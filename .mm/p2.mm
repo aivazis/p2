@@ -1,0 +1,26 @@
+# -*- Makefile -*-
+#
+# michael a.g. aïvázis
+# orthologue
+# (c) 1998-2019 all rights reserved
+#
+
+# project meta-data
+p2.major := $(repo.major)
+p2.minor := $(repo.minor)
+p2.micro := $(repo.micro)
+p2.revision := $(repo.revision)
+
+# p2 builds a python package
+p2.packages := p2.pkg
+# libraries
+p2.libraries :=
+# python extensions
+p2.extensions :=
+# and test suites
+p2.tests :=
+
+# the p2 meta-data
+p2.pkg.stem := p2
+
+# end of file
