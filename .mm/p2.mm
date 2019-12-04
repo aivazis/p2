@@ -16,9 +16,12 @@ p2.libraries :=
 # python extensions
 p2.extensions :=
 # and test suites
-p2.tests :=
+p2.tests := p2.pkg.tests
 
-# the p2 meta-data
+# the p2 package settings
 p2.pkg.stem := p2
+
+# the p2 package test suite
+p2.pkg.tests.stem := pyre
 
 # end of file
