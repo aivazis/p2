@@ -27,7 +27,7 @@ class Metaclass(AttributeFilter):
     """
 
     # ignore attributes with these names
-    pyre_reserved = {"skip"}
+    pyre_reservedNames = {"skip"}
 
     # class record initializer
     def __init__(self, name, bases, attributes, **kwds):
@@ -36,7 +36,7 @@ class Metaclass(AttributeFilter):
         # go through the descriptors
         for name, attribute in self.pyre_harvest(attributes, descriptor=Descriptor):
             # make sure the name is not my reserved list
-            assert name not in self.pyre_reserved
+            assert name not in self.pyre_reservedNames
             # mark the rest
             attribute.harvested = True
 

@@ -24,25 +24,32 @@ class AttributeFilter(Type):
 
     # interface
     @classmethod
-    def pyre_harvest(cls, attributes, descriptor, reserved=None):
+    def pyre_harvest(cls, attributes, descriptor):
         """
         Examine the class {attributes}, looking for instances of {descriptor}
         """
-        # reserved names are excluded from harvesting
-        reserved = reserved if reserved is not None else cls.pyre_reserved
         # go through the attributes
         for name, attribute in attributes.items():
             # if this is a {descriptor} instance that;s not the in the reserved list
-            if isinstance(attribute, descriptor) and name not in reserved:
+            if isinstance(attribute, descriptor) and not cls.pyre_isReserved(name):
                 # pass it on
                 yield name, attribute
         # all done
         return
 
 
+    @classmethod
+    def pyre_isReserved(cls, name):
+        """
+        Exclude reserved names from this process
+        """
+        # by default, look in a set of such names
+        return name in cls.pyre_reservedNames
+
+
     # public data
     # names excluded from filtering
-    pyre_reserved = set()
+    pyre_reservedNames = set()
 
 
 # end of file
