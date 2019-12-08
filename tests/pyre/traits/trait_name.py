@@ -15,7 +15,7 @@ class Component:
     Simple class with a trait
     """
 
-    # declare a traits
+    # declare a trait
     attr = trait()
 
 

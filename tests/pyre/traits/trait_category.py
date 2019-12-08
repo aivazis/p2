@@ -15,8 +15,8 @@ class Component:
     Simple class with a trait
     """
 
-    # declare a traits
-    attr = trait(default=True)
+    # declare a trait
+    attr = trait()
 
 
 # driver
@@ -25,8 +25,13 @@ def test():
     attr = Component.__dict__["attr"]
     # verify it's a trait
     assert isinstance(attr, trait)
-    # verify it got its default value
-    assert attr.default == True
+    # verify it has the right category name
+    assert attr.category == "trait"
+    # and that the trait predicates have the right values
+    assert attr.isBehavior == False
+    assert attr.isConfigurable == False
+    assert attr.isProperty == False
+    assert attr.isFacility == False
     # all done
     return 0
 

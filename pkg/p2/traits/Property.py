@@ -15,4 +15,10 @@ class Property(Configurable):
     """
 
 
+    # framework data
+    category = 'property'
+    # predicate that indicates whether this trait is a property
+    isProperty = True
+
+
 # end of file

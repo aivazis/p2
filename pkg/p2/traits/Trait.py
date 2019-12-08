@@ -12,7 +12,7 @@ from ..descriptors.Descriptor import Descriptor
 # declaration
 class Trait(Descriptor, Public):
     """
-    The base class for configurable component attributes
+    The base class for component attributes
 
     Traits extend the notion of the a class attribute to an object that captures meta-data that
     has no natural resting place in a regular class declaration.
@@ -24,6 +24,20 @@ class Trait(Descriptor, Public):
     information, reasonable default values, constraints and validators, documentation, and
     anything else the author of a component deems necessary.
     """
+
+
+    # framework data
+    category = 'trait' # the stem cell of traits
+    # predicate that indicates whether this trait is a behavior
+    isBehavior = False
+    # predicate that indicates whether this trait is subject to runtime configuration
+    isConfigurable = False
+    # predicate that indicates whether this trait is a property
+    isProperty = False
+    # predicate that indicates whether this trait is a facility
+    isFacility = False
+
+
 
 
 # end of file

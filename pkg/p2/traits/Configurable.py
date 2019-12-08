@@ -15,4 +15,10 @@ class Configurable(Trait):
     """
 
 
+    # framework data
+    category = 'configurable'
+    # predicate that indicates whether this trait is subject to runtime configuration
+    isConfigurable = True
+
+
 # end of file

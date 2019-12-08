@@ -5,29 +5,33 @@
 # (c) 1998-2019 all rights reserved
 
 
-# get the trait class
-from p2.traits.Trait import Trait as trait
+# get the property class
+from p2.traits.Property import Property as property
 
 
 # a client
 class Component:
     """
-    Simple class with a trait
+    Simple class with a property
     """
 
-    # declare a trait
-    attr = trait()
-    attr.aliases |= { "an-alias", "another alias" }
+    # declare a property
+    attr = property()
 
 
 # driver
 def test():
     # get the attribute; careful not to trigger the descriptor behavior
     attr = Component.__dict__["attr"]
-    # verify it's a trait
-    assert isinstance(attr, trait)
-    # verify that the aliases are set properly
-    assert attr.aliases == { "attr" , "an-alias", "another alias" }
+    # verify it's a property
+    assert isinstance(attr, property)
+    # verify it has the right category name
+    assert attr.category == "property"
+    # and that the trait predicates have the right values
+    assert attr.isBehavior == False
+    assert attr.isConfigurable == True
+    assert attr.isProperty == True
+    assert attr.isFacility == False
     # all done
     return 0
 

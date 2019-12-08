@@ -15,4 +15,10 @@ class Facility(Configurable):
     """
 
 
+    # framework data
+    category = 'facility'
+    # predicate that indicates whether this trait holds a component
+    isFacility = True
+
+
 # end of file
