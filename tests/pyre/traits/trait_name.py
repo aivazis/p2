@@ -30,15 +30,13 @@ def test():
     # verify that the aliases are initialized properly
     assert attr.aliases == { "attr" }
     # all done
-    return 0
+    return attr
 
 
 # bootstrap
 if __name__ == "__main__":
     # run the test
-    status = test()
-    # share the status code with the shell
-    raise SystemExit(status)
+    test()
 
 
 # end of file

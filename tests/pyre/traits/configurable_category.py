@@ -33,15 +33,13 @@ def test():
     assert attr.isProperty == False
     assert attr.isFacility == False
     # all done
-    return 0
+    return attr
 
 
 # bootstrap
 if __name__ == "__main__":
     # run the test
-    status = test()
-    # share the status code with the shell
-    raise SystemExit(status)
+    test()
 
 
 # end of file

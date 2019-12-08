@@ -29,15 +29,13 @@ def test():
     # verify that the aliases are set properly
     assert attr.aliases == { "attr" , "an-alias", "another alias" }
     # all done
-    return 0
+    return attr
 
 
 # bootstrap
 if __name__ == "__main__":
     # run the test
-    status = test()
-    # share the status code with the shell
-    raise SystemExit(status)
+    test()
 
 
 # end of file

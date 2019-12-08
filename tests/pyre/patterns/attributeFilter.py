@@ -60,13 +60,21 @@ class Client(metaclass=Metaclass, extra=True):
 
 
 # driver
-if __name__ == "__main__":
+def test():
     # check that the non-descriptor attribute survived the process
     assert Client.regular is True
     # verify that {Client.descriptor} is marked correctly
     assert Client.descriptor.harvested is True
     # and that the one with the reserved name is not
     assert Client.skip.harvested is False
+    # all done
+    return Client
+
+
+# bootstrap
+if __name__ == "__main__":
+    # run the test
+    test()
 
 
 # end of file
