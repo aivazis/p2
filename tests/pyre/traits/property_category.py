@@ -5,22 +5,22 @@
 # (c) 1998-2019 all rights reserved
 
 
-# get the property class
-from p2.traits.Property import Property as property
-
-
-# a client
-class Component:
-    """
-    Simple class with a property
-    """
-
-    # declare a property
-    attr = property()
-
-
 # driver
 def test():
+    # get the property class
+    from p2.traits.Property import Property as property
+
+
+    # a client
+    class Component:
+        """
+        Simple class with a property
+        """
+
+        # declare a property
+        attr = property()
+
+
     # get the attribute; careful not to trigger the descriptor behavior
     attr = Component.__dict__["attr"]
     # verify it's a property
@@ -36,8 +36,10 @@ def test():
     return attr
 
 
-# bootstrap
+# main
 if __name__ == "__main__":
+    # skip pyre initialization since we don't rely on the executive
+    pyre_noboot = True
     # run the test
     test()
 

@@ -5,22 +5,22 @@
 # (c) 1998-2019 all rights reserved
 
 
-# get the trait class
-from p2.traits.Trait import Trait as trait
-
-
-# a client
-class Component:
-    """
-    Simple class with a trait
-    """
-
-    # declare a trait
-    attr = trait()
-
-
 # driver
 def test():
+    # get the trait class
+    from p2.traits.Trait import Trait as trait
+
+
+    # a client
+    class Component:
+        """
+        Simple class with a trait
+        """
+
+        # declare a trait
+        attr = trait()
+
+
     # get the attribute; careful not to trigger the descriptor behavior
     attr = Component.__dict__["attr"]
     # verify it's a trait
@@ -33,8 +33,10 @@ def test():
     return attr
 
 
-# bootstrap
+# main
 if __name__ == "__main__":
+    # skip pyre initialization since we don't rely on the executive
+    pyre_noboot = True
     # run the test
     test()
 

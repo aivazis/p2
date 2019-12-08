@@ -5,22 +5,22 @@
 # (c) 1998-2019 all rights reserved
 
 
-# get the facility class
-from p2.traits.Facility import Facility as facility
-
-
-# a client
-class Component:
-    """
-    Simple class with a facility
-    """
-
-    # declare a facility
-    attr = facility()
-
-
 # driver
 def test():
+    # get the facility class
+    from p2.traits.Facility import Facility as facility
+
+
+    # a client
+    class Component:
+        """
+        Simple class with a facility
+        """
+
+        # declare a facility
+        attr = facility()
+
+
     # get the attribute; careful not to trigger the descriptor behavior
     attr = Component.__dict__["attr"]
     # verify it's a facility
@@ -36,8 +36,10 @@ def test():
     return attr
 
 
-# bootstrap
+# main
 if __name__ == "__main__":
+    # skip pyre initialization since we don't rely on the executive
+    pyre_noboot = True
     # run the test
     test()
 

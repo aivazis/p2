@@ -5,27 +5,27 @@
 # (c) 1998-2019 all rights reserved
 
 
-# get the behavior class
-from p2.traits.Behavior import Behavior as behavior
-
-
-# a client
-class Component:
-    """
-    Simple class with a behavior
-    """
-
-    # declare a behavior
-    @behavior
-    def method(self):
-        """
-        A simple method
-        """
-        return True
-
-
 # driver
 def test():
+    # get the behavior class
+    from p2.traits.Behavior import Behavior as behavior
+
+
+    # a client
+    class Component:
+        """
+        Simple class with a behavior
+        """
+
+        # declare a behavior
+        @behavior
+        def method(self):
+            """
+            A simple method
+            """
+            return True
+
+
     # get the attribute; careful not to trigger the descriptor behavior
     attr = Component.__dict__["method"]
     # verify it's a behavior
@@ -43,6 +43,8 @@ def test():
 
 # bootstrap
 if __name__ == "__main__":
+    # skip pyre initialization since we don't rely on the executive
+    pyre_noboot = True
     # run the test
     test()
 

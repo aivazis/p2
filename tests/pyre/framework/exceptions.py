@@ -11,7 +11,7 @@ Tests for all the exceptions raised by this package
 
 def test():
     # get the exceptions
-    from pyre.framework.exceptions import (
+    from p2.framework.exceptions import (
         FrameworkError, BadResourceLocatorError
         )
 
@@ -33,6 +33,9 @@ def test():
 
 # main
 if __name__ == "__main__":
+    # skip pyre initialization since we don't rely on the executive
+    pyre_noboot = True
+    # run the test
     test()
 
 
