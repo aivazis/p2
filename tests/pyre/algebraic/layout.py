@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# michael a.g. aïvázis
-# orthologue
+# michael a.g. aïvázis <michael.aivazis@para-sim.com>
 # (c) 1998-2019 all rights reserved
-#
 
 
 """
@@ -14,10 +12,10 @@ Verify the node layout
 
 def test():
     # access the package
-    import pyre.algebraic
+    import p2.algebraic
 
     # the algebra
-    algebra = pyre.algebraic.algebra
+    algebra = p2.algebraic.algebra
     # declare a node class
     class node(metaclass=algebra): pass
 

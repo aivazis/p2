@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# michael a.g. aïvázis
-# orthologue
+# michael a.g. aïvázis <michael.aivazis@para-sim.com>
 # (c) 1998-2019 all rights reserved
-#
 
 
 """
@@ -16,10 +14,10 @@ def test():
     # access the various operator
     import operator
     # access the package
-    import pyre.algebraic
+    import p2.algebraic
 
     # declare a node class
-    class node(metaclass=pyre.algebraic.algebra): pass
+    class node(metaclass=p2.algebraic.algebra): pass
 
     # declare a couple of nodes
     n1 = node.variable()
