@@ -11,4 +11,44 @@ class Public:
     """
 
 
+    # public data
+    # the canonical name of the trait; it has to obey python identifier rules
+    name = None
+    # documentation
+    doc = ''
+    # the trait purpose in a few words
+    tip = ''
+    # a set of alternative names for the trait; aliases are not required to satisfy the python
+    # identifier tules
+    aliases = None
+
+
+    # meta-methods
+    def __init__(self, name=name, aliases=aliases, tip=tip, doc=doc, **kwds):
+        # chain up
+        super().__init__(**kwds)
+        # record the name
+        self.name = name
+        # initialize the aliases
+        self.aliases = aliases if aliases is not None else set()
+        # if a name was supplied
+        if name is not None:
+            # add it to the aliases
+            aliases.add(name)
+        # all done
+        return
+
+
+    def __set_name__(self, cls, name):
+        """
+        Invoked by the interpreter when it discovers a descriptor in a class declaration
+        """
+        # save my name
+        self.name = name
+        # and add it to the list of aliases
+        self.aliases.add(name)
+        # all done
+        return
+
+
 # end of file
