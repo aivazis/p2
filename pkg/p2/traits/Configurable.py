@@ -5,13 +5,13 @@
 
 
 # superclass
-from .Configurable import Configurable
+from .Trait import Trait
 
 
 # declaration
-class Facility(Configurable):
+class Configurable(Trait):
     """
-    The base class for traits that are components
+    The base class of all traits that require storage for user configurable state
     """
 
 

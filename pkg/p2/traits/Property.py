@@ -5,11 +5,11 @@
 
 
 # superclass
-from .Trait import Trait
+from .Configurable import Configurable
 
 
 # declaration
-class Property(Trait):
+class Property(Configurable):
     """
     The base class for traits that are simple types
     """
