@@ -15,4 +15,17 @@ class Normalizer(Processor):
     """
 
 
+    # meta-methods
+    def __call__(self, method):
+        """
+        Add {method} as a normalizer to my registered descriptors
+        """
+        # go through the sequence of registered descriptors
+        for descriptor in self.descriptors:
+            # and register {method} as a normalizer
+            descriptor.normalizers.append(method)
+        # all done
+        return method
+
+
 # end of file

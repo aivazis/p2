@@ -15,4 +15,17 @@ class Validator(Processor):
     """
 
 
+    # meta-methods
+    def __call__(self, method):
+        """
+        Add {method} as a validator to my registered descriptors
+        """
+        # go through the sequence of registered descriptors
+        for descriptor in self.descriptors:
+            # and register {method} as a validator
+            descriptor.validators.append(method)
+        # all done
+        return method
+
+
 # end of file

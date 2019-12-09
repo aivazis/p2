@@ -11,4 +11,23 @@ class Processor:
     """
 
 
+    # public data
+    descriptors = () # the sequence of descriptors that i decorate
+
+
+    # meta methods
+    def __init__(self, descriptors=descriptors, **kwds):
+        # chain up
+        super().__init__(**kwds)
+        # record which descriptors i decorate
+        self.descriptors = tuple(descriptors)
+        # all done
+        return
+
+
+    def __call__(self, method):
+        # don't know how to do that
+        raise NotImplementedError(f"class '{type(self).__name__}' must implement '__call__'")
+
+
 # end of file
