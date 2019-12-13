@@ -6,11 +6,13 @@
 
 # superclasses
 from .Trait import Trait
+# mixins
+from ..descriptors.Default import Default
 from ..descriptors.DataDescriptor import DataDescriptor
 
 
 # declaration
-class Measure(Trait, DataDescriptor):
+class Measure(Trait, Default, DataDescriptor):
     """
     The base class of all traits that require storage for user configurable state
     """
