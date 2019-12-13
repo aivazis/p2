@@ -9,16 +9,16 @@ from .Trait import Trait
 
 
 # declaration
-class Configurable(Trait):
+class Measure(Trait):
     """
     The base class of all traits that require storage for user configurable state
     """
 
 
     # framework data
-    category = 'configurable'
+    category = 'measure'
     # predicate that indicates whether this trait is subject to runtime configuration
-    isConfigurable = True
+    isMeasure = True
 
 
 # end of file

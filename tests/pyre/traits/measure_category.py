@@ -7,29 +7,30 @@
 
 # driver
 def test():
-    # get the configurable trait class
-    from p2.traits.Configurable import Configurable as configurable
+    # get the measure trait class
+    from p2.traits.Measure import Measure as measure
 
 
     # a client
     class Component:
         """
-        Simple class with a configurable trait
+        Simple class with a measure
         """
 
-        # declare a configurable trait
-        attr = configurable()
+        # declare a measure
+        attr = measure()
 
 
     # get the attribute; careful not to trigger the descriptor behavior
     attr = Component.__dict__["attr"]
-    # verify it's a configurable trait
-    assert isinstance(attr, configurable)
+    # verify it's a measure
+    assert isinstance(attr, measure)
     # verify it has the right category name
-    assert attr.category == "configurable"
+    assert attr.category == "measure"
     # and that the trait predicates have the right values
     assert attr.isBehavior == False
-    assert attr.isConfigurable == True
+    assert attr.isDerivation == False
+    assert attr.isMeasure == True
     assert attr.isProperty == False
     assert attr.isFacility == False
     # all done

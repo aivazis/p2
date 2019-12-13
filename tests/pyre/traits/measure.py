@@ -7,7 +7,7 @@
 
 def test():
     # make sure the class is accessible
-    from p2.traits.Configurable import Configurable
+    from p2.traits.Measure import Measure
     # all done
     return
 

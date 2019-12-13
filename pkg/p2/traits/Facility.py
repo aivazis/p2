@@ -5,11 +5,11 @@
 
 
 # superclass
-from .Configurable import Configurable
+from .Measure import Measure
 
 
 # declaration
-class Facility(Configurable):
+class Facility(Measure):
     """
     The base class for traits that are components
     """

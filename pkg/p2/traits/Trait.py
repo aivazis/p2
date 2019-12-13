@@ -17,8 +17,8 @@ class Trait(Descriptor, Public):
     Traits extend the notion of the a class attribute to an object that captures meta-data that
     has no natural resting place in a regular class declaration.
 
-    Traits enable end-user configurable state, for both simple attributes and reference to more
-    elaborate object, such as other components. Collectively, such attributes from the
+    Traits enable end-user configurable state, for both simple attributes and references to
+    more elaborate objects, such as other components. Collectively, such attributes form the
     component inventory. Inventory items have names that connect them to the configuration
     store, per-instance storage for the attribute value, and additional meta-data, such as type
     information, reasonable default values, constraints and validators, documentation, and
@@ -30,14 +30,15 @@ class Trait(Descriptor, Public):
     category = 'trait' # the stem cell of traits
     # predicate that indicates whether this trait is a behavior
     isBehavior = False
-    # predicate that indicates whether this trait is subject to runtime configuration
-    isConfigurable = False
+    # predicate that indicates whether the value of this trait is derived from the values of
+    # other traits
+    isDerivation = False
+    # predicate that indicates whether this trait manages a value
+    isMeasure = False
     # predicate that indicates whether this trait is a property
     isProperty = False
     # predicate that indicates whether this trait is a facility
     isFacility = False
-
-
 
 
 # end of file

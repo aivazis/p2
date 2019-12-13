@@ -34,7 +34,8 @@ def test():
     assert attr.category == "behavior"
     # and that the trait predicates have the right values
     assert attr.isBehavior == True
-    assert attr.isConfigurable == False
+    assert attr.isMeasure == False
+    assert attr.isDerivation == False
     assert attr.isProperty == False
     assert attr.isFacility == False
     # all done
