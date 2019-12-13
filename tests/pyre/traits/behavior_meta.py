@@ -18,7 +18,7 @@ def test():
         """
 
         # declare a behavior
-        @behavior
+        @behavior(tip="a simple method")
         def method(self):
             """
             A simple method
@@ -27,13 +27,16 @@ def test():
 
 
     # get the attribute; careful not to trigger the descriptor behavior
-    attr = Component.__dict__["method"]
+    method = Component.__dict__["method"]
     # verify it's a behavior
-    assert isinstance(attr, behavior)
+    assert isinstance(method, behavior)
     # verify it has the right name
-    assert attr.name == "method"
+    assert method.name == "method"
+    # and that it got decorated correctly
+    assert method.tip == "a simple method"
+    assert method.doc.strip() == "A simple method"
     # all done
-    return attr
+    return method
 
 
 # bootstrap

@@ -24,7 +24,7 @@ class Behavior(Trait, Descriptor):
 
 
     # meta-methods
-    def __new__(cls, method=None, tip=None, **kwds):
+    def __new__(cls, method=None, **kwds):
         """
         Trap invocations with meta-data and delay the decoration of the method
         """
@@ -34,7 +34,7 @@ class Behavior(Trait, Descriptor):
             assert callable(method), 'please invoke with keyword arguments'
             # and chain up to do the normal thing; swallow the extra arguments for now; they'll
             # become accessible again in {__init__}
-            return super().__new__(cls, **kwds)
+            return super().__new__(cls)
 
         # if we don't know the {method} yet, the decorator was invoked with keyword arguments;
         # the strategy here is to return a {Behavior} constructor as the value of this
@@ -43,45 +43,33 @@ class Behavior(Trait, Descriptor):
         # prematurely
 
         # make a constructor closure
-        def buld(method):
+        def build(method):
             """
             Convert a component method into a behavior
             """
             # just build one of my instances
-            return cls(method=method, tip=tip, **kwds)
+            return cls(method=method, **kwds)
 
         # and hand it over
         return build
 
 
-    def __init__(self, method, tip=None, **kwds):
+    def __init__(self, method, **kwds):
         # chain up
-        super().__init__(**kwds)
-        # appropriate the method's docstring
-        self.__doc__ = method.__doc__
-        # save it
+        super().__init__(doc=method.__doc__, **kwds)
+        # save the method
         self.method = method
-        # and the tip
-        self.tip = tip
         # all done
         return
 
 
+    # N.B.: this is a non-data descriptor; it shouldn't define either {__set__} or {__delete__}
     def __get__(self, instance, cls):
         """
-        Invoked to retrieve the value of the behavior
+        Invoked to retrieve the behavior
         """
         # let the encapsulated function object do the work
         return self.method.__get__(instance, cls)
-
-
-    def __set__(self, instance, value):
-        """
-        Invoked to set the behavior value
-        """
-        # we don't have any use cases for this yet, so disable it
-        raise TypeError(
-            f"can't modify {self}, part of the public interface of '{instance.pyre_name}'")
 
 
     def __str__(self):
