@@ -7,7 +7,7 @@
 # declaration
 class Type(type):
     """
-    The base meta-class from which all pyre meta-classes derive
+    The base metaclass from which all pyre metaclasses derive
 
     The main raison d'être for this class is to absorb any {**kwds} arguments passed to
     {__new__} and {__init__} before chaining up to their implementations in {type}.

@@ -11,7 +11,7 @@ from ..patterns.AttributeFilter import AttributeFilter
 # declaration
 class Requirement(AttributeFilter):
     """
-    Meta-class that captures the class record processing that is common to both protocols and
+    Metaclass that captures the class record processing that is common to both protocols and
     components
     """
 

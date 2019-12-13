@@ -21,10 +21,10 @@ def test():
         harvested = False
 
 
-    # the meta-class that does the harvesting
+    # the metaclass that does the harvesting
     class Metaclass(AttributeFilter):
         """
-        A simple meta-class that looks through its instances for attributes that are instances of
+        A simple metaclass that looks through its instances for attributes that are instances of
         {Descriptor} and puts them on a pile
         """
 
@@ -47,7 +47,7 @@ def test():
 
 
     # here is the client class; its declaration contains extra keywords that should be swallowed by
-    # the pyre base meta-class
+    # the pyre base metaclass
     class Client(metaclass=Metaclass, extra=True):
         """
         A simple client class
