@@ -5,12 +5,11 @@
 # (c) 1998-2019 all rights reserved
 
 
-"""
-Exercise node algebra
-"""
-
-
 def test():
+    """
+    Exercise the algebra of arithmetic operations among nodes
+    """
+
     # access the various operator
     import operator
     # access the package

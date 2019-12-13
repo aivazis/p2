@@ -5,12 +5,11 @@
 # (c) 1998-2019 all rights reserved
 
 
-"""
-Verify the node layout
-"""
-
-
 def test():
+    """
+    Verify the node layout
+    """
+
     # access the package
     import p2.algebraic
 

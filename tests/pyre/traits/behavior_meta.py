@@ -7,6 +7,10 @@
 
 # driver
 def test():
+    """
+    Verify that the behavior decorator works as expected when invoked with metadata
+    """
+
     # get the behavior class
     from p2.traits.Behavior import Behavior as behavior
 

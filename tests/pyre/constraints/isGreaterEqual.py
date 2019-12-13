@@ -5,12 +5,11 @@
 # (c) 1998-2019 all rights reserved
 
 
-"""
-Exercise "isGreaterEqual"
-"""
-
-
 def test():
+    """
+    Exercise "isGreaterEqual"
+    """
+
     # get the package
     import p2.constraints
     # build a constraint
@@ -23,9 +22,15 @@ def test():
 
     # a case that should fail
     stranger = 0
+    # attempt to
     try:
+        # validate it
         constraint.validate(stranger)
+        # which should fail
+        assert False, "unreachable"
+    # catch the error
     except constraint.ConstraintViolationError as error:
+        # verify the error conditions
         assert error.constraint == constraint
         assert error.value == stranger
 

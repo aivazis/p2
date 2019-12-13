@@ -5,12 +5,11 @@
 # (c) 1998-2019 all rights reserved
 
 
-"""
-Verify that we can traverse the expression tree correctly and completely
-"""
-
-
 def test():
+    """
+    Verify that we can successfully perform surgery in an expression tree
+    """
+
     # access to the package
     import p2.algebraic
 
@@ -52,13 +51,18 @@ def test():
     # and check that it happened correctly
     assert set(map(id, n.variables)) == {id(n2), id(n3)}
 
-    # let's try to make a cycle
+    # let's try
     try:
+        # to make a cycle
         n.substitute(current=n2, replacement=n)
+        # which should fail
         assert False
+    # catch it
     except n.CircularReferenceError:
+        # all good
         pass
 
+    # all done
     return
 
 

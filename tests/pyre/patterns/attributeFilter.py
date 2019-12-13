@@ -7,6 +7,10 @@
 
 # driver
 def test():
+    """
+    Verify that the attribute harvesting happens correctly
+    """
+
     # get the attribute filter
     from p2.patterns.AttributeFilter import AttributeFilter
 

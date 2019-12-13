@@ -6,7 +6,10 @@
 
 
 def test():
-    # make sure the package is accessible
+    """
+    Sanity test: make sure the package is accessible
+    """
+    # access
     import p2.algebraic
     # all done
     return

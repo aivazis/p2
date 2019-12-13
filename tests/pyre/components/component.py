@@ -6,7 +6,10 @@
 
 
 def test():
-    # make sure the class is accessible
+    """
+    Sanity test: make sure the module is accessible
+    """
+    # access
     from p2.components.Component import Component
     # all done
     return

@@ -5,12 +5,11 @@
 # (c) 1998-2019 all rights reserved
 
 
-"""
-Exercise "isSubset"
-"""
-
-
 def test():
+    """
+    Exercise "isSubset"
+    """
+
     # get the package
     import p2.constraints
     # build a constraint
@@ -27,9 +26,15 @@ def test():
 
     # a case that should fail
     stranger = ["zero"]
+    # try to
     try:
+        # validate it
         constraint.validate(stranger)
+        # which should fail
+        assert False, "unreachable"
+    # catch the error
     except constraint.ConstraintViolationError as error:
+        # verify the error conditions
         assert error.constraint == constraint
         assert error.value == stranger
 

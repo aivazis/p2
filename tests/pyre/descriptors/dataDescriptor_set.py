@@ -6,6 +6,10 @@
 
 
 def test():
+    """
+    Verify that the {__set__} method behaves as expected
+    """
+
     # get the descriptor class
     from p2.descriptors.DataDescriptor import DataDescriptor as descriptor
 

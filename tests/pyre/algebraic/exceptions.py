@@ -5,25 +5,30 @@
 # (c) 1998-2019 all rights reserved
 
 
-"""
-Tests for all the exceptions raised by this package
-"""
-
-
 def test():
+    """
+    Tests for all exceptions raised by this package
+    """
+
     # pull the exceptions
     from p2.algebraic.exceptions import NodeError, CircularReferenceError
 
     # the base exception
     try:
+        # raise it
         raise NodeError()
+    # catch it
     except NodeError as error:
+        # all good
         pass
 
     # circular references
     try:
+        # raise it
         raise CircularReferenceError(node=None, path=None)
+    # catch it
     except CircularReferenceError as error:
+        # all good
         pass
 
     # all done

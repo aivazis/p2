@@ -5,12 +5,11 @@
 # (c) 1998-2019 all rights reserved
 
 
-"""
-Exercise combining two constraints using the operator "&"
-"""
-
-
 def test():
+    """
+    Exercise combining two constraints using the operator "&"
+    """
+
     # get the package
     import p2.constraints
     # build a constraint

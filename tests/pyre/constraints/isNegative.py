@@ -5,12 +5,11 @@
 # (c) 1998-2019 all rights reserved
 
 
-"""
-Exercise "isNegative"
-"""
-
-
 def test():
+    """
+    Exercise "isNegative"
+    """
+
     # get the package
     import p2.constraints
     # build a constraint
@@ -29,11 +28,18 @@ def test():
 
     # and another one
     stranger = 1
+    # try to
     try:
+        # validate it
         constraint.validate(stranger)
+        # which should fail
+        assert False
+    # catch the error
     except constraint.ConstraintViolationError as error:
+        # verify the error conditions
         assert error.constraint == constraint
         assert error.value == stranger
+
 
     # all done
     return constraint

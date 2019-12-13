@@ -5,18 +5,21 @@
 # (c) 1998-2019 all rights reserved
 
 
-"""
-Tests for all the exceptions raised by this package
-"""
-
 def test():
+    """
+    Tests for all the exceptions raised by this package
+    """
+
     # get the exception
     from p2.constraints.exceptions import ConstraintViolationError
 
     # exercise it
     try:
+        # raise it
         raise ConstraintViolationError(constraint=None, value=None)
+    # catch it
     except ConstraintViolationError as error:
+        # all good
         pass
 
     # all done

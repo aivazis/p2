@@ -7,6 +7,10 @@
 
 # driver
 def test():
+    """
+    Verify that the {validator} can decorate its client methods correctly
+    """
+
     # get the validator class
     from p2.descriptors.Validator import Validator as validator
 

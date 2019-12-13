@@ -7,6 +7,10 @@
 
 # driver
 def test():
+    """
+    Verify that facilities get the correct category predicates
+    """
+
     # get the facility class
     from p2.traits.Facility import Facility as facility
 

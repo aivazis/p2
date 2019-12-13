@@ -3,15 +3,13 @@
 #
 # michael a.g. aïvázis <michael.aivazis@para-sim.com>
 # (c) 1998-2019 all rights reserved
-# -*- coding: utf-8 -*-
-
-
-"""
-Exercise "isBetween"
-"""
 
 
 def test():
+    """
+    Exercise "isBetween"
+    """
+
     # get the package
     import p2.constraints
     # build a constraint
@@ -24,17 +22,29 @@ def test():
 
     # a case that should fail
     stranger = 0
+    # attempt to
     try:
+        # validate it
         constraint.validate(stranger)
+        # which should fail
+        assert False
+    # catch it
     except constraint.ConstraintViolationError as error:
+        # check the error conditions
         assert error.constraint == constraint
         assert error.value == stranger
 
     # and another one
     stranger = 1
+    # attempt to
     try:
+        # validate it
         constraint.validate(stranger)
+        # which should fail
+        assert False
+    # catch it
     except constraint.ConstraintViolationError as error:
+        # check the error conditions
         assert error.constraint == constraint
         assert error.value == stranger
 

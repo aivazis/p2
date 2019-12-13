@@ -7,6 +7,10 @@
 
 # driver
 def test():
+    """
+    Verify that measures get the correct category predicates
+    """
+
     # get the measure trait class
     from p2.traits.Measure import Measure as measure
 

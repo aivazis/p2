@@ -7,6 +7,10 @@
 
 # driver
 def test():
+    """
+    Verify that properties get the correct category predicates
+    """
+
     # get the property class
     from p2.traits.Property import Property as property
 

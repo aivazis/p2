@@ -7,6 +7,10 @@
 
 # driver
 def test():
+    """
+    Verify that trait aliases are registered correctly
+    """
+
     # get the trait class
     from p2.traits.Trait import Trait as trait
 

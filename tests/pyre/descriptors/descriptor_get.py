@@ -6,6 +6,10 @@
 
 
 def test():
+    """
+    Verify that the {__get__} methods works as expected
+    """
+
     # get the descriptor class
     from p2.descriptors.Descriptor import Descriptor as descriptor
 

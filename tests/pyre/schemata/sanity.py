@@ -6,7 +6,10 @@
 
 
 def test():
-    # make sure the package is accessible
+    """
+    Verify that the package is accessible
+    """
+    # access
     import p2.schemata
     # all done
     return

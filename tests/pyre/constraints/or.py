@@ -5,12 +5,11 @@
 # (c) 1998-2019 all rights reserved
 
 
-"""
-Exercise combining two constraints using the operator "|"
-"""
-
-
 def test():
+    """
+    Exercise combining two constraints using the operator "|"
+    """
+
     # get the package
     import p2.constraints
     # build a constraint
@@ -32,17 +31,29 @@ def test():
 
     # another one
     stranger = 0
+    # try to
     try:
+        # validate it
         constraint.validate(stranger)
+        # which should fail
+        assert False
+    # catch the error
     except constraint.ConstraintViolationError as error:
+        # verify the error conditions
         assert error.constraint == constraint
         assert error.value == stranger
 
     # and another
     stranger = 1
+    # try to
     try:
+        # validate it
         constraint.validate(stranger)
+        # which should fail
+        assert False
+    # catch the error
     except constraint.ConstraintViolationError as error:
+        # verify the error conditions
         assert error.constraint == constraint
         assert error.value == stranger
 

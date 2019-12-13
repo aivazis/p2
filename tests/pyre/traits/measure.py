@@ -6,7 +6,10 @@
 
 
 def test():
-    # make sure the class is accessible
+    """
+    Sanity test: make sure the module is accessible
+    """
+    # access
     from p2.traits.Measure import Measure
     # all done
     return

@@ -5,11 +5,11 @@
 # (c) 1998-2019 all rights reserved
 
 
-"""
-Tests for all the exceptions raised by this package
-"""
-
 def test():
+    """
+    Tests for all the exceptions raised by this package
+    """
+
     # get the exceptions
     from p2.framework.exceptions import (
         FrameworkError, BadResourceLocatorError
@@ -17,14 +17,20 @@ def test():
 
     # the base exception
     try:
+        # raise it
         raise FrameworkError()
+    # catch it
     except FrameworkError as error:
+        # all good
         pass
 
     # bad resource locators
     try:
+        # raise it
         raise BadResourceLocatorError(uri=None, reason=None)
+    # catch it
     except BadResourceLocatorError as error:
+        # all good
         pass
 
     # all done

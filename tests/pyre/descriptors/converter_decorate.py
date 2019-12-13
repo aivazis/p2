@@ -7,6 +7,9 @@
 
 # driver
 def test():
+    """
+    Verify that {converter} can decorate client methods correctly
+    """
     # get the converter class
     from p2.descriptors.Converter import Converter as converter
 

@@ -7,6 +7,10 @@
 
 # driver
 def test():
+    """
+    Verify that behaviors get the correct category predicates
+    """
+
     # get the behavior class
     from p2.traits.Behavior import Behavior as behavior
 

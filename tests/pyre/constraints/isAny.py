@@ -5,12 +5,11 @@
 # (c) 1998-2019 all rights reserved
 
 
-"""
-Exercise "isAny"
-"""
-
-
 def test():
+    """
+    Exercise "isAny"
+    """
+
     # get the package
     import p2.constraints
     # build a constraint
@@ -24,25 +23,43 @@ def test():
 
     # a case that should fail
     stranger = .5
+    # attempt to
     try:
+        # validate it
         constraint.validate(stranger)
+        # which should fail
+        assert False
+    # catch the error
     except constraint.ConstraintViolationError as error:
+        # and check the error conditions
         assert error.constraint == constraint
         assert error.value == stranger
 
     # another one
     stranger = 0
+    # attempt to
     try:
+        # validate it
         constraint.validate(stranger)
+        # which should fail
+        assert False
+    # catch the error
     except constraint.ConstraintViolationError as error:
+        # and check the error conditions
         assert error.constraint == constraint
         assert error.value == stranger
 
     # another one
     stranger = 1
+    # attempt to
     try:
+        # validate it
         constraint.validate(stranger)
+        # which should fail
+        assert False
+    # catch the error
     except constraint.ConstraintViolationError as error:
+        # and check the error conditions
         assert error.constraint == constraint
         assert error.value == stranger
 

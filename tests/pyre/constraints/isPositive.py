@@ -5,40 +5,52 @@
 # (c) 1998-2019 all rights reserved
 
 
-"""
-Exercise "isPositive"
-"""
-
-
 def test():
+    """
+    Exercise "isPositive"
+    """
+
     # get the package
     import p2.constraints
     # build a constraint
-    constrain = p2.constraints.isPositive()
+    constraint = p2.constraints.isPositive()
 
     # exercise with good values
-    constrain(1)
-    constrain(1.1)
-    constrain(2)
+    constraint(1)
+    constraint(1.1)
+    constraint(2)
 
     # a case that should fail
     stranger = -1
+    # try to
     try:
-        constrain(stranger)
-    except constrain.ConstraintViolationError as error:
-        assert error.constraint == constrain
+        # validate it
+        constraint.validate(stranger)
+        # which should fail
+        assert False
+    # catch the error
+    except constraint.ConstraintViolationError as error:
+        # verify the error conditions
+        assert error.constraint == constraint
         assert error.value == stranger
+
 
     # and another one
     stranger = 0
+    # try to
     try:
-        constrain(stranger)
-    except constrain.ConstraintViolationError as error:
-        assert error.constraint == constrain
+        # validate it
+        constraint.validate(stranger)
+        # which should fail
+        assert False
+    # catch the error
+    except constraint.ConstraintViolationError as error:
+        # verify the error conditions
+        assert error.constraint == constraint
         assert error.value == stranger
 
     # all done
-    return constrain
+    return constraint
 
 
 # main

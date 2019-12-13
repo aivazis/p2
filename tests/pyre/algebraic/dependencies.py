@@ -5,12 +5,10 @@
 # (c) 1998-2019 all rights reserved
 
 
-"""
-Verify that we can traverse the expression tree correctly and completely
-"""
-
-
 def test():
+    """
+    Verify that we can traverse the expression tree correctly and completely
+    """
 
     # access to the basic node
     import p2.algebraic

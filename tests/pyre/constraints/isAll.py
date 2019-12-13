@@ -5,12 +5,11 @@
 # (c) 1998-2019 all rights reserved
 
 
-"""
-Exercise "isAll"
-"""
-
-
 def test():
+    """
+    Exercise "isAll"
+    """
+
     # get the package
     import p2.constraints
     # build a constraint
@@ -25,17 +24,27 @@ def test():
 
     # a case that should fail
     stranger = 1
+    # attempt to
     try:
+        # give it a shot
         constraint.validate(stranger)
+        # which should fail
+        assert False, "unreachable"
+    # catch it
     except constraint.ConstraintViolationError as error:
+        # verify the error conditions
         assert error.constraint in [less, greater]
         assert error.value == stranger
 
     # and another one
     stranger = 0
+    # attempt to
     try:
+        # give it a shot
         constraint.validate(stranger)
+    # catch it
     except constraint.ConstraintViolationError as error:
+        # verify the error conditions
         assert error.constraint in [less, greater]
         assert error.value == stranger
 

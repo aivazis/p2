@@ -7,6 +7,9 @@
 
 # driver
 def test():
+    """
+    Verify that the {normalizer} can decorate its client methods correctly
+    """
     # get the normalizer class
     from p2.descriptors.Normalizer import Normalizer as normalizer
 

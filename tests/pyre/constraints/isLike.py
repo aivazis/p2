@@ -5,12 +5,11 @@
 # (c) 1998-2019 all rights reserved
 
 
-"""
-Exercise "isLike"
-"""
-
-
 def test():
+    """
+    Exercise "isLike"
+    """
+
     # get the package
     import p2.constraints
 
@@ -26,9 +25,15 @@ def test():
 
     # a case that should fail
     stranger = "(877) 877-097"
+    # try to
     try:
+        # validate it
         constraint.validate(stranger)
+        # which should fail
+        assert False
+    # catch the error
     except constraint.ConstraintViolationError as error:
+        # verify the error conditions
         assert error.constraint == constraint
         assert error.value == stranger
 

@@ -8,7 +8,7 @@
 # driver
 def test():
     """
-    Verify that trait docstrings and tip get recorded correctly
+    Verify that trait docstrings and tips get recorded correctly
     """
 
     # get the trait class

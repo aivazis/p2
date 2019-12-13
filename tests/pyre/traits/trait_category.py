@@ -7,6 +7,10 @@
 
 # driver
 def test():
+    """
+    Verify that traits get the correct category predicates
+    """
+
     # get the trait class
     from p2.traits.Trait import Trait as trait
 
