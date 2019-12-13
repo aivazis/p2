@@ -14,13 +14,13 @@ class Public:
     # public data
     # the canonical name of the trait; it has to obey python identifier rules
     name = None
-    # documentation
-    doc = ''
-    # the trait purpose in a few words
-    tip = ''
     # a set of alternative names for the trait; aliases are not required to satisfy the python
     # identifier tules
     aliases = None
+    # the docstring
+    doc = ''
+    # the trait purpose in a few words
+    tip = ''
 
 
     # meta-methods
@@ -35,6 +35,10 @@ class Public:
         if name is not None:
             # add it to the aliases
             aliases.add(name)
+        # record the help string
+        self.doc = doc
+        # and the tip
+        self.tip = tip
         # all done
         return
 
