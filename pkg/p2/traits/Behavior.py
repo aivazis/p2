@@ -4,12 +4,13 @@
 # (c) 1998-2019 all rights reserved
 
 
-# superclass
+# superclasses
 from .Trait import Trait
+from ..descriptors.Descriptor import Descriptor
 
 
 # declaration
-class Behavior(Trait):
+class Behavior(Trait, Descriptor):
     """
     The base class for component methods that are part of the external interface
     """

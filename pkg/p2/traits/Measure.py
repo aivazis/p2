@@ -4,12 +4,13 @@
 # (c) 1998-2019 all rights reserved
 
 
-# superclass
+# superclasses
 from .Trait import Trait
+from ..descriptors.DataDescriptor import DataDescriptor
 
 
 # declaration
-class Measure(Trait):
+class Measure(Trait, DataDescriptor):
     """
     The base class of all traits that require storage for user configurable state
     """

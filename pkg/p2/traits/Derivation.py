@@ -4,12 +4,13 @@
 # (c) 1998-2019 all rights reserved
 
 
-# superclass
+# superclasses
 from .Trait import Trait
+from ..descriptors.Descriptor import Descriptor
 
 
 # declaration
-class Derivation(Trait):
+class Derivation(Trait, Descriptor):
     """
     The base class of all traits whose values are derived from expressions
     """
