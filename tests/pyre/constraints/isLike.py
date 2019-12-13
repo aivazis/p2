@@ -30,7 +30,7 @@ def test():
         # validate it
         constraint.validate(stranger)
         # which should fail
-        assert False
+        assert False, "unreachable"
     # catch the error
     except constraint.ConstraintViolationError as error:
         # verify the error conditions

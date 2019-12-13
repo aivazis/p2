@@ -56,7 +56,7 @@ def test():
         # to make a cycle
         n.substitute(current=n2, replacement=n)
         # which should fail
-        assert False
+        assert False, "unreachable"
     # catch it
     except n.CircularReferenceError:
         # all good
