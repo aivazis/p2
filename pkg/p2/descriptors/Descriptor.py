@@ -7,14 +7,14 @@
 # declaration
 class Descriptor:
     """
-    Mixin class that converts its client into a descriptor
+    Mixin class that converts its client into a non-data descriptor
     """
 
 
     # framework hook
     def bind(self, **kwds):
         """
-        Notification that the {component} class that owns this trait has become aware of it
+        Notification that the class that owns this descriptor has become aware of it
         """
         # by default, there's nothing to do; subclasses may override and chain up to here
         return self
@@ -23,14 +23,10 @@ class Descriptor:
     # meta-methods
     def __get__(self, instance, cls):
         """
-        Invoked by the interpreter to retrieve the value of a trait
+        Invoked by the interpreter to retrieve the value of a descriptor
         """
-
-
-    def __set__(self, instance, value):
-        """
-        Invoked by the interpreter to assign a value to a trait
-        """
+        # i don't know how to do this
+        raise NotImplementedError(f"class '{type(self).__name__}' must implement '__get__'")
 
 
 # end of file
