@@ -23,6 +23,15 @@ class Public:
     tip = ''
 
 
+    # framework hook
+    def bind(self, **kwds):
+        """
+        Notification that the class that owns this descriptor has become aware of it
+        """
+        # by default, there's nothing to do; subclasses may override and chain up to here
+        return self
+
+
     # meta-methods
     def __init__(self, name=name, aliases=aliases, tip=tip, doc=doc, **kwds):
         # chain up
@@ -49,8 +58,10 @@ class Public:
         """
         # save my name
         self.name = name
-        # and add it to the list of aliases
+        # and add it to my list of aliases
         self.aliases.add(name)
+        # invoke the binding hook
+        self.bind(client=cls)
         # all done
         return
 

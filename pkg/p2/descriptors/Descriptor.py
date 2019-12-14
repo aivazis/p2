@@ -11,15 +11,6 @@ class Descriptor:
     """
 
 
-    # framework hook
-    def bind(self, **kwds):
-        """
-        Notification that the class that owns this descriptor has become aware of it
-        """
-        # by default, there's nothing to do; subclasses may override and chain up to here
-        return self
-
-
     # meta-methods
     def __get__(self, instance, cls):
         """
