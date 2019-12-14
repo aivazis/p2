@@ -11,7 +11,7 @@ from .Actor import Actor
 
 
 # declaration
-class Component(Configurable, metaclass=Actor):
+class Component(Configurable, metaclass=Actor, internal=True):
     """
     The base class for all components
     """

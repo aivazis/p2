@@ -11,7 +11,7 @@ from .Role import Role
 
 
 # declaration
-class Protocol(Configurable, metaclass=Role):
+class Protocol(Configurable, metaclass=Role, internal=True):
     """
     The base class for requirement specifications
     """
