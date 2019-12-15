@@ -17,4 +17,12 @@ class Component(Configurable, metaclass=Actor, internal=True):
     """
 
 
+    # framework data
+    # structural
+    pyre_inventory = None   # trait value management
+    pyre_implements = None  # my protocol
+    # type id
+    pyre_isComponent = True
+
+
 # end of file
