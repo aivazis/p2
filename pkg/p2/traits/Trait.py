@@ -26,18 +26,25 @@ class Trait(Public):
 
 
     # framework data
-    category = 'trait' # the stem cell of traits
-    # predicate that indicates whether this trait is a behavior
-    isBehavior = False
-    # predicate that indicates whether the value of this trait is derived from the values of
-    # other traits
-    isDerivation = False
-    # predicate that indicates whether this trait manages a value
-    isMeasure = False
-    # predicate that indicates whether this trait is a property
-    isProperty = False
-    # predicate that indicates whether this trait is a facility
-    isFacility = False
+    category = 'trait'   # the stem cell of traits
+    origin = None        # the component that declared me into existence
+    # structural predicates
+    isBehavior = False   # is this public interface?
+    isDerivation = False # is the value of this trait derived from the values of other traits?
+    isMeasure = False    # does this trait manage a value?
+    isProperty = False   # is this a property?
+    isFacility = False   # is this a facility?
+
+
+    # hooks
+    def bind(self, client, **kwds):
+        """
+        Hook invoked when {client}, the class that owns this descriptor, has become aware of it
+        """
+        # save the client
+        self.origin = client
+        # all done
+        return
 
 
 # end of file
