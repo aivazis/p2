@@ -28,7 +28,7 @@ def test():
         attr = derivation()
 
 
-    # get the attribute; careful not to trigger the descriptor derivation
+    # get the attribute; careful not to trigger the descriptor behavior
     attr = Component.__dict__["attr"]
     # verify it's a derivation
     assert isinstance(attr, derivation)
