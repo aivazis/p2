@@ -62,6 +62,38 @@ class Actor(Requirement):
         return
 
 
+    def __setattr__(self, name, value):
+        """
+        Set the class attribute {name} to {value}
+        """
+        # we need to override this in order to support setting the values of class traits. left
+        # alone, the default implementation would simply override the value of the attribute
+        # that holds the descriptor and would disable trait access both classes and instances.
+
+        # N.B.: no need to fret over performance here: class attribute assignment is not
+        # something that's expected to happen often
+
+        # during the early phases of component class creation, we set class attributes before
+        # the mapping of trait aliases to their canonical names has been set up. recognize
+        # these assignments and let them through
+
+        # get my name map
+        namemap = self.pyre_namemap
+        # so, early enough in the component class setup, or if {name} is not one of my traits
+        if namemap is None or name not in namemap:
+            # treat like a regular assignment
+            return super().__setattr__(name, value)
+
+        # otherwise, get the canonical name
+        canonical = namemap[name]
+        # get the trait
+        trait = self.pyre_traitmap[canonical]
+        # add the value to my inventory
+        self.pyre_inventory[trait] = value
+        # all done
+        return
+
+
     # implementation details
     @classmethod
     def pyre_buildProtocol(cls, component, implements):

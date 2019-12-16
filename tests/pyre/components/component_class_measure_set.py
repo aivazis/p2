@@ -49,6 +49,8 @@ def test():
 
     # set the {Base} measure
     Base.bm = 2
+    # verify that this assignment did not disturb the descriptor
+    assert isinstance(Base.__dict__["bm"], measure)
     # access the {Base} measure
     assert Base.bm == 2
     # verify {Derived} inherits the new default
@@ -57,6 +59,8 @@ def test():
     # set the {Derived} measures
     Derived.dm = False
     Derived.bm = 3
+    # verify that this assignment did not disturb the descriptor
+    assert isinstance(Derived.__dict__["dm"], measure)
     # access the {Derived} measures
     assert Derived.dm == False
     assert Derived.bm == 3
@@ -66,6 +70,8 @@ def test():
     # set the {Shadow} measure
     Shadow.bm = "another value"
     Shadow.dm = None
+    # verify that this assignment did not disturb the descriptor
+    assert isinstance(Shadow.__dict__["bm"], measure)
     # access the {Shadow} measures
     assert Shadow.bm == "another value"
     assert Shadow.dm == None
