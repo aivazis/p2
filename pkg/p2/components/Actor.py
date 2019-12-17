@@ -34,8 +34,13 @@ class Actor(Requirement):
         # chain up; swallow the locally specified keywords
         component = super().__new__(cls, name, bases, attributes, **kwds)
 
+        # if this is an internal class
+        if self.pyre_isInternal:
+            # go no further
+            return component
+
         # build the protocol specification
-        component.pyre_protocol = cls.pyre_buildProtocol(component=component, implements=implements)
+        component.pyre_implements = component.pyre_buildProtocol(implements=implements)
         # save the location of the component declaration
         component.pyre_locator = tracking.here(level=1)
 
@@ -62,26 +67,31 @@ class Actor(Requirement):
         return
 
 
+    def __call__(self, **kwds):
+        # build the instance
+        instance = super().__call__(**kwds)
+        # and return it
+        return instance
+
+
     def __setattr__(self, name, value):
         """
         Set the class attribute {name} to {value}
         """
         # we need to override this in order to support setting the values of class traits. left
-        # alone, the default implementation would simply override the value of the attribute
-        # that holds the descriptor and would disable trait access both classes and instances.
+        # alone, the default implementation would simply overwrite the descriptor with {value},
+        # which would disable trait access for both classes and instances.
 
-        # N.B.: no need to fret over performance here: class attribute assignment is not
-        # something that's expected to happen often
-
-        # during the early phases of component class creation, we set class attributes before
-        # the mapping of trait aliases to their canonical names has been set up. recognize
-        # these assignments and let them through
+        # note that during the early phases of component class creation, we set class
+        # attributes before the mapping of trait aliases to their canonical names has been set
+        # up. such assignments, as well as assignments to attributes not managed by traits, are
+        # allowed through
 
         # get my name map
         namemap = self.pyre_namemap
         # so, early enough in the component class setup, or if {name} is not one of my traits
         if namemap is None or name not in namemap:
-            # treat like a regular assignment
+            # treat this like a regular assignment
             return super().__setattr__(name, value)
 
         # otherwise, get the canonical name
@@ -96,11 +106,13 @@ class Actor(Requirement):
 
     # implementation details
     @classmethod
-    def pyre_buildProtocol(cls, component, implements):
+    def pyre_buildProtocol(cls, implements):
         """
         Build a class that describes the implementation requirements imposed on the {component}
         under construction
         """
+        # warning
+        print("components.Actor.pyre_buildProtocol: NYI!")
         # NYI
         protocols = ()
         # make one and return it
