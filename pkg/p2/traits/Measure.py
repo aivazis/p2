@@ -4,6 +4,9 @@
 # (c) 1998-2019 all rights reserved
 
 
+# support
+from .. import tracking
+
 # superclasses
 from .Trait import Trait
 # mixins
@@ -36,7 +39,7 @@ class Measure(Trait, Default, DataDescriptor):
             # if there is a value for me
             if self in inventory:
                 # return it
-                return inventory[self]
+                return inventory.getValue(trait=self)
 
         # get the class that declared me
         origin = self.origin
@@ -49,7 +52,7 @@ class Measure(Trait, Default, DataDescriptor):
             # if there is a value for me here
             if self in inventory:
                 # get it and return it
-                return inventory[self]
+                return inventory.getValue(trait=self)
             # if we have arrived at the class that declared me
             if link is origin:
                 # nobody has a value for me; hand my default value
@@ -69,10 +72,14 @@ class Measure(Trait, Default, DataDescriptor):
         """
         Set the value of this trait
         """
+        # build a locator
+        locator = tracking.here(level=1)
+        # set the priority of this assignment
+        priority = None
         # get the inventory
         inventory = instance.pyre_inventory
         # set the value
-        inventory[self] = value
+        inventory.setValue(trait=self, value=value, locator=locator, priority=priority)
         # all done
         return
 
@@ -84,7 +91,7 @@ class Measure(Trait, Default, DataDescriptor):
         # get the inventory
         inventory = instance.pyre_inventory
         # delete the value
-        del inventory[self]
+        inventory.deleteValue(trait=self)
         # all done
         return
 

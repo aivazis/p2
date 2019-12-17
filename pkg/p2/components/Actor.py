@@ -35,7 +35,7 @@ class Actor(Requirement):
         component = super().__new__(cls, name, bases, attributes, **kwds)
 
         # if this is an internal class
-        if self.pyre_isInternal:
+        if component.pyre_isInternal:
             # go no further
             return component
 
@@ -98,8 +98,12 @@ class Actor(Requirement):
         canonical = namemap[name]
         # get the trait
         trait = self.pyre_traitmap[canonical]
+        # build a locator
+        locator = tracking.here(level=1)
+        # set the priority of this assignment
+        priority = None
         # add the value to my inventory
-        self.pyre_inventory[trait] = value
+        self.pyre_inventory.setValue(trait=trait, value=value, locator=locator, priority=priority)
         # all done
         return
 

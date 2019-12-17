@@ -15,6 +15,35 @@ class Inventory:
     traits = None
 
 
+    # interface
+    def getValue(self, trait):
+        """
+        Return the value associated with {trait}
+        """
+        # delegate
+        return self.traits[trait]
+
+
+    def setValue(self, trait, value, locator, priority):
+        """
+        Set the {value} of this {trait}
+        """
+        # delegate
+        self.traits[trait] = value
+        # all done
+        return
+
+
+    def deleteValue(self, trait):
+        """
+        Remove the value associated with {trait}
+        """
+        # delegate
+        del self.traits[trait]
+        # all done
+        return
+
+
     # metamethods
     def __init__(self, **kwds):
         # chain up
@@ -33,24 +62,6 @@ class Inventory:
     def __iter__(self):
         # delegate
         return iter(self.traits)
-
-
-    def __getitem__(self, trait):
-        # delegate
-        return self.traits[trait]
-
-
-    def __setitem__(self, trait, item):
-        # delegate
-        self.traits[trait] = item
-        # all done
-        return
-
-    def __delitem__(self, item):
-        # delegate
-        del self.traits[trait]
-        # all done
-        return
 
 
 # end of file
