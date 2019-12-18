@@ -6,6 +6,7 @@
 
 # support
 from .. import tracking
+from ..framework import priorities
 
 # superclass
 from .Requirement import Requirement
@@ -101,7 +102,7 @@ class Actor(Requirement):
         # build a locator
         locator = tracking.here(level=1)
         # set the priority of this assignment
-        priority = None
+        priority = priorities.Explicit()
         # add the value to my inventory
         self.pyre_inventory.setValue(trait=trait, value=value, locator=locator, priority=priority)
         # all done

@@ -6,6 +6,7 @@
 
 # support
 from .. import tracking
+from ..framework import priorities
 
 # superclasses
 from .Trait import Trait
@@ -75,7 +76,7 @@ class Measure(Trait, Default, DataDescriptor):
         # build a locator
         locator = tracking.here(level=1)
         # set the priority of this assignment
-        priority = None
+        priority = priorities.Explicit()
         # get the inventory
         inventory = instance.pyre_inventory
         # set the value
