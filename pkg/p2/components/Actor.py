@@ -24,7 +24,7 @@ class Actor(Requirement):
 
     # types
     from .Role import Role
-    from .Inventory import Inventory
+    from .ClassInventory import ClassInventory
 
 
     # metamethods
@@ -56,13 +56,13 @@ class Actor(Requirement):
         # chain up
         super().__init__(name, bases, attributes, **kwds)
 
-        # if this is an internal component
+        # if this is a component that is marked as an implementation detail
         if self.pyre_isInternal:
             # there is nothing further to do
             return
 
         # build the class inventory
-        self.pyre_inventory = self.Inventory()
+        self.pyre_inventory = self.ClassInventory()
 
         # all done
         return
@@ -90,21 +90,30 @@ class Actor(Requirement):
 
         # get my name map
         namemap = self.pyre_namemap
-        # so, early enough in the component class setup, or if {name} is not one of my traits
-        if namemap is None or name not in namemap:
-            # treat this like a regular assignment
+        # attempt to
+        try:
+            # look up the canonical name of this attribute
+            canonical = namemap[name]
+        # early enough in the creation of the component class record, {namemap} is {None}
+        except TypeError:
+            # so treat this like a regular assignment
+            return super().__setattr__(name, value)
+        # if the name is not in the {namemap} it must not be a trait
+        except KeyError:
+            # so treat this like a regular assignment
             return super().__setattr__(name, value)
 
-        # otherwise, get the canonical name
-        canonical = namemap[name]
-        # get the trait
+        # otherwise, get the trait
         trait = self.pyre_traitmap[canonical]
         # build a locator
         locator = tracking.here(level=1)
         # set the priority of this assignment
         priority = priorities.Explicit()
-        # add the value to my inventory
-        self.pyre_inventory.setValue(trait=trait, value=value, locator=locator, priority=priority)
+        # get my inventory
+        inventory = self.pyre_inventory
+        # set the value
+        inventory.setValue(component=self, trait=trait, value=value,
+                           locator=locator, priority=priority)
         # all done
         return
 

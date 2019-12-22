@@ -33,40 +33,13 @@ class Measure(Trait, Default, DataDescriptor):
         """
         Retrieve the value of this trait
         """
-        # if the request came from an actual instance
-        if instance is not None:
-            # grab its inventory
-            inventory = instance.pyre_inventory
-            # if there is a value for me
-            if self in inventory:
-                # return it
-                return inventory.getValue(trait=self)
-
-        # get the class that declared me
-        origin = self.origin
-        # if i couldn't find a value in the instance inventory, or if this request came from a
-        # component class, we must go through the {mro} of the class looking through the
-        # inventories for ancestor components that might have a value
-        for link in cls.pyre_pedigree:
-            # get the inventory of this ancestor
-            inventory = link.pyre_inventory
-            # if there is a value for me here
-            if self in inventory:
-                # get it and return it
-                return inventory.getValue(trait=self)
-            # if we have arrived at the class that declared me
-            if link is origin:
-                # nobody has a value for me; hand my default value
-                return self.default
-
-        # if we exhausted the search through the ancestors without finding a value, we have a bug
-        import journal
-        # make a channel
-        channel = journal.firewall("pyre.traits")
-        # build an error report
-        msg = f"could not find a value for '{self.name}' in {cls}"
-        # and complain
-        raise channel.log(msg)
+        # figure out who the client is
+        client = instance if instance is not None else cls
+        # get its inventory; if the call came from a component instance, the inventory will be
+        # an instance of {InstanceInventory}; otherwise, an instance of {ClassInventory}
+        inventory = client.pyre_inventory
+        # in either case, retrieve the value
+        return inventory.getValue(component=client, trait=self)
 
 
     def __set__(self, instance, value):
@@ -80,7 +53,8 @@ class Measure(Trait, Default, DataDescriptor):
         # get the inventory
         inventory = instance.pyre_inventory
         # set the value
-        inventory.setValue(trait=self, value=value, locator=locator, priority=priority)
+        inventory.setValue(component=instance, trait=self, value=value,
+                           locator=locator, priority=priority)
         # all done
         return
 

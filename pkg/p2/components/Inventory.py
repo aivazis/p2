@@ -12,24 +12,24 @@ class Inventory:
 
 
     # public data
-    traits = None
+    traits = None # the table of trait values
 
 
     # interface
-    def getValue(self, trait):
+    def getValue(self, component, trait):
         """
         Return the value associated with {trait}
         """
-        # delegate
-        return self.traits[trait]
+        # look it up in my table of values
+        return self[trait]
 
 
-    def setValue(self, trait, value, locator, priority):
+    def setValue(self, component, trait, value, locator, priority):
         """
         Set the {value} of this {trait}
         """
-        # delegate
-        self.traits[trait] = value
+        # place in my table of values
+        self[trait] = value
         # all done
         return
 
@@ -38,8 +38,8 @@ class Inventory:
         """
         Remove the value associated with {trait}
         """
-        # delegate
-        del self.traits[trait]
+        # remove form my table of values
+        del self[trait]
         # all done
         return
 
@@ -48,20 +48,44 @@ class Inventory:
     def __init__(self, **kwds):
         # chain up
         super().__init__(**kwds)
-        # initialize my table
+        # initialize my table of values
         self.traits = {}
         # all done
         return
 
 
+    # avoid using these directly as they require knowledge of the actual objects used to store
+    # the trait values, something that should be treated as an implementation detail. use the
+    # high level interface instead, after checking with a component that the {trait} you are
+    # looking for is one it knows
+
     def __contains__(self, item):
-        # delegate to my table
+        # ask my table
         return item in self.traits
 
 
     def __iter__(self):
-        # delegate
+        # iterate over the keys in my table of values
         return iter(self.traits)
+
+
+    def __delitem__(self, trait):
+        # delegate
+        del self.traits[trait]
+        # all done
+        return
+
+
+    def __getitem__(self, trait):
+        # delegate
+        return self.traits[trait]
+
+
+    def __setitem__(self, trait, value):
+        # delegate
+        self.traits[trait] = value
+        # all done
+        return
 
 
 # end of file
