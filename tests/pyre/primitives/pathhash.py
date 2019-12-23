@@ -13,30 +13,32 @@ def test():
     import p2.primitives
     # build one
     pathhash = p2.primitives.newPathHash()
-    # here are a couple of multi-level addresses
+    # here is a couple of multi-level addresses
     separator = '.'
-    moduleName = "pyre.patterns.PathHash".split(separator)
+    moduleName = "pyre.primitives.PathHash".split(separator)
     clsName = moduleName + ["PathHash"]
 
     # now hash the matching nodes
     module = pathhash.hash(moduleName)
     cls = pathhash.hash(items=clsName)
-    # check that i get the same node the second time i retrieve it
-    assert module == pathhash.hash(items=moduleName)
-    assert cls == pathhash.hash(items=clsName)
-    # check that i can retrieve the class from within the module
-    assert cls == module.hash(items=["PathHash"])
 
-    # build an alias for the module
+    # check that i get the same node the second time i retrieve it
+    assert module is pathhash.hash(items=moduleName)
+    assert cls is pathhash.hash(items=clsName)
+    # check that i can retrieve the class from within the module
+    assert cls is module.hash(items=["PathHash"])
+
+    # set up an alias for the module
     base = pathhash.hash(items=['pyre'])
     alias = "pathhash"
-    original = pathhash.hash(items="pyre.patterns.PathHash".split(separator))
-
+    original = pathhash.hash(items="pyre.primitives.PathHash".split(separator))
+    # alias the two nodes
     base.alias(alias=alias, target=original)
+
     # check that the alias points where it should
-    assert module == pathhash.hash(items="pyre.pathhash".split(separator))
+    assert module is pathhash.hash(items="pyre.pathhash".split(separator))
     # and that both contain the same class
-    assert cls == pathhash.hash(items="pyre.pathhash.PathHash".split(separator))
+    assert cls is pathhash.hash(items="pyre.pathhash.PathHash".split(separator))
 
     # dump out the contents of the hash
     # pathhash.dump()
