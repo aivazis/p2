@@ -1,0 +1,56 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+#
+# michael a.g. aïvázis <michael.aivazis@para-sim.com>
+# (c) 1998-2019 all rights reserved
+
+
+def test():
+    """
+    Check that path hashes work as advertised
+    """
+    # access the class
+    import p2.primitives
+    # build one
+    pathhash = p2.primitives.newPathHash()
+    # here are a couple of multi-level addresses
+    separator = '.'
+    moduleName = "pyre.patterns.PathHash".split(separator)
+    clsName = moduleName + ["PathHash"]
+
+    # now hash the matching nodes
+    module = pathhash.hash(moduleName)
+    cls = pathhash.hash(items=clsName)
+    # check that i get the same node the second time i retrieve it
+    assert module == pathhash.hash(items=moduleName)
+    assert cls == pathhash.hash(items=clsName)
+    # check that i can retrieve the class from within the module
+    assert cls == module.hash(items=["PathHash"])
+
+    # build an alias for the module
+    base = pathhash.hash(items=['pyre'])
+    alias = "pathhash"
+    original = pathhash.hash(items="pyre.patterns.PathHash".split(separator))
+
+    base.alias(alias=alias, target=original)
+    # check that the alias points where it should
+    assert module == pathhash.hash(items="pyre.pathhash".split(separator))
+    # and that both contain the same class
+    assert cls == pathhash.hash(items="pyre.pathhash.PathHash".split(separator))
+
+    # dump out the contents of the hash
+    # pathhash.dump()
+
+    # return the pathhash
+    return pathhash
+
+
+# main
+if __name__ == "__main__":
+    # skip pyre initialization since we don't rely on the executive
+    pyre_noboot = True
+    # do...
+    test()
+
+
+# end of file

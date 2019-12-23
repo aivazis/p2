@@ -4,4 +4,15 @@
 # (c) 1998-2019 all rights reserved
 
 
+# factories
+def newPathHash(**kwds):
+    """
+    Build a hashing functor for hierarchical name spaces
+    """
+    # get the factory
+    from .PathHash import PathHash
+    # and invokei t
+    return PathHash(**kwds)
+
+
 # end of file
