@@ -8,10 +8,12 @@
 from .Configurable import Configurable
 # metaclass
 from .Actor import Actor
+# the base protocol
+from .Protocol import Protocol
 
 
 # declaration
-class Component(Configurable, metaclass=Actor, internal=True):
+class Component(Configurable, metaclass=Actor):
     """
     The base class for all components
     """
@@ -19,8 +21,8 @@ class Component(Configurable, metaclass=Actor, internal=True):
 
     # framework data
     # structural
-    pyre_inventory = None   # trait value management
-    pyre_implements = None  # my protocol
+    pyre_inventory = None    # trait value management
+    pyre_protocol = Protocol # my default protocol; overwritten by {Actor} during construction
     # type id
     pyre_isComponent = True
 

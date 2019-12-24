@@ -28,8 +28,6 @@ class Configurable:
     # predicates that avoid runtime type identification
     pyre_isProtocol = False    # am i a protocol?
     pyre_isComponent = False   # am i a component?
-    # misc
-    pyre_isInternal = True     # am i visible to end-users
 
 
     # interface

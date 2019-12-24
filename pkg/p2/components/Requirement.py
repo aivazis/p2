@@ -22,7 +22,7 @@ class Requirement(AttributeFilter):
 
 
     # metamethods
-    def __new__(cls, name, bases, attributes, *, internal=False, **kwds):
+    def __new__(cls, name, bases, attributes, **kwds):
         """
         Build the class record for a new configurable
         """
@@ -86,11 +86,52 @@ class Requirement(AttributeFilter):
         # record the name maps
         configurable.pyre_namemap = namemap
         configurable.pyre_traitmap = traitmap
-        # mark the visibility of the record
-        configurable.pyre_isInternal = internal
 
         # all done
         return configurable
+
+
+    # type checks
+    # N.B.: these are used by {Actor} during the creation of the protocol as component
+    # implements. component and protocols themselves are marked as such at creation time, so if
+    # you already know that an object is one of these, you can check the {pyre_isComponent} or
+    # {pyre_isProtocol} to distinguish them. {Actor} has a slightly different problem: it has
+    # to filter out base classes that are not components, and detect non-protocols among the
+    # {implements} specification by the user. hence the more careful implementation here
+
+
+    @classmethod
+    def pyre_isComponent(cls, candidate):
+        """
+        Check whether {canidate} is a component class
+        """
+        # attempt to
+        try:
+            # ask it
+            flag = candidate.pyre_isComponent
+        # if it doesn't know
+        except AttributeError:
+            # it isn't
+            flag = False
+        # return with the answer
+        return flag
+
+
+    @classmethod
+    def pyre_isProtocol(cls, candidate):
+        """
+        Check whether {canidate} is a component class
+        """
+        # attempt to
+        try:
+            # ask it
+            flag = candidate.pyre_isProtocol
+        # if it doesn't know
+        except AttributeError:
+            # it isn't
+            flag = False
+        # return with the answer
+        return flag
 
 
 # end of file

@@ -11,10 +11,14 @@ from .Role import Role
 
 
 # declaration
-class Protocol(Configurable, metaclass=Role, internal=True):
+class Protocol(Configurable, metaclass=Role):
     """
     The base class for requirement specifications
     """
+
+
+    # type id
+    pyre_isProtocol = True
 
 
 # end of file
