@@ -12,16 +12,16 @@ def test():
 
     # pull the exceptions
     from p2.components.exceptions import ComponentError
-    from p2.components.exceptions import  CategoryMismatchError
-    from p2.components.exceptions import  ImplementationSpecificationError
-    from p2.components.exceptions import  ProtocolNotImplementedError
-    from p2.components.exceptions import  TraitNotFoundError
-    from p2.components.exceptions import  FacilitySpecificationError
-    from p2.components.exceptions import  ProtocolCompatibilityError
-    from p2.components.exceptions import  ResolutionError
-    from p2.components.exceptions import  DefaultError
-    from p2.components.exceptions import  ConfigurationError
-    from p2.components.exceptions import  InitializationError
+    from p2.components.exceptions import CategoryMismatchError
+    from p2.components.exceptions import ImplementationSpecificationError
+    from p2.components.exceptions import ProtocolNotImplementedError
+    from p2.components.exceptions import TraitNotFoundError
+    from p2.components.exceptions import FacilitySpecificationError
+    from p2.components.exceptions import ProtocolCompatibilityError
+    from p2.components.exceptions import ResolutionError
+    from p2.components.exceptions import DefaultError
+    from p2.components.exceptions import ConfigurationError
+    from p2.components.exceptions import InitializationError
 
     # the base exception
     try:
@@ -44,7 +44,7 @@ def test():
     # implementation specification
     try:
         # raise it
-        raise ImplementationSpecificationError(name=None, errors=None)
+        raise ImplementationSpecificationError(component=None, errors=None)
     # catch it
     except ImplementationSpecificationError as error:
         # all good

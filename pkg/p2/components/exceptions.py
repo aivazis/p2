@@ -47,14 +47,14 @@ class ImplementationSpecificationError(ComponentError):
     """
 
     # public data
-    description = '{0.name}: poorly formed implementation specification'
+    description = '{0.component} has a poorly formed implementation specification'
 
     # meta-methods
-    def __init__(self, name, errors, **kwds):
+    def __init__(self, component, errors, **kwds):
         # chain up
         super().__init__(**kwds)
         # save the error info
-        self.name = name
+        self.component = component
         self.errors = errors
         # all done
         return
