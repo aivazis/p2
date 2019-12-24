@@ -73,8 +73,6 @@ def test():
     return
 
 
-
-
 # main
 if __name__ == "__main__":
     # skip pyre initialization since we don't rely on the executive
