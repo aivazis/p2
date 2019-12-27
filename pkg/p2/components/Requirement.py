@@ -22,7 +22,7 @@ class Requirement(AttributeFilter):
 
 
     # metamethods
-    def __new__(cls, name, bases, attributes, **kwds):
+    def __new__(cls, name, bases, attributes, *, family=None, **kwds):
         """
         Build the class record for a new configurable
         """
@@ -78,6 +78,9 @@ class Requirement(AttributeFilter):
                             # map the alias to the canonical name
                             namemap[traitAlias] = traitName
 
+        # record the public name; for class records {pyre_name} and {pyre_family} are identical
+        configurable.pyre_name = family
+        configurable.pyre_family = family
         # record the pedigree
         configurable.pyre_pedigree = pedigree
         # record the trait piles

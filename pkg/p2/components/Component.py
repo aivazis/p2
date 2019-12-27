@@ -27,4 +27,47 @@ class Component(Configurable, metaclass=Actor):
     pyre_isComponent = True
 
 
+    # metamethods
+    def __init__(self, name=None, **kwds):
+        # chain up
+        super().__init__(**kwds)
+        # save my name
+        self.pyre_name = name
+        # all done
+        return
+
+
+    def __str__(self):
+        """
+        Build a human readable representation
+        """
+        # accumulator of the name fragments
+        fragments = []
+
+        # get my name
+        name = self.pyre_name
+        # if i have one
+        if name is not None:
+            # use it
+            fragments.append(f"component '{name}'")
+        # otherwise
+        else:
+            # mark the component a s private
+            fragments.append("unnamed component")
+
+        # get my family name
+        family = self.pyre_family
+        # if i have one
+        if family is not None:
+            # use it
+            fragments.append(f"an instance of '{family}'")
+        # otherwise
+        else:
+            # get my class name and use it
+            fragments.append(f"an instance of '{type(self).__name__}'")
+
+        # assemble and return
+        return ", ".join(fragments)
+
+
 # end of file

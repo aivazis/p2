@@ -35,7 +35,7 @@ class Actor(Requirement):
         Build a new component record
         """
         # chain up; swallow the locally specified keywords
-        component = super().__new__(cls, name, bases, attributes, **kwds)
+        component = super().__new__(cls, name, bases, attributes, family=family, **kwds)
 
         # build the protocol specification
         component.pyre_protocol = cls.pyre_buildProtocol(component=component, implements=implements)
@@ -110,6 +110,20 @@ class Actor(Requirement):
                            locator=locator, priority=priority)
         # all done
         return
+
+
+    def __str__(self):
+        """
+        Build a human readable representation
+        """
+        # use my family name
+        marker = self.pyre_family
+        # if i don't have one
+        if marker is None:
+            # use my class name
+            marker = self.__name__
+        # build the rep and return it
+        return f"component '{marker}'"
 
 
     # implementation details

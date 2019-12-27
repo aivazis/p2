@@ -15,4 +15,19 @@ class Role(Requirement):
     """
 
 
+    # metamethods
+    def __str__(self):
+        """
+        Build a human readable representation
+        """
+        # use my family name
+        marker = self.pyre_family
+        # if i don't have one
+        if marker is None:
+            # use my class name
+            marker = self.__name__
+        # build the rep and return it
+        return f"protocol '{marker}'"
+
+
 # end of file

@@ -15,6 +15,9 @@ class Configurable:
     """
 
     # framework data;
+    # names registered with the configuration store
+    pyre_name = None           # for instances
+    pyre_family = None         # for classes
     # structural
     pyre_pedigree = ()         # ancestors that are configurables, in mro
     pyre_traits = ()           # all traits, both local and inherited
