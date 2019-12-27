@@ -51,12 +51,11 @@ class Requirement(AttributeFilter):
             localTraits.append(trait)
 
         # scan my ancestors for traits
-        #
         # N.B.: this must be done carefully to account for trait shadowing where distant
         # ancestor traits become inaccessible when closer ancestors declare a trait with the
         # same name. resist the temptation to speed this up by traversing the pedigree in
         # reverse order and throw everything in the map expecting that closer ancestors will
-        # update the maps correctly, because there is no easy way to undo the mapping of the
+        # update the maps correctly: there is no obvious easy way to undo the mapping of the
         # aliases of a trait that get shadowed by a closer ancestor
         for base in pedigree[1:]:
             # and through each trait
@@ -95,18 +94,16 @@ class Requirement(AttributeFilter):
 
 
     # type checks
-    # N.B.: these are used by {Actor} during the creation of the protocol as component
-    # implements. component and protocols themselves are marked as such at creation time, so if
-    # you already know that an object is one of these, you can check the {pyre_isComponent} or
-    # {pyre_isProtocol} to distinguish them. {Actor} has a slightly different problem: it has
-    # to filter out base classes that are not components, and detect non-protocols among the
-    # {implements} specification by the user. hence the more careful implementation here
-
-
+    # N.B.: these are used by {Actor} during the creation of the protocol a component
+    # implements. components and protocols themselves are marked as such at creation time, so
+    # if you already know that an object is one of these, you can check the {pyre_isComponent}
+    # or {pyre_isProtocol} to distinguish them. {Actor} has a slightly different problem: it
+    # has to filter out base classes that are not components, and detect non-protocols among
+    # the {implements} specification by the user. hence the more careful implementation here
     @classmethod
     def pyre_isComponent(cls, candidate):
         """
-        Check whether {canidate} is a component class
+        Check whether {candidate} is a component class
         """
         # attempt to
         try:
@@ -123,7 +120,7 @@ class Requirement(AttributeFilter):
     @classmethod
     def pyre_isProtocol(cls, candidate):
         """
-        Check whether {canidate} is a component class
+        Check whether {candidate} is a protocol class
         """
         # attempt to
         try:
