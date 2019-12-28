@@ -53,6 +53,15 @@ class Actor(Requirement):
         # chain up
         super().__init__(name, bases, attributes, **kwds)
 
+        # get my protocol specification
+        protocol = self.pyre_protocol
+        # generate a compatibility report
+        report = self.pyre_isCompatible(spec=protocol, fast=True)
+        # if it's not a clean sheet
+        if not report.isClean:
+            # complain
+            raise self.ProtocolNotImplementedError(component=self, protocol=protocol, report=report)
+
         # get the class inventory factory
         from .ClassInventory import ClassInventory
         # make one and attach it

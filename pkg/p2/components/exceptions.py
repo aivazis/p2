@@ -43,7 +43,7 @@ class CategoryMismatchError(ComponentError):
 class ImplementationSpecificationError(ComponentError):
     """
     Exception raised when the {implements} specification of a component declaration contains
-    errors, e.g. classes that don't derive from Protocol
+    errors, e.g. classes that don't derive from {Protocol}
     """
 
     # public data
