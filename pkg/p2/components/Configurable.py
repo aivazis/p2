@@ -254,7 +254,7 @@ class Configurable:
 
     # compatibility check
     @classmethod
-    def pyre_isCompatible(cls, spec, fast=True):
+    def pyre_isCompatibleWith(cls, spec, fast=True):
         """
         Check whether {cls} is assignment compatible with {spec}.
 

@@ -80,24 +80,24 @@ def test():
 
     # compatibility checks
     # these ones should succeed
-    assert Derived.pyre_isCompatible(Base)
-    assert OK.pyre_isCompatible(Base)
-    assert Derived.pyre_isCompatible(OK)
+    assert Derived.pyre_isCompatibleWith(Base)
+    assert OK.pyre_isCompatibleWith(Base)
+    assert Derived.pyre_isCompatibleWith(OK)
 
     # now the ones that should fail
-    report = OK.pyre_isCompatible(Derived, fast=False)
+    report = OK.pyre_isCompatibleWith(Derived, fast=False)
     assert not report
     assert len(report.incompatibilities) == 1
     error = report.incompatibilities[derived_extra][0]
     assert isinstance(error, OK.TraitNotFoundError)
 
-    report = NotOK.pyre_isCompatible(Base, fast=False)
+    report = NotOK.pyre_isCompatibleWith(Base, fast=False)
     assert not report
     assert len(report.incompatibilities) == 1
     error = report.incompatibilities[base_common][0]
     assert isinstance(error, NotOK.TraitNotFoundError)
 
-    report = NotOK.pyre_isCompatible(Derived, fast=False)
+    report = NotOK.pyre_isCompatibleWith(Derived, fast=False)
     assert not report
     assert len(report.incompatibilities) == 2
     error = report.incompatibilities[derived_common][0]
@@ -105,19 +105,19 @@ def test():
     error = report.incompatibilities[derived_extra][0]
     assert isinstance(error, NotOK.TraitNotFoundError)
 
-    report = NotOK.pyre_isCompatible(OK, fast=False)
+    report = NotOK.pyre_isCompatibleWith(OK, fast=False)
     assert not report
     assert len(report.incompatibilities) == 1
     error = report.incompatibilities[ok_common][0]
     assert isinstance(error, NotOK.TraitNotFoundError)
 
-    report = BadType.pyre_isCompatible(Base, fast=False)
+    report = BadType.pyre_isCompatibleWith(Base, fast=False)
     assert not report
     assert len(report.incompatibilities) == 1
     error = report.incompatibilities[base_common][0]
     assert isinstance(error, BadType.CategoryMismatchError)
 
-    report = BadType.pyre_isCompatible(Derived, fast=False)
+    report = BadType.pyre_isCompatibleWith(Derived, fast=False)
     assert not report
     assert len(report.incompatibilities) == 2
     error = report.incompatibilities[derived_common][0]
@@ -125,19 +125,19 @@ def test():
     error = report.incompatibilities[derived_extra][0]
     assert isinstance(error, BadType.TraitNotFoundError)
 
-    report = BadType.pyre_isCompatible(OK, fast=False)
+    report = BadType.pyre_isCompatibleWith(OK, fast=False)
     assert not report
     assert len(report.incompatibilities) == 1
     error = report.incompatibilities[ok_common][0]
     assert isinstance(error, BadType.CategoryMismatchError)
 
-    report = Shadow.pyre_isCompatible(Base, fast=False)
+    report = Shadow.pyre_isCompatibleWith(Base, fast=False)
     assert not report
     assert len(report.incompatibilities) == 1
     error = report.incompatibilities[base_common][0]
     assert isinstance(error, Shadow.CategoryMismatchError)
 
-    report = Shadow.pyre_isCompatible(Derived, fast=False)
+    report = Shadow.pyre_isCompatibleWith(Derived, fast=False)
     assert not report
     assert len(report.incompatibilities) == 2
     error = report.incompatibilities[derived_common][0]
@@ -145,7 +145,7 @@ def test():
     error = report.incompatibilities[derived_extra][0]
     assert isinstance(error, Shadow.TraitNotFoundError)
 
-    report = Shadow.pyre_isCompatible(OK, fast=False)
+    report = Shadow.pyre_isCompatibleWith(OK, fast=False)
     assert not report
     assert len(report.incompatibilities) == 1
     error = report.incompatibilities[ok_common][0]

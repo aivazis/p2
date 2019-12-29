@@ -56,7 +56,7 @@ class Actor(Requirement):
         # get my protocol specification
         protocol = self.pyre_protocol
         # generate a compatibility report
-        report = self.pyre_isCompatible(spec=protocol, fast=True)
+        report = self.pyre_isCompatibleWith(spec=protocol, fast=True)
         # if it's not a clean sheet
         if not report.isClean:
             # complain

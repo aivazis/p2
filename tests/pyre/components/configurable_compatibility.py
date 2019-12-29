@@ -71,23 +71,23 @@ def test():
 
     # compatibility checks
     # the ones that should succeed
-    assert Derived.pyre_isCompatible(Base)
-    assert OK.pyre_isCompatible(Base)
-    assert Derived.pyre_isCompatible(OK)
-    assert BadType.pyre_isCompatible(Shadow)
-    assert Shadow.pyre_isCompatible(BadType)
+    assert Derived.pyre_isCompatibleWith(Base)
+    assert OK.pyre_isCompatibleWith(Base)
+    assert Derived.pyre_isCompatibleWith(OK)
+    assert BadType.pyre_isCompatibleWith(Shadow)
+    assert Shadow.pyre_isCompatibleWith(BadType)
 
     # the ones that should fail
-    assert not OK.pyre_isCompatible(Derived)
-    assert not NotOK.pyre_isCompatible(Base)
-    assert not NotOK.pyre_isCompatible(Derived)
-    assert not NotOK.pyre_isCompatible(OK)
-    assert not BadType.pyre_isCompatible(Base)
-    assert not BadType.pyre_isCompatible(Derived)
-    assert not BadType.pyre_isCompatible(OK)
-    assert not Shadow.pyre_isCompatible(Base)
-    assert not Shadow.pyre_isCompatible(Derived)
-    assert not Shadow.pyre_isCompatible(OK)
+    assert not OK.pyre_isCompatibleWith(Derived)
+    assert not NotOK.pyre_isCompatibleWith(Base)
+    assert not NotOK.pyre_isCompatibleWith(Derived)
+    assert not NotOK.pyre_isCompatibleWith(OK)
+    assert not BadType.pyre_isCompatibleWith(Base)
+    assert not BadType.pyre_isCompatibleWith(Derived)
+    assert not BadType.pyre_isCompatibleWith(OK)
+    assert not Shadow.pyre_isCompatibleWith(Base)
+    assert not Shadow.pyre_isCompatibleWith(Derived)
+    assert not Shadow.pyre_isCompatibleWith(OK)
 
     # all done
     return Base, Derived, OK, NotOK, BadType, Shadow
