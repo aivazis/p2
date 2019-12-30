@@ -19,6 +19,10 @@ class Component(Configurable, metaclass=Actor):
     """
 
 
+    # types
+    from .exceptions import ProtocolCompatibilityError
+
+
     # framework data
     # structural
     pyre_inventory = None    # trait value management
@@ -68,6 +72,41 @@ class Component(Configurable, metaclass=Actor):
 
         # assemble and return
         return ", ".join(fragments)
+
+
+    # implementation details
+    @classmethod
+    def pyre_isCompatibleWith(cls, spec, fast=True):
+        """
+        Check whether {cls} is compatible with {spec}
+        """
+        # chain up to perform the basic checks
+        report = super().pyre_isCompatibleWith(spec=spec, fast=fast)
+        # if we found an incompatibility and we are not interested in the details
+        if fast and not report.isClean:
+            # nothing further to do
+            return report
+
+        # if {spec} is not a protocol
+        if not spec.pyre_isProtocol:
+            # we don't have anything further to do for component-component checks
+            return report
+
+        # grab my protocol
+        mine = cls.pyre_protocol
+        # check that {spec} is type compatible with it
+        if not mine.pyre_isTypeCompatibleWith(protocol=spec):
+            # build an error descriptor
+            error = cls.ProtocolCompatibilityError(configurable=cls, protocol=spec)
+            # add it to the report
+            report.incompatibilities[spec].append(error)
+            # if we are in fast mode
+            if fast:
+                # do nothing further
+                return report
+
+        # all done
+        return report
 
 
 # end of file
