@@ -27,20 +27,32 @@ class Actor(Requirement):
 
     # types
     from .exceptions import ImplementationSpecificationError
+    from .exceptions import ProtocolNotImplementedError
 
 
     # metamethods
-    def __new__(cls, name, bases, attributes, *, family=None, implements=None, **kwds):
+    def __new__(cls, name, bases, attributes, *, implements=None, **kwds):
         """
         Build a new component record
         """
-        # chain up; swallow the locally specified keywords
-        component = super().__new__(cls, name, bases, attributes, family=family, **kwds)
+        # chain up
+        component = super().__new__(cls, name, bases, attributes, **kwds)
 
-        # build the protocol specification
-        component.pyre_protocol = cls.pyre_buildProtocol(component=component, implements=implements)
         # save the location of the component declaration
         component.pyre_locator = tracking.here(level=1)
+
+        # build the protocol specification
+        protocol = cls.pyre_buildProtocol(component=component, implements=implements)
+        # attach it
+        component.pyre_protocol = protocol
+        # generate a compatibility report; the type checks will pass trivially, so the point
+        # here is to check whether {component} has the requisite traits
+        report = component.pyre_isCompatibleWith(spec=protocol, fast=True)
+        # if it's not a clean sheet
+        if not report.isClean:
+            # complain
+            raise cls.ProtocolNotImplementedError(component=component, protocol=protocol,
+                                                  report=report)
 
         # all done
         return component
@@ -52,15 +64,6 @@ class Actor(Requirement):
         """
         # chain up
         super().__init__(name, bases, attributes, **kwds)
-
-        # get my protocol specification
-        protocol = self.pyre_protocol
-        # generate a compatibility report
-        report = self.pyre_isCompatibleWith(spec=protocol, fast=True)
-        # if it's not a clean sheet
-        if not report.isClean:
-            # complain
-            raise self.ProtocolNotImplementedError(component=self, protocol=protocol, report=report)
 
         # get the class inventory factory
         from .ClassInventory import ClassInventory
