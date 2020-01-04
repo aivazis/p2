@@ -6,10 +6,11 @@
 
 # superclasses
 from ..descriptors.Public import Public
+from ..framework.Dashboard import Dashboard
 
 
 # declaration
-class Trait(Public):
+class Trait(Public, Dashboard):
     """
     The base class for component attributes
 
