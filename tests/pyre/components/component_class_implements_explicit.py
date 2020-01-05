@@ -10,8 +10,6 @@ def test():
     Verify that the implementation specifications of components are created correctly when
     there is an explicit protocol specifies
     """
-    # dashboard
-    from p2.framework.Dashboard import Dashboard
     # configurable
     from p2.components.Configurable import Configurable
     # component
@@ -39,7 +37,7 @@ def test():
         """
 
     # the expected protocol mro
-    mro = [Lazy, Protocol, Configurable, Dashboard, object]
+    mro = [Lazy, Protocol, Configurable, object]
     # verify that its protocol specification is exactly as expected
     assert Larry.pyre_protocol.mro() == mro
 
@@ -51,7 +49,7 @@ def test():
         """
 
     # the expected protocol mro
-    mro = [Moe.pyre_protocol, Lazy, Crazy, Protocol, Configurable, Dashboard, object]
+    mro = [Moe.pyre_protocol, Lazy, Crazy, Protocol, Configurable, object]
     # verify that its protocol specification is exactly as expected
     assert Moe.pyre_protocol.mro() == mro
 

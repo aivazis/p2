@@ -7,12 +7,9 @@
 # externals
 import itertools
 
-# superclass
-from ..framework.Dashboard import Dashboard
-
 
 # declaration
-class Configurable(Dashboard):
+class Configurable:
     """
     The base class for components and protocols
     """
