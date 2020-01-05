@@ -30,10 +30,10 @@ class Actor(Requirement):
     from .exceptions import ProtocolNotImplementedError
 
 
-    # metamethods
+    # meta methods
     def __new__(cls, name, bases, attributes, *, implements=None, **kwds):
         """
-        Build a new component record
+        Build a new component class record
         """
         # chain up
         component = super().__new__(cls, name, bases, attributes, **kwds)
@@ -65,10 +65,25 @@ class Actor(Requirement):
         # chain up
         super().__init__(name, bases, attributes, **kwds)
 
+        # inventory construction
         # get the class inventory factory
         from .ClassInventory import ClassInventory
-        # make one and attach it
-        self.pyre_inventory = ClassInventory()
+        # make one
+        inventory = ClassInventory()
+        # and attach it
+        self.pyre_inventory = inventory
+
+        # class registration
+        # get the dashboard factory
+        from ..framework.Dashboard import Dashboard
+        # get the singleton
+        dashboard = Dashboard()
+        # get the registrar
+        registrar = dashboard.registrar
+        # ask it to register this component class
+        registrar.registerComponentClass(component=self)
+        # and invoke the registration hook
+        self.pyre_classRegistered()
 
         # all done
         return

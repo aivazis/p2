@@ -4,6 +4,9 @@
 # (c) 1998-2020 all rights reserved
 
 
+# support
+from .. import tracking
+
 # superclass
 from .Requirement import Requirement
 
@@ -15,7 +18,42 @@ class Role(Requirement):
     """
 
 
-    # metamethods
+    # meta methods
+    def __new__(cls, name, bases, attributes, **kwds):
+        """
+        Build a new protocol class record
+        """
+        # chain up
+        protocol = super().__new__(cls, name, bases, attributes, **kwds)
+        # save the location of the protocol declaration
+        protocol.pyre_locator = tracking.here(level=1)
+        # all done
+        return protocol
+
+
+    def __init__(self, name, bases, attributes, **kwds):
+        """
+        Initialize a freshly minted protocol record
+        """
+        # chain up
+        super().__init__(name, bases, attributes, **kwds)
+
+        # registration
+        # get the dashboard factory
+        from ..framework.Dashboard import Dashboard
+        # get the singleton
+        dashboard = Dashboard()
+        # get the registrar
+        registrar = dashboard.registrar
+        # ask it to register this component class
+        registrar.registerProtocolClass(protocol=self)
+        # and invoke the registration hook
+        self.pyre_classRegistered()
+
+        # all done
+        return
+
+
     def __str__(self):
         """
         Build a human readable representation
