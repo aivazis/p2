@@ -28,7 +28,7 @@ def test():
     assert isinstance(locator, p2.tracking.script)
     # and that everything was recorded correctly
     assert locator.source == __file__
-    assert locator.line == 43
+    assert locator.line == 41
     assert locator.function == '<module>'
 
     # all done
@@ -37,8 +37,6 @@ def test():
 
 # main
 if __name__ == "__main__":
-    # skip pyre initialization since we don't rely on the executive
-    pyre_noboot = True
     # do...
     test()
 
