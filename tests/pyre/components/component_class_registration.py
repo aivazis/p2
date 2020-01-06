@@ -105,6 +105,9 @@ def test():
         # and verify it is an implementor of each one
         assert Curly in registrar.implementers[protocol]
 
+    # since every component implements the trivial protocol, the set of registered component
+    # classes should be identical to the set of implementers of {Protocol}
+    assert set(registrar.components.keys()) == set(registrar.implementers[Protocol])
 
     # all done
     return Base, Larry, Moe, Curly
