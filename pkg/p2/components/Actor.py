@@ -65,10 +65,8 @@ class Actor(Requirement):
         # chain up
         super().__init__(name, bases, attributes, **kwds)
 
-        # get the dashboard factory
-        from ..framework.Dashboard import Dashboard
-        # get the singleton
-        dashboard = Dashboard()
+        # get the dashboard
+        from .. import dashboard
 
         # class registration: get the registrar
         registrar = dashboard.registrar

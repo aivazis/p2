@@ -21,9 +21,9 @@ class NameLookup:
 
     def __str__(self):
         # get access to the framework managers
-        from ..framework.Dashboard import Dashboard
+        from .. import dashboard
         # get the nameserver
-        ns = Dashboard.pyre_nameserver
+        ns = dashboard.nameserver
         # generate my rep
         return f"{self.description} {ns[self.key]}"
 

@@ -39,10 +39,8 @@ class Role(Requirement):
         super().__init__(name, bases, attributes, **kwds)
 
         # registration
-        # get the dashboard factory
-        from ..framework.Dashboard import Dashboard
-        # get the singleton
-        dashboard = Dashboard()
+        # get the dashboard
+        from .. import dashboard
         # get the registrar
         registrar = dashboard.registrar
         # ask it to register this component class
