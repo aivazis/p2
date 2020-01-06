@@ -38,7 +38,7 @@ def test():
 
 # main
 if __name__ == "__main__":
-    # skip pyre initialization since we don't rely on the executive
+    # set a custom dashboard
     pyre_dashboard = dashboard
     # do...
     test()

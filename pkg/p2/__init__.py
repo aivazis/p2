@@ -140,7 +140,7 @@ def boot():
             # generate the message
             msg = f"'pyre_dashboard' must be a callable, not '{type(dashboard)}'"
             # make a report
-            report = PyreError(decription=msg)
+            report = PyreError(description=msg)
             # and complain
             raise report
 
