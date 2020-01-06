@@ -21,12 +21,17 @@ def dashboard():
 
 def test():
     """
-    Sanity test: make sure the dashboard singleton is accessible
+    Verify we can install a custom dashboard correctly
     """
     # access
     import p2
     # verify that the registered dashboard is the one we built
     assert p2.dashboard.custom is True
+
+    # now, get the singleton
+    from p2.framework.Dashboard import Dashboard
+    # and verify that the instance it returns is our custom dashboard
+    assert p2.dashboard is Dashboard()
     # all done
     return
 

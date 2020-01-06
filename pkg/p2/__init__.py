@@ -127,18 +127,28 @@ def boot():
     else:
         # that was trivial
         if dashboard is None:
-            # bail
-            return dashboard
+            # no worries; we will handle this case later
+            pass
         # if we were not handed a callable
-        if not callable(dashboard):
+        elif callable(dashboard):
+            # invoke it to build the custom dashboard
+            dashboard = dashboard()
+        # otherwise
+        else:
             # get the correct error report type
-            from .framewor.exceptions import PyreError
-            # make one
-            report = PyreError(decription="'pyre_dashboard' must be a callable")
+            from .framework.exceptions import PyreError
+            # generate the message
+            msg = f"'pyre_dashboard' must be a callable, not '{type(dashboard)}'"
+            # make a report
+            report = PyreError(decription=msg)
             # and complain
             raise report
-        # otherwise, invoke it to build the custom dashboard
-        dashboard = dashboard()
+
+        # now for some dirty work: get the singleton factory
+        from .framework.Dashboard import Dashboard
+        # and install the new dashboard as the singleton so users can access it either through
+        # the global variable in this package or the usual way through the singleton
+        Dashboard.pyre_singletonInstance = dashboard
 
     # if we are supposed to boot
     if dashboard is not None:

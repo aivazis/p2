@@ -7,12 +7,16 @@
 
 def test():
     """
-    Sanity test: make sure the dashboard singleton is accessible
+    Verify that we can disable the dashboard
     """
     # access
     import p2
     # verify that we registered a null dashboard correctly
     assert p2.dashboard is None
+    # and that the singleton factory
+    from p2.framework.Dashboard import Dashboard
+    # has been updated correctly
+    assert Dashboard() is None
     # all done
     return
 
