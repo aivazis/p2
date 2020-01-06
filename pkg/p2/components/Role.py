@@ -50,6 +50,11 @@ class Role(Requirement):
         # and invoke the registration hook
         self.pyre_classRegistered()
 
+        # class configuration is now complete
+        self.pyre_classConfigured()
+        # so is initialization
+        self.pyre_classInitialized()
+
         # all done
         return
 

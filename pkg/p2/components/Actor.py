@@ -65,25 +65,29 @@ class Actor(Requirement):
         # chain up
         super().__init__(name, bases, attributes, **kwds)
 
-        # inventory construction
-        # get the class inventory factory
-        from .ClassInventory import ClassInventory
-        # make one
-        inventory = ClassInventory()
-        # and attach it
-        self.pyre_inventory = inventory
-
-        # class registration
         # get the dashboard factory
         from ..framework.Dashboard import Dashboard
         # get the singleton
         dashboard = Dashboard()
-        # get the registrar
+
+        # class registration: get the registrar
         registrar = dashboard.registrar
         # ask it to register this component class
         registrar.registerComponentClass(component=self)
         # and invoke the registration hook
         self.pyre_classRegistered()
+
+        # class configuration: get the class inventory factory
+        from .ClassInventory import ClassInventory
+        # make one
+        inventory = ClassInventory()
+        # attach it
+        self.pyre_inventory = inventory
+        # class configuration is now complete
+        self.pyre_classConfigured()
+
+        # class initialization is now complete
+        self.pyre_classInitialized()
 
         # all done
         return
