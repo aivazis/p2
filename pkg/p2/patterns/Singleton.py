@@ -22,6 +22,10 @@ class Singleton(Type):
     """
 
 
+    # constants
+    null = object() # a marker to indicate an uninitialized singleton
+
+
     # metamethods
     def __init__(self, name, bases, attributes, **kwds):
         """
@@ -30,7 +34,7 @@ class Singleton(Type):
         # chain up
         super().__init__(name, bases, attributes, **kwds)
         # reset the unique instance
-        self.pyre_singletonInstance = None
+        self.pyre_singletonInstance = self.null
         # all done
         return
 
@@ -42,10 +46,10 @@ class Singleton(Type):
         # get the singleton instance
         it = self.pyre_singletonInstance
         # if {it} doesn't exist yet
-        if it is None:
+        if it is self.null:
             # build it
             it = super().__call__(**kwds)
-            # attach it
+            # and attach it
             self.pyre_singletonInstance = it
         # in either case, publish it
         return it
