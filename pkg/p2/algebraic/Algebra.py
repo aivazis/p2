@@ -80,7 +80,7 @@ class Algebra(Type):
         record.operator.__module__ = record.__module__
 
         # mark it
-        record._pyre_hasAlgebra = True
+        record.pyre_hasAlgebra = True
 
         # return the record
         return record
@@ -169,14 +169,14 @@ class Algebra(Type):
 
         This is necessary because the metaclass is asked to process all subclasses of the type
         that injected it in the hierarchy. In our case, variables, operators and the like would
-        also pass through the process. This routine detects these cases and avoids them
+        also pass through the process. This routine detects these cases and avoids them.
         """
         # go through each of the bases
         for base in bases:
             # looking for
             try:
                 # a marked one
-                return base._pyre_hasAlgebra
+                return base.pyre_hasAlgebra
             # if that fails
             except AttributeError:
                 # perfect; check the next one

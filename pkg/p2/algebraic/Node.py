@@ -48,7 +48,7 @@ class Node:
     @property
     def span(self):
         """
-        Return a sequence over my entire dependency graph
+        A sequence over my entire dependency graph
         """
         # by default, empty
         return ()
@@ -58,7 +58,7 @@ class Node:
     @property
     def literals(self):
         """
-        Return a sequence over the nodes in my dependency graph that encapsulate foreign objects
+        A sequence over the nodes in my dependency graph that encapsulate foreign objects
         """
         # by default, empty
         return ()
@@ -67,7 +67,7 @@ class Node:
     @property
     def operators(self):
         """
-        Return a sequence over the composite nodes in my dependency graph
+        A sequence over the composite nodes in my dependency graph
         """
         # by default, empty
         return ()
@@ -76,14 +76,14 @@ class Node:
     @property
     def variables(self):
         """
-        Return a sequence over the leaf nodes in my dependency graph
+        A sequence over the leaf nodes in my dependency graph
         """
         # by default, empty
         return ()
 
 
     # interface
-    def cyclic(self):
+    def isCyclic(self):
         """
         Determine whether my subgraph has any cycles
         """
@@ -111,7 +111,7 @@ class Node:
 
 
     # implementation details
-    _pyre_hasAlgebra = False
+    pyre_hasAlgebra = False
 
 
     # debugging support
