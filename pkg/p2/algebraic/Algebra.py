@@ -34,13 +34,13 @@ class Algebra(Type):
     # meta-methods
     def __new__(cls, name, bases, attributes,
                 arithmetic=True, ordering=True, boolean=True,
-                ignore=False,
+                basenode=False,
                 **kwds):
         """
         Build a new class record
         """
-        # specially marked classes
-        if ignore or cls.isIgnorable(bases):
+        # if this is not the base node of the hierarchy
+        if not basenode:
             # bypass any of my processing
             return super().__new__(cls, name, bases, attributes, **kwds)
 
@@ -61,26 +61,23 @@ class Algebra(Type):
         # build the list of base classes for the literal
         derivation = tuple(cls.literalDerivation(record))
         # make one
-        record.literal = cls('literal', derivation, {}, ignore=True)
+        record.literal = cls('literal', derivation, {})
         # adjust its module so it gets the correct attribution in stack traces
         record.literal.__module__ = record.__module__
 
         # build the list of base classes for the variable
         derivation = tuple(cls.variableDerivation(record))
         # make one
-        record.variable = cls('variable', derivation, {}, ignore=True)
+        record.variable = cls('variable', derivation, {})
         # adjust its module so it gets the correct attribution in stack traces
         record.variable.__module__ = record.__module__
 
         # build the list of base classes for operators
         derivation = tuple(cls.operatorDerivation(record))
         # make one
-        record.operator = cls('operator', derivation, {}, ignore=True)
+        record.operator = cls('operator', derivation, {})
         # adjust its module so it gets the correct attribution in stack traces
         record.operator.__module__ = record.__module__
-
-        # mark it
-        record.pyre_hasAlgebra = True
 
         # return the record
         return record
@@ -160,29 +157,6 @@ class Algebra(Type):
         yield from cls.leafDerivation(record)
         # all done
         return
-
-
-    @classmethod
-    def isIgnorable(cls, bases):
-        """
-        Filter that determines whether a class should be decorated or not.
-
-        This is necessary because the metaclass is asked to process all subclasses of the type
-        that injected it in the hierarchy. In our case, variables, operators and the like would
-        also pass through the process. This routine detects these cases and avoids them.
-        """
-        # go through each of the bases
-        for base in bases:
-            # looking for
-            try:
-                # a marked one
-                return base.pyre_hasAlgebra
-            # if that fails
-            except AttributeError:
-                # perfect; check the next one
-                continue
-        # all good
-        return False
 
 
 # end of file

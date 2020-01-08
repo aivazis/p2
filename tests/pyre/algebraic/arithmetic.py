@@ -16,7 +16,7 @@ def test():
     import p2.algebraic
 
     # declare a node class
-    class node(metaclass=p2.algebraic.algebra): pass
+    class node(metaclass=p2.algebraic.algebra, basenode=True): pass
 
     # declare a couple of nodes
     n1 = node.variable()

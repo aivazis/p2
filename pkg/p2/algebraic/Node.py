@@ -110,19 +110,4 @@ class Node:
         return self
 
 
-    # implementation details
-    pyre_hasAlgebra = False
-
-
-    # debugging support
-    def dump(self, name, indent):
-        """
-        Print my name and value
-        """
-        # show me
-        print(f"{indent}{name}: {self.value}")
-        # all done
-        return self
-
-
 # end of file

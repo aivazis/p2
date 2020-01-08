@@ -16,7 +16,7 @@ def test():
     # the algebra
     algebra = p2.algebraic.algebra
     # declare a node class
-    class node(metaclass=algebra): pass
+    class node(metaclass=algebra, basenode=True): pass
 
 
     # verify that the {mro} is what we expect
