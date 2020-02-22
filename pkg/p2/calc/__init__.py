@@ -30,6 +30,10 @@ that trait settings can refer to the values of other traits in the configuration
 """
 
 
+# metaclass
+from .Calculator import Calculator as calculator
+
+
 # debugging support; see the top level {__init__} file for instructions on how to enable this
 def debug():
     """
