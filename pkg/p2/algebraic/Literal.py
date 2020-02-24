@@ -27,16 +27,6 @@ class Literal:
         return
 
 
-    # meta-methods
-    def __init__(self, value, **kwds):
-        # chain up
-        super().__init__(**kwds)
-        # store the foreign object as my value
-        self._value = value
-        # all done
-        return
-
-
     # support for graph traversals
     def identify(self, authority, **kwds):
         """

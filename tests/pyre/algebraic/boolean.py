@@ -16,7 +16,26 @@ def test():
     import p2.algebraic
 
     # declare a node class
-    class node(metaclass=p2.algebraic.algebra, basenode=True): pass
+    class node(metaclass=p2.algebraic.algebra, basenode=True):
+        """
+        The base node
+        """
+
+        class literal:
+            """
+            An implementation of literals
+            """
+            # public data
+            value = None
+            # meta-methods
+            def __init__(self, value, **kwds):
+                # chain up
+                super().__init__(**kwds)
+                # save the value
+                self.value = value
+                # all done
+                return
+
 
     # declare a couple of nodes
     n1 = node.variable()
@@ -45,7 +64,7 @@ def check_binary(expression, operator, op1, op2):
 
 def check_left(expression, operator, value, node):
     assert expression.evaluator is operator
-    assert expression._operands[0]._value == value
+    assert expression._operands[0].value == value
     assert expression._operands[1] is node
     return
 
@@ -53,7 +72,7 @@ def check_left(expression, operator, value, node):
 def check_right(expression, operator, value, node):
     assert expression.evaluator is operator
     assert expression._operands[0] is node
-    assert expression._operands[1]._value == value
+    assert expression._operands[1].value == value
     return
 
 

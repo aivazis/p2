@@ -14,7 +14,26 @@ def test():
     import p2.algebraic
 
     # declare a node class
-    class node(metaclass=p2.algebraic.algebra, basenode=True): pass
+    class node(metaclass=p2.algebraic.algebra, basenode=True):
+        """
+        The base node
+        """
+
+        class literal:
+            """
+            An implementation of literals
+            """
+            # public data
+            value = None
+            # meta-methods
+            def __init__(self, value, **kwds):
+                # chain up
+                super().__init__(**kwds)
+                # save the value
+                self.value = value
+                # all done
+                return
+
 
     # declare a couple of nodes
     n1 = node.variable()
