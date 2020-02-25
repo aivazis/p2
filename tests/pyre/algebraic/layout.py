@@ -15,9 +15,12 @@ def test():
 
     # the algebra
     algebra = p2.algebraic.algebra
-    # declare a node class
-    class node(metaclass=algebra, basenode=True): pass
 
+    # declare a node class
+    class node(metaclass=algebra, basenode=True, arithmetic=True, boolean=True, ordering=True):
+        """
+        The base node class
+        """
 
     # verify that the {mro} is what we expect
     assert node.__mro__ == (

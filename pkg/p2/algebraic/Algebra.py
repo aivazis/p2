@@ -19,7 +19,7 @@ class Algebra(Type):
     # structural
     from .Leaf import Leaf as leaf
     from .Composite import Composite as composite
-    # algebraic
+    # algebras
     from .Arithmetic import Arithmetic as arithmetic
     from .Ordering import Ordering as ordering
     from .Boolean import Boolean as boolean
@@ -33,7 +33,7 @@ class Algebra(Type):
 
     # metamethods
     def __new__(cls, name, bases, attributes,
-                arithmetic=True, ordering=True, boolean=True,
+                arithmetic=True, ordering=False, boolean=False,
                 basenode=False,
                 **kwds):
         """

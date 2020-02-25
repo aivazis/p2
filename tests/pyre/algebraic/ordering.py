@@ -16,7 +16,7 @@ def test():
     import p2.algebraic
 
     # declare a node class
-    class node(metaclass=p2.algebraic.algebra, basenode=True):
+    class node(metaclass=p2.algebraic.algebra, basenode=True, ordering=True):
         """
         The base node
         """
