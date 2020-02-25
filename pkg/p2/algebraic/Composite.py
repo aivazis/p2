@@ -125,7 +125,7 @@ class Composite:
         return clean
 
 
-    # meta-methods
+    # metamethods
     def __init__(self, operands, **kwds):
         # chain up
         super().__init__(**kwds)

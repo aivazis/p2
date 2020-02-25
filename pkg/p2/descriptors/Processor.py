@@ -15,7 +15,7 @@ class Processor:
     descriptors = () # the sequence of descriptors that i decorate
 
 
-    # meta methods
+    # metamethods
     def __init__(self, descriptors=descriptors, **kwds):
         # chain up
         super().__init__(**kwds)

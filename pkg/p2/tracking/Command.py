@@ -11,7 +11,7 @@ class Command:
     """
 
 
-    # meta methods
+    # metamethods
     def __init__(self, arg):
         # save the argument name
         self.arg = arg

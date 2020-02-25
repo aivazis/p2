@@ -14,7 +14,7 @@ class Type(type):
     """
 
 
-    # meta methods
+    # metamethods
     def __new__(cls, name, bases, attributes, **kwds):
         """
         Create a new class record

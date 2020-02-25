@@ -13,7 +13,7 @@ class Script:
     """
 
 
-    # meta methods
+    # metamethods
     def __init__(self, source, line=None, function=None):
         # save my info
         self.source = source

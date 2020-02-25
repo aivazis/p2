@@ -11,7 +11,7 @@ class FileRegion:
     """
 
 
-    # meta methods
+    # metamethods
     def __init__(self, start, end):
         # record the start and end locators of the file region
         self.start = start

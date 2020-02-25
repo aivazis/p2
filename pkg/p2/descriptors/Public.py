@@ -32,7 +32,7 @@ class Public:
         return self
 
 
-    # meta-methods
+    # metamethods
     def __init__(self, name=name, aliases=aliases, tip=tip, doc=doc, **kwds):
         # chain up
         super().__init__(**kwds)

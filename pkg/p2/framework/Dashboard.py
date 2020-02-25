@@ -48,7 +48,7 @@ class Dashboard(metaclass=Singleton):
         return
 
 
-    # meta methods
+    # metamethods
     def __init__(self, **kwds):
         # chain up
         super().__init__(**kwds)

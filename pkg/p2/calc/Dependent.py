@@ -26,7 +26,7 @@ class Dependent:
         return self
 
 
-    # meta-methods
+    # metamethods
     def __init__(self, operands, **kwds):
         # assume i am a composite
         super().__init__(operands=operands, **kwds)

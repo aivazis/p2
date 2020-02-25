@@ -12,7 +12,7 @@ class PyreError(Exception):
     # public data
     description = "generic pyre error"
 
-    # meta-methods
+    # metamethods
     def __init__(self, description=None, locator=None, **kwds):
         # chain up
         super().__init__(**kwds)
@@ -50,7 +50,7 @@ class BadResourceLocatorError(FrameworkError):
     # public data
     description = "{0.uri}: {0.reason}"
 
-    # meta-methods
+    # metamethods
     def __init__(self, uri, reason, **kwds):
         # chain up
         super().__init__(**kwds)
@@ -84,7 +84,7 @@ class ExternalNotFoundError(FrameworkError):
     # public data
     description = "could not locate support for external package {0.category!r}"
 
-    # meta-methods
+    # metamethods
     def __init__(self, category, **kwds):
         # chain up
         super().__init__(**kwds)

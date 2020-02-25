@@ -32,7 +32,7 @@ class Not(Constraint):
         return super().validate(value=value, **kwds)
 
 
-    # meta-methods
+    # metamethods
     def __init__(self, constraint, **kwds):
         # chain up
         super().__init__(**kwds)

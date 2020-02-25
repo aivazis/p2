@@ -31,7 +31,7 @@ class Like(Constraint):
         return super().validate(value=value, **kwds)
 
 
-    # meta-methods
+    # metamethods
     def __init__(self, regexp, **kwds):
         # chain up
         super().__init__(**kwds)

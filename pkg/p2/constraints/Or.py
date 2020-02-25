@@ -34,7 +34,7 @@ class Or(Constraint):
         return super().validate(value=value, **kwds)
 
 
-    # meta-methods
+    # metamethods
     def __init__(self, *constraints, **kwds):
         # chain up
         super().__init__(**kwds)

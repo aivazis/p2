@@ -15,7 +15,7 @@ class Converter(Processor):
     """
 
 
-    # meta-methods
+    # metamethods
     def __call__(self, method):
         """
         Add {method} as a converter to my registered descriptors

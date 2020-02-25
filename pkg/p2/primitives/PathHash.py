@@ -51,7 +51,7 @@ class PathHash:
         return original
 
 
-    # meta methods
+    # metamethods
     def __init__(self):
         # initialize the table of nodes
         self.nodes = collections.defaultdict(PathHash)

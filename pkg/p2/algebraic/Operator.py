@@ -17,7 +17,7 @@ class Operator:
     evaluator = None
 
 
-    # meta-methods
+    # metamethods
     def __init__(self, evaluator, **kwds):
         # chain up
         super().__init__(**kwds)

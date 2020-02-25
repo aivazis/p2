@@ -28,7 +28,7 @@ class CategoryMismatchError(ComponentError):
     # public data
     description = "category mismatch in trait {0.name!r} between {0.configurable} and {0.target}"
 
-    # meta-methods
+    # metamethods
     def __init__(self, configurable, target, name, **kwds):
         # chain up
         super().__init__(**kwds)
@@ -49,7 +49,7 @@ class ImplementationSpecificationError(ComponentError):
     # public data
     description = '{0.component} has a poorly formed implementation specification'
 
-    # meta-methods
+    # metamethods
     def __init__(self, component, errors, **kwds):
         # chain up
         super().__init__(**kwds)
@@ -69,7 +69,7 @@ class ProtocolNotImplementedError(ComponentError):
     # public data
     description = '{0.component} does not implement {0.protocol} correctly'
 
-    # meta-methods
+    # metamethods
     def __init__(self, component, protocol, report, **kwds):
         # chain up
         super().__init__(**kwds)
@@ -89,7 +89,7 @@ class TraitNotFoundError(ComponentError):
     # public data
     description = "{0.configurable} has no trait named {0.name!r}"
 
-    # meta-methods
+    # metamethods
     def __init__(self, configurable, name, **kwds):
         # pass it on
         super().__init__(**kwds)
@@ -108,7 +108,7 @@ class FacilitySpecificationError(ComponentError):
     # public data
     description = "{0.__name__}.{0.trait.name}: could not instantiate {0.value!r}"
 
-    # meta-methods
+    # metamethods
     def __init__(self, configurable, trait, value, **kwds):
         # chain up
         super().__init__(**kwds)
@@ -129,7 +129,7 @@ class ProtocolCompatibilityError(ComponentError):
     # public data
     description = '{0.configurable} is incompatible with {0.protocol}'
 
-    # meta-methods
+    # metamethods
     def __init__(self, configurable, protocol, **kwds):
         # chain up
         super().__init__(**kwds)
@@ -148,7 +148,7 @@ class ResolutionError(ComponentError):
     # public data
     description = 'could not resolve {0.value!r} into a component that implements {0.protocol}'
 
-    # meta-methods
+    # metamethods
     def __init__(self, protocol, value, report=None, **kwds):
         # chain up
         super().__init__(**kwds)
@@ -168,7 +168,7 @@ class DefaultError(ComponentError):
     # public data
     description = 'no valid default binding for {0.protocol}'
 
-    # meta-methods
+    # metamethods
     def __init__(self, protocol, **kwds):
         # chain up
         super().__init__(**kwds)
@@ -193,7 +193,7 @@ class ConfigurationError(ComponentError):
         """
         return "\n    ".join(map(str, self.errors))
 
-    # meta-methods
+    # metamethods
     def __init__(self, configurable, errors, **kwds):
         # chain up
         super().__init__(**kwds)
@@ -219,7 +219,7 @@ class InitializationError(ComponentError):
         """
         return "\n    ".join(map(str, self.errors))
 
-    # meta-methods
+    # metamethods
     def __init__(self, configurable, errors, **kwds):
         # chain up
         super().__init__(**kwds)

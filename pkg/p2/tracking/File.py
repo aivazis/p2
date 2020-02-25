@@ -11,7 +11,7 @@ class File:
     """
 
 
-    # meta methods
+    # metamethods
     def __init__(self, source, line=None, column=None):
         # save my info
         self.source = source

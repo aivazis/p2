@@ -15,7 +15,7 @@ class Validator(Processor):
     """
 
 
-    # meta-methods
+    # metamethods
     def __call__(self, method):
         """
         Add {method} as a validator to my registered descriptors

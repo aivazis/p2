@@ -31,7 +31,7 @@ class Algebra(Type):
     from .Variable import Variable as variable
 
 
-    # meta-methods
+    # metamethods
     def __new__(cls, name, bases, attributes,
                 arithmetic=True, ordering=True, boolean=True,
                 basenode=False,

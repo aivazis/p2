@@ -55,7 +55,7 @@ class Registrar:
         return component
 
 
-    # meta methods
+    # metamethods
     def __init__(self, **kwds):
         # chain up
         super().__init__(**kwds)

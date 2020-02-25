@@ -21,7 +21,7 @@ def test():
         # public data
         name = None
 
-        # meta methods
+        # metamethods
         def __init__(self, name=name, **kwds):
             # chain yp
             super().__init__(**kwds)

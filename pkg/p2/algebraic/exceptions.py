@@ -27,7 +27,7 @@ class CircularReferenceError(NodeError):
     # public data
     description = "the evaluation graph has a cycle at {0.node}"
 
-    # meta-methods
+    # metamethods
     def __init__(self, node, path=(), **kwds):
         # chain up
         super().__init__(**kwds)

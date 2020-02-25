@@ -13,13 +13,13 @@ class Trait(Public):
     """
     The base class for component attributes
 
-    Traits extend the notion of the a class attribute to an object that captures meta-data that
+    Traits extend the notion of the a class attribute to an object that captures metadata that
     has no natural resting place in a regular class declaration.
 
     Traits enable end-user configurable state, for both simple attributes and references to
     more elaborate objects, such as other components. Collectively, such attributes form the
     component inventory. Inventory items have names that connect them to the configuration
-    store, per-instance storage for the attribute value, and additional meta-data, such as type
+    store, per-instance storage for the attribute value, and additional metadata, such as type
     information, reasonable default values, constraints and validators, documentation, and
     anything else the author of a component deems necessary.
     """

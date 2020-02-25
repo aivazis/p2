@@ -28,7 +28,7 @@ class Set(Constraint):
         return super().validate(value=value, **kwds)
 
 
-    # meta-methods
+    # metamethods
     def __init__(self, *choices, **kwds):
         # chain up
         super().__init__(**kwds)

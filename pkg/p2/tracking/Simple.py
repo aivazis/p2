@@ -10,7 +10,7 @@ class Simple:
     """
 
 
-    # meta methods
+    # metamethods
     def __init__(self, source):
         # record the source
         self.source = source

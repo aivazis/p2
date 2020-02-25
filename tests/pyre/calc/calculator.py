@@ -7,7 +7,7 @@
 
 def test():
     """
-    Sanity test: make sure the module is accessible
+    Sanity test: make sure the metaclass is accessible
     """
     # access
     from p2.calc.Calculator import Calculator

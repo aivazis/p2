@@ -26,7 +26,7 @@ class And(Constraint):
         return value
 
 
-    # meta-methods
+    # metamethods
     def __init__(self, *constraints, **kwds):
         # chain up
         super().__init__(**kwds)

@@ -16,7 +16,7 @@ class Default:
     default = None
 
 
-    # meta-methods
+    # metamethods
     def __init__(self, default=default, **kwds):
         # chain up
         super().__init__(**kwds)

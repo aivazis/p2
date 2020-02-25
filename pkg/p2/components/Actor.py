@@ -30,7 +30,7 @@ class Actor(Requirement):
     from .exceptions import ProtocolNotImplementedError
 
 
-    # meta methods
+    # metamethods
     def __new__(cls, name, bases, attributes, *, implements=None, **kwds):
         """
         Build a new component class record

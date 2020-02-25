@@ -10,7 +10,7 @@ class NameLookup:
     """
 
 
-    # meta methods
+    # metamethods
     def __init__(self, description, key):
         # record the look up key and a description
         self.key = key

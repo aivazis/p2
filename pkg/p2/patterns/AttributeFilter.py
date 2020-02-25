@@ -14,7 +14,7 @@ class AttributeFilter(Type):
     A base metaclass that enables attribute classification.
 
     A common pattern in pyre is to define classes that contain special attributes that collect
-    declarative meta-data. These attributes are processed by special purpose metaclasses and
+    declarative metadata. These attributes are processed by special purpose metaclasses and
     are converted into appropriate behavior. For example, components have properties, which are
     decorated descriptors that enable external configuration of component state. Similarly, XML
     parsing happens with the aid of classes that capture the syntax, semantics and processing

@@ -40,7 +40,7 @@ def test():
         raw = descriptor()
         cooked = trait()
 
-        # meta methods
+        # metamethods
         def __init__(self, **kwds):
             # chain up
             super().__init__(**kwds)

@@ -27,7 +27,7 @@ class ConstraintViolationError(FrameworkError):
     # public data
     description  = "{0.value!r} is not {0.constraint}"
 
-    # meta-methods
+    # metamethods
     def __init__(self, constraint, value, **kwds):
         # chain  up
         super().__init__(**kwds)

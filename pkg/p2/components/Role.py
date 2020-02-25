@@ -18,7 +18,7 @@ class Role(Requirement):
     """
 
 
-    # meta methods
+    # metamethods
     def __new__(cls, name, bases, attributes, **kwds):
         """
         Build a new protocol class record

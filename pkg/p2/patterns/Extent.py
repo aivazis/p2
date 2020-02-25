@@ -24,7 +24,7 @@ class Extent(Type):
     """
 
 
-    # meta methods
+    # metamethods
     def __init__(self, name, bases, attributes, *, pyre_extent=False, **kwds):
         """
         Endow {self}, the class record being initialized, with a registry of instances of all

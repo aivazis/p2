@@ -15,7 +15,7 @@ class DataDescriptor(Descriptor):
     """
 
 
-    # meta-methods
+    # metamethods
     def __set__(self, instance, value):
         """
         Invoked by the interpreter to assign a value to the attribute managed by the descriptor

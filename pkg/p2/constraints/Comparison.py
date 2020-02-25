@@ -33,7 +33,7 @@ class Comparison(Constraint):
         return super().validate(value=value, **kwds)
 
 
-    # meta-methods
+    # metamethods
     def __init__(self, value, **kwds):
         # chain up
         super().__init__(**kwds)

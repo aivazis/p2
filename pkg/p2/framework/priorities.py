@@ -44,7 +44,7 @@ class Priority:
     framework = None
 
 
-    # meta-methods
+    # metamethods
     def __init__(self):
         # compute my rank by grabbing the next value in my category
         self.rank = next(self.collator[self.category])

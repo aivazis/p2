@@ -11,7 +11,7 @@ class Descriptor:
     """
 
 
-    # meta-methods
+    # metamethods
     def __get__(self, instance, cls):
         """
         Invoked by the interpreter to retrieve the value of a descriptor

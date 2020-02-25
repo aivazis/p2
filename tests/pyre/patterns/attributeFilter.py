@@ -18,7 +18,7 @@ def test():
     # establish a descriptor class
     class Descriptor:
         """
-        Resting place of attribute meta-data
+        Resting place of attribute metadata
         """
 
         # marker

@@ -23,10 +23,10 @@ class Behavior(Trait, Descriptor):
     isBehavior = True
 
 
-    # meta-methods
+    # metamethods
     def __new__(cls, method=None, **kwds):
         """
-        Trap invocations with meta-data and delay the decoration of the method
+        Trap invocations with metadata and delay the decoration of the method
         """
         # if the {method} is known
         if method is not None:

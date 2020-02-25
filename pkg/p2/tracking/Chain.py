@@ -12,7 +12,7 @@ class Chain:
     """
 
 
-    # meta methods
+    # metamethods
     def __init__(self, this, next):
         # save the links
         self.this = this

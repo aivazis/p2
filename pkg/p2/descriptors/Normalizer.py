@@ -15,7 +15,7 @@ class Normalizer(Processor):
     """
 
 
-    # meta-methods
+    # metamethods
     def __call__(self, method):
         """
         Add {method} as a normalizer to my registered descriptors
