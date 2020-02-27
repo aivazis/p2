@@ -8,11 +8,16 @@
 from .. import algebraic
 
 
-# declaration
+# the metaclass that constructs the node hierarchy
 class Calculator(algebraic.algebra):
     """
-    Metaclass that endows nodes with value management capabilities
+    Metaclass that endows algebraic nodes with value management capabilities
     """
+
+    # types
+    # value management
+    from .Const import Const as const
+    from .Value import Value as value
 
 
     # metamethods
@@ -20,7 +25,7 @@ class Calculator(algebraic.algebra):
         """
         Build a new class record
         """
-        # chain up
+        # chain up to get variable, operator, and literal
         record = super().__new__(cls, name, bases, attributes, basenode=basenode, **kwds)
 
         # if this is not the base node of the hierarchy
@@ -30,6 +35,22 @@ class Calculator(algebraic.algebra):
 
         # all done
         return record
+
+
+    # implementation details
+    @classmethod
+    def literalDerivation(cls, record):
+        """
+        Contribute to the list of ancestors of the representation of literals
+        """
+        # make literals const
+        yield cls.const
+        # give them storage for a value
+        yield cls.value
+        # the contribution from {algebra}
+        yield from super().literalDerivation(record)
+        # all done
+        return
 
 
 # end of file

@@ -4,27 +4,20 @@
 # (c) 1998-2020 all rights reserved
 
 
-# declaration
+# mix-in for read-only nodes
 class Const:
     """
-    Mix-in class that serves a read-only value that must be set during construction
+    Mix-in class that disables setting the value of a node
     """
 
+
     # value management
-    def getValue(self):
-        """
-        Return my value
-        """
-        # easy enough
-        return self._value
-
-
     def setValue(self, value):
         """
         Disable value setting
         """
         # disabled
-        raise NotImplementedError("const nodes do not support 'setValue'")
+        raise NotImplementedError("const nodes are read-only")
 
 
 # end of file

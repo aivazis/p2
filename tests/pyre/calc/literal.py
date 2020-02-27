@@ -7,11 +7,12 @@
 
 def test():
     """
-    Sanity test: make sure the {Node} module is accessible
+    Sanity check: verify that the base {node} has {literal}
     """
-    # make sure the class is accessible
-    from p2.calc.Node import Node
-
+    # get the base node form the {calc} package
+    from p2.calc.Node import Node as node
+    # access the literal class
+    literal = node.literal
     # all done
     return
 
