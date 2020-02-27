@@ -4,7 +4,7 @@
 # (c) 1998-2020 all rights reserved
 
 
-# declaration
+# evaluator for functional nodes
 class Evaluator:
     """
     Mix-in class that computes the value of operator nodes by invoking their evaluator on their

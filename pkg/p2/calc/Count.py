@@ -4,7 +4,7 @@
 # (c) 1998-2020 all rights reserved
 
 
-# declaration
+# evaluator that returns the number of its operands
 class Count:
     """
     The representation of the length of a collection of nodes

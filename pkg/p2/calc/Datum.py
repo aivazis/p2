@@ -8,7 +8,7 @@
 from ..algebraic.Node import Node
 
 
-# declaration of the base node
+# augmented base node
 class Datum(Node):
     """
     The base class for nodes that have values

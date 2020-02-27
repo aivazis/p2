@@ -4,10 +4,10 @@
 # (c) 1998-2020 all rights reserved
 
 
-# declaration
+# augmented graph traversal
 class Composite:
     """
-    Mix-in class that augments graph traversal for the new leaves defined in this package
+    Mix-in class that augments graph traversal for the new nodes defined in this package
     """
 
 

@@ -4,7 +4,7 @@
 # (c) 1998-2020 all rights reserved
 
 
-# declaration
+# the value management part of being an observer
 class Dependent:
     """
     Mix-in class that enables a node to be notified when the values of its dependencies change

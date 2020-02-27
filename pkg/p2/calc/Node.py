@@ -8,7 +8,7 @@
 from . import calculator
 
 
-# declaration
+# the anchor class for lazily evaluated nodes
 class Node(metaclass=calculator, basenode=True):
     """
     The base node for lazily evaluated node graphs

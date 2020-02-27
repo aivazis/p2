@@ -4,7 +4,7 @@
 # (c) 1998-2020 all rights reserved
 
 
-# declaration
+# evaluator that computes the average of the values of a collection of nodes
 class Average:
     """
     The representation of the average value of a collection of nodes
