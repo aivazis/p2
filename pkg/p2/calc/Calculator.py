@@ -18,6 +18,10 @@ class Calculator(algebraic.algebra):
     # value management
     from .Const import Const as const
     from .Value import Value as value
+    # operators get their values through computation
+    from .Evaluator import Evaluator as evaluator
+    # the augmented base node
+    # from .Stem import Stem as base
 
 
     # metamethods
@@ -49,6 +53,19 @@ class Calculator(algebraic.algebra):
         yield cls.value
         # the contribution from {algebra}
         yield from super().literalDerivation(record)
+        # all done
+        return
+
+
+    @classmethod
+    def operatorDerivation(cls, record):
+        """
+        Contribute to the list of ancestors of operators
+        """
+        # my operators know how to compute their values
+        yield cls.evaluator
+        # the contribution from {algebra}
+        yield from super().operatorDerivation(record)
         # all done
         return
 
