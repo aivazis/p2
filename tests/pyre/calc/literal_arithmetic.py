@@ -16,11 +16,21 @@ def test():
     l1 = node.literal(value=1)
     l2 = node.literal(value=2)
 
-    # basic arithmetic
+    # basic arithmetic among literals
     assert (l1 + l2).getValue() == 3
     assert (l1 - l2).getValue() == -1
     assert (l1 * l2).getValue() == 2
     assert (l1 / l2).getValue() == 0.5
+    assert (l1 ** l2).getValue() == 1
+    assert (l1 % l2).getValue() == 1
+
+    # let the {algebra} build the second literal
+    assert (l1 + 2).getValue() == 3
+    assert (l1 - 2).getValue() == -1
+    assert (l1 * 2).getValue() == 2
+    assert (l1 / 2).getValue() == 0.5
+    assert (l1 ** 2).getValue() == 1
+    assert (l1 % 2).getValue() == 1
 
     # all done
     return
