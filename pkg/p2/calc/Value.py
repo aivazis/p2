@@ -35,9 +35,18 @@ class Value:
         # chain up
         super().__init__(**kwds)
         # save the value
-        self.setValue(value=value)
+        self._value = self.initialize(value=value)
         # all done
         return
+
+
+    # implementation details
+    def initialize(self, value):
+        """
+        Invoked by the constructor to prep the initial value of the node
+        """
+        # the default implementation is to leave the value alone
+        return value
 
 
     # private data
