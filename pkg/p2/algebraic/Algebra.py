@@ -56,64 +56,21 @@ class Algebra(Type):
         bases = tuple(derivation) + bases
 
         # build the record
-        record = super().__new__(cls, name, bases, attributes, **kwds)
+        node = super().__new__(cls, name, bases, attributes, **kwds)
 
-        # build the list of base classes for the literal
-        derivation = tuple(cls.literalDerivation(record))
-        # make one
-        record.literal = cls('literal', derivation, {})
-        # adjust its module so it gets the correct attribution in stack traces
-        record.literal.__module__ = record.__module__
-
-        # build the list of base classes for the variable
-        derivation = tuple(cls.variableDerivation(record))
-        # make one
-        record.variable = cls('variable', derivation, {})
-        # adjust its module so it gets the correct attribution in stack traces
-        record.variable.__module__ = record.__module__
-
-        # build the list of base classes for operators
-        derivation = tuple(cls.operatorDerivation(record))
-        # make one
-        record.operator = cls('operator', derivation, {})
-        # adjust its module so it gets the correct attribution in stack traces
-        record.operator.__module__ = record.__module__
+        # make literals
+        node.literal = cls.make(name="literal", base=node, chain=cls.literalDerivation(node))
+        # make variables
+        node.variable = cls.make(name="variable", base=node, chain=cls.variableDerivation(node))
+        # make operators
+        node.operator = cls.make(name="operator", base=node, chain=cls.operatorDerivation(node))
 
         # return the record
-        return record
+        return node
 
 
     # implementation details
-    @classmethod
-    def leafDerivation(cls, record):
-        """
-        Contribute to the list of ancestors of the representation of literals
-        """
-        # if the {record} specifies a leaf mix-in, add it to the pile
-        if record.leaf: yield record.leaf
-        # yield the default leaf class
-        yield cls.leaf
-        # and the buck stops here...
-        yield record
-        # all done
-        return
-
-
-    @classmethod
-    def compositeDerivation(cls, record):
-        """
-        Contribute to the list of ancestors of the representation of literals
-        """
-        # if the {record} specifies a composite mix-in, add it to the pile
-        if record.composite: yield record.composite
-        # yield the default composite class
-        yield cls.composite
-        # and the buck stops here...
-        yield record
-        # all done
-        return
-
-
+    # derivations of the user visible classes
     @classmethod
     def literalDerivation(cls, record):
         """
@@ -157,6 +114,53 @@ class Algebra(Type):
         yield from cls.leafDerivation(record)
         # all done
         return
+
+
+    # structural contributions
+    @classmethod
+    def leafDerivation(cls, record):
+        """
+        Contribute to the list of ancestors of the representation of literals
+        """
+        # if the {record} specifies a leaf mix-in, add it to the pile
+        if record.leaf: yield record.leaf
+        # yield the default leaf class
+        yield cls.leaf
+        # and the buck stops here...
+        yield record
+        # all done
+        return
+
+
+    @classmethod
+    def compositeDerivation(cls, record):
+        """
+        Contribute to the list of ancestors of the representation of literals
+        """
+        # if the {record} specifies a composite mix-in, add it to the pile
+        if record.composite: yield record.composite
+        # yield the default composite class
+        yield cls.composite
+        # and the buck stops here...
+        yield record
+        # all done
+        return
+
+
+    # record builder
+    @classmethod
+    def make(cls, name, base, chain):
+        """
+        Build a new class record to be attached to the node hierarchy
+        """
+        # realize the tuple of bases
+        derivation = tuple(chain)
+        # make the new class
+        new = cls(name, derivation, {})
+        # adjust its module so it get the correct attribution in stack traces
+        new.__module__ = base.__module__
+        # and return it
+        return new
 
 
 # end of file
