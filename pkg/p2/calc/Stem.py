@@ -9,7 +9,7 @@ from ..algebraic.Node import Node
 
 
 # augmented base node
-class Datum(Node):
+class Stem(Node):
     """
     The base class for nodes that have values
     """
