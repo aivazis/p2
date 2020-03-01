@@ -23,4 +23,16 @@ class Leaf:
         return
 
 
+    # structural classifiers
+    @property
+    def leaves(self):
+        """
+        Return a sequence over the leaves in my dependency graph
+        """
+        # i am one
+        yield self
+        # all done
+        return
+
+
 # end of file

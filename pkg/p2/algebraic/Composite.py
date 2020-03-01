@@ -75,7 +75,7 @@ class Composite:
     @property
     def variables(self):
         """
-        Return a sequence over the leaf nodes in my dependency graph
+        Return a sequence over the variables in my dependency graph
         """
         # go through my operands
         for operand in self.operands:
@@ -85,7 +85,37 @@ class Composite:
         return
 
 
-    # alterations to the dependency graph
+    # structural classifiers
+    @property
+    def leaves(self):
+        """
+        Return a sequence over the leaves in my dependency graph
+        """
+        # go through my operands:
+        for operand in self.operands:
+            # and ask them for leaves in their span
+            yield from operand.leaves
+        # all done
+        return
+
+
+    @property
+    def composites(self):
+        """
+        Return a sequence over the composites in my dependency graph
+        """
+        # i am one
+        yield self
+        # go through my operands:
+        for operand in self.operands:
+            # and ask them for leaves in their span
+            yield from operand.composites
+        # all done
+        return
+
+
+
+    # alterations of the dependency graph
     def substitute(self, current, replacement, clean=None):
         """
         Traverse my span and replace all occurrences of {current} with {replacement}

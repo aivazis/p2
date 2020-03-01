@@ -82,6 +82,25 @@ class Node:
         return ()
 
 
+    # structural classifiers
+    @property
+    def leaves(self):
+        """
+        Return a sequence over the leaves in my dependency graph
+        """
+        # by default empty
+        return ()
+
+
+    @property
+    def composites(self):
+        """
+        Return a sequence over the composites in my dependency graph
+        """
+        # by default, empty
+        return ()
+
+
     # interface
     def isCyclic(self):
         """
