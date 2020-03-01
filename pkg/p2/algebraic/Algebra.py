@@ -72,77 +72,77 @@ class Algebra(Type):
     # implementation details
     # derivations of the user visible classes
     @classmethod
-    def literalDerivation(cls, record):
+    def literalDerivation(cls, node):
         """
         Contribute to the list of ancestors of the representation of literals
         """
         # if the class record specifies a literal mix-in use it
-        if record.literal: yield record.literal
+        if node.literal: yield node.literal
         # must also derive from the default
         yield cls.literal
         # get the classes necessary to make leaves
-        yield from cls.leafDerivation(record)
+        yield from cls.leafDerivation(node)
         # all done
         return
 
 
     @classmethod
-    def operatorDerivation(cls, record):
+    def operatorDerivation(cls, node):
         """
         Contribute to the list of ancestors of the representation of operators
         """
         # if the class record specifies a operator mix-in use it
-        if record.operator: yield record.operator
+        if node.operator: yield node.operator
         # must also derive from the default
         yield cls.operator
         # get the classes necessary to make composites
-        yield from cls.compositeDerivation(record)
+        yield from cls.compositeDerivation(node)
         # all done
         return
 
 
     @classmethod
-    def variableDerivation(cls, record):
+    def variableDerivation(cls, node):
         """
         Contribute to the list of ancestors of the representation of variables
         """
         # if the class record specifies a variable mix-in use it
-        if record.variable: yield record.variable
+        if node.variable: yield node.variable
         # must also derive from the default
         yield cls.variable
         # get the classes necessary to make leaves
-        yield from cls.leafDerivation(record)
+        yield from cls.leafDerivation(node)
         # all done
         return
 
 
     # structural contributions
     @classmethod
-    def leafDerivation(cls, record):
+    def leafDerivation(cls, node):
         """
         Contribute to the list of ancestors of the representation of literals
         """
         # if the {record} specifies a leaf mix-in, add it to the pile
-        if record.leaf: yield record.leaf
+        if node.leaf: yield node.leaf
         # yield the default leaf class
         yield cls.leaf
         # and the buck stops here...
-        yield record
+        yield node
         # all done
         return
 
 
     @classmethod
-    def compositeDerivation(cls, record):
+    def compositeDerivation(cls, node):
         """
         Contribute to the list of ancestors of the representation of literals
         """
         # if the {record} specifies a composite mix-in, add it to the pile
-        if record.composite: yield record.composite
+        if node.composite: yield node.composite
         # yield the default composite class
         yield cls.composite
         # and the buck stops here...
-        yield record
+        yield node
         # all done
         return
 

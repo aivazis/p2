@@ -7,7 +7,7 @@
 # mix in that generates an event on value change
 class Dependency:
     """
-    Mix-in class that enables a node to notify its observers when its value changes
+    Value management for observables
     """
 
 

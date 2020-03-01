@@ -20,7 +20,7 @@ class Value:
         return self._value
 
 
-    def setValue(self, **kwds):
+    def setValue(self, value, **kwds):
         """
         Set my value
         """

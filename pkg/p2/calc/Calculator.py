@@ -20,6 +20,14 @@ class Calculator(algebraic.algebra):
     from .Value import Value as value
     # operators get their values through computation
     from .Evaluator import Evaluator as evaluator
+
+    # notification system
+    from .Reactor import Reactor as reactor
+    from .Observer import Observer as observer
+    from .Dependent import Dependent as dependent
+    from .Observable import Observable as observable
+    from .Dependency import Dependency as dependency
+
     # the augmented base node
     # from .Stem import Stem as base
 
@@ -30,20 +38,21 @@ class Calculator(algebraic.algebra):
         Build a new class record
         """
         # chain up to get variable, operator, and literal
-        record = super().__new__(cls, name, bases, attributes, basenode=basenode, **kwds)
+        node = super().__new__(cls, name, bases, attributes, basenode=basenode, **kwds)
 
         # if this is not the base node of the hierarchy
         if not basenode:
             # all done
-            return record
+            return node
 
         # all done
-        return record
+        return node
 
 
     # implementation details
+    # derivations of the user visible classes
     @classmethod
-    def literalDerivation(cls, record):
+    def literalDerivation(cls, node):
         """
         Contribute to the list of ancestors of the representation of literals
         """
@@ -52,20 +61,66 @@ class Calculator(algebraic.algebra):
         # give them storage for a value
         yield cls.value
         # the contribution from {algebra}
-        yield from super().literalDerivation(record)
+        yield from super().literalDerivation(node)
         # all done
         return
 
 
     @classmethod
-    def operatorDerivation(cls, record):
+    def operatorDerivation(cls, node):
         """
         Contribute to the list of ancestors of operators
         """
-        # my operators know how to compute their values
+        # operator nodes observe their operands
+        yield from cls.observerDerivation(node)
+        # they are themselves observable
+        yield from cls.observableDerivation(node)
+        # they know how to compute their values
         yield cls.evaluator
-        # the contribution from {algebra}
-        yield from super().operatorDerivation(record)
+        # and whatever else {algebra} contributes
+        yield from super().operatorDerivation(node)
+        # all done
+        return
+
+
+    @classmethod
+    def variableDerivation(cls, node):
+        """
+        Contribute to the list of ancestors of variables
+        """
+        # variables are observable
+        yield from cls.observableDerivation(node)
+        # they have storage for a value
+        yield cls.value
+        # and whatever else {algebra} contributes
+        yield from super().variableDerivation(node)
+        # all done
+        return
+
+
+    # structural contributions
+    @classmethod
+    def observableDerivation(cls, node):
+        """
+        Contribute observable behavior
+        """
+        # inject value management
+        yield cls.dependency
+        # and the notification support
+        yield cls.observable
+        # all done
+        return
+
+
+    @classmethod
+    def observerDerivation(cls, node):
+        """
+        Contribute observer behavior
+        """
+        # inject value management
+        yield cls.dependent
+        # and observable management
+        yield cls.observer
         # all done
         return
 
