@@ -25,30 +25,30 @@ class Extent(Type):
 
 
     # metamethods
-    def __init__(self, name, bases, attributes, *, pyre_extent=False, **kwds):
+    def __new__(cls, name, bases, attributes, *, pyre_extent=False, **kwds):
         """
-        Endow {self}, the class record being initialized, with a registry of instances of all
-        classes whose base it is.
+        Endow the class record being created, with a registry of instances of all classes whose
+        base it is.
 
-        The implementation here attaches a weakset of instances to the first class in a
-        hierarchy that mention {Extent} as its metaclass, by taking advantage of the way python
-        metaclasses work. Do not forget that {Extent} will process the class records of all
-        subclasses of this base class. Setting {pyre_extent} to {True} in the declaration
-        of a subclass allows that subclass to become a new extent root for its subclasses, and
-        prevents instances from counted by its base classes.
+        The implementation here attaches a {weakset} of instances to the first class in a
+        hierarchy that mentions {Extent} as its metaclass, by taking advantage of the way
+        python metaclasses work. Do not forget that {Extent} will process the class records of
+        all subclasses of this base class. Setting {pyre_extent} to {True} in the declaration
+        of a subclass allows that particular subclass to become a new extent root for its
+        subclasses, and prevents instances from counted by its base classes.
         """
         # chain up
-        super().__init__(name, bases, attributes, **kwds)
+        record = super().__new__(cls, name, bases, attributes, **kwds)
 
         # initialize storage for the instances. this happens only if the user has marked this
         # class as an extent root by explicitly setting {pyre_extent} to {True}, or if the
         # attribute that holds the storage is missing, which is true only for the first class
         # that specifies {Extent} as its metaclass
-        if pyre_extent or not hasattr(self, "pyre_extent"):
+        if pyre_extent or not hasattr(record, "pyre_extent"):
             # build the registry
-            self.pyre_extent = weakref.WeakSet()
+            record.pyre_extent = weakref.WeakSet()
         # all done
-        return
+        return record
 
 
     def __call__(self, *args, **kwds):
