@@ -13,6 +13,10 @@ def test():
     # access to the basic node
     import p2.algebraic
 
+    # N.B. the assertions in this test must be done more carefully if nodes have {ordering}
+    # since then the equality test becomes a node. the implementation of {node} below does not
+    # include {ordering}, so we should be ok with naive checks.
+
     # declare a node class
     class node(metaclass=p2.algebraic.algebra, basenode=True):
         """
@@ -40,39 +44,39 @@ def test():
     n2 = node.variable()
 
     # check that they have no dependencies
-    assert list(map(id, n1.literals)) == []
-    assert list(map(id, n2.literals)) == []
-    assert list(map(id, n1.operators)) == []
-    assert list(map(id, n2.operators)) == []
-    assert list(map(id, n1.variables)) == [id(n1)]
-    assert list(map(id, n2.variables)) == [id(n2)]
+    assert list(n1.literals) == []
+    assert list(n2.literals) == []
+    assert list(n1.operators) == []
+    assert list(n2.operators) == []
+    assert list(n1.variables) == [ n1 ]
+    assert list(n2.variables) == [ n2 ]
 
     # an expression involving a unary operator
     n = -n1
-    assert list(map(id, n.operators)) == [id(n)]
-    assert list(map(id, n.variables)) == [id(n1)]
+    assert list(n.operators) == [ n ]
+    assert list(n.variables) == [ n1 ]
 
     # an expression involving a literal
     n = 2*n1
-    assert list(map(id, n.operators)) == [id(n)]
-    assert list(map(id, n.variables)) == [id(n1)]
+    assert list(n.operators) == [ n ]
+    assert list(n.variables) == [ n1 ]
 
     # an expression involving a binary operator
     n = n1 + n2
-    assert list(map(id, n.operators)) == [id(n)]
-    assert list(map(id, n.variables)) == [id(n1), id(n2)]
+    assert list(n.operators) == [ n ]
+    assert list(n.variables) == [ n1,  n2 ]
 
     # add another layer
     m = n + n
-    assert list(map(id, m.variables)) == [id(n1), id(n2)] * 2
-    assert list(map(id, m.operators)) == [id(m), id(n) ,id(n)]
+    assert list(m.variables) == [ n1,  n2 ] * 2
+    assert list(m.operators) == [ m,  n, n ]
     # and one more
     l = m + m
-    assert list(map(id, l.variables)) == [id(n1), id(n2)] * 4
-    assert list(map(id, l.operators)) == [id(l), id(m), id(n), id(n), id(m), id(n), id(n)]
+    assert list(l.variables) == [ n1,  n2 ] * 4
+    assert list(l.operators) == [ l,  m,  n,  n,  m,  n,  n ]
 
     # a more complicated example
-    assert set(map(id, (2*(.5 - n1*n2 + n2**2)*n1).variables)) == {id(n1), id(n2)}
+    assert set((2*(.5 - n1*n2 + n2**2)*n1).variables) == { n1,  n2 }
 
     return
 
