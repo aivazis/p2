@@ -49,7 +49,7 @@ def create_instances():
 
     # verify the extents
     assert set(Base.pyre_extent) == { b1, b2, d1, d2 }
-    assert set(Roor.pyre_extent) == { r1, r2, l1, l2 }
+    assert set(Root.pyre_extent) == { r1, r2, l1, l2 }
 
     # all done
     return Base, Derived, Root, Leaf
@@ -61,11 +61,11 @@ def test():
     is empty after all instances gave been destructed
     """
     # run the test with actual instances
-    Base, Derived, Root, Lead = create_instances()
+    Base, Derived, Root, Leaf = create_instances()
 
     # now that these instances have been garbage collected, verify that the extents are empty
     assert set(Base.pyre_extent) == set()
-    assert set(Roor.pyre_extent) == set()
+    assert set(Root.pyre_extent) == set()
 
     # verify the structural invariants
     # {Base} and {Derived} share
@@ -79,7 +79,8 @@ def test():
     return Base, Derived, Root, Leaf
 
 
-# main if __name__ =="__main__":
+# main
+if __name__ =="__main__":
     # run the test
     test()
 
