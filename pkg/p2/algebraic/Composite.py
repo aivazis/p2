@@ -116,21 +116,17 @@ class Composite:
 
 
     # alterations of the dependency graph
-    def substitute(self, current, replacement, clean=None):
+    def substitute(self, current, replacement, clean=None, isAcyclic=True):
         """
         Traverse my span and replace all occurrences of {current} with {replacement}
 
         This method makes it possible to introduce cycles in the dependency graph, which is not
-        desirable typically. To prevent this, we check that {self} is not in the span of
-        {replacement} when the caller does not supply a set of {clean} nodes
+        desirable typically. By default, we check that {self} is not in the span of
+        {replacement}. Pass {isAcyclic=False} to bypass this check
         """
-        # if the caller didn't hand me a {clean} pile
-        if clean is None:
-            # make a new one
-            clean = set()
-        # if the {clean} pile does not already contain {replacement}
-        if replacement not in clean:
-            # cycle detection: look for {self} in the span of {replacement}; do it carefully so
+        # cycle detection
+        if isAcyclic:
+            # look for {self} in the span of {replacement}; do it carefully so
             # as not to trigger a call to the potentially overloaded {__eq__}, which may not
             # actually perform a comparison
             for node in replacement.span:
@@ -138,10 +134,16 @@ class Composite:
                 if node is self:
                     # the substitution would create a cycle
                     raise self.CircularReferenceError(node=self)
-            # all good; put {replacement} in the pile of {clean} nodes
-            clean.add(replacement)
+
+        # if the caller didn't hand me a pile of {clean} nodes
+        if clean is None:
+            # make a new one
+            clean = set()
+        # put {replacement} in the pile of {clean} nodes
+        clean.add(replacement)
+
         # now, iterate over composites in my span
-        for node in self.operators:
+        for node in self.composites:
             # if this is a node we have visited before
             if node in clean:
                 # skip it
