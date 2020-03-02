@@ -25,7 +25,7 @@ def test():
     # get the base node {mro}
     nodeMRO = node.mro()
     # verify the derivation of the base node
-    assert nodeMRO == [ node, algebra.base, calculator.arithmetic, object ]
+    assert nodeMRO == [ node, calculator.base, algebra.base, calculator.arithmetic, object ]
 
     # all done
     return

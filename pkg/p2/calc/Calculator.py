@@ -15,6 +15,9 @@ class Calculator(algebraic.algebra):
     """
 
     # types
+    # the augmented base node
+    from .Stem import Stem as base
+
     # value management
     from .Const import Const as const
     from .Value import Value as value
@@ -27,9 +30,6 @@ class Calculator(algebraic.algebra):
     from .Dependent import Dependent as dependent
     from .Observable import Observable as observable
     from .Dependency import Dependency as dependency
-
-    # the augmented base node
-    # from .Stem import Stem as base
 
 
     # metamethods

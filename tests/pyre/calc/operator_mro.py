@@ -35,7 +35,7 @@ def test():
         # evaluator
         calculator.evaluator,
         # base {operator} from {algebra}
-        algebra.operator, algebra.composite
+        algebra.operator, node.composite, algebra.composite
         # node
         ] + nodeMRO
 

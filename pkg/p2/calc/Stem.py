@@ -18,7 +18,8 @@ class Stem(Node):
     # types
     # augmented structural nodes
     from .Composite import Composite as composite
-    # new leaves
+
+    # new composites
     expression = None
     interpolation = None
     mapping = None
