@@ -114,7 +114,6 @@ class Composite:
         return
 
 
-
     # alterations of the dependency graph
     def substitute(self, current, replacement, clean=None, isAcyclic=True):
         """

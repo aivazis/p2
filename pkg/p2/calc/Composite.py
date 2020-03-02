@@ -92,4 +92,27 @@ class Composite:
         return
 
 
+    # alterations of the dependency graph
+    def substitute(self, current, replacement, **kwds):
+        """
+        Traverse my span and replace all occurrences of {current} with {replacement}
+
+        This method makes it possible to introduce cycles in the dependency graph, which is not
+        desirable typically. By default, we check that {self} is not in the span of
+        {replacement}. Pass {isAcyclic=False} to bypass this check; see {pyre.algebraic.Composite}
+        """
+        # chain up
+        clean = super().substitute(current=current, replacement=replacement, **kwds)
+
+        # go through the observers of the {current} node
+        for observer in tuple(current.observers):
+            # remove it as an observer of {current}
+            current.removeObserver(observer)
+            # add it as an observer of the {replacement}
+            replacement.addObserver(observer)
+
+        # all done
+        return clean
+
+
 # end of file
