@@ -23,7 +23,7 @@ def test():
         # set the value
         operator.setValue(value=1)
         # which should fail
-        assert False
+        assert False, "unreachable"
     # because there is no base with an implementation
     except AttributeError as error:
         # all good

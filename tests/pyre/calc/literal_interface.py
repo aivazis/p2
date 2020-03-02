@@ -23,7 +23,7 @@ def test():
         # set the value
         literal.setValue(value=1)
         # which should fail
-        assert False
+        assert False, "unreachable"
     # because {const} is protecting it
     except NotImplementedError as error:
         # all good
