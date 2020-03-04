@@ -46,4 +46,30 @@ class Observer(Reactor):
         return self
 
 
+    # alterations of the dependency graph
+    def substitute(self, current, replacement, **kwds):
+        """
+        Observe {replacement} instead of {current}
+        """
+        # N.B.: careful with equality checks, just in case the two nodes support {ordering}
+
+        # if {current} and {replacement} are the same node
+        if current is replacement:
+            # do nothing
+            return
+
+        # otherwise, chain up to handle other aspects of my relationship with the two nodes
+        super().substitute(current=current, replacement=replacement, **kwds)
+
+        # if i'm in the list of observers of {current}
+        if self in set(current.observers):
+            # remove me
+            current.removeObserver(observer=self)
+            # and add me to {replacement} instead
+            replacement.addObserver(observer=self)
+
+        # all done
+        return
+
+
 # end of file
