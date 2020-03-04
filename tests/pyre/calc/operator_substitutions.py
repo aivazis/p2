@@ -54,6 +54,17 @@ def test():
     # and {v3} to be observed by {s}
     assert set(v3.observers) == { s }
 
+    # now, do something impossible: ask to substitute {v1} for {v3} even though {v1} is no
+    # longer part of the expression
+    s.substitute(current=v1, replacement=v3)
+
+    # this should have had no effect so we expect
+    # {v1} to have no observers
+    assert set(v1.observers) == set()
+    # {v2} to be observed by {s}
+    assert set(v2.observers) == { s }
+    # and {v3} to be observed by {s}
+    assert set(v3.observers) == { s }
 
     # all done
     return
