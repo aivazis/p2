@@ -126,8 +126,8 @@ class Composite:
         # cycle detection
         if isAcyclic:
             # look for {self} in the span of {replacement}; do it carefully so
-            # as not to trigger a call to the potentially overloaded {__eq__}, which may not
-            # actually perform a comparison
+            # as not to trigger a call to the potentially overloaded {__eq__}, which would not
+            # actually perform a comparison but instead return an operator node
             for node in replacement.span:
                 # is this a match
                 if node is self:

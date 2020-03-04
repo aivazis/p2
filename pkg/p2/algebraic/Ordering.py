@@ -20,6 +20,9 @@ class Ordering:
     {Ordering} expects its subclasses to define two methods: {literal} and {operator}. The
     former is used to encapsulate operands that are not {Ordering} instances. The latter is
     used to construct the operator representations.
+
+    N.B.: this mix-in overrides {__eq__} to return an operator node; this messes up naive
+    equality and container membership tests
     """
 
 
