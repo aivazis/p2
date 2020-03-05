@@ -35,4 +35,19 @@ class Leaf:
         return
 
 
+    # implementation details
+    def _substitute(self, current, replacement, clean):
+        """
+        The node substitution workhorse
+        """
+        # if i'm the one being replaced
+        if current is self:
+            # return {replacement} and a marker that a substitution was performed
+            return replacement
+        # otherwise, add me to the clean pile
+        clean.add(self)
+        # and make sure they leave me alone
+        return self
+
+
 # end of file

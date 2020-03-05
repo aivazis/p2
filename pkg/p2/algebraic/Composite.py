@@ -114,48 +114,6 @@ class Composite:
         return
 
 
-    # alterations of the dependency graph
-    def substitute(self, current, replacement, clean=None, isAcyclic=True):
-        """
-        Traverse my span and replace all occurrences of {current} with {replacement}
-
-        This method makes it possible to introduce cycles in the dependency graph, which is not
-        desirable typically. By default, we check that {self} is not in the span of
-        {replacement}. Pass {isAcyclic=False} to bypass this check
-        """
-        # cycle detection
-        if isAcyclic:
-            # look for {self} in the span of {replacement}; do it carefully so
-            # as not to trigger a call to the potentially overloaded {__eq__}, which would not
-            # actually perform a comparison but instead return an operator node
-            for node in replacement.span:
-                # is this a match
-                if node is self:
-                    # the substitution would create a cycle
-                    raise self.CircularReferenceError(node=self)
-
-        # if the caller didn't hand me a pile of {clean} nodes
-        if clean is None:
-            # make a new one
-            clean = set()
-        # put {replacement} in the pile of {clean} nodes
-        clean.add(replacement)
-
-        # now, iterate over composites in my span
-        for node in self.composites:
-            # if this is a node we have visited before
-            if node in clean:
-                # skip it
-                continue
-            # otherwise, perform the substitution
-            node._substitute(current=current, replacement=replacement)
-            # and mark this node as clean
-            clean.add(node)
-
-        # all done
-        return clean
-
-
     # metamethods
     def __init__(self, operands, **kwds):
         # chain up
@@ -167,19 +125,47 @@ class Composite:
 
 
     # implementation details
-    def _substitute(self, current, replacement):
+    def _substitute(self, current, replacement, clean):
         """
         Adjust the operands by substituting {replacement} for {current} in the sequence of operands
         """
-        # my new pile of operands
-        operands = tuple(
-            # consists of replacing {current} with {replacement} wherever i bump into it
-            replacement if operand is current else operand
-            # in the pile of dependencies
-            for operand in self.operands
-        )
-        # attach the new pile
-        self._operands = operands
+        # if i'm the one being replaced
+        if current is self:
+            # just return the {replacement}
+            return replacement
+
+        # if i'm among the {clean} nodes
+        if self in clean:
+            # do nothing
+            return self
+
+        # add me to the clean pile
+        clean.add(self)
+
+        # otherwise, make a pile for my potentially adjusted operands
+        operands = []
+        # initially, i am not known to need to replace my operands
+        needsUpdate = False
+        # go through my operands
+        for op in self.operands:
+            # if this one is marked {clean}
+            if op in clean:
+                # add it to the list of operands
+                operands.append(op)
+                # and carry on
+                continue
+            # otherwise, ask it to perform the substitution
+            r = op._substitute(current=current, replacement=replacement, clean=clean)
+            # add it or its replacement to the pile
+            operands.append(r)
+            # record whether an update was performed
+            needsUpdate |= (r is not op)
+
+        # if any substitutions were needed
+        if needsUpdate:
+            # replace my operands
+            self._operands = tuple(operands)
+
         # all done
         return self
 

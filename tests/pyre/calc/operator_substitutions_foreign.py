@@ -7,7 +7,7 @@
 
 def test():
     """
-    Verify operators observe their operands
+    Verify that substitutions of nodes that are not present is a no-op
     """
     # get the base node form the {calc} package
     from p2.calc.Node import Node as node
@@ -29,8 +29,13 @@ def test():
     # use them in a simple expression
     s = v1 + v2
 
-    # we expect {s} to have two operands
+    # attempt to substitute a node that isn't there
+    s.substitute(current=v3, replacement=v1)
+
+    # verify that nothing was disturbed
     assert set(s.operands) == { v1, v2 }
+    # make sure it computes correctly
+    assert s.getValue() == 3
 
     # check observers; we expect
     # {v1} to be observed by {s}
@@ -39,32 +44,6 @@ def test():
     assert set(v2.observers) == { s }
     # and {v3} to have no observers
     assert set(v3.observers) == set()
-
-    # substitute {v3} for {v1}
-    s.substitute(current=v1, replacement=v3)
-
-    # verify the substitution took place
-    assert set(s.operands) == { v2, v3 }
-
-    # check observers; we expect
-    # {v1} to have no observers
-    assert set(v1.observers) == set()
-    # {v2} to be observed by {s}
-    assert set(v2.observers) == { s }
-    # and {v3} to be observed by {s}
-    assert set(v3.observers) == { s }
-
-    # now, do something impossible: ask to substitute {v1} for {v3} even though {v1} is no
-    # longer part of the expression
-    s.substitute(current=v1, replacement=v3)
-
-    # this should have had no effect so we expect
-    # {v1} to have no observers
-    assert set(v1.observers) == set()
-    # {v2} to be observed by {s}
-    assert set(v2.observers) == { s }
-    # and {v3} to be observed by {s}
-    assert set(v3.observers) == { s }
 
     # all done
     return

@@ -120,6 +120,7 @@ class Node:
         return None
 
 
+    # graph mutations
     def replace(self, obsolete):
         """
         Take ownership of any information held by the {obsolete} node, which is about to be
@@ -127,6 +128,53 @@ class Node:
         """
         # i don't know how to do that; my subclasses might
         return self
+
+
+    def substitute(self, current, replacement, clean=None, isAcyclic=True):
+        """
+        Replace all occurrences of {current} in my span with {replacement}
+
+        This method makes it possible to introduce cycles in the dependency graph, which is not
+        desirable typically. By default, we check that {self} is not in the span of
+        {replacement}. Pass {isAcyclic=False} to bypass this check
+        """
+        # if {current} and {replacement} are the same node
+        if current is replacement:
+            # do nothing
+            return
+
+        # cycle detection
+        if isAcyclic:
+            # look for {self} in the span of {replacement}; do it carefully so
+            # as not to trigger a call to the potentially overloaded {__eq__}, which would not
+            # actually perform a comparison but instead return an operator node
+            for node in replacement.span:
+                # is this a match
+                if node is self:
+                    # the substitution would create a cycle
+                    raise self.CircularReferenceError(node=self)
+
+        # if the caller didn't hand me a pile of {clean} nodes
+        if clean is None:
+            # make a new one
+            clean = set()
+        # put {replacement} in the pile of {clean} nodes
+        clean.add(replacement)
+
+        # perform the substitution
+        self._substitute(current=current, replacement=replacement, clean=clean)
+
+        # all done
+        return clean
+
+
+    # implementation details
+    def _substitute(self, current, replacement, clean):
+        """
+        The node substitution workhorse
+        """
+        # i have no idea how to do this; force subclasses to figure it out
+        raise NotImplementedError(f"class '{type(self).__name__}' must implement '_substitute'")
 
 
 # end of file

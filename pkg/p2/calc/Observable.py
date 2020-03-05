@@ -107,4 +107,21 @@ class Observable(Reactor):
         return
 
 
+    # implementation details
+    # alterations of the dependency graph
+    def _substitute(self, current, replacement, clean):
+        """
+        Replace {current} by {replacement}
+        """
+        # chain up
+        r = super()._substitute(current=current, replacement=replacement, clean=clean)
+
+        # as an observable, all i have to check is whether i got replaced
+        if self is not r:
+            # in which case, i must notify my observers
+            self.flush()
+        # all done
+        return r
+
+
 # end of file
