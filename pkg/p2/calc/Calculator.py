@@ -15,6 +15,9 @@ class Calculator(algebraic.algebra):
     """
 
     # types
+    # locally defined user visible classes
+    from .Probe import Probe as probe
+
     # the augmented base node
     from .Stem import Stem as base
 
@@ -45,12 +48,31 @@ class Calculator(algebraic.algebra):
             # all done
             return node
 
+        # make a probe
+        node.probe = cls.make(name="probe", base=node, chain=cls.probeDerivation(node))
+
         # all done
         return node
 
 
     # implementation details
-    # derivations of the user visible classes
+    # derivations of local extension
+    @classmethod
+    def probeDerivation(cls, node):
+        """
+        Build the {probe} base class sequence
+        """
+        # probes observe their operands
+        yield cls.observer
+        # they are themselves observable
+        yield cls.observable
+        # add the base class
+        yield cls.probe
+        # all done
+        return
+
+
+    # extended derivations of the user visible classes from my base class
     @classmethod
     def literalDerivation(cls, node):
         """
