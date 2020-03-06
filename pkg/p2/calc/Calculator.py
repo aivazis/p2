@@ -17,6 +17,9 @@ class Calculator(algebraic.algebra):
     # types
     # locally defined user visible classes
 
+    # entities that support evaluation after name resolution
+    from .Unresolved import Unresolved as unresolved
+
     # local operators
     from .Count import Count as count
     from .Maximum import Maximum as maximum
@@ -58,14 +61,18 @@ class Calculator(algebraic.algebra):
             # all done
             return node
 
+        # name resolution
+        node.unresolved = cls.make(name="unresolved", base=node,
+                                   chain=cls.unresolvedDerivation(node))
+
         # local functional nodes
-        # mean
         # count
         node.count = cls.make(name="count", base=node,
                               chain=cls.functionalDerivation(func=cls.count, node=node))
         # maximum
         node.maximum = cls.make(name="maximum", base=node,
                                 chain=cls.functionalDerivation(func=cls.maximum, node=node))
+        # mean
         node.mean = cls.make(name="mean", base=node,
                              chain=cls.functionalDerivation(func=cls.mean, node=node))
         # minimum
@@ -77,7 +84,8 @@ class Calculator(algebraic.algebra):
         # sum
         node.sum = cls.make(name="sum", base=node,
                             chain=cls.functionalDerivation(func=cls.sum, node=node))
-        # make a probe
+
+        # probe
         node.probe = cls.make(name="probe", base=node, chain=cls.probeDerivation(node))
 
         # all done
@@ -85,6 +93,24 @@ class Calculator(algebraic.algebra):
 
 
     # implementation details
+    # name resolution nodes
+    @classmethod
+    def unresolvedDerivation(cls, node):
+        """
+        Contribute to the list of ancestors of the representation of unresolved nodes
+        """
+        # my unresolved nodes are observable
+        yield cls.observable
+        # if the record has anything to say
+        if node.unresolved: yield node.unresolved
+        # my unresolved nodes know how to compute their values
+        yield cls.unresolved
+        # and whatever else my superclass says
+        yield from cls.leafDerivation(node)
+        # all done
+        return
+
+
     # node probe
     @classmethod
     def probeDerivation(cls, node):
