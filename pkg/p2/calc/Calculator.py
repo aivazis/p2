@@ -16,6 +16,16 @@ class Calculator(algebraic.algebra):
 
     # types
     # locally defined user visible classes
+
+    # local operators
+    from .Count import Count as count
+    from .Maximum import Maximum as maximum
+    from .Mean import Mean as mean
+    from .Minimum import Minimum as minimum
+    from .Product import Product as product
+    from .Sum import Sum as sum
+
+    # node probe
     from .Probe import Probe as probe
 
     # the augmented base node
@@ -48,6 +58,25 @@ class Calculator(algebraic.algebra):
             # all done
             return node
 
+        # local functional nodes
+        # mean
+        # count
+        node.count = cls.make(name="count", base=node,
+                              chain=cls.functionalDerivation(func=cls.count, node=node))
+        # maximum
+        node.maximum = cls.make(name="maximum", base=node,
+                                chain=cls.functionalDerivation(func=cls.maximum, node=node))
+        node.mean = cls.make(name="mean", base=node,
+                             chain=cls.functionalDerivation(func=cls.mean, node=node))
+        # minimum
+        node.minimum = cls.make(name="minimum", base=node,
+                                chain=cls.functionalDerivation(func=cls.minimum, node=node))
+        # product
+        node.product = cls.make(name="product", base=node,
+                                chain=cls.functionalDerivation(func=cls.product, node=node))
+        # sum
+        node.sum = cls.make(name="sum", base=node,
+                            chain=cls.functionalDerivation(func=cls.sum, node=node))
         # make a probe
         node.probe = cls.make(name="probe", base=node, chain=cls.probeDerivation(node))
 
@@ -56,7 +85,7 @@ class Calculator(algebraic.algebra):
 
 
     # implementation details
-    # derivations of local extension
+    # node probe
     @classmethod
     def probeDerivation(cls, node):
         """
@@ -143,6 +172,23 @@ class Calculator(algebraic.algebra):
         yield cls.dependent
         # and observable management
         yield cls.observer
+        # all done
+        return
+
+
+    @classmethod
+    def functionalDerivation(cls, func, node):
+        """
+        Create an operator whose evaluator is {func}
+        """
+        # functional nodes observe their operands
+        yield from cls.observerDerivation(node)
+        # and are themselves observable
+        yield from cls.observableDerivation(node)
+        # inject the evaluator
+        yield func
+        # and whatever else it takes to make a composite
+        yield from cls.compositeDerivation(node)
         # all done
         return
 
