@@ -7,7 +7,7 @@
 
 def test():
     """
-    Sanity test: make sure the module is accessible
+    Verify that the {node} class hierarchy looks as expected
     """
     # get the {calc}
     import p2.calc

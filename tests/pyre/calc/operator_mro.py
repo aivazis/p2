@@ -7,7 +7,7 @@
 
 def test():
     """
-    Verify that the class hierarchy anchored at the base node looks as expected
+    Verify that the {operator} class hierarchy looks as expected
     """
     # get the {calc}
     from p2.calc import calculator
