@@ -27,6 +27,9 @@ class Stem(Node):
     reference = None
     unresolved = None
 
+    # node probes
+    probe = None
+
     # exceptions; included here for client convenience
     from .exceptions import (
         EmptyExpressionError, ExpressionSyntaxError, EvaluationError,

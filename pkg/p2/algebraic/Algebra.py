@@ -76,8 +76,10 @@ class Algebra(Type):
         """
         Contribute to the list of ancestors of the representation of literals
         """
-        # if the class record specifies a literal mix-in use it
-        if node.literal: yield node.literal
+        # if the class record specifies a literal mix-in
+        if node.literal:
+            # add it to the pile
+            yield node.literal
         # must also derive from the default
         yield cls.literal
         # get the classes necessary to make leaves
@@ -91,8 +93,10 @@ class Algebra(Type):
         """
         Contribute to the list of ancestors of the representation of operators
         """
-        # if the class record specifies a operator mix-in use it
-        if node.operator: yield node.operator
+        # if the class record specifies a operator mix-in
+        if node.operator:
+            # add it to the pile
+            yield node.operator
         # must also derive from the default
         yield cls.operator
         # get the classes necessary to make composites
@@ -106,8 +110,10 @@ class Algebra(Type):
         """
         Contribute to the list of ancestors of the representation of variables
         """
-        # if the class record specifies a variable mix-in use it
-        if node.variable: yield node.variable
+        # if the class record specifies a variable mix-in
+        if node.variable:
+            # add it to the pile
+            yield node.variable
         # must also derive from the default
         yield cls.variable
         # get the classes necessary to make leaves
@@ -122,8 +128,10 @@ class Algebra(Type):
         """
         Contribute to the list of ancestors of the representation of literals
         """
-        # if the {record} specifies a leaf mix-in, add it to the pile
-        if node.leaf: yield node.leaf
+        # if the {record} specifies a leaf mix-in
+        if node.leaf:
+            # add it to the pile
+            yield node.leaf
         # yield the default leaf class
         yield cls.leaf
         # and the buck stops here...
@@ -137,8 +145,10 @@ class Algebra(Type):
         """
         Contribute to the list of ancestors of the representation of literals
         """
-        # if the {record} specifies a composite mix-in, add it to the pile
-        if node.composite: yield node.composite
+        # if the {record} specifies a composite mix-in
+        if node.composite:
+            # add it to the pile
+            yield node.composite
         # yield the default composite class
         yield cls.composite
         # and the buck stops here...
