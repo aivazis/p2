@@ -15,9 +15,13 @@ class Calculator(algebraic.algebra):
     """
 
     # types
+    # the augmented base node
+    from .Stem import Stem as base
+
     # locally defined user visible classes
 
     # entities that support evaluation after name resolution
+    from .Expression import Expression as expression
     from .Unresolved import Unresolved as unresolved
 
     # local operators
@@ -28,11 +32,8 @@ class Calculator(algebraic.algebra):
     from .Product import Product as product
     from .Sum import Sum as sum
 
-    # node probe
+    # node probes
     from .Probe import Probe as probe
-
-    # the augmented base node
-    from .Stem import Stem as base
 
     # value management
     from .Const import Const as const
@@ -62,6 +63,10 @@ class Calculator(algebraic.algebra):
             return node
 
         # name resolution
+        # expressions
+        node.expression = cls.make(name="expression", base=node,
+                                   chain=cls.expressionDerivation(node))
+        # unresolved nodes
         node.unresolved = cls.make(name="unresolved", base=node,
                                    chain=cls.unresolvedDerivation(node))
 
@@ -94,15 +99,40 @@ class Calculator(algebraic.algebra):
 
     # implementation details
     # name resolution nodes
+    # expression
+    @classmethod
+    def expressionDerivation(cls, node):
+        """
+        Contribute to the list of ancestors of the representation of {expression} nodes
+        """
+        # expressions observe their operands
+        yield from cls.observerDerivation(node)
+        # they are themselves observable
+        yield from cls.observableDerivation(node)
+        # if the record has anything to say
+        if node.expression:
+            # add it to the pile
+            yield node.expression
+        # the expression base class
+        yield cls.expression
+        # expressions are composites
+        yield from cls.compositeDerivation(node)
+        # all done
+        return
+
+
+    # unresolved
     @classmethod
     def unresolvedDerivation(cls, node):
         """
-        Contribute to the list of ancestors of the representation of unresolved nodes
+        Contribute to the list of ancestors of the representation of {unresolved} nodes
         """
         # my unresolved nodes are observable
         yield cls.observable
         # if the record has anything to say
-        if node.unresolved: yield node.unresolved
+        if node.unresolved:
+            # add it to the pile
+            yield node.unresolved
         # my unresolved nodes know how to compute their values
         yield cls.unresolved
         # and whatever else my superclass says
@@ -121,6 +151,10 @@ class Calculator(algebraic.algebra):
         yield cls.observer
         # they are themselves observable
         yield cls.observable
+        # if the {node} has an opinion
+        if node.probe:
+            # add it to the pile
+            yield node.probe
         # add the base class
         yield cls.probe
         # all done
