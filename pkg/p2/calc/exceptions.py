@@ -12,6 +12,7 @@ Definitions for all exceptions raised by this package
 # pull the exceptions from {algebraic}
 from ..algebraic.exceptions import NodeError, CircularReferenceError
 
+
 # the local ones
 class EvaluationError(NodeError):
     """
@@ -48,11 +49,12 @@ class EmptyExpressionError(ExpressionError):
     description = "while parsing {0.expression!r}: no references found"
 
     # meta-methods
-    def __init__(self, formula, **kwds):
+    def __init__(self, expression, normalized, **kwds):
         # chain up
         super().__init__(**kwds)
         # save the error info
-        self.expression = formula
+        self.expression = expression
+        self.normalized = normalized
         # all done
         return
 
@@ -67,11 +69,11 @@ class ExpressionSyntaxError(ExpressionError):
     description = "while evaluating {0.expression!r}: {0.error}"
 
     # meta-methods
-    def __init__(self, formula, error, **kwds):
+    def __init__(self, expression, error, **kwds):
         # chain up
         super().__init__(**kwds)
         # save the error info
-        self.expression = formula
+        self.expression = expression
         self.error = error
         # all done
         return
