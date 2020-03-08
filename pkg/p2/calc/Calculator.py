@@ -22,6 +22,7 @@ class Calculator(algebraic.algebra):
 
     # entities that support evaluation after name resolution
     from .Expression import Expression as expression
+    from .Interpolation import Interpolation as interpolation
     from .Unresolved import Unresolved as unresolved
 
     # local operators
@@ -66,6 +67,9 @@ class Calculator(algebraic.algebra):
         # expressions
         node.expression = cls.make(name="expression", base=node,
                                    chain=cls.expressionDerivation(node))
+        # interpolations
+        node.interpolation = cls.make(name="interpolation", base=node,
+                                      chain=cls.interpolationDerivation(node))
         # unresolved nodes
         node.unresolved = cls.make(name="unresolved", base=node,
                                    chain=cls.unresolvedDerivation(node))
@@ -99,7 +103,7 @@ class Calculator(algebraic.algebra):
 
     # implementation details
     # name resolution nodes
-    # expression
+    # expressions
     @classmethod
     def expressionDerivation(cls, node):
         """
@@ -116,6 +120,28 @@ class Calculator(algebraic.algebra):
         # the expression base class
         yield cls.expression
         # expressions are composites
+        yield from cls.compositeDerivation(node)
+        # all done
+        return
+
+
+    # interpolations
+    @classmethod
+    def interpolationDerivation(cls, node):
+        """
+        Contribute to the list of ancestors of the representation of {interpolation} nodes
+        """
+        # interpolations observe their operands
+        yield from cls.observerDerivation(node)
+        # they are themselves observable
+        yield from cls.observableDerivation(node)
+        # if the record has anything to say
+        if node.interpolation:
+            # add it to the pile
+            yield node.interpolation
+        # the interpolation base class
+        yield cls.interpolation
+        # interpolations are composites
         yield from cls.compositeDerivation(node)
         # all done
         return
