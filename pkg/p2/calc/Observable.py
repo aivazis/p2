@@ -62,22 +62,16 @@ class Observable(Reactor):
         """
         Remove {obsolete} from its upstream graph and assume its responsibilities
         """
+        # chain up
+        super().replace(obsolete=obsolete)
         # make a pile of nodes that have been adjusted
         clean = set()
         # go through the observers of {obsolete}; make a copy
         for observer in tuple(obsolete.observers):
-            # remove it from the pile in {obsolete}
-            obsolete.removeObserver(observer)
-            # if the observer is a composite
-            if isinstance(observer, self.composite):
-                # {obsolete} is most likely an operand; perform a substitution
-                observer.substitute(current=obsolete, replacement=self, clean=clean)
-            # add this observer to my pile
-            self.addObserver(observer)
-            # and let it know things have changed
-            observer.flush(observable=self)
+            # {obsolete} is most likely an operand; perform a substitution
+            observer.substitute(current=obsolete, replacement=self, clean=clean)
         # all done
-        return super().replace(obsolete=obsolete)
+        return self
 
 
     # signaling
