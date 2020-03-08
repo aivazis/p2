@@ -7,7 +7,7 @@
 
 def test():
     """
-    Verify that attempting to substitute nodes that aren't there is a no-op
+    Verify that substituting an operator in a simple expression works as expected
     """
     # get the base node form the {calc} package
     from p2.calc.Node import Node as node
