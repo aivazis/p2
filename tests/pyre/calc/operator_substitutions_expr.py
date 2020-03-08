@@ -24,6 +24,7 @@ def test():
     # make a few variables
     v1 = node.variable(value=1)
     v2 = node.variable(value=2)
+    v3 = node.variable(value=3)
 
     # use them in a simple expression
     s = v1 + v2
@@ -37,23 +38,29 @@ def test():
     # verify the node observers are as expected
     assert set(v1.observers) == { s }
     assert set(v2.observers) == { s }
+    assert set(v3.observers) == set()
     assert set(s.observers) == { d }
+    assert set(d.observers) == set()
 
     # now, replace {s} with {v1}
-    d.substitute(current=s, replacement=v1)
+    d.substitute(current=s, replacement=v3)
 
     # the value of {s} should be unchanged
     assert s.getValue() == 3
     # but {d} is different
-    assert d.getValue() == 2
+    assert d.getValue() == 6
 
     # check the observers
-    # {v1} now has two observers
-    assert set(v1.observers) == { s, d }
-    # nothing has changed for {v2}
+    # nothing has changed for {v1} since {s} is still alive
+    assert set(v1.observers) == { s }
+    # same for {v2}
     assert set(v2.observers) == { s }
+    # {v3} is now observed by {d}
+    assert set(v3.observers) == { d }
     # {s} is not being observed any more
     assert set(s.observers) == set()
+    # and, of course, no one is watching {d}
+    assert set(d.observers) == set()
 
     # all done
     return

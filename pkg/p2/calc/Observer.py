@@ -59,8 +59,10 @@ class Observer(Reactor):
         if self in set(current.observers):
             # remove me
             current.removeObserver(observer=self)
-            # and add me to {replacement} instead
-            replacement.addObserver(observer=self)
+            # additionally, if i'm  not the one being replaces
+            if r is self:
+                # add me as an observer to {replacement}
+                replacement.addObserver(observer=self)
 
         # all done
         return r
