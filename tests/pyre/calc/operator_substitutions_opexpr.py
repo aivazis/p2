@@ -17,7 +17,7 @@ def test():
     # include {ordering}, so we should be ok with naive checks.
 
     # get the calculator
-    from pyre.calc import calculator
+    from p2.calc import calculator
     # make sure node does not derive from {ordering}
     assert not issubclass(node, calculator.ordering)
 
