@@ -34,6 +34,17 @@ that trait settings can refer to the values of other traits in the configuration
 from .Calculator import Calculator as calculator
 
 
+# convenience
+def symbolTable():
+    """
+    Build a simple symbol table
+    """
+    # get the class
+    from .SymbolTable import SymbolTable
+    # make on and return it
+    return SymbolTable()
+
+
 # debugging support; see the top level {__init__} file for instructions on how to enable this
 def debug():
     """

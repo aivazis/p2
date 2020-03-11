@@ -71,7 +71,6 @@ class Expression:
         """
         # save the original user input
         self.expression = value
-
         # interpret {value} as my new formula
         program, operands = self.compile(model=self._model, expression=value)
         # save the referenced nodes as my operands
@@ -131,20 +130,20 @@ class Expression:
             # extract the name from the match
             identifier = match.group('identifier')
             # resolve it
-            node = model.retrieve(name=identifier)
+            node = model.resolve(name=identifier)
             # add the node to the operands
             operands.append(node)
-            # build and return the matching expression fragment
-            return "(model[{!r}])".format(identifier)
+            # build and return the matching expression fragment; note the explicit use of
+            # {__getitem__} from the {model} to retrieve the actual node value
+            return f"(model['{identifier}'])"
 
         # show me what we start with
-        print(f"Expression.parse: {expression=}")
         # convert node references to legal python identifiers
         normalized = cls._scanner.sub(handler, expression)
         # show me the normalized expression
-        print("  {normalized=}")
+        # print(f"  {normalized=}")
         # and the operands
-        print("  {operands=}")
+        # print(f"  {operands=}")
 
         # if there are no symbols, the expression had no node evaluations; but since it may
         # have had escaped braces, make sure the caller has access to the processed value

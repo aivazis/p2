@@ -121,19 +121,23 @@ class Interpolation:
                 fragment += '}'
             # unmatched braces
             elif match.group("lone_open") or match.group("lone_closed"):
+                # complain
                 raise cls.ExpressionSyntaxError(
-                    formula=expression,
-                    error="unmatched {!r}".format(match.group()))
+                    formula=expression, error=f"unmatched {match.group()}")
             # otherwise
             else:
                 # it must be an identifier
                 identifier = match.group('identifier')
-                # if the current fragment is not empty, turn it into a variable node
-                if fragment: operands.append(model.literal(value=fragment))
+                # if the current fragment is not empty
+                if fragment:
+                    # turn it into a literal node
+                    op = model.literal(value=fragment)
+                    # and add it to the pile
+                    operands.append(op)
                 # reset the fragment
                 fragment = ''
                 # use the identifier to locate the associated node
-                reference = model.retrieve(identifier)
+                reference = model.resolve(name=identifier)
                 # add it to my operands
                 operands.append(reference)
             # update the location in {expression}
@@ -152,11 +156,6 @@ class Interpolation:
         if fragment:
             # turn it into a variable
             operands.append(model.literal(value=fragment))
-
-        # summarize
-        print(f" ** SymbolTable.interpolation:")
-        print(f"    {expression=}")
-        print(f"    {operands=}")
 
         # all done
         return operands
