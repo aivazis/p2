@@ -89,7 +89,7 @@ class SymbolTable:
 
 
     # convenience: node constructors
-    def expression(self, value, **kwds):
+    def expression(self, value, name=None, **kwds):
         """
         Build an expression node
         """
@@ -100,7 +100,7 @@ class SymbolTable:
         # if it is not a string
         if not isinstance(value, str):
             # just make a variable
-            return self.variable(value=value, **kwds)
+            return self.variable(name=name, value=value, **kwds)
         # otherwise, attempt to
         try:
             # compile the {value}
@@ -108,13 +108,21 @@ class SymbolTable:
         # if this fails
         except self.node.EmptyExpressionError as error:
             # make a variable instead; use the processed value to get rid of the meta-characters
-            return self.variable(value=error.expression, **kwds)
-        # otherwise, build an expression
-        return self.node.expression(
-            model=self, expression=value, program=program, operands=operands, **kwds)
+            return self.variable(name=name, value=error.normalized, **kwds)
+
+        # if all is well, build an expression
+        new = self.node.expression(model=self, expression=value,
+                                   program=program, operands=operands, **kwds)
+        # if we were given a name
+        if name is not None:
+            # insert the node in the table
+            self.insert(name=name, node=new)
+
+        # and return the new node
+        return new
 
 
-    def interpolation(self, value, **kwds):
+    def interpolation(self, value, name=None, **kwds):
         """
         Build an interpolation node
         """
@@ -125,7 +133,7 @@ class SymbolTable:
         # if it is not a string
         if not isinstance(value, str):
             # just make a variable
-            return self.variable(value=value, **kwds)
+            return self.variable(name=name, value=value, **kwds)
         # otherwise, attempt to
         try:
             # compile the {value}
@@ -133,9 +141,18 @@ class SymbolTable:
         # if this fails
         except self.node.EmptyExpressionError as error:
             # make a variable instead; use the processed value to get rid of the meta-characters
-            return self.variable(value=error.expression, **kwds)
-        # otherwise, build an interpolation
-        return self.node.interpolation(model=self, expression=value, operands=operands, **kwds)
+            return self.variable(name=name, value=error.expression, **kwds)
+
+        # if all is well, build an interpolation
+        new = self.node.interpolation(model=self, expression=value,
+                                      operands=operands, **kwds)
+        # if we were given a name
+        if name is not None:
+            # add the node to the table
+            self.insert(name=name, node=new)
+
+        # and return the new node
+        return new
 
 
     def literal(self, **kwds):
@@ -146,28 +163,46 @@ class SymbolTable:
         return self.node.literal(**kwds)
 
 
-    def mapping(self, nodes, **kwds):
+    def mapping(self, nodes, name=None, **kwds):
         """
         Build a mapping node
         """
-        # easy enough
-        return self.node.mapping(operands=nodes, **kwds)
+        # make the node
+        new = self.node.mapping(operands=nodes, **kwds)
+        # if we were given a name
+        if name is not None:
+            # add the node to the table
+            self.insert(name=name, node=new)
+        # and return the new node
+        return new
 
 
-    def sequence(self, nodes, **kwds):
+    def sequence(self, nodes, name=None, **kwds):
         """
         Build a sequence node
         """
-        # easy enough
-        return self.node.sequence(operands=tuple(nodes), **kwds)
+        # make the node
+        new = self.node.sequence(operands=tuple(nodes), **kwds)
+        # if we were given a name
+        if name is not None:
+            # add the node to the table
+            self.insert(name=name, node=new)
+        # and return the new node
+        return new
 
 
-    def variable(self, **kwds):
+    def variable(self, name=None, **kwds):
         """
         Build a variable
         """
-        # easy enough
-        return self.node.variable(**kwds)
+        # make the node
+        new = self.node.variable(**kwds)
+        # if we were given a name
+        if name is not None:
+            # add the node to the table
+            self.insert(name=name, node=new)
+        # and return the new node
+        return new
 
 
     # meta-methods
