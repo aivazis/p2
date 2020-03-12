@@ -27,9 +27,9 @@ class Dependent:
 
 
     # metamethods
-    def __init__(self, operands, **kwds):
+    def __init__(self, **kwds):
         # assume i am a composite
-        super().__init__(operands=operands, **kwds)
+        super().__init__(**kwds)
         # observe my operands
         self.observe(observables=self.operands)
         # all done
