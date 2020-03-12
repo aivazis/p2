@@ -19,6 +19,8 @@ class Calculator(algebraic.algebra):
     from .Stem import Stem as base
 
     # locally defined user visible classes
+    # containers
+    from .Sequence import Sequence as sequence
 
     # entities that support evaluation after name resolution
     from .Expression import Expression as expression
@@ -74,6 +76,9 @@ class Calculator(algebraic.algebra):
         node.unresolved = cls.make(name="unresolved", base=node,
                                    chain=cls.unresolvedDerivation(node))
 
+        # containers
+        node.sequence = cls.make(name="sequence", base=node, chain=cls.sequenceDerivation(node))
+
         # local functional nodes
         # count
         node.count = cls.make(name="count", base=node,
@@ -102,6 +107,28 @@ class Calculator(algebraic.algebra):
 
 
     # implementation details
+    # containers
+    @classmethod
+    def sequenceDerivation(cls, node):
+        """
+        Contribute to the list of ancestors of {sequence} nodes
+        """
+        # sequences observe their operands
+        yield from cls.observerDerivation(node)
+        # they are themselves observable
+        yield from cls.observableDerivation(node)
+        # if the record has an opinion
+        if node.sequence:
+            # add it to the pile
+            yield node.sequence
+        # the sequence base class
+        yield cls.sequence
+        # and whatever else my superclass says
+        yield from cls.compositeDerivation(node)
+        # all done
+        return
+
+
     # name resolution nodes
     # expressions
     @classmethod
