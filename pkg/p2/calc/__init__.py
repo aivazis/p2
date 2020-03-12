@@ -45,7 +45,9 @@ def symbolTable():
     return SymbolTable()
 
 
-# debugging support; see the top level {__init__} file for instructions on how to enable this
+# debugging support
+# the pyre {__init__.py} file has instruction on how to use this, and examples can be found in
+#the unit tests of this package
 def debug():
     """
     Enable debugging for this package: we replace the {Node} metaclass with an extent aware
