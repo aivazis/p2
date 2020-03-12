@@ -7,22 +7,17 @@
 
 def test():
     """
-    Verify expressions resolved against a simple symbol table work as expected
+    Verify that empty expressions are converted to variables
     """
-    # access the package
+    # get the package
     import p2.calc
-    # make a symbol table
+    # make a simple symbol table so we can build {expressions}
     model = p2.calc.symbolTable()
 
-    # make a variable and add it to the model
-    cost = model.variable(name="cost", value=100)
-
-    # now an expression
-    price = model.expression(name="price", value="2 * {cost}")
-    # verify it's an {expression}
-    assert isinstance(price, model.node.expression)
-    # and that it evaluates correctly
-    assert price.getValue() == 2 * cost.getValue()
+    # attempt to build an expression with no references
+    node = model.expression(value="2 * (cost + shipping)")
+    # the return {node} should be a {variable} since there is no expression to evaluate
+    assert isinstance(node, model.node.variable)
 
     # all done
     return

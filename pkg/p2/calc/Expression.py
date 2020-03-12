@@ -117,10 +117,14 @@ class Expression:
             Callback for {re.sub} that extracts node references, adds them to my local symbol
             table and converts them into legal python identifiers
             """
-            # if the pattern matched an escaped opening brace, return it as a literal
-            if match.group("esc_open"): return "{"
-            # if the pattern matched an escaped closing brace, return it as a literal
-            if match.group("esc_close"): return "}"
+            # if the pattern matched an escaped opening brace
+            if match.group("esc_open"):
+                # return it as a literal
+                return "{"
+            # if the pattern matched an escaped closing brace
+            if match.group("esc_close"):
+                # return it as a literal
+                return "}"
             # unmatched braces
             if match.group("lone_open") or match.group("lone_closed"):
                 # are errors
