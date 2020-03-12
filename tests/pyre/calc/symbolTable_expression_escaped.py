@@ -18,7 +18,7 @@ def test():
     node = model.expression(value="2 * ({{cost}} + {{shipping}})")
     # the return {node} should be a {variable} since there is no expression to evaluate
     assert isinstance(node, model.node.variable)
-    # and it value should be as above but with the double braces replaced with single ones
+    # and its value should be as above but with the double braces replaced with single ones
     assert node.getValue() == "2 * ({cost} + {shipping})"
 
     # all done
