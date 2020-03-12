@@ -141,7 +141,7 @@ class SymbolTable:
         # if this fails
         except self.node.EmptyExpressionError as error:
             # make a variable instead; use the processed value to get rid of the meta-characters
-            return self.variable(name=name, value=error.expression, **kwds)
+            return self.variable(name=name, value=error.normalized, **kwds)
 
         # if all is well, build an interpolation
         new = self.node.interpolation(model=self, expression=value,

@@ -97,7 +97,7 @@ class Interpolation:
         # if {expression} is empty
         if not expression:
             # complain
-            raise cls.EmptyExpressionError(formula=expression)
+            raise cls.EmptyExpressionError(expression=expression, normalized=expression)
 
         # initialize the offset into the expression
         pos = 0
@@ -122,8 +122,8 @@ class Interpolation:
             # unmatched braces
             elif match.group("lone_open") or match.group("lone_closed"):
                 # complain
-                raise cls.ExpressionSyntaxError(
-                    formula=expression, error=f"unmatched {match.group()}")
+                raise cls.ExpressionSyntaxError(expression=expression,
+                                                error=f"unmatched {match.group()}")
             # otherwise
             else:
                 # it must be an identifier
@@ -150,7 +150,7 @@ class Interpolation:
         # have had escaped braces, make sure the caller has access to the processed value
         if not operands:
             # complain
-            raise cls.EmptyExpressionError(formula=fragment)
+            raise cls.EmptyExpressionError(expression=expression, normalized=fragment)
 
         # and if it's not empty
         if fragment:
