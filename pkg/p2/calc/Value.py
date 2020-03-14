@@ -12,7 +12,7 @@ class Value:
 
 
     # interface
-    def getValue(self, **kwds):
+    def getValue(self):
         """
         Return my value
         """
@@ -20,7 +20,7 @@ class Value:
         return self._value
 
 
-    def setValue(self, value, **kwds):
+    def setValue(self, value):
         """
         Set my value
         """

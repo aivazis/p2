@@ -13,7 +13,7 @@ class Evaluator:
 
 
     # value management
-    def getValue(self, **kwds):
+    def getValue(self):
         """
         Compute and return my value
         """
