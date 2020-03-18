@@ -12,9 +12,9 @@ def test():
     # get the base node form the {calc} package
     from p2.calc.Node import Node as node
 
-    # the assertions in this test must be done more carefully if nodes have {ordering} since
-    # then the equality test becomes a node. the current implementation of {node} does not
-    # include {ordering}, so we should be ok with naive checks.
+    # assertions that involve node comparisons must be done very carefully if nodes have
+    # {ordering} since then the equality test becomes a node. the current implementation of
+    # {node} does not include {ordering}, so we should be ok with naive checks.
 
     # get the calculator
     from p2.calc import calculator

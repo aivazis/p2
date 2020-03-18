@@ -55,11 +55,11 @@ class Observer(Reactor):
         # chain up to handle other aspects of my relationship with the two nodes
         r = super()._substitute(current=current, replacement=replacement, **kwds)
 
-        # if i'm in the list of observers of {current}
+        # if i'm among the observers of {current}
         if self in set(current.observers):
             # remove me
             current.removeObserver(observer=self)
-            # additionally, if i'm  not the one being replaces
+            # additionally, if i'm not the one being replaced
             if r is self:
                 # add me as an observer to {replacement}
                 replacement.addObserver(observer=self)
