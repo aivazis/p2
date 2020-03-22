@@ -7,7 +7,7 @@
 
 def test():
     """
-    Verify that the {sequence} class hierarchy looks as expected
+    Verify that the {tuple} class hierarchy looks as expected
     """
     # get the {calc}
     from p2.calc import calculator
@@ -20,18 +20,20 @@ def test():
     # get the base node {mro}
     nodeMRO = node.mro()
 
-    # get the sequence class
-    sequence = node.sequence
+    # get the tuple class
+    tuple = node.tuple
     # and its mro
-    sequenceMRO = sequence.mro()
+    tupleMRO = tuple.mro()
     # verify the structure
-    assert sequenceMRO == [
+    assert tupleMRO == [
         # the user visible class
-        sequence,
+        tuple,
         # observer
         calculator.dependent, calculator.observer,
         # observable
         calculator.dependency, calculator.observable, calculator.reactor,
+        # base {tuple} from {calculator}
+        calculator.tuple,
         # base {sequence} from {calculator}
         calculator.sequence,
         # composite

@@ -7,12 +7,12 @@
 
 def test():
     """
-    Sanity check: verify that the base {node} has {sequence}
+    Sanity check: verify that the base {node} has {tuple}
     """
     # get the base node form the {calc} package
     from p2.calc.Node import Node as node
-    # access the sequence class
-    sequence = node.sequence
+    # access the tuple class
+    node.tuple
     # all done
     return
 

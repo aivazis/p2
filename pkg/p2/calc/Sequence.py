@@ -28,14 +28,37 @@ class Sequence:
 
 
     # value management
-    def getValue(self, **kwds):
+    def getValue(self):
         """
         Compute and return my value
         """
         # return a tuple with the value of each operand; do not be tempted to avoid realizing
         # the container: value memoization will store the generator, it will get exhausted on
         # first read, and the value of the sequence will be empty thereafter!
-        return tuple(op.value for op in self.operands)
+        return self._container(op.value for op in self.operands)
+
+
+    def setValue(self, value):
+        """
+        Set my value
+        """
+        # convert and store; {composite} takes care of this
+        self.operands = value
+        # all done
+        return
+
+
+    # metamethods
+    def __init__(self, value, **kwds):
+        # chain up
+        super().__init__(operands=value, **kwds)
+        # all done
+        return
+
+
+    # implementation details
+    # force subclasses to choose
+    _container = None
 
 
 # end of file

@@ -22,10 +22,12 @@ class Stem(Node):
     # new composites
     expression = None
     interpolation = None
-    mapping = None
-    sequence = None
     reference = None
     unresolved = None
+
+    # containers
+    tuple = None
+    sequence = None
 
     # node probes
     probe = None

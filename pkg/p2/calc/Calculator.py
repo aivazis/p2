@@ -20,6 +20,7 @@ class Calculator(algebraic.algebra):
 
     # locally defined user visible classes
     # containers
+    from .Tuple import Tuple as tuple
     from .Sequence import Sequence as sequence
 
     # entities that support evaluation after name resolution
@@ -77,7 +78,7 @@ class Calculator(algebraic.algebra):
                                    chain=cls.unresolvedDerivation(node))
 
         # containers
-        node.sequence = cls.make(name="sequence", base=node, chain=cls.sequenceDerivation(node))
+        node.tuple = cls.make(name="tuple", base=node, chain=cls.tupleDerivation(node))
 
         # local functional nodes
         # count
@@ -109,7 +110,7 @@ class Calculator(algebraic.algebra):
     # implementation details
     # containers
     @classmethod
-    def sequenceDerivation(cls, node):
+    def tupleDerivation(cls, node):
         """
         Contribute to the list of ancestors of {sequence} nodes
         """
@@ -117,12 +118,21 @@ class Calculator(algebraic.algebra):
         yield from cls.observerDerivation(node)
         # they are themselves observable
         yield from cls.observableDerivation(node)
-        # if the record has an opinion
+
+        # realized container: if the record has an opinion
+        if node.tuple:
+            # add it to the pile
+            yield node.tuple
+        # the tuple base class
+        yield cls.tuple
+
+        # abstract container: if the record has an opinion
         if node.sequence:
             # add it to the pile
             yield node.sequence
         # the sequence base class
         yield cls.sequence
+
         # and whatever else my superclass says
         yield from cls.compositeDerivation(node)
         # all done
