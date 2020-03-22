@@ -74,7 +74,7 @@ class Expression:
         # interpret {value} as my new formula
         program, operands = self.compile(model=self._model, expression=value)
         # save the referenced nodes as my operands
-        self._operands = tuple(operands)
+        self.operands = operands
         # record the evaluator
         self._program = program
         # all done

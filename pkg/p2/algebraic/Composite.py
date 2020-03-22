@@ -17,7 +17,6 @@ class Composite:
     # types
     from .exceptions import CircularReferenceError
 
-
     # interface
     @property
     def operands(self):
@@ -26,6 +25,17 @@ class Composite:
         """
         # the default implementation stores my operands in a private member
         return self._operands
+
+
+    @operands.setter
+    def operands(self, operands):
+        """
+        Adjust my operands
+        """
+        # process the incoming sequence and save
+        self._operands = self._store(self._ingest(operands=operands))
+        # all done
+        return
 
 
     @property
@@ -119,12 +129,28 @@ class Composite:
         # chain up
         super().__init__(**kwds)
         # save my direct dependencies
-        self._operands = tuple(operands)
+        self.operands = operands
         # all done
         return
 
 
     # implementation details
+    def _ingest(self, operands):
+        """
+        Convert {operands} into nodes
+        """
+        # go through operands
+        for operand in operands:
+            # if this is not a node instance
+            if not isinstance(operand, self.node):
+                # make it a literal
+                operand = self.literal(value=operand)
+            # hand it off
+            yield operand
+        # all done
+        return
+
+
     def _substitute(self, current, replacement, clean):
         """
         Adjust the operands by substituting {replacement} for {current} in the sequence of operands
@@ -164,10 +190,14 @@ class Composite:
         # if any substitutions were needed
         if needsUpdate:
             # replace my operands
-            self._operands = tuple(operands)
+            self.operands = operands
 
         # all done
         return self
+
+
+    # the default storage mechanism for operands
+    _store = tuple
 
 
 # end of file

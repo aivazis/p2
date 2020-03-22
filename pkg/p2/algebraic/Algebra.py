@@ -57,6 +57,8 @@ class Algebra(Type):
 
         # build the record
         node = super().__new__(cls, name, bases, attributes, **kwds)
+        # make a note of it
+        node.node = node
 
         # make literals
         node.literal = cls.make(name="literal", base=node, chain=cls.literalDerivation(node))

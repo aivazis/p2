@@ -51,9 +51,11 @@ class Interpolation:
         Compute and return my value
         """
         # compute the values of my operands
-        values = (str(op.value) for op in self.operands)
-        # apply my operator
-        return "".join(values)
+        values = (str(op.getValue()) for op in self.operands)
+        # splice together
+        value = "".join(values)
+        # and return
+        return value
 
 
     def setValue(self, value):
@@ -62,7 +64,7 @@ class Interpolation:
         """
         # adjust my state
         self.expression = value
-        self._operands = tuple(self.compile(model=self._model, expression=value))
+        self.operands = self.compile(model=self._model, expression=value)
         # all done
         return self
 
