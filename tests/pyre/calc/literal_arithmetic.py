@@ -9,7 +9,7 @@ def test():
     """
     Exercise basic arithmetic operations among literals
     """
-    # get the base node form the {calc} package
+    # get the base node from the {calc} package
     from p2.calc.Node import Node as node
 
     # make a couple of literals

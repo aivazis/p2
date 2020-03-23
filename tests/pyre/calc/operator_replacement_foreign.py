@@ -9,7 +9,7 @@ def test():
     """
     Verify that attempting to replace a node that is not present in an expression is a no-op
     """
-    # get the base node form the {calc} package
+    # get the base node from the {calc} package
     from p2.calc.Node import Node as node
 
     # assertions that involve node comparisons must be done very carefully if nodes have

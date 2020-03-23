@@ -14,7 +14,7 @@ def test():
     # and {algebraic} metaclasses
     from p2.algebraic import algebra
 
-    # get the base node form the {calc} package
+    # get the base node from the {calc} package
     from p2.calc.Node import Node as node
 
     # get the base node {mro}

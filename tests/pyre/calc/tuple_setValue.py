@@ -9,7 +9,7 @@ def test():
     """
     Exercise the interface of tuples
     """
-    # get the base node form the {calc} package
+    # get the base node from the {calc} package
     from p2.calc.Node import Node as node
 
     # make a tuple

@@ -9,7 +9,7 @@ def test():
     """
     Sanity check: verify that the base {node} has {variable}
     """
-    # get the base node form the {calc} package
+    # get the base node from the {calc} package
     from p2.calc.Node import Node as node
     # access the variable class
     variable = node.variable
