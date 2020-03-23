@@ -18,9 +18,10 @@ class Dependent:
         """
         # stop observing my current operands
         self.ignore(self.operands)
-        # chain up to change the value; my super-classes may not implement
+        # chain up to change the value, which may involve replacing my {operands} entirely;
+        # also, my super-classes may not implement, in which case this will raise an exception
         super().setValue(value)
-        # start observing again
+        # start observing the new ones
         self.observe(self.operands)
         # all done
         return self
