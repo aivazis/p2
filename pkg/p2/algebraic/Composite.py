@@ -170,8 +170,8 @@ class Composite:
 
         # otherwise, make a pile for my potentially adjusted operands
         operands = []
-        # initially, i am not known to need to replace my operands
-        needsUpdate = False
+        # initially, i am not known to have replaced any of my operands
+        modified = False
         # go through my operands
         for op in self.operands:
             # if this one is marked {clean}
@@ -185,10 +185,10 @@ class Composite:
             # add it or its replacement to the pile
             operands.append(r)
             # record whether an update was performed
-            needsUpdate |= (r is not op)
+            modified |= (r is not op)
 
-        # if any substitutions were needed
-        if needsUpdate:
+        # if any substitutions were made
+        if modified:
             # replace my operands
             self.operands = operands
 
