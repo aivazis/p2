@@ -89,6 +89,20 @@ class SymbolTable:
 
 
     # convenience: node constructors
+    def dict(self, value, name=None, **kwds):
+        """
+        Build a mapping node
+        """
+        # make the node
+        new = self.node.dict(value=value, **kwds)
+        # if we were given a name
+        if name is not None:
+            # add the node to the table
+            self.insert(name=name, node=new)
+        # and return the new node
+        return new
+
+
     def expression(self, value, name=None, **kwds):
         """
         Build an expression node
@@ -155,20 +169,12 @@ class SymbolTable:
         return new
 
 
-    def literal(self, **kwds):
+    def list(self, value, name=None, **kwds):
         """
-        Build a literal node
-        """
-        # easy enough
-        return self.node.literal(**kwds)
-
-
-    def mapping(self, nodes, name=None, **kwds):
-        """
-        Build a mapping node
+        Build a sequence node
         """
         # make the node
-        new = self.node.mapping(operands=nodes, **kwds)
+        new = self.node.list(value=value, **kwds)
         # if we were given a name
         if name is not None:
             # add the node to the table
@@ -177,12 +183,34 @@ class SymbolTable:
         return new
 
 
-    def sequence(self, nodes, name=None, **kwds):
+    def literal(self, **kwds):
+        """
+        Build a literal node
+        """
+        # easy enough
+        return self.node.literal(**kwds)
+
+
+    def set(self, value, name=None, **kwds):
         """
         Build a sequence node
         """
         # make the node
-        new = self.node.sequence(operands=tuple(nodes), **kwds)
+        new = self.node.set(value=value, **kwds)
+        # if we were given a name
+        if name is not None:
+            # add the node to the table
+            self.insert(name=name, node=new)
+        # and return the new node
+        return new
+
+
+    def tuple(self, value, name=None, **kwds):
+        """
+        Build a sequence node
+        """
+        # make the node
+        new = self.node.tuple(value=value, **kwds)
         # if we were given a name
         if name is not None:
             # add the node to the table
