@@ -20,10 +20,14 @@ class Calculator(algebraic.algebra):
 
     # locally defined user visible classes
     # containers
+    # sequences and realizations
+    from .Sequence import Sequence as sequence
     from .List import List as list
     from .Set import Set as set
     from .Tuple import Tuple as tuple
-    from .Sequence import Sequence as sequence
+    # mappings and realizations
+    from .Mapping import Mapping as mapping
+    from .Dict import Dict as dict
 
     # entities that support evaluation after name resolution
     from .Expression import Expression as expression
@@ -80,9 +84,12 @@ class Calculator(algebraic.algebra):
                                    chain=cls.unresolvedDerivation(node))
 
         # containers
+        # sequences
         node.list = cls.make(name="list", base=node, chain=cls.listDerivation(node))
         node.set = cls.make(name="set", base=node, chain=cls.setDerivation(node))
         node.tuple = cls.make(name="tuple", base=node, chain=cls.tupleDerivation(node))
+        # mappings
+        node.dict = cls.make(name="dict", base=node, chain=cls.dictDerivation(node))
 
         # local functional nodes
         # count
@@ -113,6 +120,36 @@ class Calculator(algebraic.algebra):
 
     # implementation details
     # containers
+    @classmethod
+    def dictDerivation(cls, node):
+        """
+        Contribute to the pile of ancestors of {tuple} nodes
+        """
+        # tuples observe their operands
+        yield from cls.observerDerivation(node)
+        # they are themselves observable
+        yield from cls.observableDerivation(node)
+
+        # realized container: if the record has an opinion
+        if node.dict:
+            # add it to the pile
+            yield node.dict
+        # the tuple base class
+        yield cls.dict
+
+        # abstract container: if the record has an opinion
+        if node.mapping:
+            # add it to the pile
+            yield node.mapping
+        # the sequence base class
+        yield cls.mapping
+
+        # and whatever else my superclass says
+        yield from cls.compositeDerivation(node)
+        # all done
+        return
+
+
     @classmethod
     def listDerivation(cls, node):
         """

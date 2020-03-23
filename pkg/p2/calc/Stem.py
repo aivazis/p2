@@ -26,10 +26,14 @@ class Stem(Node):
     unresolved = None
 
     # containers
+    # sequences and realizations
+    sequence = None
     list = None
     set = None
     tuple = None
-    sequence = None
+    # mappings and realizations
+    mapping = None
+    dict = None
 
     # node probes
     probe = None
