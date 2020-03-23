@@ -27,6 +27,7 @@ class Stem(Node):
 
     # containers
     list = None
+    set = None
     tuple = None
     sequence = None
 
