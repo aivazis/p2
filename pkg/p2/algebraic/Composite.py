@@ -17,6 +17,7 @@ class Composite:
     # types
     from .exceptions import CircularReferenceError
 
+
     # interface
     @property
     def operands(self):
@@ -198,6 +199,8 @@ class Composite:
 
     # the default storage mechanism for operands
     _store = tuple
+    # storage for the operands
+    _operands = ()
 
 
 # end of file
