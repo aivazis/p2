@@ -32,10 +32,10 @@ class Sequence:
         """
         Compute and return my value
         """
-        # return a tuple with the value of each operand; do not be tempted to avoid realizing
-        # the container: value memoization will store the generator, it will get exhausted on
-        # first read, and the value of the sequence will be empty thereafter!
-        return self._container(op.value for op in self.operands)
+        # return a container with the value of each operand; do not be tempted to avoid
+        # realizing the container: value memoization will store the generator, it will get
+        # exhausted on first read, and the value of the sequence will be empty thereafter!
+        return self._container(op.getValue() for op in self.operands)
 
 
     def setValue(self, value):
@@ -57,8 +57,7 @@ class Sequence:
 
 
     # implementation details
-    # force subclasses to choose
-    _container = None
+    _container = None # force subclasses to choose
 
 
 # end of file
