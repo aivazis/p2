@@ -20,6 +20,7 @@ class Calculator(algebraic.algebra):
 
     # locally defined user visible classes
     # containers
+    from .List import List as list
     from .Tuple import Tuple as tuple
     from .Sequence import Sequence as sequence
 
@@ -78,6 +79,7 @@ class Calculator(algebraic.algebra):
                                    chain=cls.unresolvedDerivation(node))
 
         # containers
+        node.list = cls.make(name="list", base=node, chain=cls.listDerivation(node))
         node.tuple = cls.make(name="tuple", base=node, chain=cls.tupleDerivation(node))
 
         # local functional nodes
@@ -109,6 +111,36 @@ class Calculator(algebraic.algebra):
 
     # implementation details
     # containers
+    @classmethod
+    def listDerivation(cls, node):
+        """
+        Contribute to the list of ancestors of {sequence} nodes
+        """
+        # sequences observe their operands
+        yield from cls.observerDerivation(node)
+        # they are themselves observable
+        yield from cls.observableDerivation(node)
+
+        # realized container: if the record has an opinion
+        if node.list:
+            # add it to the pile
+            yield node.list
+        # the list base class
+        yield cls.list
+
+        # abstract container: if the record has an opinion
+        if node.sequence:
+            # add it to the pile
+            yield node.sequence
+        # the sequence base class
+        yield cls.sequence
+
+        # and whatever else my superclass says
+        yield from cls.compositeDerivation(node)
+        # all done
+        return
+
+
     @classmethod
     def tupleDerivation(cls, node):
         """

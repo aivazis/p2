@@ -26,6 +26,7 @@ class Stem(Node):
     unresolved = None
 
     # containers
+    list = None
     tuple = None
     sequence = None
 
