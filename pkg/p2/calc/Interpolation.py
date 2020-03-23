@@ -171,7 +171,7 @@ class Interpolation:
         # compile the expression; pass any exceptions through to the caller
         operands = cls.compile(model=model, expression=expression)
         # compute the values of the operands
-        values = (op.value for op in operands)
+        values = (op.getValue() for op in operands)
         # splice them together and return the result
         return "".join(values)
 
