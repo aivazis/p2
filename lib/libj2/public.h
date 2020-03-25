@@ -10,11 +10,7 @@
 
 // get the forward declarations
 #include "forward.h"
-
-
-// externals
-#include <stdexcept>
-#include <string>
+#include "externals.h"
 
 
 // implementations
@@ -22,6 +18,7 @@
 #include "exceptions.h"
 
 // infrastructure
+#include "Device.h"
 #include "Inventory.h"
 
 // diagnostics

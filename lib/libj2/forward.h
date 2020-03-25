@@ -76,6 +76,9 @@ namespace pyre::journal {
 
 // user facing api
 namespace pyre::journal {
+    // infrastructure
+    using device_t = Device;
+
     // channels
     // using error_t = Error;
     // using info_t = Informational;

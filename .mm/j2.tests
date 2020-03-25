@@ -6,6 +6,8 @@
 
 # the libj2 test suites
 j2.lib.tests.stem := libjournal
+j2.lib.tests.prerequisites := j2.lib
+j2.lib.tests.extern := j2.lib
 
 # global testsuite settings
 j2.lib.tests.harness :=
