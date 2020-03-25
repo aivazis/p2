@@ -21,8 +21,13 @@
 // exceptions
 #include "exceptions.h"
 
+// infrastructure
+#include "Inventory.h"
+
 // diagnostics
+// the null one
 #include "Null.h"
+// the functional ones
 
 // manipulators
 #include "Locator.h"

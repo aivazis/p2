@@ -13,6 +13,10 @@ namespace pyre::journal {
     // the exceptions
     class firewall_error;
 
+    // infrastructure
+    class Device;
+    template <bool = true> class Inventory;
+
     // the null diagnostic
     class Null;
     // its injection operator
@@ -28,11 +32,19 @@ namespace pyre::journal {
     class Selector;
 }
 
+// low level api
+#if defined(PYRE_CORE)
+namespace pyre::journal {
+    // infrastructure
+    template <bool defaultState = true>
+    using inventory_t = Inventory<defaultState>;
+}
+#endif
+
 
 // developer api
 namespace pyre::journal {
-
-    // the null diagnostics is always available
+    // the null diagnostic is always available
     using null_t = Null;
 
     // if we are building the library

@@ -1,0 +1,94 @@
+// -*- c++ -*-
+//
+// michael a.g. aïvázis <michael.aivazis@para-sim.com>
+// (c) 1998-2020 all rights reserved
+
+// code guard
+#if !defined(pyre_journal_Inventory_icc)
+#error This header contains implementation details of pyre::journal::Inventory
+#else
+
+
+// metamethods
+template <bool defaultState>
+pyre::journal::Inventory<defaultState>::
+Inventory(state_t state, device_t * device) :
+    _state(state),
+    _device(device)
+{}
+
+
+// interface
+// accessors
+template <bool defaultState>
+auto
+pyre::journal::Inventory<defaultState>::
+state() const -> state_t
+{
+    // easy enough
+    return _state;
+}
+
+
+template <bool defaultState>
+auto
+pyre::journal::Inventory<defaultState>::
+device() const -> device_t *
+{
+    // easy enough
+    return _device;
+}
+
+
+// mutators
+template <bool defaultState>
+void
+pyre::journal::Inventory<defaultState>::
+activate()
+{
+    // turn it on
+    _state = true;
+    // all done
+    return;
+}
+
+
+template <bool defaultState>
+void
+pyre::journal::Inventory<defaultState>::
+deactivate()
+{
+    // turn it off
+    _state = false;
+    // all done
+    return;
+}
+
+
+template <bool defaultState>
+auto
+pyre::journal::Inventory<defaultState>::
+device(device_t * device) -> device_t *
+{
+    // save the old one
+    device_t * old = _device;
+    // attach the new one
+    _device = device;
+    // return the old one
+    return old;
+}
+
+
+// syntactic sugar
+template <bool defaultState>
+pyre::journal::Inventory<defaultState>::
+operator bool() const
+{
+    // always off
+    return state();
+}
+
+
+#endif
+
+// end of file

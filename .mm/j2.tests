@@ -10,6 +10,6 @@ j2.lib.tests.stem := libjournal
 # global testsuite settings
 j2.lib.tests.harness :=
 j2.lib.tests.flags += -Wall $($(compiler.c++).std.c++17)
-j2.lib.tests.defines :=
+j2.lib.tests.defines := PYRE_CORE
 
 # end of file
