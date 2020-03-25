@@ -6,7 +6,7 @@
 
 # global testsuite settings
 j2.lib.tests.harness :=
-j2.lib.tests.flags := -Wall
+j2.lib.tests.flags += -Wall $($(compiler.c++).std.c++17)
 j2.lib.tests.defines :=
 
 # end of file
