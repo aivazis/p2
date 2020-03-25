@@ -61,6 +61,7 @@ namespace pyre::journal {
 #endif
 }
 
+
 // user facing api
 namespace pyre::journal {
     // channels

@@ -4,6 +4,7 @@
 // (c) 1998-2020 all rights reserved
 
 
+// get the journal
 #include <j2/journal.h>
 
 

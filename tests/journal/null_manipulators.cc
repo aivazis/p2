@@ -4,16 +4,16 @@
 // (c) 1998-2020 all rights reserved
 
 
-// the package
+// get the journal
 #include <j2/journal.h>
 
 
-// exercise the null diagnostic
+// exercise all manipulators
 int main() {
     // make a null channel
     pyre::journal::null_t channel("tests.journal.null");
 
-    // try injecting some text into the channel
+    // inject the manipulators
     channel
         << pyre::journal::at(__HERE__)
         << pyre::journal::set("time", "now")

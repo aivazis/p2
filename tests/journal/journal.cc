@@ -4,11 +4,11 @@
 // (c) 1998-2020 all rights reserved
 
 
-// sanity check: make sure the header file is accessible
+// get the journal
 #include <j2/journal.h>
 
 
-// driver
+// sanity check: make sure the header file is accessible
 int main() {
     // nothing to do
     return 0;

@@ -7,8 +7,10 @@
 #if !defined(pyre_journal_h)
 #define pyre_journal_h
 
+
 // publish the interface
 #include "public.h"
+
 
 #endif
 

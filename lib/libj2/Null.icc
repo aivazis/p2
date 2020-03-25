@@ -28,7 +28,7 @@ operator bool() const
 void
 pyre::journal::Null::
 activate() const
- {
+{
     // nothing to do
     return;
 }
@@ -37,7 +37,7 @@ activate() const
 void
 pyre::journal::Null::
 deactivate() const
- {
+{
     // nothing to do
     return;
 }
@@ -46,7 +46,7 @@ deactivate() const
 constexpr auto
 pyre::journal::Null::
 isActive() const -> bool
- {
+{
     // always off
     return false;
 }

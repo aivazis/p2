@@ -41,7 +41,6 @@ private:
 };
 
 
-
 // get the inline definitions
 #define pyre_journal_Null_icc
 #include "Null.icc"
