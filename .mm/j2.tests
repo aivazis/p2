@@ -1,0 +1,12 @@
+# -*- Makefile -*-
+#
+# michael a.g. aïvázis <michael.aivazis@para-sim.com>
+# (c) 1998-2019 all rights reserved
+
+
+# global testsuite settings
+j2.lib.tests.harness :=
+j2.lib.tests.flags := -Wall
+j2.lib.tests.defines :=
+
+# end of file
