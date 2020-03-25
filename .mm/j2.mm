@@ -23,9 +23,7 @@ j2.lib.stem := j2
 j2.lib.c++.defines += PYRE_CORE
 j2.lib.c++.flags += $($(compiler.c++).std.c++17)
 
-# the j2 test suites
-j2.lib.tests.stem := journal
-# get the test cases
+# get the testsuites
 include j2.tests
 
 # end of file

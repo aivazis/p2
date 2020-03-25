@@ -4,6 +4,9 @@
 # (c) 1998-2019 all rights reserved
 
 
+# the libj2 test suites
+j2.lib.tests.stem := libjournal
+
 # global testsuite settings
 j2.lib.tests.harness :=
 j2.lib.tests.flags += -Wall $($(compiler.c++).std.c++17)
