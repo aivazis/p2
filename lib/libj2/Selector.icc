@@ -1,0 +1,35 @@
+// -*- c++ -*-
+//
+// michael a.g. aïvázis <michael.aivazis@para-sim.com>
+// (c) 1998-2020 all rights reserved
+
+// code guard
+#if !defined(pyre_journal_Selector_icc)
+#error This header contains implementation details of pyre::journal::Selector
+#else
+
+
+// metamethods
+pyre::journal::Selector::
+Selector(string_t key, string_t value):
+    _key(key),
+    _value(value)
+{}
+
+
+// interface
+template <typename channelT>
+auto
+pyre::journal::Selector::
+inject(channelT & channel) const -> channelT &
+{
+    // decorate the channel with my metadata
+    channel.setattr(_key, _value);
+    // all done
+    return channel;
+}
+
+
+# endif
+
+// end of file

@@ -26,6 +26,7 @@
 
 // manipulators
 #include "Locator.h"
+#include "Selector.h"
 // macros
 #include "macros.h"
 

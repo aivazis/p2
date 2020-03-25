@@ -24,7 +24,8 @@ namespace pyre::journal {
 
     // locator
     class Locator;
-
+    // manipulators
+    class Selector;
 }
 
 
@@ -69,7 +70,7 @@ namespace pyre::journal {
 
     // manipulators
      using at = Locator;
-    // using set = Selector;
+     using set = Selector;
 }
 
 
