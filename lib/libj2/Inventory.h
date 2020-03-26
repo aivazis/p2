@@ -26,9 +26,10 @@ public:
 
     // interface
 public:
-    //accessors
+    // accessors
     inline auto state() const -> state_t;
     inline auto device() const -> device_t *;
+    inline static constexpr auto defaultState() -> state_t;
 
     // mutators
     inline void activate();

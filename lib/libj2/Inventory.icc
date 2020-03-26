@@ -40,6 +40,16 @@ device() const -> device_t *
 }
 
 
+template <bool stateV>
+constexpr auto
+pyre::journal::Inventory<stateV>::
+defaultState() -> state_t
+{
+    // easy enough
+    return stateV;
+}
+
+
 // mutators
 template <bool stateV>
 void

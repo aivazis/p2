@@ -21,6 +21,8 @@ int main() {
     active_t on;
     // by default, its device is null
     assert(on.device() == nullptr);
+    // verify the default state is on
+    assert(on.defaultState() == true);
     // verify it is on
     assert(on.state() == true);
     // flip it
@@ -32,6 +34,8 @@ int main() {
     inactive_t off;
     // by default, its device is null
     assert(off.device() == nullptr);
+    // verify the default state is off
+    assert(off.defaultState() == false);
     // verify it is off
     assert(off.state() == false);
     // flip it
