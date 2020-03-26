@@ -10,8 +10,8 @@
 
 
 // metamethods
-template <bool defaultState>
-pyre::journal::Inventory<defaultState>::
+template <bool stateV>
+pyre::journal::Inventory<stateV>::
 Inventory(state_t state, device_t * device) :
     _state(state),
     _device(device)
@@ -20,9 +20,9 @@ Inventory(state_t state, device_t * device) :
 
 // interface
 // accessors
-template <bool defaultState>
+template <bool stateV>
 auto
-pyre::journal::Inventory<defaultState>::
+pyre::journal::Inventory<stateV>::
 state() const -> state_t
 {
     // easy enough
@@ -30,9 +30,9 @@ state() const -> state_t
 }
 
 
-template <bool defaultState>
+template <bool stateV>
 auto
-pyre::journal::Inventory<defaultState>::
+pyre::journal::Inventory<stateV>::
 device() const -> device_t *
 {
     // easy enough
@@ -41,9 +41,9 @@ device() const -> device_t *
 
 
 // mutators
-template <bool defaultState>
+template <bool stateV>
 void
-pyre::journal::Inventory<defaultState>::
+pyre::journal::Inventory<stateV>::
 activate()
 {
     // turn it on
@@ -53,9 +53,9 @@ activate()
 }
 
 
-template <bool defaultState>
+template <bool stateV>
 void
-pyre::journal::Inventory<defaultState>::
+pyre::journal::Inventory<stateV>::
 deactivate()
 {
     // turn it off
@@ -65,9 +65,9 @@ deactivate()
 }
 
 
-template <bool defaultState>
+template <bool stateV>
 auto
-pyre::journal::Inventory<defaultState>::
+pyre::journal::Inventory<stateV>::
 device(device_t * device) -> device_t *
 {
     // save the old one
@@ -80,8 +80,8 @@ device(device_t * device) -> device_t *
 
 
 // syntactic sugar
-template <bool defaultState>
-pyre::journal::Inventory<defaultState>::
+template <bool stateV>
+pyre::journal::Inventory<stateV>::
 operator bool() const
 {
     // always off

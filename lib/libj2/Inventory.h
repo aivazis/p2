@@ -9,7 +9,7 @@
 
 
 // the common state shared by all channels of the same name/severity
-template <bool defaultState>
+template <bool stateV>
 class pyre::journal::Inventory
 {
     // types
@@ -20,7 +20,7 @@ public:
     // metamethods
 public:
     // constructors
-    inline explicit Inventory(state_t = defaultState, device_t * = nullptr);
+    inline explicit Inventory(state_t = stateV, device_t * = nullptr);
     inline Inventory(const Inventory &);
     inline const Inventory & operator= (const Inventory &);
 
