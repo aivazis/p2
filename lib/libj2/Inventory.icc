@@ -18,6 +18,16 @@ Inventory(state_t state, device_t * device) :
 {}
 
 
+// syntactic sugar
+template <bool stateV>
+pyre::journal::Inventory<stateV>::
+operator bool() const
+{
+    // always off
+    return state();
+}
+
+
 // interface
 // accessors
 template <bool stateV>
@@ -86,16 +96,6 @@ device(device_t * device) -> device_t *
     _device = device;
     // return the old one
     return old;
-}
-
-
-// syntactic sugar
-template <bool stateV>
-pyre::journal::Inventory<stateV>::
-operator bool() const
-{
-    // always off
-    return state();
 }
 
 

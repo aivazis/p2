@@ -21,6 +21,10 @@ public:
 public:
     // constructors
     inline explicit Inventory(state_t = stateV, device_t * = nullptr);
+
+    // syntactic sugar
+    inline operator bool() const;
+
     // interface
 public:
     // accessors
@@ -32,9 +36,6 @@ public:
     inline void activate();
     inline void deactivate();
     inline auto device(device_t *) -> device_t *;
-
-    // syntactic sugar
-    inline operator bool() const;
 
     // data
 private:
