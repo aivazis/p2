@@ -29,9 +29,6 @@ public:
     inline void activate() const;
     inline void deactivate() const;
 
-    // predicate
-    inline constexpr auto isActive() const -> bool;
-
     // disallow
 private:
     Null(const Null &) = delete;

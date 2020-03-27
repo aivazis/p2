@@ -20,7 +20,7 @@ pyre::journal::Null::
 operator bool() const
 {
     // always off
-    return isActive();
+    return false;
 }
 
 
@@ -40,15 +40,6 @@ deactivate() const
 {
     // nothing to do
     return;
-}
-
-
-constexpr auto
-pyre::journal::Null::
-isActive() const -> bool
-{
-    // always off
-    return false;
 }
 
 
