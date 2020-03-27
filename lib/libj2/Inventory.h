@@ -21,9 +21,6 @@ public:
 public:
     // constructors
     inline explicit Inventory(state_t = stateV, device_t * = nullptr);
-    inline Inventory(const Inventory &);
-    inline const Inventory & operator= (const Inventory &);
-
     // interface
 public:
     // accessors
@@ -39,10 +36,17 @@ public:
     // syntactic sugar
     inline operator bool() const;
 
-    // disallow
+    // data
 private:
     state_t _state;
     device_t * _device;
+
+    // disallow
+private:
+    Inventory(const Inventory &) = delete;
+    Inventory(const Inventory &&) = delete;
+    const Inventory & operator= (const Inventory &) = delete;
+    const Inventory & operator= (const Inventory &&) = delete;
 };
 
 
