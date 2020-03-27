@@ -20,6 +20,7 @@
 
 // infrastructure
 #include "Device.h"
+#include "Index.h"
 #include "Inventory.h"
 
 // diagnostics
