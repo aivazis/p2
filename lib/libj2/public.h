@@ -22,6 +22,7 @@
 #include "Device.h"
 #include "Index.h"
 #include "Inventory.h"
+#include "Channel.h"
 
 // diagnostics
 // the null one

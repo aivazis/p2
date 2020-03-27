@@ -17,7 +17,7 @@ namespace pyre::journal {
     class Device;
     template <typename> class Index;
     template <bool = true> class Inventory;
-    template <typename, typename> class Channel;
+    template <typename severityT> class Channel;
 
     // the null diagnostic
     class Null;
@@ -44,8 +44,8 @@ namespace pyre::journal {
     template <bool stateV = true>
     using inventory_t = Inventory<stateV>;
 
-    template <typename severityT, typename inventoryT>
-    using channel_t = Channel<severityT, inventoryT>;
+    template <typename severityT>
+    using channel_t = Channel<severityT>;
 }
 #endif
 
