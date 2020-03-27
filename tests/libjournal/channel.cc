@@ -15,31 +15,31 @@
 class severity {
     // types
 public:
-    using string_t = std::string;
-    using name_t = string_t;
-    using inventory_t = pyre::journal::inventory_t<true>;
-    using index_t = pyre::journal::index_t<inventory_t>;
+    using string_type = std::string;
+    using name_type = string_type;
+    using inventory_type = pyre::journal::inventory_t<true>;
+    using index_type = pyre::journal::index_t<inventory_type>;
 
     // interface
 public:
-    inline static auto lookup(const name_t &) -> inventory_t &;
+    inline static auto lookup(const name_type &) -> inventory_type &;
 
     // data
 private:
     // the index
-    static index_t _index;
+    static index_type _index;
 };
 
 // implementation
 auto
-severity::lookup(const name_t & name) -> inventory_t &
+severity::lookup(const name_type & name) -> inventory_type &
 {
     // easy enough
     return _index.lookup(name);
 }
 
 // the static index
-severity::index_t severity::_index;
+severity::index_type severity::_index;
 
 
 // channel realization

@@ -15,10 +15,10 @@ template <typename inventoryT>
 class pyre::journal::Index {
     // types
 public:
-    using string_t = std::string;
-    using name_t = string_t;
-    using inventory_t = inventoryT;
-    using index_t = std::map<name_t, inventory_t>;
+    using string_type = std::string;
+    using name_type = string_type;
+    using inventory_type = inventoryT;
+    using index_type = std::map<name_type, inventory_type>;
 
     // metamethods
 public:
@@ -26,7 +26,7 @@ public:
 
     // interface
 public:
-    inline auto lookup(const name_t &) -> inventory_t &;
+    inline auto lookup(const name_type &) -> inventory_type &;
 
     inline auto size() const;
     inline auto empty() const;
@@ -36,7 +36,7 @@ public:
 
     // data members
 private:
-    index_t _index;
+    index_type _index;
 
     // disallow
 private:

@@ -12,7 +12,7 @@
 // metamethods
 template <bool stateV>
 pyre::journal::Inventory<stateV>::
-Inventory(state_t state, device_t * device) :
+Inventory(state_type state, device_type * device) :
     _state(state),
     _device(device)
 {}
@@ -33,7 +33,7 @@ operator bool() const
 template <bool stateV>
 auto
 pyre::journal::Inventory<stateV>::
-state() const -> state_t
+state() const -> state_type
 {
     // easy enough
     return _state;
@@ -43,7 +43,7 @@ state() const -> state_t
 template <bool stateV>
 auto
 pyre::journal::Inventory<stateV>::
-device() const -> device_t *
+device() const -> device_type *
 {
     // easy enough
     return _device;
@@ -53,7 +53,7 @@ device() const -> device_t *
 template <bool stateV>
 constexpr auto
 pyre::journal::Inventory<stateV>::
-defaultState() -> state_t
+defaultState() -> state_type
 {
     // easy enough
     return stateV;
@@ -88,10 +88,10 @@ deactivate()
 template <bool stateV>
 auto
 pyre::journal::Inventory<stateV>::
-device(device_t * device) -> device_t *
+device(device_type * device) -> device_type *
 {
     // save the old one
-    device_t * old = _device;
+    device_type * old = _device;
     // attach the new one
     _device = device;
     // return the old one

@@ -21,7 +21,7 @@ Index() :
 template <typename inventoryT>
 auto
 pyre::journal::Index<inventoryT>::
-lookup(const name_t & channel) -> inventory_t &
+lookup(const name_type & channel) -> inventory_type &
 {
     // attempt to locate the {channel} state
     auto place = _index.find(channel);
@@ -40,18 +40,18 @@ lookup(const name_t & channel) -> inventory_t &
     // initialized in its default state
 
     // if we fail to find an ancestor, initialize the inventory state with the default value
-    auto state = inventory_t::defaultState();
+    auto state = inventory_type::defaultState();
     // use a period as the separator
     auto separator = '.';
     // initialize the end of the search for the separator; initially, look through the entire
     // string
-    auto stop = string_t::npos;
+    auto stop = string_type::npos;
     // until we manage to get out of this loop
     while (1) {
         // locate the last occurrence of the separator
         auto pos = channel.find_last_of(separator, stop);
         // if not there
-        if (pos == string_t::npos) {
+        if (pos == string_type::npos) {
             // nothing else to do
             break;
         }

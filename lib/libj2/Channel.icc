@@ -13,9 +13,9 @@
 // constructor
 template <typename severityT>
 pyre::journal::Channel<severityT>::
-Channel(const string_t & name) :
+Channel(const string_type & name) :
     _name(name),
-    _inventory(severity_t::lookup(name))
+    _inventory(severity_type::lookup(name))
 {}
 
 
@@ -34,7 +34,7 @@ operator bool() const
 template <typename severityT>
 auto
 pyre::journal::Channel<severityT>::
-name() const -> const string_t &
+name() const -> const string_type &
 {
     // easy enough
     return _name;
@@ -44,7 +44,7 @@ name() const -> const string_t &
 template <typename severityT>
 auto
 pyre::journal::Channel<severityT>::
-state() const -> state_t
+state() const -> state_type
 {
     // easy enough
     return _inventory.state();
@@ -54,10 +54,10 @@ state() const -> state_t
 template <typename severityT>
 constexpr auto
 pyre::journal::Channel<severityT>::
-defaultState() -> state_t
+defaultState() -> state_type
 {
     // easy enough
-    return inventory_t::defaultState();
+    return inventory_type::defaultState();
 }
 
 

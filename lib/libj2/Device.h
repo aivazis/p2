@@ -11,9 +11,9 @@
 class pyre::journal::Device {
     // types
 public:
-    using string_t = std::string;
-    using entry_t = std::vector<string_t>;
-    using metadata_t = std::map<string_t, string_t>;
+    using string_type = std::string;
+    using entry_type = std::vector<string_type>;
+    using metadata_type = std::map<string_type, string_type>;
 
     // metamethods
 public:
@@ -23,7 +23,7 @@ public:
     // interface
 public:
     // abstract
-    virtual auto record(const entry_t &, const metadata_t &) -> Device & = 0;
+    virtual auto record(const entry_type &, const metadata_type &) -> Device & = 0;
 };
 
 

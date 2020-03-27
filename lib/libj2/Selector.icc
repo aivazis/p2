@@ -11,7 +11,7 @@
 
 // metamethods
 pyre::journal::Selector::
-Selector(string_t key, string_t value):
+Selector(key_type key, value_type value):
     _key(key),
     _value(value)
 {}

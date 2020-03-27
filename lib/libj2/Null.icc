@@ -11,7 +11,7 @@
 
 // metamethods
 pyre::journal::Null::
-Null(const string_t &)
+Null(const string_type &)
 {}
 
 

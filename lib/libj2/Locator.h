@@ -13,7 +13,7 @@ class pyre::journal::Locator
 {
     // types
 public:
-    using string_t = std::string;
+    using string_type = std::string;
 
     // metamethods
 public:
@@ -28,9 +28,9 @@ public:
 
     // data
 private:
-    string_t _file;
-    string_t _line;
-    string_t _func;
+    string_type _file;
+    string_type _line;
+    string_type _func;
 };
 
 

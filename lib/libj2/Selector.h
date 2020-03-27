@@ -8,17 +8,19 @@
 #define pyre_journal_Selector_h
 
 
-// the selector diagnostic conforms to the API but has no effect
+// selectors are channel manipulators that decorate channels with metadata
 class pyre::journal::Selector
 {
     // types
 public:
-    using string_t = std::string;
+    using string_type = std::string;
+    using key_type = string_type;
+    using value_type = string_type;
 
     // metamethods
 public:
     // constructor
-    inline Selector(string_t, string_t);
+    inline Selector(key_type, value_type);
 
     // interface
 public:
@@ -28,8 +30,8 @@ public:
 
     // data
 private:
-    string_t _key;
-    string_t _value;
+    key_type _key;
+    value_type _value;
 };
 
 

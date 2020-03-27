@@ -12,15 +12,15 @@ template <typename severityT>
 class pyre::journal::Channel {
     // types
 public:
-    using string_t = std::string;
-    using severity_t = severityT;
-    using inventory_t = typename severity_t::inventory_t;
-    using state_t = typename inventory_t::state_t;
-    using index_t = Index<inventory_t>;
+    using string_type = std::string;
+    using severity_type = severityT;
+    using inventory_type = typename severity_type::inventory_type;
+    using state_type = typename inventory_type::state_type;
+    using index_type = index_t<inventory_type>;
 
     // metamethods
 public:
-    inline explicit Channel(const string_t &);
+    inline explicit Channel(const string_type &);
 
 // syntactic sugar
     inline operator bool() const;
@@ -28,9 +28,9 @@ public:
     // interface
 public:
     // accessors
-    inline auto name() const -> const string_t &;
-    inline auto state() const -> state_t;
-    inline static constexpr auto defaultState() -> state_t;
+    inline auto name() const -> const string_type &;
+    inline auto state() const -> state_type;
+    inline static constexpr auto defaultState() -> state_type;
 
     // mutators
     inline void activate();
@@ -38,8 +38,8 @@ public:
 
     // data members
 private:
-    string_t _name;
-    inventory_t & _inventory;
+    string_type _name;
+    inventory_type & _inventory;
 
     // disallow
 private:
