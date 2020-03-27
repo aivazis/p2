@@ -41,39 +41,45 @@ lookup(const name_t & channel) -> inventory_t &
 
     // if we fail to find an ancestor, initialize the inventory state with the default value
     auto state = inventory_t::defaultState();
-    // the separator
+    // use a period as the separator
     auto separator = '.';
-    // initialize the end of the search for the separator
+    // initialize the end of the search for the separator; initially, look through the entire
+    // string
     auto stop = string_t::npos;
     // until we manage to get out of this loop
     while (1) {
-        // find the last occurrence of the separator
+        // locate the last occurrence of the separator
         auto pos = channel.find_last_of(separator, stop);
         // if not there
         if (pos == string_t::npos) {
-            // we are done
+            // nothing else to do
             break;
         }
-        // otherwise, extract the fragment
+        // otherwise, extract the fragment up to the separator
         auto fragment = channel.substr(0, pos);
-        // look it up
+        // attempt to look it up in the index
         auto place = _index.find(fragment);
         // if it's there
         if (place != _index.end()) {
             // grab it
             auto & inventory = place->second;
-            // save its state
+            // use its state as the initializer for our new inventory
             state = inventory.state();
-            // and get out here
+            // and get out of here
             break;
         }
-        // otherwise, adjust the stopping place and move on
+        // otherwise, adjust the stopping place and look again
         stop = pos - 1;
     }
 
     // use the harvested state to initialize the channel inventory
     auto status = _index.emplace(channel, state);
-    // access the newly created inventory
+    // if this failed
+    if (status.second == false) {
+        // something terrible has happened
+        throw std::runtime_error("unable to emplace channel inventory");
+    }
+    // if all went well, access the newly created inventory
     auto & inventory = status.first->second;
     // and return it
     return inventory;
