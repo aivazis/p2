@@ -59,8 +59,6 @@ int main() {
     assert (channel);
     // verify that the default state is as expected
     assert (channel.defaultState() == true);
-    // verify that there is no registered device
-    assert (channel.device() == nullptr);
 
     // deactivate it
     channel.deactivate();

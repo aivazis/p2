@@ -52,16 +52,6 @@ state() const -> state_t
 
 
 template <typename severityT>
-auto
-pyre::journal::Channel<severityT>::
-device() const -> device_t *
-{
-    // easy enough
-    return _inventory.device();
-}
-
-
-template <typename severityT>
 constexpr auto
 pyre::journal::Channel<severityT>::
 defaultState() -> state_t
@@ -93,16 +83,6 @@ deactivate()
     _inventory.deactivate();
     // all done
     return;
-}
-
-
-template <typename severityT>
-auto
-pyre::journal::Channel<severityT>::
-device(device_t * device) -> device_t *
-{
-    // easy enough
-    return _inventory.device(device);
 }
 
 

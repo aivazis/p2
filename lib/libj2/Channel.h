@@ -16,7 +16,6 @@ public:
     using severity_t = severityT;
     using inventory_t = typename severity_t::inventory_t;
     using state_t = typename inventory_t::state_t;
-    using device_t = typename inventory_t::device_t;
     using index_t = Index<inventory_t>;
 
     // metamethods
@@ -31,13 +30,11 @@ public:
     // accessors
     inline auto name() const -> const string_t &;
     inline auto state() const -> state_t;
-    inline auto device() const -> device_t *;
     inline static constexpr auto defaultState() -> state_t;
 
     // mutators
     inline void activate();
     inline void deactivate();
-    inline auto device(device_t *) -> device_t *;
 
     // data members
 private:
