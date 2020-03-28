@@ -13,7 +13,7 @@
 // constructor
 template <typename severityT>
 pyre::journal::Channel<severityT>::
-Channel(const string_type & name) :
+Channel(const name_type & name) :
     _name(name),
     _inventory(severity_type::lookup(name))
 {}
@@ -34,7 +34,7 @@ operator bool() const
 template <typename severityT>
 auto
 pyre::journal::Channel<severityT>::
-name() const -> const string_type &
+name() const -> const name_type &
 {
     // easy enough
     return _name;

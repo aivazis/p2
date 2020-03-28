@@ -14,11 +14,12 @@ class pyre::journal::Null
     // types
 public:
     using string_type = std::string;
+    using name_type = string_type;
 
     // metamethods
 public:
     // constructor
-    inline explicit Null(const string_type &);
+    inline explicit Null(const name_type &);
 
     // syntactic sugar
     inline constexpr operator bool() const;

@@ -15,7 +15,9 @@ public:
     using string_type = std::string;
     using name_type = string_type;
     using entry_type = std::vector<string_type>;
-    using metadata_type = std::map<string_type, string_type>;
+    using key_type = string_type;
+    using value_type = string_type;
+    using metadata_type = std::map<key_type, value_type>;
 
     // metamethods
 public:

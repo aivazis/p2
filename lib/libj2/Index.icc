@@ -45,13 +45,13 @@ lookup(const name_type & channel) -> inventory_type &
     auto separator = '.';
     // initialize the end of the search for the separator; initially, look through the entire
     // string
-    auto stop = string_type::npos;
+    auto stop = name_type::npos;
     // until we manage to get out of this loop
     while (1) {
         // locate the last occurrence of the separator
         auto pos = channel.find_last_of(separator, stop);
         // if not there
-        if (pos == string_type::npos) {
+        if (pos == name_type::npos) {
             // nothing else to do
             break;
         }
