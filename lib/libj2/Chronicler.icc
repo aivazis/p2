@@ -1,0 +1,35 @@
+// -*- c++ -*-
+//
+// michael a.g. aïvázis <michael.aivazis@para-sim.com>
+// (c) 1998-2020 all rights reserved
+
+// code guard
+#if !defined(pyre_journal_Chronicler_icc)
+#error this file contains implementation details for pyre::journal::Chronicler
+#else
+
+
+// accessors
+auto
+pyre::journal::Chronicler::
+device() -> device_t &
+{
+    // easy enough
+    return *_device;
+}
+
+
+void
+pyre::journal::Chronicler::
+device(device_pointer device)
+{
+    // easy enough
+    _device = device;
+    // all done
+    return;
+}
+
+
+#endif
+
+// end of file

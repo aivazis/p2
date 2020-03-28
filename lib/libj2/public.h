@@ -22,6 +22,7 @@
 #include "Index.h"
 #include "Inventory.h"
 #include "Channel.h"
+#include "Chronicler.h"
 
 // devices
 #include "Device.h"
