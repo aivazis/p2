@@ -8,7 +8,6 @@
 #include <j2/journal.h>
 // support
 #include <cassert>
-#include <iostream>
 
 
 // severity stub
