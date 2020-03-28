@@ -12,14 +12,14 @@ class pyre::journal::Chronicler {
     // types
 public:
     using device_type = Device;
-    using device_pointer = std::shared_ptr<Device>;
+    using device_pointer = device_type::pointer_type;
 
     // interface
 public:
     // accessor
-    static inline auto device() -> device_t &;
+    static inline auto device() -> device_pointer;
     // mutator
-    static inline void device(device_pointer);
+    static inline auto device(device_pointer) -> device_pointer;
 
     // data members
 private:

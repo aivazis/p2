@@ -18,17 +18,17 @@
 // exceptions
 #include "exceptions.h"
 
-// infrastructure
-#include "Index.h"
-#include "Inventory.h"
-#include "Channel.h"
-#include "Chronicler.h"
-
 // devices
 #include "Device.h"
 #include "Trash.h"
 #include "Stream.h"
 #include "Console.h"
+
+// diagnostic infrastructure
+#include "Index.h"
+#include "Inventory.h"
+#include "Channel.h"
+#include "Chronicler.h"
 
 // diagnostics
 // the null one

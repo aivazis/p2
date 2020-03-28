@@ -10,14 +10,14 @@
 #include "forward.h"
 // external support
 #include "externals.h"
-// get the declaration
-#include "Chronicler.h"
 
 // support for accessing the console
 #include "Device.h"
 #include "Stream.h"
 #include "Console.h"
 
+// get the declaration
+#include "Chronicler.h"
 
 // aliases
 using console_t = pyre::journal::console_t;

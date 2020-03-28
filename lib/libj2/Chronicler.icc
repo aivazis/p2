@@ -12,21 +12,21 @@
 // accessors
 auto
 pyre::journal::Chronicler::
-device() -> device_t &
+device() -> device_pointer
 {
     // easy enough
-    return *_device;
+    return _device;
 }
 
 
-void
+auto
 pyre::journal::Chronicler::
-device(device_pointer device)
+device(device_pointer device) -> device_pointer
 {
-    // easy enough
-    _device = device;
-    // all done
-    return;
+    // swap mine with the incoming device
+    std::swap(device, _device);
+    // and return it
+    return device;
 }
 
 

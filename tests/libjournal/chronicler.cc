@@ -17,9 +17,11 @@ using chronicler_t = pyre::journal::chronicler_t;
 // verify that the chronicler is accessible
 int main() {
     // get the default device
-    auto & device = chronicler_t::device();
-    // verify that its the console
-    assert (device.name() == "console");
+    auto device_ptr = chronicler_t::device();
+    // by default, it is the console; verify that it is not an empty pointer
+    assert(device_ptr);
+    // and that it's the console
+    assert ((*device_ptr).name() == "console");
 
     // all done
     return 0;

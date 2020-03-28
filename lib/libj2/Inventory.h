@@ -16,11 +16,12 @@ class pyre::journal::Inventory
 public:
     using state_type = bool;
     using device_type = Device;
+    using device_pointer = device_type::pointer_type;
 
     // metamethods
 public:
     // constructors
-    inline explicit Inventory(state_type = stateV, device_type * = nullptr);
+    inline explicit Inventory(state_type = stateV, device_pointer = nullptr);
 
     // syntactic sugar
     inline operator bool() const;
@@ -29,18 +30,18 @@ public:
 public:
     // accessors
     inline auto state() const -> state_type;
-    inline auto device() const -> device_type *;
+    inline auto device() const -> device_pointer;
     inline static constexpr auto defaultState() -> state_type;
 
     // mutators
     inline void activate();
     inline void deactivate();
-    inline auto device(device_type *) -> device_type *;
+    inline auto device(device_pointer) -> device_pointer;
 
     // data
 private:
     state_type _state;
-    device_type * _device;
+    device_pointer _device;
 
     // disallow
 private:

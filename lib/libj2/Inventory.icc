@@ -12,7 +12,7 @@
 // metamethods
 template <bool stateV>
 pyre::journal::Inventory<stateV>::
-Inventory(state_type state, device_type * device) :
+Inventory(state_type state, device_pointer device) :
     _state(state),
     _device(device)
 {}
@@ -43,7 +43,7 @@ state() const -> state_type
 template <bool stateV>
 auto
 pyre::journal::Inventory<stateV>::
-device() const -> device_type *
+device() const -> device_pointer
 {
     // easy enough
     return _device;
@@ -88,14 +88,12 @@ deactivate()
 template <bool stateV>
 auto
 pyre::journal::Inventory<stateV>::
-device(device_type * device) -> device_type *
+device(device_pointer device) -> device_pointer
 {
-    // save the old one
-    device_type * old = _device;
-    // attach the new one
-    _device = device;
+    // swap
+    std::swap(device, _device);
     // return the old one
-    return old;
+    return device;
 }
 
 

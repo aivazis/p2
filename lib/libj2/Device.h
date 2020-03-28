@@ -11,6 +11,7 @@
 class pyre::journal::Device {
     // types
 public:
+    using pointer_type = std::shared_ptr<Device>;
     using string_type = std::string;
     using name_type = string_type;
     using entry_type = std::vector<string_type>;

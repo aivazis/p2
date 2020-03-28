@@ -20,7 +20,7 @@ int main() {
     // make a default inventory
     active_t on;
     // by default, its device is null
-    assert(on.device() == nullptr);
+    assert(on.device().get() == nullptr);
     // verify the default state is on
     assert(on.defaultState() == true);
     // verify it is on
@@ -33,7 +33,7 @@ int main() {
     // make one that is off by default
     inactive_t off;
     // by default, its device is null
-    assert(off.device() == nullptr);
+    assert(off.device().get() == nullptr);
     // verify the default state is off
     assert(off.defaultState() == false);
     // verify it is off
