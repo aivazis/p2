@@ -14,10 +14,16 @@ namespace pyre::journal {
     class firewall_error;
 
     // infrastructure
-    class Device;
     template <typename> class Index;
     template <bool = true> class Inventory;
     template <typename severityT> class Channel;
+    class Chronicler;
+
+    // devices
+    class Device;
+    class Trash;
+    class Stream;
+    class Console;
 
     // the null diagnostic
     class Null;
@@ -46,6 +52,8 @@ namespace pyre::journal {
 
     template <typename severityT>
     using channel_t = Channel<severityT>;
+
+    using chronicler_t = Chronicler;
 }
 #endif
 
@@ -85,7 +93,11 @@ namespace pyre::journal {
 // user facing api
 namespace pyre::journal {
     // infrastructure
+    // devices
     using device_t = Device;
+    using trash_t = Trash;
+    using stream_t = Stream;
+    using console_t = Console;
 
     // channels
     // using error_t = Error;

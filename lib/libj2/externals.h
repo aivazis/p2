@@ -10,6 +10,7 @@
 
 // externals
 #include <stdexcept>
+#include <memory>
 #include <string>
 #include <vector>
 #include <map>

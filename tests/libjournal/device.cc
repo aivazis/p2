@@ -8,11 +8,16 @@
 #include <j2/journal.h>
 
 
+// alias
+using device_t = pyre::journal::device_t;
+
+
 // the {device} class is abstract, so let's concretize
-class Trivial : public pyre::journal::device_t {
+class Trivial : public device_t {
     // metmethods
 public:
     ~Trivial();
+    Trivial();
 
     // interface
 public:
@@ -20,8 +25,9 @@ public:
 };
 
 
-// implement the destructor
+// metamethods
 Trivial::~Trivial() {}
+Trivial::Trivial() : device_t("trivial") {}
 
 // and the {record} method
 auto Trivial::record(const entry_type &, const metadata_type &) -> Trivial &

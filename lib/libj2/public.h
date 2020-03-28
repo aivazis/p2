@@ -19,10 +19,15 @@
 #include "exceptions.h"
 
 // infrastructure
-#include "Device.h"
 #include "Index.h"
 #include "Inventory.h"
 #include "Channel.h"
+
+// devices
+#include "Device.h"
+#include "Trash.h"
+#include "Stream.h"
+#include "Console.h"
 
 // diagnostics
 // the null one
