@@ -18,6 +18,7 @@ int main() {
         << pyre::journal::at(__HERE__)
         << pyre::journal::set("time", "now")
         << "null channel:" << pyre::journal::newline
+        << "    Hello world!"
         << pyre::journal::endl;
 
     // all done

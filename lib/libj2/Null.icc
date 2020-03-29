@@ -43,21 +43,10 @@ deactivate() const
 }
 
 
-// the injection operator
-template <typename itemT>
-auto
-pyre::journal::
-operator<< (const null_t & null, const itemT & item) -> const null_t &
-{
-    // leave the channel alone
-    return null;
-}
-
-
 // manipulators
 auto
 pyre::journal::
-endl(const null_t & null) -> const null_t &
+endl(const Null & null) -> const Null &
 {
     // leave the channel alone
     return null;
@@ -66,7 +55,49 @@ endl(const null_t & null) -> const null_t &
 
 auto
 pyre::journal::
-newline(const null_t & null) -> const null_t &
+newline(const Null & null) -> const Null &
+{
+    // leave the channel alone
+    return null;
+}
+
+
+// the injection operators
+// location info
+auto
+pyre::journal::
+operator<< (const Null & null, const Locator &) -> const Null &
+{
+    // do nothing
+    return null;
+}
+
+
+// metadata
+auto
+pyre::journal::
+operator<< (const Null & null, const Selector &) -> const Null &
+{
+    // do nothing
+    return null;
+}
+
+
+// injection of manipulator functions
+auto
+pyre::journal::
+operator<< (const Null & null, const Null & (*)(const Null &)) -> const Null &
+{
+    // do nothing
+    return null;
+}
+
+
+// injection of everything else
+template <typename itemT>
+auto
+pyre::journal::
+operator<< (const Null & null, const itemT &) -> const Null &
 {
     // leave the channel alone
     return null;

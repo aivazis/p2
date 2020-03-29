@@ -14,11 +14,7 @@ int main() {
     pyre::journal::null_t channel("tests.journal.null");
 
     // try injecting some text into the channel
-    channel
-        << pyre::journal::at(__HERE__)
-        << "null channel:" << pyre::journal::newline
-        << "    Hello world!"
-        << pyre::journal::endl;
+    channel << "    Hello world!";
 
     // all done
     return 0;
