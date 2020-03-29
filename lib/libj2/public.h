@@ -24,20 +24,20 @@
 #include "Stream.h"
 #include "Console.h"
 
-// diagnostic infrastructure
+// manipulators that are classes
+#include "Locator.h"
+#include "Selector.h"
+
+// the null diagnostic
+#include "Null.h"
+
+// functional diagnostic infrastructure
+#include "Chronicler.h"
 #include "Index.h"
 #include "Inventory.h"
 #include "Channel.h"
-#include "Chronicler.h"
+#include "Diagnostic.h"
 
-// diagnostics
-// the null one
-#include "Null.h"
-// the functional ones
-
-// manipulators
-#include "Locator.h"
-#include "Selector.h"
 // macros
 #include "macros.h"
 

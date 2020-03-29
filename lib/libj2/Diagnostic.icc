@@ -1,0 +1,144 @@
+// -*- c++ -*-
+//
+// michael a.g. aïvázis <michael.aivazis@para-sim.com>
+// (c) 1998-2020 all rights reserved
+
+// code guard
+#if !defined(pyre_journal_Diagnostic_icc)
+#error this file contains implementation details for pyre::journal::Diagnostic
+#else
+
+
+// metamethods
+template <typename severityT>
+pyre::journal::Diagnostic<severityT>::
+Diagnostic()
+{}
+
+
+// interface
+// item injection
+template <typename severityT>
+template <typename itemT>
+auto
+pyre::journal::Diagnostic<severityT>::
+inject(const itemT & item) -> Diagnostic &
+{
+    // all done
+    return *this;
+}
+
+
+// end of transaction
+template <typename severityT>
+auto
+pyre::journal::Diagnostic<severityT>::
+record() -> Diagnostic<severityT> &
+{
+    // all done
+    return *this;
+}
+
+
+// new line
+template <typename severityT>
+auto
+pyre::journal::Diagnostic<severityT>::
+newline() -> Diagnostic<severityT> &
+{
+    // all done
+    return *this;
+}
+
+
+// metadata decoration
+template <typename severityT>
+auto
+pyre::journal::Diagnostic<severityT>::
+setattr(const key_type & key, const value_type & value) -> Diagnostic<severityT> &
+{
+    // all done
+    return *this;
+}
+
+
+// manipulators
+// end of transaction
+template <typename severityT>
+auto
+pyre::journal::
+endl(Diagnostic<severityT> & channel) -> Diagnostic<severityT> &
+{
+    // ask the channel to record the accumulated message
+    return channel.record();
+}
+
+
+template <typename severityT>
+auto
+pyre::journal::
+newline(Diagnostic<severityT> & channel) -> Diagnostic<severityT> &
+{
+    // ask the channel to mark the end of a line of output
+    return channel.newline();
+}
+
+
+// the injection operators
+// location info
+template <typename severityT>
+auto
+pyre::journal::
+operator<< (Diagnostic<severityT> & channel, const Locator & locator) -> Diagnostic<severityT> &
+{
+    // use the locator information to set channel metadata
+    channel.setattr("filename", locator.file());
+    channel.setattr("line", locator.line());
+    channel.setattr("function", locator.func());
+
+    // all done
+    return channel;
+}
+
+
+// metadata
+template <typename severityT>
+auto
+pyre::journal::
+operator<< (Diagnostic<severityT> & channel, const Selector & selector) -> Diagnostic<severityT> &
+{
+    // transfer the selector metadata
+    channel.setattr(selector.key(), selector.value());
+
+    // all done
+    return channel;
+}
+
+
+// injection of manipulator functions
+template <typename severityT>
+inline auto
+pyre::journal::
+operator<< (Diagnostic<severityT> & channel,
+            Diagnostic<severityT> & (*manipulator)(Diagnostic<severityT> &))
+    -> Diagnostic<severityT> &
+{
+    // invoke the manipulator function with the {channel} as an argument
+    return manipulator(channel);
+}
+
+
+// injection of everything else
+template <typename severityT, typename itemT>
+auto
+pyre::journal::
+operator<< (Diagnostic<severityT> & channel, const itemT & item) -> Diagnostic<severityT> &
+{
+    // inject the item in the channel and return the channel
+    return channel.inject(item);
+}
+
+
+#endif
+
+// end of file

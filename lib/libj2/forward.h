@@ -13,32 +13,77 @@ namespace pyre::journal {
     // the exceptions
     class firewall_error;
 
-    // infrastructure
-    template <typename> class Index;
-    template <bool = true> class Inventory;
-    template <typename severityT> class Channel;
-    class Chronicler;
-
     // devices
     class Device;
     class Trash;
     class Stream;
     class Console;
 
-    // the null diagnostic
-    class Null;
-    // its injection operator
-    template <typename itemT>
-    inline auto operator<< (const Null &, const itemT &) -> const Null &;
-    // its manipulators
-    inline auto endl(const Null &) -> const Null &;
-    inline auto newline(const Null &) -> const Null &;
-
-    // locator
+    // the channel stream manipulators; some are actual class, others are functions that take
+    // and return a channel
+    // location information
     class Locator;
-    // manipulators
+    // metadata manipulation
     class Selector;
+
+    // the null diagnostic; used when channels are turned off at compile time
+    class Null;
+    // end of transaction
+    inline auto endl(const Null &) -> const Null &;
+    // mark the end of a line of output
+    inline auto newline(const Null &) -> const Null &;
+    // injection operators
+    // location info
+    inline auto
+    operator<< (const Null &, const Locator &) -> const Null &;
+    // metadata
+    inline auto
+    operator<< (const Null &, const Selector &) -> const Null &;
+    // injection of a manipulator function
+    inline auto
+    operator<< (const Null &, const Null & (*)(const Null &)) -> const Null &;
+    // injection of everything else
+    template <typename itemT>
+    inline auto
+    operator<< (const Null &, const itemT &) -> const Null &;
+
+    // the singleton with the global journal settings
+    class Chronicler;
+    // the common channel state
+    template <bool = true> class Inventory;
+    // storage/retrieval for common channel state
+    template <typename> class Index;
+    // live channels are implemented using two different base classes:
+    // the controller of the channel state
+    template <typename severityT> class Channel;
+    // the recorder of the channel message
+    template <typename severityT> class Diagnostic;
+    // end of transaction
+    template <typename severityT>
+    inline auto endl(Diagnostic<severityT> &) -> Diagnostic<severityT> &;
+    // end of a line of output
+    template <typename severityT>
+    inline auto newline(Diagnostic<severityT> &) -> Diagnostic<severityT> &;
+    // injection operators
+    // location info
+    template <typename severityT>
+    inline auto
+    operator<< (Diagnostic<severityT> &, const Locator &) -> Diagnostic<severityT> &;
+    // metadata
+    template <typename severityT>
+    inline auto
+    operator<< (Diagnostic<severityT> &, const Selector &) -> Diagnostic<severityT> &;
+    // injection of manipulator functions
+    template <typename severityT>
+    inline auto
+    operator<< (Diagnostic<severityT> &,
+                Diagnostic<severityT> & (*)(Diagnostic<severityT> &))
+        -> Diagnostic<severityT> &;
+    // injection of everything else
+    template <typename severityT, typename itemT>
+    inline auto operator<< (Diagnostic<severityT> &, const itemT &) -> Diagnostic<severityT> &;
 }
+
 
 // low level api
 #if defined(PYRE_CORE)
@@ -52,6 +97,9 @@ namespace pyre::journal {
 
     template <typename severityT>
     using channel_t = Channel<severityT>;
+
+    template <typename severityT>
+    using diagnostic_t = Diagnostic<severityT>;
 
     using chronicler_t = Chronicler;
 }
