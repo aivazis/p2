@@ -26,13 +26,17 @@ public:
 
     // interface
 public:
-    inline auto lookup(const name_type &) -> inventory_type &;
-
+    // simple access to the underlying index
     inline auto size() const;
     inline auto empty() const;
+    inline auto contains(const name_type &) const -> bool;
 
+    // iteration
     inline auto begin() const;
     inline auto end() const;
+
+    // look up
+    inline auto lookup(const name_type &) -> inventory_type &;
 
     // data members
 private:

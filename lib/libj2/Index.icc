@@ -21,6 +21,59 @@ Index() :
 template <typename inventoryT>
 auto
 pyre::journal::Index<inventoryT>::
+size() const
+{
+    return _index.size();
+}
+
+
+template <typename inventoryT>
+auto
+pyre::journal::Index<inventoryT>::
+empty() const
+{
+    return _index.empty();
+}
+
+
+template <typename inventoryT>
+auto
+pyre::journal::Index<inventoryT>::
+contains(const name_type & channel) const -> bool
+{
+    // attempt to locate the {channel}
+    auto place = _index.find(channel);
+    // if i can't find it
+    if (place == _index.end()) {
+        // i don't have it
+        return false;
+    }
+    // otherwise, i do
+    return true;
+}
+
+
+template <typename inventoryT>
+auto
+pyre::journal::Index<inventoryT>::
+begin() const
+{
+    return _index.begin();
+}
+
+
+template <typename inventoryT>
+auto
+pyre::journal::Index<inventoryT>::
+end() const
+{
+    return _index.end();
+}
+
+
+template <typename inventoryT>
+auto
+pyre::journal::Index<inventoryT>::
 lookup(const name_type & channel) -> inventory_type &
 {
     // attempt to locate the {channel} state
@@ -83,42 +136,6 @@ lookup(const name_type & channel) -> inventory_type &
     auto & inventory = status.first->second;
     // and return it
     return inventory;
-}
-
-
-template <typename inventoryT>
-auto
-pyre::journal::Index<inventoryT>::
-size() const
-{
-    return _index.size();
-}
-
-
-template <typename inventoryT>
-auto
-pyre::journal::Index<inventoryT>::
-empty() const
-{
-    return _index.empty();
-}
-
-
-template <typename inventoryT>
-auto
-pyre::journal::Index<inventoryT>::
-begin() const
-{
-    return _index.begin();
-}
-
-
-template <typename inventoryT>
-auto
-pyre::journal::Index<inventoryT>::
-end() const
-{
-    return _index.end();
 }
 
 
