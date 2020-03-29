@@ -24,9 +24,8 @@ public:
 
     // interface
 public:
-    template <typename channelT>
-    inline auto
-    inject(channelT &) const -> channelT &;
+    inline auto key() const -> const key_type &;
+    inline auto value() const -> const value_type &;
 
     // data
 private:

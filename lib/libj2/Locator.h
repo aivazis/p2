@@ -22,9 +22,10 @@ public:
 
     // interface
 public:
-    template <typename channelT>
-    inline auto
-    inject(channelT &) const -> channelT &;
+    // accessors
+    auto file() const -> const string_type &;
+    auto line() const -> const string_type &;
+    auto func() const -> const string_type &;
 
     // data
 private:

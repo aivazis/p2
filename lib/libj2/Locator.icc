@@ -19,17 +19,31 @@ Locator(const char * file, int line, const char * function):
 
 
 // interface
-template <typename channelT>
+// accessors
 auto
 pyre::journal::Locator::
-inject(channelT & channel) const -> channelT &
+file() const -> const string_type &
 {
-    // decorate the channel with my metadata
-    channel.setattr("filename", _file);
-    channel.setattr("line", _line);
-    channel.setattr("function", _func);
-    // all done
-    return channel;
+    // easy enough
+    return _file;
+}
+
+
+auto
+pyre::journal::Locator::
+line() const -> const string_type &
+{
+    // easy enough
+    return _line;
+}
+
+
+auto
+pyre::journal::Locator::
+func() const -> const string_type &
+{
+    // easy enough
+    return _func;
 }
 
 

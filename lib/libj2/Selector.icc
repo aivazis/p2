@@ -18,15 +18,22 @@ Selector(key_type key, value_type value):
 
 
 // interface
-template <typename channelT>
+// accessors
 auto
 pyre::journal::Selector::
-inject(channelT & channel) const -> channelT &
+key() const -> const key_type &
 {
-    // decorate the channel with my metadata
-    channel.setattr(_key, _value);
-    // all done
-    return channel;
+    // easy enough
+    return _key;
+}
+
+
+auto
+pyre::journal::Selector::
+value() const -> const value_type &
+{
+    // easy enough
+    return _value;
 }
 
 
