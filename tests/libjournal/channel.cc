@@ -47,7 +47,7 @@ using channel_t = pyre::journal::channel_t<severity>;
 
 // exercise the channel state index
 int main() {
-    // make an index
+    // make a channel
     channel_t channel("test.channel");
 
     // verify its name
