@@ -25,6 +25,7 @@ using chronicler_t = pyre::journal::chronicler_t;
 
 
 // data
+chronicler_t::metadata_type chronicler_t::_globals;
 chronicler_t::device_pointer chronicler_t::_device = std::make_shared<console_t>();
 
 

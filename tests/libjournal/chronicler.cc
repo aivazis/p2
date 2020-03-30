@@ -16,6 +16,11 @@ using chronicler_t = pyre::journal::chronicler_t;
 
 // verify that the chronicler is accessible
 int main() {
+    // get the global metadata map
+    chronicler_t::metadata_type & globals = chronicler_t::globals();
+    // verify its empty
+    assert (globals.empty());
+
     // get the default device
     auto device_ptr = chronicler_t::device();
     // by default, it is the console; verify that it is not an empty pointer

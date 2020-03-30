@@ -12,9 +12,18 @@
 // accessors
 auto
 pyre::journal::Chronicler::
+globals() -> metadata_type &
+{
+    // grant access to my global metadata
+    return _globals;
+}
+
+
+auto
+pyre::journal::Chronicler::
 device() -> device_pointer
 {
-    // easy enough
+    // share my device
     return _device;
 }
 
