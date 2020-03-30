@@ -15,6 +15,9 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <ostream>
+#include <sstream>
+#include <iomanip>
 
 
 #endif

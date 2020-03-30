@@ -12,20 +12,42 @@
 // metamethods
 template <typename severityT>
 pyre::journal::Diagnostic<severityT>::
-Diagnostic()
+Diagnostic() :
+    _entry(),
+    _buffer(),
+    _metadata()
 {}
 
 
 // interface
-// item injection
+// accessors
 template <typename severityT>
-template <typename itemT>
 auto
 pyre::journal::Diagnostic<severityT>::
-inject(const itemT & item) -> Diagnostic &
+buffer() -> string_type
 {
-    // all done
-    return *this;
+    // easy enough
+    return _buffer.str();
+}
+
+
+template <typename severityT>
+auto
+pyre::journal::Diagnostic<severityT>::
+entry() const -> const entry_type &
+{
+    // easy enough
+    return _entry;
+}
+
+
+// conversion to an {ostream} so that standard manipulators work as expected
+template <typename severityT>
+pyre::journal::Diagnostic<severityT>::
+operator ostream_type & ()
+{
+    // grant access to my buffer
+    return _buffer;
 }
 
 
@@ -35,8 +57,20 @@ auto
 pyre::journal::Diagnostic<severityT>::
 record() -> Diagnostic<severityT> &
 {
+    // flush the {buffer}
+    newline();
+
+    // me as a {severity_type}; this works trivially because of crtp
+    severity_type & self = static_cast<severity_type &>(*this);
+    // write the journal entry to the device
+    self.commit();
+
+    // clean up
+    _entry.clear();
+    _metadata.clear();
+
     // all done
-    return *this;
+    return self;
 }
 
 
@@ -46,6 +80,12 @@ auto
 pyre::journal::Diagnostic<severityT>::
 newline() -> Diagnostic<severityT> &
 {
+    // add the contents of the buffer to the message page
+    _entry.push_back(_buffer.str());
+    // clear out the buffer contents
+    _buffer.str(string_type());
+    // reset any error flags
+    _buffer.clear();
     // all done
     return *this;
 }
@@ -57,6 +97,22 @@ auto
 pyre::journal::Diagnostic<severityT>::
 setattr(const key_type & key, const value_type & value) -> Diagnostic<severityT> &
 {
+    // record the metadata
+    _metadata[key] = value;
+    // all done
+    return *this;
+}
+
+
+// item injection
+template <typename severityT>
+template <typename itemT>
+auto
+pyre::journal::Diagnostic<severityT>::
+inject(const itemT & item) -> Diagnostic &
+{
+    // inject into my buffer
+    _buffer << item;
     // all done
     return *this;
 }

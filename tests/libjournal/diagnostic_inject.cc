@@ -12,6 +12,9 @@
 
 // severity stub
 class diagnostic_t : public pyre::journal::diagnostic_t<diagnostic_t> {
+    // interface
+public:
+    inline void commit() {}
 };
 
 

@@ -9,6 +9,7 @@
 // support
 #include <cassert>
 
+#include <iostream>
 
 // severity stub
 class diagnostic_t : public pyre::journal::diagnostic_t<diagnostic_t> {
@@ -25,10 +26,15 @@ int main() {
 
     // inject something
     diagnostic
-        << pyre::journal::at(__HERE__)
-        << pyre::journal::set("time", "now")
-        << "hello world!" << pyre::journal::newline
-        << pyre::journal::endl;
+        << std::setw(15)
+        << "hello world!"
+        << pyre::journal::newline;
+
+    // check the entry
+    for (auto value : diagnostic.entry()) {
+        // verify that there is only one value and it is what we expect
+        assert (value == "   hello world!");
+    }
 
     // all done
     return 0;
