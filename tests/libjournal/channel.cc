@@ -11,41 +11,12 @@
 
 
 // severity stub
-class severity {
-    // types
-public:
-    using string_type = std::string;
-    using name_type = string_type;
-    using inventory_type = pyre::journal::inventory_t<true>;
-    using index_type = pyre::journal::index_t<inventory_type>;
-
-    // interface
-public:
-    inline static auto lookup(const name_type &) -> inventory_type &;
-
-    // data
-private:
-    // the index
-    static index_type _index;
-};
-
-// implementation
-auto
-severity::lookup(const name_type & name) -> inventory_type &
-{
-    // easy enough
-    return _index.lookup(name);
-}
-
-// the static index
-severity::index_type severity::_index;
-
-
+class severity {};
 // channel realization
-using channel_t = pyre::journal::channel_t<severity>;
+using channel_t = pyre::journal::channel_t<severity, pyre::journal::inventory_t<true>>;
 
 
-// exercise the channel state index
+// exercise the channel state interface
 int main() {
     // make a channel
     channel_t channel("test.channel");

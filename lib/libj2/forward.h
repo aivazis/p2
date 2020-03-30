@@ -55,7 +55,7 @@ namespace pyre::journal {
     template <typename> class Index;
     // live channels are implemented using two different base classes:
     // the controller of the channel state
-    template <typename severityT> class Channel;
+    template <typename severityT, typename inventoryT> class Channel;
     // the recorder of the channel message
     template <typename severityT> class Diagnostic;
     // end of transaction
@@ -95,8 +95,8 @@ namespace pyre::journal {
     template <bool stateV = true>
     using inventory_t = Inventory<stateV>;
 
-    template <typename severityT>
-    using channel_t = Channel<severityT>;
+    template <typename severityT, typename inventoryT>
+    using channel_t = Channel<severityT, inventoryT>;
 
     template <typename severityT>
     using diagnostic_t = Diagnostic<severityT>;

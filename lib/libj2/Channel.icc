@@ -11,17 +11,17 @@
 
 // metamethods
 // constructor
-template <typename severityT>
-pyre::journal::Channel<severityT>::
+template <typename severityT, typename inventoryT>
+pyre::journal::Channel<severityT, inventoryT>::
 Channel(const name_type & name) :
     _name(name),
-    _inventory(severity_type::lookup(name))
+    _inventory(lookup(name))
 {}
 
 
 // syntactic sugar
-template <typename severityT>
-pyre::journal::Channel<severityT>::
+template <typename severityT, typename inventoryT>
+pyre::journal::Channel<severityT, inventoryT>::
 operator bool() const
 {
     // my inventory can convert itself
@@ -31,9 +31,9 @@ operator bool() const
 
 // interface
 // accessors
-template <typename severityT>
+template <typename severityT, typename inventoryT>
 auto
-pyre::journal::Channel<severityT>::
+pyre::journal::Channel<severityT, inventoryT>::
 name() const -> const name_type &
 {
     // easy enough
@@ -41,9 +41,9 @@ name() const -> const name_type &
 }
 
 
-template <typename severityT>
+template <typename severityT, typename inventoryT>
 auto
-pyre::journal::Channel<severityT>::
+pyre::journal::Channel<severityT, inventoryT>::
 state() const -> state_type
 {
     // easy enough
@@ -51,20 +51,10 @@ state() const -> state_type
 }
 
 
-template <typename severityT>
-constexpr auto
-pyre::journal::Channel<severityT>::
-defaultState() -> state_type
-{
-    // easy enough
-    return inventory_type::defaultState();
-}
-
-
 // mutators
-template <typename severityT>
+template <typename severityT, typename inventoryT>
 void
-pyre::journal::Channel<severityT>::
+pyre::journal::Channel<severityT, inventoryT>::
 activate()
 {
     // easy enough
@@ -74,9 +64,9 @@ activate()
 }
 
 
-template <typename severityT>
+template <typename severityT, typename inventoryT>
 void
-pyre::journal::Channel<severityT>::
+pyre::journal::Channel<severityT, inventoryT>::
 deactivate()
 {
     // easy enough
@@ -84,6 +74,43 @@ deactivate()
     // all done
     return;
 }
+
+
+// static interface
+template <typename severityT, typename inventoryT>
+auto
+pyre::journal::Channel<severityT, inventoryT>::
+index() -> const index_type &
+{
+    // grant access to my index
+    return _index;
+}
+
+
+template <typename severityT, typename inventoryT>
+constexpr auto
+pyre::journal::Channel<severityT, inventoryT>::
+defaultState() -> state_type
+{
+    // easy enough
+    return inventory_type::defaultState();
+}
+
+
+template <typename severityT, typename inventoryT>
+auto
+pyre::journal::Channel<severityT, inventoryT>::
+lookup(const name_type & name) -> inventory_type &
+{
+    // easy enough
+    return _index.lookup(name);
+}
+
+
+// static data
+template <typename severityT, typename inventoryT>
+typename pyre::journal::Channel<severityT, inventoryT>::index_type
+pyre::journal::Channel<severityT, inventoryT>::_index;
 
 
 #endif

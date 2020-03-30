@@ -7,16 +7,17 @@
 #if !defined(pyre_journal_Channel_h)
 #define pyre_journal_Channel_h
 
+
 // access to the state shared by all channels of a given severity and name
-template <typename severityT>
+template <typename severityT, typename inventoryT>
 class pyre::journal::Channel {
     // types
 public:
     using severity_type = severityT;
-    using name_type = typename severity_type::name_type;
-    using inventory_type = typename severity_type::inventory_type;
+    using inventory_type = inventoryT;
     using state_type = typename inventory_type::state_type;
-    using index_type = index_t<inventory_type>;
+    using index_type = Index<inventory_type>;
+    using name_type = typename index_type::name_type;
 
     // metamethods
 public:
@@ -30,16 +31,28 @@ public:
     // accessors
     inline auto name() const -> const name_type &;
     inline auto state() const -> state_type;
-    inline static constexpr auto defaultState() -> state_type;
 
     // mutators
     inline void activate();
     inline void deactivate();
 
+    // static interface
+public:
+    // accessors
+    inline static auto index() -> const index_type &;
+    inline static constexpr auto defaultState() -> state_type;
+
+    // inventory access
+    inline static auto lookup(const name_type &) -> inventory_type &;
+
     // data members
 private:
-    name_type _name;
-    inventory_type & _inventory;
+    name_type _name;              // my name
+    inventory_type & _inventory;  // my shared state
+
+    // static data
+private:
+    static index_type _index;     // the index that holds all channels of this severity
 
     // disallow
 private:
