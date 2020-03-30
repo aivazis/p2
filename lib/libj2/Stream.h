@@ -7,7 +7,8 @@
 #if !defined(pyre_journal_Stream_h)
 #define pyre_journal_Stream_h
 
-//
+
+// a device that writes to output streams
 class pyre::journal::Stream : public pyre::journal::device_t {
     // types
 public:

@@ -7,6 +7,7 @@
 #if !defined(pyre_journal_Diagnostic_h)
 #define pyre_journal_Diagnostic_h
 
+
 // support for injecting and recording information in channels
 template <typename severityT>
 class pyre::journal::Diagnostic {

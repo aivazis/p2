@@ -7,7 +7,8 @@
 #if !defined(pyre_journal_Device_h)
 #define pyre_journal_Device_h
 
-//
+
+// the base class of all journal devices
 class pyre::journal::Device {
     // types
 public:

@@ -7,6 +7,7 @@
 #if !defined(pyre_journal_Trash_h)
 #define pyre_journal_Trash_h
 
+
 // a device that ignores all requests for output
 class pyre::journal::Trash : public pyre::journal::device_t {
     // metamethods

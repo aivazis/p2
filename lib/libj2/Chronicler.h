@@ -7,7 +7,8 @@
 #if !defined(pyre_journal_Chronicler_h)
 #define pyre_journal_Chronicler_h
 
-//
+
+// singleton that own the journal default configuration
 class pyre::journal::Chronicler {
     // types
 public:

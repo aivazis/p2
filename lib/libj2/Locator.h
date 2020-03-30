@@ -8,7 +8,7 @@
 #define pyre_journal_Locator_h
 
 
-// the locator diagnostic conforms to the API but has no effect
+// information about the location of the channel invocation
 class pyre::journal::Locator
 {
     // types
