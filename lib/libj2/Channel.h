@@ -9,6 +9,9 @@
 
 
 // access to the state shared by all channels of a given severity and name
+// do not be tempted to remove the {severityT} template parameter: its presence is essential in
+// order to guarantee that each channel category gets its own static data, such as the channel
+// {_index}
 template <typename severityT, typename inventoryT>
 class pyre::journal::Channel {
     // types
