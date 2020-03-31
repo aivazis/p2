@@ -8,7 +8,7 @@
 #if !defined(pyre_journal_ErrorConsole_h)
 #define pyre_journal_ErrorConsole_h
 
-// a device that prints to {cout}
+// a device that prints to {cerr}
 class pyre::journal::ErrorConsole : public pyre::journal::stream_t {
     // metamethods
 public:
@@ -17,6 +17,14 @@ public:
     // destructor
     virtual ~ErrorConsole();
 
+    // interface
+public:
+    inline bool tty() const;
+
+    // data
+private:
+    bool _tty;
+
     // disallow
 private:
     ErrorConsole(const ErrorConsole &) = delete;
@@ -24,6 +32,12 @@ private:
     const ErrorConsole & operator= (const ErrorConsole &) = delete;
     const ErrorConsole & operator= (const ErrorConsole &&) = delete;
 };
+
+
+// get the inline definitions
+#define pyre_journal_ErrorConsole_icc
+#include "ErrorConsole.icc"
+#undef pyre_journal_Diagnostic_icc
 
 
 #endif

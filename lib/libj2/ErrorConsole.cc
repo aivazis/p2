@@ -10,20 +10,24 @@
 #include "forward.h"
 // external support
 #include "externals.h"
-// access {std::cerr}
-#include <iostream>
 
 // get the device declarations
 #include "Device.h"
 #include "Stream.h"
 #include "ErrorConsole.h"
 
+// access {std::cerr}
+#include <iostream>
+// get {isatty}
+#include <unistd.h>
+
 
 // metamethods
 // constructor
 pyre::journal::ErrorConsole::
 ErrorConsole() :
-    stream_t("cerr", std::cerr)
+    stream_t("cerr", std::cerr),
+    _tty(isatty(2) == 1)
 {}
 
 
