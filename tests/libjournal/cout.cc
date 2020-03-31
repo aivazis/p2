@@ -11,7 +11,7 @@
 
 
 // alias the type
-using console_t = pyre::journal::console_t;
+using console_t = pyre::journal::cout_t;
 
 
 // exercise the trivial device
@@ -19,7 +19,7 @@ int main() {
     // instantiate
     console_t console;
     // check its name
-    assert (console.name() == "console");
+    assert (console.name() == "cout");
 
     // all done
     return 0;

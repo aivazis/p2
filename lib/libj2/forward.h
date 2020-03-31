@@ -152,7 +152,7 @@ namespace pyre::journal {
     using device_t = Device;
     using trash_t = Trash;
     using stream_t = Stream;
-    using console_t = Console;
+    using cout_t = Console;
     using cerr_t = ErrorConsole;
 
     // channels

@@ -20,7 +20,7 @@
 #include "Chronicler.h"
 
 // aliases
-using console_t = pyre::journal::console_t;
+using console_t = pyre::journal::cout_t;
 using chronicler_t = pyre::journal::chronicler_t;
 
 

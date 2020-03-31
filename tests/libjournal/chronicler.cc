@@ -26,7 +26,7 @@ int main() {
     // by default, it is the console; verify that it is not an empty pointer
     assert(device_ptr);
     // and that it's the console
-    assert ((*device_ptr).name() == "console");
+    assert ((*device_ptr).name() == "cout");
 
     // all done
     return 0;

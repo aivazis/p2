@@ -23,7 +23,7 @@
 // constructor
 pyre::journal::Console::
 Console() :
-    stream_t("console", std::cout)
+    stream_t("cout", std::cout)
 {}
 
 
