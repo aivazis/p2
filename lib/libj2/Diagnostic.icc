@@ -128,6 +128,35 @@ inject(const itemT & item) -> Diagnostic &
 }
 
 
+// static interface
+template <typename severityT>
+auto
+pyre::journal::Diagnostic<severityT>::
+device() -> device_pointer
+{
+    // easy enough
+    return _device;
+}
+
+
+template <typename severityT>
+auto
+pyre::journal::Diagnostic<severityT>::
+device(device_pointer device) -> device_pointer
+{
+    // swap mine with the incoming device pointer
+    std::swap(_device, device);
+    // and return mine
+    return device;
+}
+
+
+// static data
+template <typename severityT>
+typename pyre::journal::Diagnostic<severityT>::device_pointer
+pyre::journal::Diagnostic<severityT>::_device;
+
+
 // manipulators
 // end of transaction
 template <typename severityT>

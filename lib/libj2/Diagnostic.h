@@ -25,6 +25,9 @@ public:
     using entry_type = std::vector<string_type>;
     using metadata_type = std::map<string_type, string_type>;
 
+    using device_type = Device;
+    using device_pointer = device_type::pointer_type;
+
     // metamethods
 public:
     inline Diagnostic();
@@ -49,11 +52,21 @@ public:
     template <typename itemT>
     inline auto inject(const itemT &) -> Diagnostic &;
 
+    // static interface
+public:
+    // device support
+    static inline auto device() -> device_pointer;
+    static inline auto device(device_pointer) -> device_pointer;
+
     // data members
 private:
     entry_type _entry;
     buffer_type _buffer;
     metadata_type _metadata;
+
+    // static data
+private:
+    static device_pointer _device;
 
     // disallow
 private:
