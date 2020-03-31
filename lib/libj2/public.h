@@ -23,6 +23,7 @@
 #include "Trash.h"
 #include "Stream.h"
 #include "Console.h"
+#include "ErrorConsole.h"
 
 // manipulators that are classes
 #include "Locator.h"

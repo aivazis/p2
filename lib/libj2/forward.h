@@ -18,6 +18,7 @@ namespace pyre::journal {
     class Trash;
     class Stream;
     class Console;
+    class ErrorConsole;
 
     // the channel stream manipulators; some are actual class, others are functions that take
     // and return a channel
@@ -152,6 +153,7 @@ namespace pyre::journal {
     using trash_t = Trash;
     using stream_t = Stream;
     using console_t = Console;
+    using cerr_t = ErrorConsole;
 
     // channels
     using error_t = Error;
