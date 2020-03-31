@@ -51,6 +51,16 @@ state() const -> state_type
 }
 
 
+template <typename severityT, typename inventoryT>
+auto
+pyre::journal::Channel<severityT, inventoryT>::
+inventory() const -> inventory_type &
+{
+    // easy enough
+    return _inventory;
+}
+
+
 // mutators
 template <typename severityT, typename inventoryT>
 void

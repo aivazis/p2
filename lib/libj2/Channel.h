@@ -34,6 +34,7 @@ public:
     // accessors
     inline auto name() const -> const name_type &;
     inline auto state() const -> state_type;
+    inline auto inventory() const -> inventory_type &;
 
     // mutators
     inline void activate();
