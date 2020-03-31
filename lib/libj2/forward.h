@@ -13,6 +13,10 @@ namespace pyre::journal {
     // the exceptions
     class firewall_error;
 
+    // terminal support
+    class ASCII;
+    class CSI;
+
     // devices
     class Device;
     class Trash;
@@ -148,6 +152,10 @@ namespace pyre::journal {
 // user facing api
 namespace pyre::journal {
     // infrastructure
+    // terminal support
+    using ascii_t = ASCII;
+    using csi_t = CSI;
+
     // devices
     using device_t = Device;
     using trash_t = Trash;

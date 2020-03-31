@@ -18,6 +18,10 @@
 // exceptions
 #include "exceptions.h"
 
+// terminal support
+#include "ASCII.h"
+#include "CSI.h"
+
 // devices
 #include "Device.h"
 #include "Trash.h"
