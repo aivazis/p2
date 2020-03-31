@@ -37,6 +37,8 @@
 #include "Inventory.h"
 #include "Channel.h"
 #include "Diagnostic.h"
+// the user facing channels
+#include "Debug.h"
 
 // macros
 #include "macros.h"

@@ -58,6 +58,12 @@ namespace pyre::journal {
     template <typename severityT, typename inventoryT> class Channel;
     // the recorder of the channel message
     template <typename severityT> class Diagnostic;
+    // the built-in channels
+    class Debug;
+    class Firewall;
+    class Informational;
+    class Warning;
+    class Error;
     // end of transaction
     template <typename severityT>
     inline auto endl(Diagnostic<severityT> &) -> Diagnostic<severityT> &;
@@ -114,26 +120,26 @@ namespace pyre::journal {
     // if we are building the library
 #if defined(PYRE_CORE)
     // enable the developer channels
-    // using debug_t = Debug;
-    // using firewall_t = Firewall;
+    using debug_t = Debug;
+    using firewall_t = Firewall;
 
     // if the user has explicitly requested no debugging
 #elif defined(NDEBUG)
     // disable the developer channels
-    using debug_t = Null;
-    using firewall_t = Null;
+    using debug_t = null_t;
+    using firewall_t =  null_t;
 
     // if the user has explicitly asked for debugging support
 #elif defined(DEBUG) || defined(JOURNAL_DEBUG)
     // enable the developer channels
-    // using debug_t = Debug;
-    // using firewall_t = Firewall;
+    using debug_t = Debug;
+    using firewall_t = Firewall;
 
     // otherwise, assume this is a production build
 #else
     // disable the developer channels
-    using debug_t = Null;
-    using firewall_t = Null;
+    using debug_t =  null_t;
+    using firewall_t =  null_t;
 #endif
 }
 
@@ -148,9 +154,9 @@ namespace pyre::journal {
     using console_t = Console;
 
     // channels
-    // using error_t = Error;
-    // using info_t = Informational;
-    // using warning_t = Warning;
+    using error_t = Error;
+    using info_t = Informational;
+    using warning_t = Warning;
 
     // manipulators
      using at = Locator;
