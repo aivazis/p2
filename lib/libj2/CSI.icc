@@ -12,7 +12,7 @@
 // static interface
 auto
 pyre::journal::CSI::
-csi3(int code, bool bright) -> string_type
+csi3(int code, bool bright) -> rep_type
 {
     // build the escape sequence and return it
     return esc
@@ -25,7 +25,7 @@ csi3(int code, bool bright) -> string_type
 
 auto
 pyre::journal::CSI::
-csi8(int red, int green, int blue, bool foreground) -> string_type
+csi8(int red, int green, int blue, bool foreground) -> rep_type
 {
     // build the escape sequence and return it
     return esc
@@ -39,7 +39,7 @@ csi8(int red, int green, int blue, bool foreground) -> string_type
 
 auto
 pyre::journal::CSI::
-csi8_gray(int gray, bool foreground) -> string_type
+csi8_gray(int gray, bool foreground) -> rep_type
 {
     // build the escape sequence and return it
     return esc
@@ -53,7 +53,7 @@ csi8_gray(int gray, bool foreground) -> string_type
 
 auto
 pyre::journal::CSI::
-csi24(int red, int green, int blue, bool foreground) -> string_type
+csi24(int red, int green, int blue, bool foreground) -> rep_type
 {
     // build the escape sequence and return it
     return esc
@@ -67,7 +67,7 @@ csi24(int red, int green, int blue, bool foreground) -> string_type
 
 auto
 pyre::journal::CSI::
-blink(bool state) -> string_type
+blink(bool state) -> rep_type
 {
     // build the escape sequence and return it
     return esc

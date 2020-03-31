@@ -16,7 +16,7 @@
 
 
 // initialize {esc}
-const pyre::journal::CSI::string_type
+const pyre::journal::CSI::rep_type
 pyre::journal::CSI::esc(1, ASCII::ESC);
 
 
