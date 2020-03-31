@@ -15,7 +15,8 @@
 using active_t = pyre::journal::inventory_t<true>;
 using inactive_t = pyre::journal::inventory_t<false>;
 
-// verify that the null diagnostic is always off
+// verify that the default inventory state reflects the compile time settings
+// verify that we can manipulate the inventory state at runtime
 int main() {
     // make a default inventory
     active_t on;
