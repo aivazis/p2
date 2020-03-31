@@ -23,5 +23,6 @@ p2.pkg.stem := p2
 
 # the p2 package test suite
 p2.pkg.tests.stem := pyre
+p2.pkg.tests.prerequisites := p2.pkg
 
 # end of file
