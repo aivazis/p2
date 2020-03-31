@@ -9,12 +9,14 @@
 
 
 // externals
+#include <cstdlib>
 #include <type_traits>
 #include <stdexcept>
 #include <utility>
 #include <memory>
 #include <string>
 #include <vector>
+#include <set>
 #include <map>
 #include <ostream>
 #include <sstream>

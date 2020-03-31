@@ -16,6 +16,7 @@ namespace pyre::journal {
     // terminal support
     class ASCII;
     class CSI;
+    class ANSI;
 
     // devices
     class Device;
@@ -155,6 +156,7 @@ namespace pyre::journal {
     // terminal support
     using ascii_t = ASCII;
     using csi_t = CSI;
+    using ansi_t = ANSI;
 
     // devices
     using device_t = Device;

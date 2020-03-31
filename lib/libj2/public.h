@@ -21,6 +21,7 @@
 // terminal support
 #include "ASCII.h"
 #include "CSI.h"
+#include "ANSI.h"
 
 // devices
 #include "Device.h"
