@@ -41,6 +41,16 @@ entry() const -> const entry_type &
 }
 
 
+template <typename severityT>
+auto
+pyre::journal::Diagnostic<severityT>::
+metadata() const -> const metadata_type &
+{
+    // easy enough
+    return _metadata;
+}
+
+
 // conversion to an {ostream} so that standard manipulators work as expected
 template <typename severityT>
 pyre::journal::Diagnostic<severityT>::
