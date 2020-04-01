@@ -4,14 +4,31 @@
 # (c) 1998-2019 all rights reserved
 
 
-# the libj2 test suites
+# the libj2 test suite
 j2.lib.tests.stem := libjournal
 j2.lib.tests.prerequisites := j2.lib
 j2.lib.tests.extern := j2.lib
 
-# global testsuite settings
+# global testsuite settings; these apply to all test cases
+# the harness is the portion of the command line before the test driver itselrf
 j2.lib.tests.harness :=
+# arguments to pass to each test case
+j2.lib.tests.argv :=
+# compiler arguments
 j2.lib.tests.flags += -Wall $($(compiler.c++).std.c++17)
 j2.lib.tests.defines := PYRE_CORE
+
+# test case configuration
+# the {ansi_emulates} driver has some special cases
+tests.libjournal.ansi_emulates.cases := ansi_emulates.yes ansi_emulates.no
+# run with a value for TERM that indicates a terminal that does not support ANSI emulation
+ansi_emulates.no.harness := TERM=foo
+# tell the driver that it should expect an incompatible terminal
+ansi_emulates.no.argv := 0
+# run with a value for TERM that indicates a terminal that supports ANSI emulation
+ansi_emulates.yes.harness := TERM=xterm
+# tell the driver that it should expect a compatible terminal
+ansi_emulates.yes.argv := 1
+
 
 # end of file
