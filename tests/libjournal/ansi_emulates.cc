@@ -14,7 +14,6 @@
 using ansi_t = pyre::journal::ansi_t;
 
 
-#include <iostream>
 // exercise the trivial device
 int main(int argc, char *argv[]) {
 

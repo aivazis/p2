@@ -4,7 +4,6 @@
 // (c) 1998-2020 all rights reserved
 
 
-#include <iostream>
 // get the journal
 #include <j2/journal.h>
 // support
