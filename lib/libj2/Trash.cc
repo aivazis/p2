@@ -11,6 +11,9 @@
 // external support
 #include "externals.h"
 
+// support for color
+#include "ASCII.h"
+#include "CSI.h"
 // get the device declaration
 #include "Device.h"
 // get the stream declaration

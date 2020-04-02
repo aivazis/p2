@@ -11,6 +11,9 @@
 // external support
 #include "externals.h"
 
+// support for color
+#include "ASCII.h"
+#include "CSI.h"
 // support for accessing the console
 #include "Device.h"
 #include "Stream.h"

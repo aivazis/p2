@@ -26,10 +26,6 @@ public:
     inline static auto csi24(int red, int green, int blue, bool foreground=true) -> rep_type;
     // turn blink on and off; there isn't wide support for this, so avoid it
     inline static auto blink(bool state=true) -> rep_type;
-
-    // static data members
-private:
-    static const rep_type esc;
 };
 
 

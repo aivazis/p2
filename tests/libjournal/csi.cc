@@ -18,7 +18,7 @@ using csi_t = pyre::journal::csi_t;
 // exercise the trivial device
 int main() {
     // setup {ESC} so we don't have interpretable command sequences in the code
-    csi_t::string_type ESC(1, ascii_t::ESC);
+    csi_t::rep_type ESC { ascii_t::ESC };
 
     // verify the escape sequence generation routines build the correct strings
     assert ((csi_t::csi3(35) == ESC + "[0;35m"));
