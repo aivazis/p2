@@ -12,13 +12,20 @@
 class pyre::journal::Device {
     // types
 public:
+    // pointers to me
     using pointer_type = std::shared_ptr<Device>;
+    // alias of the basic string type
     using string_type = std::string;
+    // for naming device instances
     using name_type = string_type;
+    // a diagnostic entry is a vector of lines
     using entry_type = std::vector<string_type>;
+    // diagnostic metadata in a map
     using key_type = string_type;
     using value_type = string_type;
     using metadata_type = std::map<key_type, value_type>;
+    // decorators in a map from metadata keys to the colorizer's representation
+    using palette_type = std::map<key_type, CSI::rep_type>;
 
     // metamethods
 public:

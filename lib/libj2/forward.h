@@ -25,6 +25,11 @@ namespace pyre::journal {
     class Console;
     class ErrorConsole;
 
+    // renderers
+    class Renderer;
+    class Memo;
+    class Alert;
+
     // the channel stream manipulators; some are actual class, others are functions that take
     // and return a channel
     // location information
@@ -114,6 +119,9 @@ namespace pyre::journal {
     using diagnostic_t = Diagnostic<severityT>;
 
     using chronicler_t = Chronicler;
+
+    using memo_t = Memo;
+    using alert_t = Alert;
 }
 #endif
 

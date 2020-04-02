@@ -30,6 +30,10 @@
 #include "Console.h"
 #include "ErrorConsole.h"
 
+// renderers
+#include "Renderer.h"
+#include "Memo.h"
+
 // manipulators that are classes
 #include "Locator.h"
 #include "Selector.h"
