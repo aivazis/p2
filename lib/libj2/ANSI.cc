@@ -83,7 +83,7 @@ ansi_t::table_type make_ansi()
     // make a table
     ansi_t::table_type table;
 
-    // the rest sequence
+    // the reset sequence
     table["normal"] = csi_t::csi3(0);
 
     // regular colors
@@ -116,6 +116,9 @@ ansi_t::table_type make_x11()
     // make a table
     ansi_t::table_type table;
 
+    // the reset sequence
+    table["normal"] = csi_t::csi3(0);
+
     // the X11 named colors
     table["burlywood"] = csi_t::csi24(0xde, 0xb8, 0x87);
     table["dark_goldenrod"] = csi_t::csi24(0xb8, 0x86, 0x0b);
@@ -146,6 +149,9 @@ ansi_t::table_type make_gray()
     // make a table
     ansi_t::table_type table;
 
+    // the reset sequence
+    table["normal"] = csi_t::csi3(0);
+
     // grays
     table["gray10"] = csi_t::csi24(0x19, 0x19, 0x19);
     table["gray30"] = csi_t::csi24(0x4c, 0x4c, 0x4c);
@@ -163,6 +169,9 @@ ansi_t::table_type make_misc()
 {
     // make a table
     ansi_t::table_type table;
+
+    // the reset sequence
+    table["normal"] = csi_t::csi3(0);
 
     // other custom colors
     table["amber"] = csi_t::csi24(0xff, 0xbf, 0x00);
