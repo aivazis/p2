@@ -24,10 +24,29 @@
 using console_t = pyre::journal::cout_t;
 using chronicler_t = pyre::journal::chronicler_t;
 
+// helper
+static
+chronicler_t::metadata_type initializeGlobals();
+
 
 // data
-chronicler_t::metadata_type chronicler_t::_globals;
+chronicler_t::metadata_type chronicler_t::_globals = initializeGlobals();
 chronicler_t::device_pointer chronicler_t::_device = std::make_shared<console_t>();
+
+
+// implementation details
+chronicler_t::metadata_type initializeGlobals()
+{
+    // make a table
+    chronicler_t::metadata_type table;
+
+    // initialize the expected metadata with default values; applications are expected to
+    // replace these with values that are more sensible
+    table["application"] = "journal";
+
+    // return it
+    return table;
+}
 
 
 // end of file
