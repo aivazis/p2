@@ -34,13 +34,6 @@ private:
 };
 
 
-#if 0
-// get the inline definitions
-#define pyre_journal_Memo_icc
-#include "Memo.icc"
-#undef pyre_journal_Memo_icc
-#endif
-
 #endif
 
 // end of file
