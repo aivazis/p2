@@ -18,8 +18,11 @@ using chronicler_t = pyre::journal::chronicler_t;
 int main() {
     // get the global metadata map
     chronicler_t::metadata_type & globals = chronicler_t::globals();
-    // verify its empty
-    assert (globals.empty());
+
+    // there should be only one setting for now
+    assert (globals.size() == 1);
+    // verify the known contents
+    assert (globals.at("application") == "journal");
 
     // get the default device
     auto device_ptr = chronicler_t::device();
