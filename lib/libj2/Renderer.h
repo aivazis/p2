@@ -15,7 +15,7 @@ public:
     // pointers to me
     using pointer_type = std::shared_ptr<Renderer>;
 
-    using entry_type = page_t;
+    using page_type = page_t;
     using key_type = key_t;
     using value_type = value_t;
     using metadata_type = metadata_t;
@@ -31,16 +31,16 @@ public:
 
     // interface
 public:
-    virtual auto render(palette_type &, const entry_type &,
+    virtual auto render(palette_type &, const page_type &,
                         const metadata_type &) const -> bufmsg_type;
 
     // implementation details
 protected:
-    virtual void header(palette_type &, buffer_type &, const entry_type &,
+    virtual void header(palette_type &, buffer_type &, const page_type &,
                         const metadata_type &) const;
-    virtual void body(palette_type &, buffer_type &, const entry_type &,
+    virtual void body(palette_type &, buffer_type &, const page_type &,
                       const metadata_type &) const;
-    virtual void footer(palette_type &, buffer_type &, const entry_type &,
+    virtual void footer(palette_type &, buffer_type &, const page_type &,
                         const metadata_type &) const;
 
     // disallow

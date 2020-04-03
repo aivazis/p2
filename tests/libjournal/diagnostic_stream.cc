@@ -30,7 +30,7 @@ int main() {
         << pyre::journal::newline;
 
     // check the entry
-    for (auto value : diagnostic.entry()) {
+    for (auto value : diagnostic.page()) {
         // verify that there is only one value and it is what we expect
         assert (value == "   hello world!");
     }

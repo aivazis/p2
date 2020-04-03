@@ -26,8 +26,8 @@ int main() {
 
     // verify that the buffer is empty
     assert (channel.buffer().empty());
-    // the entry is empty
-    assert (channel.entry().empty());
+    // the page is empty
+    assert (channel.page().empty());
     // the metadata has been flushed
     assert (channel.metadata().empty());
 

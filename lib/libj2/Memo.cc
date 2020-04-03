@@ -30,7 +30,7 @@ pyre::journal::Memo::
 void
 pyre::journal::Memo::
 header(palette_type & palette, buffer_type & buffer,
-       const entry_type &, const metadata_type & meta) const
+       const page_type &, const metadata_type & meta) const
 {
     // mark the beginning of a diagnostic
     bufmsg_type marker { " >> " };
@@ -116,7 +116,7 @@ header(palette_type & palette, buffer_type & buffer,
 
 void
 pyre::journal::Memo::
-body(palette_type & palette, buffer_type & buffer, const entry_type & page,
+body(palette_type & palette, buffer_type & buffer, const page_type & page,
      const metadata_type &) const
 {
     // make a marker

@@ -30,7 +30,7 @@ pyre::journal::Renderer::
 // interface
 auto
 pyre::journal::Renderer::
-render(palette_type & palette, const entry_type & entry,
+render(palette_type & palette, const page_type & page,
        const metadata_type & meta) const -> bufmsg_type
 {
     // make a metadata table
@@ -45,9 +45,9 @@ render(palette_type & palette, const entry_type & entry,
     // make a buffer
     buffer_type buffer;
     // build the document
-    header(palette, buffer, entry, local);
-    body(palette, buffer, entry, local);
-    footer(palette, buffer, entry, local);
+    header(palette, buffer, page, local);
+    body(palette, buffer, page, local);
+    footer(palette, buffer, page, local);
 
     // extract the string and return it
     return buffer.str();
@@ -57,7 +57,7 @@ render(palette_type & palette, const entry_type & entry,
 // implementation details
 void
 pyre::journal::Renderer::
-header(palette_type &, buffer_type &, const entry_type &, const metadata_type &) const
+header(palette_type &, buffer_type &, const page_type &, const metadata_type &) const
 {
     // all done
     return;
@@ -66,7 +66,7 @@ header(palette_type &, buffer_type &, const entry_type &, const metadata_type &)
 
 void
 pyre::journal::Renderer::
-body(palette_type &, buffer_type &, const entry_type &, const metadata_type &) const
+body(palette_type &, buffer_type &, const page_type &, const metadata_type &) const
 {
     // all done
     return;
@@ -75,7 +75,7 @@ body(palette_type &, buffer_type &, const entry_type &, const metadata_type &) c
 
 void
 pyre::journal::Renderer::
-footer(palette_type &, buffer_type &, const entry_type &, const metadata_type &) const
+footer(palette_type &, buffer_type &, const page_type &, const metadata_type &) const
 {
     // all done
     return;

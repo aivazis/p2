@@ -21,8 +21,8 @@ public:
 
     // interface
 public:
-    virtual auto memo(const entry_type &, const metadata_type &) -> Trivial &;
-    virtual auto alert(const entry_type &, const metadata_type &) -> Trivial &;
+    virtual auto memo(const page_type &, const metadata_type &) -> Trivial &;
+    virtual auto alert(const page_type &, const metadata_type &) -> Trivial &;
 };
 
 
@@ -31,14 +31,14 @@ Trivial::~Trivial() {}
 Trivial::Trivial() : device_t("trivial") {}
 
 // the {memo} method
-auto Trivial::memo(const entry_type &, const metadata_type &) -> Trivial &
+auto Trivial::memo(const page_type &, const metadata_type &) -> Trivial &
 {
     // return myself
     return *this;
 }
 
 // and the {alert} method
-auto Trivial::alert(const entry_type &, const metadata_type &) -> Trivial &
+auto Trivial::alert(const page_type &, const metadata_type &) -> Trivial &
 {
     // return myself
     return *this;
@@ -55,13 +55,13 @@ int main() {
     trivial_t device;
 
     // make an entry
-    trivial_t::entry_type entry;
+    trivial_t::page_type page;
     // and some metadata
     trivial_t::metadata_type metadata;
 
     // record
-    device.memo(entry, metadata);
-    device.alert(entry, metadata);
+    device.memo(page, metadata);
+    device.alert(page, metadata);
 
     // all done
     return 0;

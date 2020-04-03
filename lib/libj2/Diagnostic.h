@@ -17,7 +17,7 @@ public:
     // conversion to an {ostream} so standard manipulators can work
     using ostream_type = outputstream_t;
     // diagnostic payload
-    using entry_type = page_t;
+    using page_type = page_t;
     // diagnostic metadata
     using key_type = key_t;
     using value_type = value_t;
@@ -37,7 +37,7 @@ public:
 public:
     // accessors
     inline auto buffer() -> bufmsg_type;
-    inline auto entry() const -> const entry_type &;
+    inline auto page() const -> const page_type &;
     inline auto metadata() const -> const metadata_type &;
 
     // conversion to an {ostream}
@@ -61,7 +61,7 @@ public:
 
     // data members
 private:
-    entry_type _entry;
+    page_type _page;
     buffer_type _buffer;
     metadata_type _metadata;
 

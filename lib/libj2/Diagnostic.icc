@@ -13,7 +13,7 @@
 template <typename severityT>
 pyre::journal::Diagnostic<severityT>::
 Diagnostic() :
-    _entry(),
+    _page(),
     _buffer(),
     _metadata()
 {}
@@ -34,10 +34,10 @@ buffer() -> bufmsg_type
 template <typename severityT>
 auto
 pyre::journal::Diagnostic<severityT>::
-entry() const -> const entry_type &
+page() const -> const page_type &
 {
     // easy enough
-    return _entry;
+    return _page;
 }
 
 
@@ -76,7 +76,7 @@ record() -> Diagnostic<severityT> &
     self.commit();
 
     // clean up
-    _entry.clear();
+    _page.clear();
     _metadata.clear();
 
     // all done
@@ -91,7 +91,7 @@ pyre::journal::Diagnostic<severityT>::
 newline() -> Diagnostic<severityT> &
 {
     // add the contents of the buffer to the message page
-    _entry.push_back(_buffer.str());
+    _page.push_back(_buffer.str());
     // clear out the buffer contents
     _buffer.str(bufmsg_type());
     // reset any error flags

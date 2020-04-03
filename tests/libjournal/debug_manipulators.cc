@@ -22,11 +22,11 @@ int main() {
         << "debug channel:" << pyre::journal::newline
         << "    hello world!" << pyre::journal::newline;
 
-    // get the current channel entry
-    auto entry = channel.entry();
+    // get the current channel page
+    auto page = channel.page();
     // verify
-    assert (entry[0] == "debug channel:");
-    assert (entry[1] == "    hello world!");
+    assert (page[0] == "debug channel:");
+    assert (page[1] == "    hello world!");
 
     // get the metadata
     auto metadata = channel.metadata();

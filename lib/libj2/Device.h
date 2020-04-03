@@ -16,8 +16,8 @@ public:
     using pointer_type = std::shared_ptr<Device>;
     // for naming device instances
     using name_type = name_t;
-    // a diagnostic entry is a vector of lines
-    using entry_type = page_t;
+    // a page of diagnostics is a vector of lines
+    using page_type = page_t;
     // diagnostic metadata in a map
     using key_type = key_t;
     using value_type = value_t;
@@ -38,8 +38,8 @@ public:
     inline auto name() const -> const name_type &;
 
     // abstract
-    virtual auto memo(const entry_type &, const metadata_type &) -> Device & = 0;
-    virtual auto alert(const entry_type &, const metadata_type &) -> Device & = 0;
+    virtual auto memo(const page_type &, const metadata_type &) -> Device & = 0;
+    virtual auto alert(const page_type &, const metadata_type &) -> Device & = 0;
 
     // data
 private:
