@@ -12,12 +12,10 @@
 class pyre::journal::Chronicler {
     // types
 public:
-    using string_type = std::string;
-
     // global metadata
-    using key_type = string_type;
-    using value_type = string_type;
-    using metadata_type = std::map<key_type, value_type>;
+    using key_type = key_t;
+    using value_type = value_t;
+    using metadata_type = metadata_t;
 
     // device support
     using device_type = Device;

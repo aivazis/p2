@@ -17,11 +17,12 @@
 // type aliases
 using csi_t = pyre::journal::csi_t;
 using ansi_t = pyre::journal::ansi_t;
+using nameset_t = pyre::journal::nameset_t;
 
 
 // the set compatible emulations
 static
-std::set<std::string>
+nameset_t
 compatible { "ansi",
              "vt102", "vt220", "vt320", "vt420",
              "xterm", "xterm-color", "xterm-16color", "xterm-256color" };
@@ -139,6 +140,7 @@ ansi_t::table_type make_misc()
 
     // other custom colors
     table["amber"] = csi_t::csi24(0xff, 0xbf, 0x00);
+    table["sage"] = csi_t::csi24(176, 208, 176);
 
     // all done
     return table;

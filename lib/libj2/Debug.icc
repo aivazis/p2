@@ -55,7 +55,7 @@ commit()
     }
 
     // record the entry
-    dev->record(entry(), metadata());
+    dev->memo(entry(), metadata());
 
     // all done
     return;

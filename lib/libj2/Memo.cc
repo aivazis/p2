@@ -14,8 +14,6 @@
 // support for color
 #include "ASCII.h"
 #include "CSI.h"
-// access to the type names
-#include "Device.h"
 // the superclass
 #include "Renderer.h"
 // the declaration
@@ -32,10 +30,10 @@ pyre::journal::Memo::
 void
 pyre::journal::Memo::
 header(palette_type & palette, buffer_type & buffer,
-       const entry_type &, const metadata_type & meta)
+       const entry_type &, const metadata_type & meta) const
 {
     // mark the beginning of a diagnostic
-    string_type marker { " >> " };
+    bufmsg_type marker { " >> " };
 
     // attempt to get location information
     // N.B.: we only print line number and function name if we know the filename
@@ -45,7 +43,7 @@ header(palette_type & palette, buffer_type & buffer,
         // make some room and turn on location formatting
         buffer << palette["filename"];
         // set a maximum length for the rendered filename
-        const string_type::size_type maxlen = 60;
+        const bufmsg_type::size_type maxlen = 60;
         // get the filename size
         auto len = filename.size();
         // so that names that are longer than this maximum
@@ -118,10 +116,11 @@ header(palette_type & palette, buffer_type & buffer,
 
 void
 pyre::journal::Memo::
-body(palette_type & palette, buffer_type & buffer, const entry_type & page, const metadata_type &)
+body(palette_type & palette, buffer_type & buffer, const entry_type & page,
+     const metadata_type &) const
 {
     // make a marker
-    string_type marker { " -- "  };
+    bufmsg_type marker { " -- "  };
 
     // go through the lines in the page
     for (auto & line : page) {

@@ -11,9 +11,6 @@
 // a formatter for messages that are meant for end user; currently, this means {info_t},
 // {warning_t}, and {error_t}
 class pyre::journal::Alert : public Renderer {
-    // types
-public:
-
     // metamethods
 public:
     virtual ~Alert();
@@ -22,9 +19,9 @@ public:
     // implementation details
 protected:
     virtual void header(palette_type &, buffer_type &,
-                        const entry_type &, const metadata_type &) override;
+                        const entry_type &, const metadata_type &) const override;
     virtual void body(palette_type &, buffer_type &,
-                      const entry_type &, const metadata_type &) override;
+                      const entry_type &, const metadata_type &) const override;
 
     // disallow
 private:

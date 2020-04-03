@@ -13,7 +13,8 @@ class pyre::journal::Locator
 {
     // types
 public:
-    using string_type = std::string;
+    // the data held by {Locator} are used as values in diagnostic metadata
+    using value_type = value_t;
 
     // metamethods
 public:
@@ -23,15 +24,15 @@ public:
     // interface
 public:
     // accessors
-    auto file() const -> const string_type &;
-    auto line() const -> const string_type &;
-    auto func() const -> const string_type &;
+    auto file() const -> const value_type &;
+    auto line() const -> const value_type &;
+    auto func() const -> const value_type &;
 
     // data
 private:
-    string_type _file;
-    string_type _line;
-    string_type _func;
+    const value_type _file;
+    const value_type _line;
+    const value_type _func;
 };
 
 

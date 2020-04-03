@@ -13,13 +13,7 @@
 class pyre::journal::ANSI {
     // types
 public:
-    using string_type = std::string;
-    using csi_type = CSI;
-    using name_type = string_type;
-    using color_type = csi_type::rep_type;
-
-    using table_type = std::map<name_type, color_type>;
-
+    using table_type = colortable_t;
 
     // static interface
 public:

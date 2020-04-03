@@ -15,8 +15,7 @@ template <typename inventoryT>
 class pyre::journal::Index {
     // types
 public:
-    using string_type = std::string;
-    using name_type = string_type;
+    using name_type = name_t;
     using inventory_type = inventoryT;
     using index_type = std::map<name_type, inventory_type>;
 

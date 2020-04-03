@@ -12,12 +12,12 @@
 class pyre::journal::firewall_error : public std::logic_error {
     // types
 public:
-    using string_type = std::string;
+    using string_type = string_t;
 
     // metamethods
 public:
-    firewall_error(const string_type &);
     firewall_error(const char *);
+    firewall_error(const string_type &);
 };
 
 

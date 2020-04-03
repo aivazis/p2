@@ -32,7 +32,7 @@ pyre::journal::Alert::
 void
 pyre::journal::Alert::
 header(palette_type & palette, buffer_type & buffer,
-       const entry_type & page, const metadata_type & meta)
+       const entry_type & page, const metadata_type & meta) const
 {
     // ask the palette for the severity decoration
     auto severityColor = palette["severity"];
@@ -60,7 +60,8 @@ header(palette_type & palette, buffer_type & buffer,
 
 void
 pyre::journal::Alert::
-body(palette_type & palette, buffer_type & buffer, const entry_type & page, const metadata_type &)
+body(palette_type & palette, buffer_type & buffer,
+     const entry_type & page, const metadata_type &) const
 {
     // go through the lines in the page; skip the first one, since it was printed as part of
     // the header

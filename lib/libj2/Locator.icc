@@ -22,7 +22,7 @@ Locator(const char * file, int line, const char * function):
 // accessors
 auto
 pyre::journal::Locator::
-file() const -> const string_type &
+file() const -> const value_type &
 {
     // easy enough
     return _file;
@@ -31,7 +31,7 @@ file() const -> const string_type &
 
 auto
 pyre::journal::Locator::
-line() const -> const string_type &
+line() const -> const value_type &
 {
     // easy enough
     return _line;
@@ -40,7 +40,7 @@ line() const -> const string_type &
 
 auto
 pyre::journal::Locator::
-func() const -> const string_type &
+func() const -> const value_type &
 {
     // easy enough
     return _func;

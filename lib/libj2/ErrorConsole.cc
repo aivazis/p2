@@ -12,7 +12,9 @@
 // support for color
 #include "ASCII.h"
 #include "CSI.h"
-// get the device declarations
+// renderer
+#include "Renderer.h"
+// the device declarations
 #include "Device.h"
 #include "Stream.h"
 #include "ErrorConsole.h"

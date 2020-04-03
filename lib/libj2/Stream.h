@@ -9,10 +9,12 @@
 
 
 // a device that writes to output streams
-class pyre::journal::Stream : public pyre::journal::device_t {
+class pyre::journal::Stream : public pyre::journal::Device {
     // types
 public:
-    using stream_type = std::ostream;
+    using stream_type = outputstream_t;
+    using renderer_type = Renderer;
+    using renderer_pointer = Renderer::pointer_type;
 
     // metamethods
 public:
@@ -23,12 +25,19 @@ public:
 
     // interface
 public:
-    // abstract
-    virtual auto record(const entry_type &, const metadata_type &) -> Stream &;
+    // developer diagnostics
+    virtual auto memo(const entry_type &, const metadata_type &) -> Stream &;
+    // user facing diagnostics
+    virtual auto alert(const entry_type &, const metadata_type &) -> Stream &;
 
     // data
 private:
+    // the stream to write to
     stream_type & _stream;
+    // the renderer for memos
+    renderer_pointer _memo;
+    // the renderer for alerts
+    renderer_pointer _alert;
 };
 
 

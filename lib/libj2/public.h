@@ -8,10 +8,10 @@
 #define pyre_journal_public_h
 
 
-// get the forward declarations
-#include "forward.h"
 // external packages
 #include "externals.h"
+// get the forward declarations
+#include "forward.h"
 
 
 // implementations
@@ -23,17 +23,17 @@
 #include "CSI.h"
 #include "ANSI.h"
 
+// renderers
+#include "Renderer.h"
+#include "Memo.h"
+#include "Alert.h"
+
 // devices
 #include "Device.h"
 #include "Trash.h"
 #include "Stream.h"
 #include "Console.h"
 #include "ErrorConsole.h"
-
-// renderers
-#include "Renderer.h"
-#include "Memo.h"
-#include "Alert.h"
 
 // manipulators that are classes
 #include "Locator.h"

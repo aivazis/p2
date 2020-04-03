@@ -13,8 +13,7 @@ class pyre::journal::Null
 {
     // types
 public:
-    using string_type = std::string;
-    using name_type = string_type;
+    using name_type = name_t;
 
     // metamethods
 public:

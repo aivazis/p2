@@ -24,7 +24,7 @@ Diagnostic() :
 template <typename severityT>
 auto
 pyre::journal::Diagnostic<severityT>::
-buffer() -> string_type
+buffer() -> bufmsg_type
 {
     // easy enough
     return _buffer.str();
@@ -93,7 +93,7 @@ newline() -> Diagnostic<severityT> &
     // add the contents of the buffer to the message page
     _entry.push_back(_buffer.str());
     // clear out the buffer contents
-    _buffer.str(string_type());
+    _buffer.str(bufmsg_type());
     // reset any error flags
     _buffer.clear();
     // all done

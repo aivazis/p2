@@ -10,9 +10,6 @@
 
 // a formatter for messages that are meant for developers, i.e. {debug_t} and {firewall_t}
 class pyre::journal::Memo : public Renderer {
-    // types
-public:
-
     // metamethods
 public:
     virtual ~Memo();
@@ -21,9 +18,9 @@ public:
     // implementation details
 protected:
     virtual void header(palette_type &, buffer_type &,
-                        const entry_type &, const metadata_type &) override;
+                        const entry_type &, const metadata_type &) const override;
     virtual void body(palette_type &, buffer_type &,
-                      const entry_type &, const metadata_type &) override;
+                      const entry_type &, const metadata_type &) const override;
 
     // disallow
 private:

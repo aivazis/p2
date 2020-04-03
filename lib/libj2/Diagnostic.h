@@ -14,17 +14,18 @@ class pyre::journal::Diagnostic {
     // types
 public:
     using severity_type = severityT;
-
-    using string_type = std::string;
-    using ostream_type = std::ostream;
-
-    using key_type = string_type;
-    using value_type = string_type;
-
-    using buffer_type = std::stringstream;
-    using entry_type = std::vector<string_type>;
-    using metadata_type = std::map<string_type, string_type>;
-
+    // conversion to an {ostream} so standard manipulators can work
+    using ostream_type = outputstream_t;
+    // diagnostic payload
+    using entry_type = page_t;
+    // diagnostic metadata
+    using key_type = key_t;
+    using value_type = value_t;
+    using metadata_type = metadata_t;
+    // message buffering
+    using bufmsg_type = bufmsg_t;
+    using buffer_type = buffer_t;
+    // device
     using device_type = Device;
     using device_pointer = device_type::pointer_type;
 
@@ -35,7 +36,7 @@ public:
     // interface
 public:
     // accessors
-    inline auto buffer() -> string_type;
+    inline auto buffer() -> bufmsg_type;
     inline auto entry() const -> const entry_type &;
     inline auto metadata() const -> const metadata_type &;
 

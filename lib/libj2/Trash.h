@@ -9,7 +9,7 @@
 
 
 // a device that ignores all requests for output
-class pyre::journal::Trash : public pyre::journal::device_t {
+class pyre::journal::Trash : public pyre::journal::Device {
     // metamethods
 public:
     // constructor
@@ -19,8 +19,10 @@ public:
 
     // interface
 public:
-    // abstract
-    virtual auto record(const entry_type &, const metadata_type &) -> Trash &;
+    // developer diagnostics
+    virtual auto memo(const entry_type &, const metadata_type &) -> Trash &;
+    // user facing diagnostics
+    virtual auto alert(const entry_type &, const metadata_type &) -> Trash &;
 
     // disallow
 private:

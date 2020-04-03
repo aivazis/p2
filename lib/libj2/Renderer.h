@@ -12,15 +12,17 @@
 class pyre::journal::Renderer {
     // types
 public:
-    using string_type = Device::string_type;
+    // pointers to me
+    using pointer_type = std::shared_ptr<Renderer>;
 
-    using entry_type = Device::entry_type;
-    using key_type = Device::key_type;
-    using value_type = Device::value_type;
-    using metadata_type = Device::metadata_type;
-    using palette_type = Device::palette_type;
+    using entry_type = page_t;
+    using key_type = key_t;
+    using value_type = value_t;
+    using metadata_type = metadata_t;
+    using palette_type = palette_t;
 
-    using buffer_type = std::stringstream;
+    using bufmsg_type = bufmsg_t;
+    using buffer_type = buffer_t;
 
     // metamethods
 public:
@@ -29,13 +31,17 @@ public:
 
     // interface
 public:
-    virtual auto render(palette_type &, const entry_type &, const metadata_type &) -> string_type;
+    virtual auto render(palette_type &, const entry_type &,
+                        const metadata_type &) const -> bufmsg_type;
 
     // implementation details
 protected:
-    virtual void header(palette_type &, buffer_type &, const entry_type &, const metadata_type &);
-    virtual void body(palette_type &, buffer_type &, const entry_type &, const metadata_type &);
-    virtual void footer(palette_type &, buffer_type &, const entry_type &, const metadata_type &);
+    virtual void header(palette_type &, buffer_type &, const entry_type &,
+                        const metadata_type &) const;
+    virtual void body(palette_type &, buffer_type &, const entry_type &,
+                      const metadata_type &) const;
+    virtual void footer(palette_type &, buffer_type &, const entry_type &,
+                        const metadata_type &) const;
 
     // disallow
 private:

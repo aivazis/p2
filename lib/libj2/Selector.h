@@ -13,9 +13,8 @@ class pyre::journal::Selector
 {
     // types
 public:
-    using string_type = std::string;
-    using key_type = string_type;
-    using value_type = string_type;
+    using key_type = key_t;
+    using value_type = value_t;
 
     // metamethods
 public:

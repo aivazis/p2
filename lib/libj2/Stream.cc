@@ -12,6 +12,9 @@
 // support for color
 #include "ASCII.h"
 #include "CSI.h"
+// renderers
+#include "Renderer.h"
+
 // get the device declaration
 #include "Device.h"
 // get the stream declaration
@@ -28,7 +31,16 @@ pyre::journal::Stream::
 // interface
 auto
 pyre::journal::Stream::
-record(const entry_type & entry, const metadata_type & meta) -> Stream &
+memo(const entry_type &, const metadata_type &) -> Stream &
+{
+    // all done
+    return *this;
+}
+
+
+auto
+pyre::journal::Stream::
+alert(const entry_type &, const metadata_type &) -> Stream &
 {
     // all done
     return *this;

@@ -12,6 +12,8 @@
 // support for color
 #include "ASCII.h"
 #include "CSI.h"
+// renderers
+#include "Renderer.h"
 // get the device declarations
 #include "Device.h"
 #include "Stream.h"

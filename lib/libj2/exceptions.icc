@@ -12,13 +12,13 @@
 // firewall_error
 // constructors
 pyre::journal::firewall_error::
-firewall_error(const string_type & what) :
+firewall_error(const char * what) :
     std::logic_error(what)
 {}
 
 
 pyre::journal::firewall_error::
-firewall_error(const char * what) :
+firewall_error(const string_type & what) :
     std::logic_error(what)
 {}
 

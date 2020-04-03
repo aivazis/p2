@@ -28,7 +28,16 @@ pyre::journal::Trash::
 // interface
 auto
 pyre::journal::Trash::
-record(const entry_type & entry, const metadata_type & meta) -> Trash &
+memo(const entry_type &, const metadata_type &) -> Trash &
+{
+    // all done
+    return *this;
+}
+
+
+auto
+pyre::journal::Trash::
+alert(const entry_type &, const metadata_type &) -> Trash &
 {
     // all done
     return *this;

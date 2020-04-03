@@ -8,12 +8,11 @@
 #define pyre_journal_CSI_h
 
 
-//
+// the generator of ANSI color control sequences given color info
 class pyre::journal::CSI {
     // types
 public:
-    using string_type = std::string;
-    using rep_type = string_type;
+    using rep_type = string_t;
 
     // static interface
 public:
