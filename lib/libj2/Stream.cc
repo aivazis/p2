@@ -4,8 +4,6 @@
 // (c) 1998-2020 all rights reserved
 
 
-// for the build system
-#include <portinfo>
 // get the forward declarations
 #include "forward.h"
 // external support
