@@ -33,6 +33,7 @@
 // renderers
 #include "Renderer.h"
 #include "Memo.h"
+#include "Alert.h"
 
 // manipulators that are classes
 #include "Locator.h"
