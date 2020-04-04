@@ -62,6 +62,8 @@ namespace pyre::journal {
     class Chronicler;
     // the common channel state
     template <bool = true> class Inventory;
+    // firewall state
+    class FirewallInventory;
     // storage/retrieval for common channel state
     template <typename> class Index;
     // live channels are implemented using two different base classes:
@@ -111,6 +113,8 @@ namespace pyre::journal {
 
     template <bool stateV = true>
     using inventory_t = Inventory<stateV>;
+
+    using firewallInventory_t = FirewallInventory;
 
     template <typename severityT, typename inventoryT>
     using channel_t = Channel<severityT, inventoryT>;

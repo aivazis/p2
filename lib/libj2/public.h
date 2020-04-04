@@ -46,10 +46,13 @@
 #include "Chronicler.h"
 #include "Index.h"
 #include "Inventory.h"
+#include "FirewallInventory.h"
 #include "Channel.h"
 #include "Diagnostic.h"
-// the user facing channels
+// the developer facing channels
 #include "Debug.h"
+#include "Firewall.h"
+// the user facing channels
 
 // macros
 #include "macros.h"

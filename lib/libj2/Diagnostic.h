@@ -14,6 +14,8 @@ class pyre::journal::Diagnostic {
     // types
 public:
     using severity_type = severityT;
+    // surely this is useful somewhere...
+    using string_type = string_t;
     // conversion to an {ostream} so standard manipulators can work
     using ostream_type = outputstream_t;
     // diagnostic payload

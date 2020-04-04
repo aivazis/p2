@@ -1,0 +1,77 @@
+// -*- c++ -*-
+//
+// michael a.g. aïvázis <michael.aivazis@para-sim.com>
+// (c) 1998-2020 all rights reserved
+
+// code guard
+#if !defined(pyre_journal_Firewall_icc)
+#error this file contains implementation details for pyre::journal::Firewall
+#else
+
+
+// metamethods
+pyre::journal::Firewall::
+Firewall(const name_type & name) :
+    diagnostic_type(),
+    channel_type(name)
+{
+    setattr("channel", name);
+    setattr("severity", "firewall");
+}
+
+
+// interface
+// accessors
+auto
+pyre::journal::Firewall::
+fatal() -> state_type
+{
+    // easy enough
+    return inventory().fatal();
+}
+
+
+// mutators
+auto
+pyre::journal::Firewall::
+fatal(state_type flag) -> state_type
+{
+    // easy enough
+    return inventory().fatal(flag);
+}
+
+
+// implementation details
+// record the message to the chosen device
+void
+pyre::journal::Firewall::
+commit()
+{
+    // if i'm an active channel, generate some output
+    if (state()) {
+        // decorate with my severity
+        setattr("severity", "firewall");
+        // and my channel name
+        setattr("channel", name());
+        // hunt down the device to use
+        auto dev = device();
+        // and record the entry
+        dev->memo(page(), metadata());
+    }
+
+    // if i'm fatal
+    if (fatal()) {
+        // prepare a message
+        string_type msg = name() + string_type(": FIREWALL BREACHED!");
+        // throw a firewall
+        throw firewall_error(msg);
+    }
+
+    // all done
+    return;
+}
+
+
+#endif
+
+// end of file
