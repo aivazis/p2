@@ -12,6 +12,7 @@
 class pyre::journal::Stream : public pyre::journal::Device {
     // types
 public:
+    using palette_type = palette_t;
     using stream_type = outputstream_t;
     using renderer_type = Renderer;
     using renderer_pointer = Renderer::pointer_type;
@@ -38,6 +39,8 @@ private:
     renderer_pointer _memo;
     // the renderer for alerts
     renderer_pointer _alert;
+    // the color palette
+    palette_type _palette;
 };
 
 

@@ -14,8 +14,9 @@ pyre::journal::Stream::
 Stream(const name_type & name, stream_type & stream) :
     device_t(name),
     _stream(stream),
-    _memo(std::make_shared<Renderer>()),
-    _alert(std::make_shared<Renderer>())
+    _memo { std::make_shared<Memo>() },
+    _alert { std::make_shared<Alert>() },
+    _palette()
 {}
 
 

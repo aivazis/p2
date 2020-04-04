@@ -12,8 +12,10 @@
 // support for color
 #include "ASCII.h"
 #include "CSI.h"
-// renderer
+// renderer support
 #include "Renderer.h"
+#include "Memo.h"
+#include "Alert.h"
 
 // get the device declaration
 #include "Device.h"
@@ -31,8 +33,12 @@ pyre::journal::Stream::
 // interface
 auto
 pyre::journal::Stream::
-memo(const page_type &, const metadata_type &) -> Stream &
+memo(const page_type & page, const metadata_type & meta) -> Stream &
 {
+    // get the memo renderer to format the message
+    auto content = _memo->render(_palette, page, meta);
+    // inject it into my stream
+    _stream << content;
     // all done
     return *this;
 }
@@ -40,8 +46,12 @@ memo(const page_type &, const metadata_type &) -> Stream &
 
 auto
 pyre::journal::Stream::
-alert(const page_type &, const metadata_type &) -> Stream &
+alert(const page_type & page, const metadata_type & meta) -> Stream &
 {
+    // get the memo renderer to format the message
+    auto content = _alert->render(_palette, page, meta);
+    // inject it into my stream
+    _stream << content;
     // all done
     return *this;
 }
