@@ -25,9 +25,6 @@ public:
     // message buffering
     using bufmsg_type = bufmsg_t;
     using buffer_type = buffer_t;
-    // device
-    using device_type = Device;
-    using device_pointer = device_type::pointer_type;
 
     // metamethods
 public:
@@ -53,21 +50,11 @@ public:
     template <typename itemT>
     inline auto inject(const itemT &) -> Diagnostic &;
 
-    // static interface
-public:
-    // device support
-    static inline auto device() -> device_pointer;
-    static inline auto device(device_pointer) -> device_pointer;
-
     // data members
 private:
     page_type _page;
     buffer_type _buffer;
     metadata_type _metadata;
-
-    // static data
-private:
-    static device_pointer _device;
 
     // disallow
 private:

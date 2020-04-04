@@ -54,12 +54,39 @@ state() const -> state_type
 template <typename severityT, typename inventoryT>
 auto
 pyre::journal::Channel<severityT, inventoryT>::
+device() const -> device_pointer
+{
+    // ask my inventory for its device
+    auto dev = _inventory.device();
+    // if that's not set
+    if (!dev) {
+        // get my channel-wide default
+        dev = defaultDevice();
+        // if that's not set either
+        if (!dev) {
+            // ask the {chronicler} for the global default
+            dev = Chronicler::device();
+            // finally, if that's not set either
+            if (!dev) {
+                // use the trash can
+                dev = std::make_shared<Trash>();
+            }
+        }
+    }
+
+    // all done
+    return dev;
+}
+
+
+template <typename severityT, typename inventoryT>
+auto
+pyre::journal::Channel<severityT, inventoryT>::
 inventory() const -> inventory_type &
 {
     // easy enough
     return _inventory;
 }
-
 
 // mutators
 template <typename severityT, typename inventoryT>
@@ -83,6 +110,16 @@ deactivate()
     _inventory.deactivate();
     // all done
     return;
+}
+
+
+template <typename severityT, typename inventoryT>
+auto
+pyre::journal::Channel<severityT, inventoryT>::
+device(device_pointer device) -> device_pointer
+{
+    // ask my inventory to do the swap
+    return _inventory.device(device);
 }
 
 
@@ -110,6 +147,28 @@ defaultState() -> state_type
 template <typename severityT, typename inventoryT>
 auto
 pyre::journal::Channel<severityT, inventoryT>::
+defaultDevice() -> device_pointer
+{
+    // easy enough
+    return _device;
+}
+
+
+template <typename severityT, typename inventoryT>
+auto
+pyre::journal::Channel<severityT, inventoryT>::
+defaultDevice(device_pointer device) -> device_pointer
+{
+    // swap mine with the incoming device pointer
+    std::swap(_device, device);
+    // and return mine
+    return device;
+}
+
+
+template <typename severityT, typename inventoryT>
+auto
+pyre::journal::Channel<severityT, inventoryT>::
 lookup(const name_type & name) -> inventory_type &
 {
     // easy enough
@@ -121,6 +180,11 @@ lookup(const name_type & name) -> inventory_type &
 template <typename severityT, typename inventoryT>
 typename pyre::journal::Channel<severityT, inventoryT>::index_type
 pyre::journal::Channel<severityT, inventoryT>::_index;
+
+// static data
+template <typename severityT, typename inventoryT>
+typename pyre::journal::Channel<severityT, inventoryT>::device_pointer
+pyre::journal::Channel<severityT, inventoryT>::_device;
 
 
 #endif

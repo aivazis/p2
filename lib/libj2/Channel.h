@@ -17,9 +17,10 @@ class pyre::journal::Channel {
     // types
 public:
     using severity_type = severityT;
-    using inventory_type = inventoryT;
 
+    using inventory_type = inventoryT;
     using state_type = typename inventory_type::state_type;
+    using device_pointer = typename inventory_type::device_pointer;
 
     using index_type = Index<inventory_type>;
     using name_type = typename index_type::name_type;
@@ -36,29 +37,39 @@ public:
     // accessors
     inline auto name() const -> const name_type &;
     inline auto state() const -> state_type;
+    inline auto device() const -> device_pointer;
     inline auto inventory() const -> inventory_type &;
 
     // mutators
     inline void activate();
     inline void deactivate();
+    inline auto device(device_pointer) -> device_pointer;
 
     // static interface
 public:
     // accessors
+    // my index
     inline static auto index() -> const index_type &;
+
+    // my default state; it's read-only, and tied to the template argument
     inline static constexpr auto defaultState() -> state_type;
+
+    // the default device
+    static inline auto defaultDevice() -> device_pointer;
+    static inline auto defaultDevice(device_pointer) -> device_pointer;
 
     // inventory access
     inline static auto lookup(const name_type &) -> inventory_type &;
 
     // data members
 private:
-    name_type _name;              // my name
-    inventory_type & _inventory;  // my shared state
+    name_type _name;               // my name
+    inventory_type & _inventory;   // my shared state
 
     // static data
 private:
-    static index_type _index;     // the index that holds all channels of this severity
+    static index_type _index;      // the name index for all channels of this severity
+    static device_pointer _device; // the global device for channels of this severity
 
     // disallow
 private:

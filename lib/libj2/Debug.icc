@@ -31,29 +31,13 @@ commit()
         return;
     }
 
-    // decorate with my severity
+    // otherwise, decorate with my severity
     setattr("severity", "debug");
     // and my channel name
     setattr("channel", name());
 
-    // otherwise, hunt down the device to use; start with the device specific to this channel
-    auto dev = inventory().device();
-    // if that's not set
-    if (!dev) {
-        // try the default device for this severity
-        dev = device();
-        // if that's not set
-        if (!dev) {
-            // ask the {chronicler} for the global default
-            dev = Chronicler::device();
-            // finally, if that's not set
-            if (!dev) {
-                // use the trash can
-                dev = std::make_shared<Trash>();
-            }
-        }
-    }
-
+    // hunt down the device to use
+    auto dev = device();
     // record the entry
     dev->memo(page(), metadata());
 
