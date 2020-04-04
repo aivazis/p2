@@ -13,10 +13,10 @@
 pyre::journal::Stream::
 Stream(const name_type & name, stream_type & stream) :
     device_t(name),
+    _palette(),
     _stream(stream),
     _memo { std::make_shared<Memo>() },
-    _alert { std::make_shared<Alert>() },
-    _palette()
+    _alert { std::make_shared<Alert>() }
 {}
 
 

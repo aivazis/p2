@@ -34,8 +34,10 @@ pyre::journal::Alert::
 header(palette_type & palette, buffer_type & buffer,
        const page_type & page, const metadata_type & meta) const
 {
+    // get the severity
+    auto severity = meta.at("severity");
     // ask the palette for the severity decoration
-    auto severityColor = palette["severity"];
+    auto severityColor = palette[severity];
     // if we are generating color output
     if (!severityColor.empty()) {
         // print the application name in the correct color

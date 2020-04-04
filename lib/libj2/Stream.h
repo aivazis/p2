@@ -31,6 +31,11 @@ public:
     // user facing diagnostics
     virtual auto alert(const page_type &, const metadata_type &) -> Stream &;
 
+    // configuration data
+protected:
+    // the color palette
+    palette_type _palette;
+
     // data
 private:
     // the stream to write to
@@ -39,8 +44,6 @@ private:
     renderer_pointer _memo;
     // the renderer for alerts
     renderer_pointer _alert;
-    // the color palette
-    palette_type _palette;
 };
 
 

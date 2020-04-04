@@ -32,6 +32,9 @@ pyre::journal::Memo::
 header(palette_type & palette, buffer_type & buffer,
        const page_type &, const metadata_type & meta) const
 {
+    // get the channel severity
+    auto severity = meta.at("severity");
+
     // mark the beginning of a diagnostic
     bufmsg_type marker { " >> " };
 
@@ -41,7 +44,7 @@ header(palette_type & palette, buffer_type & buffer,
     // if it's there
     if (!filename.empty()) {
         // make some room and turn on location formatting
-        buffer << palette["filename"];
+        buffer << palette[severity];
         // set a maximum length for the rendered filename
         const bufmsg_type::size_type maxlen = 60;
         // get the filename size
@@ -65,7 +68,7 @@ header(palette_type & palette, buffer_type & buffer,
         // if we know it
         if (!line.empty()) {
             // render it
-            buffer << palette["line"] << line << palette["reset"] << ":";
+            buffer << palette[severity] << line << palette["reset"] << ":";
         }
 
         // same with the function name
@@ -73,7 +76,7 @@ header(palette_type & palette, buffer_type & buffer,
         // if we know it
         if (!function.empty()) {
             // render it
-            buffer << palette["function"] << " " << function << palette["reset"] << ":";
+            buffer << palette[severity] << " " << function << palette["reset"] << ":";
         }
         // wrap up the location info
         buffer << std::endl;
@@ -82,11 +85,11 @@ header(palette_type & palette, buffer_type & buffer,
     // render the channel name and severity
     buffer
         // start things off with the marker
-        << marker
-        // render the severity
-        << palette["severity"] << meta.at("severity") << palette["reset"]
+        << palette[severity] << marker << palette["reset"]
         // and the channel name
-        << ": " << palette["channel"] << meta.at("channel") << palette["reset"]
+        << palette[severity] << meta.at("channel") << palette["reset"]
+        // and the severity
+        << " (" << palette[severity] << severity << palette["reset"] << ")"
         // done with the into line
         << std::endl;
 
@@ -102,10 +105,10 @@ header(palette_type & palette, buffer_type & buffer,
         }
         // otherwise, render it
         buffer
-            << marker
-            << palette["meta_key"] << key << palette["reset"]
+            << palette[severity] << marker << palette["reset"]
+            << palette[severity] << key << palette["reset"]
             << ": "
-            << palette["meta_value"] << value << palette["reset"]
+            << palette[severity] << value << palette["reset"]
             << std::endl;
     }
 
@@ -117,16 +120,19 @@ header(palette_type & palette, buffer_type & buffer,
 void
 pyre::journal::Memo::
 body(palette_type & palette, buffer_type & buffer, const page_type & page,
-     const metadata_type &) const
+     const metadata_type & meta) const
 {
     // make a marker
     bufmsg_type marker { " -- "  };
+    // get the channel severity
+    auto severity = meta.at("severity");
 
     // go through the lines in the page
     for (auto & line : page) {
         // and render them
         buffer
-            << marker << palette["body"] << line << palette["reset"]
+            << palette[severity] << marker << palette["reset"]
+            << palette["body"] << line << palette["reset"]
             << std::endl;
     }
 

@@ -16,7 +16,7 @@ int main() {
     pyre::journal::debug_t channel("tests.journal.debug");
 
     // activate the channel
-    // channel.activate();
+    channel.activate();
 
     // inject something into the channel
     channel
