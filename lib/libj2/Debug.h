@@ -10,8 +10,8 @@
 
 // developer facing diagnostic; usually gets turned off in release mode
 class pyre::journal::Debug :
-    public pyre::journal::Diagnostic<Debug>,
-    public pyre::journal::Channel<Debug, pyre::journal::Inventory<false>> {
+    public Diagnostic<Debug>,
+    public Channel<Debug, Inventory<false>> {
     // types
 public:
     using diagnostic_type = Diagnostic<Debug>;

@@ -9,7 +9,7 @@
 #define pyre_journal_ErrorConsole_h
 
 // a device that prints to {cerr}
-class pyre::journal::ErrorConsole : public pyre::journal::stream_t {
+class pyre::journal::ErrorConsole : public Stream {
     // metamethods
 public:
     // constructor

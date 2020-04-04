@@ -9,7 +9,7 @@
 
 
 // a device that ignores all requests for output
-class pyre::journal::Trash : public pyre::journal::Device {
+class pyre::journal::Trash : public Device {
     // metamethods
 public:
     // constructor

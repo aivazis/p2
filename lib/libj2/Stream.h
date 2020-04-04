@@ -9,7 +9,7 @@
 
 
 // a device that writes to output streams
-class pyre::journal::Stream : public pyre::journal::Device {
+class pyre::journal::Stream : public Device {
     // types
 public:
     using palette_type = palette_t;

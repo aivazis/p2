@@ -9,7 +9,7 @@
 #define pyre_journal_Console_h
 
 // a device that prints to {cout}
-class pyre::journal::Console : public pyre::journal::stream_t {
+class pyre::journal::Console : public Stream {
     // metamethods
 public:
     // constructor
