@@ -53,6 +53,9 @@
 #include "Debug.h"
 #include "Firewall.h"
 // the user facing channels
+#include "Error.h"
+#include "Informational.h"
+#include "Warning.h"
 
 // macros
 #include "macros.h"

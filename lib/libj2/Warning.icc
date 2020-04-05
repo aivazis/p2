@@ -4,19 +4,19 @@
 // (c) 1998-2020 all rights reserved
 
 // code guard
-#if !defined(pyre_journal_Debug_icc)
-#error this file contains implementation details for pyre::journal::Debug
+#if !defined(pyre_journal_Warning_icc)
+#error this file contains implementation details for pyre::journal::Warning
 #else
 
 
 // metamethods
-pyre::journal::Debug::
-Debug(name_type name) :
+pyre::journal::Warning::
+Warning(name_type name) :
     diagnostic_type(),
     channel_type(name)
 {
     // decorate with my severity
-    setattr("severity", "debug");
+    setattr("severity", "warning");
     // and my channel name
     setattr("channel", name);
 }
@@ -24,7 +24,7 @@ Debug(name_type name) :
 
 // interface
 void
-pyre::journal::Debug::
+pyre::journal::Warning::
 commit()
 {
     // if i'm not an active channel
@@ -36,7 +36,7 @@ commit()
     // otherwise, hunt down the device to use
     auto dev = device();
     // record the entry
-    dev->memo(page(), metadata());
+    dev->alert(page(), metadata());
 
     // all done
     return;

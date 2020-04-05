@@ -15,8 +15,10 @@ Firewall(const name_type & name) :
     diagnostic_type(),
     channel_type(name)
 {
-    setattr("channel", name);
+    // decorate with my severity
     setattr("severity", "firewall");
+    // and my channel name
+    setattr("channel", name);
 }
 
 
@@ -49,10 +51,6 @@ commit()
 {
     // if i'm an active channel, generate some output
     if (state()) {
-        // decorate with my severity
-        setattr("severity", "firewall");
-        // and my channel name
-        setattr("channel", name());
         // hunt down the device to use
         auto dev = device();
         // and record the entry

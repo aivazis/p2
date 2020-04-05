@@ -42,13 +42,8 @@ int main() {
     // add some decorations
     palette["reset"] = ansi_t::x11.at("normal");
     palette["channel"] = ansi_t::x11.at("light slate gray");
-    palette["severity"] = ansi_t::x11.at("steel blue");
-    palette["filename"] = ansi_t::x11.at("light coral");
-    palette["line"] = ansi_t::x11.at("light coral");
-    palette["function"] = ansi_t::x11.at("light coral");
-    palette["meta_key"] = ansi_t::x11.at("hot pink");
-    palette["meta_value"] = ansi_t::x11.at("burlywood");
-    palette["body"] = ansi_t::x11.at("navajo white");
+    palette["debug"] = ansi_t::x11.at("steel blue");
+    palette["body"] = "";
 
     // pull the page
     auto & page = channel.page();
@@ -61,7 +56,7 @@ int main() {
     auto msg = alert.render(palette, page, meta);
 
     // show me
-    std::cout << msg;
+    // std::cout << msg;
 
      // nothing to do
     return 0;

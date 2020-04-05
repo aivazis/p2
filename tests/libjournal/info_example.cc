@@ -12,24 +12,18 @@
 
 // exercise the channel manipulators
 int main() {
-    // make a debug channel
-    pyre::journal::debug_t channel("tests.journal.debug");
+    // make an info channel
+    pyre::journal::info_t channel("tests.journal.info");
 
-    // activate it
+    // activate the channel
     // channel.activate();
 
-    // try injecting something into the channel
+    // inject something into the channel
     channel
         << pyre::journal::at(__HERE__)
         << pyre::journal::set("time", "now")
+        << "info channel:" << pyre::journal::newline
         << "    hello world!" << pyre::journal::endl;
-
-    // verify that the buffer is empty
-    assert (channel.buffer().empty());
-    // the page is empty
-    assert (channel.page().empty());
-    // the metadata has been flushed
-    assert (channel.metadata().empty());
 
     // all done
     return 0;

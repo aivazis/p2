@@ -56,7 +56,7 @@ int main() {
     auto msg = memo.render(palette, page, meta);
 
     // show me
-    std::cout << msg;
+    // std::cout << msg;
 
      // nothing to do
     return 0;
