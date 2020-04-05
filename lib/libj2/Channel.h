@@ -43,23 +43,25 @@ public:
     // mutators
     inline void activate();
     inline void deactivate();
+
+    inline auto state(state_type flag) -> state_type;
     inline auto device(device_pointer) -> device_pointer;
 
     // static interface
 public:
     // accessors
     // my index
-    inline static auto index() -> const index_type &;
+    static inline auto index() -> const index_type &;
 
     // my default state; it's read-only, and tied to the template argument
-    inline static constexpr auto defaultState() -> state_type;
+    static inline constexpr auto defaultState() -> state_type;
 
     // the default device
     static inline auto defaultDevice() -> device_pointer;
     static inline auto defaultDevice(device_pointer) -> device_pointer;
 
     // inventory access
-    inline static auto lookup(const name_type &) -> inventory_type &;
+    static inline auto lookup(const name_type &) -> inventory_type &;
 
     // data members
 private:

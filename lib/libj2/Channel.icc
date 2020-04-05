@@ -116,6 +116,16 @@ deactivate()
 template <typename severityT, typename inventoryT>
 auto
 pyre::journal::Channel<severityT, inventoryT>::
+state(state_type flag) -> state_type
+{
+    // easy enough
+    return _inventory.state(flag);
+}
+
+
+template <typename severityT, typename inventoryT>
+auto
+pyre::journal::Channel<severityT, inventoryT>::
 device(device_pointer device) -> device_pointer
 {
     // ask my inventory to do the swap

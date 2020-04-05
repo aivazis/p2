@@ -88,6 +88,18 @@ deactivate()
 template <bool stateV>
 auto
 pyre::journal::Inventory<stateV>::
+state(state_type flag) -> state_type
+{
+    // swap
+    std::swap(flag, _state);
+    // and return the previous setting
+    return flag;
+}
+
+
+template <bool stateV>
+auto
+pyre::journal::Inventory<stateV>::
 device(device_pointer device) -> device_pointer
 {
     // swap

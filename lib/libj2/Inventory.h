@@ -36,12 +36,17 @@ public:
     // accessors
     inline auto state() const -> state_type;
     inline auto device() const -> device_pointer;
-    inline static constexpr auto defaultState() -> state_type;
 
     // mutators
     inline void activate();
     inline void deactivate();
+
+    inline auto state(state_type) -> state_type;
     inline auto device(device_pointer) -> device_pointer;
+
+    // class methods
+public:
+    static inline constexpr auto defaultState() -> state_type;
 
     // data
 private:
