@@ -22,6 +22,11 @@ public:
 public:
     // constructors
     inline explicit Inventory(state_type = stateV, device_pointer = nullptr);
+    // let the compiler write the others
+    Inventory(const Inventory &) = default;
+    Inventory(Inventory &&) = default;
+    Inventory & operator= (const Inventory &) = default;
+    Inventory & operator= (Inventory &&) = default;
 
     // syntactic sugar
     inline operator bool() const;
@@ -42,13 +47,6 @@ public:
 private:
     state_type _state;
     device_pointer _device;
-
-    // disallow
-private:
-    Inventory(const Inventory &) = delete;
-    Inventory(const Inventory &&) = delete;
-    const Inventory & operator= (const Inventory &) = delete;
-    const Inventory & operator= (const Inventory &&) = delete;
 };
 
 

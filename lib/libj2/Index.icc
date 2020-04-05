@@ -93,7 +93,7 @@ lookup(const name_type & channel) -> inventory_type &
     // initialized in its default state
 
     // if we fail to find an ancestor, initialize the inventory state with the default value
-    auto state = inventory_type::defaultState();
+    inventory_type inventory;
     // use a period as the separator
     auto separator = '.';
     // initialize the end of the search for the separator; initially, look through the entire
@@ -115,9 +115,7 @@ lookup(const name_type & channel) -> inventory_type &
         // if it's there
         if (place != _index.end()) {
             // grab it
-            auto & inventory = place->second;
-            // use its state as the initializer for our new inventory
-            state = inventory.state();
+            inventory = place->second;
             // and get out of here
             break;
         }
@@ -126,16 +124,16 @@ lookup(const name_type & channel) -> inventory_type &
     }
 
     // use the harvested state to initialize the channel inventory
-    auto status = _index.emplace(channel, state);
+    auto status = _index.emplace(channel, inventory);
     // if this failed
     if (status.second == false) {
         // something terrible has happened
         throw std::runtime_error("unable to emplace channel inventory");
     }
-    // if all went well, access the newly created inventory
-    auto & inventory = status.first->second;
+    // access the newly built shared state
+    auto & shared = status.first->second;
     // and return it
-    return inventory;
+    return shared;
 }
 
 

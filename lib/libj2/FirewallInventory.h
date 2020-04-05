@@ -15,6 +15,11 @@ class pyre::journal::FirewallInventory : public Inventory<true>
 public:
     // constructors
     inline explicit FirewallInventory(state_type = true, device_pointer = nullptr);
+    // let the compiler write the others
+    FirewallInventory(const FirewallInventory &) = default;
+    FirewallInventory(FirewallInventory &&) = default;
+    FirewallInventory & operator= (const FirewallInventory &) = default;
+    FirewallInventory & operator= (FirewallInventory &&) = default;
 
     // interface
 public:
@@ -26,13 +31,6 @@ public:
     // data
 private:
     state_type _fatal;
-
-    // disallow
-private:
-    FirewallInventory(const FirewallInventory &) = delete;
-    FirewallInventory(const FirewallInventory &&) = delete;
-    const FirewallInventory & operator= (const FirewallInventory &) = delete;
-    const FirewallInventory & operator= (const FirewallInventory &&) = delete;
 };
 
 
