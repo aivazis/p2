@@ -15,7 +15,6 @@ using alert_t = pyre::journal::alert_t;
 using debug_t = pyre::journal::debug_t;
 using chronicler_t = pyre::journal::chronicler_t;
 
-#include <iostream>
 
 // verify that the null diagnostic is always off
 int main() {
@@ -53,12 +52,9 @@ int main() {
     // make an alert
     alert_t alert;
     // ask it to render what we have
-    auto msg = alert.render(palette, page, meta);
+    alert.render(palette, page, meta);
 
-    // show me
-    // std::cout << msg;
-
-     // nothing to do
+    // all done
     return 0;
 }
 

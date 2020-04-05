@@ -15,7 +15,6 @@ using memo_t = pyre::journal::memo_t;
 using debug_t = pyre::journal::debug_t;
 using chronicler_t = pyre::journal::chronicler_t;
 
-#include <iostream>
 
 // verify that the null diagnostic is always off
 int main() {
@@ -53,12 +52,9 @@ int main() {
     // make a memo
     memo_t memo;
     // ask it to render what we have
-    auto msg = memo.render(palette, page, meta);
+    memo.render(palette, page, meta);
 
-    // show me
-    // std::cout << msg;
-
-     // nothing to do
+    // all done
     return 0;
 }
 
