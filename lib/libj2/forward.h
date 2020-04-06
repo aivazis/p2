@@ -114,7 +114,6 @@ namespace pyre::journal {
 
 
 // low level api
-#if defined(PYRE_CORE)
 namespace pyre::journal {
     // infrastructure
     template <typename inventoryT>
@@ -136,7 +135,6 @@ namespace pyre::journal {
     using memo_t = Memo;
     using alert_t = Alert;
 }
-#endif
 
 
 // developer api
