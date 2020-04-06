@@ -20,61 +20,61 @@ using channel_t = pyre::journal::channel_t<severityT, inventoryT>;
 
 // severity stubs
 // info
-class info_t :
-    public channel_t<info_t, inventory_t<false>>
+class myinfo_t :
+    public channel_t<myinfo_t, inventory_t<false>>
 {
     // types
 public:
-    using channel_type = channel_t<info_t, inventory_t<false>>;
+    using channel_type = channel_t<myinfo_t, inventory_t<false>>;
 
     // metamethods
 public:
     // index initialization is required...
-    info_t(const name_type &);
+    myinfo_t(const name_type &);
 };
 
 // info stub implementation
-info_t::info_t(const name_type & name) :
+myinfo_t::myinfo_t(const name_type & name) :
     channel_type(name)
 {}
 
 
 // warning
-class warning_t :
-    public channel_t<warning_t, inventory_t<true>>
+class mywarning_t :
+    public channel_t<mywarning_t, inventory_t<true>>
 {
     // types
 public:
-    using channel_type = channel_t<warning_t, inventory_t<true>>;
+    using channel_type = channel_t<mywarning_t, inventory_t<true>>;
 
     // metamethods
 public:
     // index initialization is required...
-    warning_t(const name_type &);
+    mywarning_t(const name_type &);
 };
 
 // warning stub implementation
-warning_t::warning_t(const name_type & name) :
+mywarning_t::mywarning_t(const name_type & name) :
     channel_type(name)
 {}
 
 
 // error
-class error_t :
-    public channel_t<error_t, inventory_t<true>>
+class myerror_t :
+    public channel_t<myerror_t, inventory_t<true>>
 {
     // types
 public:
-    using channel_type = channel_t<error_t, inventory_t<true>>;
+    using channel_type = channel_t<myerror_t, inventory_t<true>>;
 
     // metamethods
 public:
     // index initialization is required...
-    error_t(const name_type &);
+    myerror_t(const name_type &);
 };
 
 // error stub implementation
-error_t::error_t(const name_type & name) :
+myerror_t::myerror_t(const name_type & name) :
     channel_type(name)
 {}
 
@@ -82,14 +82,14 @@ error_t::error_t(const name_type & name) :
 // verify there is no crosstalk among the indices of different severities
 int main() {
     // make a couple of info channels
-    info_t info_1("info.channel_1");
-    info_t info_2("info.channel_2");
+    myinfo_t info_1("info.channel_1");
+    myinfo_t info_2("info.channel_2");
     // a couple of warning channels
-    warning_t warning_1("warning.channel_1");
-    warning_t warning_2("warning.channel_2");
+    mywarning_t warning_1("warning.channel_1");
+    mywarning_t warning_2("warning.channel_2");
     // and a couple of error channels
-    error_t error_1("error.channel_1");
-    error_t error_2("error.channel_2");
+    myerror_t error_1("error.channel_1");
+    myerror_t error_2("error.channel_2");
 
     // check the states
     assert (!info_1);
@@ -100,7 +100,7 @@ int main() {
     assert (error_2);
 
     // get the info index
-    const info_t::index_type & infos = info_1.index();
+    const myinfo_t::index_type & infos = info_1.index();
     // verify it has exactly two channels
     assert (infos.size() == 2);
     // one of them is "test.channel1"
@@ -109,7 +109,7 @@ int main() {
     assert (infos.contains("info.channel_2"));
 
     // get the warning index
-    const warning_t::index_type & warnings = warning_1.index();
+    const mywarning_t::index_type & warnings = warning_1.index();
     // verify it has exactly two channels
     assert (warnings.size() == 2);
     // one of them is "test.channel1"
@@ -118,7 +118,7 @@ int main() {
     assert (warnings.contains("warning.channel_2"));
 
     // get the error index
-    const error_t::index_type & errors = error_1.index();
+    const myerror_t::index_type & errors = error_1.index();
     // verify it has exactly two channels
     assert (errors.size() == 2);
     // one of them is "test.channel1"
