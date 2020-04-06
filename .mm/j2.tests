@@ -30,5 +30,14 @@ ansi_emulates.yes.harness := TERM=xterm
 # tell the driver that it should expect a compatible terminal
 ansi_emulates.yes.argv := 1
 
+# the {chronicler_verbosity} has special cases
+tests.libjournal.chronicler_verbosity.cases := chronicler_verbosity.3 chronicler_verbosity.5
+# set the verbosity to 3
+chronicler_verbosity.3.argv := 3
+chronicler_verbosity.3.harness := JOURNAL_VERBOSITY=3
+# set the verbosity to 5
+chronicler_verbosity.5.argv := 5
+chronicler_verbosity.5.harness := JOURNAL_VERBOSITY=5
+
 
 # end of file
