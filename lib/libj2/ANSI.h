@@ -26,6 +26,10 @@ public:
     static table_type x11;
     static table_type gray;
     static table_type misc;
+
+    // implementation details
+private:
+    static bool _compatible;
 };
 
 

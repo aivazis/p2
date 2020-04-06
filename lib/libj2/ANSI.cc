@@ -40,18 +40,19 @@ static ansi_t::table_type make_misc();
 // the emulation predicate
 bool ansi_t::compatible()
 {
-    // check; once and only once
-    static bool flag = emulates();
     // and return the result
-    return flag;
+    return _compatible;
 }
 
 
 // the static objects in {ansi_t}
+// color tables
 ansi_t::table_type ansi_t::null;
 ansi_t::table_type ansi_t::ansi = make_ansi();
 ansi_t::table_type ansi_t::gray = make_gray();
 ansi_t::table_type ansi_t::misc = make_misc();
+// the emulation flag
+bool ansi_t::_compatible = emulates();
 
 
 // implementations
