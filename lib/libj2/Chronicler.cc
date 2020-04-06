@@ -67,7 +67,7 @@ chronicler_t::verbosity_type initializeVerbosity()
         return level;
     }
     // otherwise, attempt to convert to a {verbosity_t}
-    auto status = std::atoi(setting);
+    auto status = std::strtol(setting, nullptr, 10);
     // if the conversion failed
     if (status == 0) {
         // go with our default
