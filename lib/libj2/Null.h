@@ -13,7 +13,9 @@ class pyre::journal::Null
 {
     // types
 public:
+    // channel names
     using name_type = name_t;
+    using nameset_type = nameset_t;
 
     // metamethods
 public:
@@ -28,6 +30,9 @@ public:
     // state management
     inline void activate() const;
     inline void deactivate() const;
+
+    // bulk activation
+    static inline void activateChannels(const nameset_type &);
 
     // disallow
 private:

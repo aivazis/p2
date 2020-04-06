@@ -192,9 +192,12 @@ namespace pyre::journal {
     using warning_t = Warning;
 
     // manipulators
-     using at = Locator;
-     using set = Selector;
-     using verbosity = Verbosity;
+    using at = Locator;
+    using set = Selector;
+    using verbosity = Verbosity;
+
+    // convenience
+    inline void init(int argc, char* argv[]);
 }
 
 

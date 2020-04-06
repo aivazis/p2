@@ -43,6 +43,15 @@ deactivate() const
 }
 
 
+void
+pyre::journal::Null::
+activateChannels(const nameset_type &)
+{
+    // nothing to do
+    return;
+}
+
+
 // manipulators
 auto
 pyre::journal::

@@ -18,11 +18,26 @@
 #include "Alert.h"
 // support for accessing the console
 #include "Device.h"
+#include "Trash.h"
 #include "Stream.h"
 #include "Console.h"
 
 // get the declaration
 #include "Chronicler.h"
+
+// get access to diagnostics; needed by the initializers
+// manipulators that are classes
+#include "Locator.h"
+#include "Selector.h"
+#include "Verbosity.h"
+// the null channel
+#include "Null.h"
+// access to the debug channel
+#include "Index.h"
+#include "Inventory.h"
+#include "Channel.h"
+#include "Diagnostic.h"
+#include "Debug.h"
 
 // aliases
 using console_t = pyre::journal::cout_t;
@@ -31,6 +46,58 @@ using chronicler_t = pyre::journal::chronicler_t;
 // helpers
 static chronicler_t::metadata_type initializeGlobals();
 static chronicler_t::verbosity_type initializeVerbosity();
+
+
+// the initializer
+void
+chronicler_t::init(int argc, char* argv[]) {
+    // our marker
+    string_type marker("--journal.");
+    // the table of parsed arguments
+    cmd_type commands;
+
+    // go trough the arguments
+    for (int i=0; i<argc; ++i) {
+        // convert into a string
+        string_type arg(argv[i]);
+        // filter the ones that are for me
+        if (arg.compare(0, marker.size(), marker) == 0) {
+            // extract the command
+            auto cmd = arg.substr(marker.size());
+            // split on the equal sign
+            auto sep = cmd.find("=");
+            // extract the name part
+            auto name = cmd.substr(0, sep);
+            // and the value part
+            auto value = (sep != string_t::npos) ? cmd.substr(sep+1, string_t::npos) : "";
+            // put them in the table
+            commands[name] = value;
+        }
+    }
+
+    // check for verbosity
+    auto & verb = commands["verbosity"];
+    // if there
+    if (!verb.empty()) {
+        // extract
+        int v = std::strtol(verb.c_str(), nullptr, 10);
+        // set it
+        verbosity(v);
+    }
+
+    // check for debug channels
+    auto & debug = commands["debug"];
+    // if there
+    if (!debug.empty()) {
+        // convert the comma separated list into a set of channel names
+        auto channels = nameset(debug);
+        // ask the debug channel to activate these
+        debug_t::activateChannels(channels);
+    }
+
+    // all dome
+    return;
+}
 
 
 // data

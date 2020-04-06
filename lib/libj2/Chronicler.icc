@@ -60,6 +60,47 @@ device(device_pointer device) -> device_pointer
 }
 
 
+// string -> nameset converter
+auto
+pyre::journal::Chronicler::
+nameset(string_t text) -> nameset_type
+{
+    // make a set
+    nameset_type channels;
+    // start at the beginning
+    name_type::size_type start { 0 };
+    // until much later
+    while (1) {
+        // look for a comma
+        auto pos = text.find(",", start);
+        // if not found
+        if (pos == string_t::npos) {
+            // there was no comma; grab what left of the string
+            auto channel = text.substr(start, string_t::npos);
+            // if it's not empty
+            if (!channel.empty()) {
+                // add it to the set
+                channels.emplace(channel);
+            }
+            // and we are done
+            break;
+        }
+        // if found, extract the substring
+        auto channel = text.substr(start, pos-start);
+        // if it's not empty
+        if (!channel.empty()) {
+            // add it to the set
+            channels.emplace(channel);
+        }
+        // update the start position and move on
+        start = pos + 1;
+    }
+
+    // all done
+    return channels;
+}
+
+
 #endif
 
 // end of file

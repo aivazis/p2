@@ -70,6 +70,18 @@ commit()
 }
 
 
+// initialize the channel index
+auto
+pyre::journal::Firewall::
+initializeIndex() -> index_type
+{
+    // make an empty index
+    index_type index;
+    // and return it
+    return index;
+}
+
+
 #endif
 
 // end of file

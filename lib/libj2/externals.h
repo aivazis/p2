@@ -35,6 +35,13 @@ namespace pyre::journal {
 
     // generic names
     using name_t = string_t;
+    // set of names
+    using nameset_t = std::set<name_t>;
+
+    // command line parsing
+    using cmdname_t = string_t;
+    using cmdvalue_t = string_t;
+    using cmd_t = std::map<cmdname_t, cmdvalue_t>;
 
     // a set of generic names
     using nameset_t = std::set<name_t>;

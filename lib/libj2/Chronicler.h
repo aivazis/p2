@@ -12,6 +12,8 @@
 class pyre::journal::Chronicler {
     // types
 public:
+    // strings;
+    using string_type = string_t;
     // verbosity level
     using verbosity_type = verbosity_t;
     // global metadata
@@ -23,8 +25,20 @@ public:
     using device_type = Device;
     using device_pointer = device_type::pointer_type;
 
+    // channel names
+    using name_type = name_t;
+    using nameset_type = nameset_t;
+
+    // command line parsing
+    using cmdname_type = cmdname_t;
+    using cmdvalue_type = cmdvalue_t;
+    using cmd_type = cmd_t;
+
     // interface
 public:
+    // the initializer that parses the program command line
+    static void init(int argc, char* argv[]);
+
     // verbosity
     static inline auto verbosity() -> verbosity_type;
     static inline auto verbosity(verbosity_type) -> verbosity_type;
@@ -33,6 +47,9 @@ public:
     // device support
     static inline auto device() -> device_pointer;
     static inline auto device(device_pointer) -> device_pointer;
+
+    // convert a string with a comma separated list of names into a set
+    static inline auto nameset(string_type) -> nameset_type;
 
     // data members
 private:

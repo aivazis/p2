@@ -21,7 +21,11 @@ public:
 
     // metamethods
 public:
-    inline Index();
+    inline Index() = default;
+    inline Index(const Index &) = default;
+    inline Index(Index &&) = default;
+    inline Index & operator= (const Index &) = default;
+    inline Index & operator= (Index &&) = default;
 
     // interface
 public:
@@ -34,8 +38,10 @@ public:
     inline auto begin() const;
     inline auto end() const;
 
-    // look up
+    // channel look up
     inline auto lookup(const name_type &) -> inventory_type &;
+    // manual inventory placement
+    inline void insert(const name_type &, const inventory_type &);
 
     // data members
 private:
@@ -43,10 +49,6 @@ private:
 
     // disallow
 private:
-    Index(const Index &) = delete;
-    Index(const Index &&) = delete;
-    const Index & operator= (const Index &) = delete;
-    const Index & operator= (const Index &&) = delete;
 };
 
 

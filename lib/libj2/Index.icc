@@ -10,11 +10,13 @@
 
 
 // metamethods
+#if 0
 template <typename inventoryT>
 pyre::journal::Index<inventoryT>::
 Index() :
     _index()
 {}
+#endif
 
 
 // interface
@@ -134,6 +136,18 @@ lookup(const name_type & channel) -> inventory_type &
     auto & shared = status.first->second;
     // and return it
     return shared;
+}
+
+
+template <typename inventoryT>
+void
+pyre::journal::Index<inventoryT>::
+insert(const name_type & channel, const inventory_type & inventory)
+{
+    // place the inventory in the map
+    _index[channel] = inventory;
+    // all done
+    return;
 }
 
 

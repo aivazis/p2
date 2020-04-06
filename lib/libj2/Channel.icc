@@ -189,7 +189,7 @@ lookup(const name_type & name) -> inventory_type &
 // static data
 template <typename severityT, typename inventoryT>
 typename pyre::journal::Channel<severityT, inventoryT>::index_type
-pyre::journal::Channel<severityT, inventoryT>::_index;
+pyre::journal::Channel<severityT, inventoryT>::_index { severityT::initializeIndex() };
 
 // static data
 template <typename severityT, typename inventoryT>

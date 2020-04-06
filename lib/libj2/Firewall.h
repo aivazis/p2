@@ -30,6 +30,8 @@ public:
 
     // commit the message to a device
     inline void commit();
+    // initialize the channel index
+    static inline auto initializeIndex() -> index_type;
 
     // disallow
 private:

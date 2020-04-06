@@ -16,6 +16,7 @@ class pyre::journal::Debug :
 public:
     using diagnostic_type = Diagnostic<Debug>;
     using channel_type = Channel<Debug, Inventory<false>>;
+    using nameset_type = nameset_t;
 
     // metamethods
 public:
@@ -23,7 +24,13 @@ public:
 
     // interface
 public:
+    // record the message in the journal
     inline void commit();
+
+    // initialize the channel index
+    static inline auto initializeIndex() -> index_type;
+    // bulk channelactivation
+    static inline void activateChannels(const nameset_type &);
 
     // disallow
 private:
