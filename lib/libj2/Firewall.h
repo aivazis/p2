@@ -25,13 +25,11 @@ public:
 
     // interface
 public:
+    // control over whether firewalls are fatal
     auto fatal() -> state_type;
     auto fatal(state_type) -> state_type;
-
     // commit the message to a device
     inline void commit();
-    // initialize the channel index
-    static inline auto initializeIndex() -> index_type;
 
     // disallow
 private:

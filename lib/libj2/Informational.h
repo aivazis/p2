@@ -25,8 +25,6 @@ public:
 public:
     // record the message in the journal
     inline void commit();
-    // initialize the channel index
-    static inline auto initializeIndex() -> index_type;
 
     // disallow
 private:

@@ -52,6 +52,8 @@ public:
     // accessors
     // my index
     static inline auto index() -> const index_type &;
+    // initialize the channel index
+    static inline auto initializeIndex() -> index_type;
 
     // my default state; it's read-only, and tied to the template argument
     static inline constexpr auto defaultState() -> state_type;
