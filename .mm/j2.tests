@@ -39,5 +39,11 @@ chronicler_verbosity.3.harness := JOURNAL_VERBOSITY=3
 chronicler_verbosity.5.argv := 5
 chronicler_verbosity.5.harness := JOURNAL_VERBOSITY=5
 
+# the {chronicler_init} test case needs command line arguments
+tests.libjournal.chronicler_init.cases := chronicler_init.cmdline chronicler_init.envvar
+# set verbosity and channels through the command line
+chronicler_init.cmdline.argv := --journal.verbosity=5 --journal.debug=test.init.one,test.init.two
+# set verbosity and channels through the environment
+chronicler_init.envvar.harness := JOURNAL_VERBOSITY=5 JOURNAL_DEBUG=test.init.one,test.init.two
 
 # end of file
