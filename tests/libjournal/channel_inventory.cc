@@ -10,16 +10,38 @@
 #include <cassert>
 
 
+// type aliases
+template <bool stateV = true>
+using inventory_t = pyre::journal::inventory_t<stateV>;
+
+template <typename severityT, typename inventoryT>
+using channel_t = pyre::journal::channel_t<severityT, inventoryT>;
+
+
 // severity stub
-class severity {};
-// channel realization
-using channel_t = pyre::journal::channel_t<severity, pyre::journal::inventory_t<true>>;
+class severity_t :
+    public channel_t<severity_t, inventory_t<true>>
+{
+    // types
+public:
+    using channel_type = channel_t<severity_t, inventory_t<true>>;
+
+    // metamethods
+public:
+    // index initialization is required...
+    severity_t(const name_type &);
+};
+
+// stub implementation
+severity_t::severity_t(const name_type & name) :
+    channel_type(name)
+{}
 
 
 // exercise the channel state interface
 int main() {
     // make a channel
-    channel_t channel("test.channel");
+    severity_t channel("test.channel");
 
     // get its inventory
     auto & inventory = channel.inventory();

@@ -10,17 +10,73 @@
 #include <cassert>
 
 
+// type aliases
+template <bool stateV = true>
+using inventory_t = pyre::journal::inventory_t<stateV>;
+
+template <typename severityT, typename inventoryT>
+using channel_t = pyre::journal::channel_t<severityT, inventoryT>;
+
+
+// severity stubs
 // info
-class info {};
-using info_t = pyre::journal::channel_t<info, pyre::journal::inventory_t<false>>;
+class info_t :
+    public channel_t<info_t, inventory_t<false>>
+{
+    // types
+public:
+    using channel_type = channel_t<info_t, inventory_t<false>>;
+
+    // metamethods
+public:
+    // index initialization is required...
+    info_t(const name_type &);
+};
+
+// info stub implementation
+info_t::info_t(const name_type & name) :
+    channel_type(name)
+{}
+
 
 // warning
-class warning {};
-using warning_t = pyre::journal::channel_t<warning, pyre::journal::inventory_t<true>>;
+class warning_t :
+    public channel_t<warning_t, inventory_t<true>>
+{
+    // types
+public:
+    using channel_type = channel_t<warning_t, inventory_t<true>>;
+
+    // metamethods
+public:
+    // index initialization is required...
+    warning_t(const name_type &);
+};
+
+// warning stub implementation
+warning_t::warning_t(const name_type & name) :
+    channel_type(name)
+{}
+
 
 // error
-class error {};
-using error_t = pyre::journal::channel_t<error, pyre::journal::inventory_t<true>>;
+class error_t :
+    public channel_t<error_t, inventory_t<true>>
+{
+    // types
+public:
+    using channel_type = channel_t<error_t, inventory_t<true>>;
+
+    // metamethods
+public:
+    // index initialization is required...
+    error_t(const name_type &);
+};
+
+// error stub implementation
+error_t::error_t(const name_type & name) :
+    channel_type(name)
+{}
 
 
 // verify there is no crosstalk among the indices of different severities
