@@ -28,7 +28,7 @@ pyre::journal::Trash::
 // interface
 auto
 pyre::journal::Trash::
-memo(const page_type &, const metadata_type &) -> Trash &
+memo(verbosity_type, const page_type &, const metadata_type &) -> Trash &
 {
     // all done
     return *this;
@@ -37,7 +37,7 @@ memo(const page_type &, const metadata_type &) -> Trash &
 
 auto
 pyre::journal::Trash::
-alert(const page_type &, const metadata_type &) -> Trash &
+alert(verbosity_type, const page_type &, const metadata_type &) -> Trash &
 {
     // all done
     return *this;

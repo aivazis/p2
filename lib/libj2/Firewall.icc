@@ -54,7 +54,7 @@ commit()
         // hunt down the device to use
         auto dev = device();
         // and record the entry
-        dev->memo(page(), metadata());
+        dev->memo(verbosity(), page(), metadata());
     }
 
     // if i'm fatal

@@ -21,6 +21,8 @@
 #include "Device.h"
 // get the stream declaration
 #include "Stream.h"
+// get the manager of the global state
+#include "Chronicler.h"
 
 
 // metamethods
@@ -33,9 +35,16 @@ pyre::journal::Stream::
 // interface
 auto
 pyre::journal::Stream::
-memo(const page_type & page, const metadata_type & meta) -> Stream &
+memo(verbosity_type verbosity, const page_type & page, const metadata_type & meta) -> Stream &
 {
-    // get the memo renderer to format the message
+    // get the verbosity level
+    auto maxVerbosity = chronicler_t::verbosity();
+    // if this message is chattier
+    if (verbosity > maxVerbosity) {
+        // do nothing
+        return *this;
+    }
+    // otherwise, get the memo renderer to format the message
     auto content = _memo->render(_palette, page, meta);
     // inject it into my stream
     _stream << content;
@@ -46,9 +55,16 @@ memo(const page_type & page, const metadata_type & meta) -> Stream &
 
 auto
 pyre::journal::Stream::
-alert(const page_type & page, const metadata_type & meta) -> Stream &
+alert(verbosity_type verbosity, const page_type & page, const metadata_type & meta) -> Stream &
 {
-    // get the memo renderer to format the message
+    // get the verbosity level
+    auto maxVerbosity = chronicler_t::verbosity();
+    // if this message is chattier
+    if (verbosity > maxVerbosity) {
+        // do nothing
+        return *this;
+    }
+    // otherwise, get the alert renderer to format the message
     auto content = _alert->render(_palette, page, meta);
     // inject it into my stream
     _stream << content;

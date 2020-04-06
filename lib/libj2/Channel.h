@@ -17,8 +17,8 @@ class pyre::journal::Channel {
     // types
 public:
     using severity_type = severityT;
-
     using inventory_type = inventoryT;
+
     using state_type = typename inventory_type::state_type;
     using device_pointer = typename inventory_type::device_pointer;
 

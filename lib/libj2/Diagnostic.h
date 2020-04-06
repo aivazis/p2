@@ -13,6 +13,9 @@ template <typename severityT>
 class pyre::journal::Diagnostic {
     // types
 public:
+    // my verbosity level
+    using verbosity_type = verbosity_t;
+    // my channel type
     using severity_type = severityT;
     // surely this is useful somewhere...
     using string_type = string_t;
@@ -30,7 +33,7 @@ public:
 
     // metamethods
 public:
-    inline Diagnostic();
+    inline explicit Diagnostic(verbosity_type = 1);
 
     // interface
 public:
@@ -38,6 +41,10 @@ public:
     inline auto buffer() -> bufmsg_type;
     inline auto page() const -> const page_type &;
     inline auto metadata() const -> const metadata_type &;
+    inline auto verbosity() const -> verbosity_type;
+
+    // mutators
+    inline auto verbosity(verbosity_type) -> verbosity_type;
 
     // conversion to an {ostream}
     inline operator ostream_type & ();
@@ -54,9 +61,10 @@ public:
 
     // data members
 private:
-    page_type _page;
-    buffer_type _buffer;
-    metadata_type _metadata;
+    page_type _page;               // the body of the message
+    buffer_type _buffer;           // the buffer in which entries accumulate
+    metadata_type _metadata;       // the message metadata
+    verbosity_type _verbosity;     // my verbosity level
 
     // disallow
 private:

@@ -63,6 +63,16 @@ newline(const Null & null) -> const Null &
 
 
 // the injection operators
+// verbosity level
+auto
+pyre::journal::
+operator<< (const Null & null, const Verbosity &) -> const Null &
+{
+    // do nothing
+    return null;
+}
+
+
 // location info
 auto
 pyre::journal::

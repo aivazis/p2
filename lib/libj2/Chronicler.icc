@@ -12,6 +12,26 @@
 // accessors
 auto
 pyre::journal::Chronicler::
+verbosity() -> verbosity_type
+{
+    // easy enough
+    return _verbosity;
+}
+
+
+auto
+pyre::journal::Chronicler::
+verbosity(verbosity_type verbosity) -> verbosity_type
+{
+    // swap
+    std::swap(verbosity, _verbosity);
+    // and return the old value
+    return verbosity;
+}
+
+
+auto
+pyre::journal::Chronicler::
 globals() -> metadata_type &
 {
     // grant access to my global metadata
@@ -28,6 +48,7 @@ device() -> device_pointer
 }
 
 
+// mutators
 auto
 pyre::journal::Chronicler::
 device(device_pointer device) -> device_pointer

@@ -12,6 +12,8 @@
 class pyre::journal::Chronicler {
     // types
 public:
+    // verbosity level
+    using verbosity_type = verbosity_t;
     // global metadata
     using key_type = key_t;
     using value_type = value_t;
@@ -23,9 +25,11 @@ public:
 
     // interface
 public:
+    // verbosity
+    static inline auto verbosity() -> verbosity_type;
+    static inline auto verbosity(verbosity_type) -> verbosity_type;
     // metadata
     static inline auto globals() -> metadata_type &;
-
     // device support
     static inline auto device() -> device_pointer;
     static inline auto device(device_pointer) -> device_pointer;
@@ -34,6 +38,7 @@ public:
 private:
     static device_pointer _device;
     static metadata_type _globals;
+    static verbosity_type _verbosity;
 
     // disallow
 private:

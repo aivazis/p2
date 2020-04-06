@@ -32,6 +32,8 @@ namespace pyre::journal {
 
     // the channel stream manipulators; some are actual class, others are functions that take
     // and return a channel
+    // verbosity level
+    class Verbosity;
     // location information
     class Locator;
     // metadata manipulation
@@ -44,6 +46,9 @@ namespace pyre::journal {
     // mark the end of a line of output
     inline auto newline(const Null &) -> const Null &;
     // injection operators
+    // verbosity level
+    inline auto
+    operator<< (const Null &, const Verbosity &) -> const Null &;
     // location info
     inline auto
     operator<< (const Null &, const Locator &) -> const Null &;
@@ -84,6 +89,10 @@ namespace pyre::journal {
     template <typename severityT>
     inline auto newline(Diagnostic<severityT> &) -> Diagnostic<severityT> &;
     // injection operators
+    // verbosity info
+    template <typename severityT>
+    inline auto
+    operator<< (Diagnostic<severityT> &, const Verbosity &) -> Diagnostic<severityT> &;
     // location info
     template <typename severityT>
     inline auto
@@ -185,6 +194,7 @@ namespace pyre::journal {
     // manipulators
      using at = Locator;
      using set = Selector;
+     using verbosity = Verbosity;
 }
 
 

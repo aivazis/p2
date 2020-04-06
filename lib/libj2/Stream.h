@@ -27,9 +27,9 @@ public:
     // interface
 public:
     // developer diagnostics
-    virtual auto memo(const page_type &, const metadata_type &) -> Stream &;
+    virtual auto memo(verbosity_type, const page_type &, const metadata_type &) -> Stream &;
     // user facing diagnostics
-    virtual auto alert(const page_type &, const metadata_type &) -> Stream &;
+    virtual auto alert(verbosity_type, const page_type &, const metadata_type &) -> Stream &;
 
     // configuration data
 protected:

@@ -12,10 +12,11 @@
 // metamethods
 template <typename severityT>
 pyre::journal::Diagnostic<severityT>::
-Diagnostic() :
+Diagnostic(verbosity_type verbosity) :
     _page(),
     _buffer(),
-    _metadata()
+    _metadata(),
+    _verbosity(verbosity)
 {}
 
 
@@ -48,6 +49,29 @@ metadata() const -> const metadata_type &
 {
     // easy enough
     return _metadata;
+}
+
+
+template <typename severityT>
+auto
+pyre::journal::Diagnostic<severityT>::
+verbosity() const -> verbosity_type
+{
+    // easy enough
+    return _verbosity;
+}
+
+
+// mutators
+template <typename severityT>
+auto
+pyre::journal::Diagnostic<severityT>::
+verbosity(verbosity_type verbosity) -> verbosity_type
+{
+    // swap
+    std::swap(verbosity, _verbosity);
+    // and return the old one
+    return _verbosity;
 }
 
 
@@ -151,6 +175,20 @@ newline(Diagnostic<severityT> & channel) -> Diagnostic<severityT> &
 
 
 // the injection operators
+// verbosity level
+template <typename severityT>
+auto
+pyre::journal::
+operator<< (Diagnostic<severityT> & channel, const Verbosity & verbosity) -> Diagnostic<severityT> &
+{
+    // adjust the verbosity of the channel
+    channel.verbosity(verbosity.verbosity());
+
+    // all done
+    return channel;
+}
+
+
 // location info
 template <typename severityT>
 auto

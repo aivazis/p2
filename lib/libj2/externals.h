@@ -25,9 +25,12 @@
 
 // aliases for fundamental types that define implementation choices
 namespace pyre::journal {
+    // sizes of things
+    using size_t = std::size_t;
     // strings
     using string_t = std::string;
-    // output stream; careful here: we already have a {stream_t} that points to {Stream}
+    // output streams; careful here: we already have a {stream_t} that points to the journal
+    // {Stream} device
     using outputstream_t = std::ostream;
 
     // generic names
@@ -36,6 +39,8 @@ namespace pyre::journal {
     // a set of generic names
     using nameset_t = std::set<name_t>;
 
+    // a channel's verbosity level
+    using verbosity_t = size_t;
     // a page is the payload of a journal entry
     using page_t = std::vector<string_t>;
     // the metadata associated with an journal entry

@@ -38,6 +38,7 @@
 // manipulators that are classes
 #include "Locator.h"
 #include "Selector.h"
+#include "Verbosity.h"
 
 // the null diagnostic
 #include "Null.h"

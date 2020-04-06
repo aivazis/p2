@@ -20,9 +20,9 @@ public:
     // interface
 public:
     // developer diagnostics
-    virtual auto memo(const page_type &, const metadata_type &) -> Trash &;
+    virtual auto memo(verbosity_type, const page_type &, const metadata_type &) -> Trash &;
     // user facing diagnostics
-    virtual auto alert(const page_type &, const metadata_type &) -> Trash &;
+    virtual auto alert(verbosity_type, const page_type &, const metadata_type &) -> Trash &;
 
     // disallow
 private:

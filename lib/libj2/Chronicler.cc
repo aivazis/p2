@@ -28,12 +28,13 @@
 using console_t = pyre::journal::cout_t;
 using chronicler_t = pyre::journal::chronicler_t;
 
-// helper
-static
-chronicler_t::metadata_type initializeGlobals();
+// helpers
+static chronicler_t::metadata_type initializeGlobals();
+static chronicler_t::verbosity_type initializeVerbosity();
 
 
 // data
+chronicler_t::verbosity_type chronicler_t::_verbosity = initializeVerbosity();
 chronicler_t::metadata_type chronicler_t::_globals = initializeGlobals();
 chronicler_t::device_pointer chronicler_t::_device = std::make_shared<console_t>();
 
@@ -50,6 +51,32 @@ chronicler_t::metadata_type initializeGlobals()
 
     // return it
     return table;
+}
+
+
+chronicler_t::verbosity_type initializeVerbosity()
+{
+    // establish the default severity level
+    pyre::journal::verbosity_t level = 1;
+
+    // read the {JOURNAL_VERB} environment variable
+    auto setting = std::getenv("JOURNAL_VERBOSITY");
+    // if it doesn't exist
+    if (setting == nullptr) {
+        // go with our default
+        return level;
+    }
+    // otherwise, attempt to convert to a {verbosity_t}
+    auto status = std::atoi(setting);
+    // if the conversion failed
+    if (status == 0) {
+        // go with our default
+        return level;
+    }
+
+    // otherwise, use the converted value as the new level; note that this implementation makes
+    // it impossible to set the verbosity level to zero from the environment
+    return status;
 }
 
 

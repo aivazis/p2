@@ -36,7 +36,7 @@ commit()
     // otherwise, hunt down the device to use
     auto dev = device();
     // record the entry
-    dev->memo(page(), metadata());
+    dev->memo(verbosity(), page(), metadata());
 
     // all done
     return;
