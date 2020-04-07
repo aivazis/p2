@@ -24,7 +24,7 @@ public:
     // interface
 public:
     // accessors
-    auto verbosity() const -> verbosity_type;
+    inline auto verbosity() const -> verbosity_type;
 
     // data
 private:

@@ -24,9 +24,9 @@ public:
     // interface
 public:
     // accessors
-    auto file() const -> const value_type &;
-    auto line() const -> const value_type &;
-    auto func() const -> const value_type &;
+    inline auto file() const -> const value_type &;
+    inline auto line() const -> const value_type &;
+    inline auto func() const -> const value_type &;
 
     // data
 private:
