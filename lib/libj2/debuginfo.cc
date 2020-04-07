@@ -18,7 +18,7 @@ using debug_t = pyre::journal::debug_t;
 
 // check the state
 extern "C"
-bool debuginfo_active(const char * channel)
+int debuginfo_active(const char * channel)
 {
     // get the channel state and return it
     return debug_t(channel).state();

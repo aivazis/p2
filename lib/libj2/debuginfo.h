@@ -16,7 +16,7 @@
 extern "C" {
 #endif
 
-    bool debuginfo_active(const char * channel);
+    int  debuginfo_active(const char * channel);
     void debuginfo_activate(const char * channel);
     void debuginfo_deactivate(const char * channel);
     void debuginfo_out(const char * channel, __HERE_DECL__, const char * fmt, ...);

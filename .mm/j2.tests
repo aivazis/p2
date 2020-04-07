@@ -14,9 +14,12 @@ j2.lib.tests.extern := j2.lib
 j2.lib.tests.harness :=
 # arguments to pass to each test case
 j2.lib.tests.argv :=
-# compiler arguments
-j2.lib.tests.flags += -Wall $($(compiler.c++).std.c++17)
-j2.lib.tests.defines := PYRE_CORE
+# c++ compiler arguments
+j2.lib.tests.c++.defines := PYRE_CORE
+j2.lib.tests.c++.flags += -Wall $($(compiler.c++).std.c++17)
+# c compiler arguments
+j2.lib.tests.c.defines := PYRE_CORE
+j2.lib.tests.c.flags += -Wall $($(compiler.c).std.c11)
 
 # test case configuration
 # the {ansi_emulates} driver has some special cases
