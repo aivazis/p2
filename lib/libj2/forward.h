@@ -194,6 +194,10 @@ namespace pyre::journal {
     using set = Selector;
     using verbosity = Verbosity;
 
+    // aliases for the manipulators
+    using locator_t = Locator;
+    using selector_t = Selector;
+
     // convenience
     inline void init(int argc, char* argv[]);
 }
