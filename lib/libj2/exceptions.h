@@ -16,8 +16,8 @@ public:
 
     // metamethods
 public:
-    firewall_error(const char *);
-    firewall_error(const string_type &);
+    inline firewall_error(const char *);
+    inline firewall_error(const string_type &);
 };
 
 
