@@ -5,7 +5,7 @@
 
 
 // the package
-#include <j2/journal.h>
+#include <p2/journal.h>
 
 
 // exercise throwing and catching {firewall_error}

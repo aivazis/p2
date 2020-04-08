@@ -5,7 +5,7 @@
 
 
 // get the journal
-#include <j2/debuginfo.h>
+#include <p2/journal/debuginfo.h>
 
 
 // sanity check: make sure the header file is accessible

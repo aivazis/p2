@@ -5,7 +5,7 @@
 
 
 // get the journal
-#include <j2/journal.h>
+#include <p2/journal.h>
 
 
 // verify that the debug diagnostic is off by default, and that we can manipulate its state

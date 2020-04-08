@@ -9,7 +9,7 @@
 
 
 // publish the interface
-#include "public.h"
+#include "journal/public.h"
 
 
 #endif

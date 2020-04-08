@@ -8,7 +8,7 @@
 #define NDEBUG
 #undef PYRE_CORE
 // get the journal
-#include <j2/journal.h>
+#include <p2/journal.h>
 
 // re-enable debugging support so we have assert
 #undef NDEBUG

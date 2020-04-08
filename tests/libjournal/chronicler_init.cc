@@ -5,7 +5,7 @@
 
 #include <iostream>
 // get the journal
-#include <j2/journal.h>
+#include <p2/journal.h>
 // support
 #include <cassert>
 
