@@ -36,6 +36,9 @@ j2.ext.capsule :=
 j2.ext.wraps := j2.lib
 # external dependencies
 j2.ext.extern := j2.lib pybind11 python
+# compiler control
+j2.ext.lib.c++.defines += PYRE_CORE
+j2.ext.lib.c++.flags += $($(compiler.c++).std.c++17)
 
 # get the testsuites
 include j2.lib.tests j2.ext.tests
