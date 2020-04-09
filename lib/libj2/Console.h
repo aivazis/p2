@@ -10,6 +10,11 @@
 
 // a device that prints to {cout}
 class pyre::journal::Console : public Stream {
+    // types
+public:
+    // pointers to me
+    using pointer_type = std::shared_ptr<Console>;
+
     // metamethods
 public:
     // constructor

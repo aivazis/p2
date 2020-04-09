@@ -10,6 +10,11 @@
 
 // a device that ignores all requests for output
 class pyre::journal::Trash : public Device {
+    // types
+public:
+    // pointers to me
+    using pointer_type = std::shared_ptr<Trash>;
+
     // metamethods
 public:
     // constructor

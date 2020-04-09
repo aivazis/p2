@@ -10,6 +10,11 @@
 
 // a device that prints to {cerr}
 class pyre::journal::ErrorConsole : public Stream {
+    // types
+public:
+    // pointers to me
+    using pointer_type = std::shared_ptr<ErrorConsole>;
+
     // metamethods
 public:
     // constructor

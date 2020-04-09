@@ -12,6 +12,9 @@
 class pyre::journal::Stream : public Device {
     // types
 public:
+    // pointers to me
+    using pointer_type = std::shared_ptr<Stream>;
+
     using palette_type = palette_t;
     using stream_type = outputstream_t;
     using renderer_type = Renderer;
@@ -20,7 +23,7 @@ public:
     // metamethods
 public:
     // constructor
-    inline explicit Stream(const name_type &, stream_type &);
+    inline Stream(const name_type &, stream_type &);
     // destructor
     virtual ~Stream();
 
