@@ -21,6 +21,7 @@ debug(py::module & m) {
         .def(py::init<const string_t &>(), "name"_a)
         // accessors
         .def("name", &debug_t::name)
+        .def("state", (bool (debug_t::*)() const) &debug_t::state)
         .def("device", (debug_t::device_pointer (debug_t::*)() const) &debug_t::device)
         // static interface
         .def_static("defaultState", &debug_t::defaultState)

@@ -1,0 +1,19 @@
+# -*- Makefile -*-
+#
+# michael a.g. aïvázis <michael.aivazis@para-sim.com>
+# (c) 1998-2019 all rights reserved
+
+
+# the j2 extennsion module test suite
+j2.ext.tests.stem := journal.ext
+j2.ext.tests.prerequisites := j2.ext
+
+
+# global testsuite settings; these apply to all test cases
+# the harness is the portion of the command line before the test driver itselrf
+j2.ext.tests.harness :=
+# arguments to pass to each test case
+j2.ext.tests.argv :=
+
+
+# end of file

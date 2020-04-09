@@ -10,15 +10,17 @@ j2.micro := $(repo.micro)
 j2.revision := $(repo.revision)
 
 # j2 builds a python package
-j2.packages := # j2.pkg
+j2.packages := j2.pkg
 # libraries
 j2.libraries := j2.lib
 # python extensions
-j2.extensions := # j2.ext
+j2.extensions := j2.ext
 # and test suites
-j2.tests := j2.lib.tests
+j2.tests := j2.lib.tests j2.ext.tests
 
 # the j2 library settings
+# the file with the library metadata
+# j2.lib.meta := meta.cc.in
 # the destination include directory
 j2.lib.incdir := $(builder.dest.inc)/p2/journal/
 # the master header file; it is deposited one level above the rest
@@ -36,6 +38,6 @@ j2.ext.wraps := j2.lib
 j2.ext.extern := j2.lib pybind11 python
 
 # get the testsuites
-include j2.tests
+include j2.lib.tests j2.ext.tests
 
 # end of file
