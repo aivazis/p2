@@ -5,7 +5,7 @@
 
 
 # the libj2 test suite
-j2.lib.tests.stem := libjournal
+j2.lib.tests.stem := journal.lib
 j2.lib.tests.prerequisites := j2.lib
 j2.lib.tests.extern := j2.lib
 
@@ -24,7 +24,7 @@ j2.lib.tests.c.flags += -Wall $($(compiler.c).std.c11)
 
 # test case configuration
 # the {ansi_emulates} driver has some special cases
-tests.libjournal.ansi_emulates.cases := ansi_emulates.yes ansi_emulates.no
+tests.journal.lib.ansi_emulates.cases := ansi_emulates.yes ansi_emulates.no
 # run with a value for TERM that indicates a terminal that does not support ANSI emulation
 ansi_emulates.no.harness := TERM=foo
 # tell the driver that it should expect an incompatible terminal
@@ -36,7 +36,7 @@ ansi_emulates.yes.argv := 1
 
 
 # the {chronicler_verbosity} has special cases
-tests.libjournal.chronicler_verbosity.cases := chronicler_verbosity.3 chronicler_verbosity.5
+tests.journal.lib.chronicler_verbosity.cases := chronicler_verbosity.3 chronicler_verbosity.5
 # set the verbosity to 3
 chronicler_verbosity.3.argv := 3
 chronicler_verbosity.3.harness := JOURNAL_VERBOSITY=3
@@ -45,7 +45,7 @@ chronicler_verbosity.5.argv := 5
 chronicler_verbosity.5.harness := JOURNAL_VERBOSITY=5
 
 # the {chronicler_init} test case needs command line arguments
-tests.libjournal.chronicler_init.cases := chronicler_init.cmdline chronicler_init.envvar
+tests.journal.lib.chronicler_init.cases := chronicler_init.cmdline chronicler_init.envvar
 # set verbosity and channels through the command line
 chronicler_init.cmdline.argv := --journal.verbosity=5 --journal.debug=test.init.one,test.init.two
 # set verbosity and channels through the environment
