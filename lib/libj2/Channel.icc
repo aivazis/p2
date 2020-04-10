@@ -58,24 +58,30 @@ device() const -> device_pointer
 {
     // ask my inventory for its device
     auto dev = _inventory.device();
-    // if that's not set
-    if (!dev) {
-        // get my channel-wide default
-        dev = defaultDevice();
-        // if that's not set either
-        if (!dev) {
-            // ask the {chronicler} for the global default
-            dev = Chronicler::device();
-            // finally, if that's not set either
-            if (!dev) {
-                // use the trash can
-                dev = std::make_shared<Trash>();
-            }
-        }
+    // if it's set
+    if (dev) {
+        // that's the one
+        return dev;
     }
 
-    // all done
-    return dev;
+    // try my channel-wide default
+    dev = defaultDevice();
+    // if it's set
+    if (dev) {
+        // that's the one
+        return dev;
+    }
+
+    // fall back to the global setting
+    dev = Chronicler::device();
+    // if it's set
+    if (dev) {
+        // that's the one
+        return dev;
+    }
+
+    // otherwise, make a trash can and return it
+    return std::make_shared<Trash>();
 }
 
 
