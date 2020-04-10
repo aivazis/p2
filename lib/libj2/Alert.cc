@@ -32,6 +32,12 @@ pyre::journal::Alert::
 header(palette_type & palette, buffer_type & buffer,
        const page_type & page, const metadata_type & meta) const
 {
+    // if there is nothing to print
+    if (page.empty()) {
+        // we are done
+        return;
+    }
+
     // get the severity
     auto severity = meta.at("severity");
     // ask the palette for the severity decoration
@@ -63,6 +69,11 @@ pyre::journal::Alert::
 body(palette_type & palette, buffer_type & buffer,
      const page_type & page, const metadata_type &) const
 {
+    // the page had up to one line
+    if (page.size() < 2) {
+        // nothing further to do
+        return;
+    }
     // go through the lines in the page; skip the first one, since it was printed as part of
     // the header
     for (auto line = page.begin()+1; line != page.end(); ++line) {

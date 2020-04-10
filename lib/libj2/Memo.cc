@@ -28,8 +28,14 @@ pyre::journal::Memo::
 void
 pyre::journal::Memo::
 header(palette_type & palette, buffer_type & buffer,
-       const page_type &, const metadata_type & meta) const
+       const page_type & page, const metadata_type & meta) const
 {
+    // if there is no contents
+    if (page.empty()) {
+        // we are done
+        return;
+    }
+
     // get the channel severity
     auto severity = meta.at("severity");
 
@@ -38,9 +44,11 @@ header(palette_type & palette, buffer_type & buffer,
 
     // attempt to get location information
     // N.B.: we only print line number and function name if we know the filename
-    auto & filename = meta.at("filename");
+    auto loc = meta.find("filename");
     // if it's there
-    if (!filename.empty()) {
+    if (loc != meta.end()) {
+        // extract the filename
+        auto filename = loc->second;
         // make some room and turn on location formatting
         buffer << palette[severity];
         // set a maximum length for the rendered filename
@@ -120,6 +128,12 @@ pyre::journal::Memo::
 body(palette_type & palette, buffer_type & buffer, const page_type & page,
      const metadata_type & meta) const
 {
+    // if the page is empty
+    if (page.empty()) {
+        // nothing to do
+        return;
+    }
+
     // make a marker
     bufmsg_type marker { " -- "  };
     // get the channel severity

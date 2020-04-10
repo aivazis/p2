@@ -57,6 +57,12 @@ auto
 pyre::journal::Stream::
 alert(verbosity_type verbosity, const page_type & page, const metadata_type & meta) -> Stream &
 {
+    // if there is no payload and no metadata
+    if (page.empty() && meta.empty()) {
+        // nothing else to do
+        return *this;
+    }
+
     // get the verbosity level
     auto maxVerbosity = chronicler_t::verbosity();
     // if this message is chattier
@@ -64,10 +70,12 @@ alert(verbosity_type verbosity, const page_type & page, const metadata_type & me
         // do nothing
         return *this;
     }
+
     // otherwise, get the alert renderer to format the message
     auto content = _alert->render(_palette, page, meta);
     // inject it into my stream
     _stream << content;
+
     // all done
     return *this;
 }
