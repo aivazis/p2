@@ -12,7 +12,9 @@
 // metamethods
 pyre::journal::Trash::
 Trash() :
-    device_t("trash")
+    device_t("trash"),
+    _memo { std::make_shared<Memo>() },
+    _alert { std::make_shared<Alert>() }
 {}
 
 

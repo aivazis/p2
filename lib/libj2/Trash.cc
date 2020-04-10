@@ -12,6 +12,10 @@
 // support for color
 #include "ASCII.h"
 #include "CSI.h"
+// renderer support
+#include "Renderer.h"
+#include "Memo.h"
+#include "Alert.h"
 // get the device declaration
 #include "Device.h"
 // get the stream declaration
@@ -28,8 +32,12 @@ pyre::journal::Trash::
 // interface
 auto
 pyre::journal::Trash::
-memo(verbosity_type, const page_type &, const metadata_type &) -> Trash &
+memo(verbosity_type, const page_type & page, const metadata_type & meta) -> Trash &
 {
+    // make an empty palette
+    palette_type palette;
+    // go through the motions, and then discard the content
+    _memo->render(palette, page, meta);
     // all done
     return *this;
 }
@@ -37,8 +45,12 @@ memo(verbosity_type, const page_type &, const metadata_type &) -> Trash &
 
 auto
 pyre::journal::Trash::
-alert(verbosity_type, const page_type &, const metadata_type &) -> Trash &
+alert(verbosity_type, const page_type & page, const metadata_type & meta) -> Trash &
 {
+    // make an empty palette
+    palette_type palette;
+    // go through the motions, and then discard the content
+    _alert->render(palette, page, meta);
     // all done
     return *this;
 }

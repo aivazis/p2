@@ -15,6 +15,10 @@ public:
     // pointers to me
     using pointer_type = std::shared_ptr<Trash>;
 
+    using palette_type = palette_t;
+    using renderer_type = Renderer;
+    using renderer_pointer = Renderer::pointer_type;
+
     // metamethods
 public:
     // constructor
@@ -28,6 +32,13 @@ public:
     virtual auto memo(verbosity_type, const page_type &, const metadata_type &) -> Trash &;
     // user facing diagnostics
     virtual auto alert(verbosity_type, const page_type &, const metadata_type &) -> Trash &;
+
+    // data
+private:
+    // the renderer for memos
+    renderer_pointer _memo;
+    // the renderer for alerts
+    renderer_pointer _alert;
 
     // disallow
 private:
