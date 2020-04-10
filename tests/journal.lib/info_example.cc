@@ -16,7 +16,7 @@ int main() {
     pyre::journal::info_t channel("tests.journal.info");
 
     // activate the channel
-    // channel.activate();
+    channel.deactivate();
 
     // inject something into the channel
     channel

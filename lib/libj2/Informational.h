@@ -11,11 +11,11 @@
 // user facing diagnostic; meant for informational messages, such as progress reports
 class pyre::journal::Informational :
     public Diagnostic<Informational>,
-    public Channel<Informational, Inventory<false>> {
+    public Channel<Informational, Inventory<true>> {
     // types
 public:
     using diagnostic_type = Diagnostic<Informational>;
-    using channel_type = Channel<Informational, Inventory<false>>;
+    using channel_type = Channel<Informational, Inventory<true>>;
 
     // metamethods
 public:
