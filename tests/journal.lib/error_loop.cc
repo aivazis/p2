@@ -11,14 +11,14 @@
 
 
 // type aliases
-using error_t = pyre::journal::error_t;
+using myerror_t = pyre::journal::error_t;
 using trash_t = pyre::journal::trash_t;
 
 
 // exercise the channel manipulators
 int main() {
     // make an error channel
-    error_t channel("tests.journal.error");
+    myerror_t channel("tests.journal.error");
 
     // send the output to the trash
     channel.device(std::make_shared<trash_t>());
