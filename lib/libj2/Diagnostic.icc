@@ -99,9 +99,9 @@ record() -> Diagnostic<severityT> &
     // write the journal entry to the device
     self.commit();
 
-    // clean up
+    // clean up the page, but not the metadata; metadata accumulate for the lifetime of a
+    // channel instance, so they can be set whenever the information becomes available
     _page.clear();
-    _metadata.clear();
 
     // all done
     return self;

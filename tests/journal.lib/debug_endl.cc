@@ -28,8 +28,8 @@ int main() {
     assert (channel.buffer().empty());
     // the page is empty
     assert (channel.page().empty());
-    // the metadata has been flushed
-    assert (channel.metadata().empty());
+    // but the metadata has been retained
+    assert (!channel.metadata().empty());
 
     // all done
     return 0;
