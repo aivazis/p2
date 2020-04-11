@@ -96,8 +96,20 @@ record() -> Diagnostic<severityT> &
 
     // me as a {severity_type}; this works trivially because of crtp
     severity_type & self = static_cast<severity_type &>(*this);
-    // write the journal entry to the device
-    self.commit();
+
+    // attempt to
+    try {
+        // write the journal entry to the device
+        self.commit();
+    }
+    // if anything goes wrong, e.g. a {firewall_t} or {error_t} raises an exception because
+    // it's marked as fatal
+    catch (...) {
+        // clean up the page; see below regarding the channel metadata
+        _page.clear();
+        // and raise the error again
+        throw;
+    }
 
     // clean up the page, but not the metadata; metadata accumulate for the lifetime of a
     // channel instance, so they can be set whenever the information becomes available
