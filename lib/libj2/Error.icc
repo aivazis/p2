@@ -11,8 +11,8 @@
 
 // metamethods
 pyre::journal::Error::
-Error(name_type name) :
-    diagnostic_type(),
+Error(name_type name, verbosity_type verbosity) :
+    diagnostic_type(verbosity),
     channel_type(name)
 {
     // decorate with my severity

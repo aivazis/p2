@@ -20,7 +20,7 @@ public:
 
     // metamethods
 public:
-    inline explicit Warning(name_type name);
+    inline explicit Warning(name_type name, verbosity_type = 1);
 
     // interface
 public:

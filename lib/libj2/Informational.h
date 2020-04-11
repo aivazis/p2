@@ -19,7 +19,7 @@ public:
 
     // metamethods
 public:
-    inline explicit Informational(name_type name);
+    inline explicit Informational(name_type name, verbosity_type = 1);
 
     // interface
 public:

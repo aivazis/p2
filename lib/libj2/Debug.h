@@ -20,7 +20,7 @@ public:
 
     // metamethods
 public:
-    inline explicit Debug(name_type name);
+    inline explicit Debug(name_type name, verbosity_type = 1);
 
     // interface
 public:

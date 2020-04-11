@@ -21,7 +21,7 @@ public:
 
     // metamethods
 public:
-    inline explicit Firewall(const name_type & name);
+    inline explicit Firewall(const name_type &, verbosity_type = 1);
 
     // interface
 public:
