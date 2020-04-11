@@ -16,7 +16,7 @@ using firewall_t = pyre::journal::firewall_t;
 
 // exercise the channel manipulators
 int main() {
-    // make an info channel
+    // make a firewall
     firewall_t channel("tests.journal.firewall");
 
     // gingerly

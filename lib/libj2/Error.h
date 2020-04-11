@@ -12,11 +12,14 @@
 // cannot recover
 class pyre::journal::Error :
     public Diagnostic<Error>,
-    public Channel<Error, Inventory<true>> {
+    public Channel<Error, Fatal<true, true>> {
     // types
 public:
+    // my parts
     using diagnostic_type = Diagnostic<Error>;
-    using channel_type = Channel<Error, Inventory<true>>;
+    using channel_type = Channel<Error, Fatal<true, true>>;
+    // the error indicator
+    using exception_type = application_error;
 
     // metamethods
 public:
@@ -24,6 +27,9 @@ public:
 
     // interface
 public:
+    // control over whether errors are fatal
+    inline auto fatal() -> state_type;
+    inline auto fatal(state_type) -> state_type;
     // record the message in the journal
     inline void commit();
 

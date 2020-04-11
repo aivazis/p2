@@ -9,6 +9,20 @@
 #else
 
 
+// application_error
+// constructors
+pyre::journal::application_error::
+application_error(const char * what) :
+    std::runtime_error(what)
+{}
+
+
+pyre::journal::application_error::
+application_error(const string_type & what) :
+    std::runtime_error(what)
+{}
+
+
 // firewall_error
 // constructors
 pyre::journal::firewall_error::

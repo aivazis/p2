@@ -47,7 +47,7 @@
 #include "Chronicler.h"
 #include "Index.h"
 #include "Inventory.h"
-#include "FirewallInventory.h"
+#include "Fatal.h"
 #include "Channel.h"
 #include "Diagnostic.h"
 // the developer facing channels

@@ -25,7 +25,17 @@ int main() {
 
     // inject repeatedly
     for (auto i=0; i<10; ++i) {
-        channel << "i: " << i << pyre::journal::endl;
+        // carefully
+        try {
+            // inject something
+            channel << "i: " << i << pyre::journal::endl;
+            // errors are fatal by default, so we shouldn't be able to get here
+            throw std::logic_error("unreachable");
+            // if all goes well
+        }  catch (const myerror_t::exception_type & error) {
+            // make sure the reason was recorded correctly
+            assert (error.what() == channel.name() + myerror_t::string_type(": application error"));
+        }
     }
 
     // all done

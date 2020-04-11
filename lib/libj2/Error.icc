@@ -23,20 +23,45 @@ Error(name_type name, verbosity_type verbosity) :
 
 
 // interface
+// accessors
+auto
+pyre::journal::Error::
+fatal() -> state_type
+{
+    // easy enough
+    return inventory().fatal();
+}
+
+
+// mutators
+auto
+pyre::journal::Error::
+fatal(state_type flag) -> state_type
+{
+    // easy enough
+    return inventory().fatal(flag);
+}
+
+
 void
 pyre::journal::Error::
 commit()
 {
-    // if i'm not an active channel
-    if (!state()) {
-        // do nothing
-        return;
+    // if i'm an active channel, generate some output
+    if (state()) {
+        // hunt down the device to use
+        auto dev = device();
+        // record the entry
+        dev->alert(verbosity(), page(), metadata());
     }
 
-    // otherwise, hunt down the device to use
-    auto dev = device();
-    // record the entry
-    dev->alert(verbosity(), page(), metadata());
+    // if i'm fatal
+    if (fatal()) {
+        // prepare a message
+        string_type msg = name() + string_type(": application error");
+        // throw an application error
+        throw application_error(msg);
+    }
 
     // all done
     return;

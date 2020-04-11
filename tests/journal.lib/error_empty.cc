@@ -10,13 +10,26 @@
 #include <cassert>
 
 
+// type alias
+using myerror_t = pyre::journal::error_t;
+
+
 // exercise the channel manipulators
 int main() {
     // make an info channel
-    pyre::journal::error_t channel("tests.journal.error");
+    myerror_t channel("tests.journal.error");
 
-    // inject nothing
-    channel << pyre::journal::endl;
+    // carefully
+    try {
+        // inject nothing
+        channel << pyre::journal::endl;
+        // errors are fatal by default, so we shouldn't be able to get here
+        throw std::logic_error("unreachable");
+    // if all goes well
+    }  catch (const myerror_t::exception_type & error) {
+        // make sure the reason was recorded correctly
+        assert (error.what() == channel.name() + myerror_t::string_type(": application error"));
+    }
 
     // all done
     return 0;

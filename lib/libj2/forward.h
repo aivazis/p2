@@ -11,6 +11,7 @@
 // forward declarations of all user facing entities
 namespace pyre::journal {
     // the exceptions
+    class application_error;
     class firewall_error;
 
     // terminal support
@@ -68,7 +69,7 @@ namespace pyre::journal {
     // the common channel state
     template <bool = true> class Inventory;
     // firewall state
-    class FirewallInventory;
+    template <bool = true, bool = true> class Fatal;
     // storage/retrieval for common channel state
     template <typename> class Index;
     // live channels are implemented using two different base classes:
@@ -122,7 +123,8 @@ namespace pyre::journal {
     template <bool stateV = true>
     using inventory_t = Inventory<stateV>;
 
-    using firewallInventory_t = FirewallInventory;
+    template <bool fatalV = true, bool stateV = true>
+    using fatal_t = Fatal<fatalV, stateV>;
 
     template <typename severityT, typename inventoryT>
     using channel_t = Channel<severityT, inventoryT>;

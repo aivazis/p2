@@ -11,12 +11,13 @@
 // developer facing diagnostic; usually gets turned off in release mode
 class pyre::journal::Firewall :
     public Diagnostic<Firewall>,
-    public Channel<Firewall, FirewallInventory> {
+    public Channel<Firewall, Fatal<true, true>> {
     // types
 public:
+    // my parts
     using diagnostic_type = Diagnostic<Firewall>;
-    using channel_type = Channel<Firewall, FirewallInventory>;
-
+    using channel_type = Channel<Firewall, Fatal<true, true>>;
+    // the error indicator
     using exception_type = firewall_error;
 
     // metamethods

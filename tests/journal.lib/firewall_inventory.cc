@@ -12,7 +12,7 @@
 
 
 // convenience
-using inventory_t = pyre::journal::firewallInventory_t;
+using inventory_t = pyre::journal::firewall_t::inventory_type;
 
 // verify that we can manipulate the inventory state at runtime
 int main() {

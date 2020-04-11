@@ -8,6 +8,19 @@
 #define pyre_journal_exceptions_h
 
 
+// exception raised by errors
+class pyre::journal::application_error : public std::runtime_error {
+    // types
+public:
+    using string_type = string_t;
+
+    // metamethods
+public:
+    inline application_error(const char *);
+    inline application_error(const string_type &);
+};
+
+
 // exception raised by firewalls
 class pyre::journal::firewall_error : public std::logic_error {
     // types
