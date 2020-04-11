@@ -14,7 +14,8 @@
 using ansi_t = pyre::journal::ansi_t;
 
 
-// exercise the trivial device
+// verify that we cab detect ANSI emulation reliably; the harness sets things up and passes a
+// flag on the command line so we can set our expectations
 int main(int argc, char *argv[]) {
 
     // the user hands his expectation

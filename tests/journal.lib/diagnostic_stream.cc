@@ -18,7 +18,7 @@ public:
 };
 
 
-// exercise the diagnostic state index
+// verify that the message is assembled correctly
 int main() {
     // make a diagnostic
     diagnostic_t diagnostic;

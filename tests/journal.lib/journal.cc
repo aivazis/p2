@@ -8,7 +8,7 @@
 #include <p2/journal.h>
 
 
-// sanity check: make sure the header file is accessible
+// compile time sanity check: make sure the header file is accessible
 int main() {
     // nothing to do
     return 0;

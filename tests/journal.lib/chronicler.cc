@@ -14,8 +14,11 @@
 using chronicler_t = pyre::journal::chronicler_t;
 
 
-// verify that the chronicler is accessible
+// verify that the initial chronicler global state is as expected
 int main() {
+    // verify that the default verbosity is at level 1
+    assert (chronicler_t::verbosity() == 1);
+
     // get the global metadata map
     chronicler_t::metadata_type & globals = chronicler_t::globals();
 

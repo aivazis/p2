@@ -15,7 +15,7 @@ using myerror_t = pyre::journal::error_t;
 using trash_t = pyre::journal::trash_t;
 
 
-// exercise the channel manipulators
+// verify that repeated injections work correctly
 int main() {
     // make an error channel
     myerror_t channel("tests.journal.error");

@@ -8,7 +8,7 @@
 #include <p2/journal/debuginfo.h>
 
 
-// sanity check: make sure the header file is accessible
+// exercise the C bindings
 int main() {
     // name a channel
     const char * channel = "tests.journal.debuginfo";

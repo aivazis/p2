@@ -79,7 +79,8 @@ myerror_t::myerror_t(const name_type & name) :
 {}
 
 
-// verify there is no crosstalk among the indices of different severities
+// verify there is no crosstalk among the indices of different severities, and that the indices
+// update correctly when new channels are made
 int main() {
     // make a couple of info channels
     myinfo_t info_1("info.channel_1");

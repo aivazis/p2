@@ -16,7 +16,7 @@ using nameset_t = pyre::journal::nameset_t;
 using chronicler_t = pyre::journal::chronicler_t;
 
 
-// verify that the verbosity level set in the environment matches what the test harness gave me
+// verify that the chronicler command line parser can handle comma separated values correctly
 // on the command line
 int main() {
     // form the test case

@@ -15,11 +15,13 @@ using debug_t = pyre::journal::debug_t;
 using trash_t = pyre::journal::trash_t;
 
 
-// exercise the channel manipulators
+// verify that repeated injection work correctly
 int main() {
     // make a debug channel
     debug_t channel("tests.journal.debug");
 
+    // activate the channel
+    channel.activate();
     // send the output to the trash
     channel.device(std::make_shared<trash_t>());
 

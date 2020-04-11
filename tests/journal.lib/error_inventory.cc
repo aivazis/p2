@@ -12,30 +12,30 @@
 
 
 // convenience
-using inventory_t = pyre::journal::firewall_t::inventory_type;
+using inventory_t = pyre::journal::error_t::inventory_type;
 
-// verify that we can manipulate the firewall inventory state
+// verify that we can manipulate the error inventory state
 int main() {
     // make a default inventory
-    inventory_t firewall;
+    inventory_t error;
     // by default, its device is null
-    assert(firewall.device().get() == nullptr);
+    assert(error.device().get() == nullptr);
 
     // verify the default state is on
-    assert(firewall.defaultState() == true);
+    assert(error.defaultState() == true);
     // verify it is on
-    assert(firewall.state() == true);
+    assert(error.state() == true);
     // flip it
-    firewall.deactivate();
+    error.deactivate();
     // check again
-    assert(firewall.state() == false);
+    assert(error.state() == false);
 
     // verify it's fatal by default
-    assert(firewall.fatal() == true);
+    assert(error.fatal() == true);
     // flip it
-    firewall.fatal(false);
+    error.fatal(false);
     // check again
-    assert(firewall.fatal() == false);
+    assert(error.fatal() == false);
 
     // all done
     return 0;

@@ -14,7 +14,7 @@
 using console_t = pyre::journal::cerr_t;
 
 
-// exercise the trivial device
+// exercise the {cerr} console
 int main() {
     // instantiate
     console_t console;

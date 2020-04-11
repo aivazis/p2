@@ -18,7 +18,7 @@ using index_t = pyre::journal::index_t<pyre::journal::inventory_t<defaultState>>
 using trash_t = pyre::journal::trash_t;
 
 
-// exercise the channel state index
+// exercise the cascade feature of the channel state index
 int main() {
     // make an index
     index_t index;

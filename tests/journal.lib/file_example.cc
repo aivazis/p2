@@ -13,6 +13,7 @@
 
 
 // alias the type
+using debug_t = pyre::journal::debug_t;
 using stream_t = pyre::journal::stream_t;
 
 
@@ -20,17 +21,22 @@ using stream_t = pyre::journal::stream_t;
 int main() {
     // the path of the file
     auto filename = std::filesystem::path("file.out");
-
     // make a file stream
     auto ofs = std::ofstream(filename);
-    // instantiate
-    stream_t stream(filename, ofs);
-    // check its name
-    assert (stream.name() == filename);
 
-    // clean up
-    // close the file
-    ofs.close();
+    // make a channel
+    debug_t channel("test.journal.file");
+    // set its device
+    channel.device(std::make_shared<stream_t>(filename, ofs));
+    // activate
+    channel.activate();
+
+    // inject something
+    channel
+        << pyre::journal::at(__HERE__)
+        << "hello world!"
+        << pyre::journal::endl;
+
     // and remove it
     std::filesystem::remove(filename);
 

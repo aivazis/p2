@@ -44,7 +44,9 @@ using trash_t = pyre::journal::trash_t;
 using chronicler_t = pyre::journal::chronicler_t;
 
 
-// verify that the chronicler is accessible
+// verify that channels of the same severity have access to the same default device; verify
+// that each channel can specify it's own device, that there is no cross talk among channels of
+// different names, and that channels of the same name share the same device
 int main() {
     // make a trash can
     auto trash = std::make_shared<trash_t>();

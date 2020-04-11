@@ -38,7 +38,7 @@ severity_t::severity_t(const name_type & name) :
 {}
 
 
-// exercise the channel state interface
+// verify that the default channel state is what we expect
 int main() {
     // make a channel
     severity_t channel("test.channel");

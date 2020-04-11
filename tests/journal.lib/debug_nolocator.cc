@@ -10,7 +10,7 @@
 #include <cassert>
 
 
-// exercise the channel manipulators
+// verify that everything works correctly in the absence of location information
 int main() {
     // make an info channel
     pyre::journal::debug_t channel("tests.journal.debug");

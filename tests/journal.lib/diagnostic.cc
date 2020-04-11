@@ -12,23 +12,28 @@
 
 // severity stub
 class diagnostic_t : public pyre::journal::diagnostic_t<diagnostic_t> {
+    // metamethods
+public:
+    inline explicit diagnostic_t(verbosity_type verbosity = 1) :
+        pyre::journal::diagnostic_t<diagnostic_t>(verbosity) {}
+
     // interface
 public:
     inline void commit() {}
 };
 
 
-// exercise the diagnostic state index
+// verify that diagnostics can be instantiated correctly
 int main() {
     // make a diagnostic
-    diagnostic_t diagnostic;
+    diagnostic_t d1;
+    // make sure its verbosity is at the default value
+    assert (d1.verbosity() == 1);
 
-    // inject something
-    diagnostic
-        << pyre::journal::at(__HERE__)
-        << pyre::journal::set("time", "now")
-        << "hello world!" << pyre::journal::newline
-        << pyre::journal::endl;
+    // make another diagnostic with a non-default verbosity
+    diagnostic_t d2(3);
+    // make sure its verbosity is at the default value
+    assert (d2.verbosity() == 3);
 
     // all done
     return 0;

@@ -16,7 +16,7 @@ using debug_t = pyre::journal::debug_t;
 using chronicler_t = pyre::journal::chronicler_t;
 
 
-// verify that the null diagnostic is always off
+// exercise the {memo} renderer
 int main() {
     // grab the global metadata table from chronicler
     auto & globals = chronicler_t::globals();
@@ -24,7 +24,7 @@ int main() {
     globals["application"] = "memo";
     globals["author"] = "michael";
 
-    // use a {debug_t} to build a document and its metdata
+    // use a {debug_t} to build a document and its metadata
     debug_t channel("memo");
     // put some stuff in it; careful not to flush so we don't lose everything
     channel

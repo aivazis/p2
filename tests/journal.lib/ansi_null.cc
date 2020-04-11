@@ -14,11 +14,11 @@
 using ansi_t = pyre::journal::ansi_t;
 
 
-// exercise the trivial device
+// verify that the null color table supports all possible requests
 int main() {
-    // verify that the null color table support all possible requests
+    // ask for a color that's unlikely to be there
     auto & strange = ansi_t::null["a-very-unlikely-color-name"];
-    // and that the color sequences it returns are empty strings
+    // verify that the color sequences it returns are empty strings
     assert (strange.empty());
     // all done
     return 0;

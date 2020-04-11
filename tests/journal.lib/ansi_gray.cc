@@ -15,7 +15,7 @@ using csi_t = pyre::journal::csi_t;
 using ansi_t = pyre::journal::ansi_t;
 
 
-// exercise the trivial device
+// verify that the gray tones are registered correctly
 int main() {
 
     // verify the contents of the {gray} color table

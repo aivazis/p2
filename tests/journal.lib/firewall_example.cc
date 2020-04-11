@@ -19,8 +19,8 @@ int main() {
     // make a debug channel
     firewall_t channel("tests.journal.firewall");
 
-    // suppress the output to the screen
-    channel.deactivate();
+    // send the output to the trash
+    channel.device(std::make_shared<pyre::journal::trash_t>());
 
     // firewalls are fatal by default, so attempt
     try {

@@ -17,7 +17,7 @@ using chronicler_t = pyre::journal::chronicler_t;
 
 // hand the command line arguments to the {chronicler} initializer
 int main(int argc, char* argv[]) {
-    // ask {chronicler} to do this
+    // register the command line with the {chronicler}
     chronicler_t::init(argc, argv);
 
     // we expect the verbosity level to be 5

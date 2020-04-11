@@ -15,7 +15,8 @@ using csi_t = pyre::journal::csi_t;
 using ansi_t = pyre::journal::ansi_t;
 
 
-// exercise the trivial device
+// verify a few of the x11 standard colors; the x11 color table is generated automatically from
+// the canonical {rgb.txt} file, but stil...
 int main() {
 
     // verify the contents of the {x11} color table

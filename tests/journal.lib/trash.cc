@@ -14,7 +14,7 @@
 using trash_t = pyre::journal::trash_t;
 
 
-// exercise the trivial device
+// verify we can instantiate the trash can
 int main() {
     // instantiate
     trash_t trash;

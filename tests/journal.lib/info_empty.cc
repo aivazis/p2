@@ -10,7 +10,7 @@
 #include <cassert>
 
 
-// exercise the channel manipulators
+// verify that empty injections in info channels happens correctly
 int main() {
     // make an info channel
     pyre::journal::info_t channel("tests.journal.info");

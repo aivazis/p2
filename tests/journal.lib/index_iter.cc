@@ -15,7 +15,7 @@ const bool defaultState = true;
 using index_t = pyre::journal::index_t<pyre::journal::inventory_t<defaultState>>;
 
 
-// exercise the channel state index
+// exercise iterating through the index contents
 int main() {
     // make an index
     index_t index;
@@ -28,9 +28,7 @@ int main() {
     // initialize the count
     std::size_t count = 0;
     // go through the contents
-    for (auto & item : index) {
-        // get the inventory
-        auto & inventory = item.second;
+    for (auto & [key, inventory] : index) {
         // verify the channel state is as expected
         assert(inventory.state() == inventory.defaultState());
         // increment the counter

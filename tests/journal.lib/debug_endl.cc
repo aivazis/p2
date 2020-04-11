@@ -10,7 +10,7 @@
 #include <cassert>
 
 
-// exercise the channel manipulators
+// verify that flushing the channel resets its buffers correctly
 int main() {
     // make a debug channel
     pyre::journal::debug_t channel("tests.journal.debug");

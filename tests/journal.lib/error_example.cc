@@ -10,17 +10,18 @@
 #include <cassert>
 
 
-// type alias
+// type aliases
+using trash_t = pyre::journal::trash_t;
 using myerror_t = pyre::journal::error_t;
 
 
-// exercise the channel manipulators
+// basic error example
 int main() {
     // make an error channel
     myerror_t channel("tests.journal.error");
 
-    // deactivate the channel
-    channel.deactivate();
+    // send the output to the trash
+    channel.device(std::make_shared<trash_t>());
 
     // carefully
     try {

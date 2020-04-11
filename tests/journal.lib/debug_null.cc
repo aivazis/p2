@@ -21,6 +21,22 @@ int main() {
     // verify that {debug_t} is a {null_t}
     assert ((std::is_same<pyre::journal::debug_t, pyre::journal::null_t>::value));
 
+    // make a channel
+    pyre::journal::debug_t channel("tests.journal.debug");
+    // activate it
+    channel.activate();
+
+    // inject something
+    channel
+        // location
+        << pyre::journal::at(__HERE__)
+        // some metadata
+        << pyre::journal::set("time", "now")
+        // a message with a newline
+        << "debug channel:" << pyre::journal::newline
+        // another message and a flush
+        << "    hello world!" << pyre::journal::endl;
+
     // all done
     return 0;
 }

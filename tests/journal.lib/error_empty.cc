@@ -14,7 +14,7 @@
 using myerror_t = pyre::journal::error_t;
 
 
-// exercise the channel manipulators
+// verify that injection of an empty message works correctly
 int main() {
     // make an info channel
     myerror_t channel("tests.journal.error");

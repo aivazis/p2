@@ -10,7 +10,7 @@
 #include <cassert>
 
 
-// verify basic information injection
+// verify that he state is as expected after a simple injection
 int main() {
     // make a debug channel
     pyre::journal::debug_t channel("tests.journal.debug");

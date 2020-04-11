@@ -21,7 +21,7 @@ int main() {
 
     // tag
     chronicler_t::key_type key("application");
-    chronicler_t::value_type value("chronicler_globals");
+    chronicler_t::value_type value("chronicler");
     // insert it
     metadata[key] = value;
 

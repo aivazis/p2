@@ -15,7 +15,7 @@ using ascii_t = pyre::journal::ascii_t;
 using csi_t = pyre::journal::csi_t;
 
 
-// exercise the trivial device
+// verify we can build escape sequences correctly
 int main() {
     // setup {ESC} so we don't have interpretable command sequences in the code
     csi_t::rep_type ESC { ascii_t::ESC };

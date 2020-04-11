@@ -15,7 +15,7 @@ using csi_t = pyre::journal::csi_t;
 using ansi_t = pyre::journal::ansi_t;
 
 
-// exercise the trivial device
+// verify that the colors in the misc color palette are registered correctly
 int main() {
 
     // verify the contents of the {misc} color table

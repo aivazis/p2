@@ -10,7 +10,7 @@
 #include <cassert>
 
 
-// exercise the channel manipulators
+// make sure empty injections into a warning work as expected
 int main() {
     // make an info channel
     pyre::journal::warning_t channel("tests.journal.warning");

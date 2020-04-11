@@ -15,7 +15,7 @@ using trash_t = pyre::journal::trash_t;
 using chronicler_t = pyre::journal::chronicler_t;
 
 
-// verify that the chronicler is accessible
+// exercise getting/setting the global default device
 int main() {
     // get the default device
     auto builtin = chronicler_t::device();

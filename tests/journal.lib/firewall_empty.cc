@@ -14,7 +14,7 @@
 using firewall_t = pyre::journal::firewall_t;
 
 
-// exercise the channel manipulators
+// verify that empty injections in firewall work as expected
 int main() {
     // make a firewall
     firewall_t channel("tests.journal.firewall");

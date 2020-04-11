@@ -38,7 +38,7 @@ severity_t::severity_t(const name_type & name) :
 {}
 
 
-// exercise the channel state interface
+// verify that channels of the same severity and name share the same state
 int main() {
     // make a channel
     severity_t channel_1("test.channel");

@@ -14,7 +14,7 @@
 using myerror_t = pyre::journal::error_t;
 
 
-// exercise the channel manipulators
+// verify that injection works correctly in the absence of location information
 int main() {
     // make an error channel
     myerror_t channel("tests.journal.error");

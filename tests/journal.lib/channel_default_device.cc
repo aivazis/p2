@@ -41,7 +41,7 @@ severity_t::severity_t(const name_type & name) :
 using trash_t = pyre::journal::trash_t;
 
 
-// verify that the chronicler is accessible
+// verify that we can control the default device
 int main() {
     // get the default device
     auto builtin = severity_t::defaultDevice();

@@ -14,7 +14,7 @@
 using console_t = pyre::journal::cout_t;
 
 
-// exercise the trivial device
+// instantiate the {cout} console and make sure its name is correct
 int main() {
     // instantiate
     console_t console;

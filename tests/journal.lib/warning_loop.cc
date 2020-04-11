@@ -15,7 +15,7 @@ using warning_t = pyre::journal::warning_t;
 using trash_t = pyre::journal::trash_t;
 
 
-// exercise the channel manipulators
+// exercise repeated injection into a warning channel
 int main() {
     // make a warning channel
     warning_t channel("tests.journal.warning");

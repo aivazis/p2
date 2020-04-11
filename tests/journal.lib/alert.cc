@@ -16,7 +16,7 @@ using debug_t = pyre::journal::debug_t;
 using chronicler_t = pyre::journal::chronicler_t;
 
 
-// verify that the null diagnostic is always off
+// exercise the {alert} renderer
 int main() {
     // grab the global metadata table from chronicler
     auto & globals = chronicler_t::globals();

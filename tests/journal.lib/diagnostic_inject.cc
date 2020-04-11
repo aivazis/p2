@@ -18,7 +18,7 @@ public:
 };
 
 
-// exercise the diagnostic state index
+// compile time: make sure injection works as expected
 int main() {
     // make a diagnostic
     diagnostic_t diagnostic;

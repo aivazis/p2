@@ -38,7 +38,7 @@ severity_t::severity_t(const name_type & name) :
 {}
 
 
-// exercise the channel state index
+// verify that channels of the same severity share inventory indices
 int main() {
     // make a couple of channels
     severity_t channel_1("test.channel_1");

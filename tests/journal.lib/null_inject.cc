@@ -8,7 +8,7 @@
 #include <p2/journal.h>
 
 
-// exercise the null diagnostic
+// exercise injections into a null diagnostic
 int main() {
     // make a null channel
     pyre::journal::null_t channel("tests.journal.null");

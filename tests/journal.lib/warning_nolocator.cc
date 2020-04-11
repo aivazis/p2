@@ -10,7 +10,7 @@
 #include <cassert>
 
 
-// exercise the channel manipulators
+// verify that injections work correctly in the absence of location information
 int main() {
     // make an warning channel
     pyre::journal::warning_t channel("tests.journal.warning");

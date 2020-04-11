@@ -15,7 +15,7 @@ const bool defaultState = true;
 using index_t = pyre::journal::index_t<pyre::journal::inventory_t<defaultState>>;
 
 
-// exercise the channel state index
+// verify that looking up channel names in the index creates nodes
 int main() {
     // make an index
     index_t index;
