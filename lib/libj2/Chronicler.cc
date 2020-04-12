@@ -101,9 +101,9 @@ chronicler_t::init(int argc, char* argv[]) {
 
 
 // data
-chronicler_t::verbosity_type chronicler_t::_verbosity = initializeVerbosity();
-chronicler_t::metadata_type chronicler_t::_globals = initializeGlobals();
-chronicler_t::device_pointer chronicler_t::_device = std::make_shared<console_t>();
+chronicler_t::verbosity_type chronicler_t::_verbosity { initializeVerbosity() };
+chronicler_t::metadata_type chronicler_t::_globals { initializeGlobals() };
+chronicler_t::device_pointer chronicler_t::_device { std::make_shared<console_t>() };
 
 
 // implementation details
