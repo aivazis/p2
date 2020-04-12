@@ -23,13 +23,18 @@
 #include "CSI.h"
 #include "ANSI.h"
 
-// renderers
+// abstractions
 #include "Renderer.h"
+#include "Device.h"
+
+// renderers
 #include "Memo.h"
 #include "Alert.h"
 
+// the global state
+#include "Chronicler.h"
+
 // devices
-#include "Device.h"
 #include "Trash.h"
 #include "Stream.h"
 #include "Console.h"
@@ -44,7 +49,6 @@
 #include "Null.h"
 
 // functional diagnostic infrastructure
-#include "Chronicler.h"
 #include "Index.h"
 #include "Inventory.h"
 #include "Fatal.h"

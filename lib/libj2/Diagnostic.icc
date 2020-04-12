@@ -15,7 +15,7 @@ pyre::journal::Diagnostic<severityT>::
 Diagnostic(verbosity_type verbosity) :
     _page(),
     _buffer(),
-    _metadata(),
+    _metadata(Chronicler::globals()),
     _verbosity(verbosity)
 {}
 

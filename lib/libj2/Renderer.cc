@@ -33,21 +33,13 @@ pyre::journal::Renderer::
 render(palette_type & palette, const page_type & page,
        const metadata_type & meta) const -> bufmsg_type
 {
-    // make a metadata table
-    metadata_type local;
-    // get the global metadata from the {chronicler_t>
-    auto & global = Chronicler::globals();
-    // merge them into my local table
-    local.insert(std::begin(global), std::end(global));
-    // merge the diagnostic metadata as well
-    local.insert(std::begin(meta), std::end(meta));
-
     // make a buffer
     buffer_type buffer;
+
     // build the document
-    header(palette, buffer, page, local);
-    body(palette, buffer, page, local);
-    footer(palette, buffer, page, local);
+    header(palette, buffer, page, meta);
+    body(palette, buffer, page, meta);
+    footer(palette, buffer, page, meta);
 
     // extract the string and return it
     return buffer.str();
