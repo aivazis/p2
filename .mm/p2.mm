@@ -25,4 +25,7 @@ p2.pkg.stem := p2
 p2.pkg.tests.stem := pyre
 p2.pkg.tests.prerequisites := p2.pkg
 
+# get the testsuites
+include p2.pkg.tests
+
 # end of file

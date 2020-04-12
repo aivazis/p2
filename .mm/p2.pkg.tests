@@ -1,0 +1,12 @@
+# -*- Makefile -*-
+#
+# michael a.g. aïvázis <michael.aivazis@para-sim.com>
+# (c) 1998-2019 all rights reserved
+
+
+# the p2 package test suite
+p2.pkg.tests.stem := pyre.pkg
+p2.pkg.tests.prerequisites := p2.pkg
+
+
+# end of file
