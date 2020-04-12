@@ -11,6 +11,7 @@
 
 
 // alias
+using trash_t = pyre::journal::trash_t;
 using firewall_t = pyre::journal::firewall_t;
 
 
@@ -18,6 +19,8 @@ using firewall_t = pyre::journal::firewall_t;
 int main() {
     // make a firewall
     firewall_t channel("tests.journal.firewall");
+    // send the output to the trash
+    channel.device(std::make_shared<trash_t>());
 
     // gingerly
     try {

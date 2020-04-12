@@ -11,6 +11,7 @@
 
 
 // type alias
+using trash_t = pyre::journal::trash_t;
 using myerror_t = pyre::journal::error_t;
 
 
@@ -18,6 +19,8 @@ using myerror_t = pyre::journal::error_t;
 int main() {
     // make an info channel
     myerror_t channel("tests.journal.error");
+    // send the output to the trash
+    channel.device(std::make_shared<trash_t>());
 
     // carefully
     try {
