@@ -128,13 +128,10 @@ newline() -> Diagnostic<severityT> &
 {
     // get the contents of the buffer
     auto contents = _buffer.str();
-    // if there is anything there
-    if (!contents.empty()) {
-        // place onto the page
-        _page.push_back(_buffer.str());
-        // and reset the buffer
-        _buffer.str(bufmsg_type());
-    }
+    // place onto the page
+    _page.push_back(_buffer.str());
+    // and reset the buffer
+    _buffer.str(bufmsg_type());
     // discard any error flags
     _buffer.clear();
     // all done
