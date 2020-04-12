@@ -18,8 +18,10 @@ class PyreError(Exception):
         super().__init__(**kwds)
         # attach the locator
         self.locator = locator
-        # check whether we have to attach a special error description
-        if description is not None: self.description = description
+        # if i were given a special format to use when rendering the error
+        if description is not None:
+            # attach it
+            self.description = description
         # all done
         return
 
