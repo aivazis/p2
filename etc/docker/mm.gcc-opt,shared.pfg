@@ -1,0 +1,25 @@
+;
+; michael a.g. aïvázis
+; orthologue
+; (c) 1998-2020 all rights reserved
+;
+
+mm:
+    ; targets
+    target = opt, shared
+
+    ; compilers
+    compilers = gcc
+
+    ; final products
+    prefix = {pyre.environ.HOME}/tools/mm
+    ; intermediate build products
+    bldroot = {pyre.environ.HOME}/tmp/builds/mm
+
+    ; other settings
+    ; the local makefile
+    local = Make.mmm
+    ; the make utility
+    make = make
+
+; end of file
