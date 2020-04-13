@@ -11,13 +11,13 @@
 
 
 // alias
-using error_t = pyre::journal::error_t;
+using myerror_t = pyre::journal::error_t;
 
 
 // verify the basic channel state
 int main() {
     // make an error channel
-    error_t channel("tests.journal.error");
+    myerror_t channel("tests.journal.error");
 
     // check its name
     assert (channel.name() == "tests.journal.error");

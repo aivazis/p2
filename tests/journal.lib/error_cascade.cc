@@ -14,7 +14,7 @@
 // chronicler
 using chronicler_t = pyre::journal::chronicler_t;
 // error
-using error_t = pyre::journal::error_t;
+using myerror_t = pyre::journal::error_t;
 // the trash can
 using trash_t = pyre::journal::trash_t;
 
@@ -22,7 +22,7 @@ using trash_t = pyre::journal::trash_t;
 // verify the cascade works correctly for errors
 int main() {
     // make a channel
-    error_t parent("test.error.parent");
+    myerror_t parent("test.error.parent");
     // its activation state is what's expected
     assert(parent.state());
     // it is fatal
@@ -37,7 +37,7 @@ int main() {
     parent.device(std::make_shared<trash_t>());
 
     // make a error that's lower in the hierarchy
-    error_t child("test.error.parent.blah.blah.child");
+    myerror_t child("test.error.parent.blah.blah.child");
     // make sure its activation state is what's expected
     assert(child.state() == parent.state());
     // it is also non-fatal
