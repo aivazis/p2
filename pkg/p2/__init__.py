@@ -169,6 +169,8 @@ dashboard = boot()
 if dashboard is not None:
     # publish
     from . import meta
+    from . import patterns
+    from . import tracking
 
 
 # end of file
