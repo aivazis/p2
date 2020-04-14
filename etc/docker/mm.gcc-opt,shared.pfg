@@ -9,16 +9,14 @@ mm:
     target = opt, shared
 
     ; compilers
-    compilers = gcc
+    compilers = gcc, python/python3
 
     ; final products
-    prefix = {pyre.environ.HOME}/tools/mm
+    prefix = @PREFIX@
     ; intermediate build products
-    bldroot = {pyre.environ.HOME}/tmp/builds/mm
+    bldroot = /tmp/builds
 
     ; other settings
-    ; the local makefile
-    local = Make.mmm
     ; the make utility
     make = make
 

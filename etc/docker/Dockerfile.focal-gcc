@@ -4,6 +4,7 @@
 FROM ubuntu:focal
 
 # set up some build variables
+ARG prefix=/usr/local
 ARG python_version=3.8
 ARG python=python${python_version}
 
@@ -35,16 +36,34 @@ COPY . p2
 WORKDIR /home/pyre/dv/p2/.mm
 # copy the relevant configuration file
 COPY etc/docker/focal.mm config.mm.in
-# expand our python choice
-RUN sed -e "s/@PYTHON_VERSION@/${python_version}/g" config.mm.in > config.mm
+# expand
+RUN sed -e "s:@PYTHON_VERSION@:${python_version}:g" config.mm.in > config.mm
 
 # go to the {p2} top level directory
 WORKDIR /home/pyre/dv/p2
 # copy the {mm} coniguration file
-COPY etc/docker/mm.gcc-opt,shared.pfg mm.pfg
-# colorize
+COPY etc/docker/mm.gcc-opt,shared.pfg mm.pfg.in
+# expand; the '/' after ${prefix} is necessary for complying with the mm convention of
+# termiating slashes on all directories
+RUN sed -e "s:@PREFIX@:${prefix}:g" mm.pfg.in > mm.pfg
+
+# environment
+# colorize (for fun)
 ENV TERM=xterm-256color
+# set up the dynamic linker path
+ENV LD_LIBRARY_PATH=${prefix}/lib
+
 # build
 RUN ${python} /home/pyre/dv/mm/mm.py
+
+# install
+# - the python packages: by making the canonical directory a symbolic link to our install area
+RUN \
+        rmdir ${prefix}/lib/${python}/dist-packages; \
+        ln -s ${prefix}/packages ${prefix}/lib/${python}/dist-packages
+
+# run the tests
+RUN ${python} /home/pyre/dv/mm/mm.py tests
+
 
 # end of file
