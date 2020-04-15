@@ -7,6 +7,8 @@ FROM ubuntu:focal
 ARG prefix=/usr/local
 ARG python_version=3.8
 ARG python=python${python_version}
+ARG home=/home/pyre
+ARG mm="${python} ${home}/mm/mm.py"
 
 # update the package repository
 RUN apt update -y
@@ -24,7 +26,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
         libgsl-dev
 
 # make the development area
-WORKDIR /home/pyre/dv
+WORKDIR ${home}
 
 # pull mm
 RUN git clone https://github.com/aivazis/mm.git
@@ -33,14 +35,14 @@ RUN git clone https://github.com/aivazis/mm.git
 COPY . p2
 
 # go to the mm configuration directory
-WORKDIR /home/pyre/dv/p2/.mm
+WORKDIR ${home}/p2/.mm
 # copy the relevant configuration file
 COPY etc/docker/focal.mm config.mm.in
 # expand
 RUN sed -e "s:@PYTHON_VERSION@:${python_version}:g" config.mm.in > config.mm
 
 # go to the {p2} top level directory
-WORKDIR /home/pyre/dv/p2
+WORKDIR ${home}/p2
 # copy the {mm} coniguration file
 COPY etc/docker/mm.gcc-opt,shared.pfg mm.pfg.in
 # expand; the '/' after ${prefix} is necessary for complying with the mm convention of
@@ -52,18 +54,22 @@ RUN sed -e "s:@PREFIX@:${prefix}:g" mm.pfg.in > mm.pfg
 ENV TERM=xterm-256color
 # set up the dynamic linker path
 ENV LD_LIBRARY_PATH=${prefix}/lib
+# export the python choide
+ENV PYTHON=${python}
+# and the path to {mm}
+ENV MM=${mm}
 
-# build
-RUN ${python} /home/pyre/dv/mm/mm.py
-
-# install
+# prep the install location for python packages
 # - the python packages: by making the canonical directory a symbolic link to our install area
 RUN \
-        rmdir ${prefix}/lib/${python}/dist-packages; \
-        ln -s ${prefix}/packages ${prefix}/lib/${python}/dist-packages
+        ln -s ${prefix}/packages/p2 ${prefix}/lib/${python}/dist-packages; \
+        ln -s ${prefix}/packages/j2 ${prefix}/lib/${python}/dist-packages
 
-# run the tests
-RUN ${python} /home/pyre/dv/mm/mm.py tests
+# show me the build context
+RUN ${python} ${home}/mm/mm.py --serial builder.info host.info
+
+# build and test
+RUN ${mm} tests
 
 
 # end of file
