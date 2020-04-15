@@ -21,11 +21,6 @@ class Channel(p2.patterns.named):
     """
 
 
-    # class data
-    # access to the singleton with the global journal configuration
-    chronicler = Chronicler()
-
-
     # public data
     @property
     def state(self):
@@ -137,8 +132,9 @@ class Channel(p2.patterns.named):
     inventory = None
 
     # class data; managed by class methods
-    index = None          # the severity wide channel index; patched during bootstrapping
-    defaultDevice = None  # the severity wide device
+    index = None               # the severity wide channel index; patched during bootstrapping
+    defaultDevice = None       # the severity wide device
+    chronicler = Chronicler()  # the singleton with the global journal configuration
 
 
     # inventory types for the various channels
@@ -169,6 +165,18 @@ class Channel(p2.patterns.named):
 
         # public data
         fatal = True
+
+
+    class enabled_fatal_type(enabled_type, fatal_type):
+        """
+        Inventory for channels that are enabled and fatal
+        """
+
+
+    class disabled_fatal_type(disabled_type, fatal_type):
+        """
+        Inventory for channels that are disabled and fatal
+        """
 
 
 # end of file
