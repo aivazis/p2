@@ -16,7 +16,11 @@ j2.libraries := j2.lib
 # python extensions
 j2.extensions := j2.ext
 # and test suites
-j2.tests := j2.lib.tests j2.ext.tests
+j2.tests := j2.pkg.tests j2.lib.tests j2.ext.tests
+
+# the j2 pkg
+# depends on the p2 package
+j2.pkg.prerequisites := p2.pkg
 
 # the j2 library settings
 # the file with the library metadata
@@ -41,6 +45,6 @@ j2.ext.lib.c++.defines += PYRE_CORE
 j2.ext.lib.c++.flags += $($(compiler.c++).std.c++17)
 
 # get the testsuites
-include j2.lib.tests j2.ext.tests
+include j2.pkg.tests j2.lib.tests j2.ext.tests
 
 # end of file
