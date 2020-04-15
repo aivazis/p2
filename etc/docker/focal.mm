@@ -1,9 +1,8 @@
 # -*- Makefile -*-
 #
-# michael a.g. aïvázis
-# parasim
+# michael a.g. aïvázis <michael.aivazis@para-sim.com>
 # (c) 1998-2020 all rights reserved
-#
+
 
 # external dependencies
 # system tools
@@ -15,7 +14,7 @@ gsl.dir := $(sys.prefix)
 numpy.version := 1.17.4
 numpy.dir := $(sys.prefix)/lib/python3/dist-packages/numpy/core
 # pybind11
-pybind11.version := 2.3.0
+pybind11.version := 2.4.3
 pybind11.dir = $(sys.prefix)
 # python
 python.version := @PYTHON_VERSION@

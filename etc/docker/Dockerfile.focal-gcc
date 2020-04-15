@@ -1,53 +1,17 @@
 ## -*- docker-image-name: "pyre-focal-gcc" -*-
 
-# starting with the latest ubuntu
+# based on ubuntu
 FROM ubuntu:focal
 
 # set up some build variables
-ARG prefix=/usr/local
+# python version
 ARG python_version=3.8
 ARG python=python${python_version}
-ARG home=/home/pyre
-ARG mm="${python} ${home}/mm/mm.py"
-
-# update the package repository
-RUN apt update -y
-
-# get the latest
-RUN apt dist-upgrade -y
-
-# install the base software stack
-RUN DEBIAN_FRONTEND=noninteractive \
-    apt install -y \
-        git \
-        g++ gfortran make \
-        ${python} ${python}-dev \
-        python3-pybind11 \
-        libgsl-dev
-
-# make the development area
-WORKDIR ${home}
-
-# pull mm
-RUN git clone https://github.com/aivazis/mm.git
-
-# pull p2
-COPY . p2
-
-# go to the mm configuration directory
-WORKDIR ${home}/p2/.mm
-# copy the relevant configuration file
-COPY etc/docker/focal.mm config.mm.in
-# expand
-RUN sed -e "s:@PYTHON_VERSION@:${python_version}:g" config.mm.in > config.mm
-
-# go to the {p2} top level directory
-WORKDIR ${home}/p2
-# copy the {mm} coniguration file
-COPY etc/docker/mm.gcc-opt,shared.pfg mm.pfg.in
-# expand; the '/' after ${prefix} is necessary for complying with the mm convention of
-# termiating slashes on all directories
-RUN sed -e "s:@PREFIX@:${prefix}:g" mm.pfg.in > mm.pfg
+# locations
+ARG prefix=/usr/local
+ARG srcdir=${prefix}/src
+# the build system
+ARG mm="${python} ${srcdir}/mm/mm.py"
 
 # environment
 # colorize (for fun)
@@ -59,16 +23,58 @@ ENV PYTHON=${python}
 # and the path to {mm}
 ENV MM=${mm}
 
+
+# update the package repository
+RUN apt update -y
+# get the latest
+RUN apt dist-upgrade -y
+# install the base software stack
+RUN DEBIAN_FRONTEND=noninteractive \
+    apt install -y \
+        git vim \
+        g++ gfortran make \
+        ${python} ${python}-dev \
+        python3-pybind11 \
+        libgsl-dev
+
+
+# place the {mm} configuration file
+# make the pyre configuration directory
+WORKDIR /root/.pyre
+# copy the {mm} coniguration file here
+COPY etc/docker/mm.gcc-opt,shared.pfg mm.pfg.in
+# expand; the '/' after ${prefix} is necessary for complying with the mm convention of
+# termiating slashes on all directories
+RUN sed -e "s:@PREFIX@:${prefix}:g" mm.pfg.in > mm.pfg
+
+# place the {mm} control file
+WORKDIR /root/.mm
+# copy the relevant configuration file
+COPY etc/docker/focal.mm config.mm.in
+# expand
+RUN sed -e "s:@PYTHON_VERSION@:${python_version}:g" config.mm.in > config.mm
+
+
+# make the development area
+WORKDIR ${srcdir}
+# pull mm
+RUN git clone https://github.com/aivazis/mm.git
+# pull p2
+COPY . p2
+
+# go to the {p2} top level directory
+WORKDIR ${srcdir}/p2
+# build
+RUN ${mm}
+# show me the build context
+RUN ${mm} --serial builder.info host.info
+
 # prep the install location for python packages
 # - the python packages: by making the canonical directory a symbolic link to our install area
 RUN \
         ln -s ${prefix}/packages/p2 ${prefix}/lib/${python}/dist-packages; \
         ln -s ${prefix}/packages/j2 ${prefix}/lib/${python}/dist-packages
-
-# show me the build context
-RUN ${python} ${home}/mm/mm.py --serial builder.info host.info
-
-# build and test
+# and test
 RUN ${mm} tests
 
 
