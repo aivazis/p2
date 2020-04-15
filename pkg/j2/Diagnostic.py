@@ -9,6 +9,8 @@
 import p2
 # for location information
 import traceback
+# access to the global settings
+from .Chronicler import Chronicler
 
 
 # encapsulation of message recording
@@ -96,16 +98,25 @@ class Diagnostic(p2.patterns.named):
         # initialize my buffers
         # the content accumulator
         self.page = []
-        # the metadata
+
+        # my metadata
         self.meta = {
             "channel": name,
             "severity": self.severity,
             }
+        # plus whatever the chronicler has
+        self.meta.update(self.chronicler.meta)
+
         # the locator
         self.locator = None
 
         # all done
         return
+
+
+    # class data
+    # access to the singleton with the global journal configuration
+    chronicler = Chronicler()
 
 
 # end of file
