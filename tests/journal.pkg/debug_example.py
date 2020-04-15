@@ -16,7 +16,7 @@ def test():
     # activate it
     channel.activate()
     # but send the output to trash
-    # channel.device = j2.trash()
+    channel.device = j2.trash()
 
     # add some metadats
     channel.meta["time"] = "now"

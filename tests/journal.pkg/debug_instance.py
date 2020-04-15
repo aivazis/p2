@@ -20,6 +20,7 @@ def test():
     # the page should be empty
     assert channel.page == []
     # verify the metadata
+    assert channel.meta["application"] == "journal"
     assert channel.meta["channel"] == channel.name
     assert channel.meta["severity"] == channel.severity
 
