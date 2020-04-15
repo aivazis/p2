@@ -42,22 +42,13 @@ def preamble():
 #include "ANSI.h"
 
 
-// type aliases
-using csi_t = pyre::journal::csi_t;
-using ansi_t = pyre::journal::ansi_t;
-
-
-// the helper
-static ansi_t::table_type make_x11();
-// the static object in {ansi_t}
-ansi_t::table_type ansi_t::x11 = make_x11();
-
-
 // the color table factory
-ansi_t::table_type make_x11()
+auto
+pyre::journal::ANSI::
+make_x11() -> table_type
 {
     // make a table
-    ansi_t::table_type table;
+    table_type table;
 
     // the reset sequence
     table["normal"] = csi_t::csi3(0);
