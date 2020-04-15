@@ -42,4 +42,20 @@ from . import meta
 from .ext import libjournal
 
 
+# if there is no functional extension module
+if True:
+    # publish
+    # the devices
+    from .Trash import Trash as trash
+    from .Console import Console as cout
+    from .ErrorConsole import ErrorConsole as cerr
+    # the channels
+    from .Debug import Debug as debug
+
+    # get the singleton with the global state
+    from .Chronicler import Chronicler as chronicler
+    # attach the default device
+    chronicler().device = cout()
+
+
 # end of file
