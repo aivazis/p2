@@ -19,13 +19,13 @@ using ansi_t = pyre::journal::ansi_t;
 int main() {
 
     // verify the contents of the {gray} color table
-    assert ((ansi_t::gray.at("normal") == csi_t::csi3(0)));
-    assert ((ansi_t::gray.at("gray10") == csi_t::csi24(0x19, 0x19, 0x19)));
-    assert ((ansi_t::gray.at("gray30") == csi_t::csi24(0x4c, 0x4c, 0x4c)));
-    assert ((ansi_t::gray.at("gray41") == csi_t::csi24(0x69, 0x69, 0x69)));
-    assert ((ansi_t::gray.at("gray50") == csi_t::csi24(0x80, 0x80, 0x80)));
-    assert ((ansi_t::gray.at("gray66") == csi_t::csi24(0xa9, 0xa9, 0xa9)));
-    assert ((ansi_t::gray.at("gray75") == csi_t::csi24(0xbe, 0xbe, 0xbe)));
+    assert ((ansi_t::gray("normal") == csi_t::csi3(0)));
+    assert ((ansi_t::gray("gray10") == csi_t::csi24(0x19, 0x19, 0x19)));
+    assert ((ansi_t::gray("gray30") == csi_t::csi24(0x4c, 0x4c, 0x4c)));
+    assert ((ansi_t::gray("gray41") == csi_t::csi24(0x69, 0x69, 0x69)));
+    assert ((ansi_t::gray("gray50") == csi_t::csi24(0x80, 0x80, 0x80)));
+    assert ((ansi_t::gray("gray66") == csi_t::csi24(0xa9, 0xa9, 0xa9)));
+    assert ((ansi_t::gray("gray75") == csi_t::csi24(0xbe, 0xbe, 0xbe)));
 
     // all done
     return 0;

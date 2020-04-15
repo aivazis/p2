@@ -14,50 +14,123 @@
 #include "ANSI.h"
 
 
-// type aliases
-using csi_t = pyre::journal::csi_t;
-using ansi_t = pyre::journal::ansi_t;
-using nameset_t = pyre::journal::nameset_t;
-
-
-// the set compatible emulations
-static
-nameset_t
-compatible { "ansi",
-             "vt102", "vt220", "vt320", "vt420",
-             "xterm", "xterm-color", "xterm-16color", "xterm-256color" };
-
-
-// the helpers
-static bool emulates();
-
-// the static data
-static ansi_t::table_type make_ansi();
-static ansi_t::table_type make_gray();
-static ansi_t::table_type make_misc();
-
-
-// the emulation predicate
-bool ansi_t::compatible()
+// compatibility check
+auto
+pyre::journal::ANSI::
+compatible() -> bool
 {
-    // and return the result
-    return _compatible;
+    // get my instance
+    const ANSI & instance = initialize();
+    // and ask it
+    return instance._compatible;
 }
 
 
-// the static objects in {ansi_t}
-// color tables
-ansi_t::table_type ansi_t::null;
-ansi_t::table_type ansi_t::ansi = make_ansi();
-ansi_t::table_type ansi_t::gray = make_gray();
-ansi_t::table_type ansi_t::misc = make_misc();
-// the emulation flag
-bool ansi_t::_compatible = emulates();
+// access to the color tables
+auto
+pyre::journal::ANSI::
+null(const name_type & color) -> csi_type
+{
+    // there's nothing ever in this table...
+    return "";
+}
+
+
+auto
+pyre::journal::ANSI::
+ansi(const name_type & color) -> csi_type
+{
+    // get me my instance
+    const ANSI & instance = initialize();
+    // access the color table
+    const table_type & table = instance._ansi;
+    // try to look up the color name
+    auto spot = table.find(color);
+    // if not there, return an empty string; otherwise return the corresponding escape sequence
+    return spot == table.end() ? "" : spot->second;
+}
+
+
+auto
+pyre::journal::ANSI::
+gray(const name_type & color) -> csi_type
+{
+    // get me my instance
+    const ANSI & instance = initialize();
+    // access the color table
+    const table_type & table = instance._gray;
+    // try to look up the color name
+    auto spot = table.find(color);
+    // if not there, return an empty string; otherwise return the corresponding escape sequence
+    return spot == table.end() ? "" : spot->second;
+}
+
+
+auto
+pyre::journal::ANSI::
+x11(const name_type & color) -> csi_type
+{
+    // get me my instance
+    const ANSI & instance = initialize();
+    // access the color table
+    const table_type & table = instance._x11;
+    // try to look up the color name
+    auto spot = table.find(color);
+    // if not there, return an empty string; otherwise return the corresponding escape sequence
+    return spot == table.end() ? "" : spot->second;
+}
+
+
+auto
+pyre::journal::ANSI::
+misc(const name_type & color) -> csi_type
+{
+    // get me my instance
+    const ANSI & instance = initialize();
+    // access the color table
+    const table_type & table = instance._misc;
+    // try to look up the color name
+    auto spot = table.find(color);
+    // if not there, return an empty string; otherwise return the corresponding escape sequence
+    return spot == table.end() ? "" : spot->second;
+}
+
+
+// the singleton factory
+auto
+pyre::journal::ANSI::
+initialize() -> const ANSI &
+{
+    // make one, once...
+    static ANSI * ptr { new ANSI() };
+    // and return it
+    return *ptr;
+}
+
+
+// metamethods
+pyre::journal::ANSI::
+ANSI() :
+    // copatibility flag
+    _compatible { emulates() },
+    // color tables
+    _ansi { make_ansi() },
+    _gray { make_gray() },
+    _x11 { make_x11() },
+    _misc { make_misc() }
+{}
 
 
 // implementations
-bool emulates()
+auto
+pyre::journal::ANSI::
+emulates() -> bool
 {
+    // the set compatible emulations
+    nameset_t compatible { "ansi",
+                           "vt102", "vt220", "vt320", "vt420",
+                           "xterm", "xterm-color", "xterm-16color", "xterm-256color" };
+
     // get the {TERM} environment variable
     auto term = std::getenv("TERM");
     // if the value is not set
@@ -77,7 +150,9 @@ bool emulates()
 }
 
 
-ansi_t::table_type make_ansi()
+auto
+pyre::journal::ANSI::
+make_ansi() -> table_type
 {
     // make a table
     ansi_t::table_type table;
@@ -110,7 +185,9 @@ ansi_t::table_type make_ansi()
 }
 
 
-ansi_t::table_type make_gray()
+auto
+pyre::journal::ANSI::
+make_gray() -> table_type
 {
     // make a table
     ansi_t::table_type table;
@@ -131,7 +208,9 @@ ansi_t::table_type make_gray()
 }
 
 
-ansi_t::table_type make_misc()
+auto
+pyre::journal::ANSI::
+make_misc() -> table_type
 {
     // make a table
     ansi_t::table_type table;

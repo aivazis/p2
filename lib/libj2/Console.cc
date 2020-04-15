@@ -43,15 +43,15 @@ Console() :
     if (_tty && ansi_t::compatible())  {
         // populate my palette with some colors
         // put things back to normal
-        _palette["reset"] = ansi_t::x11.at("normal");
+        _palette["reset"] = ansi_t::x11("normal");
         // channel name
-        _palette["channel"] = ansi_t::x11.at("purple");
+        _palette["channel"] = ansi_t::x11("purple");
         // severity
-        _palette["info"] = ansi_t::x11.at("forest green");
-        _palette["warning"] = ansi_t::x11.at("orange");
-        _palette["error"] = ansi_t::x11.at("red");
-        _palette["debug"] = ansi_t::x11.at("cornflower blue");
-        _palette["firewall"] = ansi_t::x11.at("fuchsia");
+        _palette["info"] = ansi_t::x11("forest green");
+        _palette["warning"] = ansi_t::x11("orange");
+        _palette["error"] = ansi_t::x11("red");
+        _palette["debug"] = ansi_t::x11("cornflower blue");
+        _palette["firewall"] = ansi_t::x11("fuchsia");
         // the page body
         _palette["body"] = "";
     }

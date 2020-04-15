@@ -39,9 +39,9 @@ int main() {
     // make a palette
     memo_t::palette_type palette;
     // add some decorations
-    palette["reset"] = ansi_t::x11.at("normal");
-    palette["channel"] = ansi_t::x11.at("light slate gray");
-    palette["debug"] = ansi_t::x11.at("steel blue");
+    palette["reset"] = ansi_t::x11("normal");
+    palette["channel"] = ansi_t::x11("light slate gray");
+    palette["debug"] = ansi_t::x11("steel blue");
     palette["body"] = "";
 
     // pull the page
