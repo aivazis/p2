@@ -1,0 +1,19 @@
+# -*- Makefile -*-
+#
+# michael a.g. aïvázis <michael.aivazis@para-sim.com>
+# (c) 1998-2019 all rights reserved
+
+
+# the libjcdev test suite
+jcdev.lib.tests.stem := jcdev.lib
+jcdev.lib.tests.prerequisites := jcdev.lib
+jcdev.lib.tests.extern := jcdev.lib
+# compiler control
+jcdev.lib.tests.c++.flags += -Wall $($(compiler.c++).std.c++17)
+jcdev.lib.tests.c++.libraries += j2
+
+
+# test case configuration
+tests.jcdev.lib.debug.clean := debug.csv
+
+# end of file
