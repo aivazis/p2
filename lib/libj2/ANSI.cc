@@ -126,11 +126,6 @@ auto
 pyre::journal::ANSI::
 emulates() -> bool
 {
-    // the set compatible emulations
-    nameset_t compatible { "ansi",
-                           "vt102", "vt220", "vt320", "vt420",
-                           "xterm", "xterm-color", "xterm-16color", "xterm-256color" };
-
     // get the {TERM} environment variable
     auto term = std::getenv("TERM");
     // if the value is not set
@@ -138,6 +133,11 @@ emulates() -> bool
         // we don't know, so better be safe
         return false;
     }
+
+    // the set of compatible terminal types
+    nameset_t compatible { "ansi",
+                           "vt102", "vt220", "vt320", "vt420",
+                           "xterm", "xterm-color", "xterm-16color", "xterm-256color" };
 
     // if the value is not in the set of supported emulations
     if (compatible.find(term) == compatible.end()) {
