@@ -21,6 +21,7 @@ public:
 
     // metamethods
 public:
+    virtual ~Device();
     inline Device(stream_type & stream);
 
     // interface

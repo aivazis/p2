@@ -13,6 +13,12 @@
 #include "Device.h"
 
 
+// metamethods
+jcdev::Device::
+~Device()
+{}
+
+
 // record a developer facing message
 auto
 jcdev::Device::
@@ -43,7 +49,7 @@ jcdev::Device::
 inject(verbosity_type verbosity, const page_type & page, const metadata_type & meta)
 {
     // get the time
-    std::time_t now = std::time_t(nullptr);
+    std::time_t now = std::time(nullptr);
     // inject the timestamp
     _stream << '"' << std::put_time(std::localtime(&now), "%F %T %z") << '"';
 
