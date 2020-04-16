@@ -16,7 +16,7 @@ def generate():
         # pull the information
         r,g,b, name = line.strip().split(None, 3)
         # build the statement
-        yield f"table[\"{name}\"] = CSI.csi24(red={r}, green={g}, blue={b})"
+        yield f"    \"{name}\": CSI.csi24(red={r}, green={g}, blue={b}),"
     # all done
     return
 
@@ -37,19 +37,18 @@ from .CSI import CSI
 
 
 # the table of color names to ANSI control sequences
-table = {}
+table = {
+    # the reset sequence
+    "normal": CSI.reset(),
 
-# the reset sequence
-table["normal"] = CSI.reset()
-
-# the X11 named colors""")
+    # the X11 named colors""")
 
 
 def postamble():
     """
     Return the trailing lines
     """
-    return """
+    return """    }
 
 # end of file"""
 
