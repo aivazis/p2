@@ -40,7 +40,7 @@ from .CSI import CSI
 table = {}
 
 # the reset sequence
-table["normal"] = CSI.csi3(0)
+table["normal"] = CSI.reset()
 
 # the X11 named colors""")
 

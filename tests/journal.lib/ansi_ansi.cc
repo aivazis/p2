@@ -20,7 +20,7 @@ int main() {
 
     // verify the contents of the {ansi} color table
     // the reset sequence
-    assert ((ansi_t::ansi("normal") == csi_t::csi3(0)));
+    assert ((ansi_t::ansi("normal") == csi_t::reset()));
     // regular colors
     assert ((ansi_t::ansi("black") == csi_t::csi3(30)));
     assert ((ansi_t::ansi("red") == csi_t::csi3(31)));

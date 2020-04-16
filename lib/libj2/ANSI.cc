@@ -158,7 +158,7 @@ make_ansi() -> table_type
     ansi_t::table_type table;
 
     // the reset sequence
-    table["normal"] = csi_t::csi3(0);
+    table["normal"] = csi_t::reset();
 
     // regular colors
     table["black"] = csi_t::csi3(30);
@@ -193,7 +193,7 @@ make_gray() -> table_type
     ansi_t::table_type table;
 
     // the reset sequence
-    table["normal"] = csi_t::csi3(0);
+    table["normal"] = csi_t::reset();
 
     // grays
     table["gray10"] = csi_t::csi24(0x19, 0x19, 0x19);
@@ -216,7 +216,7 @@ make_misc() -> table_type
     ansi_t::table_type table;
 
     // the reset sequence
-    table["normal"] = csi_t::csi3(0);
+    table["normal"] = csi_t::reset();
 
     // other custom colors
     table["amber"] = csi_t::csi24(0xff, 0xbf, 0x00);

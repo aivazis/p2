@@ -19,7 +19,7 @@ using ansi_t = pyre::journal::ansi_t;
 int main() {
 
     // verify the contents of the {misc} color table
-    assert ((ansi_t::misc("normal") == csi_t::csi3(0)));
+    assert ((ansi_t::misc("normal") == csi_t::reset()));
     assert ((ansi_t::misc("amber") == csi_t::csi24(0xff, 0xbf, 0x00)));
 
     // all done

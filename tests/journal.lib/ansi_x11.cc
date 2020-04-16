@@ -20,7 +20,7 @@ using ansi_t = pyre::journal::ansi_t;
 int main() {
 
     // verify the contents of the {x11} color table
-    assert ((ansi_t::x11("normal") == csi_t::csi3(0)));
+    assert ((ansi_t::x11("normal") == csi_t::reset()));
     assert ((ansi_t::x11("burlywood") == csi_t::csi24(0xde, 0xb8, 0x87)));
     assert ((ansi_t::x11("dark goldenrod") == csi_t::csi24(0xb8, 0x86, 0x0b)));
     assert ((ansi_t::x11("dark khaki") == csi_t::csi24(0xbd, 0xb7, 0x6b)));

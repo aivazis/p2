@@ -19,7 +19,7 @@ using ansi_t = pyre::journal::ansi_t;
 int main() {
 
     // verify the contents of the {gray} color table
-    assert ((ansi_t::gray("normal") == csi_t::csi3(0)));
+    assert ((ansi_t::gray("normal") == csi_t::reset()));
     assert ((ansi_t::gray("gray10") == csi_t::csi24(0x19, 0x19, 0x19)));
     assert ((ansi_t::gray("gray30") == csi_t::csi24(0x4c, 0x4c, 0x4c)));
     assert ((ansi_t::gray("gray41") == csi_t::csi24(0x69, 0x69, 0x69)));

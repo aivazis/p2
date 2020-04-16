@@ -51,7 +51,7 @@ make_x11() -> table_type
     table_type table;
 
     // the reset sequence
-    table["normal"] = csi_t::csi3(0);
+    table["normal"] = csi_t::reset();
 
     // the X11 named colors""")
 
