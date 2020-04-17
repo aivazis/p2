@@ -7,7 +7,7 @@
 
 def test():
     """
-    Check a few of the canonical X11 color names
+    Verify that we can detect ANSI compatible terminals correctly
     """
     # for the command line
     import sys
