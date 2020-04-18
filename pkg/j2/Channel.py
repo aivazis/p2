@@ -83,10 +83,12 @@ class Channel(p2.patterns.named):
 
     @classmethod
     def setDefaultDevice(cls, device):
-        # easy enough
+        # save the current device
+        old = cls.defaultDevice
+        # install the new one
         cls.defaultDevice = device
-        # all done
-        return
+        # and return the old
+        return old
 
 
     # interface

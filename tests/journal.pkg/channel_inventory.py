@@ -9,10 +9,10 @@
 import collections  # for {defaultdict}
 
 
-# channel state interface
+# verify that the default channel state is as expected
 def test():
     """
-    Exercise the channel state interface
+    Exercise the default channel state
     """
     # get the package
     from j2.Channel import Channel
@@ -24,17 +24,12 @@ def test():
     # make one
     channel = Channel(name="test.channel")
 
-    # verify its name
-    assert channel.name == "test.channel"
-    # its state
-    assert channel.state == False
-    # and again using the conversion to bool
-    assert not channel
-
-    # activate it
-    channel.activate()
-    # and check
-    assert channel.state == True
+    # get its inventory
+    inventory = channel.inventory
+    # verify that it is disabled
+    assert inventory.state == False
+    # and that it has no registered device
+    assert inventory.device == None
 
     # all done
     return
