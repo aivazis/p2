@@ -17,7 +17,7 @@ def test():
     # activate it
     channel.activate()
     # but send the output to trash
-    # channel.device = j2.trash()
+    channel.device = j2.trash()
 
     # a few times
     for _ in range(10):
