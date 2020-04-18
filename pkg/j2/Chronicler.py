@@ -16,20 +16,22 @@ class Chronicler(metaclass=p2.patterns.singleton):
 
 
     # public data
+    meta = None
     device = None
+    verbosity = 1
 
 
     # metamethods
-    def __init__(self, **kwds):
+    def __init__(self, verbosity=verbosity, device=device, meta=meta, **kwds):
         # chain up
         super().__init__(**kwds)
 
         # the default verbosity
-        self.verbosity = 1
+        self.verbosity = verbosity
         # the default device
-        self.device = None
+        self.device = device
         # the global metadata
-        self.meta = {
+        self.meta = meta if meta is not None else {
             "application": "journal",  # this key is required; applications should override
             }
 
