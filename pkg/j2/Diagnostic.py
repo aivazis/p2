@@ -114,9 +114,18 @@ class Diagnostic(p2.patterns.named):
         return
 
 
+    # implementation details
+    def commit(self):
+        """
+        Write the accumulated message to my device and flush
+        """
+        # nothing to do; subclasses should override
+        return
+
+
     # class data
-    # access to the singleton with the global journal configuration
-    chronicler = Chronicler()
+    severity = "generic"        # subclasses must override
+    chronicler = Chronicler()   # access to the singleton with the global journal configuration
 
 
 # end of file
