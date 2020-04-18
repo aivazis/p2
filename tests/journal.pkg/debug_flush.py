@@ -7,7 +7,7 @@
 
 def test():
     """
-    verify that message injection is handled properly
+    Verify that the channel buffers get flushed properly after {log}
     """
     # access the journal
     import j2
@@ -21,6 +21,9 @@ def test():
 
     # inject
     channel.log("hello world!")
+
+    # verify that the buffer is empty after the flush
+    assert len(channel.page) == 0
 
     # all done
     return

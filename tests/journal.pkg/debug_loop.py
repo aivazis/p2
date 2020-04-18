@@ -7,7 +7,7 @@
 
 def test():
     """
-    verify that message injection is handled properly
+    Sanity check: verify that the channel is accessible
     """
     # access the journal
     import j2
@@ -17,10 +17,12 @@ def test():
     # activate it
     channel.activate()
     # but send the output to trash
-    channel.device = j2.trash()
+    # channel.device = j2.trash()
 
-    # inject
-    channel.log("hello world!")
+    # a few times
+    for _ in range(10):
+        # inject
+        channel.log("hello world!")
 
     # all done
     return

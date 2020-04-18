@@ -7,7 +7,7 @@
 
 def test():
     """
-    verify that message injection is handled properly
+    Verify that empty log messages get handled properly
     """
     # access the journal
     import j2
@@ -20,7 +20,7 @@ def test():
     channel.device = j2.trash()
 
     # inject
-    channel.log("hello world!")
+    channel.log()
 
     # all done
     return
