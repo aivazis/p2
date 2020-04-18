@@ -7,21 +7,23 @@
 
 def test():
     """
-    Sanity check: verify that the channel is accessible
+    Verify that the channel buffers get flushed properly after {log}
     """
     # access the journal
     import j2
 
-    # make a info channel
+    # make an info channel
     channel = j2.info(name="tests.journal.info")
+    # activate it
+    channel.activate()
     # but send the output to trash
     channel.device = j2.trash()
 
-    # add some metadats
-    channel.meta["time"] = "now"
     # inject
-    channel.line("info channel:")
-    channel.log("    hello world!")
+    channel.log("hello world!")
+
+    # verify that the buffer is empty after the flush
+    assert len(channel.page) == 0
 
     # all done
     return

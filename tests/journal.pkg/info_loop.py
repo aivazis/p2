@@ -7,21 +7,22 @@
 
 def test():
     """
-    Sanity check: verify that the channel is accessible
+    Verify that repeated access to the same channel does not accumulate extraneous material
     """
     # access the journal
     import j2
 
-    # make a info channel
+    # make an info channel
     channel = j2.info(name="tests.journal.info")
+    # activate it
+    channel.activate()
     # but send the output to trash
     channel.device = j2.trash()
 
-    # add some metadats
-    channel.meta["time"] = "now"
-    # inject
-    channel.line("info channel:")
-    channel.log("    hello world!")
+    # a few times
+    for _ in range(10):
+        # inject
+        channel.log("hello world!")
 
     # all done
     return
