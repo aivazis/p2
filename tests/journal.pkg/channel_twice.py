@@ -17,13 +17,13 @@ def test():
     """
     # get the package
     from j2.Channel import Channel
-    # the base class has no index, so make one
-    index = collections.defaultdict(Channel.disabled_type)
-    # and attach it
-    Channel.index = index
+    # derive a severity
+    class Severity(Channel):
+        # make and attach an index
+        index = collections.defaultdict(Channel.disabled_type)
 
     # make one
-    channel_1 = Channel(name="test.channel")
+    channel_1 = Severity(name="test.channel")
     # verify its name
     assert channel_1.name == "test.channel"
     # its state
@@ -37,7 +37,7 @@ def test():
     assert channel_1.state == True
 
     # make another channel by the same name
-    channel_2 = Channel(name="test.channel")
+    channel_2 = Severity(name="test.channel")
     # verify the name
     assert channel_2.name == "test.channel"
     # verify it's on

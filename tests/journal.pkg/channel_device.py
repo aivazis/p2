@@ -19,10 +19,11 @@ def test():
     import j2
     # and the channel
     from j2.Channel import Channel
-    # the base class has no index, so make one
-    index = collections.defaultdict(Channel.disabled_type)
-    # and attach it
-    Channel.index = index
+
+    # derive a severity
+    class Severity(Channel):
+        # make and attach an index
+        index = collections.defaultdict(Channel.disabled_type)
 
     # make a trash can
     trash = j2.trash()
@@ -31,17 +32,17 @@ def test():
     default = j2.chronicler().device
 
     # make a couple of channels
-    channel_1 = Channel("journal.tests.channel_1")
-    channel_2 = Channel("journal.tests.channel_2")
+    channel_1 = Severity("journal.tests.channel_1")
+    channel_2 = Severity("journal.tests.channel_2")
 
     # verify that their device is currently what chronicler provides
     assert channel_1.device is default
     assert channel_2.device is default
 
     # set the channel wide default
-    Channel.setDefaultDevice(trash)
+    Severity.setDefaultDevice(trash)
     # and ask for it back
-    shared = Channel.getDefaultDevice()
+    shared = Severity.getDefaultDevice()
     # verify that that's what the two channel see now
     assert channel_1.device is shared
     assert channel_2.device is shared
@@ -53,12 +54,12 @@ def test():
     assert channel_1.device is not channel_2.device
 
     # make a new channel that shares state with {channel_1}
-    channel_10 = Channel("journal.tests.channel_1")
+    channel_10 = Severity("journal.tests.channel_1")
     # verify it has the same device
     assert channel_10.device is channel_1.device
 
     # make a new channel that shares state with {channel_2}
-    channel_20 = Channel("journal.tests.channel_2")
+    channel_20 = Severity("journal.tests.channel_2")
     # verify it has the same device
     assert channel_20.device is channel_2.device
 

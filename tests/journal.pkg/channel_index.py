@@ -16,14 +16,14 @@ def test():
     """
     # get the package
     from j2.Channel import Channel
-    # the base class has no index, so make one
-    index = collections.defaultdict(Channel.disabled_type)
-    # and attach it
-    Channel.index = index
+    # derive a severity
+    class Severity(Channel):
+        # make and attach an index
+        index = collections.defaultdict(Channel.disabled_type)
 
     # make a couple of channels
-    channel_1 = Channel(name="test.channel_1")
-    channel_2 = Channel(name="test.channel_2")
+    channel_1 = Severity(name="test.channel_1")
+    channel_2 = Severity(name="test.channel_2")
 
     # get the index through the first channel
     index_1 = channel_1.index
