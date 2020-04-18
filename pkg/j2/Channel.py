@@ -4,8 +4,10 @@
 # (c) 1998-2020 all rights reserved
 
 
+# externals
+import collections     # for {defaultdict}
 # framework
-import p2 # for my superclass
+import p2              # for my superclass
 # access to the global settings
 from .Chronicler import Chronicler
 
@@ -118,6 +120,20 @@ class Channel(p2.patterns.named):
         super().__init__(name=name, **kwds)
         # look up my inventory
         self.inventory = self.index[name]
+        # all done
+        return
+
+
+    @classmethod
+    def __init_subclass__(cls, /, inventory_type, **kwds):
+        # chain up
+        super().__init_subclass__(**kwds)
+        # attach the inventory type
+        cls.inventory_type = inventory_type
+        # create an index
+        index = collections.defaultdict(inventory_type)
+        # and attach it
+        cls.index = index
         # all done
         return
 

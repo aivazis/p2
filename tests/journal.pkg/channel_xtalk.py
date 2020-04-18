@@ -5,10 +5,6 @@
 # (c) 1998-2020 all rights reserved
 
 
-# externals
-import collections  # for {defaultdict}
-
-
 # verify we can derive from {Channel} and create independent channel factories
 def test():
     """
@@ -19,23 +15,21 @@ def test():
     from j2.Channel import Channel
 
     # three channel subclasses
-    class info(Channel):
+    class info(Channel, inventory_type=Channel.disabled_type):
         """
         info channel
         """
-        index = collections.defaultdict(Channel.disabled_type)
 
-    class warning(Channel):
+    class warning(Channel, inventory_type=Channel.enabled_type):
         """
         warning channel
         """
-        index = collections.defaultdict(Channel.enabled_type)
 
-    class error(Channel):
+    class error(Channel, inventory_type=Channel.enabled_type):
         """
         error channel
         """
-        index = collections.defaultdict(Channel.enabled_fatal_type)
+
 
     # make a couple of info channels
     info_1 = info("info.channel_1")

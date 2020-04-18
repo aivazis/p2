@@ -5,10 +5,6 @@
 # (c) 1998-2020 all rights reserved
 
 
-# externals
-import collections  # for {defaultdict}
-
-
 # verify that the default channel state is as expected
 def test():
     """
@@ -16,10 +12,12 @@ def test():
     """
     # get the package
     from j2.Channel import Channel
+
     # derive a severity
-    class Severity(Channel):
-        # make and attach an index
-        index = collections.defaultdict(Channel.disabled_type)
+    class Severity(Channel, inventory_type=Channel.disabled_type):
+        """
+        A sample derivation
+        """
 
     # make one
     channel = Severity(name="test.channel")

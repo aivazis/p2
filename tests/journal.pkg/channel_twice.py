@@ -5,11 +5,6 @@
 # (c) 1998-2020 all rights reserved
 
 
-# externals
-import collections  # for {defaultdict}
-
-
-
 # channels with the same name share state
 def test():
     """
@@ -17,10 +12,12 @@ def test():
     """
     # get the package
     from j2.Channel import Channel
+
     # derive a severity
-    class Severity(Channel):
-        # make and attach an index
-        index = collections.defaultdict(Channel.disabled_type)
+    class Severity(Channel, inventory_type=Channel.disabled_type):
+        """
+        A sample derivation
+        """
 
     # make one
     channel_1 = Severity(name="test.channel")

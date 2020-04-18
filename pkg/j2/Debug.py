@@ -4,16 +4,13 @@
 # (c) 1998-2020 all rights reserved
 
 
-# externals
-import collections
-
 # superclasses
 from .Channel import Channel
 from .Diagnostic import Diagnostic
 
 
 # the implementation of the debug channel
-class Debug(Diagnostic, Channel):
+class Debug(Diagnostic, Channel, inventory_type=Channel.disabled_type):
     """
     Debug channels are used for communicating application progress to its developers
     """
@@ -38,11 +35,6 @@ class Debug(Diagnostic, Channel):
 
     # constant
     severity = "debug"     # the channel severity
-
-    # my inventory type
-    inventory_type = Channel.disabled_type
-    # determines what my index holds
-    index = collections.defaultdict(inventory_type)
 
 
 # end of file

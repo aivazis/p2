@@ -4,16 +4,13 @@
 # (c) 1998-2020 all rights reserved
 
 
-# externals
-import collections
-
 # superclasses
 from .Channel import Channel
 from .Diagnostic import Diagnostic
 
 
 # the implementation of the debug channel
-class Informational(Diagnostic, Channel):
+class Informational(Diagnostic, Channel, inventory_type=Channel.enabled_type):
     """
     Informational channels are used for communicating application progress to users
     """
@@ -38,11 +35,6 @@ class Informational(Diagnostic, Channel):
 
     # constant
     severity = "info" # the channel severity
-
-    # my inventory type
-    inventory_type = Channel.enabled_type
-    # determines what my index holds
-    index = collections.defaultdict(inventory_type)
 
 
 # end of file

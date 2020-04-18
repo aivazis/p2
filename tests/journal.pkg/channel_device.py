@@ -5,10 +5,6 @@
 # (c) 1998-2020 all rights reserved
 
 
-# externals
-import collections  # for {defaultdict}
-
-
 # access to instance specific devices
 def test():
     """
@@ -21,9 +17,10 @@ def test():
     from j2.Channel import Channel
 
     # derive a severity
-    class Severity(Channel):
-        # make and attach an index
-        index = collections.defaultdict(Channel.disabled_type)
+    class Severity(Channel, inventory_type=Channel.disabled_type):
+        """
+        A sample derivation
+        """
 
     # make a trash can
     trash = j2.trash()
