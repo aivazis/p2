@@ -72,7 +72,7 @@ int main() {
     // set the channel specific devices for both of them to different devices
     channel_1.device(std::make_shared<trash_t>());
     channel_2.device(std::make_shared<trash_t>());
-    // verify that the two channels  now have different devices
+    // verify that the two channels now have different devices
     assert (channel_1.device() != channel_2.device());
 
     // make a channel that shares state with {channel_1}
