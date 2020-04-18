@@ -7,7 +7,7 @@
 
 def test():
     """
-    Sanity check: verify that the channel is accessible
+    Verify that repeated access to the same channel does not accumulate extraneous material
     """
     # access the journal
     import j2
