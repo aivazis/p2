@@ -51,6 +51,7 @@ if True:
     from .ErrorConsole import ErrorConsole as cerr
 
     # the channels
+    from .Null import Null as null
     from .Debug import Debug as debug
     from .Informational import Informational as info
 
