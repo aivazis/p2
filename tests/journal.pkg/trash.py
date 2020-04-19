@@ -7,7 +7,7 @@
 
 def test():
     """
-    Verify that we can access the {cerr} console
+    Verify that we can access the {trash} device
     """
     # get the pakcage
     import j2
