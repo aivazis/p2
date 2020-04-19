@@ -7,7 +7,7 @@
 
 def test():
     """
-    verify that message injection is handled properly
+    Verify that message injection is handled properly
     """
     # access the journal
     import j2

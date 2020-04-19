@@ -7,7 +7,7 @@
 
 def test():
     """
-    Sanity check: verify that the channel is accessible
+    Verify the channel initial state
     """
     # access the journal
     import j2
@@ -18,6 +18,8 @@ def test():
     assert channel.name == "tests.journal.debug"
     # the verbosity should be at the default level
     assert channel.verbosity == 1
+    # the channel should be inactive
+    assert channel.state == False
     # the page should be empty
     assert channel.page == []
     # verify the metadata
