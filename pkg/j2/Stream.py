@@ -15,6 +15,17 @@ class Stream(Device):
     """
 
 
+    # interface
+    def close(self):
+        """
+        Close the associated stream
+        """
+        # delegate
+        self.stream.close()
+        # all done
+        return self
+
+
     # metamethods
     def __init__(self, stream, name="stream", **kwds):
         # chain up

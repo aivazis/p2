@@ -47,6 +47,7 @@ if True:
     # publish
     # the devices
     from .Trash import Trash as trash
+    from .Stream import Stream as stream
     from .Console import Console as cout
     from .ErrorConsole import ErrorConsole as cerr
 
