@@ -52,7 +52,10 @@ if True:
 
     # the channels
     from .Null import Null as null
+
     from .Debug import Debug as debug
+    from .Firewall import Firewall as firewall
+
     from .Informational import Informational as info
 
     # get the singleton with the global state
