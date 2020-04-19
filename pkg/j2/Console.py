@@ -8,6 +8,8 @@
 import sys # for {stdout}
 # superclass
 from .Stream import Stream
+# the palette definitions
+from . import palettes
 
 
 # write messages to {stdout}
@@ -20,7 +22,7 @@ class Console(Stream):
     # metamethods
     def __init__(self, **kwds):
         # chain up
-        super().__init__(name="cout", stream=sys.stdout, **kwds)
+        super().__init__(name="cout", stream=sys.stdout, palette=palettes.light, **kwds)
         # all done
         return
 

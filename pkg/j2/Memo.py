@@ -35,7 +35,7 @@ class Memo(Renderer):
         # consider it an indication that we have location information
         if filename:
             # initialize a buffer
-            buffer = [ palette["severity"] ]
+            buffer = [ palette[severity] ]
             # pull the longest filename we are going to print
             maxlen = self.maxlen
             # if the filename is too long
@@ -60,7 +60,7 @@ class Memo(Renderer):
             # if it's available
             if line:
                 # turn color back on
-                buffer.append(palette["severity"])
+                buffer.append(palette[severity])
                 # add the number to the pile
                 buffer.append(line)
                 # reset the color
@@ -73,7 +73,7 @@ class Memo(Renderer):
             # if it's available
             if function:
                 # turn color back on
-                buffer.append(palette["severity"])
+                buffer.append(palette[severity])
                 # add the number to the pile
                 buffer.append(function)
                 # reset the color
@@ -86,9 +86,9 @@ class Memo(Renderer):
 
         # render the channel name and severity
         buffer = [
-            palette["severity"], marker, palette["reset"],
-            palette["severity"], meta["channel"], palette["reset"],
-            "(", palette["severity"], severity, palette["reset"], ")"
+            palette[severity], marker, palette["reset"],
+            palette[severity], meta["channel"], palette["reset"],
+            "(", palette[severity], severity, palette["reset"], ")"
             ]
         # assemble and push
         yield ''.join(buffer)
@@ -104,10 +104,10 @@ class Memo(Renderer):
                 continue
             # otherwise, render it
             buffer = [
-                palette["severity"], marker, palette["reset"],
-                palette["severity"], key, palette["reset"],
-                ":",
-                palette["severity"], value, palette["reset"],
+                palette[severity], marker, palette["reset"],
+                palette[severity], key, palette["reset"],
+                ": ",
+                palette[severity], value, palette["reset"],
                 ]
             # assemble and push
             yield ''.join(buffer)
@@ -134,7 +134,7 @@ class Memo(Renderer):
         for line in page:
             # render
             buffer = [
-                palette["severity"], marker, palette["reset"],
+                palette[severity], marker, palette["reset"],
                 palette["body"], line, palette["reset"]
                 ]
             # assemble and push

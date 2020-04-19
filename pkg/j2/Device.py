@@ -10,6 +10,8 @@ import collections    # for {defaultdict}
 import p2             # for my superclass
 # access to the global settings
 from .Chronicler import Chronicler
+# and to the palette definitions
+from . import palettes
 
 
 # the base class of journal devices
@@ -71,7 +73,7 @@ class Device(p2.patterns.named):
 
 
     # metamethods
-    def __init__(self, palette=None, alerts=None, memos=None, **kwds):
+    def __init__(self, palette=palettes.null, alerts=None, memos=None, **kwds):
         # chain up
         super().__init__(**kwds)
 
@@ -79,7 +81,7 @@ class Device(p2.patterns.named):
         self.memoRenderer = memos if memos is not None else self.Memo()
         self.alertRenderer = alerts if alerts is not None else self.Alert()
         # save the palette
-        self.palette = collections.defaultdict(str) if palette is None else palette
+        self.palette = palette
 
         # all done
         return

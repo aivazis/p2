@@ -8,6 +8,8 @@
 import sys # for {stdout}
 # superclass
 from .Stream import Stream
+# the palette definitions
+from . import palettes
 
 
 # write messages to {stderr}
@@ -20,7 +22,7 @@ class ErrorConsole(Stream):
     # metamethods
     def __init__(self, **kwds):
         # chain up
-        super().__init__(name="cerr", stream=sys.stderr, **kwds)
+        super().__init__(name="cerr", stream=sys.stderr, palette=palettes.light, **kwds)
         # all done
         return
 
