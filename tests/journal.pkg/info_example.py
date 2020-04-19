@@ -7,7 +7,7 @@
 
 def test():
     """
-    Sanity check: verify that the channel is accessible
+    Exercise the info channel with a realistic example
     """
     # access the journal
     import j2
