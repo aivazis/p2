@@ -9,15 +9,17 @@ def test():
     """
     Verify that message injection is handled properly
     """
-    # access the journal
-    import j2
+    # get the channel
+    from j2.Null import Null as null
+    # and the trash can
+    from j2.Trash import Trash as trash
 
     # make a null channel
-    channel = j2.null(name="tests.journal.null")
+    channel = null(name="tests.journal.null")
     # activate it
     channel.activate()
     # but send the output to trash
-    channel.device = j2.trash()
+    channel.device = trash()
 
     # inject
     channel.log("hello world!")

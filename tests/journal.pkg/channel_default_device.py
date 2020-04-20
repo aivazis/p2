@@ -10,8 +10,8 @@ def test():
     """
     Verify that we can control the default device
     """
-    # the package
-    import j2
+    # the trash can
+    from j2.Trash import Trash as trash
     # get the channel
     from j2.Channel import Channel
 
@@ -19,7 +19,7 @@ def test():
     builtin = Channel.getDefaultDevice()
 
     # make new device
-    custom = j2.trash()
+    custom = trash()
     # install it
     old = Channel.setDefaultDevice(device=custom)
 

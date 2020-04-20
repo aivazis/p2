@@ -9,11 +9,11 @@ def test():
     """
     Verify the channel initial state
     """
-    # access the journal
-    import j2
+    # get the channel
+    from j2.Debug import Debug as debug
 
     # make a channel
-    channel = j2.debug(name="tests.journal.debug")
+    channel = debug(name="tests.journal.debug")
     # verify the channel name
     assert channel.name == "tests.journal.debug"
     # the verbosity should be at the default level

@@ -9,11 +9,11 @@ def test():
     """
     Verify that we can access the {cout} console
     """
-    # get the pakcage
-    import j2
+    # get the device
+    from j2.Console import Console as cout
 
     # instantiate and verify the name
-    assert j2.cout().name == "cout"
+    cout().name == "cout"
 
     # all done
     return

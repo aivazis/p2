@@ -10,19 +10,18 @@ def test():
     """
     Exercise getting/setting the global device
     """
-    # get the package
-    import j2
-
-    # get the manager of the global state
-    chronicler = j2.chronicler()
+    # get the chronicler
+    from j2.Chronicler import Chronicler as chronicler
+    # and the trash can
+    from j2.Trash import Trash as trash
 
     # make a new device
-    trash = j2.trash()
+    custom = trash()
     # install it
-    chronicler.device = trash
+    chronicler.device = custom
 
     # verify that it was installed correctly
-    assert chronicler.device is trash
+    assert chronicler.device is custom
 
     # all done
     return

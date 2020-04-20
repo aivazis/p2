@@ -10,12 +10,8 @@ def test():
     """
     Exercise the diagnostic state
     """
-    # get the package
-    import j2
-    # the diagnostic base class
+    # get the diagnostic base class
     from j2.Diagnostic import Diagnostic
-    # and the global state manager
-    chronicler = j2.chronicler()
 
     # make one
     d1 = Diagnostic(name="test.channel")

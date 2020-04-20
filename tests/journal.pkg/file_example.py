@@ -14,13 +14,16 @@ def test():
     # make a stream
     ostr = open(filename, mode="w")
 
-    # get the package
-    import j2
-    # turn it into a journal device
-    device = j2.stream(name=filename, stream=ostr)
+    # get the device
+    from j2.Stream import Stream as stream
+    # and a channel
+    from j2.Debug import Debug as debug
+
+    # instantiate
+    device = stream(name=filename, stream=ostr)
 
     # make a debug channel
-    channel = j2.debug(name="tests.journal.debug")
+    channel = debug(name="tests.journal.debug")
     # activate it
     channel.activate()
     # send the output to the file

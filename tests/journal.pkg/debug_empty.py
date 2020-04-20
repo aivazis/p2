@@ -9,15 +9,17 @@ def test():
     """
     Verify that empty log messages get handled properly
     """
-    # access the journal
-    import j2
+    # access the trash can
+    from j2.Trash import Trash as trash
+    # and the channel
+    from j2.Debug import Debug as debug
 
     # make a debug channel
-    channel = j2.debug(name="tests.journal.debug")
+    channel = debug(name="tests.journal.debug")
     # activate it
     channel.activate()
     # but send the output to trash
-    channel.device = j2.trash()
+    channel.device = trash()
 
     # inject
     channel.log()

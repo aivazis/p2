@@ -9,11 +9,11 @@ def test():
     """
     Verify the channel initial state
     """
-    # access the journal
-    import j2
+    # get the channel
+    from j2.Firewall import Firewall as firewall
 
     # make a channel
-    channel = j2.firewall(name="tests.journal.firewall")
+    channel = firewall(name="tests.journal.firewall")
     # verify the channel name
     assert channel.name == "tests.journal.firewall"
     # the verbosity should be at the default level

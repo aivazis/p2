@@ -9,11 +9,11 @@ def test():
     """
     Sanity check: verify that the channel is accessible
     """
-    # access the journal
-    import j2
+    # get the channel
+    from j2.Warning import Warning as warning
 
     # make a channel
-    channel = j2.warning(name="tests.journal.warning")
+    channel = warning(name="tests.journal.warning")
     # verify the channel name
     assert channel.name == "tests.journal.warning"
     # the verbosity should be at the default level

@@ -11,8 +11,9 @@ def test():
     Verify that channel instances get their devices from the same source, and that there is no
     crosstalk when setting a channel specific device
     """
-    # get the package
-    import j2
+    # get the support characters
+    from j2.Trash import Trash
+    from j2.Chronicler import Chronicler as chronicler
     # and the channel
     from j2.Channel import Channel
 
@@ -23,10 +24,10 @@ def test():
         """
 
     # make a trash can
-    trash = j2.trash()
+    trash = Trash()
 
     # ask the chronicler for its device
-    default = j2.chronicler().device
+    default = chronicler().device
 
     # make a couple of channels
     channel_1 = Severity("journal.tests.channel_1")
@@ -45,8 +46,8 @@ def test():
     assert channel_2.device is shared
 
     # set the channel specific devices to different values
-    channel_1.device = j2.trash()
-    channel_2.device = j2.trash()
+    channel_1.device = Trash()
+    channel_2.device = Trash()
     # verify the devices are now different
     assert channel_1.device is not channel_2.device
 

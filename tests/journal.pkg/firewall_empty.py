@@ -9,13 +9,15 @@ def test():
     """
     Verify that empty log messages get handled properly
     """
-    # access the journal
-    import j2
+    # get the trash can
+    from j2.Trash import Trash as trash
+    # and the channel
+    from j2.Firewall import Firewall as firewall
 
     # make a firewall
-    channel = j2.firewall(name="tests.journal.firewall")
+    channel = firewall(name="tests.journal.firewall")
     # send the output to trash
-    channel.device = j2.trash()
+    channel.device = trash()
 
     # carefully
     try:

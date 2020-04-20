@@ -10,23 +10,22 @@ def test():
     """
     Verify the default global settings
     """
-    # get the package
-    import j2
-
-    # get the manager of the global state
-    chronicler = j2.chronicler()
+    # get the console
+    from j2.Console import Console as cout
+    # and the chronicler
+    from j2.Chronicler import Chronicler as chronicler
 
     # ask it for its metadata
-    meta = chronicler.meta
+    meta = chronicler().meta
     # verify that the table comes with only one setting
     assert len(meta) == 1
     # that is the default application name
     assert meta["application"] == "journal"
 
     # get the default device
-    device = chronicler.device
+    device = chronicler().device
     # verify it's an instance of {cout}
-    assert isinstance(device, j2.cout)
+    assert isinstance(device, cout)
     # and that it is named correctly
     assert device.name == "cout"
 

@@ -9,11 +9,11 @@ def test():
     """
     Verify that we can access the {cerr} console
     """
-    # get the pakcage
-    import j2
+    # get the device
+    from j2.ErrorConsole import ErrorConsole as cerr
 
     # instantiate and verify the name
-    assert j2.cerr().name == "cerr"
+    assert cerr().name == "cerr"
 
     # all done
     return

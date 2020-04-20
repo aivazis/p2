@@ -10,7 +10,7 @@ def test():
     Sanity check: verify that the channel is accessible
     """
     # access the channel constructor
-    from j2 import null
+    from j2.Null import Null
     # all done
     return
 

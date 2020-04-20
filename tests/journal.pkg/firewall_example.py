@@ -9,13 +9,15 @@ def test():
     """
     Exercise the firewall channel with a realistic example
     """
-    # access the journal
-    import j2
+    # get the trash can
+    from j2.Trash import Trash as trash
+    # and the channel
+    from j2.Firewall import Firewall as firewall
 
     # make a firewall channel
-    channel = j2.firewall(name="tests.journal.firewall")
+    channel = firewall(name="tests.journal.firewall")
     # send the output to trash
-    channel.device = j2.trash()
+    channel.device = trash()
 
     # add some metadats
     channel.meta["time"] = "now"
@@ -31,7 +33,7 @@ def test():
     except channel.FirewallError as error:
         # verify that the description is correct
         assert str(error) == (
-            f"file='{__file__}', line=27, function='test': "
+            f"file='{__file__}', line=29, function='test': "
             "firewall breached; aborting..."
             )
 

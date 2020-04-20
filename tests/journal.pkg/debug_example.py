@@ -9,15 +9,16 @@ def test():
     """
     Exercise the debug channel with a realistic example
     """
-    # access the journal
-    import j2
+    # access the parts
+    from j2.Trash import Trash as trash
+    from j2.Debug import Debug as debug
 
     # make a debug channel
-    channel = j2.debug(name="tests.journal.debug")
+    channel = debug(name="tests.journal.debug")
     # activate it
     channel.activate()
     # but send the output to trash
-    channel.device = j2.trash()
+    channel.device = trash()
 
     # add some metadats
     channel.meta["time"] = "now"

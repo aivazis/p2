@@ -9,11 +9,11 @@ def test():
     """
     Verify that we can access the {trash} device
     """
-    # get the pakcage
-    import j2
+    # get the device
+    from j2.Trash import Trash as trash
 
     # instantiate and verify the name
-    assert j2.trash().name == "trash"
+    assert trash().name == "trash"
 
     # all done
     return

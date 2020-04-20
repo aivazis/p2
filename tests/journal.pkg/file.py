@@ -14,10 +14,10 @@ def test():
     # make a stream
     ostr = open(filename, mode="w")
 
-    # get the package
-    import j2
-    # turn it into a journal device
-    device = j2.stream(name=filename, stream=ostr)
+    # get the device
+    from j2.Stream import Stream as stream
+    # instantiate
+    device = stream(name=filename, stream=ostr)
     # check its name
     assert device.name == filename
 

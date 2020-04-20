@@ -9,13 +9,15 @@ def test():
     """
     Verify that repeated access to the same channel does not accumulate extraneous material
     """
-    # access the journal
-    import j2
+    # get the trash can
+    from j2.Trash import Trash as trash
+    # and the channel
+    from j2.Warning import Warning as warning
 
     # make a warning channel
-    channel = j2.warning(name="tests.journal.warning")
+    channel = warning(name="tests.journal.warning")
     # send the output to trash
-    channel.device = j2.trash()
+    channel.device = trash()
 
     # a few times
     for _ in range(10):
