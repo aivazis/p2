@@ -14,8 +14,6 @@ def test():
 
     # make an info channel
     channel = j2.info(name="tests.journal.info")
-    # activate it
-    channel.activate()
     # but send the output to trash
     channel.device = j2.trash()
 
