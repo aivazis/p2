@@ -12,7 +12,7 @@ def test():
     # access the journal
     import j2
 
-    # make a info channel
+    # make an info channel
     channel = j2.info(name="tests.journal.info")
     # but send the output to trash
     channel.device = j2.trash()
