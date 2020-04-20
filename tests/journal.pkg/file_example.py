@@ -10,7 +10,7 @@ def test():
     Verify that we can build a stream based device
     """
     # pick a file name
-    filename = "file.out"
+    filename = "file_example.out"
     # make a stream
     ostr = open(filename, mode="w")
 
