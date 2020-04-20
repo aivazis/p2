@@ -21,13 +21,8 @@ def test():
     # check its name
     assert device.name == filename
 
-    # close the stream
+    # close the stream; not strictly necessary, but let's exercise the interface
     device.close()
-
-    # get os services
-    import os
-    # so we can remove the file
-    os.unlink(filename)
 
     # all done
     return

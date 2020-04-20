@@ -7,7 +7,7 @@
 
 def test():
     """
-    Verify that we can build a stream based device
+    Verify that we can inject into a stream based device
     """
     # pick a file name
     filename = "file_example.out"
@@ -23,7 +23,7 @@ def test():
     channel = j2.debug(name="tests.journal.debug")
     # activate it
     channel.activate()
-    # but send the output to trash
+    # send the output to the file
     channel.device = device
 
     # add some metadats
@@ -32,10 +32,8 @@ def test():
     channel.line("debug channel:")
     channel.log("    hello world!")
 
-    # get os services
-    import os
-    # so we can remove the file
-    os.unlink(filename)
+    # close the stream; not strictly necessary, but let's exercise the interface
+    device.close()
 
     # all done
     return
