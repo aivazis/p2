@@ -23,13 +23,19 @@ class Firewall(Diagnostic, Channel, inventory_type=Channel.enabled_fatal_type):
     # public data
     @property
     def fatal(self):
+        """
+        Check whether i'm fatal
+        """
         # ask my inventory
         return self.inventory.fatal
 
 
     @fatal.setter
     def fatal(self, flag):
-        # set my inventory
+        """
+        Set whether i'm fatal
+        """
+        # pass the flag to my inventory
         self.inventory.fatal = flag
         # all done
         return
