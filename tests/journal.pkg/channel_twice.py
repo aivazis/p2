@@ -53,6 +53,8 @@ def test():
 
 # main
 if __name__ == "__main__":
+    # prohibit the journal bindings
+    journal_no_libjournal = True
     # run the test
     test()
 
