@@ -14,7 +14,7 @@ def test():
 
     # make an info channel
     channel = j2.info(name="tests.journal.info")
-    # but send the output to trash
+    # send the output to trash
     channel.device = j2.trash()
 
     # inject
