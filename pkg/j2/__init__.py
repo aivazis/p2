@@ -58,6 +58,8 @@ if True:
     from .Firewall import Firewall as firewall
 
     from .Informational import Informational as info
+    from .Warning import Warning as warning
+    from .Error import Error as error
 
     # get the singleton with the global state
     from .Chronicler import Chronicler as chronicler
