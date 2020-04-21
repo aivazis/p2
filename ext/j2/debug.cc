@@ -76,8 +76,7 @@ debug(py::module & m) {
                                "access the channel metadata"
                                )
 
-        // static interface
-        // the default state
+        // the default state: static read-only property
         .def_property_readonly_static("defaultState",
                                       // the getter
                                       [](py::object) -> debug_t::state_type {
@@ -87,7 +86,7 @@ debug(py::module & m) {
                                       "get the default state of debug channels"
                                       )
 
-        // the default device
+        // the default device: static mutable property
         .def_property_static("defaultDevice",
                              // the getter
                              [](py::object) -> debug_t::device_pointer {
@@ -100,6 +99,12 @@ debug(py::module & m) {
                              // the docstring
                              "access the default device for all debug channels"
                              )
+
+        // interface
+        // activate
+        .def("activate", &debug_t::activate, "enable output generation")
+        // deactivate
+        .def("deactivate", &debug_t::deactivate, "disable output generation")
 
         // done
         ;
