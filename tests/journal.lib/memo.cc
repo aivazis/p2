@@ -9,7 +9,6 @@
 
 
 // type aliases
-using csi_t = pyre::journal::csi_t;
 using ansi_t = pyre::journal::ansi_t;
 using memo_t = pyre::journal::memo_t;
 using debug_t = pyre::journal::debug_t;
