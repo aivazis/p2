@@ -4,12 +4,12 @@
 # (c) 1998-2020 all rights reserved
 
 
-# externals
-import collections     # for {defaultdict}
 # framework
 import p2              # for my superclass
 # access to the global settings
 from .Chronicler import Chronicler
+# and my index
+from .Index import Index
 
 
 # access to the channel shared state
@@ -119,7 +119,7 @@ class Channel(p2.patterns.named):
         # chain up
         super().__init__(name=name, **kwds)
         # look up my inventory
-        self.inventory = self.index[name]
+        self.inventory = self.index.lookup(name)
         # all done
         return
 
@@ -131,7 +131,7 @@ class Channel(p2.patterns.named):
         # attach the inventory type
         cls.inventory_type = inventory_type
         # create an index
-        index = collections.defaultdict(inventory_type)
+        index = Index(inventory_type)
         # and attach it
         cls.index = index
         # all done
@@ -156,33 +156,64 @@ class Channel(p2.patterns.named):
 
 
     # inventory types for the various channels
-    class enabled_type:
+    class inventory_type:
+        """
+        The base inventory
+        """
+
+        # public data
+        state = None
+        device = None
+
+        # interface
+        def copy(self, source):
+            """
+            Make me look like {source}
+            """
+            # easy
+            self.state = source.state
+            self.device = source.device
+            # all done
+            return
+
+
+    class enabled_type(inventory_type):
         """
         Inventory for channels that are activated by default, i.e. warnings, errors, and firewalls
         """
 
         # public data
         state = True
-        device = None
 
 
-    class disabled_type:
+    class disabled_type(inventory_type):
         """
         Inventory for channels that are deactivated by default, i.e. info, and debug
         """
 
         # public data
         state = False
-        device = None
 
 
-    class fatal_type:
+    class fatal_type(inventory_type):
         """
         Inventory for channels that can raise an exception when they tigger, i.e. firewalls
         """
 
         # public data
         fatal = True
+
+        # interface
+        def copy(self, source):
+            """
+            Make me look like {source}
+            """
+            # chain up
+            super().copy(source)
+            # copy whether i'm fatal
+            self.fatal = source.fatal
+            # all done
+            return
 
 
     class enabled_fatal_type(enabled_type, fatal_type):

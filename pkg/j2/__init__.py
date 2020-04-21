@@ -38,13 +38,33 @@ def credits():
 # publish
 # the metadata
 from . import meta
-# the bindings
-from .ext import libjournal
 
+# set up a marker about whether we are going to load and publish the bindings
+without_libjournal = False
+
+# get the {__main__} module
+import __main__
+# check whether
+try:
+    # the user has expressed an opinion
+    without_libjournal = __main__.journal_no_libjournal
+# if not
+except AttributeError:
+    # no worries
+    pass
+
+# if we are allowed
+if without_libjournal is False:
+    # load the bindings
+    from .ext import libjournal
+    # if something went wrong
+    if libjournal is None:
+        # indicate that we don't have access to the binding
+        without_libjournal = True
 
 # if there is no functional extension module
-if True:
-    # publish
+if without_libjournal:
+    # fall back on the pure python implementation
     # the devices
     from .Trash import Trash as trash
     from .Stream import Stream as stream
@@ -61,6 +81,16 @@ if True:
     from .Warning import Warning as warning
     from .Error import Error as error
 
+    # get the singleton with the global state
+    from .Chronicler import Chronicler as chronicler
+    # attach the default device
+    chronicler().device = cout()
+
+# otherwise
+else:
+    # minimal configuration, for now
+    # get the console
+    from .Console import Console as cout
     # get the singleton with the global state
     from .Chronicler import Chronicler as chronicler
     # attach the default device
