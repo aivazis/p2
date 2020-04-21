@@ -15,7 +15,7 @@ def test():
     # make a trash can
     console = libjournal.ErrorConsole()
     # verify its name is what we expect
-    assert console.name() == "cerr"
+    assert console.name == "cerr"
 
     # all done
     return

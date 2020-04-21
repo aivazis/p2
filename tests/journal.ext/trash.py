@@ -15,7 +15,7 @@ def test():
     # make a trash can
     trash = libjournal.Trash()
     # verify its name is what we expect
-    assert trash.name() == "trash"
+    assert trash.name == "trash"
 
     # all done
     return
