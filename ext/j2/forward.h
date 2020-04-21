@@ -8,8 +8,9 @@
 namespace p2::libjournal {
 
     // module methods
-    void devices(py::module &);
+    void chronicler(py::module &);
     void debug(py::module &);
+    void devices(py::module &);
 
 }
 

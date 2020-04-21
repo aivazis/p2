@@ -7,12 +7,8 @@
 // standard library
 #include <string>
 
-
 // pybind support
 #include <pybind11/pybind11.h>
-// get the special {pybind11} literals
-using namespace pybind11::literals;
-
 
 // get the journal
 #include <p2/journal.h>
@@ -26,9 +22,14 @@ namespace p2::libjournal {
 
     // from {pybind11}
     namespace py = pybind11;
+    // get the special {pybind11} literals
+    using namespace py::literals;
 
 
     // from {pyre::journal}
+    // the global state
+    using chronicler_t = pyre::journal::chronicler_t;
+
     // devices
     using device_t = pyre::journal::device_t;
     using trash_t = pyre::journal::trash_t;

@@ -15,9 +15,11 @@ PYBIND11_MODULE(j2, m) {
     // the doc string
     m.doc() = "the journal extension module";
 
-    // device
+    // global state
+    p2::libjournal::chronicler(m);
+    // devices
     p2::libjournal::devices(m);
-    // add inventory methods
+    // channels
     p2::libjournal::debug(m);
 }
 
