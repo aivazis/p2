@@ -28,6 +28,13 @@ def test():
         # no problem
         pass
 
+    # verify its verbosity is at 1 by default
+    assert channel.verbosity == 1
+    # that it can be modified
+    channel.verbosity = 5
+    # and the assignment sticks
+    assert channel.verbosity == 5
+
     # verify its state is off by default
     assert channel.state is False
     # that it can be modified

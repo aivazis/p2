@@ -22,6 +22,9 @@ debug(py::module & m) {
     // device
     using getDevice_mfp = debug_t::device_pointer (debug_t::*)() const;
     using setDevice_mfp = debug_t::device_pointer (debug_t::*)(debug_t::device_pointer);
+    // verbosity
+    using getVerbosity_mfp = debug_t::verbosity_type (debug_t::*)() const;
+    using setVerbosity_mfp = debug_t::verbosity_type (debug_t::*)(debug_t::verbosity_type);
 
 
     // the debug channel interface
@@ -51,6 +54,16 @@ debug(py::module & m) {
                       (setDevice_mfp) &debug_t::device,
                       // the docstring
                       "access the output device"
+                      )
+
+        // the verbosity level
+        .def_property("verbosity",
+                      // the getter
+                      (getVerbosity_mfp) &debug_t::verbosity,
+                      // the setter
+                      (setVerbosity_mfp) &debug_t::verbosity,
+                      // the docstring
+                      "access the verbosity level"
                       )
 
         // static interface
