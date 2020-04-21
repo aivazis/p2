@@ -17,7 +17,7 @@ devices(py::module & m) {
     // the base device
     py::class_<device_t, device_t::pointer_type>(m, "Device")
         // accessor
-        .def("name", &device_t::name)
+        .def_property_readonly("name", &device_t::name, "the name of the device")
         // done
         ;
 
