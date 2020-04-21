@@ -15,6 +15,8 @@ PYBIND11_MODULE(j2, m) {
     // the doc string
     m.doc() = "the journal extension module";
 
+    // bind the opaque types
+    p2::libjournal::opaque(m);
     // global state
     p2::libjournal::chronicler(m);
     // devices

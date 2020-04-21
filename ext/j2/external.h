@@ -4,14 +4,16 @@
 // (c) 1998-2020 all rights reserved
 
 
-// standard library
-#include <string>
+// get the journal
+#include <p2/journal.h>
 
 // pybind support
 #include <pybind11/pybind11.h>
+#include <pybind11/stl.h>
+#include <pybind11/stl_bind.h>
 
-// get the journal
-#include <p2/journal.h>
+// make certain STL containers opaque
+PYBIND11_MAKE_OPAQUE(pyre::journal::metadata_t);
 
 
 // type aliases

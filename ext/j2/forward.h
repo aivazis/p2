@@ -7,6 +7,8 @@
 // the {libjournal} namespace
 namespace p2::libjournal {
 
+    // bindings of opaque types
+    void opaque(py::module &);
     // module methods
     void chronicler(py::module &);
     void debug(py::module &);
