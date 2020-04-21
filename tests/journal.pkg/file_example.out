@@ -1,6 +1,0 @@
-/Users/mga/dv/p2/tests/journal.pkg/file_example.py:36:test:
- >> tests.journal.debug(debug)
- >> application: journal
- >> time: now
- -- debug channel:
- --     hello world!
