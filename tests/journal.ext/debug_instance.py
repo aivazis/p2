@@ -52,6 +52,8 @@ def test():
     assert channel.device is trash
     # check the name
     assert channel.device.name == "trash"
+    # and verify that it's different from the default device held by the class
+    assert channel.device is not channel.defaultDevice
 
     # all done
     return

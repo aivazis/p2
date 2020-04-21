@@ -74,13 +74,33 @@ debug(py::module & m) {
                                (getMetadata_mfp) &debug_t::metadata,
                                // the docstring
                                "access the channel metadata"
-                      )
+                               )
 
         // static interface
         // the default state
-        .def_static("defaultState", &debug_t::defaultState)
+        .def_property_readonly_static("defaultState",
+                                      // the getter
+                                      [](py::object) -> debug_t::state_type {
+                                          return debug_t::defaultState();
+                                      },
+                                      // the docstring
+                                      "get the default state of debug channels"
+                                      )
+
         // the default device
-        .def_static("defaultDevice", (debug_t::device_pointer (*)()) &debug_t::defaultDevice)
+        .def_property_static("defaultDevice",
+                             // the getter
+                             [](py::object) -> debug_t::device_pointer {
+                                 return debug_t::defaultDevice();
+                             },
+                             // the setter
+                             [](py::object, debug_t::device_pointer device) {
+                                 debug_t::defaultDevice(device);
+                             },
+                             // the docstring
+                             "access the default device for all debug channels"
+                             )
+
         // done
         ;
 
