@@ -7,7 +7,7 @@
 
 def test():
     """
-    Verify the default value for the  debug channel shared state
+    Verify access to the channel properties
     """
     # access
     from j2 import libjournal
