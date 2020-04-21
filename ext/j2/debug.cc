@@ -16,15 +16,17 @@ p2::libjournal::
 debug(py::module & m) {
 
     // type aliases for the member functions (mfp: method pointer)
+    // verbosity
+    using getVerbosity_mfp = debug_t::verbosity_type (debug_t::*)() const;
+    using setVerbosity_mfp = debug_t::verbosity_type (debug_t::*)(debug_t::verbosity_type);
     // state
     using getState_mfp = debug_t::state_type (debug_t::*)() const;
     using setState_mfp = debug_t::state_type (debug_t::*)(debug_t::state_type);
     // device
     using getDevice_mfp = debug_t::device_pointer (debug_t::*)() const;
     using setDevice_mfp = debug_t::device_pointer (debug_t::*)(debug_t::device_pointer);
-    // verbosity
-    using getVerbosity_mfp = debug_t::verbosity_type (debug_t::*)() const;
-    using setVerbosity_mfp = debug_t::verbosity_type (debug_t::*)(debug_t::verbosity_type);
+    // metadata
+    using getMetadata_mfp = debug_t::metadata_type & (debug_t::*)() const;
 
 
     // the debug channel interface
@@ -35,6 +37,16 @@ debug(py::module & m) {
         // accessors
         // the name; read-only property
         .def_property_readonly("name", &debug_t::name)
+
+        // the verbosity level
+        .def_property("verbosity",
+                      // the getter
+                      (getVerbosity_mfp) &debug_t::verbosity,
+                      // the setter
+                      (setVerbosity_mfp) &debug_t::verbosity,
+                      // the docstring
+                      "access the verbosity level"
+                      )
 
         // the channel state; mutable property
         .def_property("state",
@@ -56,14 +68,12 @@ debug(py::module & m) {
                       "access the output device"
                       )
 
-        // the verbosity level
-        .def_property("verbosity",
-                      // the getter
-                      (getVerbosity_mfp) &debug_t::verbosity,
-                      // the setter
-                      (setVerbosity_mfp) &debug_t::verbosity,
-                      // the docstring
-                      "access the verbosity level"
+        // the registered device: read-only property
+        .def_property_readonly("meta",
+                               // the getter
+                               (getMetadata_mfp) &debug_t::metadata,
+                               // the docstring
+                               "access the channel metadata"
                       )
 
         // static interface
