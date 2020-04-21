@@ -46,6 +46,15 @@ chronicler(py::module & m) {
                              "access the default device"
                              )
 
+        // global metadata
+        .def_property_readonly_static("meta",
+                                      // the getter
+                                      [] (py::object) -> chronicler_t::metadata_type & {
+                                          return chronicler_t::globals();
+                                      },
+                                      // the docstring
+                                      "access the global metadata"
+                                      )
         // all done
         ;
 
