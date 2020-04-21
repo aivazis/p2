@@ -10,21 +10,53 @@
 #include "forward.h"
 
 
-// add bindings to the inventory
+// add bindings for the debug channel
 void
 p2::libjournal::
 debug(py::module & m) {
 
-    // debug channels
+    // type aliases for the member functions (mfp: method pointer)
+    // state
+    using getState_mfp = debug_t::state_type (debug_t::*)() const;
+    using setState_mfp = debug_t::state_type (debug_t::*)(debug_t::state_type);
+    // device
+    using getDevice_mfp = debug_t::device_pointer (debug_t::*)() const;
+    using setDevice_mfp = debug_t::device_pointer (debug_t::*)(debug_t::device_pointer);
+
+
+    // the debug channel interface
     py::class_<debug_t>(m, "Debug")
         // the constructor
         .def(py::init<const string_t &>(), "name"_a)
+
         // accessors
-        .def("name", &debug_t::name)
-        .def("state", (bool (debug_t::*)() const) &debug_t::state)
-        .def("device", (debug_t::device_pointer (debug_t::*)() const) &debug_t::device)
+        // the name; read-only property
+        .def_property_readonly("name", &debug_t::name)
+
+        // the channel state; mutable property
+        .def_property("state",
+                      // the getter
+                      (getState_mfp) &debug_t::state,
+                      // the setter
+                      (setState_mfp) &debug_t::state,
+                      // the docstring
+                      "access the channel activation state"
+                      )
+
+        // the registered device: mutable property
+        .def_property("device",
+                      // the getter
+                      (getDevice_mfp) &debug_t::device,
+                      // the setter
+                      (setDevice_mfp) &debug_t::device,
+                      // the docstring
+                      "access the output device"
+                      )
+
         // static interface
+        // the default state
         .def_static("defaultState", &debug_t::defaultState)
+        // the default device
         .def_static("defaultDevice", (debug_t::device_pointer (*)()) &debug_t::defaultDevice)
         // done
         ;
