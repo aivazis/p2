@@ -12,7 +12,13 @@ class Named:
 
 
     # public data
-    name = None
+    @property
+    def name(self):
+        """
+        Get my name
+        """
+        # easy enough
+        return self._name
 
 
     # metamethods
@@ -20,9 +26,13 @@ class Named:
         # chain up
         super().__init__(**kwds)
         # store the name
-        self.name = name
+        self._name = name
         # all done
         return
+
+
+    # implementation details
+    _name = None  # storage for the {name} property
 
 
 # end of file
