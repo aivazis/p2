@@ -22,7 +22,7 @@ class Console(Stream):
     # metamethods
     def __init__(self, **kwds):
         # chain up
-        super().__init__(name="cout", stream=sys.stdout, palette=palettes.light, **kwds)
+        super().__init__(name="cout", stream=sys.stdout, palette=palettes.dark, **kwds)
         # all done
         return
 
