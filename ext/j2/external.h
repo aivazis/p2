@@ -13,6 +13,7 @@
 #include <pybind11/stl_bind.h>
 
 // make certain STL containers opaque
+PYBIND11_MAKE_OPAQUE(pyre::journal::page_t);
 PYBIND11_MAKE_OPAQUE(pyre::journal::metadata_t);
 
 

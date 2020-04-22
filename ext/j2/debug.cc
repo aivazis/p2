@@ -25,8 +25,10 @@ debug(py::module & m) {
     // device
     using getDevice_mfp = debug_t::device_pointer (debug_t::*)() const;
     using setDevice_mfp = debug_t::device_pointer (debug_t::*)(debug_t::device_pointer);
+    // channel contents
+    using getPage_mfp = const debug_t::page_type & (debug_t::*)() const;
     // metadata
-    using getMetadata_mfp = debug_t::metadata_type & (debug_t::*)() const;
+    using getMetadata_mfp = const debug_t::metadata_type & (debug_t::*)() const;
 
 
     // the debug channel interface
@@ -68,13 +70,41 @@ debug(py::module & m) {
                       "access the output device"
                       )
 
-        // the registered device: read-only property
+        // the channel metadata: read-only property
         .def_property_readonly("meta",
                                // the getter
                                (getMetadata_mfp) &debug_t::metadata,
                                // the docstring
                                "access the channel metadata"
                                )
+
+        // the current channel contents
+        .def_property_readonly("page",
+                               // the getter
+                               (getPage_mfp) &debug_t::page,
+                               // the docstring
+                               "access the current channel contents"
+                               )
+
+        // the channel severity: static read-only property
+        .def_property_readonly_static("severity",
+                                      // the getter
+                                      [](py::object) -> debug_t::string_type {
+                                          return "debug";
+                                      },
+                                      // the docstring
+                                      "get the channel severity name"
+                                      )
+
+        // access to the manager of the global state
+        .def_property_readonly_static("chronicler",
+                                      // the getter
+                                      [m](py::object) -> py::object {
+                                          return m.attr("Chronicler");
+                                      },
+                                      // the docstring
+                                      "grant access to the keeper of the global state"
+                                      )
 
         // the default state: static read-only property
         .def_property_readonly_static("defaultState",
@@ -115,6 +145,41 @@ debug(py::module & m) {
              &debug_t::deactivate,
              // the docstring
              "disable output generation"
+             )
+
+        // add a line to the contents
+        .def("line",
+             // the handler
+             [](debug_t & channel, const debug_t::string_type & message) {
+                 // if the message is not empry
+                 if (!message.empty()) {
+                     // inject the message
+                     channel.inject(message);
+                 }
+                 // add a new line
+                 channel.newline();
+             },
+             // the docstring
+             "add another line to the message page",
+             // the arguments
+             "message"_a = ""
+             )
+
+        // add a message to the channel and flush
+        .def("log",
+             // the handler
+             [](debug_t & channel, const debug_t::string_type & message) {
+                 // if the message is not empty
+                 // if (!message.empty()) {
+                   //   channel << message;
+                 // }
+                 // in any case, flush
+                 channel << pyre::journal::endl;
+             },
+             // the docstring
+             "add the optional {message} to the channel contents and then record the entry",
+             // the arguments
+             "message"_a = ""
              )
 
         // operator bool

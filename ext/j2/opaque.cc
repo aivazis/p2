@@ -14,6 +14,9 @@
 void
 p2::libjournal::
 opaque(py::module & m) {
+    // the channel ocontents
+    py::bind_vector<pyre::journal::page_t>(m, "Page");
+
     // the channel metadata type
     py::bind_map<pyre::journal::metadata_t>(m, "Metadata");
 
