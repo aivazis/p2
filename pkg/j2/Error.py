@@ -16,6 +16,10 @@ class Error(Diagnostic, Channel, inventory_type=Channel.enabled_fatal_type):
     """
 
 
+    # types
+    from .exceptions import ApplicationError
+
+
     # interface
     @property
     def fatal(self):
@@ -42,13 +46,15 @@ class Error(Diagnostic, Channel, inventory_type=Channel.enabled_fatal_type):
         """
         Commit my payload to the journal
         """
-        # if i'm not active
-        if not self.state:
-            # bail
-            return self
+        # if i'm active
+        if self.state:
+            # hunt down my device and record the entry
+            self.device.alert(verbosity=self.verbosity, page=self.page, meta=self.meta)
 
-        # otherwise, hunt down my device and record the entry
-        self.device.alert(verbosity=self.verbosity, page=self.page, meta=self.meta)
+        # if i'm fatal
+        if self.fatal:
+            # generate an exception
+            raise self.ApplicationError(error=self)
 
         # all done
         return self

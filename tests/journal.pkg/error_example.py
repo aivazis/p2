@@ -19,11 +19,21 @@ def test():
     # send the output to trash
     channel.device = trash()
 
-    # add some metadats
+    # add some metadata
     channel.meta["time"] = "now"
-    # inject
-    channel.line("error channel:")
-    channel.log("    hello world!")
+
+
+    # carefully
+    try:
+        # inject
+        channel.line("error channel:")
+        channel.log("    hello world!")
+        # shouldn't get here
+        assert False, "unreachable"
+    # if the correct exception was raised
+    except channel.ApplicationError as error:
+        # all  good
+        pass
 
     # all done
     return

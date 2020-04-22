@@ -21,8 +21,16 @@ def test():
 
     # a few times
     for _ in range(10):
-        # inject
-        channel.log("hello world!")
+        # carefully
+        try:
+            # inject
+            channel.log("hello world!")
+            # shouldn't get here
+            assert False, "unreachable"
+            # if the correct exception was raised
+        except channel.ApplicationError as error:
+            # all  good
+            pass
 
     # all done
     return
