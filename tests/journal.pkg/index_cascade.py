@@ -7,7 +7,7 @@
 
 def test():
     """
-    Verify that we can look up channel names and retrieve the associated inventory
+    Verify that channels lower in the hierarchy inherit the default state of their parent
     """
     # access the index
     from j2.Index import Index
