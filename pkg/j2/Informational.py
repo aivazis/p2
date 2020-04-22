@@ -6,35 +6,33 @@
 
 # superclasses
 from .Channel import Channel
-from .Diagnostic import Diagnostic
 
 
 # the implementation of the debug channel
-class Informational(Diagnostic, Channel, inventory_type=Channel.enabled_type):
+class Informational(Channel, active=True, fatal=False):
     """
     Informational channels are used for communicating application progress to users
     """
 
 
+    # types
+    from .exceptions import ApplicationError
+
+
     # implementation details
-    def commit(self):
+    def record(self):
         """
         Commit my payload to the journal
         """
-        # if i'm not active
-        if not self.state:
-            # bail
-            return self
-
-        # otherwise, hunt down my device and record the entry
-        self.device.alert(verbosity=self.verbosity, page=self.page, meta=self.meta)
-
+        # hunt down my device and record the entry
+        self.device.alert(page=self.page, meta=self.meta)
         # all done
         return self
 
 
-    # constant
-    severity = "info" # the channel severity
+    # constants
+    severity = "info"              # the channel severity
+    fatalError = ApplicationError  # the exception i raise when i'm fatal
 
 
 # end of file

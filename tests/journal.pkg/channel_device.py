@@ -17,7 +17,7 @@ def test():
     from j2.Channel import Channel
 
     # derive a severity
-    class Severity(Channel, inventory_type=Channel.disabled_type):
+    class Severity(Channel, active=False):
         """
         A sample derivation
         """

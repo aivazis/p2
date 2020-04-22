@@ -6,13 +6,20 @@
 
 # superclasses
 from .Channel import Channel
-from .Diagnostic import Diagnostic
 
 
 # the implementation of the Firewall channel
-class Firewall(Diagnostic, Channel, inventory_type=Channel.enabled_fatal_type):
+class Firewall(Channel, active=True, fatal=True):
     """
-    Debug channels are used for communicating application progress to its developers
+    Firewalls are used to communicate that a bug was detected.
+
+    Firewalls are typically used to contain code that checks enforces invariants and checks the
+    internal consistency of the code. When these checks fail, the firewall prints a diagnostic
+    message to the screen and raises an exception.
+
+    A firewall fires either because a defect has been identified or because the defect
+    detection logic in the firewall is faulty. In either case, THE SOURCE CODE REQUIRES
+    MODIFICATION.
     """
 
 
@@ -20,48 +27,20 @@ class Firewall(Diagnostic, Channel, inventory_type=Channel.enabled_fatal_type):
     from .exceptions import FirewallError
 
 
-    # public data
-    @property
-    def fatal(self):
-        """
-        Check whether i'm fatal
-        """
-        # ask my inventory
-        return self.inventory.fatal
-
-
-    @fatal.setter
-    def fatal(self, flag):
-        """
-        Set whether i'm fatal
-        """
-        # pass the flag to my inventory
-        self.inventory.fatal = flag
-        # all done
-        return
-
-
     # implementation details
-    def commit(self):
+    def record(self):
         """
         Commit my payload to the journal
         """
-        # if i'm active
-        if self.state:
-            #  hunt down my device and record the entry
-            self.device.memo(verbosity=self.verbosity, page=self.page, meta=self.meta)
-
-        # if i'm fatal
-        if self.fatal:
-            # generate an exception
-            raise self.FirewallError(firewall=self)
-
+        # hunt down my device and record the entry
+        self.device.memo(page=self.page, meta=self.meta)
         # all done
         return self
 
 
-    # constant
-    severity = "firewall"     # the channel severity
+    # constants
+    severity = "firewall"       # the channel severity
+    fatalError = FirewallError  # the exception i raise when i'm fatal
 
 
 # end of file

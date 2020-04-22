@@ -8,13 +8,13 @@
 # make sure the injection interface works as expected
 def test():
     """
-    Exercise the diagnostic state
+    Exercise the channel state
     """
-    # get the diagnostic base class
-    from j2.Diagnostic import Diagnostic
+    # get the channel base class
+    from j2.Channel import Channel
 
     # make one
-    d1 = Diagnostic(name="test.channel")
+    d1 = Channel(name="test.channel")
 
     # build a message
     d1.line("hello world!")

@@ -6,35 +6,33 @@
 
 # superclasses
 from .Channel import Channel
-from .Diagnostic import Diagnostic
 
 
 # the implementation of the debug channel
-class Debug(Diagnostic, Channel, inventory_type=Channel.disabled_type):
+class Debug(Channel, active=False, fatal=False):
     """
-    Debug channels are used for communicating application progress to its developers
+    Debug channels are used for communicating application progress to developers
     """
+
+
+    # types
+    from .exceptions import DebugError
 
 
     # implementation details
-    def commit(self):
+    def record(self):
         """
-        Commit my payload to the journal
+        Make an entry in the journal
         """
-        # if i'm not active
-        if not self.state:
-            # bail
-            return self
-
-        # otherwise, hunt down my device and record the entry
-        self.device.memo(verbosity=self.verbosity, page=self.page, meta=self.meta)
-
+        # hunt down my device and record the entry
+        self.device.memo(page=self.page, meta=self.meta)
         # all done
         return self
 
 
-    # constant
-    severity = "debug"     # the channel severity
+    # constants
+    severity = "debug"       # the channel severity
+    fatalError = DebugError  # the exception i raise when i'm fatal
 
 
 # end of file

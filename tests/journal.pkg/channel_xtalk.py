@@ -15,17 +15,17 @@ def test():
     from j2.Channel import Channel
 
     # three channel subclasses
-    class info(Channel, inventory_type=Channel.disabled_type):
+    class info(Channel, active=False):
         """
         info channel
         """
 
-    class warning(Channel, inventory_type=Channel.enabled_type):
+    class warning(Channel, active=True):
         """
         warning channel
         """
 
-    class error(Channel, inventory_type=Channel.enabled_type):
+    class error(Channel, active=True):
         """
         error channel
         """

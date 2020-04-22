@@ -9,19 +9,22 @@ def test():
     """
     Verify that we can look up channel names and retrieve the associated inventory
     """
-    # access the index
-    from j2.Index import Index
-    # get the channel so we can use the embedded inventory types
+    # get the channel
     from j2.Channel import Channel
 
-    # make an index
-    index = Index(Channel.enabled_type)
+    # make a severity
+    class Severity(Channel, active=True, fatal=True):
+        """
+        A sample derivation
+        """
 
+    # get the index
+    index = Severity.index
     # look up a name
     inventory = index.lookup(name="test.index")
 
     # verify it is an instance of the correct class
-    assert isinstance(inventory, Channel.enabled_type)
+    assert isinstance(inventory, Severity.inventory_type)
     # hence the state is on
     assert inventory.state is True
     # and the device is null

@@ -27,16 +27,35 @@ class FirewallError(JournalError):
     description = "firewall breached; aborting..."
 
     # metamethods
-    def __init__(self, firewall, **kwds):
+    def __init__(self, channel, **kwds):
         # chain up
-        super().__init__(locator=firewall.locator, **kwds)
+        super().__init__(locator=channel.locator, **kwds)
         # save the firewall
-        self.firewall = firewall
+        self.firewall = channel
         # all done
         return
 
 
-# raise by error channels
+# raised by debug channels that are marked fatal
+class DebugError(JournalError):
+    """
+    Exception raised when fatal debug channels fire
+    """
+
+    # public data
+    description = "aborting..."
+
+    # metamethods
+    def __init__(self, channel, **kwds):
+        # chain up
+        super().__init__(locator=channel.locator, **kwds)
+        # save the firewall
+        self.debug = channel
+        # all done
+        return
+
+
+# raised by error channels
 class ApplicationError(JournalError):
     """
     Exception raised when an application error is encountered
@@ -46,11 +65,11 @@ class ApplicationError(JournalError):
     description = "application error; aborting..."
 
     # metamethods
-    def __init__(self, error, **kwds):
+    def __init__(self, channel, **kwds):
         # chain up
-        super().__init__(locator=error.locator, **kwds)
+        super().__init__(locator=channel.locator, **kwds)
         # save the firewall
-        self.error = error
+        self.error = channel
         # all done
         return
 

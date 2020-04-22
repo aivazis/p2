@@ -28,12 +28,20 @@ class Chronicler(metaclass=p2.patterns.singleton):
 
         # the default verbosity
         self.verbosity = verbosity
-        # the default device
-        self.device = device
-        # the global metadata
+
+        # the global metadata; can't be empty
         self.meta = meta if meta is not None else {
             "application": "journal",  # this key is required; applications should override
             }
+
+        # if whoever initialized the journal did not expressed an opinion regarding the device
+        if device is None:
+            # grab the console
+            from .Console import Console as cout
+            # and instantiate it
+            device = cout()
+        # attach it
+        self.device = device
 
         # all done
         return

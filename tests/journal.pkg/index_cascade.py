@@ -9,17 +9,22 @@ def test():
     """
     Verify that channels lower in the hierarchy inherit the default state of their parent
     """
-    # access the index
-    from j2.Index import Index
-    # get the channel so we can use the embedded inventory types
+    # get the channel base class
     from j2.Channel import Channel
+
+    # make a severity
+    class Severity(Channel, active=True, fatal=True):
+        """
+        A sample derivation
+        """
+
     # get the trash can
     from j2.Trash import Trash
 
-    # decide on the inventory type
-    inventory_type = Channel.enabled_fatal_type
-    # make an index
-    index = Index(inventory_type)
+    # get the index
+    index = Severity.index
+    # and the inventory type
+    inventory_type = Severity.inventory_type
 
     # look up a name
     parent = index.lookup(name="test.index.parent")
