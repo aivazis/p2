@@ -102,9 +102,28 @@ debug(py::module & m) {
 
         // interface
         // activate
-        .def("activate", &debug_t::activate, "enable output generation")
+        .def("activate",
+             // the method
+             &debug_t::activate,
+             // the docstring
+             "enable output generation"
+             )
+
         // deactivate
-        .def("deactivate", &debug_t::deactivate, "disable output generation")
+        .def("deactivate",
+             // the method
+             &debug_t::deactivate,
+             // the docstring
+             "disable output generation"
+             )
+
+        // operator bool
+        .def("__bool__",
+             // the implementation
+             [](const debug_t & channel) { return channel.state(); },
+             // the docstring
+             ""
+             )
 
         // done
         ;

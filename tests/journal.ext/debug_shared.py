@@ -28,6 +28,10 @@ def test():
     assert ch_1.state == False
     assert ch_2.state == False
 
+    # and once again, using {__bool__}
+    assert bool(ch_1) == False
+    assert bool(ch_2) == False
+
     # all done
     return
 
