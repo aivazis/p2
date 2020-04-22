@@ -9,17 +9,13 @@ def test():
     """
     Verify that empty log messages get handled properly
     """
-    # get the trash can
-    from j2.Trash import Trash as trash
-    # and the channel
+    # get the channel
     from j2.Warning import Warning as warning
 
     # make a warning channel
     channel = warning(name="tests.journal.warning")
-    # send the output to trash
-    channel.device = trash()
 
-    # inject
+    # inject an empty message
     channel.log()
 
     # all done

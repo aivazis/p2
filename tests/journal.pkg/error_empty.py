@@ -9,18 +9,22 @@ def test():
     """
     Verify that empty log messages get handled properly
     """
-    # get the trash can
-    from j2.Trash import Trash as trash
-    # and the channel
+    # get the channel
     from j2.Error import Error as error
 
     # make an error channel
     channel = error(name="tests.journal.error")
-    # send the output to trash
-    channel.device = trash()
 
-    # inject
-    channel.log()
+    # carefully
+    try:
+        # inject an empty message
+        channel.log()
+        # shouldn't get here
+        assert False, "unreachable"
+    # if the correct exception was raised
+    except channel.ApplicationError as error:
+        # all  good
+        pass
 
     # all done
     return
