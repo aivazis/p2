@@ -169,7 +169,7 @@ class Algebra(Type):
         derivation = tuple(chain)
         # make the new class
         new = cls(name, derivation, {})
-        # adjust its module so it get the correct attribution in stack traces
+        # adjust its module so it gets the correct attribution in stack traces
         new.__module__ = base.__module__
         # and return it
         return new
