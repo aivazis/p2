@@ -11,8 +11,6 @@ def test():
     """
     # get the channel
     from j2.Warning import Warning
-    # the chronicler
-    from j2.Chronicler import Chronicler
     # and the trash can
     from j2.Trash import Trash
 
@@ -21,7 +19,7 @@ def test():
     # verify that the state is on
     assert parent.state is True
     # and the device is at the default value
-    assert parent.device is Chronicler().device
+    assert parent.device is Warning.chronicler.device
 
     # activate it
     parent.state = True

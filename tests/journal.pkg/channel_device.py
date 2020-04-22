@@ -13,7 +13,6 @@ def test():
     """
     # get the support characters
     from j2.Trash import Trash
-    from j2.Chronicler import Chronicler as chronicler
     # and the channel
     from j2.Channel import Channel
 
@@ -27,7 +26,7 @@ def test():
     trash = Trash()
 
     # ask the chronicler for its device
-    default = chronicler().device
+    default = Severity.chronicler.device
 
     # make a couple of channels
     channel_1 = Severity("journal.tests.channel_1")

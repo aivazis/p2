@@ -13,13 +13,11 @@ def test():
     from j2.Memo import Memo as memo
     # the colospaces
     from j2.ANSI import ANSI
-    # the chronicler
-    from j2.Chronicler import Chronicler as chronicler
     # and a channel
     from j2.Debug import Debug as debug
 
     # get the chronicler metadata
-    gmeta = chronicler().meta
+    gmeta = debug.chronicler.meta
     # add some
     gmeta["application"] = "memo"
     gmeta["author"] = "michael"

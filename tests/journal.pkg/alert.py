@@ -13,13 +13,11 @@ def test():
     from j2.Alert import Alert as alert
     # the colospaces
     from j2.ANSI import ANSI
-    # the chronicler
-    from j2.Chronicler import Chronicler as chronicler
     # and a channel
     from j2.Informational import Informational as info
 
     # get the chronicler metadata
-    gmeta = chronicler().meta
+    gmeta = info.chronicler.meta
     # add some
     gmeta["application"] = "alert"
     gmeta["author"] = "michael"
