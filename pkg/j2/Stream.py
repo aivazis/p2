@@ -37,14 +37,16 @@ class Stream(Device):
 
 
     # implementation details
-    def record(self, message):
+    def record(self, page):
         """
         Record a message
         """
         # assemble the content
-        content = "\n".join(message)
-        # easy
-        print(content, file=self.stream)
+        content = "\n".join(page)
+        # if there is anything there
+        if content:
+            # inject it
+            print(content, file=self.stream)
         # all done
         return
 

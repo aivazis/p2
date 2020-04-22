@@ -27,7 +27,7 @@ class Trash(Device):
 
 
     # implementation details
-    def record(self, message):
+    def record(self, page):
         """
         Record a message
         """

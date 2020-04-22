@@ -47,7 +47,7 @@ class Device(p2.patterns.named):
         # otherwise, invoke the alert renderer to format the message
         content = self.alertRenderer.render(palette=self.palette, page=page, meta=meta)
         # ask the subclass to record
-        self.record(message=content)
+        self.record(page=content)
         # all done
         return self
 
@@ -67,7 +67,7 @@ class Device(p2.patterns.named):
         # otherwise, invoke the alert renderer to format the message
         content = self.memoRenderer.render(palette=self.palette, page=page, meta=meta)
         # ask the subclass to record
-        self.record(message=content)
+        self.record(page=content)
         # all done
         return self
 
@@ -88,7 +88,7 @@ class Device(p2.patterns.named):
 
 
     # implementation details
-    def record(self, message):
+    def record(self, page):
         """
         Record a message
         """

@@ -91,8 +91,17 @@ auto
 pyre::journal::Diagnostic<severityT>::
 record() -> Diagnostic<severityT> &
 {
-    // flush the {buffer}
-    newline();
+    // get the contents of the buffer
+    auto contents = _buffer.str();
+    // if there is anything currently in the accumulator
+    if (!contents.empty()) {
+        // add it to the page
+        _page.push_back(contents);
+    }
+    // in any case, clear the buffer
+    _buffer.str(bufmsg_type());
+    // and discard any error flags
+    _buffer.clear();
 
     // me as a {severity_type}; this works trivially because of crtp
     severity_type & self = static_cast<severity_type &>(*this);
@@ -126,8 +135,6 @@ auto
 pyre::journal::Diagnostic<severityT>::
 newline() -> Diagnostic<severityT> &
 {
-    // get the contents of the buffer
-    auto contents = _buffer.str();
     // place onto the page
     _page.push_back(_buffer.str());
     // and reset the buffer
