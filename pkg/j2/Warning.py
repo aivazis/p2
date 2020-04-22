@@ -11,7 +11,10 @@ from .Channel import Channel
 # the implementation of the debug channel
 class Warning(Channel, active=True, fatal=False):
     """
-    Warning channels are used for communicating application progress to users
+    Warning channels are used to communicate application progress to users.
+
+    Typically, they indicate that the application has encountered a condition that is
+    potentially problematic, but the application has identified a workaround.
     """
 
 

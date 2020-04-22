@@ -11,7 +11,10 @@ from .Channel import Channel
 # the implementation of the debug channel
 class Error(Channel, active=True, fatal=True):
     """
-    Error channels are used for communicating application progress to users
+    Error channels are used to communicate application progress to users
+
+    Typically, they indicate that the application has encountered a condition that is
+    problematic, and the application is unable to identify a viable workaround.
     """
 
 

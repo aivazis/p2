@@ -13,13 +13,16 @@ class Firewall(Channel, active=True, fatal=True):
     """
     Firewalls are used to communicate that a bug was detected.
 
-    Firewalls are typically used to contain code that checks enforces invariants and checks the
+    Firewalls are typically used to contain code that enforces invariants and checks the
     internal consistency of the code. When these checks fail, the firewall prints a diagnostic
     message to the screen and raises an exception.
 
     A firewall fires either because a defect has been identified or because the defect
     detection logic in the firewall is faulty. In either case, THE SOURCE CODE REQUIRES
     MODIFICATION.
+
+    Expensive consistency checks can be avoided by checking whether the associated firewall is
+    active before conducting them.
     """
 
 
