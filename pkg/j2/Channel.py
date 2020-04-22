@@ -79,18 +79,33 @@ class Channel(p2.patterns.named):
     # access to severity wide configuration
     @classmethod
     def getDefaultDevice(cls):
+        """
+        Get the severity wide default device
+        """
         # easy enough
         return cls.defaultDevice
 
 
     @classmethod
     def setDefaultDevice(cls, device):
+        """
+        Set the severity wide default device
+        """
         # save the current device
         old = cls.defaultDevice
         # install the new one
         cls.defaultDevice = device
         # and return the old
         return old
+
+
+    @classmethod
+    def getDefaultState(cls):
+        """
+        Get the default state of my channels
+        """
+        # my inventory type knows
+        return cls.inventory_type.state
 
 
     # interface
