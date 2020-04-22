@@ -7,14 +7,14 @@
 # administrative
 def copyright():
     """
-    Return the pyre copyright note
+    Return the journal copyright note
     """
     return print(meta.header)
 
 
 def license():
     """
-    Print the pyre license
+    Print the journal license
     """
     # print it
     return print(meta.license)
@@ -22,7 +22,7 @@ def license():
 
 def version():
     """
-    Return the pyre version
+    Return the journal version
     """
     return meta.version
 
@@ -36,9 +36,6 @@ def credits():
 
 
 # publish
-# the metadata
-from . import meta
-
 # set up a marker about whether we are going to load and publish the bindings
 without_libjournal = False
 
@@ -54,7 +51,7 @@ except AttributeError:
     pass
 
 # if we are allowed
-if without_libjournal is False:
+if not without_libjournal:
     # load the bindings
     from .ext import libjournal
     # if something went wrong
@@ -62,39 +59,8 @@ if without_libjournal is False:
         # indicate that we don't have access to the binding
         without_libjournal = True
 
-# if there is no functional extension module
-if without_libjournal:
-    # fall back on the pure python implementation
-    # the devices
-    from .Trash import Trash as trash
-    from .Stream import Stream as stream
-    from .Console import Console as cout
-    from .ErrorConsole import ErrorConsole as cerr
-
-    # the channels
-    from .Null import Null as null
-
-    from .Debug import Debug as debug
-    from .Firewall import Firewall as firewall
-
-    from .Informational import Informational as info
-    from .Warning import Warning as warning
-    from .Error import Error as error
-
-    # get the singleton with the global state
-    from .Chronicler import Chronicler as chronicler
-    # attach the default device
-    chronicler().device = cout()
-
-# otherwise
-else:
-    # minimal configuration, for now
-    # get the console
-    from .Console import Console as cout
-    # get the singleton with the global state
-    from .Chronicler import Chronicler as chronicler
-    # attach the default device
-    chronicler().device = cout()
+# publish the package metadata
+from . import meta
 
 
 # end of file
