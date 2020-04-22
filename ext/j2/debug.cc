@@ -151,13 +151,8 @@ debug(py::module & m) {
         .def("line",
              // the handler
              [](debug_t & channel, const debug_t::string_type & message) {
-                 // if the message is not empry
-                 if (!message.empty()) {
-                     // inject the message
-                     channel.inject(message);
-                 }
-                 // add a new line
-                 channel.newline();
+                 // inject
+                 channel << message << pyre::journal::newline;
              },
              // the docstring
              "add another line to the message page",
@@ -169,12 +164,8 @@ debug(py::module & m) {
         .def("log",
              // the handler
              [](debug_t & channel, const debug_t::string_type & message) {
-                 // if the message is not empty
-                 // if (!message.empty()) {
-                   //   channel << message;
-                 // }
-                 // in any case, flush
-                 channel << pyre::journal::endl;
+                 // inject and flush
+                 channel << message << pyre::journal::endl;
              },
              // the docstring
              "add the optional {message} to the channel contents and then record the entry",
@@ -187,7 +178,7 @@ debug(py::module & m) {
              // the implementation
              [](const debug_t & channel) { return channel.state(); },
              // the docstring
-             ""
+             "syntactic sugar for checking the state of a channel"
              )
 
         // done
