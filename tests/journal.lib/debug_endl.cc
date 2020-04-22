@@ -14,9 +14,10 @@
 int main() {
     // make a debug channel
     pyre::journal::debug_t channel("tests.journal.debug");
-
     // activate it
-    // channel.activate();
+    channel.activate();
+    // but send the output to the trash
+    channel.device(std::make_shared<pyre::journal::trash_t>());
 
     // try injecting something into the channel
     channel

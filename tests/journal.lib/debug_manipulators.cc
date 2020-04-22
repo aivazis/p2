@@ -15,7 +15,7 @@ int main() {
     // make a debug channel
     pyre::journal::debug_t channel("tests.journal.debug");
 
-    // try injecting something into the channel
+    // try injecting something into the channel; careful not to flush
     channel
         << pyre::journal::at(__HERE__)
         << pyre::journal::set("time", "now")
