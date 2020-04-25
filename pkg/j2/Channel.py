@@ -220,6 +220,7 @@ class Channel(p2.patterns.named):
         # all done
         return self
 
+
     # metamethods
     def __init__(self, name, verbosity=verbosity, **kwds):
         # chain up
@@ -239,7 +240,7 @@ class Channel(p2.patterns.named):
 
 
     @classmethod
-    def __init_subclass__(cls, /, active=True, fatal=False, **kwds):
+    def __init_subclass__(cls, active=True, fatal=False, **kwds):
         # chain up
         super().__init_subclass__(**kwds)
 
