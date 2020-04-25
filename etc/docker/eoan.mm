@@ -18,6 +18,7 @@ pybind11.version := 2.3.0
 pybind11.dir = $(sys.prefix)
 # python
 python.version := @PYTHON_VERSION@
+python.model := @PYTHON_MODEL@
 python.dir := $(sys.prefix)
 python.incdir := $(python.dir)/include/python$(python.version)
 python.libdir := $(python.dir)/lib/python$(python.version)

@@ -5,7 +5,7 @@ FROM ubuntu:eoan
 
 # set up some build variables
 # python version
-ARG python_version=3.8
+ARG python_version=3.7
 ARG python=python${python_version}
 # locations
 ARG prefix=/usr/local
@@ -52,7 +52,10 @@ WORKDIR /root/.mm
 # copy the relevant configuration file
 COPY etc/docker/eoan.mm config.mm.in
 # expand
-RUN sed -e "s:@PYTHON_VERSION@:${python_version}:g" config.mm.in > config.mm
+RUN sed \
+        -e "s:@PYTHON_VERSION@:${python_version}:g" \
+        -e "s:@PYTHON_MODEL@:m:g" \
+        config.mm.in > config.mm
 
 
 # make the development area
