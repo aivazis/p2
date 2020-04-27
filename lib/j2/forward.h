@@ -8,6 +8,10 @@
 #define pyre_journal_forward_h
 
 
+// grab the locator macros
+#include "macros.h"
+
+
 // forward declarations of all user facing entities
 namespace pyre::journal {
     // abstractions
@@ -100,6 +104,13 @@ namespace pyre::journal {
     template <typename severityT, template <class> typename proxyT>
     inline auto
     endl(Channel<severityT, proxyT> &) -> Channel<severityT, proxyT> &;
+
+    // flushing with a decorator
+    template <typename decoratorT>
+    inline auto endl(decoratorT) -> Flush<decoratorT>;
+
+    // flushing with the special locator signature
+    inline auto endl(__HERE_DECL__) -> Flush<Locator>;
 
     // end of a line of output
     template <typename severityT, template <class> typename proxyT>

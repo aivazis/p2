@@ -122,7 +122,7 @@ operator<< (Channel<severityT, proxyT> & channel, const Flush<decoratorT> & flus
 template <typename decoratorT>
 auto
 pyre::journal::
-flush(decoratorT decorator) -> Flush<decoratorT>
+endl(decoratorT decorator) -> Flush<decoratorT>
 {
     // easy enough
     return Flush(decorator);
@@ -131,7 +131,7 @@ flush(decoratorT decorator) -> Flush<decoratorT>
 
 // recognize the locator special signature and convert it into a flushable
 auto
-pyre::journal::flush(__HERE_DECL__) -> Flush<Locator>
+pyre::journal::endl(__HERE_DECL__) -> Flush<Locator>
 {
     return Flush(Locator(__HERE_ARGS__));
 }

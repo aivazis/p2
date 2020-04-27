@@ -32,7 +32,7 @@ int main() {
     channel
         << pyre::journal::note("time", "now")
         << "hello world!" << pyre::journal::newline
-        << pyre::journal::flush(__HERE__);
+        << pyre::journal::endl(__HERE__);
 
     // all done
     return 0;
