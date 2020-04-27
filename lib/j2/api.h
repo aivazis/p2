@@ -15,7 +15,7 @@ namespace pyre::journal {
 
     // channels
     using info_t = Informational<InventoryProxy>;
-    using warning_t = Warning;
+    using warning_t = Warning<InventoryProxy>;
     using error_t = Error;
 
     // the keeper of the global settings

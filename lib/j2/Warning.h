@@ -10,12 +10,18 @@
 
 // user facing channel ; meant for warning messages, i.e. when the applications detects
 // something wrong but it can work around the problem
-class pyre::journal::Warning : public Channel<Warning, InventoryProxy>
+template <template <typename> typename proxyT>
+class pyre::journal::Warning : public Channel<Warning<proxyT>, proxyT>
 {
     // types
 public:
-    // my parts
+    // my base
     using channel_type = Channel<Warning, InventoryProxy>;
+    // my parts
+    using name_type = typename channel_type::name_type;
+    using verbosity_type = typename channel_type::verbosity_type;
+    using index_type = typename channel_type::index_type;
+    using entry_type = typename channel_type::entry_type;
     // my exception
     using exception_type = application_error;
 
