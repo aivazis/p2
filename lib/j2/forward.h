@@ -80,7 +80,7 @@ namespace pyre::journal {
     class Warning;
     class Error;
     // developer facing
-    class Debug;
+    template <template <typename> typename proxyT> class Debug;
     class Firewall;
 
     // end of transaction

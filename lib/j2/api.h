@@ -43,7 +43,7 @@ namespace pyre::journal {
     // if we are building the library
 #if defined(PYRE_CORE)
     // enable the developer channels
-    using debug_t = Debug;
+    using debug_t = Debug<InventoryProxy>;
     using firewall_t = Firewall;
 
     // if the user has suppressed debugging support explicitly
