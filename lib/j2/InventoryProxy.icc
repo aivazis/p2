@@ -21,7 +21,7 @@ InventoryProxy(inventory_reference inventory) :
 template <typename clientT>
 auto
 pyre::journal::InventoryProxy<clientT>::
-active() const
+active() const -> active_type
 {
     // ask my referent
     return _inventory.active();
@@ -31,7 +31,7 @@ active() const
 template <typename clientT>
 auto
 pyre::journal::InventoryProxy<clientT>::
-fatal() const
+fatal() const -> fatal_type
 {
     // ask my referent
     return _inventory.fatal();
@@ -41,7 +41,7 @@ fatal() const
 template <typename clientT>
 auto
 pyre::journal::InventoryProxy<clientT>::
-device() const
+device() const -> device_type
 {
     // first, look in my inventory for a local setting
     auto device = _inventory.device();

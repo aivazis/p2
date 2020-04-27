@@ -30,9 +30,9 @@ public:
 
     // accessors
 public:
-    inline auto active() const;
-    inline auto fatal() const;
-    inline auto device() const;
+    inline auto active() const -> active_type;
+    inline auto fatal() const -> fatal_type;
+    inline auto device() const -> device_type;
 
     // mutators
 public:
