@@ -76,7 +76,7 @@ namespace pyre::journal {
 
     // channels
     // user facing facing
-    class Informational;
+    template <template <typename> typename proxyT> class Informational;
     class Warning;
     class Error;
     // developer facing

@@ -9,12 +9,18 @@
 
 
 // user facing channel; meant for informational messages, such as progress reports
-class pyre::journal::Informational : public Channel<Informational, InventoryProxy>
+template <template <typename> typename proxyT>
+class pyre::journal::Informational : public Channel<Informational<proxyT>, proxyT>
 {
     // types
 public:
+    // my base
+    using channel_type = Channel<Informational<proxyT>, proxyT>;
     // my parts
-    using channel_type = Channel<Informational, InventoryProxy>;
+    using name_type = typename channel_type::name_type;
+    using verbosity_type = typename channel_type::verbosity_type;
+    using index_type = typename channel_type::index_type;
+    using entry_type = typename channel_type::entry_type;
     // my exception
     using exception_type = application_error;
 

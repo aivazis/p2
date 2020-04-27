@@ -14,7 +14,7 @@ namespace pyre::journal {
     inline void init(int argc, char* argv[]);
 
     // channels
-    using info_t = Informational;
+    using info_t = Informational<InventoryProxy>;
     using warning_t = Warning;
     using error_t = Error;
 
