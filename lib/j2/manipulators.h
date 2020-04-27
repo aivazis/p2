@@ -77,6 +77,7 @@ operator<< (Channel<severityT, proxyT> & channel, const Note & note)
 
 
 // injection of manipulator functions
+// this template takes care of {endl}, {newline}, and the stateless manipulators from <iomanip>
 template <typename severityT, template <class> typename proxyT>
 inline auto
 pyre::journal::
@@ -100,6 +101,39 @@ operator<< (Channel<severityT, proxyT> & channel, const itemT & item)
     channel.entry().inject(item);
     // enable chaining
     return channel;
+}
+
+
+// flush with a decorator
+template <typename severityT, template <class> typename proxyT, typename decoratorT>
+auto
+pyre::journal::
+operator<< (Channel<severityT, proxyT> & channel, const Flush<decoratorT> & flush)
+    -> Channel<severityT, proxyT> &
+{
+    // inject the decorator
+    channel << flush.decorator();
+    // all done
+    return channel.log();
+}
+
+
+// make a decorator flushable
+template <typename decoratorT>
+auto
+pyre::journal::
+flush(decoratorT decorator) -> Flush<decoratorT>
+{
+    // easy enough
+    return Flush(decorator);
+}
+
+
+// recognize the locator special signature and convert it into a flushable
+auto
+pyre::journal::flush(__HERE_DECL__) -> Flush<Locator>
+{
+    return Flush(Locator(__HERE_ARGS__));
 }
 
 

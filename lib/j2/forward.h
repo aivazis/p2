@@ -28,6 +28,8 @@ namespace pyre::journal {
     class Locator;
     // metadata manipulation
     class Note;
+    // flushing with a decorator
+    template <typename decoratorT> class Flush;
 
     // renderers
     class Memo;

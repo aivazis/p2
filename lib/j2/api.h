@@ -8,6 +8,10 @@
 #define pyre_journal_api_h
 
 
+// grab the locator macros
+#include "macros.h"
+
+
 // end user facing api
 namespace pyre::journal {
     // the initializer of the global settings
@@ -27,11 +31,15 @@ namespace pyre::journal {
     using cout_t = Console;
     using cerr_t = ErrorConsole;
 
-
     // manipulators
     using at = Locator;
     using note = Note;
     using verbosity = Verbosity;
+
+    template <typename decoratorT>
+    inline auto flush(decoratorT) -> Flush<decoratorT>;
+
+    inline auto flush(__HERE_DECL__) -> Flush<Locator>;
 }
 
 

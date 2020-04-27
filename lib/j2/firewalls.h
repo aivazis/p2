@@ -23,6 +23,7 @@ extern "C" {
 }
 #endif
 
-# endif // pyre_journal_firewalls_h
+
+# endif
 
 /* end of file */

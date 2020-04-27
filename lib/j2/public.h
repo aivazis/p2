@@ -28,6 +28,7 @@
 #include "Verbosity.h"
 #include "Locator.h"
 #include "Note.h"
+#include "Flush.h"
 
 // abstractions
 #include "Renderer.h"
@@ -63,8 +64,6 @@
 
 // manipulators
 #include "manipulators.h"
-// __HERE__ and siblings
-#include "macros.h"
 
 // terminal support
 #include "ASCII.h"
