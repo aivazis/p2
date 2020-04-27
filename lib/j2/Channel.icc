@@ -117,31 +117,6 @@ entry() -> entry_reference
 }
 
 
-// interface
-template <typename severityT, template <typename> typename proxyT>
-auto
-pyre::journal::Channel<severityT, proxyT>::
-activate() -> severity_reference
-{
-    // set my activation
-    this->active(true);
-    // enable chaining
-    return static_cast<severity_reference>(*this);
-}
-
-
-template <typename severityT, template <typename> typename proxyT>
-auto
-pyre::journal::Channel<severityT, proxyT>::
-deactivate() -> severity_reference
-{
-    // set my activation
-    this->active(false);
-    // enable chaining
-    return static_cast<severity_reference>(*this);
-}
-
-
 // injection support
 template <typename severityT, template <typename> typename proxyT>
 auto

@@ -85,6 +85,31 @@ device(device_type device) -> client_reference
 }
 
 
+// interface
+template <typename clientT>
+auto
+pyre::journal::InventoryProxy<clientT>::
+activate() -> client_reference
+{
+    // set my activation
+    active(true);
+    // enable chaining
+    return static_cast<client_reference>(*this);
+}
+
+
+template <typename clientT>
+auto
+pyre::journal::InventoryProxy<clientT>::
+deactivate() -> client_reference
+{
+    // set my activation
+    active(false);
+    // enable chaining
+    return static_cast<client_reference>(*this);
+}
+
+
 // syntactic sugar
 template <typename clientT>
 pyre::journal::InventoryProxy<clientT>::

@@ -64,11 +64,6 @@ public:
     // read/write access to my current journal entry
     inline auto entry() -> entry_reference;
 
-    // interface
-public:
-    inline auto activate() -> severity_reference;
-    inline auto deactivate() -> severity_reference;
-
     // injection support; not normally accessed directly, there are manipulators for this
 public:
     // end of a line of message

@@ -40,6 +40,11 @@ public:
     inline auto fatal(fatal_type) -> client_reference;
     inline auto device(device_type) -> client_reference;
 
+    // interface
+public:
+    inline auto activate() -> client_reference;
+    inline auto deactivate() -> client_reference;
+
     // syntactic sugar
 public:
     inline operator active_type() const;
