@@ -55,7 +55,7 @@ namespace pyre::journal {
     // if the user has requested debugging support explicitly
 #elif defined(DEBUG) || defined(JOURNAL_DEBUG)
     // enable the developer channels
-    using debug_t = Debug;
+    using debug_t = Debug<InventoryProxy>;
     using firewall_t = Firewall;
 
     // otherwise, this is a production build
