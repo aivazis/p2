@@ -9,12 +9,18 @@
 
 
 // developer facing channel; usually gets turned off in release mode
-class pyre::journal::Firewall : public Channel<Firewall, InventoryProxy>
+template <template <typename> typename proxyT>
+class pyre::journal::Firewall : public Channel<Firewall<proxyT>, proxyT>
 {
     // types
 public:
+    // my base
+    using channel_type = Channel<Firewall<proxyT>, proxyT>;
     // my parts
-    using channel_type = Channel<Firewall, InventoryProxy>;
+    using name_type = typename channel_type::name_type;
+    using verbosity_type = typename channel_type::verbosity_type;
+    using index_type = typename channel_type::index_type;
+    using entry_type = typename channel_type::entry_type;
     // my exception
     using exception_type = firewall_error;
 

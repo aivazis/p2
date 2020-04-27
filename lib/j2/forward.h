@@ -81,7 +81,7 @@ namespace pyre::journal {
     class Error;
     // developer facing
     template <template <typename> typename proxyT> class Debug;
-    class Firewall;
+    template <template <typename> typename proxyT> class Firewall;
 
     // end of transaction
     template <typename severityT, template <class> typename proxyT>

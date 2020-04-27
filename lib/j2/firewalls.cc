@@ -13,7 +13,7 @@
 
 
 // type alias
-using firewall_t = pyre::journal::Firewall;
+using firewall_t = pyre::journal::firewall_t;
 
 
 // hit
