@@ -35,6 +35,7 @@ public:
     // the current message
     using entry_type = entry_t;
     using entry_reference = entry_type &;
+    using entry_const_reference = const entry_type &;
 
     // miscellaneous
     using string_type = string_t;
@@ -48,6 +49,7 @@ public:
 public:
     inline auto name() const -> const name_type &;
     inline auto verbosity() const -> verbosity_type;
+    inline auto entry() const -> entry_const_reference;
 
     // mutators
 public:

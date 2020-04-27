@@ -46,6 +46,16 @@ verbosity() const -> verbosity_type
 }
 
 
+template <typename severityT, template <typename> typename proxyT>
+auto
+pyre::journal::Channel<severityT, proxyT>::
+entry() const -> entry_const_reference
+{
+    // easy enough
+    return _entry;
+}
+
+
 // mutators
 template <typename severityT, template <typename> typename proxyT>
 auto

@@ -24,16 +24,7 @@ Entry() :
 // accessors
 auto
 pyre::journal::Entry::
-buffer() -> linebuf_type &
-{
-    // easy enough
-    return _buffer;
-}
-
-
-auto
-pyre::journal::Entry::
-page() const -> const page_type &
+page() const -> page_const_reference
 {
     // easy enough
     return _page;
@@ -42,7 +33,35 @@ page() const -> const page_type &
 
 auto
 pyre::journal::Entry::
-notes() const -> const notes_type &
+notes() const -> notes_const_reference
+{
+    // easy enough
+    return _notes;
+}
+
+
+// mutators
+auto
+pyre::journal::Entry::
+buffer() -> linebuf_reference
+{
+    // easy enough
+    return _buffer;
+}
+
+
+auto
+pyre::journal::Entry::
+page() -> page_reference
+{
+    // easy enough
+    return _page;
+}
+
+
+auto
+pyre::journal::Entry::
+notes() -> notes_reference
 {
     // easy enough
     return _notes;
@@ -52,7 +71,7 @@ notes() const -> const notes_type &
 // transaction support
 auto
 pyre::journal::Entry::
-note(const key_type & key, const value_type & value) -> Entry &
+note(const key_type & key, const value_type & value) -> entry_reference
 {
     // place the pair in the metadata table
     _notes.emplace(key, value);
@@ -63,7 +82,7 @@ note(const key_type & key, const value_type & value) -> Entry &
 
 auto
 pyre::journal::Entry::
-push() -> Entry &
+push() -> entry_reference
 {
     // add to the page whatever is in the buffer
     _page.push_back(_buffer.str());
@@ -78,7 +97,7 @@ push() -> Entry &
 
 auto
 pyre::journal::Entry::
-flush() -> Entry &
+flush() -> entry_reference
 {
     // clear the page
     _page.clear();
