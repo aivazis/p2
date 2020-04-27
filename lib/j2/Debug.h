@@ -17,14 +17,12 @@ public:
     // my base
     using channel_type = Channel<Debug<proxyT>, proxyT>;
     // my parts
-    // using name_type = name_t;
     using name_type = typename channel_type::name_type;
     using verbosity_type = typename channel_type::verbosity_type;
     using index_type = typename channel_type::index_type;
     using entry_type = typename channel_type::entry_type;
     // my exception
     using exception_type = debug_error;
-
 
     // metamethods
 public:
