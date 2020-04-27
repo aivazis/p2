@@ -43,8 +43,34 @@ auto
 pyre::journal::InventoryProxy<clientT>::
 device() const
 {
-    // ask my referent
-    return _inventory.device();
+    // first, look in my inventory for a local setting
+    auto device = _inventory.device();
+    // if it's set
+    if (device) {
+        // that's the one
+        return device;
+    }
+
+    // next, check whether there is a severity wide default registered with the client's index
+    device = client_type::index().device();
+    // if it's set
+    if (device) {
+        // that's the one
+        return device;
+    }
+
+    // next, look for the global default
+    device = Chronicler::device();
+    // if it's set
+    if (device) {
+        // that's the one
+        return device;
+    }
+
+    // if all else fails, make a trash can
+    device = std::make_shared<Trash>();
+    // and return it
+    return device;
 }
 
 

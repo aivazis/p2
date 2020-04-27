@@ -46,42 +46,6 @@ verbosity() const -> verbosity_type
 }
 
 
-template <typename severityT, template <typename> typename proxyT>
-auto
-pyre::journal::Channel<severityT, proxyT>::
-device() const
-{
-    // ask my proxy for the channel specific setting
-    auto device = proxy_type::device();
-    // if it's set
-    if (device) {
-        // that's the one
-        return device;
-    }
-
-    // get the severity wide default
-    device = index().device();
-    // if it's set
-    if (device) {
-        // that's the one
-        return device;
-    }
-
-    // get the global default
-    device = Chronicler::device();
-    // if it's set
-    if (device) {
-        // that's the one
-        return device;
-    }
-
-    // otherwise, make a trash can
-    device = std::make_shared<Trash>();
-    // and return it
-    return device;
-}
-
-
 // mutators
 template <typename severityT, template <typename> typename proxyT>
 auto
@@ -90,18 +54,6 @@ verbosity(verbosity_type verbosity) -> severity_reference
 {
     // adjust my verbosity
     _verbosity = verbosity;
-    // enable chaining
-    return static_cast<severity_reference>(*this);
-}
-
-
-template <typename severityT, template <typename> typename proxyT>
-auto
-pyre::journal::Channel<severityT, proxyT>::
-device(device_type device) -> severity_reference
-{
-    // delegate
-    proxy_type::device(device);
     // enable chaining
     return static_cast<severity_reference>(*this);
 }

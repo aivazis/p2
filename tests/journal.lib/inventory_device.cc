@@ -57,32 +57,22 @@ channel_t::index_type channel_t::_index { true, false };
 int main() {
     // make the shared inventory instance
     channel_t::inventory_type inventory(true, false);
-
     // create a channel
     channel_t ch_1(inventory);
     // check that the client sees the state of the inventory
-    assert (ch_1.active() == inventory.active());
-    assert (ch_1.fatal() == inventory.fatal());
+    assert (ch_1.device() == pyre::journal::chronicler_t::device());
 
     // create another channel with access to the shared state
     channel_t ch_2(inventory);
-    // repeat
-    assert (ch_2.active() == inventory.active());
-    assert (ch_2.fatal() == inventory.fatal());
+    // it should also see the same device
+    assert (ch_2.device() == ch_1.device());
 
-    // do some damage through {ch_1}
-    ch_1.active(false).fatal(true);
+    // install a custom device in the shared state
+    inventory.device(std::make_shared<pyre::journal::trash_t>());
 
-    // verify
-    assert (ch_1.active() == ch_2.active());
-    assert (ch_1.fatal() == ch_2.fatal());
-
-    // do some damage through {ch_2}
-    ch_1.active(true).fatal(false);
-
-    // verify
-    assert (ch_1.active() == ch_2.active());
-    assert (ch_1.fatal() == ch_2.fatal());
+    // check again
+    assert (ch_1.device() == inventory.device());
+    assert (ch_2.device() == ch_1.device());
 
     // all done
     return 0;

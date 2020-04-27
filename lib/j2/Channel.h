@@ -51,16 +51,11 @@ public:
 public:
     inline auto name() const -> const name_type &;
     inline auto verbosity() const -> verbosity_type;
-    // the device cascade
-    inline auto device() const;
 
     // mutators
 public:
     // verbosity
     inline auto verbosity(verbosity_type) -> severity_reference;
-    // the device cascade implementation above forces us to write a forwarding overload...
-    inline auto device(device_type) -> severity_reference;
-
     // read/write access to my current journal entry
     inline auto entry() -> entry_reference;
 
