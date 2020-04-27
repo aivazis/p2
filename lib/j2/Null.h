@@ -8,7 +8,7 @@
 #define pyre_journal_Null_h
 
 
-// the null diagnostic conforms to the API but has no effect
+// the null channel conforms to the API but has no effect
 class pyre::journal::Null
 {
     // types
@@ -16,23 +16,40 @@ public:
     // channel names
     using name_type = name_t;
     using nameset_type = nameset_t;
+    // parts
+    using active_type = bool;
+    using fatal_type = bool;
+    using device_type = void *;
 
     // metamethods
 public:
     // constructor
     inline explicit Null(const name_type &);
 
+    // accessors
+public:
+    inline constexpr auto active() const;
+    inline constexpr auto fatal() const;
+    inline constexpr auto device() const -> device_type;
+
+    // mutators
+public:
+    inline constexpr auto active(active_type) -> Null &;
+    inline constexpr auto fatal(fatal_type) -> Null &;
+    inline constexpr auto device(device_type) -> Null &;
+
     // syntactic sugar
-    inline constexpr operator bool() const;
+public:
+    inline constexpr operator active_type() const;
 
     // interface
 public:
     // state management
-    inline void activate() const;
-    inline void deactivate() const;
+    inline constexpr void activate() const;
+    inline constexpr void deactivate() const;
 
     // bulk activation
-    static inline void activateChannels(const nameset_type &);
+    static constexpr inline void activateChannels(const nameset_type &);
 
     // disallow
 private:

@@ -12,34 +12,12 @@
 // metamethods
 pyre::journal::Firewall::
 Firewall(const name_type & name, verbosity_type verbosity) :
-    diagnostic_type(verbosity),
-    channel_type(name)
+    channel_type(name, verbosity)
 {
+    // get my entry
+    entry_type & e = entry();
     // decorate with my severity
-    setattr("severity", "firewall");
-    // and my channel name
-    setattr("channel", name);
-}
-
-
-// interface
-// accessors
-auto
-pyre::journal::Firewall::
-fatal() -> state_type
-{
-    // easy enough
-    return inventory().fatal();
-}
-
-
-// mutators
-auto
-pyre::journal::Firewall::
-fatal(state_type flag) -> state_type
-{
-    // easy enough
-    return inventory().fatal(flag);
+    e.note("severity", "debug");
 }
 
 
@@ -47,26 +25,36 @@ fatal(state_type flag) -> state_type
 // record the message to the chosen device
 void
 pyre::journal::Firewall::
-commit()
+record()
 {
-    // if i'm an active channel, generate some output
-    if (state()) {
-        // hunt down the device to use
-        auto dev = device();
-        // and record the entry
-        dev->memo(verbosity(), page(), metadata());
-    }
-
-    // if i'm fatal
-    if (fatal()) {
-        // prepare a message
-        string_type msg = name() + string_type(": FIREWALL BREACHED!");
-        // throw a firewall
-        throw firewall_error(msg);
-    }
-
+    // hunt down the device to use
+    auto dev = device();
+    // and record the entry
+    dev->memo(entry());
     // all done
     return;
+}
+
+
+// raise an exception when fatal
+void
+pyre::journal::Firewall::
+die()
+{
+    // prepare a message
+    auto msg = name() + firewall_error::string_type(": FIREWALL BREACHED!");
+    // throw a firewall
+    throw exception_type(msg);
+}
+
+
+// initialize the channel index
+auto
+pyre::journal::Firewall::
+initializeIndex() -> index_type
+{
+    // make an empty index and return it; for {firewall}, channels are (active,fatal) by default
+    return index_type(true, true);
 }
 
 

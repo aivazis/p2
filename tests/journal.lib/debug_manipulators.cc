@@ -18,18 +18,18 @@ int main() {
     // try injecting something into the channel; careful not to flush
     channel
         << pyre::journal::at(__HERE__)
-        << pyre::journal::set("time", "now")
+        << pyre::journal::note("time", "now")
         << "debug channel:" << pyre::journal::newline
         << "    hello world!" << pyre::journal::newline;
 
     // get the current channel page
-    auto page = channel.page();
+    auto page = channel.entry().page();
     // verify
     assert (page[0] == "debug channel:");
     assert (page[1] == "    hello world!");
 
     // get the metadata
-    auto metadata = channel.metadata();
+    auto metadata = channel.entry().notes();
     // verify
     assert (metadata["filename"] == __FILE__);
     assert (metadata["line"] == "20");

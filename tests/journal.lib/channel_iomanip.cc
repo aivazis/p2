@@ -10,27 +10,28 @@
 #include <cassert>
 
 
-// severity stub
-class diagnostic_t : public pyre::journal::diagnostic_t<diagnostic_t> {
-    // interface
+// channel stub
+class channel_t : public pyre::journal::channel_t<channel_t> {
+    // metamethods
 public:
-    inline void commit() {}
+    inline explicit channel_t(const name_type & name) :
+        pyre::journal::channel_t<channel_t>(name) {}
 };
 
 
 // verify that the message is assembled correctly
 int main() {
-    // make a diagnostic
-    diagnostic_t diagnostic;
+    // make a channel
+    channel_t channel("channel");
 
     // inject something
-    diagnostic
+    channel
         << std::setw(15)
         << "hello world!"
         << pyre::journal::newline;
 
     // check the entry
-    for (auto value : diagnostic.page()) {
+    for (auto value : channel.entry().page()) {
         // verify that there is only one value and it is what we expect
         assert (value == "   hello world!");
     }

@@ -4,14 +4,17 @@
 // (c) 1998-2020 all rights reserved
 
 
-// get the forward declarations
-#include "forward.h"
 // external support
 #include "externals.h"
+// forward declarations
+#include "forward.h"
+// type aliases
+#include "api.h"
 
-// support for color
-#include "ASCII.h"
-#include "CSI.h"
+// the global settings
+#include "Chronicler.h"
+// message contents
+#include "Entry.h"
 // the superclass
 #include "Renderer.h"
 // the declaration
@@ -27,32 +30,37 @@ pyre::journal::Memo::
 // implementation details
 void
 pyre::journal::Memo::
-header(palette_type & palette, buffer_type & buffer,
-       const page_type & page, const metadata_type & meta) const
+header(palette_type & palette, linebuf_type & buffer, const entry_type & entry) const
 {
+    // get the page
+    auto & page = entry.page();
+
     // if there is no contents
     if (page.empty()) {
         // we are done
         return;
     }
 
-    // get the channel severity
-    auto severity = meta.at("severity");
+    // get the notes
+    auto & notes = entry.notes();
 
-    // mark the beginning of a diagnostic
-    bufmsg_type marker { " >> " };
+    // get the channel severity
+    auto severity = notes.at("severity");
+
+    // mark the beginning of a message
+    line_type marker { " >> " };
 
     // attempt to get location information
     // N.B.: we only print line number and function name if we know the filename
-    auto loc = meta.find("filename");
+    auto loc = notes.find("filename");
     // if it's there
-    if (loc != meta.end()) {
+    if (loc != notes.end()) {
         // extract the filename
         auto filename = loc->second;
         // make some room and turn on location formatting
         buffer << palette[severity];
         // set a maximum length for the rendered filename
-        const bufmsg_type::size_type maxlen = 60;
+        const line_type::size_type maxlen = 60;
         // get the filename size
         auto len = filename.size();
         // so that names that are longer than this maximum
@@ -70,7 +78,7 @@ header(palette_type & palette, buffer_type & buffer,
         buffer << palette["reset"] << ":";
 
         // attempt to get the line number
-        auto & line = meta.at("line");
+        auto & line = notes.at("line");
         // if we know it
         if (!line.empty()) {
             // render it
@@ -78,7 +86,7 @@ header(palette_type & palette, buffer_type & buffer,
         }
 
         // same with the function name
-        auto & function = meta.at("function");
+        auto & function = notes.at("function");
         // if we know it
         if (!function.empty()) {
             // render it
@@ -93,17 +101,17 @@ header(palette_type & palette, buffer_type & buffer,
         // start things off with the marker
         << palette[severity] << marker << palette["reset"]
         // and the channel name
-        << palette[severity] << meta.at("channel") << palette["reset"]
+        << palette[severity] << notes.at("channel") << palette["reset"]
         // and the severity
         << " (" << palette[severity] << severity << palette["reset"] << ")"
         // done with the into line
         << std::endl;
 
-    // now for the extra metadata, if any
+    // now for the extra notes, if any
     // build a set of the keys we have processed already
-    std::set<key_type> known { "severity", "channel", "filename", "line", "function" };
-    // go through the metadata
-    for (auto & [key, value] : meta) {
+    std::set<entry_type::key_type> known { "severity", "channel", "filename", "line", "function" };
+    // go through the notes
+    for (auto & [key, value] : notes) {
         // if the key is in the known pile
         if (known.find(key) != known.end()) {
             // ignore it
@@ -125,19 +133,24 @@ header(palette_type & palette, buffer_type & buffer,
 
 void
 pyre::journal::Memo::
-body(palette_type & palette, buffer_type & buffer, const page_type & page,
-     const metadata_type & meta) const
+body(palette_type & palette, linebuf_type & buffer, const entry_type & entry) const
 {
+    // get the page
+    auto & page = entry.page();
+
     // if the page is empty
     if (page.empty()) {
         // nothing to do
         return;
     }
 
+    // get the notes
+    auto & notes = entry.notes();
+
     // make a marker
-    bufmsg_type marker { " -- "  };
+    line_type marker { " -- "  };
     // get the channel severity
-    auto severity = meta.at("severity");
+    auto severity = notes.at("severity");
 
     // go through the lines in the page
     for (auto & line : page) {

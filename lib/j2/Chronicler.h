@@ -19,11 +19,10 @@ public:
     // global metadata
     using key_type = key_t;
     using value_type = value_t;
-    using metadata_type = metadata_t;
+    using notes_type = notes_t;
 
     // device support
-    using device_type = Device;
-    using device_pointer = device_type::pointer_type;
+    using device_type = device_ptr;
 
     // channel names
     using name_type = name_t;
@@ -43,18 +42,18 @@ public:
     static inline auto verbosity() -> verbosity_type;
     static inline auto verbosity(verbosity_type) -> verbosity_type;
     // metadata
-    static inline auto globals() -> metadata_type &;
+    static inline auto notes() -> notes_type &;
     // device support
-    static inline auto device() -> device_pointer;
-    static inline auto device(device_pointer) -> device_pointer;
+    static inline auto device() -> device_type;
+    static inline auto device(device_type) -> device_type;
 
     // convert a string with a comma separated list of names into a set
     static inline auto nameset(string_type) -> nameset_type;
 
     // data members
 private:
-    static device_pointer _device;
-    static metadata_type _globals;
+    static device_type _device;
+    static notes_type _notes;
     static verbosity_type _verbosity;
 
     // disallow

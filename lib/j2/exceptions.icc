@@ -37,6 +37,20 @@ firewall_error(const string_type & what) :
 {}
 
 
+// debug
+// constructors
+pyre::journal::debug_error::
+debug_error(const char * what) :
+    std::logic_error(what)
+{}
+
+
+pyre::journal::debug_error::
+debug_error(const string_type & what) :
+    std::logic_error(what)
+{}
+
+
 # endif
 
 // end of file

@@ -10,38 +10,33 @@
 
 
 // metamethods
-#if 0
-template <typename inventoryT>
-pyre::journal::Index<inventoryT>::
-Index() :
-    _index()
+pyre::journal::Index::
+Index(active_type active, fatal_type fatal):
+    Inventory(active, fatal),
+    _index {}
 {}
-#endif
 
 
 // interface
-template <typename inventoryT>
 auto
-pyre::journal::Index<inventoryT>::
+pyre::journal::Index::
 size() const
 {
     return _index.size();
 }
 
 
-template <typename inventoryT>
 auto
-pyre::journal::Index<inventoryT>::
+pyre::journal::Index::
 empty() const
 {
     return _index.empty();
 }
 
 
-template <typename inventoryT>
 auto
-pyre::journal::Index<inventoryT>::
-contains(const name_type & channel) const -> bool
+pyre::journal::Index::
+contains(const name_type & channel) const
 {
     // attempt to locate the {channel}
     auto place = _index.find(channel);
@@ -55,27 +50,33 @@ contains(const name_type & channel) const -> bool
 }
 
 
-template <typename inventoryT>
 auto
-pyre::journal::Index<inventoryT>::
+pyre::journal::Index::
+emplace(const name_type & name, active_type active, fatal_type fatal)
+{
+    // easy enough
+    return _index.emplace(name, inventory_type(active, fatal));
+}
+
+
+auto
+pyre::journal::Index::
 begin() const
 {
     return _index.begin();
 }
 
 
-template <typename inventoryT>
 auto
-pyre::journal::Index<inventoryT>::
+pyre::journal::Index::
 end() const
 {
     return _index.end();
 }
 
 
-template <typename inventoryT>
 auto
-pyre::journal::Index<inventoryT>::
+pyre::journal::Index::
 lookup(const name_type & channel) -> inventory_type &
 {
     // attempt to locate the {channel} state
@@ -94,8 +95,8 @@ lookup(const name_type & channel) -> inventory_type &
     // inherits the state of its nearest ancestor. if no ancestor exists, the inventory is
     // initialized in its default state
 
-    // if we fail to find an ancestor, initialize the inventory state with the default value
-    inventory_type inventory;
+    // if we fail to find an ancestor, initialize the inventory state with my default values
+    inventory_type inventory { active(), fatal() };
     // use a period as the separator
     auto separator = '.';
     // initialize the end of the search for the separator; initially, look through the entire
@@ -136,18 +137,6 @@ lookup(const name_type & channel) -> inventory_type &
     auto & shared = status.first->second;
     // and return it
     return shared;
-}
-
-
-template <typename inventoryT>
-void
-pyre::journal::Index<inventoryT>::
-insert(const name_type & channel, const inventory_type & inventory)
-{
-    // place the inventory in the map
-    _index[channel] = inventory;
-    // all done
-    return;
 }
 
 

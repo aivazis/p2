@@ -4,13 +4,12 @@
 // (c) 1998-2020 all rights reserved
 
 
+// externals
+#include <cstdarg>
 // the journal interface
 #include "public.h"
 // my declarations
 #include "debuginfo.h"
-
-// externals
-#include <cstdarg>
 
 // type alias
 using debug_t = pyre::journal::debug_t;
@@ -18,19 +17,19 @@ using debug_t = pyre::journal::debug_t;
 
 // check the state
 extern "C"
-int debuginfo_active(const char * channel)
+int debuginfo_active(const char * name)
 {
-    // get the channel state and return it
-    return debug_t(channel).state();
+    // make the channel
+    return debug_t(name).active();
 }
 
 
 // activate a channel
 extern "C"
-void debuginfo_activate(const char * channel)
+void debuginfo_activate(const char * name)
 {
-    // activate the channel
-    debug_t(channel).activate();
+    // make the channel and activate it
+    debug_t(name).activate();
     // all done
     return;
 }
@@ -38,10 +37,10 @@ void debuginfo_activate(const char * channel)
 
 // deactivate a channel
 extern "C"
-void debuginfo_deactivate(const char * channel)
+void debuginfo_deactivate(const char * name)
 {
-    // deactivate the channel
-    debug_t(channel).deactivate();
+    // make the channel and deactivate it
+    debug_t(name).deactivate();
     // all done
     return;
 }

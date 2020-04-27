@@ -11,31 +11,18 @@
 
 
 // type aliases
-template <bool stateV = true>
-using inventory_t = pyre::journal::inventory_t<stateV>;
-
-template <typename severityT, typename inventoryT>
-using channel_t = pyre::journal::channel_t<severityT, inventoryT>;
+template <typename severityT>
+using channel_t = pyre::journal::channel_t<severityT>;
 
 
 // severity stub
-class severity_t :
-    public channel_t<severity_t, inventory_t<true>>
+class severity_t : public channel_t<severity_t>
 {
-    // types
-public:
-    using channel_type = channel_t<severity_t, inventory_t<true>>;
-
     // metamethods
 public:
     // index initialization is required...
-    severity_t(const name_type &);
+    inline severity_t(const name_type & name): channel_t<severity_t>(name) {}
 };
-
-// stub implementation
-severity_t::severity_t(const name_type & name) :
-    channel_type(name)
-{}
 
 
 // verify that channels of the same severity share inventory indices

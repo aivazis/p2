@@ -8,50 +8,39 @@
 #define pyre_journal_Inventory_h
 
 
-// the common state shared by all channels of the same name/severity
-template <bool stateV>
-class pyre::journal::Inventory
-{
+// the state shared by all channels of a given name+severity
+class pyre::journal::Inventory {
     // types
 public:
-    using state_type = bool;
-    using device_type = Device;
-    using device_pointer = device_type::pointer_type;
+    using active_type = bool;
+    using fatal_type = bool;
+    using device_type = device_ptr;
 
     // metamethods
 public:
-    // constructors
-    inline explicit Inventory(state_type = stateV, device_pointer = nullptr);
-    // let the compiler write the others
-    Inventory(const Inventory &) = default;
-    Inventory(Inventory &&) = default;
-    Inventory & operator= (const Inventory &) = default;
-    Inventory & operator= (Inventory &&) = default;
+    inline explicit Inventory(active_type = true, fatal_type = false);
 
-    // syntactic sugar
-    inline operator bool() const;
-
-    // interface
-public:
     // accessors
-    inline auto state() const -> state_type;
-    inline auto device() const -> device_pointer;
+public:
+    inline auto active() const;
+    inline auto fatal() const;
+    inline auto device() const;
 
     // mutators
-    inline void activate();
-    inline void deactivate();
-
-    inline auto state(state_type) -> state_type;
-    inline auto device(device_pointer) -> device_pointer;
-
-    // class methods
 public:
-    static inline constexpr auto defaultState() -> state_type;
+    inline auto active(active_type) -> Inventory &;
+    inline auto fatal(fatal_type) -> Inventory &;
+    inline auto device(device_type) -> Inventory &;
 
-    // data
+    // syntactic sugar
+public:
+    inline operator active_type() const;
+
+    // data members
 private:
-    state_type _state;
-    device_pointer _device;
+    active_type _active;
+    fatal_type  _fatal;
+    device_type _device;
 };
 
 

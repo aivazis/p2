@@ -42,7 +42,7 @@ private:
 // get the inline definitions
 #define pyre_journal_ErrorConsole_icc
 #include "ErrorConsole.icc"
-#undef pyre_journal_Diagnostic_icc
+#undef pyre_journal_ErrorConsole_icc
 
 
 #endif

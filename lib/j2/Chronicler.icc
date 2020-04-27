@@ -32,16 +32,16 @@ verbosity(verbosity_type verbosity) -> verbosity_type
 
 auto
 pyre::journal::Chronicler::
-globals() -> metadata_type &
+notes() -> notes_type &
 {
     // grant access to my global metadata
-    return _globals;
+    return _notes;
 }
 
 
 auto
 pyre::journal::Chronicler::
-device() -> device_pointer
+device() -> device_type
 {
     // share my device
     return _device;
@@ -51,7 +51,7 @@ device() -> device_pointer
 // mutators
 auto
 pyre::journal::Chronicler::
-device(device_pointer device) -> device_pointer
+device(device_type device) -> device_type
 {
     // swap mine with the incoming device
     std::swap(device, _device);

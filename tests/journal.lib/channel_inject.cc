@@ -10,23 +10,28 @@
 #include <cassert>
 
 
-// severity stub
-class diagnostic_t : public pyre::journal::diagnostic_t<diagnostic_t> {
-    // interface
+// channel stub
+class channel_t : public pyre::journal::channel_t<channel_t> {
+    // metamethods
 public:
-    inline void commit() {}
+    inline explicit channel_t(const name_type & name) :
+        pyre::journal::channel_t<channel_t>(name) {}
+
+    // implementation details
+    inline void record() {}
+    inline void die() {}
 };
 
 
 // compile time: make sure injection works as expected
 int main() {
-    // make a diagnostic
-    diagnostic_t diagnostic;
+    // make a channel
+    channel_t channel("channel");
 
     // inject something
-    diagnostic
+    channel
         << pyre::journal::at(__HERE__)
-        << pyre::journal::set("time", "now")
+        << pyre::journal::note("time", "now")
         << "hello world!" << pyre::journal::newline
         << pyre::journal::endl;
 

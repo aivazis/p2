@@ -16,8 +16,8 @@ public:
     using pointer_type = std::shared_ptr<Trash>;
 
     using palette_type = palette_t;
-    using renderer_type = Renderer;
-    using renderer_pointer = Renderer::pointer_type;
+    using renderer_type = renderer_t;
+    using renderer_pointer = renderer_ptr;
 
     // metamethods
 public:
@@ -28,10 +28,10 @@ public:
 
     // interface
 public:
-    // developer diagnostics
-    virtual auto memo(verbosity_type, const page_type &, const metadata_type &) -> Trash &;
-    // user facing diagnostics
-    virtual auto alert(verbosity_type, const page_type &, const metadata_type &) -> Trash &;
+    // developer messages
+    virtual auto memo(const entry_type &) -> Trash &;
+    // user facing messages
+    virtual auto alert(const entry_type &) -> Trash &;
 
     // data
 private:

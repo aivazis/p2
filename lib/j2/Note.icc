@@ -4,14 +4,14 @@
 // (c) 1998-2020 all rights reserved
 
 // code guard
-#if !defined(pyre_journal_Selector_icc)
-#error This header contains implementation details of pyre::journal::Selector
+#if !defined(pyre_journal_Note_icc)
+#error This header contains implementation details of pyre::journal::Note
 #else
 
 
 // metamethods
-pyre::journal::Selector::
-Selector(key_type key, value_type value):
+pyre::journal::Note::
+Note(key_type key, value_type value):
     _key(key),
     _value(value)
 {}
@@ -20,7 +20,7 @@ Selector(key_type key, value_type value):
 // interface
 // accessors
 auto
-pyre::journal::Selector::
+pyre::journal::Note::
 key() const -> const key_type &
 {
     // easy enough
@@ -29,7 +29,7 @@ key() const -> const key_type &
 
 
 auto
-pyre::journal::Selector::
+pyre::journal::Note::
 value() const -> const value_type &
 {
     // easy enough

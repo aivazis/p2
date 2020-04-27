@@ -48,24 +48,25 @@ namespace pyre::journal {
 
     // a channel's verbosity level
     using verbosity_t = size_t;
+
+    // the type of line
+    using line_t = string_t;
+    // line buffer: the accumulator of partially constructed messages
+    using linebuf_t = std::stringstream;
     // a page is the payload of a journal entry
-    using page_t = std::vector<string_t>;
-    // the metadata associated with an journal entry
+    using page_t = std::vector<line_t>;
+    // metadata associated with a journal entry
     using key_t = string_t;
     using value_t = string_t;
-    using metadata_t = std::map<key_t, value_t>;
-
-    // support for message buffering; unfortunately {std::stringstream} doesn't expose the
-    // return type of its {str} method, so i need a redundant definition here
-    using bufmsg_t = string_t;
-    using buffer_t = std::stringstream;
+    using notes_t = std::map<key_t, value_t>;
 
     // a color table is a map from a color name to a control string
     using colorname_t = string_t;
     using colorrep_t = string_t;
     using colortable_t = std::map<colorname_t, colorrep_t>;
 
-    // a palette is a map from e metadata key to a color name
+    // a palette is a map from a metadata key to a color name; it is used by the renderers to
+    // colorize the message notes
     using palette_t = std::map<key_t, colorrep_t>;
 }
 

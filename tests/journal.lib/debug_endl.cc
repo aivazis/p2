@@ -22,15 +22,15 @@ int main() {
     // try injecting something into the channel
     channel
         << pyre::journal::at(__HERE__)
-        << pyre::journal::set("time", "now")
+        << pyre::journal::note("time", "now")
         << "    hello world!" << pyre::journal::endl;
 
     // verify that the buffer is empty
-    assert (channel.buffer().empty());
+    assert (channel.entry().buffer().str().empty());
     // the page is empty
-    assert (channel.page().empty());
+    assert (channel.entry().page().empty());
     // but the metadata has been retained
-    assert (!channel.metadata().empty());
+    assert (!channel.entry().notes().empty());
 
     // all done
     return 0;

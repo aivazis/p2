@@ -25,7 +25,7 @@ int main() {
         // location
         << pyre::journal::at(__HERE__)
         // some metadata
-        << pyre::journal::set("time", "now")
+        << pyre::journal::note("time", "now")
         // a message with a newline
         << "debug channel:" << pyre::journal::newline
         // another message and a flush

@@ -10,15 +10,14 @@
 #include <cassert>
 
 
-// type aliases
-const bool defaultState = true;
-using index_t = pyre::journal::index_t<pyre::journal::inventory_t<defaultState>>;
+// type alias
+using index_t = pyre::journal::index_t;
 
 
 // verify that the channel state index can be instantiated
 int main() {
     // make an index
-    index_t index;
+    index_t index(true, true);
 
     // make sure it's empty
     assert(index.empty());

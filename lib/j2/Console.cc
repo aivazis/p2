@@ -4,10 +4,17 @@
 // (c) 1998-2020 all rights reserved
 
 
-// get the forward declarations
-#include "forward.h"
 // external support
 #include "externals.h"
+// get the forward declarations
+#include "forward.h"
+// type aliases
+#include "api.h"
+
+// global settings
+#include "Chronicler.h"
+// message contents
+#include "Entry.h"
 
 // support for color
 #include "ASCII.h"
@@ -36,7 +43,7 @@ using ansi_t = pyre::journal::ansi_t;
 // constructor
 pyre::journal::Console::
 Console() :
-    stream_t("cout", std::cout),
+    Stream("cout", std::cout),
     _tty(isatty(1) == 1)
 {
     // if i am connected to a compatible terminal

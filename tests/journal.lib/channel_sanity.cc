@@ -11,31 +11,18 @@
 
 
 // type aliases
-template <bool stateV = true>
-using inventory_t = pyre::journal::inventory_t<stateV>;
-
-template <typename severityT, typename inventoryT>
-using channel_t = pyre::journal::channel_t<severityT, inventoryT>;
+template <typename severityT>
+using channel_t = pyre::journal::channel_t<severityT>;
 
 
 // severity stub
-class severity_t :
-    public channel_t<severity_t, inventory_t<true>>
+class severity_t : public channel_t<severity_t>
 {
-    // types
-public:
-    using channel_type = channel_t<severity_t, inventory_t<true>>;
-
     // metamethods
 public:
     // index initialization is required...
-    severity_t(const name_type &);
+    inline severity_t(const name_type & name): channel_t<severity_t>(name) {}
 };
-
-// stub implementation
-severity_t::severity_t(const name_type & name) :
-    channel_type(name)
-{}
 
 
 // exercise the channel state interface for both the shared and global state
@@ -45,17 +32,21 @@ int main() {
 
     // verify its name
     assert (channel.name() == "test.channel");
-    // its state
-    assert (channel.state() == true);
+    // its activation state
+    assert (channel.active() == true);
+    // whether it's fatal
+    assert (channel.fatal() == false);
     // and again using the conversion to bool
     assert (channel);
-    // verify that the default state is as expected
-    assert (channel.defaultState() == true);
+    // verify that the default activation state is as expected
+    assert (channel.index().active() == true);
+    // verify that the default fatal state is as expected
+    assert (channel.index().fatal() == false);
 
     // deactivate it
     channel.deactivate();
     // and check
-    assert (channel.state() == false);
+    assert (channel.active() == false);
 
     // all done
     return 0;

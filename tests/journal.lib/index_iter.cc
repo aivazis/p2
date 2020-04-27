@@ -11,14 +11,13 @@
 
 
 // type aliases
-const bool defaultState = true;
-using index_t = pyre::journal::index_t<pyre::journal::inventory_t<defaultState>>;
+using index_t = pyre::journal::index_t;
 
 
 // exercise iterating through the index contents
 int main() {
     // make an index
-    index_t index;
+    index_t index(true, true);
 
     // lookup a name
     index.lookup("test.index.1");
@@ -29,8 +28,10 @@ int main() {
     std::size_t count = 0;
     // go through the contents
     for (auto & [key, inventory] : index) {
-        // verify the channel state is as expected
-        assert(inventory.state() == inventory.defaultState());
+        // verify the channel activation state is as expected
+        assert(inventory.active() == index.active());
+        // verify the channel fatal state is as expected
+        assert(inventory.fatal() == index.fatal());
         // increment the counter
         count++;
     }

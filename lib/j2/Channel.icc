@@ -10,30 +10,25 @@
 
 
 // metamethods
-// constructor
-template <typename severityT, typename inventoryT>
-pyre::journal::Channel<severityT, inventoryT>::
-Channel(const name_type & name) :
-    _name(name),
-    _inventory(lookup(name))
-{}
-
-
-// syntactic sugar
-template <typename severityT, typename inventoryT>
-pyre::journal::Channel<severityT, inventoryT>::
-operator bool() const
+template <typename severityT, template <typename> typename proxyT>
+pyre::journal::Channel<severityT, proxyT>::
+Channel(const name_type & name, verbosity_type verbosity) :
+    proxy_type(_index.lookup(name)),
+    _name{ name },
+    _verbosity{ verbosity },
+    _entry{}
 {
-    // my inventory can convert itself
-    return _inventory;
+    // get my entry
+    entry_type & e = entry();
+    // decorate with my channel name
+    e.note("channel", name);
 }
 
 
-// interface
 // accessors
-template <typename severityT, typename inventoryT>
+template <typename severityT, template <typename> typename proxyT>
 auto
-pyre::journal::Channel<severityT, inventoryT>::
+pyre::journal::Channel<severityT, proxyT>::
 name() const -> const name_type &
 {
     // easy enough
@@ -41,179 +36,236 @@ name() const -> const name_type &
 }
 
 
-template <typename severityT, typename inventoryT>
+template <typename severityT, template <typename> typename proxyT>
 auto
-pyre::journal::Channel<severityT, inventoryT>::
-state() const -> state_type
+pyre::journal::Channel<severityT, proxyT>::
+verbosity() const -> verbosity_type
 {
     // easy enough
-    return _inventory.state();
+    return _verbosity;
 }
 
 
-template <typename severityT, typename inventoryT>
+template <typename severityT, template <typename> typename proxyT>
 auto
-pyre::journal::Channel<severityT, inventoryT>::
-device() const -> device_pointer
+pyre::journal::Channel<severityT, proxyT>::
+device() const
 {
-    // ask my inventory for its device
-    auto dev = _inventory.device();
+    // ask my proxy for the channel specific setting
+    auto device = proxy_type::device();
     // if it's set
-    if (dev) {
+    if (device) {
         // that's the one
-        return dev;
+        return device;
     }
 
-    // try my channel-wide default
-    dev = defaultDevice();
+    // get the severity wide default
+    device = index().device();
     // if it's set
-    if (dev) {
+    if (device) {
         // that's the one
-        return dev;
+        return device;
     }
 
-    // fall back to the global setting
-    dev = Chronicler::device();
+    // get the global default
+    device = Chronicler::device();
     // if it's set
-    if (dev) {
+    if (device) {
         // that's the one
-        return dev;
+        return device;
     }
 
-    // otherwise, make a trash can and return it
-    return std::make_shared<Trash>();
-}
-
-
-template <typename severityT, typename inventoryT>
-auto
-pyre::journal::Channel<severityT, inventoryT>::
-inventory() const -> inventory_type &
-{
-    // easy enough
-    return _inventory;
-}
-
-// mutators
-template <typename severityT, typename inventoryT>
-void
-pyre::journal::Channel<severityT, inventoryT>::
-activate()
-{
-    // easy enough
-    _inventory.activate();
-    // all done
-    return;
-}
-
-
-template <typename severityT, typename inventoryT>
-void
-pyre::journal::Channel<severityT, inventoryT>::
-deactivate()
-{
-    // easy enough
-    _inventory.deactivate();
-    // all done
-    return;
-}
-
-
-template <typename severityT, typename inventoryT>
-auto
-pyre::journal::Channel<severityT, inventoryT>::
-state(state_type flag) -> state_type
-{
-    // easy enough
-    return _inventory.state(flag);
-}
-
-
-template <typename severityT, typename inventoryT>
-auto
-pyre::journal::Channel<severityT, inventoryT>::
-device(device_pointer device) -> device_pointer
-{
-    // ask my inventory to do the swap
-    return _inventory.device(device);
-}
-
-
-// static interface
-template <typename severityT, typename inventoryT>
-auto
-pyre::journal::Channel<severityT, inventoryT>::
-index() -> const index_type &
-{
-    // grant access to my index
-    return _index;
-}
-
-
-// initialize the channel index
-template <typename severityT, typename inventoryT>
-auto
-pyre::journal::Channel<severityT, inventoryT>::
-initializeIndex() -> index_type
-{
-    // make an empty index
-    index_type index;
+    // otherwise, make a trash can
+    device = std::make_shared<Trash>();
     // and return it
-    return index;
-}
-
-
-template <typename severityT, typename inventoryT>
-constexpr auto
-pyre::journal::Channel<severityT, inventoryT>::
-defaultState() -> state_type
-{
-    // easy enough
-    return inventory_type::defaultState();
-}
-
-
-template <typename severityT, typename inventoryT>
-auto
-pyre::journal::Channel<severityT, inventoryT>::
-defaultDevice() -> device_pointer
-{
-    // easy enough
-    return _device;
-}
-
-
-template <typename severityT, typename inventoryT>
-auto
-pyre::journal::Channel<severityT, inventoryT>::
-defaultDevice(device_pointer device) -> device_pointer
-{
-    // swap mine with the incoming device pointer
-    std::swap(_device, device);
-    // and return mine
     return device;
 }
 
 
-template <typename severityT, typename inventoryT>
+// mutators
+template <typename severityT, template <typename> typename proxyT>
 auto
-pyre::journal::Channel<severityT, inventoryT>::
-lookup(const name_type & name) -> inventory_type &
+pyre::journal::Channel<severityT, proxyT>::
+verbosity(verbosity_type verbosity) -> severity_reference
+{
+    // adjust my verbosity
+    _verbosity = verbosity;
+    // enable chaining
+    return static_cast<severity_reference>(*this);
+}
+
+
+template <typename severityT, template <typename> typename proxyT>
+auto
+pyre::journal::Channel<severityT, proxyT>::
+device(device_type device) -> severity_reference
+{
+    // delegate
+    proxy_type::device(device);
+    // enable chaining
+    return static_cast<severity_reference>(*this);
+}
+
+
+template <typename severityT, template <typename> typename proxyT>
+auto
+pyre::journal::Channel<severityT, proxyT>::
+entry() -> entry_reference
 {
     // easy enough
-    return _index.lookup(name);
+    return _entry;
+}
+
+
+// interface
+template <typename severityT, template <typename> typename proxyT>
+auto
+pyre::journal::Channel<severityT, proxyT>::
+activate() -> severity_reference
+{
+    // set my activation
+    this->active(true);
+    // enable chaining
+    return static_cast<severity_reference>(*this);
+}
+
+
+template <typename severityT, template <typename> typename proxyT>
+auto
+pyre::journal::Channel<severityT, proxyT>::
+deactivate() -> severity_reference
+{
+    // set my activation
+    this->active(false);
+    // enable chaining
+    return static_cast<severity_reference>(*this);
+}
+
+
+// injection support
+template <typename severityT, template <typename> typename proxyT>
+auto
+pyre::journal::Channel<severityT, proxyT>::
+line() -> severity_reference
+{
+    // ask my entry to move the contents of its accumulator to the page
+    _entry.push();
+    // enable chaining
+    return static_cast<severity_reference>(*this);
+}
+
+
+template <typename severityT, template <typename> typename proxyT>
+auto
+pyre::journal::Channel<severityT, proxyT>::
+log() -> severity_reference
+{
+     // if there's anything in the entry buffer
+     if (!_entry.buffer().str().empty()) {
+         // move it to the page
+         _entry.push();
+     }
+
+     // very carefully
+     try {
+          // write the journal entry to the device
+          commit();
+     }
+     // fatal channels raise exceptions
+     catch (...) {
+         // clean up the page
+         _entry.flush();
+         // and raise the exception again
+         throw;
+     }
+
+    // clean up the page, but not the metadata; metadata accumulate for the lifetime of a
+    // channel instance, so they can be set whenever the information becomes available
+    _entry.flush();
+
+    // enable chaining
+    return static_cast<severity_reference>(*this);
+}
+
+
+template <typename severityT, template <typename> typename proxyT>
+auto
+pyre::journal::Channel<severityT, proxyT>::
+commit() -> severity_reference
+{
+    // me as a {severity_reference}; this works trivially because of crtp
+    severity_reference self = static_cast<severity_reference>(*this);
+
+    // if i'm not active
+    if (self.active() == false) {
+        // nothing to do
+        return self;
+    }
+
+    // if my verbosity exceeds the maximum
+    if (_verbosity > chronicler_t::verbosity()) {
+        // nothing to do
+        return self;
+    }
+
+    // record the message
+    self.record();
+
+    // if i'm fatal
+    if (self.fatal() == true) {
+        // throw an exception
+        self.die();
+    }
+
+    // all done
+    return self;
+}
+
+
+// static interface
+template <typename severityT, template <typename> typename proxyT>
+auto
+pyre::journal::Channel<severityT, proxyT>::
+index() -> index_reference
+{
+    // grant access to the default inventory
+    return _index;
+}
+
+
+template <typename severityT, template <typename> typename proxyT>
+auto
+pyre::journal::Channel<severityT, proxyT>::
+initializeIndex() -> index_type
+{
+    // make a default index
+    return index_type(true, false);
+}
+
+
+// bulk channel activation
+template <typename severityT, template <typename> typename proxyT>
+void
+pyre::journal::Channel<severityT, proxyT>::
+activateChannels(const nameset_type & names)
+{
+    // go through the names in the set
+    for (auto & name : names) {
+        // make debug channel by this name
+        severity_type channel(name);
+        // and activate it
+        channel.activate();
+    }
+    // all done
+    return;
 }
 
 
 // static data
-template <typename severityT, typename inventoryT>
-typename pyre::journal::Channel<severityT, inventoryT>::index_type
-pyre::journal::Channel<severityT, inventoryT>::_index { severityT::initializeIndex() };
-
-// static data
-template <typename severityT, typename inventoryT>
-typename pyre::journal::Channel<severityT, inventoryT>::device_pointer
-pyre::journal::Channel<severityT, inventoryT>::_device;
+template <typename severityT, template <typename> typename proxyT>
+typename pyre::journal::Channel<severityT, proxyT>::index_type
+pyre::journal::Channel<severityT, proxyT>::
+_index{ severity_type::initializeIndex() };
 
 
 #endif

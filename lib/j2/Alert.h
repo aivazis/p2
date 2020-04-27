@@ -18,10 +18,8 @@ public:
 
     // implementation details
 protected:
-    virtual void header(palette_type &, buffer_type &,
-                        const page_type &, const metadata_type &) const override;
-    virtual void body(palette_type &, buffer_type &,
-                      const page_type &, const metadata_type &) const override;
+    virtual void header(palette_type &, linebuf_type &, const entry_type &) const override;
+    virtual void body(palette_type &, linebuf_type &, const entry_type &) const override;
 
     // disallow
 private:

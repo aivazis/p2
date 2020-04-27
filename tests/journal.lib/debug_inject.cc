@@ -18,10 +18,10 @@ int main() {
     // try injecting something into the channel
     channel << "hello world!";
     // get the channel buffer and verify its contents
-    assert (channel.buffer() == "hello world!");
+    assert (channel.entry().buffer().str() == "hello world!");
 
     // get the metadata
-    auto metadata = channel.metadata();
+    auto metadata = channel.entry().notes();
     // verify that the channel identification entries are present
     assert (metadata["severity"] == "debug");
     assert (metadata["channel"] == "tests.journal.debug");

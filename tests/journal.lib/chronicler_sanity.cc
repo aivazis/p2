@@ -20,12 +20,12 @@ int main() {
     assert (chronicler_t::verbosity() == 1);
 
     // get the global metadata map
-    chronicler_t::metadata_type & globals = chronicler_t::globals();
+    chronicler_t::notes_type & notes = chronicler_t::notes();
 
     // there should be only one setting for now
-    assert (globals.size() == 1);
+    assert (notes.size() == 1);
     // verify the known contents
-    assert (globals.at("application") == "journal");
+    assert (notes.at("application") == "journal");
 
     // get the default device
     auto device_ptr = chronicler_t::device();

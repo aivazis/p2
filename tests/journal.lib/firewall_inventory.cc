@@ -16,19 +16,18 @@ using inventory_t = pyre::journal::firewall_t::inventory_type;
 
 // verify that we can manipulate the firewall inventory state
 int main() {
-    // make a default inventory
-    inventory_t firewall;
-    // by default, its device is null
-    assert(firewall.device().get() == nullptr);
+    // make a channel
+    pyre::journal::firewall_t firewall("error");
 
-    // verify the default state is on
-    assert(firewall.defaultState() == true);
+    // by default, its device is whatever the global default is
+    assert(firewall.device() == pyre::journal::chronicler_t::device());
+
     // verify it is on
-    assert(firewall.state() == true);
+    assert(firewall.active() == true);
     // flip it
-    firewall.deactivate();
+    firewall.active(false);
     // check again
-    assert(firewall.state() == false);
+    assert(firewall.active() == false);
 
     // verify it's fatal by default
     assert(firewall.fatal() == true);

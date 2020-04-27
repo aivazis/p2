@@ -10,28 +10,24 @@
 #include <cassert>
 
 
-// severity stub
-class diagnostic_t : public pyre::journal::diagnostic_t<diagnostic_t> {
+// channel stub
+class channel_t : public pyre::journal::channel_t<channel_t> {
     // metamethods
 public:
-    inline explicit diagnostic_t(verbosity_type verbosity = 1) :
-        pyre::journal::diagnostic_t<diagnostic_t>(verbosity) {}
-
-    // interface
-public:
-    inline void commit() {}
+    inline explicit channel_t(const name_type & name, verbosity_type verbosity = 1) :
+        pyre::journal::channel_t<channel_t>(name, verbosity) {}
 };
 
 
 // verify that diagnostics can be instantiated correctly
 int main() {
     // make a diagnostic
-    diagnostic_t d1;
+    channel_t d1("d1");
     // make sure its verbosity is at the default value
     assert (d1.verbosity() == 1);
 
     // make another diagnostic with a non-default verbosity
-    diagnostic_t d2(3);
+    channel_t d2("d3", 3);
     // make sure its verbosity is at the default value
     assert (d2.verbosity() == 3);
 

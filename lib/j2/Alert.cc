@@ -4,16 +4,17 @@
 // (c) 1998-2020 all rights reserved
 
 
-// get the forward declarations
-#include "forward.h"
 // external support
 #include "externals.h"
+// forward declarations
+#include "forward.h"
+// type aliases
+#include "api.h"
 
-// support for color
-#include "ASCII.h"
-#include "CSI.h"
-// access to the type names
-#include "Device.h"
+// the global settings
+#include "Chronicler.h"
+// message contents
+#include "Entry.h"
 // the superclass
 #include "Renderer.h"
 // the declaration
@@ -29,28 +30,32 @@ pyre::journal::Alert::
 // implementation details
 void
 pyre::journal::Alert::
-header(palette_type & palette, buffer_type & buffer,
-       const page_type & page, const metadata_type & meta) const
+header(palette_type & palette, linebuf_type & buffer, const entry_type & entry) const
 {
+    // get the page
+    auto & page = entry.page();
     // if there is nothing to print
     if (page.empty()) {
         // we are done
         return;
     }
 
+    // get the notes
+    auto & notes = entry.notes();
+
     // get the severity
-    auto severity = meta.at("severity");
+    auto severity = notes.at("severity");
     // ask the palette for the severity decoration
     auto severityColor = palette[severity];
     // if we are generating color output
     if (!severityColor.empty()) {
         // print the application name in the correct color
         buffer
-            << severityColor << meta.at("application") << palette["reset"];
+            << severityColor << notes.at("application") << palette["reset"];
     } else {
         // otherwise, print the application name, followed by the severity
         buffer
-            << meta.at("application") << "(" << meta.at("severity") << ")";
+            << notes.at("application") << "(" << notes.at("severity") << ")";
     }
 
     // make some space, and print the first line of the body
@@ -66,12 +71,14 @@ header(palette_type & palette, buffer_type & buffer,
 
 void
 pyre::journal::Alert::
-body(palette_type & palette, buffer_type & buffer,
-     const page_type & page, const metadata_type &) const
+body(palette_type & palette, linebuf_type & buffer, const entry_type & entry) const
 {
+    // get the page
+    auto & page = entry.page();
+
     // the page had up to one line
     if (page.size() < 2) {
-        // nothing further to do
+        // we have rendered the first line already; nothing further to do
         return;
     }
     // go through the lines in the page; skip the first one, since it was printed as part of

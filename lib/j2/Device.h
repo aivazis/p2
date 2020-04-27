@@ -13,19 +13,11 @@ class pyre::journal::Device {
     // types
 public:
     // pointers to me
-    using pointer_type = std::shared_ptr<Device>;
+    using pointer_type = device_ptr;
     // for naming device instances
     using name_type = name_t;
-    // the verbosity level
-    using verbosity_type = verbosity_t;
-    // a page of diagnostics is a vector of lines
-    using page_type = page_t;
-    // diagnostic metadata in a map
-    using key_type = key_t;
-    using value_type = value_t;
-    using metadata_type = metadata_t;
-    // decorators in a map from metadata keys to the colorizer's representation
-    using palette_type = palette_t;
+    // message entry
+    using entry_type = entry_t;
 
     // metamethods
 public:
@@ -40,8 +32,8 @@ public:
     inline auto name() const -> const name_type &;
 
     // abstract
-    virtual auto memo(verbosity_type, const page_type &, const metadata_type &) -> Device & = 0;
-    virtual auto alert(verbosity_type, const page_type &, const metadata_type &) -> Device & = 0;
+    virtual auto memo(const entry_type &) -> Device & = 0;
+    virtual auto alert(const entry_type &) -> Device & = 0;
 
     // data
 private:

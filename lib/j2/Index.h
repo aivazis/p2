@@ -8,47 +8,49 @@
 #define pyre_journal_Index_h
 
 
-// owner of the map (channel name -> shared channel state)
-// each concrete subclass of {diagnostic} maintains its own index as class data, shared among
-// its instances
-template <typename inventoryT>
-class pyre::journal::Index {
+// owner of the map (channel name -> shared channel state), as well as the severity wide defaults
+// each concrete {channel} maintains its own index as class data, shared among its instances
+class pyre::journal::Index : public Inventory
+{
     // types
 public:
+    // channel names
     using name_type = name_t;
-    using inventory_type = inventoryT;
+    // shared state
+    using inventory_type = Inventory;
+
+    // the map from channel names to inventory instances
     using index_type = std::map<name_type, inventory_type>;
 
     // metamethods
 public:
-    inline Index() = default;
-    inline Index(const Index &) = default;
-    inline Index(Index &&) = default;
-    inline Index & operator= (const Index &) = default;
-    inline Index & operator= (Index &&) = default;
+    inline Index(active_type active, fatal_type fatal);
+    // let the compiler write the rest
+    Index(const Index &) = default;
+    Index(Index &&) = default;
+    Index & operator= (const Index &) = default;
+    Index & operator= (Index &&) = default;
 
     // interface
 public:
     // simple access to the underlying index
     inline auto size() const;
     inline auto empty() const;
-    inline auto contains(const name_type &) const -> bool;
+    inline auto contains(const name_type &) const;
+
+    // explicit inventory insertion
+    inline auto emplace(const name_type &, active_type, fatal_type);
 
     // iteration
     inline auto begin() const;
     inline auto end() const;
 
-    // channel look up
+    // look up the shared state of a channel
     inline auto lookup(const name_type &) -> inventory_type &;
-    // manual inventory placement
-    inline void insert(const name_type &, const inventory_type &);
 
     // data members
 private:
     index_type _index;
-
-    // disallow
-private:
 };
 
 

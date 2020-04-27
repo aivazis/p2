@@ -4,18 +4,19 @@
 // (c) 1998-2020 all rights reserved
 
 
-// get the forward declarations
-#include "forward.h"
 // external support
 #include "externals.h"
+// forward declarations
+#include "forward.h"
+// type aliases
+#include "api.h"
 
-// access to color support
-#include "ASCII.h"
-#include "CSI.h"
-// access to the type names
-#include "Device.h"
-// access to the gloabal state
+// global settings
 #include "Chronicler.h"
+// message content
+#include "Entry.h"
+// the base device
+#include "Device.h"
 
 // get the declaration
 #include "Renderer.h"
@@ -30,16 +31,15 @@ pyre::journal::Renderer::
 // interface
 auto
 pyre::journal::Renderer::
-render(palette_type & palette, const page_type & page,
-       const metadata_type & meta) const -> bufmsg_type
+render(palette_type & palette, const entry_type & entry) const -> line_type
 {
     // make a buffer
-    buffer_type buffer;
+    linebuf_type buffer;
 
     // build the document
-    header(palette, buffer, page, meta);
-    body(palette, buffer, page, meta);
-    footer(palette, buffer, page, meta);
+    header(palette, buffer, entry);
+    body(palette, buffer, entry);
+    footer(palette, buffer, entry);
 
     // extract the string and return it
     return buffer.str();
@@ -49,7 +49,7 @@ render(palette_type & palette, const page_type & page,
 // implementation details
 void
 pyre::journal::Renderer::
-header(palette_type &, buffer_type &, const page_type &, const metadata_type &) const
+header(palette_type &, linebuf_type &, const entry_type &) const
 {
     // all done
     return;
@@ -58,7 +58,7 @@ header(palette_type &, buffer_type &, const page_type &, const metadata_type &) 
 
 void
 pyre::journal::Renderer::
-body(palette_type &, buffer_type &, const page_type &, const metadata_type &) const
+body(palette_type &, linebuf_type &, const entry_type &) const
 {
     // all done
     return;
@@ -67,7 +67,7 @@ body(palette_type &, buffer_type &, const page_type &, const metadata_type &) co
 
 void
 pyre::journal::Renderer::
-footer(palette_type &, buffer_type &, const page_type &, const metadata_type &) const
+footer(palette_type &, linebuf_type &, const entry_type &) const
 {
     // all done
     return;

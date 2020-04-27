@@ -4,19 +4,23 @@
 // (c) 1998-2020 all rights reserved
 
 
-// get the forward declarations
-#include "forward.h"
 // external support
 #include "externals.h"
+// forward declarations
+#include "forward.h"
+// type aliases
+#include "api.h"
 
-// support for color
-#include "ASCII.h"
-#include "CSI.h"
+// global settings
+#include "Chronicler.h"
+// message contents
+#include "Entry.h"
+
 // renderer support
 #include "Renderer.h"
 #include "Memo.h"
 #include "Alert.h"
-// get the device declaration
+// my superclass
 #include "Device.h"
 // get the stream declaration
 #include "Trash.h"
@@ -32,12 +36,12 @@ pyre::journal::Trash::
 // interface
 auto
 pyre::journal::Trash::
-memo(verbosity_type, const page_type & page, const metadata_type & meta) -> Trash &
+memo(const entry_type & entry) -> Trash &
 {
     // make an empty palette
     palette_type palette;
     // go through the motions, and then discard the content
-    _memo->render(palette, page, meta);
+    _memo->render(palette, entry);
     // all done
     return *this;
 }
@@ -45,12 +49,12 @@ memo(verbosity_type, const page_type & page, const metadata_type & meta) -> Tras
 
 auto
 pyre::journal::Trash::
-alert(verbosity_type, const page_type & page, const metadata_type & meta) -> Trash &
+alert(const entry_type & entry) -> Trash &
 {
     // make an empty palette
     palette_type palette;
     // go through the motions, and then discard the content
-    _alert->render(palette, page, meta);
+    _alert->render(palette, entry);
     // all done
     return *this;
 }

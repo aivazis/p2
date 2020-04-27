@@ -8,29 +8,31 @@
 #define pyre_journal_Firewall_h
 
 
-// developer facing diagnostic; usually gets turned off in release mode
-class pyre::journal::Firewall :
-    public Diagnostic<Firewall>,
-    public Channel<Firewall, Fatal<true, true>> {
+// developer facing channel; usually gets turned off in release mode
+class pyre::journal::Firewall : public Channel<Firewall, InventoryProxy>
+{
     // types
 public:
     // my parts
-    using diagnostic_type = Diagnostic<Firewall>;
-    using channel_type = Channel<Firewall, Fatal<true, true>>;
-    // the error indicator
+    using channel_type = Channel<Firewall, InventoryProxy>;
+    // my exception
     using exception_type = firewall_error;
 
     // metamethods
 public:
     inline explicit Firewall(const name_type &, verbosity_type = 1);
 
-    // interface
+    // implementation details
 public:
-    // control over whether firewalls are fatal
-    inline auto fatal() -> state_type;
-    inline auto fatal(state_type) -> state_type;
-    // commit the message to a device
-    inline void commit();
+    // record the message to a device
+    inline void record();
+    // raise the correct exception when fatal
+    inline void die();
+
+    // implementation details
+public:
+    // initialize the channel index
+    static inline auto initializeIndex() -> index_type;
 
     // disallow
 private:

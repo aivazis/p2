@@ -11,20 +11,17 @@
 
 
 // type aliases
-template <bool stateV = true>
-using inventory_t = pyre::journal::inventory_t<stateV>;
-
-template <typename severityT, typename inventoryT>
-using channel_t = pyre::journal::channel_t<severityT, inventoryT>;
+template <typename severityT>
+using channel_t = pyre::journal::channel_t<severityT>;
 
 
 // severity stub
 class severity_t :
-    public channel_t<severity_t, inventory_t<true>>
+    public channel_t<severity_t>
 {
     // types
 public:
-    using channel_type = channel_t<severity_t, inventory_t<true>>;
+    using channel_type = channel_t<severity_t>;
 
     // metamethods
 public:
@@ -62,9 +59,12 @@ int main() {
     assert (channel_2.device() == global);
 
     // set the channel-wide default
-    severity_t::defaultDevice(trash);
+    severity_t::index().device(trash);
     // and get it back
-    auto shared = severity_t::defaultDevice();
+    auto shared = severity_t::index().device();
+    // it should be our trash can
+    assert (shared == trash);
+
     // verify that that's what the channels see
     assert (channel_1.device() == shared);
     assert (channel_2.device() == shared);

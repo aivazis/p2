@@ -4,20 +4,24 @@
 // (c) 1998-2020 all rights reserved
 
 
-// get the forward declarations
-#include "forward.h"
 // external support
 #include "externals.h"
+// get the forward declarations
+#include "forward.h"
+// type aliases
+#include "api.h"
 
-// support for color
-#include "ASCII.h"
-#include "CSI.h"
+// global settings
+#include "Chronicler.h"
+// message contents
+#include "Entry.h"
+
 // renderer support
 #include "Renderer.h"
 #include "Memo.h"
 #include "Alert.h"
 
-// get the device declaration
+// my superclass
 #include "Device.h"
 // get the stream declaration
 #include "Stream.h"
@@ -35,17 +39,10 @@ pyre::journal::Stream::
 // interface
 auto
 pyre::journal::Stream::
-memo(verbosity_type verbosity, const page_type & page, const metadata_type & meta) -> Stream &
+memo(const entry_type & entry) -> Stream &
 {
-    // get the verbosity level
-    auto maxVerbosity = chronicler_t::verbosity();
-    // if this message is chattier
-    if (verbosity > maxVerbosity) {
-        // do nothing
-        return *this;
-    }
-    // otherwise, get the memo renderer to format the message
-    auto content = _memo->render(_palette, page, meta);
+    // get the memo renderer to format the message
+    auto content = _memo->render(_palette, entry);
     // inject it into my stream
     _stream << content;
     // all done
@@ -55,24 +52,20 @@ memo(verbosity_type verbosity, const page_type & page, const metadata_type & met
 
 auto
 pyre::journal::Stream::
-alert(verbosity_type verbosity, const page_type & page, const metadata_type & meta) -> Stream &
+alert(const entry_type & entry) -> Stream &
 {
+    // get the page and the notes
+    auto & page = entry.page();
+    auto & notes = entry.notes();
+
     // if there is no payload and no metadata
-    if (page.empty() && meta.empty()) {
+    if (page.empty() && notes.empty()) {
         // nothing else to do
         return *this;
     }
 
-    // get the verbosity level
-    auto maxVerbosity = chronicler_t::verbosity();
-    // if this message is chattier
-    if (verbosity > maxVerbosity) {
-        // do nothing
-        return *this;
-    }
-
     // otherwise, get the alert renderer to format the message
-    auto content = _alert->render(_palette, page, meta);
+    auto content = _alert->render(_palette, entry);
     // inject it into my stream
     _stream << content;
 

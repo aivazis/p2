@@ -34,6 +34,19 @@ public:
 };
 
 
+// exception raised by debug channels when marked fatal
+class pyre::journal::debug_error : public std::logic_error {
+    // types
+public:
+    using string_type = string_t;
+
+    // metamethods
+public:
+    inline debug_error(const char *);
+    inline debug_error(const string_type &);
+};
+
+
 // get the inline definitions
 #define pyre_journal_exceptions_icc
 #include "exceptions.icc"

@@ -8,24 +8,33 @@
 #define pyre_journal_Warning_h
 
 
-// user facing diagnostic; meant for warning messages, i.e. when the applications detects
+// user facing channel ; meant for warning messages, i.e. when the applications detects
 // something wrong but it can work around the problem
-class pyre::journal::Warning :
-    public Diagnostic<Warning>,
-    public Channel<Warning, Inventory<true>> {
+class pyre::journal::Warning : public Channel<Warning, InventoryProxy>
+{
     // types
 public:
-    using diagnostic_type = Diagnostic<Warning>;
-    using channel_type = Channel<Warning, Inventory<true>>;
+    // my parts
+    using channel_type = Channel<Warning, InventoryProxy>;
+    // my exception
+    using exception_type = application_error;
 
     // metamethods
 public:
-    inline explicit Warning(name_type name, verbosity_type = 1);
+    inline explicit Warning(const name_type & name, verbosity_type = 1);
 
-    // interface
+    // implementation details
 public:
-    // record the message in the journal
-    inline void commit();
+    // record the message to a device
+    inline void record();
+    // raise the correct exception when fatal
+    inline void die();
+
+
+    // implementation details
+public:
+    // initialize the channel index
+    static inline auto initializeIndex() -> index_type;
 
     // disallow
 private:

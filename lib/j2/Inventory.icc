@@ -5,107 +5,87 @@
 
 // code guard
 #if !defined(pyre_journal_Inventory_icc)
-#error This header contains implementation details of pyre::journal::Inventory
+#error this file contains implementation details for pyre::journal::Inventory
 #else
 
 
 // metamethods
-template <bool stateV>
-pyre::journal::Inventory<stateV>::
-Inventory(state_type state, device_pointer device) :
-    _state(state),
-    _device(device)
+pyre::journal::Inventory::
+Inventory(active_type active, fatal_type fatal) :
+    _active {active},
+    _fatal {fatal},
+    _device {nullptr}
 {}
 
 
-// syntactic sugar
-template <bool stateV>
-pyre::journal::Inventory<stateV>::
-operator bool() const
-{
-    // always off
-    return state();
-}
-
-
-// interface
 // accessors
-template <bool stateV>
 auto
-pyre::journal::Inventory<stateV>::
-state() const -> state_type
+pyre::journal::Inventory::
+active() const
 {
     // easy enough
-    return _state;
+    return _active;
 }
 
 
-template <bool stateV>
 auto
-pyre::journal::Inventory<stateV>::
-device() const -> device_pointer
+pyre::journal::Inventory::
+fatal() const
+{
+    // easy enough
+    return _fatal;
+}
+
+
+auto
+pyre::journal::Inventory::
+device() const
 {
     // easy enough
     return _device;
 }
 
 
-template <bool stateV>
-constexpr auto
-pyre::journal::Inventory<stateV>::
-defaultState() -> state_type
+// accessors
+auto
+pyre::journal::Inventory::
+active(active_type active) -> Inventory &
 {
     // easy enough
-    return stateV;
-}
-
-
-// mutators
-template <bool stateV>
-void
-pyre::journal::Inventory<stateV>::
-activate()
-{
-    // turn it on
-    _state = true;
+    _active = active;
     // all done
-    return;
+    return *this;
 }
 
 
-template <bool stateV>
-void
-pyre::journal::Inventory<stateV>::
-deactivate()
+auto
+pyre::journal::Inventory::
+fatal(fatal_type fatal) -> Inventory &
 {
-    // turn it off
-    _state = false;
+    // easy enough
+    _fatal = fatal;
     // all done
-    return;
+    return *this;
 }
 
 
-template <bool stateV>
 auto
-pyre::journal::Inventory<stateV>::
-state(state_type flag) -> state_type
+pyre::journal::Inventory::
+device(device_type device) -> Inventory &
 {
-    // swap
-    std::swap(flag, _state);
-    // and return the previous setting
-    return flag;
+    // easy enough
+    _device = device;
+    // all done
+    return *this;
 }
 
 
-template <bool stateV>
-auto
-pyre::journal::Inventory<stateV>::
-device(device_pointer device) -> device_pointer
+// syntactic sugar
+pyre::journal::Inventory::
+operator active_type() const
 {
-    // swap
-    std::swap(device, _device);
-    // return the old one
-    return device;
+    // return my activation state
+    return active();
 }
 
 

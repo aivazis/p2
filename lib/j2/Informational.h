@@ -8,23 +8,31 @@
 #define pyre_journal_Informational_h
 
 
-// user facing diagnostic; meant for informational messages, such as progress reports
-class pyre::journal::Informational :
-    public Diagnostic<Informational>,
-    public Channel<Informational, Inventory<true>> {
+// user facing channel; meant for informational messages, such as progress reports
+class pyre::journal::Informational : public Channel<Informational, InventoryProxy>
+{
     // types
 public:
-    using diagnostic_type = Diagnostic<Informational>;
-    using channel_type = Channel<Informational, Inventory<true>>;
+    // my parts
+    using channel_type = Channel<Informational, InventoryProxy>;
+    // my exception
+    using exception_type = application_error;
 
     // metamethods
 public:
-    inline explicit Informational(name_type name, verbosity_type = 1);
+    inline explicit Informational(const name_type & name, verbosity_type = 1);
 
-    // interface
+    // implementation details
 public:
-    // record the message in the journal
-    inline void commit();
+    // record the message to a device
+    inline void record();
+    // raise the correct exception when fatal
+    inline void die();
+
+    // implementation details
+public:
+    // initialize the channel index
+    static inline auto initializeIndex() -> index_type;
 
     // disallow
 private:

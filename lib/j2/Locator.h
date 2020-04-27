@@ -13,7 +13,7 @@ class pyre::journal::Locator
 {
     // types
 public:
-    // the data held by {Locator} are used as values in diagnostic metadata
+    // the data held by {Locator} are used to create message notes
     using value_type = value_t;
 
     // metamethods

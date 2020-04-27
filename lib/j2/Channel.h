@@ -8,79 +8,94 @@
 #define pyre_journal_Channel_h
 
 
-// access to the state shared by all channels of a given severity and name
-// do not be tempted to remove the {severityT} template parameter: its presence is essential in
-// order to guarantee that each channel category gets its own static data, such as the channel
-// {_index}
-template <typename severityT, typename inventoryT>
-class pyre::journal::Channel {
+// the base journal channel
+template < typename severityT,
+           template <typename channelT> typename proxyT
+           >
+class pyre::journal::Channel :
+    public proxyT<Channel<severityT, proxyT>>
+{
     // types
 public:
+    // my severity
     using severity_type = severityT;
-    using inventory_type = inventoryT;
+    using severity_reference = severity_type &;
 
-    using state_type = typename inventory_type::state_type;
-    using device_pointer = typename inventory_type::device_pointer;
+    // my verbosity
+    using verbosity_type = verbosity_t;
 
-    using index_type = Index<inventory_type>;
-    using name_type = typename index_type::name_type;
+    // access to my shared state
+    using proxy_type = proxyT<Channel<severityT, proxyT>>;
+    using inventory_type = typename proxy_type::inventory_type;
+    using inventory_reference = typename proxy_type::inventory_reference;
+    using device_type = typename inventory_type::device_type;
+
+    // my name
+    using name_type = Index::name_type;
+    // the map from channel names to inventories
+    using index_type = Index;
+    using index_reference = index_type &;
+    // the current message
+    using entry_type = entry_t;
+    using entry_reference = entry_type &;
+
+    // miscellaneous
+    using string_type = string_t;
+    using nameset_type = nameset_t;
 
     // metamethods
 public:
-    inline explicit Channel(const name_type &);
+    inline Channel(const name_type &, verbosity_type = 1);
 
-// syntactic sugar
-    inline operator bool() const;
+    // accessors
+public:
+    inline auto name() const -> const name_type &;
+    inline auto verbosity() const -> verbosity_type;
+    // the device cascade
+    inline auto device() const;
+
+    // mutators
+public:
+    // verbosity
+    inline auto verbosity(verbosity_type) -> severity_reference;
+    // the device cascade implementation above forces us to write a forwarding overload...
+    inline auto device(device_type) -> severity_reference;
+
+    // read/write access to my current journal entry
+    inline auto entry() -> entry_reference;
 
     // interface
 public:
-    // accessors
-    inline auto name() const -> const name_type &;
-    inline auto state() const -> state_type;
-    inline auto device() const -> device_pointer;
-    inline auto inventory() const -> inventory_type &;
+    inline auto activate() -> severity_reference;
+    inline auto deactivate() -> severity_reference;
 
-    // mutators
-    inline void activate();
-    inline void deactivate();
-
-    inline auto state(state_type flag) -> state_type;
-    inline auto device(device_pointer) -> device_pointer;
+    // injection support; not normally accessed directly, there are manipulators for this
+public:
+    // end of a line of message
+    inline auto line() -> severity_reference;
+    // end of a message
+    inline auto log() -> severity_reference;
+    // commit the current message to the journal
+    inline auto commit() -> severity_reference;
 
     // static interface
 public:
-    // accessors
-    // my index
-    static inline auto index() -> const index_type &;
-    // initialize the channel index
-    static inline auto initializeIndex() -> index_type;
+    // access to the severity wide index with the default settings and the names of the channels
+    inline static auto index() -> index_reference;
+    // index initializer
+    inline static auto initializeIndex() -> index_type;
+    // bulk channel activation
+    static inline void activateChannels(const nameset_type &);
 
-    // my default state; it's read-only, and tied to the template argument
-    static inline constexpr auto defaultState() -> state_type;
-
-    // the default device
-    static inline auto defaultDevice() -> device_pointer;
-    static inline auto defaultDevice(device_pointer) -> device_pointer;
-
-    // inventory access
-    static inline auto lookup(const name_type &) -> inventory_type &;
-
-    // data members
+    // implementation details: data
 private:
-    name_type _name;               // my name
-    inventory_type & _inventory;   // my shared state
+    name_type _name;
+    verbosity_type _verbosity;
+    entry_type _entry;
 
-    // static data
+    // implementation details: static data
 private:
-    static index_type _index;      // the name index for all channels of this severity
-    static device_pointer _device; // the global device for channels of this severity
-
-    // disallow
-private:
-    Channel(const Channel &) = delete;
-    Channel(const Channel &&) = delete;
-    const Channel & operator= (const Channel &) = delete;
-    const Channel & operator= (const Channel &&) = delete;
+    static index_type _index;
 };
 
 

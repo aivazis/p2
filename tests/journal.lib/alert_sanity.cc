@@ -18,7 +18,7 @@ using chronicler_t = pyre::journal::chronicler_t;
 // exercise the {alert} renderer
 int main() {
     // grab the global metadata table from chronicler
-    auto & globals = chronicler_t::globals();
+    auto & globals = chronicler_t::notes();
     // set some metadata
     globals["application"] = "alert";
     globals["author"] = "michael";
@@ -28,8 +28,8 @@ int main() {
     // put some stuff in it; careful not to flush so we don't lose everything
     channel
         << pyre::journal::at(__HERE__)
-        << pyre::journal::set("time", "now")
-        << pyre::journal::set("device", "null")
+        << pyre::journal::note("time", "now")
+        << pyre::journal::note("device", "null")
         << "simon says:"
         << pyre::journal::newline
         << "hello world!"
@@ -43,15 +43,12 @@ int main() {
     palette["info"] = ansi_t::x11("steel blue");
     palette["body"] = "";
 
-    // pull the page
-    auto & page = channel.page();
-    // and its metadata
-    auto & meta = channel.metadata();
-
+    // pull the entry
+    auto & entry = channel.entry();
     // make an alert
     alert_t alert;
     // ask it to render what we have
-    alert.render(palette, page, meta);
+    alert.render(palette, entry);
 
     // all done
     return 0;

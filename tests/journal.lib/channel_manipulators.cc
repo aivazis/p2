@@ -10,34 +10,35 @@
 #include <cassert>
 
 
-// severity stub
-class diagnostic_t : public pyre::journal::diagnostic_t<diagnostic_t> {
-    // interface
+// channel stub
+class channel_t : public pyre::journal::channel_t<channel_t> {
+    // metamethods
 public:
-    inline void commit() {}
+    inline explicit channel_t(const name_type & name) :
+        pyre::journal::channel_t<channel_t>(name) {}
 };
 
 
 // exercise the manipulators
 int main() {
-    // make a diagnostic
-    diagnostic_t diagnostic;
+    // make a channel
+    channel_t channel("channel");
 
     // inject something; avoid flushing by using {endl}
-    diagnostic
+    channel
         << pyre::journal::at(__HERE__)
         << pyre::journal::verbosity(4)
-        << pyre::journal::set("time", "now")
+        << pyre::journal::note("time", "now")
         << "hello world!" << pyre::journal::newline;
 
     // verify the verbosity level
-    assert (diagnostic.verbosity() == 4);
+    assert (channel.verbosity() == 4);
 
     // get the metadata
-    auto meta = diagnostic.metadata();
+    auto meta = channel.entry().notes();
     // verify that our decorations are present
     assert (meta["filename"] == __FILE__);
-    assert (meta["line"] == "28");
+    assert (meta["line"] == "29");
     assert (meta["function"] == __func__);
     assert (meta["time"] == "now");
 

@@ -16,7 +16,7 @@ int main() {
     // inject the manipulators
     channel
         << pyre::journal::at(__HERE__)
-        << pyre::journal::set("time", "now")
+        << pyre::journal::note("time", "now")
         << "null channel:" << pyre::journal::newline
         << "    Hello world!"
         << pyre::journal::endl;

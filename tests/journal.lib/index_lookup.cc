@@ -11,25 +11,33 @@
 
 
 // type aliases
-const bool defaultState = true;
-using index_t = pyre::journal::index_t<pyre::journal::inventory_t<defaultState>>;
+using index_t = pyre::journal::index_t;
 
 
 // exercise the channel state index
 int main() {
     // make an index
-    index_t index;
+    index_t index(true, true);
 
     // lookup a name
     auto & inventory = index.lookup("test.index");
-    // make sure its default state is what we expect
-    assert(inventory.defaultState() == defaultState);
-    // and its actual state is what's expected
-    assert(inventory.state() == defaultState);
+
+    // make sure its activation state is what we expect
+    assert(inventory.active() == true);
     // turn it off
-    inventory.deactivate();
+    inventory.active(false);
     // make sure it happened
-    assert(inventory.state() == false);
+    assert(inventory.active() == false);
+
+    // check whether it's fatal
+    assert(inventory.fatal() == true);
+    // turn it off
+    inventory.fatal(false);
+    // make sure it happened
+    assert(inventory.fatal() == false);
+
+    // the default device is a {nullptr}
+    assert(inventory.device() == nullptr);
 
     // all done
     return 0;

@@ -8,29 +8,31 @@
 #define pyre_journal_Debug_h
 
 
-// developer facing diagnostic; usually gets turned off in release mode
-class pyre::journal::Debug :
-    public Diagnostic<Debug>,
-    public Channel<Debug, Inventory<false>> {
+// developer facing channel; usually gets turned off in release mode
+class pyre::journal::Debug : public Channel<Debug, InventoryProxy>
+{
     // types
 public:
-    using diagnostic_type = Diagnostic<Debug>;
-    using channel_type = Channel<Debug, Inventory<false>>;
-    using nameset_type = nameset_t;
+    // my parts
+    using channel_type = Channel<Debug, InventoryProxy>;
+    // my exception
+    using exception_type = debug_error;
 
     // metamethods
 public:
-    inline explicit Debug(name_type name, verbosity_type = 1);
+    inline Debug(const name_type &, verbosity_type = 1);
 
-    // interface
+    // implementation details; don't access directly
 public:
     // record the message in the journal
-    inline void commit();
+    inline void record();
+    // raise an exception when fatal
+    inline void die();
 
+    // static methods
+public:
     // initialize the channel index
     static inline auto initializeIndex() -> index_type;
-    // bulk channelactivation
-    static inline void activateChannels(const nameset_type &);
 
     // disallow
 private:

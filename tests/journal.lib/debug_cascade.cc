@@ -24,7 +24,7 @@ int main() {
     // make a channel
     mydebug_t parent("test.debug.parent");
     // its activation state is what's expected
-    assert(parent.state() == false);
+    assert(parent.active() == false);
     // and the device is the global default
     assert(parent.device() == chronicler_t::device());
     // turn it on
@@ -35,7 +35,7 @@ int main() {
     // make a debug that's lower in the hierarchy
     mydebug_t child("test.debug.parent.blah.blah.child");
     // make sure its activation state is what's expected
-    assert(child.state() == parent.state());
+    assert(child.active() == parent.active());
     // and that it inherited the device
     assert(child.device() == parent.device());
 

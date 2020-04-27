@@ -51,5 +51,12 @@ chronicler_init.cmdline.argv := --journal.verbosity=5 --journal.debug=test.init.
 # set verbosity and channels through the environment
 chronicler_init.envvar.harness := JOURNAL_VERBOSITY=5 JOURNAL_DEBUG=test.init.one,test.init.two
 
+# the {file_sanity} test case must clean up the file it creates
+tests.journal.lib.file_sanity.clean += file_sanity.out
+
+# the {file_example} test case must clean up the file it creates
+tests.journal.lib.file_example.clean += file_example.out
+
+
 
 # end of file

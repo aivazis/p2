@@ -13,7 +13,7 @@ class pyre::journal::Verbosity
 {
     // types
 public:
-    // the data held by {Verbosity} are used as values in diagnostic metadata
+    // the verbosity level
     using verbosity_type = size_t;
 
     // metamethods

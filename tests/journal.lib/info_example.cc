@@ -21,7 +21,7 @@ int main() {
     // inject something into the channel
     channel
         << pyre::journal::at(__HERE__)
-        << pyre::journal::set("time", "now")
+        << pyre::journal::note("time", "now")
         << "info channel:" << pyre::journal::newline
         << "    hello world!" << pyre::journal::endl;
 

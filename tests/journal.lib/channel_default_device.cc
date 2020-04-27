@@ -11,31 +11,19 @@
 
 
 // type aliases
-template <bool stateV = true>
-using inventory_t = pyre::journal::inventory_t<stateV>;
-
-template <typename severityT, typename inventoryT>
-using channel_t = pyre::journal::channel_t<severityT, inventoryT>;
+template <typename severityT>
+using channel_t = pyre::journal::channel_t<severityT>;
 
 
 // severity stub
-class severity_t :
-    public channel_t<severity_t, inventory_t<true>>
+class severity_t : public channel_t<severity_t>
 {
-    // types
-public:
-    using channel_type = channel_t<severity_t, inventory_t<true>>;
-
     // metamethods
 public:
     // index initialization is required...
-    severity_t(const name_type &);
+    inline severity_t(const name_type & name): channel_t<severity_t>(name) {}
 };
 
-// stub implementation
-severity_t::severity_t(const name_type & name) :
-    channel_type(name)
-{}
 
 // the trash can
 using trash_t = pyre::journal::trash_t;
@@ -44,17 +32,15 @@ using trash_t = pyre::journal::trash_t;
 // verify that we can control the default device
 int main() {
     // get the default device
-    auto builtin = severity_t::defaultDevice();
+    auto builtin = severity_t::index().device();
 
     // make a new device
     auto custom = std::make_shared<trash_t>();
     // install it
-    auto old = severity_t::defaultDevice(custom);
+    severity_t::index().device(custom);
 
     // check that the current device is the one we just installed
-    assert (severity_t::defaultDevice().get() == custom.get());
-    // and that the device returned during installation is the {builtin} one
-    assert (old.get() == builtin.get());
+    assert (severity_t::index().device().get() == custom.get());
 
     // all done
     return 0;

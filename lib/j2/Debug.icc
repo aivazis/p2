@@ -11,35 +11,39 @@
 
 // metamethods
 pyre::journal::Debug::
-Debug(name_type name, verbosity_type verbosity) :
-    diagnostic_type(verbosity),
-    channel_type(name)
+Debug(const name_type & name, verbosity_type verbosity) :
+    channel_type(name, verbosity)
 {
+    // get my entry
+    entry_type & e = entry();
     // decorate with my severity
-    setattr("severity", "debug");
-    // and my channel name
-    setattr("channel", name);
+    e.note("severity", "debug");
 }
 
 
-// interface
+// implementation details
+// record the message to the chosen device
 void
 pyre::journal::Debug::
-commit()
+record()
 {
-    // if i'm not an active channel
-    if (!state()) {
-        // do nothing
-        return;
-    }
-
-    // otherwise, hunt down the device to use
+    // hunt down the device to use
     auto dev = device();
     // record the entry
-    dev->memo(verbosity(), page(), metadata());
-
+    dev->memo(entry());
     // all done
     return;
+}
+
+
+void
+pyre::journal::Debug::
+die()
+{
+    // prepare a message
+    auto msg = name() + debug_error::string_type(": debug error");
+    // throw an application error
+    throw exception_type(msg);
 }
 
 
@@ -48,8 +52,9 @@ auto
 pyre::journal::Debug::
 initializeIndex() -> index_type
 {
-    // make an empty index
-    index_type index;
+    // make an empty index; for {debug}, channels are (inactive,non-fatal) by default
+    index_type index(false, false);
+
     // read the {JOURNAL_DEBUG} environment variable
     auto debugopt = std::getenv("JOURNAL_DEBUG");
     // if it doesn't exist
@@ -57,35 +62,17 @@ initializeIndex() -> index_type
         // return the empty index
         return index;
     }
+
     // otherwise, convert the value into a set of names
     auto channels = chronicler_t::nameset(debugopt);
     // go through them
     for (auto & name : channels) {
-        // make an inventory
-        inventory_type inventory(true);
-        // add them to the index
-        index.insert(name, inventory);
+        // make an inventory corresponding to an (active,non-fatal) channel and add it to the index
+        index.emplace(name, true, false);
     }
 
     // and return it
     return index;
-}
-
-
-// bulk channel activation
-void
-pyre::journal::Debug::
-activateChannels(const nameset_type & names)
-{
-    // go through the names in the set
-    for (auto & name : names) {
-        // make a debug channel by this name
-        Debug channel(name);
-        // and activate it
-        channel.activate();
-    }
-    // all done
-    return;
 }
 
 

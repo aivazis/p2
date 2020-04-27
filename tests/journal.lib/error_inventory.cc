@@ -11,24 +11,20 @@
 #include <cassert>
 
 
-// convenience
-using inventory_t = pyre::journal::error_t::inventory_type;
-
 // verify that we can manipulate the error inventory state
 int main() {
     // make a default inventory
-    inventory_t error;
-    // by default, its device is null
-    assert(error.device().get() == nullptr);
+    pyre::journal::error_t error("error");
 
-    // verify the default state is on
-    assert(error.defaultState() == true);
+    // by default, its device is null
+    assert(error.device() == pyre::journal::chronicler_t::device());
+
     // verify it is on
-    assert(error.state() == true);
+    assert(error.active() == true);
     // flip it
-    error.deactivate();
+    error.active(false);
     // check again
-    assert(error.state() == false);
+    assert(error.active() == false);
 
     // verify it's fatal by default
     assert(error.fatal() == true);

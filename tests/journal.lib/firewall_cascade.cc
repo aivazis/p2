@@ -24,7 +24,7 @@ int main() {
     // make a channel
     firewall_t parent("test.firewall.parent");
     // its activation state is what's expected
-    assert(parent.state());
+    assert(parent.active());
     // it is fatal
     assert(parent.fatal());
     // and the device is the global default
@@ -39,7 +39,7 @@ int main() {
     // make a firewall that's lower in the hierarchy
     firewall_t child("test.firewall.parent.blah.blah.child");
     // make sure its activation state is what's expected
-    assert(child.state() == parent.state());
+    assert(child.active() == parent.active());
     // it is also non-fatal
     assert(child.fatal() == parent.fatal());
     // and that it inherited the device

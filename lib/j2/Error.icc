@@ -11,60 +11,51 @@
 
 // metamethods
 pyre::journal::Error::
-Error(name_type name, verbosity_type verbosity) :
-    diagnostic_type(verbosity),
-    channel_type(name)
+Error(const name_type & name, verbosity_type verbosity) :
+    channel_type(name, verbosity)
 {
+    // get my entry
+    entry_type & e = entry();
     // decorate with my severity
-    setattr("severity", "error");
-    // and my channel name
-    setattr("channel", name);
+    e.note("severity", "error");
 }
 
 
-// interface
-// accessors
-auto
+// implementation details
+// record the message to the chosen device
+void
 pyre::journal::Error::
-fatal() -> state_type
+record()
 {
-    // easy enough
-    return inventory().fatal();
-}
-
-
-// mutators
-auto
-pyre::journal::Error::
-fatal(state_type flag) -> state_type
-{
-    // easy enough
-    return inventory().fatal(flag);
+    // hunt down the device to use
+    auto dev = device();
+    // record the entry
+    dev->alert(entry());
+    // all done
+    return;
 }
 
 
 void
 pyre::journal::Error::
-commit()
+die()
 {
-    // if i'm an active channel, generate some output
-    if (state()) {
-        // hunt down the device to use
-        auto dev = device();
-        // record the entry
-        dev->alert(verbosity(), page(), metadata());
-    }
+    // prepare a message
+    auto msg = name() + ": application error";
+    // throw an application error
+    throw exception_type(msg);
+}
 
-    // if i'm fatal
-    if (fatal()) {
-        // prepare a message
-        string_type msg = name() + string_type(": application error");
-        // throw an application error
-        throw application_error(msg);
-    }
 
-    // all done
-    return;
+// initialize the channel index
+auto
+pyre::journal::Error::
+initializeIndex() -> index_type
+{
+    // make an empty index; for {error}, channels are (active,fatal) by default
+    index_type index(true, true);
+    // and return it
+    return index;
 }
 
 

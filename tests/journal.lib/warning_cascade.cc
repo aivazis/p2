@@ -24,7 +24,7 @@ int main() {
     // make a channel
     mywarning_t parent("test.warning.parent");
     // its activation state is what's expected
-    assert(parent.state());
+    assert(parent.active());
     // and the device is the global default
     assert(parent.device() == chronicler_t::device());
     // turn it off
@@ -35,7 +35,7 @@ int main() {
     // make a warning that's lower in the hierarchy
     mywarning_t child("test.warning.parent.blah.blah.child");
     // make sure its activation state is what's expected
-    assert(child.state() == parent.state());
+    assert(child.active() == parent.active());
     // and that it inherited the device
     assert(child.device() == parent.device());
 

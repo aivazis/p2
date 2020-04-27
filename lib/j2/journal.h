@@ -8,6 +8,9 @@
 #define pyre_journal_h
 
 
+//  the file you are looking for is "journal/api.h"; it contains the published typenames that
+//  constitute the journal public api
+
 // publish the interface
 #include "journal/public.h"
 

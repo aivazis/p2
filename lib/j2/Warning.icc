@@ -11,35 +11,51 @@
 
 // metamethods
 pyre::journal::Warning::
-Warning(name_type name, verbosity_type verbosity) :
-    diagnostic_type(verbosity),
-    channel_type(name)
+Warning(const name_type & name, verbosity_type verbosity) :
+    channel_type(name, verbosity)
 {
+    // get my entry
+    entry_type & e = entry();
     // decorate with my severity
-    setattr("severity", "warning");
-    // and my channel name
-    setattr("channel", name);
+    e.note("severity", "warning");
 }
 
 
-// interface
+// implementation details
+// record the message to the chosen device
 void
 pyre::journal::Warning::
-commit()
+record()
 {
-    // if i'm not an active channel
-    if (!state()) {
-        // do nothing
-        return;
-    }
-
-    // otherwise, hunt down the device to use
+    // hunt down the device to use
     auto dev = device();
     // record the entry
-    dev->alert(verbosity(), page(), metadata());
-
+    dev->alert(entry());
     // all done
     return;
+}
+
+
+void
+pyre::journal::Warning::
+die()
+{
+    // prepare a message
+    auto msg = name() + ": application error";
+    // throw an application error
+    throw exception_type(msg);
+}
+
+
+// initialize the channel index
+auto
+pyre::journal::Warning::
+initializeIndex() -> index_type
+{
+    // make an empty index; for {warning}, channels are (active,non-fatal) by default
+    index_type index(true, false);
+    // and return it
+    return index;
 }
 
 

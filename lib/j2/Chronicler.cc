@@ -4,47 +4,48 @@
 // (c) 1998-2020 all rights reserved
 
 
-// get the forward declarations
-#include "forward.h"
 // external support
 #include "externals.h"
-
-// support for color
-#include "ASCII.h"
-#include "CSI.h"
-// renderer support
-#include "Renderer.h"
-#include "Memo.h"
-#include "Alert.h"
-// support for accessing the console
-#include "Device.h"
-#include "Trash.h"
-#include "Stream.h"
-#include "Console.h"
+// forward declarations
+#include "forward.h"
+// type aliases
+#include "api.h"
 
 // get the declaration
 #include "Chronicler.h"
 
-// get access to diagnostics; needed by the initializers
-// manipulators that are classes
-#include "Locator.h"
-#include "Selector.h"
-#include "Verbosity.h"
-// the null channel
-#include "Null.h"
-// access to the debug channel
-#include "Index.h"
+// infrastructure needed by the initializers
+#include "exceptions.h"
+// message content
+#include "Entry.h"
+// access to the console and the trash can
+// renderer support
+#include "Renderer.h"
+#include "Memo.h"
+#include "Alert.h"
+// device support
+#include "Device.h"
+#include "Stream.h"
+#include "Console.h"
+#include "Trash.h"
+
+// access to {debug_t}
+// channel parts
 #include "Inventory.h"
+#include "InventoryProxy.h"
+#include "Index.h"
 #include "Channel.h"
-#include "Diagnostic.h"
+// the {debug} channel
 #include "Debug.h"
+
 
 // aliases
 using console_t = pyre::journal::cout_t;
 using chronicler_t = pyre::journal::chronicler_t;
 
+
 // helpers
-static chronicler_t::metadata_type initializeGlobals();
+static chronicler_t::notes_type initializeGlobals();
 static chronicler_t::verbosity_type initializeVerbosity();
 
 
@@ -102,15 +103,15 @@ chronicler_t::init(int argc, char* argv[]) {
 
 // data
 chronicler_t::verbosity_type chronicler_t::_verbosity { initializeVerbosity() };
-chronicler_t::metadata_type chronicler_t::_globals { initializeGlobals() };
-chronicler_t::device_pointer chronicler_t::_device { std::make_shared<console_t>() };
+chronicler_t::notes_type chronicler_t::_notes { initializeGlobals() };
+chronicler_t::device_type chronicler_t::_device { std::make_shared<console_t>() };
 
 
 // implementation details
-chronicler_t::metadata_type initializeGlobals()
+chronicler_t::notes_type initializeGlobals()
 {
     // make a table
-    chronicler_t::metadata_type table;
+    chronicler_t::notes_type table;
 
     // initialize the expected metadata with default values; applications are expected to
     // replace these with values that are more sensible

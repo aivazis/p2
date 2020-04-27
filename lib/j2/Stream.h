@@ -17,8 +17,8 @@ public:
 
     using palette_type = palette_t;
     using stream_type = outputstream_t;
-    using renderer_type = Renderer;
-    using renderer_pointer = Renderer::pointer_type;
+    using renderer_type = renderer_t;
+    using renderer_pointer = renderer_ptr;
 
     // metamethods
 public:
@@ -29,10 +29,10 @@ public:
 
     // interface
 public:
-    // developer diagnostics
-    virtual auto memo(verbosity_type, const page_type &, const metadata_type &) -> Stream &;
-    // user facing diagnostics
-    virtual auto alert(verbosity_type, const page_type &, const metadata_type &) -> Stream &;
+    // developer messages
+    virtual auto memo(const entry_type &) -> Stream &;
+    // user facing messages
+    virtual auto alert(const entry_type &) -> Stream &;
 
     // configuration data
 protected:

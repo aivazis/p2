@@ -13,26 +13,29 @@
 // get the forward declarations
 #include "forward.h"
 
+// published type aliases; this is the file you are looking for...
+#include "api.h"
 
-// implementations
 // exceptions
 #include "exceptions.h"
 
-// terminal support
-#include "ASCII.h"
-#include "CSI.h"
-#include "ANSI.h"
+// global settings
+#include "Chronicler.h"
+
+// message entry
+#include "Entry.h"
+// message metadata
+#include "Verbosity.h"
+#include "Locator.h"
+#include "Note.h"
 
 // abstractions
 #include "Renderer.h"
 #include "Device.h"
 
 // renderers
-#include "Memo.h"
 #include "Alert.h"
-
-// the global state
-#include "Chronicler.h"
+#include "Memo.h"
 
 // devices
 #include "Trash.h"
@@ -40,40 +43,33 @@
 #include "Console.h"
 #include "ErrorConsole.h"
 
-// manipulators that are classes
-#include "Locator.h"
-#include "Selector.h"
-#include "Verbosity.h"
-
-// the null diagnostic
-#include "Null.h"
-
-// functional diagnostic infrastructure
-#include "Index.h"
+// support for channel shared state
 #include "Inventory.h"
-#include "Fatal.h"
+#include "InventoryProxy.h"
+#include "Index.h"
+
+// channel infrastructure
 #include "Channel.h"
-#include "Diagnostic.h"
-// the developer facing channels
-#include "Debug.h"
-#include "Firewall.h"
-// the user facing channels
-#include "Error.h"
+
+// channels
+#include "Null.h"
+// end user facing
 #include "Informational.h"
 #include "Warning.h"
+#include "Error.h"
+// developer facing
+#include "Debug.h"
+#include "Firewall.h"
 
-// macros
+// manipulators
+#include "manipulators.h"
+// __HERE__ and siblings
 #include "macros.h"
 
-//
-inline void
-pyre::journal::
-init(int argc, char* argv[]) {
-    // ask {chronicler} to do this
-    pyre::journal::chronicler_t::init(argc, argv);
-    // all done
-    return;
-}
+// terminal support
+#include "ASCII.h"
+#include "CSI.h"
+#include "ANSI.h"
 
 
 #endif

@@ -15,9 +15,65 @@ Null(const name_type &)
 {}
 
 
+// accessors
+constexpr auto
+pyre::journal::Null::
+active() const
+{
+    // easy enough
+    return false;
+}
+
+
+constexpr auto
+pyre::journal::Null::
+fatal() const
+{
+    // easy enough
+    return false;
+}
+
+
+constexpr auto
+pyre::journal::Null::
+device() const -> device_type
+{
+    // easy enough
+    return nullptr;
+}
+
+
+// accessors
+constexpr auto
+pyre::journal::Null::
+active(active_type) -> Null &
+{
+    // all done
+    return *this;
+}
+
+
+constexpr auto
+pyre::journal::Null::
+fatal(fatal_type) -> Null &
+{
+    // all done
+    return *this;
+}
+
+
+constexpr auto
+pyre::journal::Null::
+device(device_type) -> Null &
+{
+    // all done
+    return *this;
+}
+
+
 constexpr
 pyre::journal::Null::
-operator bool() const
+operator active_type() const
 {
     // always off
     return false;
@@ -25,7 +81,7 @@ operator bool() const
 
 
 // interface
-void
+constexpr void
 pyre::journal::Null::
 activate() const
 {
@@ -34,7 +90,7 @@ activate() const
 }
 
 
-void
+constexpr void
 pyre::journal::Null::
 deactivate() const
 {
@@ -43,7 +99,7 @@ deactivate() const
 }
 
 
-void
+constexpr void
 pyre::journal::Null::
 activateChannels(const nameset_type &)
 {
@@ -53,7 +109,7 @@ activateChannels(const nameset_type &)
 
 
 // manipulators
-auto
+constexpr auto
 pyre::journal::
 endl(const Null & null) -> const Null &
 {
@@ -62,7 +118,7 @@ endl(const Null & null) -> const Null &
 }
 
 
-auto
+constexpr auto
 pyre::journal::
 newline(const Null & null) -> const Null &
 {
@@ -73,7 +129,7 @@ newline(const Null & null) -> const Null &
 
 // the injection operators
 // verbosity level
-auto
+constexpr auto
 pyre::journal::
 operator<< (const Null & null, const Verbosity &) -> const Null &
 {
@@ -83,7 +139,7 @@ operator<< (const Null & null, const Verbosity &) -> const Null &
 
 
 // location info
-auto
+constexpr auto
 pyre::journal::
 operator<< (const Null & null, const Locator &) -> const Null &
 {
@@ -93,9 +149,9 @@ operator<< (const Null & null, const Locator &) -> const Null &
 
 
 // metadata
-auto
+constexpr auto
 pyre::journal::
-operator<< (const Null & null, const Selector &) -> const Null &
+operator<< (const Null & null, const Note &) -> const Null &
 {
     // do nothing
     return null;
@@ -103,7 +159,7 @@ operator<< (const Null & null, const Selector &) -> const Null &
 
 
 // injection of manipulator functions
-auto
+constexpr auto
 pyre::journal::
 operator<< (const Null & null, const Null & (*)(const Null &)) -> const Null &
 {
@@ -114,7 +170,7 @@ operator<< (const Null & null, const Null & (*)(const Null &)) -> const Null &
 
 // injection of everything else
 template <typename itemT>
-auto
+constexpr auto
 pyre::journal::
 operator<< (const Null & null, const itemT &) -> const Null &
 {

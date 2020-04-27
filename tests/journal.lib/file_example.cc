@@ -20,7 +20,7 @@ using stream_t = pyre::journal::stream_t;
 // exercise the stream device
 int main() {
     // the path of the file
-    auto filename = std::filesystem::path("file.out");
+    auto filename = std::filesystem::path("file_example.out");
     // make a file stream
     auto ofs = std::ofstream(filename);
 
@@ -36,9 +36,6 @@ int main() {
         << pyre::journal::at(__HERE__)
         << "hello world!"
         << pyre::journal::endl;
-
-    // and remove it
-    std::filesystem::remove(filename);
 
     // all done
     return 0;

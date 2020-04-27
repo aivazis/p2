@@ -8,30 +8,32 @@
 #define pyre_journal_Error_h
 
 
-// user facing diagnostic; meant for error messages, i.e. conditions from which the application
+// user facing channel; meant for error messages, i.e. conditions from which the application
 // cannot recover
-class pyre::journal::Error :
-    public Diagnostic<Error>,
-    public Channel<Error, Fatal<true, true>> {
+class pyre::journal::Error : public Channel<Error, InventoryProxy>
+{
     // types
 public:
     // my parts
-    using diagnostic_type = Diagnostic<Error>;
-    using channel_type = Channel<Error, Fatal<true, true>>;
+    using channel_type = Channel<Error, InventoryProxy>;
     // the error indicator
     using exception_type = application_error;
 
     // metamethods
 public:
-    inline explicit Error(name_type name, verbosity_type = 1);
+    inline explicit Error(const name_type & name, verbosity_type = 1);
 
-    // interface
+    // implementation details
 public:
-    // control over whether errors are fatal
-    inline auto fatal() -> state_type;
-    inline auto fatal(state_type) -> state_type;
     // record the message in the journal
-    inline void commit();
+    inline void record();
+    // raise the correct exception when fatal
+    inline void die();
+
+    // implementation details
+public:
+    // initialize the channel index
+    static inline auto initializeIndex() -> index_type;
 
     // disallow
 private:

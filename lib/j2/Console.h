@@ -42,7 +42,7 @@ private:
 // get the inline definitions
 #define pyre_journal_Console_icc
 #include "Console.icc"
-#undef pyre_journal_Diagnostic_icc
+#undef pyre_journal_Console_icc
 
 
 #endif

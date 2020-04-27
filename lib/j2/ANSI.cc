@@ -4,10 +4,12 @@
 // (c) 1998-2020 all rights reserved
 
 
-// get the forward declarations
-#include "forward.h"
 // external support
 #include "externals.h"
+// get the forward declarations
+#include "forward.h"
+// and the type aliases
+#include "api.h"
 // get the support we need
 #include "ASCII.h"
 #include "CSI.h"
