@@ -15,22 +15,31 @@ def test():
     # make a channel
     ch_1 = libjournal.Debug("test.channel")
     # activate it
-    ch_1.activate()
+    ch_1.active = True
+    # and make it fatal
+    ch_1.fatal = True
 
     # make another
     ch_2 = libjournal.Debug("test.channel")
     # verify it is active
-    assert ch_2.state == True
+    assert ch_2.active == True
+    # and fatal
+    assert ch_2.fatal == True
     # deactivate it
-    ch_2.deactivate()
+    ch_2.active = False
+    # and make it non-fatal
+    ch_2.fatal = False
 
     # verify that both channels are now inactive
-    assert ch_1.state == False
-    assert ch_2.state == False
-
+    assert ch_1.active == False
+    assert ch_2.active == False
     # and once again, using {__bool__}
     assert bool(ch_1) == False
     assert bool(ch_2) == False
+
+    # verify that they are both non-fatal
+    assert ch_1.fatal == False
+    assert ch_2.fatal == False
 
     # all done
     return

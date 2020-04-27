@@ -15,19 +15,19 @@ def test():
     # make a debug channel
     channel = libjournal.Debug("test.channel")
     # get its metadata
-    meta = channel.meta
+    notes = channel.notes
     # adjust the application name
-    meta["application"] = "debug_meta"
+    notes["application"] = "debug_meta"
     # add something
-    meta["author"] = "michael"
+    notes["author"] = "michael"
 
     # make sure the adjustments stick by getting the value once again
-    meta = channel.meta
+    notes = channel.notes
     # and comparing against expectations
-    assert meta["application"] == "debug_meta"
-    assert meta["author"] == "michael"
-    assert meta["channel"] == "test.channel"
-    assert meta["severity"] == "debug"
+    assert notes["application"] == "debug_meta"
+    assert notes["author"] == "michael"
+    assert notes["channel"] == "test.channel"
+    assert notes["severity"] == "debug"
 
     # all done
     return

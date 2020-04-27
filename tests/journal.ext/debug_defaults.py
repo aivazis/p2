@@ -13,7 +13,9 @@ def test():
     from j2 import libjournal
 
     # verify that debug channels are inactive by default
-    assert libjournal.Debug.defaultState == False
+    assert libjournal.Debug.defaultActive == False
+    # and non-fatal
+    assert libjournal.Debug.defaultFatal == False
     # verify that the channel default device is not set
     assert libjournal.Debug.defaultDevice == None
 
@@ -27,12 +29,14 @@ def test():
     # make a debug channel
     channel = libjournal.Debug("test.channel")
     # verify that its view of its default state is consistent
-    assert channel.defaultState == libjournal.Debug.defaultState
+    assert channel.defaultActive == libjournal.Debug.defaultActive
+    assert channel.defaultFatal == libjournal.Debug.defaultFatal
     # similarly for the default device
     assert channel.defaultDevice == libjournal.Debug.defaultDevice
 
     # and now, the instance state
-    assert channel.state == channel.defaultState
+    assert channel.active == channel.defaultActive
+    assert channel.fatal == channel.defaultFatal
     assert channel.device == channel.defaultDevice
 
     # all done

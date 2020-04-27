@@ -16,21 +16,21 @@ def test():
     chronicler = libjournal.Chronicler
 
     # ask for the global metadata
-    meta = chronicler.meta
+    gNotes = chronicler.notes
     # adjust the application name
-    meta["application"] = "chronicler"
+    gNotes["application"] = "chronicler"
     # and add some
-    meta["author"] = "michael"
+    gNotes["author"] = "michael"
 
     # now, make a channel
     channel = libjournal.Debug(name="tests.journal.chronicler")
     # ask for its metadata
-    meta = channel.meta
+    cNotes = channel.notes
     # which must include the global settings above
-    assert meta["application"] == "chronicler"
-    assert meta["author"] == "michael"
-    assert meta["channel"] == "tests.journal.chronicler"
-    assert meta["severity"] == "debug"
+    assert cNotes["application"] == "chronicler"
+    assert cNotes["author"] == "michael"
+    assert cNotes["channel"] == "tests.journal.chronicler"
+    assert cNotes["severity"] == "debug"
 
     # all done
     return

@@ -35,12 +35,19 @@ def test():
     # and the assignment sticks
     assert channel.verbosity == 5
 
-    # verify its state is off by default
-    assert channel.state is False
+    # verify its activation state is off by default
+    assert channel.active is False
     # that it can be modified
-    channel.state = True
+    channel.active = True
     # and the assignment sticks
-    assert channel.state is True
+    assert channel.active is True
+
+    # verify its not fatal
+    assert channel.fatal is False
+    # that it can be modified
+    channel.fatal = True
+    # and the assignment sticks
+    assert channel.fatal is True
 
     # verify that the accessible device is the console
     assert channel.device.name == "cout"

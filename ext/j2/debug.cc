@@ -18,17 +18,16 @@ debug(py::module & m) {
     // type aliases for the member functions (mfp: method pointer)
     // verbosity
     using getVerbosity_mfp = debug_t::verbosity_type (debug_t::*)() const;
-    using setVerbosity_mfp = debug_t::verbosity_type (debug_t::*)(debug_t::verbosity_type);
-    // state
-    using getState_mfp = debug_t::state_type (debug_t::*)() const;
-    using setState_mfp = debug_t::state_type (debug_t::*)(debug_t::state_type);
+    using setVerbosity_mfp = debug_t & (debug_t::*)(debug_t::verbosity_type);
+    // active
+    using getActive_mfp = debug_t::active_type (debug_t::*)() const;
+    using setActive_mfp = debug_t & (debug_t::*)(debug_t::active_type);
+    // fatal
+    using getFatal_mfp = debug_t::fatal_type (debug_t::*)() const;
+    using setFatal_mfp = debug_t & (debug_t::*)(debug_t::fatal_type);
     // device
-    using getDevice_mfp = debug_t::device_pointer (debug_t::*)() const;
-    using setDevice_mfp = debug_t::device_pointer (debug_t::*)(debug_t::device_pointer);
-    // channel contents
-    using getPage_mfp = const debug_t::page_type & (debug_t::*)() const;
-    // metadata
-    using getMetadata_mfp = const debug_t::metadata_type & (debug_t::*)() const;
+    using getDevice_mfp = debug_t::device_type (debug_t::*)() const;
+    using setDevice_mfp = debug_t & (debug_t::*)(debug_t::device_type);
 
 
     // the debug channel interface
@@ -38,7 +37,9 @@ debug(py::module & m) {
 
         // accessors
         // the name; read-only property
-        .def_property_readonly("name", &debug_t::name)
+        .def_property_readonly("name",
+                               &debug_t::name,
+                               "my name")
 
         // the verbosity level
         .def_property("verbosity",
@@ -47,17 +48,27 @@ debug(py::module & m) {
                       // the setter
                       (setVerbosity_mfp) &debug_t::verbosity,
                       // the docstring
-                      "access the verbosity level"
+                      "the verbosity level"
                       )
 
-        // the channel state; mutable property
-        .def_property("state",
+        // the channel activation state; mutable property
+        .def_property("active",
                       // the getter
-                      (getState_mfp) &debug_t::state,
+                      (getActive_mfp) &debug_t::active,
                       // the setter
-                      (setState_mfp) &debug_t::state,
+                      (setActive_mfp) &debug_t::active,
                       // the docstring
-                      "access the channel activation state"
+                      "the channel activation state"
+                      )
+
+        // the channel activation state; mutable property
+        .def_property("fatal",
+                      // the getter
+                      (getFatal_mfp) &debug_t::fatal,
+                      // the setter
+                      (setFatal_mfp) &debug_t::fatal,
+                      // the docstring
+                      "the channel activation state"
                       )
 
         // the registered device: mutable property
@@ -67,24 +78,32 @@ debug(py::module & m) {
                       // the setter
                       (setDevice_mfp) &debug_t::device,
                       // the docstring
-                      "access the output device"
+                      "the output device"
                       )
 
-        // the channel metadata: read-only property
-        .def_property_readonly("meta",
-                               // the getter
-                               (getMetadata_mfp) &debug_t::metadata,
-                               // the docstring
-                               "access the channel metadata"
-                               )
-
-        // the current channel contents
+        // the content of the current entry
         .def_property_readonly("page",
                                // the getter
-                               (getPage_mfp) &debug_t::page,
+                               // N.B. the explicit declaration of the λ return value is
+                               // critical in making the page read/write in python
+                               [] (debug_t & channel) -> pyre::journal::page_t & {
+                                   return channel.entry().page();
+                               },
                                // the docstring
-                               "access the current channel contents"
-                               )
+                               "the contents of the current entry"
+                      )
+
+        // the notes of the current entry
+        .def_property_readonly("notes",
+                               // the getter
+                               // N.B. the explicit declaration of the λ return value is
+                               // critical in making the notes read/write in python
+                               [] (debug_t & channel) -> pyre::journal::notes_t & {
+                                   return channel.entry().notes();
+                               },
+                               // the docstring
+                               "the notes associated with the current entry"
+                      )
 
         // the channel severity: static read-only property
         .def_property_readonly_static("severity",
@@ -103,37 +122,47 @@ debug(py::module & m) {
                                           return m.attr("Chronicler");
                                       },
                                       // the docstring
-                                      "grant access to the keeper of the global state"
+                                      "the keeper of the global state"
                                       )
 
-        // the default state: static read-only property
-        .def_property_readonly_static("defaultState",
+        // the default activation state: static read-only property
+        .def_property_readonly_static("defaultActive",
                                       // the getter
-                                      [](py::object) -> debug_t::state_type {
-                                          return debug_t::defaultState();
+                                      [](py::object) -> debug_t::active_type {
+                                          return debug_t::index().active();
                                       },
                                       // the docstring
-                                      "get the default state of debug channels"
+                                      "the default state of debug channels"
+                                      )
+
+        // the default fatal state: static read-only property
+        .def_property_readonly_static("defaultFatal",
+                                      // the getter
+                                      [](py::object) -> debug_t::fatal_type {
+                                          return debug_t::index().fatal();
+                                      },
+                                      // the docstring
+                                      "the default fatality of debug channels"
                                       )
 
         // the default device: static mutable property
         .def_property_static("defaultDevice",
                              // the getter
-                             [](py::object) -> debug_t::device_pointer {
-                                 return debug_t::defaultDevice();
+                             [](py::object) -> debug_t::device_type {
+                                 return debug_t::index().device();
                              },
                              // the setter
-                             [](py::object, debug_t::device_pointer device) {
-                                 debug_t::defaultDevice(device);
+                             [](py::object, debug_t::device_type device) {
+                                 debug_t::index().device(device);
                              },
                              // the docstring
-                             "access the default device for all debug channels"
+                             "the default device for all debug channels"
                              )
 
         // interface
         // activate
         .def("activate",
-             // the method
+             // the method;
              &debug_t::activate,
              // the docstring
              "enable output generation"
@@ -176,7 +205,7 @@ debug(py::module & m) {
         // operator bool
         .def("__bool__",
              // the implementation
-             [](const debug_t & channel) { return channel.state(); },
+             [](const debug_t & channel) { return channel.active(); },
              // the docstring
              "syntactic sugar for checking the state of a channel"
              )

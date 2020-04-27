@@ -39,7 +39,7 @@ chronicler(py::module & m) {
                                  return chronicler_t::device();
                              },
                              // the setter
-                             [](py::object, chronicler_t::device_pointer device) {
+                             [](py::object, chronicler_t::device_type device) {
                                  chronicler_t::device(device);
                              },
                              // the docstring
@@ -47,10 +47,10 @@ chronicler(py::module & m) {
                              )
 
         // global metadata
-        .def_property_readonly_static("meta",
+        .def_property_readonly_static("notes",
                                       // the getter
-                                      [] (py::object) -> chronicler_t::metadata_type & {
-                                          return chronicler_t::globals();
+                                      [] (py::object) -> chronicler_t::notes_type & {
+                                          return chronicler_t::notes();
                                       },
                                       // the docstring
                                       "access the global metadata"
