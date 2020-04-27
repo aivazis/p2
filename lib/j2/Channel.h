@@ -9,11 +9,8 @@
 
 
 // the base journal channel
-template < typename severityT,
-           template <typename channelT> typename proxyT
-           >
-class pyre::journal::Channel :
-    public proxyT<Channel<severityT, proxyT>>
+template <typename severityT, template <class> typename proxyT>
+class pyre::journal::Channel : public proxyT<severityT>
 {
     // types
 public:
@@ -25,7 +22,7 @@ public:
     using verbosity_type = verbosity_t;
 
     // access to my shared state
-    using proxy_type = proxyT<Channel<severityT, proxyT>>;
+    using proxy_type = proxyT<severityT>;
     using inventory_type = typename proxy_type::inventory_type;
     using inventory_reference = typename proxy_type::inventory_reference;
     using device_type = typename inventory_type::device_type;
