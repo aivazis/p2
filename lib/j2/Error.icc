@@ -10,12 +10,13 @@
 
 
 // metamethods
-pyre::journal::Error::
+template <template <typename> typename proxyT>
+pyre::journal::Error<proxyT>::
 Error(const name_type & name, verbosity_type verbosity) :
     channel_type(name, verbosity)
 {
     // get my entry
-    entry_type & e = entry();
+    entry_type & e = this->entry();
     // decorate with my severity
     e.note("severity", "error");
 }
@@ -23,33 +24,36 @@ Error(const name_type & name, verbosity_type verbosity) :
 
 // implementation details
 // record the message to the chosen device
+template <template <typename> typename proxyT>
 void
-pyre::journal::Error::
+pyre::journal::Error<proxyT>::
 record()
 {
     // hunt down the device to use
-    auto dev = device();
+    auto dev = this->device();
     // record the entry
-    dev->alert(entry());
+    dev->alert(this->entry());
     // all done
     return;
 }
 
 
+template <template <typename> typename proxyT>
 void
-pyre::journal::Error::
+pyre::journal::Error<proxyT>::
 die()
 {
     // prepare a message
-    auto msg = name() + ": application error";
+    auto msg = this->name() + ": application error";
     // throw an application error
     throw exception_type(msg);
 }
 
 
 // initialize the channel index
+template <template <typename> typename proxyT>
 auto
-pyre::journal::Error::
+pyre::journal::Error<proxyT>::
 initializeIndex() -> index_type
 {
     // make an empty index; for {error}, channels are (active,fatal) by default

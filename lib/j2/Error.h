@@ -10,13 +10,19 @@
 
 // user facing channel; meant for error messages, i.e. conditions from which the application
 // cannot recover
-class pyre::journal::Error : public Channel<Error, InventoryProxy>
+template <template <typename> typename proxyT>
+class pyre::journal::Error : public Channel<Error<proxyT>, proxyT>
 {
     // types
 public:
-    // my parts
+    // my base
     using channel_type = Channel<Error, InventoryProxy>;
-    // the error indicator
+    // my parts
+    using name_type = typename channel_type::name_type;
+    using verbosity_type = typename channel_type::verbosity_type;
+    using index_type = typename channel_type::index_type;
+    using entry_type = typename channel_type::entry_type;
+    // my error indicator
     using exception_type = application_error;
 
     // metamethods
