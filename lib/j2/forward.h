@@ -133,6 +133,12 @@ namespace pyre::journal {
     inline auto
     operator<< (Channel<severityT, proxyT> &, const Note &) -> Channel<severityT, proxyT> &;
 
+    // flush with a decorator
+    template <typename severityT, template <class> typename proxyT, typename decoratorT>
+    inline auto
+    operator<< (Channel<severityT, proxyT> & channel, const Flush<decoratorT> & flush)
+        -> Channel<severityT, proxyT> &;
+
     // injection of manipulator functions
     template <typename severityT, template <class> typename proxyT>
     inline auto
