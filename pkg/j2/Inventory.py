@@ -12,8 +12,8 @@ class Inventory:
 
 
     # public data
-    state = None    # the activation state of the channel
-    fatal = None    # fatal channels raise exceptions on output
+    active = None  # the activation state of the channel
+    fatal = None   # fatal channels raise exceptions on output
     device = None  # the custom output device
 
 
@@ -23,7 +23,7 @@ class Inventory:
         Make me look like {source}
         """
         # make a copy
-        self.state = source.state
+        self.active = source.active
         self.fatal = source.fatal
         self.device = source.device
         # all done

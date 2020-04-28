@@ -25,7 +25,7 @@ class Debug(Channel, active=False, fatal=False):
         Make an entry in the journal
         """
         # hunt down my device and record the entry
-        self.device.memo(page=self.page, meta=self.meta)
+        self.device.memo(entry=self.entry)
         # all done
         return self
 

@@ -16,22 +16,27 @@ class Memo(Renderer):
 
 
     # implementation details
-    def header(self, palette, page, meta):
+    def header(self, palette, entry):
         """
         Generate the message header
         """
+        # get the page
+        page = entry.page
         # if there is nothing to render
         if not page:
             # bail
             return
 
+        # get the notes
+        notes = entry.notes
+
         # setup the marker
         marker = self.marker
         # otherwise, grab the severity
-        severity = meta["severity"]
+        severity = notes["severity"]
 
         # get the name of the file
-        filename = meta["filename"]
+        filename = notes["filename"]
         # consider it an indication that we have location information
         if filename:
             # initialize a buffer
@@ -56,7 +61,7 @@ class Memo(Renderer):
             buffer.append(":")
 
             # get the line number
-            line = str(meta["line"])
+            line = str(notes["line"])
             # if it's available
             if line:
                 # turn color back on
@@ -69,7 +74,7 @@ class Memo(Renderer):
                 buffer.append(":")
 
             # repeat with the function name
-            function = meta["function"]
+            function = notes["function"]
             # if it's available
             if function:
                 # turn color back on
@@ -87,7 +92,7 @@ class Memo(Renderer):
         # render the channel name and severity
         buffer = [
             palette[severity], marker, palette["reset"],
-            palette[severity], meta["channel"], palette["reset"],
+            palette[severity], notes["channel"], palette["reset"],
             "(", palette[severity], severity, palette["reset"], ")"
             ]
         # assemble and push
@@ -97,7 +102,7 @@ class Memo(Renderer):
         # already
         done = { "severity", "channel", "filename", "line", "function", "source" }
         # go through the metadata
-        for key, value in meta.items():
+        for key, value in notes.items():
             # if this is something we've dealt with
             if key in done:
                 # skip it
@@ -116,19 +121,24 @@ class Memo(Renderer):
         return
 
 
-    def body(self, palette, page, meta):
+    def body(self, palette, entry):
         """
         Generate the message body
         """
+        # get the page
+        page = entry.page
         # if there's nothing to do
         if not page:
             # move on
             return
 
+        # get the notes
+        notes = entry.notes
+
         # get the marker
         marker = self.continuation
         # and the severity
-        severity = meta["severity"]
+        severity = notes["severity"]
 
         # go through the message content
         for line in page:

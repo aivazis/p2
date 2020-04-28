@@ -16,20 +16,26 @@ class Alert(Renderer):
 
 
     # implementation details
-    def header(self, palette, page, meta):
+    def header(self, palette, entry):
         """
         Generate the message header
         """
+        # get the page
+        page = entry.page
+
         # if there's nothing to do
         if not page:
             # bail
             return
 
+        # get the notes
+        notes = entry.notes
+
         # get the severity
-        severity = meta["severity"]
+        severity = notes["severity"]
         # generate
         buffer = [
-            palette[severity], meta["application"], palette["reset"],
+            palette[severity], notes["application"], palette["reset"],
             "(",
             palette[severity], severity, palette["reset"],
             "): ",
@@ -42,10 +48,13 @@ class Alert(Renderer):
         return
 
 
-    def body(self, palette, page, meta):
+    def body(self, palette, entry):
         """
         Generate the message body
         """
+        # get the page
+        page = entry.page
+
         # if there's nothing to do
         if len(page) < 2:
             # bail

@@ -28,7 +28,7 @@ class Error(Channel, active=True, fatal=True):
         Commit my payload to the journal
         """
         # hunt down my device and record the entry
-        self.device.alert(page=self.page, meta=self.meta)
+        self.device.alert(entry=self.entry)
         # all done
         return self
 

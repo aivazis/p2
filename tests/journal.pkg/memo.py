@@ -17,7 +17,7 @@ def test():
     from j2.Debug import Debug as debug
 
     # get the chronicler metadata
-    gmeta = debug.chronicler.meta
+    gmeta = debug.chronicler.notes
     # add some
     gmeta["application"] = "memo"
     gmeta["author"] = "michael"
@@ -25,8 +25,8 @@ def test():
     # make a channel
     channel = debug(name="tests.journal.debug")
     # add some metadata
-    channel.meta["time"] = "now"
-    channel.meta["device"] = "null"
+    channel.notes["time"] = "now"
+    channel.notes["device"] = "null"
     # inject
     channel.line("debug channel:")
     channel.line("    hello world!")
@@ -39,15 +39,10 @@ def test():
         "body": "",
         }
 
-    # extract the page from the channel
-    page = channel.page
-    # and the metadata
-    meta = channel.meta
-
     # instantiate the renderer
     renderer = memo()
     # ask it to do its thing
-    renderer.render(palette=palette, page=page, meta=meta)
+    renderer.render(palette=palette, entry=channel.entry)
 
     # all done
     return

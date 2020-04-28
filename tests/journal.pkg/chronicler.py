@@ -16,7 +16,7 @@ def test():
     from j2.Chronicler import Chronicler as chronicler
 
     # ask it for its metadata
-    meta = chronicler().meta
+    meta = chronicler().notes
     # verify that the table comes with only one setting
     assert len(meta) == 1
     # that is the default application name

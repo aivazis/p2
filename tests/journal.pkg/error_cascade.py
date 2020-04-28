@@ -17,14 +17,14 @@ def test():
     # make a channel
     parent = Error(name="test.index.parent")
     # verify that the state is on
-    assert parent.state is True
+    assert parent.active is True
     # it is fatal
     assert parent.fatal is True
     # and the device is at the default value
     assert parent.device is Error.chronicler.device
 
     # activate it
-    parent.state = True
+    parent.active = True
     # make it non-fatal
     parent.fatal = False
     # and set the device to a trash can
@@ -33,7 +33,7 @@ def test():
     # lookup a name that is lower in the hierarchy
     child = Error(name="test.index.parent.blah.blah.child")
     # that it's state is the same as the parent
-    assert child.state == parent.state
+    assert child.active == parent.active
     assert child.fatal == parent.fatal
     # and that it inherited the device correctly
     assert child.device is parent.device

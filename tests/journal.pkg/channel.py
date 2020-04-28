@@ -25,14 +25,14 @@ def test():
     # verify its name
     assert channel.name == "test.channel"
     # its state
-    assert channel.state == False
+    assert channel.active == False
     # and again using the conversion to bool
     assert not channel
 
     # activate it
     channel.activate()
     # and check
-    assert channel.state == True
+    assert channel.active == True
 
     # all done
     return

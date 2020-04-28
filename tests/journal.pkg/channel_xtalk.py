@@ -44,12 +44,12 @@ def test():
     error_2 = error("error.channel_2")
 
     # check the states
-    assert info_1.state == False
-    assert info_2.state == False
-    assert warning_1.state == True
-    assert warning_2.state == True
-    assert error_1.state == True
-    assert error_2.state == True
+    assert info_1.active == False
+    assert info_2.active == False
+    assert warning_1.active == True
+    assert warning_2.active == True
+    assert error_1.active == True
+    assert error_2.active == True
 
     # get the info index
     infos = info.index

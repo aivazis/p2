@@ -38,20 +38,20 @@ class Channel(p2.patterns.named):
 
     # access to settings from my shared inventory
     @property
-    def state(self):
+    def active(self):
         """
         Get my activation state
         """
         # ask my inventory
-        return self.inventory.state
+        return self.inventory.active
 
-    @state.setter
-    def state(self, state):
+    @active.setter
+    def active(self, active):
         """
         Set my activation state
         """
         # adjust my inventory
-        self.inventory.state = state
+        self.inventory.active = active
         # all done
         return
 
@@ -123,23 +123,23 @@ class Channel(p2.patterns.named):
         return old
 
 
-    # access to information from my current buffer
+    # access to information from my current entry
     @property
     def page(self):
         """
-        Return the contents of my buffer
+        Return the contents of my entry
         """
         # ask and pass on
-        return self.buffer.page
+        return self.entry.page
 
 
     @property
-    def meta(self):
+    def notes(self):
         """
         Return the metadata of the current message
         """
         # ask and pass on
-        return self.buffer.meta
+        return self.entry.notes
 
 
     # interface
@@ -148,7 +148,7 @@ class Channel(p2.patterns.named):
         Enable the recording of messages
         """
         # easy
-        self.state = True
+        self.active = True
         # all done
         return self
 
@@ -158,7 +158,7 @@ class Channel(p2.patterns.named):
         Disable the recording of messages
         """
         # easy
-        self.state = False
+        self.active = False
         # all done
         return self
 
@@ -188,19 +188,18 @@ class Channel(p2.patterns.named):
         filename, line, function, *_ = trace[0]
 
         # decorate my current metadata
-        meta = self.meta
+        notes = self.notes
         # with location information
-        meta["filename"] = filename
-        meta["line"] = line
-        meta["function"] = function
-
+        notes["filename"] = filename
+        notes["line"] = line
+        notes["function"] = function
 
         # certain channels, e.g. errors and firewalls, raise exceptions as part of committing a
         # message to the journal. such exceptions may be caught and handled, and the channel
         # instance may continue to be used. this leads to text accumulating on my page, and the
-        # next time i'm flushed, my {buffer} still contains lines from the previous
+        # next time i'm flushed, my {entry} still contains lines from the previous
         # message. the awkward block that follows attempts to prevent this by catching
-        # exceptions, cleaning up the {buffer} in the finally section, and re-raising the
+        # exceptions, cleaning up the {entry} in the finally section, and re-raising the
         # exception. of course, if no exception is raised, we just clean up the page and move
         # on
 
@@ -214,8 +213,8 @@ class Channel(p2.patterns.named):
             raise
         # but in any case
         finally:
-            # flush my buffer
-            self.buffer = self.newBuffer()
+            # flush my entry
+            self.entry = self.newEntry()
 
         # all done
         return self
@@ -230,8 +229,8 @@ class Channel(p2.patterns.named):
         self.verbosity = verbosity
         # look up my inventory
         self.inventory = self.index.lookup(name)
-        # start out with an empty buffer
-        self.buffer = self.newBuffer()
+        # start out with an empty entry
+        self.entry = self.newEntry()
         # and an invalid locator
         self.locator = None
 
@@ -250,7 +249,7 @@ class Channel(p2.patterns.named):
         bases = [ Inventory ]
         # with default values for the channel state
         attributes = {
-            "state": active,
+            "active": active,
             "fatal": fatal,
             "device": None
             }
@@ -272,9 +271,9 @@ class Channel(p2.patterns.named):
 
     def __bool__(self):
         """
-        Simplify state testing
+        Simplify activation state testing
         """
-        return self.inventory.state
+        return self.inventory.active
 
 
     # implementation details
@@ -283,7 +282,7 @@ class Channel(p2.patterns.named):
         Commit the accumulated message to my device and flush
         """
         # if i'm not active
-        if not self.state:
+        if not self.active:
             # nothing to do
             return self
 
@@ -298,11 +297,11 @@ class Channel(p2.patterns.named):
         # if i'm fatal
         if self.fatal:
             # get my metadata
-            meta = self.meta
+            notes = self.notes
             # pull the location information
-            filename = meta["filename"]
-            line = meta["line"]
-            function = meta["function"]
+            filename = notes["filename"]
+            line = notes["line"]
+            function = notes["function"]
             # build a locator
             self.locator = p2.tracking.script(source=filename, line=line, function=function)
             # generate an exception
@@ -320,26 +319,26 @@ class Channel(p2.patterns.named):
         raise NotImplementedError(f"class '{type(self).__name__}' must implement 'record'")
 
 
-    def newBuffer(self):
+    def newEntry(self):
         """
-        Create a fresh message buffer
+        Create a fresh message entry
         """
         # initialize my metadata
-        meta = {
+        notes = {
             "channel": self.name,
             "severity": self.severity,
             }
 
         # inject whatever metadata it has
-        meta.update(self.chronicler.meta)
+        notes.update(self.chronicler.notes)
 
-        # get the buffer factory
-        from .Buffer import Buffer
+        # get the entry factory
+        from .Entry import Entry
         # make one
-        buffer = Buffer(meta=meta)
+        entry = Entry(notes=notes)
 
         # and return it
-        return buffer
+        return entry
 
 
     # class data
@@ -350,7 +349,7 @@ class Channel(p2.patterns.named):
     index = Index(inventory_type)  # the severity wide channel index
 
     # instance data
-    buffer = None                  # the accumulator of message content and metadata
+    entry = None                   # the accumulator of message content and metadata
     locator = None                 # location information
     inventory = None               # the state shared by all instances of the same name/severity
 

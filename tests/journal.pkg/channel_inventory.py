@@ -25,7 +25,7 @@ def test():
     # get its inventory
     inventory = channel.inventory
     # verify that it is disabled
-    assert inventory.state == False
+    assert inventory.active == False
     # and that it has no registered device
     assert inventory.device == None
 

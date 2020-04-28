@@ -26,7 +26,7 @@ def test():
     # verify it is an instance of the correct class
     assert isinstance(inventory, Severity.inventory_type)
     # hence the state is on
-    assert inventory.state is True
+    assert inventory.active is True
     # and the device is null
     assert inventory.device is None
 

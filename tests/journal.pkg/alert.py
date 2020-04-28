@@ -17,7 +17,7 @@ def test():
     from j2.Informational import Informational as info
 
     # get the chronicler metadata
-    gmeta = info.chronicler.meta
+    gmeta = info.chronicler.notes
     # add some
     gmeta["application"] = "alert"
     gmeta["author"] = "michael"
@@ -25,8 +25,8 @@ def test():
     # make an info channel
     channel = info(name="tests.journal.info")
     # add some metadata
-    channel.meta["time"] = "now"
-    channel.meta["device"] = "null"
+    channel.notes["time"] = "now"
+    channel.notes["device"] = "null"
     # inject
     channel.line("info channel:")
     channel.line("    hello world!")
@@ -39,15 +39,10 @@ def test():
         "body": "",
         }
 
-    # extract the page from the channel
-    page = channel.page
-    # and the metadata
-    meta = channel.meta
-
     # instantiate the renderer
     renderer = alert()
     # ask it to do its thing
-    renderer.render(palette=palette, page=page, meta=meta)
+    renderer.render(palette=palette, entry=channel.entry)
 
     # all done
     return

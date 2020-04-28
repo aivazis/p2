@@ -20,7 +20,7 @@ def test():
     channel.device = trash()
 
     # add some metadats
-    channel.meta["time"] = "now"
+    channel.notes["time"] = "now"
     # inject
     channel.line("info channel:")
     channel.log("    hello world!")

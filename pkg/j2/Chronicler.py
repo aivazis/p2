@@ -16,13 +16,13 @@ class Chronicler(metaclass=p2.patterns.singleton):
 
 
     # public data
-    meta = None
+    notes = None
     device = None
     verbosity = 1
 
 
     # metamethods
-    def __init__(self, verbosity=verbosity, device=device, meta=meta, **kwds):
+    def __init__(self, verbosity=verbosity, device=device, notes=notes, **kwds):
         # chain up
         super().__init__(**kwds)
 
@@ -30,7 +30,7 @@ class Chronicler(metaclass=p2.patterns.singleton):
         self.verbosity = verbosity
 
         # the global metadata; can't be empty
-        self.meta = meta if meta is not None else {
+        self.notes = notes if notes is not None else {
             "application": "journal",  # this key is required; applications should override
             }
 

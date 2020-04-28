@@ -20,7 +20,7 @@ def test():
     channel.device = trash()
 
     # add some metadata
-    channel.meta["time"] = "now"
+    channel.notes["time"] = "now"
 
 
     # carefully

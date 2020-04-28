@@ -12,14 +12,14 @@ class Renderer:
 
 
     # interface
-    def render(self, palette, page, meta):
+    def render(self, palette, entry):
         """
         Generate the message content
         """
         # each rendered message has three sections
-        yield from self.header(palette=palette, page=page, meta=meta)
-        yield from self.body(palette=palette, page=page, meta=meta)
-        yield from self.footer(palette=palette, page=page, meta=meta)
+        yield from self.header(palette=palette, entry=entry)
+        yield from self.body(palette=palette, entry=entry)
+        yield from self.footer(palette=palette, entry=entry)
 
         # all done
         return

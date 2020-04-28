@@ -36,7 +36,7 @@ class Firewall(Channel, active=True, fatal=True):
         Commit my payload to the journal
         """
         # hunt down my device and record the entry
-        self.device.memo(page=self.page, meta=self.meta)
+        self.device.memo(entry=self.entry)
         # all done
         return self
 

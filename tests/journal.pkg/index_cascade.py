@@ -31,14 +31,14 @@ def test():
     # verify it is an instance of the correct class
     assert isinstance(parent, inventory_type)
     # hence the state is on
-    assert parent.state is True
+    assert parent.active is True
     # it is fatal
     assert parent.fatal is True
     # and the device is null
     assert parent.device is None
 
     # deactivate it
-    parent.state = False
+    parent.active = False
     # make it non-fatal
     parent.fatal = False
     # and set the device to a trash can
@@ -49,7 +49,7 @@ def test():
     # make sure it's an instance of the correct type
     assert isinstance(child, inventory_type)
     # that it's state is the same as the parent
-    assert child.state == parent.state
+    assert child.active == parent.active
     assert child.fatal == parent.fatal
     # and that it inherited the device correctly
     assert child.device is parent.device

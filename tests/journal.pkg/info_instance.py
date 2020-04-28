@@ -21,9 +21,9 @@ def test():
     # the page should be empty
     assert channel.page == []
     # verify the metadata
-    assert channel.meta["application"] == "journal"
-    assert channel.meta["channel"] == channel.name
-    assert channel.meta["severity"] == channel.severity
+    assert channel.notes["application"] == "journal"
+    assert channel.notes["channel"] == channel.name
+    assert channel.notes["severity"] == channel.severity
 
     # all done
     return
