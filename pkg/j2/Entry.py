@@ -32,8 +32,12 @@ class Entry:
         """
         Support for quick unpacking
         """
-        # make a tuple and hand it off
-        return self.page, self.notes
+        # first the page
+        yield self.page
+        # then the notes
+        yield self.notes
+        # all done
+        return
 
 
 # end of file
