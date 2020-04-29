@@ -27,14 +27,14 @@ public:
     // interface
 public:
     // developer diagnostics
-    virtual auto memo(verbosity_type, const page_type &, const metadata_type &) -> Device &;
+    virtual auto memo(const entry_type &) -> Device &;
     // user facing diagnostics
-    virtual auto alert(verbosity_type, const page_type &, const metadata_type &) -> Device &;
+    virtual auto alert(const entry_type &) -> Device &;
 
 
     // implementation details
 protected:
-    virtual void inject(verbosity_type, const page_type &, const metadata_type &);
+    virtual void inject(const entry_type &);
 
     // data members
 private:

@@ -24,8 +24,8 @@ int main(int argc, char * argv[])
     pyre::journal::init(argc, argv);
 
     // add my context to the global metadata
-    auto & globals = chronicler_t::globals();
-    globals["application"] = "jcdev";
+    auto & notes = chronicler_t::notes();
+    notes["application"] = "jcdev";
 
     // create my output stream
     std::ofstream csv("debug.csv");

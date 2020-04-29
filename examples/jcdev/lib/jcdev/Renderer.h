@@ -14,12 +14,9 @@ class jcdev::Renderer {
 public:
     // pointers to me
     using pointer_type = std::shared_ptr<Renderer>;
-
-    using page_type = pyre::journal::page_t;
-    using key_type = pyre::journal::key_t;
-    using value_type = pyre::journal::value_t;
-    using metadata_type = pyre::journal::metadata_t;
-
+    // message contents
+    using entry_type = pyre::journal::entry_t;
+    // my output format
     using record_type = record_t;
 
     // metamethods
@@ -29,7 +26,7 @@ public:
 
     // interface
 public:
-    virtual auto render(const page_type &, const metadata_type &) const -> record_type;
+    virtual auto render(const entry_type &) const -> record_type;
 
     // implementation details
 private:

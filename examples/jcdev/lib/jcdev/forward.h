@@ -10,7 +10,6 @@
 
 // set up the namespace
 namespace jcdev {
-
     // the custom renderer
     class Renderer;
     // the custom device

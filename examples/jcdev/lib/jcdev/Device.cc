@@ -22,10 +22,10 @@ jcdev::Device::
 // record a developer facing message
 auto
 jcdev::Device::
-memo(verbosity_type verbosity, const page_type & page, const metadata_type & meta) -> Device &
+memo(const entry_type & entry) -> Device &
 {
     // render and inject the message
-    inject(verbosity, page, meta);
+    inject(entry);
     // all done
     return *this;
 }
@@ -34,10 +34,10 @@ memo(verbosity_type verbosity, const page_type & page, const metadata_type & met
 // record a user facing message
 auto
 jcdev::Device::
-alert(verbosity_type verbosity, const page_type & page, const metadata_type & meta) -> Device &
+alert(const entry_type & entry) -> Device &
 {
     // render and inject the message
-    inject(verbosity, page, meta);
+    inject(entry);
     // all done
     return *this;
 }
@@ -46,7 +46,7 @@ alert(verbosity_type verbosity, const page_type & page, const metadata_type & me
 // the workhorse
 void
 jcdev::Device::
-inject(verbosity_type verbosity, const page_type & page, const metadata_type & meta)
+inject(const entry_type & entry)
 {
     // get the time
     std::time_t now = std::time(nullptr);
@@ -54,7 +54,7 @@ inject(verbosity_type verbosity, const page_type & page, const metadata_type & m
     _stream << '"' << std::put_time(std::localtime(&now), "%F %T %z") << '"';
 
     // render
-    record_type record { _renderer.render(page, meta) };
+    record_type record { _renderer.render(entry) };
     // go through the entries
     for (const auto & line : record) {
         // and inject each one

@@ -26,23 +26,28 @@ jcdev::Renderer::
 // implementation details
 auto
 jcdev::Renderer::
-render(const page_type & page, const metadata_type & meta) const -> record_type
+render(const entry_type & entry) const -> record_type
 {
+    // get the page
+    auto page = entry.page();
+    // and the notes
+    auto notes = entry.notes();
+
     // make a record
     record_type record;
 
     // add the severity
-    record.push_back(meta.at("severity"));
+    record.push_back(notes.at("severity"));
     // the application
-    record.push_back(meta.at("application"));
+    record.push_back(notes.at("application"));
     // the channel name
-    record.push_back(meta.at("channel"));
+    record.push_back(notes.at("channel"));
     // the filename
-    record.push_back(meta.at("filename"));
+    record.push_back(notes.at("filename"));
     // the line number
-    record.push_back(meta.at("line"));
+    record.push_back(notes.at("line"));
     // the function name
-    record.push_back(meta.at("function"));
+    record.push_back(notes.at("function"));
 
     // the joiner
     auto join = [] (string_t buffer, const string_t & line) {
