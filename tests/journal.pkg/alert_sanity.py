@@ -11,7 +11,7 @@ def test():
     """
     # get the renderer
     from j2.Alert import Alert as alert
-    # the colospaces
+    # the color spaces
     from j2.ANSI import ANSI
     # and a channel
     from j2.Informational import Informational as info
@@ -24,6 +24,10 @@ def test():
 
     # make an info channel
     channel = info(name="tests.journal.info")
+    # generate a fake stack trace
+    channel.notes["filename"] = "memo_sanity"
+    channel.notes["line"] = 29
+    channel.notes["function"] = "test"
     # add some metadata
     channel.notes["time"] = "now"
     channel.notes["device"] = "null"
@@ -42,7 +46,9 @@ def test():
     # instantiate the renderer
     renderer = alert()
     # ask it to do its thing
-    renderer.render(palette=palette, entry=channel.entry)
+    page = "\n".join(renderer.render(palette=palette, entry=channel.entry))
+    # and show me
+    # print(page)
 
     # all done
     return
