@@ -22,8 +22,7 @@ ansi_emulates.yes.argv := 1
 
 
 # clean up after the {file} test case
-tests.journal.pkg.file.clean := file.out
-
+tests.journal.pkg.file_sanity.clean := file.out
 
 # clean up after the {file_example} test case
 tests.journal.pkg.file_example.clean := file_example.out
