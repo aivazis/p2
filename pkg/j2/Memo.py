@@ -50,7 +50,7 @@ class Memo(Renderer):
                 # add an ellipsis
                 buffer.append("...")
                 # and the trailing part of the filename
-                buffer.append(-3*maxlen//4)
+                buffer.append(filename[-3*maxlen//4:])
             # otherwise
             else:
                 # add the filename to pile
