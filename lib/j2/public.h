@@ -71,6 +71,17 @@
 #include "ANSI.h"
 
 
+// the convenience initializer
+void
+pyre::journal::
+init(int argc, char* argv[]) {
+    // ask {chronicler} to do this
+    pyre::journal::chronicler_t::init(argc, argv);
+    // all done
+    return;
+}
+
+
 #endif
 
 // end of file
