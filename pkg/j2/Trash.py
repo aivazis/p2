@@ -18,21 +18,29 @@ class Trash(Device):
     name = "trash"
 
 
+    # interface
+    def alert(self, entry):
+        """
+        Generate an alert
+        """
+        # do nothing
+        return self
+
+
+    def memo(self, entry):
+        """
+        Generate a memo
+        """
+        # do nothing
+        return self
+
+
     # metamethods
     def __init__(self, name=name,  **kwds):
         # chain up
         super().__init__(name=name, **kwds)
         # all done
         return
-
-
-    # implementation details
-    def record(self, page):
-        """
-        Record a message
-        """
-        # do nothing
-        return self
 
 
 # end of file
