@@ -33,22 +33,6 @@ render(const entry_type & entry) const -> record_type
     // and the notes
     auto notes = entry.notes();
 
-    // make a record
-    record_type record;
-
-    // add the severity
-    record.push_back(notes.at("severity"));
-    // the application
-    record.push_back(notes.at("application"));
-    // the channel name
-    record.push_back(notes.at("channel"));
-    // the filename
-    record.push_back(notes.at("filename"));
-    // the line number
-    record.push_back(notes.at("line"));
-    // the function name
-    record.push_back(notes.at("function"));
-
     // the joiner
     auto join = [] (string_t buffer, const string_t & line) {
                     return std::move(buffer) + '\n' + line;
@@ -56,10 +40,26 @@ render(const entry_type & entry) const -> record_type
     // assemble the message
     string_t message = std::accumulate(next(page.begin()), page.end(), page[0], join);
 
-    // and add it to the pile
-    record.push_back(message);
+    // make a record
+    record_type record
+        {
+         // add the severity
+         notes.at("severity"),
+         // the application
+         notes.at("application"),
+         // the channel name
+         notes.at("channel"),
+         // the filename
+         notes.at("filename"),
+         // the line number
+         notes.at("line"),
+         // the function name
+         notes.at("function"),
+         // the message
+         message
+    };
 
-    // all done
+    // and yield it
     return record;
 }
 

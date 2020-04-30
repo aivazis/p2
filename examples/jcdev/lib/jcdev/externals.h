@@ -10,7 +10,7 @@
 
 // standard library
 #include <ctime>
-#include <vector>
+#include <array>
 #include <numeric>
 #include <ostream>
 #include <iomanip>
@@ -25,8 +25,10 @@ namespace jcdev {
     // strings
     using string_t = std::string;
 
+    // the record length
+    const int record_size = 7;
     // a csv record
-    using record_t = std::vector<string_t>;
+    using record_t = std::array<string_t, record_size>;
 }
 
 
