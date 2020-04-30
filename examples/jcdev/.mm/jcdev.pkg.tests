@@ -1,0 +1,16 @@
+# -*- Makefile -*-
+#
+# michael a.g. aïvázis <michael.aivazis@para-sim.com>
+# (c) 1998-2019 all rights reserved
+
+
+# the jcdev package test suite
+jcdev.pkg.tests.stem := jcdev.pkg
+jcdev.pkg.tests.prerequisites := jcdev.pkg
+
+
+# clean up the examples
+tests.jcdev.pkg.debug_example.clean = debug_example.csv
+
+
+# end of file
