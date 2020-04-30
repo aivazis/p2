@@ -191,7 +191,7 @@ class Channel(p2.patterns.named):
         notes = self.notes
         # with location information
         notes["filename"] = filename
-        notes["line"] = line
+        notes["line"] = str(line)
         notes["function"] = function
 
         # certain channels, e.g. errors and firewalls, raise exceptions as part of committing a
