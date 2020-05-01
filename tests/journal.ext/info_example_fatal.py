@@ -16,14 +16,25 @@ def test():
 
     # make an info channel
     channel = info(name="tests.journal.info")
+    # make it fatal
+    channel.fatal = True
     # send the output to trash
     channel.device = trash()
 
     # add some metadata
     channel.notes["time"] = "now"
-    # inject
-    channel.line("info channel:")
-    channel.log("    hello world!")
+
+    # we asked for this to be fatal, so carefully
+    try:
+        # to inject something
+        channel.line("info channel:")
+        channel.log("    hello world!")
+        # this should be unreachable
+        assert False, "unreachable"
+    # if all goes well
+    except channel.ApplicationError:
+        # all good
+        pass
 
     # all done
     return
@@ -31,6 +42,8 @@ def test():
 
 # main
 if __name__ == "__main__":
+    # prohibit the journal bindings
+    journal_no_libjournal = True
     # run the test
     test()
 

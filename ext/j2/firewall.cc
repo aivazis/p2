@@ -105,16 +105,6 @@ firewall(py::module & m) {
                                "the notes associated with the current entry"
                       )
 
-        // the channel severity: static read-only property
-        .def_property_readonly_static("severity",
-                                      // the getter
-                                      [](py::object) -> firewall_t::string_type {
-                                          return "firewall";
-                                      },
-                                      // the docstring
-                                      "get the channel severity name"
-                                      )
-
         // access to the exception
         .def_property_readonly_static("FirewallError",
                                       // the getter
@@ -123,6 +113,16 @@ firewall(py::module & m) {
                                       },
                                       // the docstring
                                       "the keeper of the global state"
+                                      )
+
+        // the channel severity: static read-only property
+        .def_property_readonly_static("severity",
+                                      // the getter
+                                      [](py::object) -> firewall_t::string_type {
+                                          return "firewall";
+                                      },
+                                      // the docstring
+                                      "get the channel severity name"
                                       )
 
         // access to the manager of the global state

@@ -105,6 +105,16 @@ debug(py::module & m) {
                                "the notes associated with the current entry"
                       )
 
+        // access to the exception
+        .def_property_readonly_static("DebugError",
+                                      // the getter
+                                      [m](py::object) -> py::object {
+                                          return m.attr("DebugError");
+                                      },
+                                      // the docstring
+                                      "the keeper of the global state"
+                                      )
+
         // the channel severity: static read-only property
         .def_property_readonly_static("severity",
                                       // the getter
