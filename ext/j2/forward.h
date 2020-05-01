@@ -11,9 +11,12 @@ namespace p2::libjournal {
     void opaque(py::module &);
     // module methods
     void chronicler(py::module &);
-    void debug(py::module &);
     void devices(py::module &);
 
+    // developer channels
+    void debug(py::module &);
+    // user facing channels
+    void info(py::module &);
 }
 
 

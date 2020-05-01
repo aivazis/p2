@@ -21,8 +21,10 @@ PYBIND11_MODULE(j2, m) {
     p2::libjournal::chronicler(m);
     // devices
     p2::libjournal::devices(m);
-    // channels
+    // developer channels
     p2::libjournal::debug(m);
+    // user facing channels
+    p2::libjournal::info(m);
 }
 
 
