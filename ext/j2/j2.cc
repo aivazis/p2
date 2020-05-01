@@ -17,12 +17,15 @@ PYBIND11_MODULE(j2, m) {
 
     // bind the opaque types
     p2::libjournal::opaque(m);
+    // register the exception types
+    p2::libjournal::exceptions(m);
     // global state
     p2::libjournal::chronicler(m);
     // devices
     p2::libjournal::devices(m);
     // developer channels
     p2::libjournal::debug(m);
+    p2::libjournal::firewall(m);
     // user facing channels
     p2::libjournal::info(m);
     p2::libjournal::warning(m);

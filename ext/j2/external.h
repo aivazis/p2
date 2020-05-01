@@ -30,6 +30,11 @@ namespace p2::libjournal {
 
 
     // from {pyre::journal}
+    // the exceptions
+    using debug_error = pyre::journal::debug_error;
+    using firewall_error = pyre::journal::firewall_error;
+    using application_error = pyre::journal::application_error;
+
     // the global state
     using chronicler_t = pyre::journal::chronicler_t;
 

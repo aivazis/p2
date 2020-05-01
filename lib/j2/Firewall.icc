@@ -18,7 +18,7 @@ Firewall(const name_type & name, verbosity_type verbosity) :
     // get my entry
     entry_type & e = this->entry();
     // decorate with my severity
-    e.note("severity", "debug");
+    e.note("severity", "firewall");
 }
 
 
