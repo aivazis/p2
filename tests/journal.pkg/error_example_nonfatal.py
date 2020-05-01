@@ -7,23 +7,32 @@
 
 def test():
     """
-    Exercise the info channel with a realistic example
+    Exercise the error channel with a realistic example
     """
     # get the trash can
     from j2.Trash import Trash as trash
     # and the channel
-    from j2.Informational import Informational as info
+    from j2.Error import Error as error
 
-    # make an info channel
-    channel = info(name="tests.journal.info")
+    # make an error channel
+    channel = error(name="tests.journal.error")
+    # make it non-fatal
+    channel.fatal = False
     # send the output to trash
     channel.device = trash()
 
     # add some metadata
     channel.notes["time"] = "now"
-    # inject
-    channel.line("info channel:")
-    channel.log("    hello world!")
+
+    # carefully
+    try:
+        # inject
+        channel.line("error channel:")
+        channel.log("    hello world!")
+    # if the correct exception was raised
+    except channel.ApplicationError as error:
+        # shouldn't get here
+        assert False, "unreachable"
 
     # all done
     return

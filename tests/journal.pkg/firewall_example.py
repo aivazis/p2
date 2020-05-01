@@ -19,7 +19,7 @@ def test():
     # send the output to trash
     channel.device = trash()
 
-    # add some metadats
+    # add some metadata
     channel.notes["time"] = "now"
 
     # carefully

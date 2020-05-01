@@ -7,23 +7,32 @@
 
 def test():
     """
-    Exercise the info channel with a realistic example
+    Exercise the firewall channel with a realistic example
     """
     # get the trash can
     from j2.Trash import Trash as trash
     # and the channel
-    from j2.Informational import Informational as info
+    from j2.Firewall import Firewall as firewall
 
-    # make an info channel
-    channel = info(name="tests.journal.info")
+    # make a firewall channel
+    channel = firewall(name="tests.journal.firewall")
+    # make it non-fatal
+    channel.fatal = False
     # send the output to trash
     channel.device = trash()
 
     # add some metadata
     channel.notes["time"] = "now"
-    # inject
-    channel.line("info channel:")
-    channel.log("    hello world!")
+
+    # carefully
+    try:
+        # inject
+        channel.line("firewall:")
+        channel.log("    a nasty bug was detected")
+    # if the correct exception was raised
+    except channel.FirewallError as error:
+        # shouldn't get here
+        assert False, "unreachable"
 
     # all done
     return

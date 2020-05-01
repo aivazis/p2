@@ -16,14 +16,25 @@ def test():
 
     # make a warning channel
     channel = warning(name="tests.journal.warning")
+    # make it fatal
+    channel.fatal = True
     # send the output to trash
     channel.device = trash()
 
     # add some metadata
     channel.notes["time"] = "now"
-    # inject
-    channel.line("warning channel:")
-    channel.log("    hello world!")
+
+    # we asked for this to be fatal, so carefully
+    try:
+        # inject something
+        channel.line("warning channel:")
+        channel.log("    hello world!")
+        # this should be unreachable
+        assert False, "unreachable"
+    # if all goes well
+    except channel.ApplicationError:
+        # all good
+        pass
 
     # all done
     return

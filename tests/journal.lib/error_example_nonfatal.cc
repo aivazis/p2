@@ -10,31 +10,31 @@
 #include <cassert>
 
 
-// alias
+// type aliases
 using trash_t = pyre::journal::trash_t;
-using firewall_t = pyre::journal::firewall_t;
+using myerror_t = pyre::journal::error_t;
 
 
-// exercise the channel manipulators
+// basic error example
 int main() {
-    // make a debug channel
-    firewall_t channel("tests.journal.firewall");
+    // make an error channel
+    myerror_t channel("tests.journal.error");
 
+    // make it non-fatal
+    channel.fatal(false);
     // send the output to the trash
     channel.device(std::make_shared<trash_t>());
-    // make sure the firewall isn't fatal
-    channel.fatal(false);
 
-    // firewalls are fatal by default, so attempt to
+    // errors are fatal by default, so attempt to
     try {
-        // inject something into the channel
+        // inject something into the channel; no exception should be raised
         channel
             << pyre::journal::at(__HERE__)
             << pyre::journal::note("time", "now")
-            << "nasty bug:" << pyre::journal::newline
+            << "error channel:" << pyre::journal::newline
             << "    hello world!" << pyre::journal::endl;
-    // if the firewall triggered the exception
-    } catch (const firewall_t::exception_type &) {
+    // if the error triggered an exception
+    } catch (const myerror_t::exception_type &) {
         // unreachable
         throw std::logic_error("unreachable");
     }

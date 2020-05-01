@@ -29,7 +29,7 @@ def test():
     # send the output to the file
     channel.device = device
 
-    # add some metadats
+    # add some metadata
     channel.notes["time"] = "now"
     # inject
     channel.line("debug channel:")
