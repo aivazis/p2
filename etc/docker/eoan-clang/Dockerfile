@@ -1,4 +1,4 @@
-## -*- docker-image-name: "pyre-eoan-gcc" -*-
+## -*- docker-image-name: "pyre:eoan-clang" -*-
 
 # based on ubuntu
 FROM ubuntu:eoan
@@ -32,7 +32,7 @@ RUN apt dist-upgrade -y
 RUN DEBIAN_FRONTEND=noninteractive \
     apt install -y \
         git vim \
-        g++ gfortran make \
+        clang gfortran make \
         ${python} ${python}-dev \
         python3-pybind11 \
         libgsl-dev
@@ -42,7 +42,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
 # make the pyre configuration directory
 WORKDIR /root/.pyre
 # copy the {mm} coniguration file here
-COPY etc/docker/mm.gcc-opt,shared.pfg mm.pfg.in
+COPY etc/docker/eoan-clang/mm.pfg mm.pfg.in
 # expand; the '/' after ${prefix} is necessary for complying with the mm convention of
 # termiating slashes on all directories
 RUN sed -e "s:@PREFIX@:${prefix}:g" mm.pfg.in > mm.pfg
@@ -50,7 +50,7 @@ RUN sed -e "s:@PREFIX@:${prefix}:g" mm.pfg.in > mm.pfg
 # place the {mm} control file
 WORKDIR /root/.mm
 # copy the relevant configuration file
-COPY etc/docker/eoan.mm config.mm.in
+COPY etc/docker/eoan-clang/config.mm config.mm.in
 # expand
 RUN sed \
         -e "s:@PYTHON_VERSION@:${python_version}:g" \
@@ -68,9 +68,9 @@ COPY . p2
 # go to the {p2} top level directory
 WORKDIR ${srcdir}/p2
 # build
-RUN ${mm}
+# RUN ${mm}
 # show me the build context
-RUN ${mm} --serial builder.info host.info
+RUN ${mm} --serial host.info builder.info compilers.info
 
 # prep the install location for python packages
 # - the python packages: by making the canonical directory a symbolic link to our install area
@@ -78,7 +78,7 @@ RUN \
         ln -s ${prefix}/packages/p2 ${prefix}/lib/${python}/dist-packages; \
         ln -s ${prefix}/packages/j2 ${prefix}/lib/${python}/dist-packages
 # and test
-RUN ${mm} tests
+# RUN ${mm} tests
 
 
 # end of file

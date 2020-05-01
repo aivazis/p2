@@ -1,11 +1,11 @@
-## -*- docker-image-name: "pyre-eoan-clang" -*-
+## -*- docker-image-name: "pyre:focal-clang" -*-
 
 # based on ubuntu
-FROM ubuntu:eoan
+FROM ubuntu:focal
 
 # set up some build variables
 # python version
-ARG python_version=3.7
+ARG python_version=3.8
 ARG python=python${python_version}
 # locations
 ARG prefix=/usr/local
@@ -42,7 +42,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
 # make the pyre configuration directory
 WORKDIR /root/.pyre
 # copy the {mm} coniguration file here
-COPY etc/docker/mm.clang-opt,shared.pfg mm.pfg.in
+COPY etc/docker/focal-clang/mm.pfg mm.pfg.in
 # expand; the '/' after ${prefix} is necessary for complying with the mm convention of
 # termiating slashes on all directories
 RUN sed -e "s:@PREFIX@:${prefix}:g" mm.pfg.in > mm.pfg
@@ -50,12 +50,9 @@ RUN sed -e "s:@PREFIX@:${prefix}:g" mm.pfg.in > mm.pfg
 # place the {mm} control file
 WORKDIR /root/.mm
 # copy the relevant configuration file
-COPY etc/docker/eoan.mm config.mm.in
+COPY etc/docker/focal-clang/config.mm config.mm.in
 # expand
-RUN sed \
-        -e "s:@PYTHON_VERSION@:${python_version}:g" \
-        -e "s:@PYTHON_MODEL@:m:g" \
-        config.mm.in > config.mm
+RUN sed -e "s:@PYTHON_VERSION@:${python_version}:g" config.mm.in > config.mm
 
 
 # make the development area
@@ -78,7 +75,7 @@ RUN \
         ln -s ${prefix}/packages/p2 ${prefix}/lib/${python}/dist-packages; \
         ln -s ${prefix}/packages/j2 ${prefix}/lib/${python}/dist-packages
 # and test
-RUN ${mm} tests
+# RUN ${mm} tests
 
 
 # end of file
