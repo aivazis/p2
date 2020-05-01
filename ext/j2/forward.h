@@ -17,6 +17,7 @@ namespace p2::libjournal {
     void debug(py::module &);
     // user facing channels
     void info(py::module &);
+    void warning(py::module &);
 }
 
 

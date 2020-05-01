@@ -25,6 +25,7 @@ PYBIND11_MODULE(j2, m) {
     p2::libjournal::debug(m);
     // user facing channels
     p2::libjournal::info(m);
+    p2::libjournal::warning(m);
 }
 
 
