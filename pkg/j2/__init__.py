@@ -69,7 +69,12 @@ if without_libjournal:
     # instantiate the singleton and publish the instance
     chronicler = Chronicler()
 
-    # publish the channels
+    # devices
+    from .Trash import Trash as trash
+    from .Console import Console as cout
+    from .ErrorConsole import ErrorConsole as cerr
+
+    # channels
     # developer facing
     from .Debug import Debug as debug
     from .Firewall import Firewall as firewall
@@ -83,6 +88,11 @@ else:
     # let the c++ library take over
     # publish the keeper of the global state
     chronicler = libjournal.Chronicler
+
+    # devices
+    trash = libjournal.Trash
+    cout = libjournal.Console
+    cerr = libjournal.ErrorConsole
 
     # the developer facing channels
     debug = libjournal.Debug
