@@ -1,0 +1,12 @@
+# -*- Makefile -*-
+#
+# michael a.g. aïvázis <michael.aivazis@para-sim.com>
+# (c) 1998-2019 all rights reserved
+
+
+# the j2 test suite; it exercises whatever is published by the package
+j2.api.tests.stem := journal.api
+j2.api.tests.prerequisites := j2.pkg j2.ext
+
+
+# end of file
