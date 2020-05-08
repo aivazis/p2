@@ -16,7 +16,7 @@ using firewall_t = pyre::journal::firewall_t;
 
 // exercise the channel manipulators
 int main() {
-    // make a debug channel
+    // make a firewall
     firewall_t channel("tests.journal.firewall");
 
     // send the output to the trash

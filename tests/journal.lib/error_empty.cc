@@ -17,7 +17,7 @@ using myerror_t = pyre::journal::error_t;
 
 // verify that injection of an empty message works correctly
 int main() {
-    // make an info channel
+    // make an error channel
     myerror_t channel("tests.journal.error");
     // send the output to the trash
     channel.device(std::make_shared<trash_t>());

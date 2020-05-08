@@ -16,7 +16,7 @@ using firewall_t = pyre::journal::firewall_t;
 
 // verify that injection without location information works correctly
 int main() {
-    // make an info channel
+    // make a firewall
     firewall_t channel("tests.journal.firewall");
 
     // send the output to the trash

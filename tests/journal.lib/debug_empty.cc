@@ -12,7 +12,7 @@
 
 // verify that empty messages are handled correctly
 int main() {
-    // make an info channel
+    // make a debug channel
     pyre::journal::debug_t channel("tests.journal.debug");
     // activate the channel
     channel.activate();

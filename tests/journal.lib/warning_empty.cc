@@ -12,7 +12,7 @@
 
 // make sure empty injections into a warning work as expected
 int main() {
-    // make an info channel
+    // make a warning channel
     pyre::journal::warning_t channel("tests.journal.warning");
     // send the output to the trash
     channel.device(std::make_shared<pyre::journal::trash_t>());
