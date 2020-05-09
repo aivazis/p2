@@ -76,6 +76,9 @@ public:
     // bulk channel activation
     static inline void activateChannels(const nameset_type &);
 
+    // send all output to the trash
+    static inline void quiet();
+
     // implementation details: data
 private:
     name_type _name;

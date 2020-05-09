@@ -74,9 +74,24 @@
 // the convenience initializer
 void
 pyre::journal::
-init(int argc, char* argv[]) {
+init(int argc, char* argv[])
+{
     // ask {chronicler} to do this
     pyre::journal::chronicler_t::init(argc, argv);
+    // all done
+    return;
+}
+
+
+// install the trash can as the global device
+void
+pyre::journal::
+quiet()
+{
+    // make a trash can
+    auto trashcan = std::make_shared<trash_t>();
+    // make it the default
+    chronicler_t::device(trashcan);
     // all done
     return;
 }

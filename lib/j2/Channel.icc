@@ -198,6 +198,21 @@ activateChannels(const nameset_type & names)
 }
 
 
+// send all output to the trash
+template <typename severityT, template <typename> typename proxyT>
+void
+pyre::journal::Channel<severityT, proxyT>::
+quiet()
+{
+    // make a trash can
+    auto trashcan = std::make_shared<trash_t>();
+    // make it the default
+    index().device(trashcan);
+    // all done
+    return;
+}
+
+
 // static data
 template <typename severityT, template <typename> typename proxyT>
 typename pyre::journal::Channel<severityT, proxyT>::index_type

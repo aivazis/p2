@@ -12,6 +12,8 @@
 namespace pyre::journal {
     // the initializer of the global settings
     inline void init(int argc, char* argv[]);
+    // global device settings
+    inline void quiet();
 
     // channels
     using info_t = Informational<InventoryProxy>;
