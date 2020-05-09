@@ -21,11 +21,16 @@ ansi_emulates.yes.harness := TERM=xterm
 ansi_emulates.yes.argv := 1
 
 
-# clean up after the {file} test case
-tests.journal.pkg.file_sanity.clean := file.out
+# the following tests require clean up
+tests.journal.pkg.file_sanity.clean := file_sanity.log
+tests.journal.pkg.file_example.clean := file_example.log
 
-# clean up after the {file_example} test case
-tests.journal.pkg.file_example.clean := file_example.out
+tests.journal.pkg.api_file.clean := api_file.log
+tests.journal.pkg.debug_file.clean := debug_file.log
+tests.journal.pkg.firewall_file.clean := firewall_file.log
+tests.journal.pkg.error_file.clean := error_file.log
+tests.journal.pkg.info_file.clean := info_file.log
+tests.journal.pkg.warning_file.clean := warning_file.log
 
 
 # end of file

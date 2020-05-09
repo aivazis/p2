@@ -71,6 +71,7 @@ if without_libjournal:
 
     # devices
     from .Trash import Trash as trash
+    from .File import File as file
     from .Console import Console as cout
     from .ErrorConsole import ErrorConsole as cerr
 
@@ -82,6 +83,31 @@ if without_libjournal:
     from .Informational import Informational as info
     from .Warning import Warning as warning
     from .Error import Error as error
+
+    # convenience function to suppress all output
+    def quiet():
+        """
+        Suppress all output
+        """
+        # make a trash can
+        trashcan = trash()
+        # set it as the default device
+        chronicler.device = trashcan
+        # all done
+        return
+
+    # convenience function to send all output to a log file
+    def logfile(path):
+        """
+        Send all output to a log file
+        """
+        # make a file
+        logfile = file(path=path)
+        # set it as the default device
+        chronicler.device = logfile
+        # all done
+        return
+
 
 # if we have access to the bindings
 else:

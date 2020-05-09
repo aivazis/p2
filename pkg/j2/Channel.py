@@ -117,10 +117,37 @@ class Channel(p2.patterns.named):
         """
         # get the previous setting
         old = cls.inventory_type.device
-        # my inventory type has it
+        # install the new device
         cls.inventory_type.device = device
         # all done
         return old
+
+
+    # convenient configuration
+    @classmethod
+    def quiet(cls):
+        """
+        Suppress output from all channels of this severity
+        """
+        # get the trash can
+        from .Trash import Trash
+        # make one
+        trash = Trash()
+        # and install it as the default device
+        return cls.setDefaultDevice(trash)
+
+
+    @classmethod
+    def logfile(cls, path):
+        """
+        Send output from all channels of this severity to a log file
+        """
+        # get the file device
+        from .File import File
+        # make one
+        log = File(path)
+        # and install it as the default
+        return cls.setDefaultDevice(log)
 
 
     # access to information from my current entry
