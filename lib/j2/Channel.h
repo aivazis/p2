@@ -37,6 +37,9 @@ public:
     using entry_reference = entry_type &;
     using entry_const_reference = const entry_type &;
 
+    // pathnames
+    using path_type = path_t;
+
     // miscellaneous
     using string_type = string_t;
     using nameset_type = nameset_t;
@@ -78,6 +81,8 @@ public:
 
     // send all output to the trash
     static inline void quiet();
+    // and all output to a file with the given filename
+    static inline void file(const path_t &);
 
     // implementation details: data
 private:

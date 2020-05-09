@@ -25,6 +25,7 @@
 #include "Alert.h"
 // device support
 #include "Device.h"
+#include "File.h"
 #include "Stream.h"
 #include "Console.h"
 #include "Trash.h"

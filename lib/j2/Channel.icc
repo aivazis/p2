@@ -213,6 +213,21 @@ quiet()
 }
 
 
+// send all output to a file with the given name
+template <typename severityT, template <typename> typename proxyT>
+void
+pyre::journal::Channel<severityT, proxyT>::
+file(const path_t & name)
+{
+    // make a file
+    auto logfile = std::make_shared<file_t>(name);
+    // register it as the default device
+    index().device(logfile);
+    // all done
+    return;
+}
+
+
 // static data
 template <typename severityT, template <typename> typename proxyT>
 typename pyre::journal::Channel<severityT, proxyT>::index_type
