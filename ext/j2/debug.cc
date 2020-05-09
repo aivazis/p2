@@ -232,7 +232,7 @@ debug(py::module & m) {
         .def_static("logfile",
                     // the implementation
                     [](const debug_t::string_type & path) {
-                        debug_t::file(path);
+                        debug_t::logfile(path);
                     },
                     // the docstring
                     "send all output to a file",

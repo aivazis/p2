@@ -14,10 +14,10 @@
 using warning_t = pyre::journal::warning_t;
 
 
-// exercise the channel manipulators
+// send all output to a log file
 int main() {
     // send all channel output to a log file
-    warning_t::file("warning_file.log");
+    warning_t::logfile("warning_file.log");
 
     // make a warning channel
     warning_t channel("tests.journal.warning");

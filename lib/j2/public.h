@@ -114,7 +114,7 @@ quiet()
 // send all channel output to a log file
 void
 pyre::journal::
-file(const path_t & name)
+logfile(const path_t & name)
 {
     // create the device
     auto dev = std::make_shared<file_t>(name);

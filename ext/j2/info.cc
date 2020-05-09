@@ -232,7 +232,7 @@ info(py::module & m) {
         .def_static("logfile",
                     // the implementation
                     [](const info_t::string_type & path) {
-                        info_t::file(path);
+                        info_t::logfile(path);
                     },
                     // the docstring
                     "send all output to a file",

@@ -232,7 +232,7 @@ warning(py::module & m) {
         .def_static("logfile",
                     // the implementation
                     [](const warning_t::string_type & path) {
-                        warning_t::file(path);
+                        warning_t::logfile(path);
                     },
                     // the docstring
                     "send all output to a file",

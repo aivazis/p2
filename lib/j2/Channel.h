@@ -82,7 +82,7 @@ public:
     // send all output to the trash
     static inline void quiet();
     // and all output to a file with the given filename
-    static inline void file(const path_t &);
+    static inline void logfile(const path_t &);
 
     // implementation details: data
 private:

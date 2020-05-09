@@ -14,10 +14,10 @@
 using info_t = pyre::journal::info_t;
 
 
-// exercise the channel manipulators
+// send all output to a log file
 int main() {
     // send all channel output to a log file
-    info_t::file("info_file.log");
+    info_t::logfile("info_file.log");
 
     // make an info channel
     info_t channel("tests.journal.info");

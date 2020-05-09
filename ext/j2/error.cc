@@ -232,7 +232,7 @@ error(py::module & m) {
         .def_static("logfile",
                     // the implementation
                     [](const error_t::string_type & path) {
-                        error_t::file(path);
+                        error_t::logfile(path);
                     },
                     // the docstring
                     "send all output to a file",

@@ -17,7 +17,7 @@ namespace pyre::journal {
     // turn all channel output off
     inline void quiet();
     // send all channel output to a log file
-    inline void file(const path_t &);
+    inline void logfile(const path_t &);
 
     // channels
     using info_t = Informational<InventoryProxy>;

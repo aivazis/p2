@@ -14,10 +14,10 @@
 using debug_t = pyre::journal::debug_t;
 
 
-// exercise the channel manipulators
+// send all output to a log file
 int main() {
     // send channel output to a log file
-    debug_t::file("debug_file.log");
+    debug_t::logfile("debug_file.log");
 
     // make a debug channel
     debug_t channel("tests.journal.debug");

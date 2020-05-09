@@ -14,10 +14,10 @@
 using firewall_t = pyre::journal::firewall_t;
 
 
-// exercise the channel manipulators
+// send all output to a log file
 int main() {
     // send channel output to a log file
-    firewall_t::file("firewall_file.log");
+    firewall_t::logfile("firewall_file.log");
 
     // make a firewall
     firewall_t channel("tests.journal.firewall");

@@ -217,7 +217,7 @@ quiet()
 template <typename severityT, template <typename> typename proxyT>
 void
 pyre::journal::Channel<severityT, proxyT>::
-file(const path_t & name)
+logfile(const path_t & name)
 {
     // make a file
     auto logfile = std::make_shared<file_t>(name);

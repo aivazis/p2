@@ -15,10 +15,10 @@ using trash_t = pyre::journal::trash_t;
 using myerror_t = pyre::journal::error_t;
 
 
-// basic error example
+// send all output to a log file
 int main() {
     // send the errors to a log file
-    myerror_t::file("error_file.log");
+    myerror_t::logfile("error_file.log");
 
     // make an error channel
     myerror_t channel("tests.journal.error");

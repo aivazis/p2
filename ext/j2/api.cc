@@ -29,7 +29,7 @@ api(py::module & m) {
     m.def("logfile",
           // the implementation
           [](const debug_t::string_type & path) {
-              pyre::journal::file(path);
+              pyre::journal::logfile(path);
           },
           // the docstring
           "send all output to a file",
