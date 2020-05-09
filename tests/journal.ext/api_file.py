@@ -13,7 +13,7 @@ def test():
     import j2.ext.j2 as libjournal
 
     # send all output to a log file
-    libjournal.file(name="api_file.log")
+    libjournal.logfile(name="api_file.log")
 
     # make a channel
     channel = libjournal.Debug(name="test.journal.debug")

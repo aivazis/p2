@@ -13,7 +13,7 @@ def test():
     from j2.ext.j2 import Warning as warning
 
     # send output to a log file
-    warning.file("warning_file.log")
+    warning.logfile("warning_file.log")
 
     # make a warning channel
     channel = warning(name="tests.journal.warning")

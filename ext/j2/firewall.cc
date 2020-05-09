@@ -229,7 +229,7 @@ firewall(py::module & m) {
                     )
 
         // send output to a log file
-        .def_static("file",
+        .def_static("logfile",
                     // the implementation
                     [](const firewall_t::string_type & path) {
                         firewall_t::file(path);

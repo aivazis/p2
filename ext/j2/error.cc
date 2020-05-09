@@ -229,7 +229,7 @@ error(py::module & m) {
                     )
 
         // send output to a log file
-        .def_static("file",
+        .def_static("logfile",
                     // the implementation
                     [](const error_t::string_type & path) {
                         error_t::file(path);

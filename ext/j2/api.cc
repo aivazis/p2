@@ -26,7 +26,7 @@ api(py::module & m) {
           );
 
     // send output to a log file
-    m.def("file",
+    m.def("logfile",
           // the implementation
           [](const debug_t::string_type & path) {
               pyre::journal::file(path);

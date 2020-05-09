@@ -13,7 +13,7 @@ def test():
     from j2.ext.j2 import Firewall as firewall
 
     # send output to a log file
-    firewall.file("firewall_file.log")
+    firewall.logfile("firewall_file.log")
 
     # make a channel
     channel = firewall(name="test.journal.firewall")

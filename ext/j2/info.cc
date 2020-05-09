@@ -229,7 +229,7 @@ info(py::module & m) {
                     )
 
         // send output to a log file
-        .def_static("file",
+        .def_static("logfile",
                     // the implementation
                     [](const info_t::string_type & path) {
                         info_t::file(path);

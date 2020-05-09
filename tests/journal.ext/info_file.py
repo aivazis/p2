@@ -13,7 +13,7 @@ def test():
     from j2.ext.j2 import Informational as info
 
     # send all output to a file
-    info.file("info_file.log")
+    info.logfile("info_file.log")
 
     # make an info channel
     channel = info(name="tests.journal.info")

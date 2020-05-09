@@ -13,7 +13,7 @@ def test():
     from j2.ext.j2 import Error as error
 
     # send output to a log file
-    error.file("error_file.log")
+    error.logfile("error_file.log")
 
     # make a channel
     channel = error(name="test.journal.error")
