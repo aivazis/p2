@@ -220,6 +220,14 @@ debug(py::module & m) {
              "syntactic sugar for checking the state of a channel"
              )
 
+        // send output to a trash can
+        .def_static("quiet",
+                    // the implementation
+                    &debug_t::quiet,
+                    // the docstring
+                    "suppress all output from debug channels"
+                    )
+
         // done
         ;
 

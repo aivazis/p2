@@ -220,7 +220,15 @@ error(py::module & m) {
              "syntactic sugar for checking the activation state of the channel"
              )
 
-        // done
+        // send output to a trash can
+        .def_static("quiet",
+                    // the implementation
+                    &error_t::quiet,
+                    // the docstring
+                    "suppress all output from error channels"
+                    )
+
+         // done
         ;
 
     // all done

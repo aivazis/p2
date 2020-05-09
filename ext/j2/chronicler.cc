@@ -55,7 +55,15 @@ chronicler(py::module & m) {
                                       // the docstring
                                       "access the global metadata"
                                       )
-        // all done
+        // send output to a trash can
+        .def_static("quiet",
+                    // the implementation
+                    &chronicler_t::quiet,
+                    // the docstring
+                    "suppress all output from all channels"
+                    )
+
+         // all done
         ;
 
     // all done

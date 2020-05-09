@@ -220,7 +220,15 @@ warning(py::module & m) {
              "syntactic sugar for checking the state of a channel"
              )
 
-        // done
+        // send output to a trash can
+        .def_static("quiet",
+                    // the implementation
+                    &warning_t::quiet,
+                    // the docstring
+                    "suppress all output from warning channels"
+                    )
+
+         // done
         ;
 
     // all done

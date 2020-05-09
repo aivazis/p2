@@ -220,6 +220,14 @@ firewall(py::module & m) {
              "syntactic sugar for checking the activation state of the channel"
              )
 
+        // send output to a trash can
+        .def_static("quiet",
+                    // the implementation
+                    &firewall_t::quiet,
+                    // the docstring
+                    "suppress all output from firewalls"
+                    )
+
         // done
         ;
 
