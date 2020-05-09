@@ -40,6 +40,7 @@
 
 // devices
 #include "Trash.h"
+#include "File.h"
 #include "Stream.h"
 #include "Console.h"
 #include "ErrorConsole.h"

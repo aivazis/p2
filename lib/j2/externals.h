@@ -18,9 +18,10 @@
 #include <vector>
 #include <set>
 #include <map>
-#include <ostream>
+#include <fstream>
 #include <sstream>
 #include <iomanip>
+#include <filesystem>
 
 
 // aliases for fundamental types that define implementation choices
@@ -29,9 +30,13 @@ namespace pyre::journal {
     using size_t = std::size_t;
     // strings
     using string_t = std::string;
-    // output streams; careful here: we already have a {stream_t} that points to the journal
+    // output streams; careful here: we already have a {stream_t} that's an alias for a device
     // {Stream} device
     using outputstream_t = std::ostream;
+    // file streams; careful here: we already have a {file_t} that's an alias to the file device
+    using filestream_t = std::ofstream;
+    // paths
+    using path_t = std::filesystem::path;
 
     // generic names
     using name_t = string_t;

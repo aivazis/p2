@@ -41,6 +41,7 @@ namespace pyre::journal {
 
     // devices
     class Trash;
+    class File;
     class Stream;
     class Console;
     class ErrorConsole;

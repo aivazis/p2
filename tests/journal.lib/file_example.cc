@@ -8,26 +8,22 @@
 #include <p2/journal.h>
 // support
 #include <cassert>
-#include <fstream>
-#include <filesystem>
 
 
 // alias the type
 using debug_t = pyre::journal::debug_t;
-using stream_t = pyre::journal::stream_t;
+using file_t = pyre::journal::file_t;
 
 
-// exercise the stream device
+// exercise the file device
 int main() {
-    // the path of the file
-    auto filename = std::filesystem::path("file_example.out");
-    // make a file stream
-    auto ofs = std::ofstream(filename);
+    // the filename
+    auto filename = file_t::path_type("file_example.out");
 
     // make a channel
     debug_t channel("test.journal.file");
     // set its device
-    channel.device(std::make_shared<stream_t>(filename, ofs));
+    channel.device(std::make_shared<file_t>(filename));
     // activate
     channel.activate();
 

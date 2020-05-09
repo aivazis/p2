@@ -25,6 +25,7 @@ namespace pyre::journal {
 
     // devices
     using trash_t = Trash;
+    using file_t = File;
     using stream_t = Stream;
     using cout_t = Console;
     using cerr_t = ErrorConsole;

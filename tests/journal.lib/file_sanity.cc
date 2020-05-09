@@ -8,29 +8,21 @@
 #include <p2/journal.h>
 // support
 #include <cassert>
-#include <fstream>
-#include <filesystem>
 
 
 // alias the type
-using stream_t = pyre::journal::stream_t;
+using file_t = pyre::journal::file_t;
 
 
 // exercise the stream device
 int main() {
-    // the path of the file
-    auto filename = std::filesystem::path("file_sanity.out");
+    // the filename
+    auto filename = file_t::path_type("file_sanity.out");
 
-    // make a file stream
-    auto ofs = std::ofstream(filename);
     // instantiate
-    stream_t stream(filename, ofs);
+    file_t file(filename);
     // check its name
-    assert (stream.name() == filename);
-
-    // clean up
-    // close the file
-    ofs.close();
+    assert (file.path() == filename);
 
     // all done
     return 0;

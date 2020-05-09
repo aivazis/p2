@@ -23,34 +23,34 @@
 
 // my superclass
 #include "Device.h"
-// get the stream declaration
-#include "Stream.h"
+// get the file declaration
+#include "File.h"
 
 
 // metamethods
 // destructor
-pyre::journal::Stream::
-~Stream()
+pyre::journal::File::
+~File()
 {}
 
 
 // interface
 auto
-pyre::journal::Stream::
-memo(const entry_type & entry) -> Stream &
+pyre::journal::File::
+memo(const entry_type & entry) -> File &
 {
     // get the memo renderer to format the message
     auto content = _memo->render(_palette, entry);
-    // inject it into my stream
-    _stream << content;
+    // inject it into my file
+    _file << content;
     // all done
     return *this;
 }
 
 
 auto
-pyre::journal::Stream::
-alert(const entry_type & entry) -> Stream &
+pyre::journal::File::
+alert(const entry_type & entry) -> File &
 {
     // get the page and the notes
     auto & page = entry.page();
@@ -64,8 +64,8 @@ alert(const entry_type & entry) -> Stream &
 
     // otherwise, get the alert renderer to format the message
     auto content = _alert->render(_palette, entry);
-    // inject it into my stream
-    _stream << content;
+    // inject it into my file
+    _file << content;
 
     // all done
     return *this;
