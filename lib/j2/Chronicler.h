@@ -38,6 +38,9 @@ public:
     // the initializer that parses the program command line
     static void init(int argc, char* argv[]);
 
+    // suppress all output
+    static void quiet();
+
     // verbosity
     static inline auto verbosity() -> verbosity_type;
     static inline auto verbosity(verbosity_type) -> verbosity_type;

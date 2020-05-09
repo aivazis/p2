@@ -88,10 +88,8 @@ void
 pyre::journal::
 quiet()
 {
-    // make a trash can
-    auto trashcan = std::make_shared<trash_t>();
-    // make it the default
-    chronicler_t::device(trashcan);
+    // forward to the {chronicler_t}
+    chronicler_t::quiet();
     // all done
     return;
 }

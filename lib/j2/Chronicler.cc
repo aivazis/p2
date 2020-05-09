@@ -101,6 +101,19 @@ chronicler_t::init(int argc, char* argv[]) {
 }
 
 
+// suppress all output
+void
+chronicler_t::quiet()
+{
+    // make a trash can
+    auto trashcan = std::make_shared<trash_t>();
+    // make it the default device
+    device(trashcan);
+    // all done
+    return;
+}
+
+
 // data
 chronicler_t::verbosity_type chronicler_t::_verbosity { initializeVerbosity() };
 chronicler_t::notes_type chronicler_t::_notes { initializeGlobals() };
