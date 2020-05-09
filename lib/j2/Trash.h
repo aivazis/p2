@@ -29,9 +29,9 @@ public:
     // interface
 public:
     // developer messages
-    virtual auto memo(const entry_type &) -> Trash &;
+    virtual auto memo(const entry_type &) -> Trash & override;
     // user facing messages
-    virtual auto alert(const entry_type &) -> Trash &;
+    virtual auto alert(const entry_type &) -> Trash & override;
 
     // data
 private:

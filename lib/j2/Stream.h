@@ -30,9 +30,9 @@ public:
     // interface
 public:
     // developer messages
-    virtual auto memo(const entry_type &) -> Stream &;
+    virtual auto memo(const entry_type &) -> Stream & override;
     // user facing messages
-    virtual auto alert(const entry_type &) -> Stream &;
+    virtual auto alert(const entry_type &) -> Stream & override;
 
     // configuration data
 protected:
