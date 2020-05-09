@@ -10,19 +10,17 @@ def test():
     Verify that we can build a stream based device
     """
     # pick a file name
-    filename = "file.out"
-    # make a stream
-    ostr = open(filename, mode="w")
+    filename = "file_sanity.log"
 
     # get the device
-    from j2.Stream import Stream as stream
+    from j2.File import File
     # instantiate
-    device = stream(name=filename, stream=ostr)
-    # check its name
-    assert device.name == filename
+    device = File(path=filename)
 
-    # close the stream; not strictly necessary, but let's exercise the interface
-    device.close()
+    # check its name
+    assert device.name == "log"
+    # and the path
+    assert device.path == filename
 
     # all done
     return

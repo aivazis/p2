@@ -7,23 +7,21 @@
 
 def test():
     """
-    Verify that we can inject into a stream based device
+    Verify that we can send channel output to a log file
     """
     # pick a file name
-    filename = "file_example.out"
-    # make a stream
-    ostr = open(filename, mode="w")
+    filename = "file_example.log"
 
     # get the device
-    from j2.Stream import Stream as stream
+    from j2.File import File
     # and a channel
-    from j2.Debug import Debug as debug
+    from j2.Debug import Debug
 
     # instantiate
-    device = stream(name=filename, stream=ostr)
+    device = File(path=filename)
 
     # make a debug channel
-    channel = debug(name="tests.journal.debug")
+    channel = Debug(name="tests.journal.debug")
     # activate it
     channel.activate()
     # send the output to the file
@@ -34,9 +32,6 @@ def test():
     # inject
     channel.line("debug channel:")
     channel.log("    hello world!")
-
-    # close the stream; not strictly necessary, but let's exercise the interface
-    device.close()
 
     # all done
     return
