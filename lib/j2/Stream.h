@@ -9,6 +9,13 @@
 
 
 // a device that writes to output streams
+
+// N.B.: the constructor of this class keeps a reference to the stream you pass in; it's your
+//    responsibility to make sure that your output stream outlives this device. Its use as a
+//    base class by {Console} and {ErrorConsole} is correct since {std::cout} and {std::cerr}
+//    are global objects with very long lives. Do not instantiate it with anything shorter
+//    lived than a local variable in your {main}
+
 class pyre::journal::Stream : public Device {
     // types
 public:
