@@ -54,6 +54,13 @@ private:
     renderer_pointer _memo;
     // the renderer for alerts
     renderer_pointer _alert;
+
+    // disallow
+private:
+    Stream(const Stream &) = delete;
+    Stream(const Stream &&) = delete;
+    const Stream & operator= (const Stream &) = delete;
+    const Stream & operator= (const Stream &&) = delete;
 };
 
 

@@ -38,6 +38,13 @@ public:
     // data
 private:
     name_type _name;
+
+    // disallow
+private:
+    Device(const Device &) = delete;
+    Device(const Device &&) = delete;
+    const Device & operator= (const Device &) = delete;
+    const Device & operator= (const Device &&) = delete;
 };
 
 

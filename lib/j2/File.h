@@ -54,6 +54,13 @@ private:
     renderer_pointer _memo;
     // the renderer for alerts
     renderer_pointer _alert;
+
+    // disallow
+private:
+    File(const File &) = delete;
+    File(const File &&) = delete;
+    const File & operator= (const File &) = delete;
+    const File & operator= (const File &&) = delete;
 };
 
 
