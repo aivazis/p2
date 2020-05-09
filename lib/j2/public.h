@@ -8,7 +8,7 @@
 #define pyre_journal_public_h
 
 
-// external packages
+// external packagesvap
 #include "externals.h"
 // get the forward declarations
 #include "forward.h"
@@ -79,6 +79,21 @@ init(int argc, char* argv[])
 {
     // ask {chronicler} to do this
     pyre::journal::chronicler_t::init(argc, argv);
+    // all done
+    return;
+}
+
+
+// register the application name with the chronicler
+void
+pyre::journal::
+application(const value_t & name)
+{
+    // get the global metadata
+    auto & notes = chronicler_t::notes();
+    // register the given name under the {application} key; the key is guaranteed to exist:
+    // it's part of the {chronicler_t} initialization
+    notes.at("application") = name;
     // all done
     return;
 }

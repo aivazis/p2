@@ -11,6 +11,10 @@ namespace p2::libjournal {
     void opaque(py::module &);
     // exceptions
     void exceptions(py::module &);
+
+    // module level convenience methods
+    void api(py::module &);
+
     // module methods
     void chronicler(py::module &);
     void devices(py::module &);

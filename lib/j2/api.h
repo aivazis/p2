@@ -12,7 +12,9 @@
 namespace pyre::journal {
     // the initializer of the global settings
     inline void init(int argc, char* argv[]);
-    // global device settings
+    // registration of the application name; {value_t} is normally an {std::string}
+    inline void application(const value_t & name);
+    // turn all channel output off
     inline void quiet();
 
     // channels

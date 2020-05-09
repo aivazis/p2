@@ -19,6 +19,7 @@ PYBIND11_MODULE(j2, m) {
     p2::libjournal::opaque(m);
     // register the exception types
     p2::libjournal::exceptions(m);
+
     // global state
     p2::libjournal::chronicler(m);
     // devices
@@ -30,6 +31,9 @@ PYBIND11_MODULE(j2, m) {
     p2::libjournal::info(m);
     p2::libjournal::warning(m);
     p2::libjournal::error(m);
+
+    // convenience functions at module level
+    p2::libjournal::api(m);
 }
 
 
