@@ -228,6 +228,18 @@ debug(py::module & m) {
                     "suppress all output from debug channels"
                     )
 
+        // send output to a log file
+        .def_static("file",
+                    // the implementation
+                    [](const debug_t::string_type & path) {
+                        debug_t::file(path);
+                    },
+                    // the docstring
+                    "send all output to a file",
+                    // the arguments
+                    "name"_a
+                    )
+
         // done
         ;
 

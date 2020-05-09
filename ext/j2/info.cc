@@ -228,6 +228,18 @@ info(py::module & m) {
                     "suppress all output from info channels"
                     )
 
+        // send output to a log file
+        .def_static("file",
+                    // the implementation
+                    [](const info_t::string_type & path) {
+                        info_t::file(path);
+                    },
+                    // the docstring
+                    "send all output to a file",
+                    // the arguments
+                    "name"_a
+                    )
+
          // done
         ;
 

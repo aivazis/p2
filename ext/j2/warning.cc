@@ -228,6 +228,18 @@ warning(py::module & m) {
                     "suppress all output from warning channels"
                     )
 
+        // send output to a log file
+        .def_static("file",
+                    // the implementation
+                    [](const warning_t::string_type & path) {
+                        warning_t::file(path);
+                    },
+                    // the docstring
+                    "send all output to a file",
+                    // the arguments
+                    "name"_a
+                    )
+
          // done
         ;
 

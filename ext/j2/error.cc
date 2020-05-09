@@ -228,6 +228,18 @@ error(py::module & m) {
                     "suppress all output from error channels"
                     )
 
+        // send output to a log file
+        .def_static("file",
+                    // the implementation
+                    [](const error_t::string_type & path) {
+                        error_t::file(path);
+                    },
+                    // the docstring
+                    "send all output to a file",
+                    // the arguments
+                    "name"_a
+                    )
+
          // done
         ;
 

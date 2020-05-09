@@ -16,4 +16,12 @@ j2.ext.tests.harness :=
 j2.ext.tests.argv :=
 
 
+# the following test cases require cleanup
+tests.journal.ext.api_file.clean += "api_file.log"
+tests.journal.ext.debug_file.clean += "debug_file.log"
+tests.journal.ext.firewall_file.clean += "firewall_file.log"
+tests.journal.ext.error_file.clean += "error_file.log"
+tests.journal.ext.info_file.clean += "info_file.log"
+tests.journal.ext.warning_file.clean += "warning_file.log"
+
 # end of file

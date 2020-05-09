@@ -25,6 +25,18 @@ api(py::module & m) {
           "register the application {name}"
           );
 
+    // send output to a log file
+    m.def("file",
+          // the implementation
+          [](const debug_t::string_type & path) {
+              pyre::journal::file(path);
+          },
+          // the docstring
+          "send all output to a file",
+          // the arguments
+          "name"_a
+          );
+
     // all done
     return;
 }
