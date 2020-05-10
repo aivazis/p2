@@ -22,24 +22,24 @@ def test():
     # make another
     ch_2 = libjournal.Debug("test.channel")
     # verify it is active
-    assert ch_2.active == True
+    assert ch_2.active is True
     # and fatal
-    assert ch_2.fatal == True
+    assert ch_2.fatal is True
     # deactivate it
     ch_2.active = False
     # and make it non-fatal
     ch_2.fatal = False
 
     # verify that both channels are now inactive
-    assert ch_1.active == False
-    assert ch_2.active == False
+    assert ch_1.active is False
+    assert ch_2.active is False
     # and once again, using {__bool__}
-    assert bool(ch_1) == False
-    assert bool(ch_2) == False
+    assert bool(ch_1) is False
+    assert bool(ch_2) is False
 
     # verify that they are both non-fatal
-    assert ch_1.fatal == False
-    assert ch_2.fatal == False
+    assert ch_1.fatal is False
+    assert ch_2.fatal is False
 
     # all done
     return

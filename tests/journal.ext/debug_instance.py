@@ -19,7 +19,10 @@ def test():
     # the verbosity should be at the default level
     assert channel.verbosity == 1
     # the channel should be inactive
-    assert channel.active == False
+    assert channel.active is False
+    # and non-fatal
+    assert channel.fatal is False
+
     # the page should be empty
     assert tuple(channel.page) == ()
     # verify the metadata

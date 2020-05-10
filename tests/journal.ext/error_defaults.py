@@ -12,10 +12,10 @@ def test():
     # access
     from j2 import libjournal
 
-    # verify that error channels are inactive by default
-    assert libjournal.Error.defaultActive == True
-    # and non-fatal
-    assert libjournal.Error.defaultFatal == True
+    # verify that error channels are active by default
+    assert libjournal.Error.defaultActive is True
+    # and fatal
+    assert libjournal.Error.defaultFatal is True
     # verify that the channel default device is not set
     assert libjournal.Error.defaultDevice == None
 
@@ -26,7 +26,7 @@ def test():
     # and make sure the assignment sticks
     assert libjournal.Error.defaultDevice is trash
 
-    # make a error channel
+    # make a channel
     channel = libjournal.Error("test.channel")
     # verify that its view of its default state is consistent
     assert channel.defaultActive == libjournal.Error.defaultActive

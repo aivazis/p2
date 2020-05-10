@@ -12,19 +12,19 @@ def test():
     # access
     from j2 import libjournal
 
-    # make a error channel
+    # make a channel
     channel = libjournal.Error("test.channel")
     # get its metadata
     notes = channel.notes
     # adjust the application name
-    notes["application"] = "error_meta"
+    notes["application"] = "error_notes"
     # add something
     notes["author"] = "michael"
 
     # make sure the adjustments stick by getting the value once again
     notes = channel.notes
     # and comparing against expectations
-    assert notes["application"] == "error_meta"
+    assert notes["application"] == "error_notes"
     assert notes["author"] == "michael"
     assert notes["channel"] == "test.channel"
     assert notes["severity"] == "error"

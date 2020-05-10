@@ -25,7 +25,7 @@ def test():
 
     # deactivate it
     parent.active = False
-    # and make it non fatal
+    # make it non -atal
     parent.fatal = False
     # and set the device to a trash can
     parent.device = Trash()

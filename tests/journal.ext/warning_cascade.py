@@ -32,7 +32,7 @@ def test():
 
     # lookup a name that is lower in the hierarchy
     child = Warning(name="test.index.parent.blah.blah.child")
-    # that it's state is the same as the parent
+    # that its state is the same as the parent
     assert child.active == parent.active
     assert child.fatal == parent.fatal
     # and that it inherited the device correctly

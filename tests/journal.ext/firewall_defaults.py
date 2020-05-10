@@ -13,9 +13,9 @@ def test():
     from j2 import libjournal
 
     # verify that firewall channels are inactive by default
-    assert libjournal.Firewall.defaultActive == True
+    assert libjournal.Firewall.defaultActive is True
     # and non-fatal
-    assert libjournal.Firewall.defaultFatal == True
+    assert libjournal.Firewall.defaultFatal is True
     # verify that the channel default device is not set
     assert libjournal.Firewall.defaultDevice == None
 

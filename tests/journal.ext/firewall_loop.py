@@ -7,7 +7,7 @@
 
 def test():
     """
-    Verify that channels lower in the hierarchy inherit their parent default state
+    Verify that repeated use of the same instance works correctly
     """
     # get the channel
     from j2.ext.j2 import Firewall as firewall

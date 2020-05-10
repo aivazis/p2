@@ -7,12 +7,12 @@
 
 def test():
     """
-    Verify that channels lower in the hierarchy inherit their parent default state
+    Verify that empty messages get handled correctly
     """
     # get the channel
     from j2.ext.j2 import Firewall
 
-    # make a channel
+    # make one
     channel = Firewall(name="test.journal.firewall")
 
     # carefully

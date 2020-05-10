@@ -13,22 +13,22 @@ def test():
     from j2 import libjournal
 
     # make a channel
-    ch_1 = libjournal.Firewall("test.channel")
+    ch_1 = libjournal.Warning("test.channel")
     # deactivate it
     ch_1.active = False
-    # and make it non-fatal
-    ch_1.fatal = False
+    # and make it fatal
+    ch_1.fatal = True
 
     # make another
-    ch_2 = libjournal.Firewall("test.channel")
+    ch_2 = libjournal.Warning("test.channel")
     # verify it is inactive
     assert ch_2.active is False
-    # and non-fatal
-    assert ch_2.fatal is False
+    # and fatal
+    assert ch_2.fatal is True
     # activate it
     ch_2.active = True
-    # and make it fatal
-    ch_2.fatal = True
+    # and make it non-fatal
+    ch_2.fatal = False
 
     # verify that both channels are now active
     assert ch_1.active is True
@@ -37,9 +37,9 @@ def test():
     assert bool(ch_1) is True
     assert bool(ch_2) is True
 
-    # verify that they are both fatal
-    assert ch_1.fatal is True
-    assert ch_2.fatal is True
+    # verify that they are both non-fatal
+    assert ch_1.fatal is False
+    assert ch_2.fatal is False
 
     # all done
     return

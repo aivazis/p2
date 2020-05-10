@@ -12,7 +12,7 @@ def test():
     # access
     from j2 import libjournal
 
-    # make a error channel
+    # make a channel
     channel = libjournal.Error("test.channel")
 
     # verify its name

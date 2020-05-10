@@ -7,7 +7,7 @@
 
 def test():
     """
-    Verify that the device base class constructor is unavailable
+    Verify that we can control the minimum verbosity level
     """
     # access
     from j2 import libjournal

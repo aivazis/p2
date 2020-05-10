@@ -7,7 +7,7 @@
 
 def test():
     """
-    Verify that channels lower in the hierarchy inherit their parent default state
+    Verify that we can suppress all journal output
     """
     # get the chronicler
     from j2.ext.j2 import Chronicler as chronicler

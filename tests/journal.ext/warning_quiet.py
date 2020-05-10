@@ -7,7 +7,7 @@
 
 def test():
     """
-    Exercise the warning channel with a realistic example
+    Verify we an suppress all channel output
     """
     # get the channel
     from j2.ext.j2 import Warning as warning
@@ -15,7 +15,7 @@ def test():
     # suppress all output
     warning.quiet()
 
-    # make an warning channel
+    # make a warning channel
     channel = warning(name="tests.journal.warning")
     # add some metadata
     channel.notes["time"] = "now"

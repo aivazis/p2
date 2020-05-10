@@ -7,7 +7,7 @@
 
 def test():
     """
-    Verify that channels lower in the hierarchy inherit their parent default state
+    Verify that we can suppress channel output
     """
     # get the channel
     from j2.ext.j2 import Debug as debug

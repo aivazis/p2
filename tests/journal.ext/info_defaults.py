@@ -13,9 +13,9 @@ def test():
     from j2 import libjournal
 
     # verify that info channels are inactive by default
-    assert libjournal.Informational.defaultActive == True
+    assert libjournal.Informational.defaultActive is True
     # and non-fatal
-    assert libjournal.Informational.defaultFatal == False
+    assert libjournal.Informational.defaultFatal is False
     # verify that the channel default device is not set
     assert libjournal.Informational.defaultDevice == None
 
@@ -26,7 +26,7 @@ def test():
     # and make sure the assignment sticks
     assert libjournal.Informational.defaultDevice is trash
 
-    # make a info channel
+    # make a channel
     channel = libjournal.Informational("test.channel")
     # verify that its view of its default state is consistent
     assert channel.defaultActive == libjournal.Informational.defaultActive

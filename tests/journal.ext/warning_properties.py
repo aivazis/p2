@@ -35,7 +35,7 @@ def test():
     # and the assignment sticks
     assert channel.verbosity == 5
 
-    # verify its activation state is off by default
+    # verify its state is on by default
     assert channel.active is True
     # that it can be modified
     channel.active = False

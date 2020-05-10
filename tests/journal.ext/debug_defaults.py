@@ -13,9 +13,9 @@ def test():
     from j2 import libjournal
 
     # verify that debug channels are inactive by default
-    assert libjournal.Debug.defaultActive == False
+    assert libjournal.Debug.defaultActive is False
     # and non-fatal
-    assert libjournal.Debug.defaultFatal == False
+    assert libjournal.Debug.defaultFatal is False
     # verify that the channel default device is not set
     assert libjournal.Debug.defaultDevice == None
 

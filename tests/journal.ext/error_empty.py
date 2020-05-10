@@ -7,7 +7,7 @@
 
 def test():
     """
-    Verify that channels lower in the hierarchy inherit their parent default state
+    Verify that empty messages are handled correctly
     """
     # get the channel
     from j2.ext.j2 import Error

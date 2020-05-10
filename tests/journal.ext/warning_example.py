@@ -14,13 +14,13 @@ def test():
     # and the channel
     from j2.ext.j2 import Warning as warning
 
-    # make an warning channel
+    # make a warning channel
     channel = warning(name="tests.journal.warning")
     # send the output to trash
     channel.device = trash()
-
     # add some metadata
     channel.notes["time"] = "now"
+
     # inject
     channel.line("warning channel:")
     channel.log("    hello world!")

@@ -7,14 +7,14 @@
 
 def test():
     """
-    Sanity check: verify that the channel is accessible
+    Exercise the simplest use case
     """
     # get the trash can
     from j2.ext.j2 import Trash as trash
     # and the channel
     from j2.ext.j2 import Warning as warning
 
-    # make an warning channel
+    # make a warning channel
     channel = warning(name="tests.journal.warning")
     # send the output to trash
     channel.device = trash()

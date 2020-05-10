@@ -12,19 +12,19 @@ def test():
     # access
     from j2 import libjournal
 
-    # make a info channel
+    # make a channel
     channel = libjournal.Informational("test.channel")
     # get its metadata
     notes = channel.notes
     # adjust the application name
-    notes["application"] = "info_meta"
+    notes["application"] = "info_notes"
     # add something
     notes["author"] = "michael"
 
     # make sure the adjustments stick by getting the value once again
     notes = channel.notes
     # and comparing against expectations
-    assert notes["application"] == "info_meta"
+    assert notes["application"] == "info_notes"
     assert notes["author"] == "michael"
     assert notes["channel"] == "test.channel"
     assert notes["severity"] == "info"

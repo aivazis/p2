@@ -7,7 +7,7 @@
 
 def test():
     """
-    Verify that channels lower in the hierarchy inherit their parent default state
+    Exercise the common use case
     """
     # get the channel
     from j2.ext.j2 import Error as error
@@ -18,7 +18,6 @@ def test():
     channel = error(name="test.journal.error")
     # send the output to trash
     channel.device = trash()
-
     # add some metadata
     channel.notes["time"] = "now"
 

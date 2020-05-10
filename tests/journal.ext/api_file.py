@@ -19,7 +19,6 @@ def test():
     channel = libjournal.Debug(name="test.journal.debug")
     # activate it
     channel.activate()
-
     # add some metadata
     channel.notes["time"] = "now"
 

@@ -19,9 +19,9 @@ def test():
     # the verbosity should be at the default level
     assert channel.verbosity == 1
     # the channel should be active
-    assert channel.active == True
+    assert channel.active is True
     # and fatal
-    assert channel.fatal == True
+    assert channel.fatal is True
 
     # the page should be empty
     assert tuple(channel.page) == ()

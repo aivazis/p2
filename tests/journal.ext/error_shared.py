@@ -14,32 +14,32 @@ def test():
 
     # make a channel
     ch_1 = libjournal.Error("test.channel")
-    # activate it
-    ch_1.active = True
-    # and make it fatal
-    ch_1.fatal = True
+    # deactivate it
+    ch_1.active = False
+    # and make it non-fatal
+    ch_1.fatal = False
 
     # make another
     ch_2 = libjournal.Error("test.channel")
-    # verify it is active
-    assert ch_2.active == True
-    # and fatal
-    assert ch_2.fatal == True
-    # deactivate it
-    ch_2.active = False
-    # and make it non-fatal
-    ch_2.fatal = False
+    # verify it is inactive
+    assert ch_2.active is False
+    # and non-fatal
+    assert ch_2.fatal is False
+    # activate it
+    ch_2.active = True
+    # and make it fatal
+    ch_2.fatal = True
 
-    # verify that both channels are now inactive
-    assert ch_1.active == False
-    assert ch_2.active == False
+    # verify that both channels are now active
+    assert ch_1.active is True
+    assert ch_2.active is True
     # and once again, using {__bool__}
-    assert bool(ch_1) == False
-    assert bool(ch_2) == False
+    assert bool(ch_1) is True
+    assert bool(ch_2) is True
 
-    # verify that they are both non-fatal
-    assert ch_1.fatal == False
-    assert ch_2.fatal == False
+    # verify that they are both fatal
+    assert ch_1.fatal is True
+    assert ch_2.fatal is True
 
     # all done
     return

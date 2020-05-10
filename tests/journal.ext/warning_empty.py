@@ -12,7 +12,7 @@ def test():
     # get the channel
     from j2.ext.j2 import Warning as warning
 
-    # make an warning channel
+    # make a channel
     channel = warning(name="tests.journal.warning")
 
     # inject an empty message

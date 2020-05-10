@@ -7,13 +7,13 @@
 
 def test():
     """
-    Verify that the device base class constructor is unavailable
+    Verify that the manager of the global state is available
     """
     # access
     from j2 import libjournal
 
     # verify we have access to the global state
-    chronicler = libjournal.Chronicler
+    chronicler = libjournal.chronicler
 
     # all done
     return

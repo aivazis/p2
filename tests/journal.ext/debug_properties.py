@@ -42,7 +42,7 @@ def test():
     # and the assignment sticks
     assert channel.active is True
 
-    # verify its not fatal
+    # verify it's not fatal
     assert channel.fatal is False
     # that it can be modified
     channel.fatal = True

@@ -7,7 +7,7 @@
 
 def test():
     """
-    Exercise the error channel with a realistic example
+    Exercise a non-fatal error channel with a realistic example
     """
     # get the trash can
     from j2.ext.j2 import Trash as trash

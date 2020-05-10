@@ -7,7 +7,7 @@
 
 def test():
     """
-    Verify that the device base class constructor is unavailable
+    Verify that the trash can is accessible
     """
     # access
     from j2 import libjournal

@@ -7,7 +7,7 @@
 
 def test():
     """
-    Exercise the info channel with a realistic example
+    Exercise a fatal info channel with a realistic example
     """
     # get the trash can
     from j2.ext.j2 import Trash as trash

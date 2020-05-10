@@ -7,7 +7,7 @@
 
 def test():
     """
-    Verify that channels lower in the hierarchy inherit their parent default state
+    Verify that channel buffers reset correctly after a flush
     """
     # get the channel
     from j2.ext.j2 import Firewall as firewall

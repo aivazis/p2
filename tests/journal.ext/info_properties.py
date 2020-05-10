@@ -12,7 +12,7 @@ def test():
     # access
     from j2 import libjournal
 
-    # make a info channel
+    # make a channel
     channel = libjournal.Informational("test.channel")
 
     # verify its name
@@ -42,7 +42,7 @@ def test():
     # and the assignment sticks
     assert channel.active is False
 
-    # verify its not fatal
+    # verify it's not fatal
     assert channel.fatal is False
     # that it can be modified
     channel.fatal = True

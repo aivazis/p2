@@ -17,14 +17,14 @@ def test():
     # get its metadata
     notes = channel.notes
     # adjust the application name
-    notes["application"] = "firewall_meta"
+    notes["application"] = "firewall_notes"
     # add something
     notes["author"] = "michael"
 
     # make sure the adjustments stick by getting the value once again
     notes = channel.notes
     # and comparing against expectations
-    assert notes["application"] == "firewall_meta"
+    assert notes["application"] == "firewall_notes"
     assert notes["author"] == "michael"
     assert notes["channel"] == "test.channel"
     assert notes["severity"] == "firewall"

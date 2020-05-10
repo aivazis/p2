@@ -7,7 +7,7 @@
 
 def test():
     """
-    Exercise the firewall channel with a realistic example
+    Exercise a non-fatal firewall channel with a realistic example
     """
     # get the trash can
     from j2.ext.j2 import Trash as trash
@@ -29,7 +29,7 @@ def test():
         # inject
         channel.line("firewall:")
         channel.log("    a nasty bug was detected")
-    # if the correct exception was raised
+    # if any exception was raised
     except channel.FirewallError as error:
         # shouldn't get here
         assert False, "unreachable"

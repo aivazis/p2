@@ -7,7 +7,7 @@
 
 def test():
     """
-    Verify that channels lower in the hierarchy inherit their parent default state
+    Verify that the message buffers get reset correctly after a flush
     """
     # get the channel
     from j2.ext.j2 import Debug as debug

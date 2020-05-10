@@ -12,10 +12,10 @@ def test():
     # access
     from j2 import libjournal
 
-    # verify that warning channels are inactive by default
-    assert libjournal.Warning.defaultActive == True
+    # verify that warning channels are active by default
+    assert libjournal.Warning.defaultActive is True
     # and non-fatal
-    assert libjournal.Warning.defaultFatal == False
+    assert libjournal.Warning.defaultFatal is False
     # verify that the channel default device is not set
     assert libjournal.Warning.defaultDevice == None
 

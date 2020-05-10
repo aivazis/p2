@@ -7,7 +7,7 @@
 
 def test():
     """
-    Verify that the device base class constructor is unavailable
+    Verify that the error console is available
     """
     # access
     from j2 import libjournal

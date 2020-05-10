@@ -7,7 +7,7 @@
 
 def test():
     """
-    Exercise the info channel with a realistic example
+    Verify we can suppress all channel output
     """
     # get the channel
     from j2.ext.j2 import Informational as info
