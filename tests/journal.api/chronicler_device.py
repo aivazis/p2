@@ -7,7 +7,7 @@
 
 def test():
     """
-    Verify that the device base class constructor is unavailable
+    Verify that we can set the global default device
     """
     # access
     import j2
@@ -18,12 +18,12 @@ def test():
     # verify that the default device is the console
     assert chronicler.device.name == "cout"
 
-    # make a j2.trash can
-    j2.trash = j2.trash()
+    # make a trash can
+    trash = j2.trash()
     # set it as the device
-    chronicler.device = j2.trash
+    chronicler.device = trash
     # verify the assignment sticks
-    assert chronicler.device is j2.trash
+    assert chronicler.device is trash
     # and that the name is correct
     assert chronicler.device.name == "trash"
 

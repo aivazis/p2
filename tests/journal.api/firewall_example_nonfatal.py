@@ -7,7 +7,7 @@
 
 def test():
     """
-    Exercise the firewall channel with a realistic example
+    Verify we can make firewalls non-fatal
     """
     # get the journal
     import j2
@@ -16,9 +16,8 @@ def test():
     channel = j2.firewall(name="tests.journal.firewall")
     # make it non-fatal
     channel.fatal = False
-    # send the output to j2.trash
+    # send the output to the trash
     channel.device = j2.trash()
-
     # add some metadata
     channel.notes["time"] = "now"
 

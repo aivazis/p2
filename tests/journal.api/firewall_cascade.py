@@ -14,9 +14,9 @@ def test():
 
     # make a channel
     parent = j2.firewall(name="test.index.parent")
-    # verify that the state is off
+    # verify that the state is on
     assert parent.active is True
-    # and that is fatal
+    # that it is fatal
     assert parent.fatal is True
     # and the device is at the default value
     assert parent.device is parent.chronicler.device
@@ -25,12 +25,12 @@ def test():
     parent.active = False
     # and make it non fatal
     parent.fatal = False
-    # and set the device to a j2.trash can
+    # and set the device to a trash can
     parent.device = j2.trash()
 
     # lookup a name that is lower in the hierarchy
     child = j2.firewall(name="test.index.parent.blah.blah.child")
-    # that it's active is the same as the parent
+    # check that its state is the same as the parent
     assert child.active == parent.active
     assert child.fatal == parent.fatal
     # and that it inherited the device correctly

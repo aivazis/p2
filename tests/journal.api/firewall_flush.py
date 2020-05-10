@@ -7,14 +7,14 @@
 
 def test():
     """
-    Verify that channels lower in the hierarchy inherit their parent default state
+    Verify that flushing clears the message buffers
     """
     # get the journal
     import j2
 
     # make a channel
     channel = j2.firewall(name="test.journal.firewall")
-    # send the output to j2.trash
+    # send the output to the trash
     channel.device = j2.trash()
 
     # carefully

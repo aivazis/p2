@@ -7,11 +7,10 @@
 
 def test():
     """
-    Sanity check: verify the bindings of the {error} channel are accessible
+    Sanity check: verify that the channel is accessible
     """
     # access
     from j2 import error
-
     # all done
     return
 

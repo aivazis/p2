@@ -7,14 +7,15 @@
 
 def test():
     """
-    Verify that channels lower in the hierarchy inherit their parent default state
+    Verify that the channel buffers are cleared after flushing a message; this is a non-trivial
+    test because it guarantees that the implementation handles the transaction correctly
     """
     # get the journal
     import j2
 
     # make a channel
     channel = j2.error(name="test.journal.error")
-    # send the output to j2.trash
+    # send the output to the trash
     channel.device = j2.trash()
 
     # carefully

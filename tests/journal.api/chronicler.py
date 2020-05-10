@@ -7,7 +7,7 @@
 
 def test():
     """
-    Verify that the device base class constructor is unavailable
+    Verify that the manager of the global state is accessible
     """
     # access
     import j2

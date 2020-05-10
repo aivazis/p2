@@ -7,7 +7,7 @@
 
 def test():
     """
-    Verify that the device base class constructor is unavailable
+    Verify that we can control the global verbosity threshold
     """
     # access
     import j2

@@ -7,26 +7,26 @@
 
 def test():
     """
-    Verify that the firewall channel wide defaults are as expected
+    Verify that the channel wide defaults are as expected
     """
     # access
     import j2
 
-    # verify that firewall channels are inactive by default
+    # verify that firewall channels are active by default
     assert j2.firewall.defaultActive == True
-    # and non-fatal
+    # and fatal
     assert j2.firewall.defaultFatal == True
     # verify that the channel default device is not set
     assert j2.firewall.defaultDevice == None
 
-    # make a j2.trash can
-    j2.trash = j2.trash()
+    # make a trash can
+    trash = j2.trash()
     # make it the default device
-    j2.firewall.defaultDevice = j2.trash
+    j2.firewall.defaultDevice = trash
     # and make sure the assignment sticks
-    assert j2.firewall.defaultDevice is j2.trash
+    assert j2.firewall.defaultDevice is trash
 
-    # make a firewall channel
+    # make a channel
     channel = j2.firewall("test.channel")
     # verify that its view of its default state is consistent
     assert channel.defaultActive == j2.firewall.defaultActive

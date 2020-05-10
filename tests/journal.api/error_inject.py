@@ -7,17 +7,17 @@
 
 def test():
     """
-    Verify that channels lower in the hierarchy inherit their parent default state
+    Verify that we can inject simple messages correctly
     """
     # get the journal
     import j2
 
     # make a channel
     channel = j2.error(name="test.journal.error")
-    # send the output to j2.trash
-    channel.device = j2.trash()
-    # make the error non-fatal
+    # make it non-fatal
     channel.fatal = False
+    # send the output to the trash
+    channel.device = j2.trash()
 
     # inject
     channel.log("hello world!")

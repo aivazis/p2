@@ -12,19 +12,21 @@ def test():
     # access
     import j2
 
-    # make a debug channel
+    # make a channel
     channel = j2.debug("test.channel")
     # get its metadata
     notes = channel.notes
     # adjust the application name
-    notes["application"] = "debug_meta"
+    notes["application"] = "debug_notes"
     # add something
     notes["author"] = "michael"
 
-    # make sure the adjustments stick by getting the value once again
+    # make sure the adjustments stick by asking for the notes once again; this step is
+    # non-trivial: if support is provided by the C++ library, it ensures that the notes are
+    # mutable
     notes = channel.notes
     # and comparing against expectations
-    assert notes["application"] == "debug_meta"
+    assert notes["application"] == "debug_notes"
     assert notes["author"] == "michael"
     assert notes["channel"] == "test.channel"
     assert notes["severity"] == "debug"

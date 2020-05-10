@@ -7,7 +7,7 @@
 
 def test():
     """
-    Verify that channels lower in the hierarchy inherit their parent default state
+    Verify that the message buffers reset correctly after flushing
     """
     # get the journal
     import j2
@@ -16,7 +16,7 @@ def test():
     channel = j2.debug(name="test.journal.debug")
     # activate it
     channel.activate()
-    # but send the output to j2.trash
+    # but send the output to the trash
     channel.device = j2.trash()
 
     # inject

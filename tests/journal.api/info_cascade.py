@@ -21,11 +21,11 @@ def test():
     # and the device is at the default value
     assert parent.device is j2.info.chronicler.device
 
-    # activate it
-    parent.active = True
+    # deactivate it
+    parent.active = False
     # make it fatal
     parent.fatal = True
-    # and set the device to a j2.trash can
+    # and set the device to a trash can
     parent.device = j2.trash()
 
     # lookup a name that is lower in the hierarchy

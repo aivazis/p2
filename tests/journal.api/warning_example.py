@@ -7,18 +7,18 @@
 
 def test():
     """
-    Exercise the j2.warning channel with a realistic example
+    Exercise the channel with a realistic example
     """
     # get the journal
     import j2
 
-    # make an j2.warning channel
+    # make a channel
     channel = j2.warning(name="tests.journal.warning")
-    # send the output to j2.trash
+    # send the output to the trash
     channel.device = j2.trash()
-
     # add some metadata
     channel.notes["time"] = "now"
+
     # inject
     channel.line("warning channel:")
     channel.log("    hello world!")

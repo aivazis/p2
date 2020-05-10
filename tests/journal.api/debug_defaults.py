@@ -7,7 +7,7 @@
 
 def test():
     """
-    Verify that the debug channel wide defaults are as expected
+    Verify that the channel wide defaults are as expected
     """
     # access
     import j2
@@ -19,12 +19,12 @@ def test():
     # verify that the channel default device is not set
     assert j2.debug.defaultDevice == None
 
-    # make a j2.trash can
-    j2.trash = j2.trash()
+    # make a trash can
+    trash = j2.trash()
     # make it the default device
-    j2.debug.defaultDevice = j2.trash
+    j2.debug.defaultDevice = trash
     # and make sure the assignment sticks
-    assert j2.debug.defaultDevice is j2.trash
+    assert j2.debug.defaultDevice is trash
 
     # make a debug channel
     channel = j2.debug("test.channel")

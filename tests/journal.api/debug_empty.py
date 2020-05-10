@@ -7,7 +7,7 @@
 
 def test():
     """
-    Verify that channels lower in the hierarchy inherit their parent default state
+    Verify that empty messages are injected correctly
     """
     # get the channel
     import j2

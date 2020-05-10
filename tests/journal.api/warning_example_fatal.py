@@ -7,16 +7,16 @@
 
 def test():
     """
-    Exercise the j2.warning channel with a realistic example
+    Exercise the channel with a realistic example when it is fatal
     """
     # get the journal
     import j2
 
-    # make a j2.warning channel
+    # make a channel
     channel = j2.warning(name="tests.journal.warning")
     # make it fatal
     channel.fatal = True
-    # send the output to j2.trash
+    # send the output to the trash
     channel.device = j2.trash()
 
     # add some metadata

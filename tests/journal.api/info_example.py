@@ -7,18 +7,18 @@
 
 def test():
     """
-    Exercise the j2.info channel with a realistic example
+    Exercise the common use case
     """
     # get the journal
     import j2
 
-    # make an j2.info channel
+    # make a channel
     channel = j2.info(name="tests.journal.info")
-    # send the output to j2.trash
+    # send the output to the trash
     channel.device = j2.trash()
-
     # add some metadata
     channel.notes["time"] = "now"
+
     # inject
     channel.line("info channel:")
     channel.log("    hello world!")

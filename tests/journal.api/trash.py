@@ -7,15 +7,15 @@
 
 def test():
     """
-    Verify that the device base class constructor is unavailable
+    Verify that the trash can is accessible
     """
     # access
     import j2
 
-    # make a j2.trash can
-    j2.trash = j2.trash()
+    # make a trash can
+    trash = j2.trash()
     # verify its name is what we expect
-    assert j2.trash.name == "trash"
+    assert trash.name == "trash"
 
     # all done
     return

@@ -7,7 +7,7 @@
 
 def test():
     """
-    Verify that the device base class constructor is unavailable
+    Verify that we have write access to the global metadata and that channels inherit them automatically
     """
     # access
     import j2
@@ -19,7 +19,7 @@ def test():
     gNotes = chronicler.notes
     # adjust the application name
     gNotes["application"] = "chronicler"
-    # and add some
+    # and add something new
     gNotes["author"] = "michael"
 
     # now, make a channel

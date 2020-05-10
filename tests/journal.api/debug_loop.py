@@ -7,7 +7,7 @@
 
 def test():
     """
-    Verify that content is flushed correctly when the same instance is used multiple times
+    Verify that content is flushed correctly when the same channel instance is used multiple times
     """
     # get the journal
     import j2
@@ -16,10 +16,10 @@ def test():
     channel = j2.debug(name="test.journal.debug")
     # activate it
     channel.activate()
-    # but send the output to j2.trash
+    # but send the output to the trash
     channel.device = j2.trash()
 
-    # a few times
+    # for a few times
     for _ in range(10):
         # inject
         channel.log("hello world!")

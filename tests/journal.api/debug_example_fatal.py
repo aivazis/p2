@@ -7,18 +7,18 @@
 
 def test():
     """
-    Exercise the debug channel with a realistic example
+    Exercise a channel with a realistic example when the channel is fatal
     """
     # the journal
     import j2
 
-    # make a debug channel
+    # make a channel
     channel = j2.debug(name="tests.journal.debug")
     # activate it
     channel.active = True
     # make it fatal
     channel.fatal = True
-    # but send the output to j2.trash
+    # but send the output to the trash
     channel.device = j2.trash()
 
     # add some metadata

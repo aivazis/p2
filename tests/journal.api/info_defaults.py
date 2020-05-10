@@ -7,26 +7,26 @@
 
 def test():
     """
-    Verify that the j2.info channel wide defaults are as expected
+    Verify that the channel wide defaults are as expected
     """
     # access
     import j2
 
-    # verify that j2.info channels are inactive by default
+    # verify that info channels are active by default
     assert j2.info.defaultActive == True
     # and non-fatal
     assert j2.info.defaultFatal == False
     # verify that the channel default device is not set
     assert j2.info.defaultDevice == None
 
-    # make a j2.trash can
-    j2.trash = j2.trash()
+    # make a trash can
+    trash = j2.trash()
     # make it the default device
-    j2.info.defaultDevice = j2.trash
+    j2.info.defaultDevice = trash
     # and make sure the assignment sticks
-    assert j2.info.defaultDevice is j2.trash
+    assert j2.info.defaultDevice is trash
 
-    # make a j2.info channel
+    # make a channel
     channel = j2.info("test.channel")
     # verify that its view of its default state is consistent
     assert channel.defaultActive == j2.info.defaultActive

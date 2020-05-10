@@ -7,14 +7,14 @@
 
 def test():
     """
-    Verify that channels lower in the hierarchy inherit their parent default state
+    Exercise the simplest non-trivial use case
     """
     # get the journal
     import j2
 
     # make a channel
     channel = j2.firewall(name="test.journal.firewall")
-    # send the output to j2.trash
+    # send the output to the trash
     channel.device = j2.trash()
     # make the firewall non-fatal
     channel.fatal = False

@@ -7,26 +7,26 @@
 
 def test():
     """
-    Verify that the j2.warning channel wide defaults are as expected
+    Verify that the channel wide defaults are as expected
     """
     # access
     import j2
 
-    # verify that j2.warning channels are inactive by default
+    # verify that channels are active by default
     assert j2.warning.defaultActive == True
     # and non-fatal
     assert j2.warning.defaultFatal == False
     # verify that the channel default device is not set
     assert j2.warning.defaultDevice == None
 
-    # make a j2.trash can
-    j2.trash = j2.trash()
+    # make a trash can
+    trash = j2.trash()
     # make it the default device
-    j2.warning.defaultDevice = j2.trash
+    j2.warning.defaultDevice = trash
     # and make sure the assignment sticks
-    assert j2.warning.defaultDevice is j2.trash
+    assert j2.warning.defaultDevice is trash
 
-    # make a j2.warning channel
+    # make a another channel
     channel = j2.warning("test.channel")
     # verify that its view of its default state is consistent
     assert channel.defaultActive == j2.warning.defaultActive

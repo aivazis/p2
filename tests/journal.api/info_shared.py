@@ -21,7 +21,7 @@ def test():
 
     # make another
     ch_2 = j2.info("test.channel")
-    # verify it is active
+    # verify it is inactive
     assert ch_2.active == False
     # and fatal
     assert ch_2.fatal == True

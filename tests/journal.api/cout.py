@@ -7,12 +7,12 @@
 
 def test():
     """
-    Verify that the device base class constructor is unavailable
+    Verify that the console is accessible
     """
     # access
     import j2
 
-    # make a j2.trash can
+    # instantiate the console
     console = j2.cout()
     # verify its name is what we expect
     assert console.name == "cout"

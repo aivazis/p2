@@ -12,9 +12,8 @@ def test():
     # get the journal
     import j2
 
-    # make an j2.info channel
+    # make a channel
     channel = j2.info(name="tests.journal.info")
-
     # inject an empty message
     channel.log()
 

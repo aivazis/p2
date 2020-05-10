@@ -17,14 +17,16 @@ def test():
     # get its metadata
     notes = channel.notes
     # adjust the application name
-    notes["application"] = "firewall_meta"
+    notes["application"] = "firewall_notes"
     # add something
     notes["author"] = "michael"
 
-    # make sure the adjustments stick by getting the value once again
+    # make sure the adjustments stick by asking for the notes once again; this step is
+    # non-trivial: if support is provided by the C++ library, it ensures that the notes are
+    # mutable
     notes = channel.notes
     # and comparing against expectations
-    assert notes["application"] == "firewall_meta"
+    assert notes["application"] == "firewall_notes"
     assert notes["author"] == "michael"
     assert notes["channel"] == "test.channel"
     assert notes["severity"] == "firewall"

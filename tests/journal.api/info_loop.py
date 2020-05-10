@@ -12,12 +12,12 @@ def test():
     # get the journal
     import j2
 
-    # make an j2.info channel
+    # make a channel
     channel = j2.info(name="tests.journal.info")
-    # send the output to j2.trash
+    # send the output to the trash
     channel.device = j2.trash()
 
-    # a few times
+    # for a few times
     for _ in range(10):
         # inject
         channel.log("hello world!")

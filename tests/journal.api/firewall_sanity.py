@@ -7,11 +7,10 @@
 
 def test():
     """
-    Sanity check: verify the bindings of the {firewall} channel are accessible
+    Verify the channel is accessible
     """
     # access
     from j2 import firewall
-
     # all done
     return
 

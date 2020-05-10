@@ -7,14 +7,14 @@
 
 def test():
     """
-    Verify that channels lower in the hierarchy inherit their parent default state
+    Exercise the usual test case
     """
     # get the journal
     import j2
 
     # make a channel
     channel = j2.error(name="test.journal.error")
-    # send the output to j2.trash
+    # send the output to the trash
     channel.device = j2.trash()
 
     # add some metadata

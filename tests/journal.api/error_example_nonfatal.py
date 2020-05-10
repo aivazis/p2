@@ -7,7 +7,7 @@
 
 def test():
     """
-    Exercise the error channel with a realistic example
+    Exercise the usual test case with an non-fatal channel
     """
     # get the journal
     import j2
@@ -16,7 +16,7 @@ def test():
     channel = j2.error(name="tests.journal.error")
     # make it non-fatal
     channel.fatal = False
-    # send the output to j2.trash
+    # send the output to the trash
     channel.device = j2.trash()
 
     # add some metadata

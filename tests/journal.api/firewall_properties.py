@@ -51,12 +51,12 @@ def test():
 
     # verify that the accessible device is the console
     assert channel.device.name == "cout"
-    # make a j2.trash can
-    j2.trash = j2.trash()
+    # make a trash can
+    trash = j2.trash()
     # register it as the device
-    channel.device = j2.trash
+    channel.device = trash
     # and verify that the assignment sticks
-    assert channel.device is j2.trash
+    assert channel.device is trash
     # check the name
     assert channel.device.name == "trash"
     # and verify that it's different from the default device held by the class

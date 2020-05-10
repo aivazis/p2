@@ -25,7 +25,7 @@ def test():
     parent.active = True
     # and make it fatal
     parent.fatal = True
-    # and set the device to a j2.trash can
+    # and set the device to a trash can
     parent.device = j2.trash()
 
     # lookup a name that is lower in the hierarchy

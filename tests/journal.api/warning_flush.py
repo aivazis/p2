@@ -12,9 +12,9 @@ def test():
     # get the journal
     import j2
 
-    # make an j2.warning channel
+    # make a channel
     channel = j2.warning(name="tests.journal.warning")
-    # send the output to j2.trash
+    # send the output to the trash
     channel.device = j2.trash()
 
     # inject

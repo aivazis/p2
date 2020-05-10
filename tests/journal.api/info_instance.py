@@ -18,6 +18,11 @@ def test():
     assert channel.name == "tests.journal.info"
     # the verbosity should be at the default level
     assert channel.verbosity == 1
+    # the channel should be active
+    assert channel.active == True
+    # and non fatal
+    assert channel.fatal == False
+
     # the page should be empty
     assert list(channel.page) == []
     # verify the metadata

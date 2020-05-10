@@ -7,7 +7,7 @@
 
 def test():
     """
-    Verify that the device base class constructor is unavailable
+    Verify that the device base class is not exported
     """
     # access
     import j2
@@ -16,7 +16,7 @@ def test():
     try:
         # access the device base class
         j2.Device()
-        # which is not Published
+        # which is not published
         assert False, "unreachable"
     # if it fails
     except AttributeError:
