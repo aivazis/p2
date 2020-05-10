@@ -18,6 +18,8 @@ def test():
     parent = Informational(name="test.index.parent")
     # verify that the state is on
     assert parent.active is True
+    # that it's non-fatal
+    assert parent.fatal is False
     # and the device is at the default value
     assert parent.device is Informational.chronicler.device
 
@@ -30,6 +32,7 @@ def test():
     child = Informational(name="test.index.parent.blah.blah.child")
     # that it's state is the same as the parent
     assert child.active == parent.active
+    assert child.fatal == parent.fatal
     # and that it inherited the device correctly
     assert child.device is parent.device
 

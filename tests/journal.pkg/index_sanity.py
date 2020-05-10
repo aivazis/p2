@@ -7,7 +7,7 @@
 
 def test():
     """
-    Sanity check: verify that the package is accessible
+    Sanity check: verify that the inventory index is accessible
     """
     # access the index
     from j2.Index import Index

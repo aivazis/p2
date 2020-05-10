@@ -28,11 +28,18 @@ def test():
     assert channel.active == False
     # and again using the conversion to bool
     assert not channel
+    # verify it is non-fatal
+    assert channel.fatal == False
 
     # activate it
     channel.activate()
     # and check
     assert channel.active == True
+
+    # make it fatal
+    channel.fatal = True
+    # and check
+    assert channel.fatal == True
 
     # all done
     return

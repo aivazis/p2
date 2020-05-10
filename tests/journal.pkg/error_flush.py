@@ -14,9 +14,9 @@ def test():
     # and the channel
     from j2.Error import Error as error
 
-    # make an error channel
+    # make a channel
     channel = error(name="tests.journal.error")
-    # send the output to trash
+    # send the output to the trash
     channel.device = trash()
 
     # carefully

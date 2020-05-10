@@ -18,11 +18,15 @@ def test():
     parent = Debug(name="test.index.parent")
     # verify that the state is off
     assert parent.active is False
+    # it's non-fatal
+    assert parent.fatal is False
     # and the device is at the default value
     assert parent.device is Debug.chronicler.device
 
     # activate it
     parent.active = True
+    # make it fatal
+    parent.fatal = True
     # and set the device to a trash can
     parent.device = Trash()
 
@@ -30,6 +34,7 @@ def test():
     child = Debug(name="test.index.parent.blah.blah.child")
     # that it's state is the same as the parent
     assert child.active == parent.active
+    assert child.fatal == parent.fatal
     # and that it inherited the device correctly
     assert child.device is parent.device
 

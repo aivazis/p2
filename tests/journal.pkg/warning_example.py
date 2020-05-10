@@ -18,9 +18,9 @@ def test():
     channel = warning(name="tests.journal.warning")
     # send the output to trash
     channel.device = trash()
-
     # add some metadata
     channel.notes["time"] = "now"
+
     # inject
     channel.line("warning channel:")
     channel.log("    hello world!")

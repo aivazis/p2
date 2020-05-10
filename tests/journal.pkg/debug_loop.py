@@ -14,14 +14,14 @@ def test():
     # and the channel
     from j2.Debug import Debug as debug
 
-    # make a debug channel
+    # make a channel
     channel = debug(name="tests.journal.debug")
     # activate it
     channel.activate()
     # but send the output to trash
     channel.device = trash()
 
-    # a few times
+    # for a few times
     for _ in range(10):
         # inject
         channel.log("hello world!")

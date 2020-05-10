@@ -13,18 +13,18 @@ def test():
     # the trash can
     from j2.Trash import Trash as trash
     # get the channel
-    from j2.Channel import Channel
+    from j2.Channel import Channel as channel
 
-    # ask it of the default device
-    builtin = Channel.getDefaultDevice()
+    # ask it for the default device
+    builtin = channel.getDefaultDevice()
 
     # make new device
     custom = trash()
     # install it
-    old = Channel.setDefaultDevice(device=custom)
+    old = channel.setDefaultDevice(device=custom)
 
     # check that the default device is what we just installed
-    assert Channel.getDefaultDevice() is custom
+    assert channel.getDefaultDevice() is custom
     # and the device we just replaced was the original built-in one
     assert old is builtin
 

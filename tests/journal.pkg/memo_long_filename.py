@@ -7,7 +7,7 @@
 
 def test():
     """
-    Exercise the developer facing renderer
+    Verify that the renderer can trim long file names correctly
     """
     # get the renderer
     from j2.Memo import Memo as memo

@@ -7,7 +7,7 @@
 
 def test():
     """
-    Exercise the debug channel with a realistic example
+    Exercise a fatal debug channel with a realistic example
     """
     # access the parts
     from j2.Trash import Trash as trash

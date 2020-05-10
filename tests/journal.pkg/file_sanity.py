@@ -7,7 +7,7 @@
 
 def test():
     """
-    Verify that we can build a stream based device
+    Verify that we can build a file based device
     """
     # pick a file name
     filename = "file_sanity.log"

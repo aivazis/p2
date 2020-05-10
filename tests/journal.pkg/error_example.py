@@ -22,7 +22,6 @@ def test():
     # add some metadata
     channel.notes["time"] = "now"
 
-
     # carefully
     try:
         # inject

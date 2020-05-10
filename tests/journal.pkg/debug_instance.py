@@ -20,6 +20,9 @@ def test():
     assert channel.verbosity == 1
     # the channel should be inactive
     assert channel.active == False
+    # and non-fatal
+    assert channel.fatal == False
+
     # the page should be empty
     assert channel.page == []
     # verify the metadata

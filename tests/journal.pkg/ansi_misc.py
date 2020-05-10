@@ -7,7 +7,7 @@
 
 def test():
     """
-    Check a few of the canonical X11 color names
+    Check a few of the miscellaneous color names
     """
     # access the color map
     from j2.ANSI import ANSI
@@ -18,6 +18,7 @@ def test():
     # the reset sequence
     assert ANSI.misc("normal") == CSI.reset()
 
+    # my picks
     assert ANSI.misc("amber") == CSI.csi24(0xff, 0xbf, 0x00)
     assert ANSI.misc("sage") == CSI.csi24(176, 208, 176)
 

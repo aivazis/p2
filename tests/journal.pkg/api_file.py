@@ -19,9 +19,9 @@ def test():
     channel = j2.debug(name="tests.journal.debug")
     # activate it
     channel.activate()
-
     # add some metadata
     channel.notes["time"] = "now"
+
     # inject
     channel.line("debug channel:")
     channel.log("    hello world!")

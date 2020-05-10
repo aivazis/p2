@@ -7,7 +7,7 @@
 
 def test():
     """
-    Sanity check: verify that the channel is accessible
+    Exercise the simplest use case
     """
     # get the trash can
     from j2.Trash import Trash as trash

@@ -7,7 +7,7 @@
 
 def test():
     """
-    Exercise the warning channel with a realistic example
+    Exercise a fatal warning channel with a realistic example
     """
     # get the trash can
     from j2.Trash import Trash as trash

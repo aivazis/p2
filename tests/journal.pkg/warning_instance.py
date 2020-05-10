@@ -7,7 +7,7 @@
 
 def test():
     """
-    Sanity check: verify that the channel is accessible
+    Verify te channel state
     """
     # get the channel
     from j2.Warning import Warning as warning
@@ -19,7 +19,10 @@ def test():
     # the verbosity should be at the default level
     assert channel.verbosity == 1
     # the channel should be active
-    assert channel.active == True
+    assert channel.active is True
+    # and non-fatal
+    assert channel.fatal is False
+
     # the page should be empty
     assert channel.page == []
     # verify the metadata

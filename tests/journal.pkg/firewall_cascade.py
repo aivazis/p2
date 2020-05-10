@@ -23,8 +23,8 @@ def test():
     # and the device is at the default value
     assert parent.device is Firewall.chronicler.device
 
-    # activate it
-    parent.active = True
+    # deactivate it
+    parent.active = False
     # make it non-fatal
     parent.fatal = False
     # and set the device to a trash can

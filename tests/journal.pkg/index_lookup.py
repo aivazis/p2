@@ -27,6 +27,8 @@ def test():
     assert isinstance(inventory, Severity.inventory_type)
     # hence the state is on
     assert inventory.active is True
+    # it is fatal
+    assert inventory.fatal is True
     # and the device is null
     assert inventory.device is None
 

@@ -7,7 +7,7 @@
 
 def test():
     """
-    Check a few of the canonical X11 color names
+    Check a few of the canonical greay tones
     """
     # access the color map
     from j2.ANSI import ANSI

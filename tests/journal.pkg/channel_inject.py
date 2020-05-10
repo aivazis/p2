@@ -8,7 +8,7 @@
 # make sure the injection interface works as expected
 def test():
     """
-    Exercise the channel state
+    Exercise a simple use case
     """
     # get the channel base class
     from j2.Channel import Channel

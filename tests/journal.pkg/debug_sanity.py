@@ -9,7 +9,7 @@ def test():
     """
     Sanity check: verify that the channel is accessible
     """
-    # access the channel constructor
+    # access the channel class
     from j2.Debug import Debug
     # all done
     return

@@ -7,7 +7,7 @@
 
 def test():
     """
-    Sanity check: verify that the channel is accessible
+    Verify the channel state
     """
     # get the channel
     from j2.Informational import Informational as info
@@ -18,6 +18,11 @@ def test():
     assert channel.name == "tests.journal.info"
     # the verbosity should be at the default level
     assert channel.verbosity == 1
+    # it should be active
+    assert channel.active is True
+    # and non-fatal
+    assert channel.fatal is False
+
     # the page should be empty
     assert channel.page == []
     # verify the metadata

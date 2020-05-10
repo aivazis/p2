@@ -23,15 +23,21 @@ def test():
     channel_1 = Severity(name="test.channel")
     # verify its name
     assert channel_1.name == "test.channel"
-    # its state
+    # verify it is inactive
     assert channel_1.active == False
     # and again using the conversion to bool
     assert not channel_1
+    # check that it is non-fatal
+    assert channel_1.fatal == False
 
     # activate it
     channel_1.activate()
     # and check
     assert channel_1.active == True
+    # make it fatal
+    channel_1.fatal = True
+    # and check
+    assert channel_1.fatal == True
 
     # make another channel by the same name
     channel_2 = Severity(name="test.channel")
@@ -39,6 +45,8 @@ def test():
     assert channel_2.name == "test.channel"
     # verify it's on
     assert channel_2.active == True
+    # and fatal
+    assert channel_2.fatal == True
 
     # deactivate it
     channel_2.active = False
@@ -46,6 +54,13 @@ def test():
     assert channel_2.active == False
     # and that the new state is mirrored by channel_1
     assert channel_1.active == False
+
+    # make it non-fatal
+    channel_2.fatal = False
+    # verify
+    assert channel_2.fatal == False
+    # and that the new state is mirrored by channel_1
+    assert channel_1.fatal == False
 
     # all done
     return

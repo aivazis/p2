@@ -7,7 +7,7 @@
 
 def test():
     """
-    Check a few of the canonical X11 color names
+    Check that the color tables respond well when asked for color names that don't exist
     """
     # access the color map
     from j2.ANSI import ANSI

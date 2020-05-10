@@ -40,7 +40,7 @@ def test():
     Severity.setDefaultDevice(trash)
     # and ask for it back
     shared = Severity.getDefaultDevice()
-    # verify that that's what the two channel see now
+    # verify that that's what the two channels see now
     assert channel_1.device is shared
     assert channel_2.device is shared
 

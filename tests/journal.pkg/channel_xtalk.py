@@ -25,7 +25,7 @@ def test():
         warning channel
         """
 
-    class error(Channel, active=True):
+    class error(Channel, active=True, fatal=True):
         """
         error channel
         """
@@ -50,6 +50,14 @@ def test():
     assert warning_2.active == True
     assert error_1.active == True
     assert error_2.active == True
+
+    # fatality
+    assert info_1.fatal == False
+    assert info_2.fatal == False
+    assert warning_1.fatal == False
+    assert warning_2.fatal == False
+    assert error_1.fatal == True
+    assert error_2.fatal == True
 
     # get the info index
     infos = info.index

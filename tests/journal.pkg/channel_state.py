@@ -10,7 +10,7 @@ def test():
     """
     Exercise the channel state
     """
-    # and the channel base class
+    # get the channel base class
     from j2.Channel import Channel
 
     # make one

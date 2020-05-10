@@ -27,18 +27,18 @@ def test():
     index_1 = channel_1.index
     # verify it has exactly two channels
     assert len(index_1) == 2
-    # one of them is the name of {channel_1}
+    # one of them is {channel_1}
     assert channel_1.name in index_1
-    # and the other is the name of {channel_2}
+    # and the other is {channel_2}
     assert channel_2.name in index_1
 
     # repeat, through the second channel
     index_2 = channel_1.index
     # verify it has exactly two channels
     assert len(index_2) == 2
-    # one of them is the name of {channel_1}
+    # one of them is {channel_1}
     assert channel_1.name in index_2
-    # and the other is the name of {channel_2}
+    # and the other is {channel_2}
     assert channel_2.name in index_2
 
     # all done
