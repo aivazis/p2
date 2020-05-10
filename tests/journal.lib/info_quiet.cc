@@ -10,7 +10,7 @@
 #include <cassert>
 
 
-// exercise the channel manipulators
+// verify we can suppress channel output
 int main() {
     // quiet {info} channels by sending the output to a trash can
     pyre::journal::info_t::quiet();

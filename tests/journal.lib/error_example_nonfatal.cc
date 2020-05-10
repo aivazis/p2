@@ -15,7 +15,7 @@ using trash_t = pyre::journal::trash_t;
 using myerror_t = pyre::journal::error_t;
 
 
-// basic error example
+// basic error example with a non-fatal channel
 int main() {
     // make an error channel
     myerror_t channel("tests.journal.error");

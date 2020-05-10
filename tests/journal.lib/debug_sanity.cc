@@ -6,26 +6,21 @@
 
 // get the journal
 #include <p2/journal.h>
+// support
+#include <cassert>
 
 
 // verify that the debug diagnostic is off by default, and that we can manipulate its state
 int main() {
     // make a debug channel
-    pyre::journal::debug_t channel("tests.journal.null");
+    pyre::journal::debug_t channel("tests.journal.debug");
 
-    // if it's active by default
-    if (channel) {
-        // we have a problem
-        throw pyre::journal::firewall_error("active debug channel");
-    }
-
-    // attempt to activate
-    channel.activate();
-    // if it failed to activate
-    if (!channel) {
-        // we have a problem
-        throw pyre::journal::firewall_error("debug channel could not be activated");
-    }
+    // check its name
+    assert (channel.name() == "tests.journal.debug");
+    // by default, it should be inactive
+    assert (channel.active() == false);
+    // and non-fatal
+    assert (channel.fatal() == false);
 
     // all done
     return 0;

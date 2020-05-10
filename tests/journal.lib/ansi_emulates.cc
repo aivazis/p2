@@ -14,11 +14,11 @@
 using ansi_t = pyre::journal::ansi_t;
 
 
-// verify that we cab detect ANSI emulation reliably; the harness sets things up and passes a
+// verify that we can detect ANSI emulation reliably; the harness sets things up and passes a
 // flag on the command line so we can set our expectations
 int main(int argc, char *argv[]) {
 
-    // the user hands his expectation
+    // the test harness hands its expectation
     bool expectation = argc > 1 ? std::atoi(argv[1]) : true;
     // ask the wrapper whether the underlying terminal type is ANSI compatible
     auto observation = ansi_t::compatible();

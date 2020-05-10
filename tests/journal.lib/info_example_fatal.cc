@@ -14,7 +14,7 @@
 using info_t = pyre::journal::info_t;
 
 
-// exercise the channel manipulators
+// exercise a fatal channel
 int main() {
     // make an info channel
     info_t channel("tests.journal.info");

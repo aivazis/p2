@@ -14,7 +14,7 @@
 using warning_t = pyre::journal::warning_t;
 
 
-// exercise the channel manipulators
+// exercise the common use case with a fatal channel
 int main() {
     // make a warning channel
     warning_t channel("tests.journal.warning");

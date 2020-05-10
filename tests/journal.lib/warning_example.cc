@@ -10,7 +10,7 @@
 #include <cassert>
 
 
-// exercise the channel manipulators
+// exercise the common use case
 int main() {
     // make a warning channel
     pyre::journal::warning_t channel("tests.journal.warning");

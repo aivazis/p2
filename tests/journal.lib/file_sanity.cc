@@ -22,6 +22,8 @@ int main() {
     // instantiate
     file_t file(filename);
     // check its name
+    assert (file.name() == "file");
+    // and its path
     assert (file.path() == filename);
 
     // all done

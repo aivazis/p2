@@ -15,7 +15,7 @@ using info_t = pyre::journal::info_t;
 using trash_t = pyre::journal::trash_t;
 
 
-// exercise the channel manipulators
+// make sure repeated use doesn't leave junk behind
 int main() {
     // make an info channel
     info_t channel("tests.journal.info");

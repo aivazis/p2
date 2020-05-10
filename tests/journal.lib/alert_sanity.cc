@@ -23,7 +23,7 @@ int main() {
     globals["application"] = "alert";
     globals["author"] = "michael";
 
-    // use a {info_t} to build a document and its metadata
+    // use a channel to build a document and its metadata
     info_t channel("alert");
     // put some stuff in it; careful not to flush so we don't lose everything
     channel

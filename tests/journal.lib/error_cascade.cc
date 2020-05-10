@@ -36,7 +36,7 @@ int main() {
     // and set the device to a trash can
     parent.device(std::make_shared<trash_t>());
 
-    // make a error that's lower in the hierarchy
+    // make a channel that's lower in the hierarchy
     myerror_t child("test.error.parent.blah.blah.child");
     // make sure its activation state is what's expected
     assert(child.active() == parent.active());

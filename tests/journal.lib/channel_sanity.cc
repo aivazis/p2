@@ -48,6 +48,11 @@ int main() {
     // and check
     assert (channel.active() == false);
 
+    // make it fatal
+    channel.fatal(true);
+    // and check
+    assert (channel.fatal() == true);
+
     // all done
     return 0;
 }

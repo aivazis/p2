@@ -15,7 +15,7 @@ using trash_t = pyre::journal::trash_t;
 using firewall_t = pyre::journal::firewall_t;
 
 
-// exercise the channel manipulators
+// exercise a non-fatal channel
 int main() {
     // make a firewall
     firewall_t channel("tests.journal.firewall");

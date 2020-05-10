@@ -11,11 +11,11 @@
 
 
 // channel stub
-class channel_t : public pyre::journal::channel_t<channel_t> {
+class severity_t : public pyre::journal::channel_t<severity_t> {
     // metamethods
 public:
-    inline explicit channel_t(const name_type & name) :
-        pyre::journal::channel_t<channel_t>(name) {}
+    inline explicit severity_t(const name_type & name) :
+        pyre::journal::channel_t<severity_t>(name) {}
 
     // implementation details
     inline void record() {}
@@ -26,7 +26,7 @@ public:
 // compile time: make sure injection works as expected
 int main() {
     // make a channel
-    channel_t channel("channel");
+    severity_t channel("channel");
 
     // inject something
     channel

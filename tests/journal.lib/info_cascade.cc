@@ -25,6 +25,8 @@ int main() {
     myinfo_t parent("test.info.parent");
     // its activation state is what's expected
     assert(parent.active());
+    // it is non-fatal
+    assert(parent.fatal() == false);
     // and the device is the global default
     assert(parent.device() == chronicler_t::device());
     // turn it off
@@ -32,10 +34,11 @@ int main() {
     // and set the device to a trash can
     parent.device(std::make_shared<trash_t>());
 
-    // make a info that's lower in the hierarchy
+    // make a channel that's lower in the hierarchy
     myinfo_t child("test.info.parent.blah.blah.child");
     // make sure its activation state is what's expected
     assert(child.active() == parent.active());
+    assert(child.fatal() == parent.fatal());
     // and that it inherited the device
     assert(child.device() == parent.device());
 

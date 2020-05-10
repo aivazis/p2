@@ -10,7 +10,7 @@
 #include <cassert>
 
 
-// exercise the channel manipulators
+// verify that injection happens correctly even in the absence of location information
 int main() {
     // make an info channel
     pyre::journal::info_t channel("tests.journal.info");
