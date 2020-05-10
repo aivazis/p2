@@ -25,6 +25,14 @@ api(py::module & m) {
           "register the application {name}"
           );
 
+    // suppress all output
+    m.def("quiet",
+          // the implementation
+          &pyre::journal::quiet,
+          // the docstring
+          "suppress all channel output"
+          );
+
     // send output to a log file
     m.def("logfile",
           // the implementation
