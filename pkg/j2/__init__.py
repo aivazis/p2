@@ -84,6 +84,17 @@ if without_libjournal:
     from .Warning import Warning as warning
     from .Error import Error as error
 
+
+    # convenience function to set the application name
+    def application(name):
+        """
+        Set the application name
+        """
+        # record the name in the {chronicler} notes
+        chronicler.notes["application"] = name
+        # all done
+        return
+
     # convenience function to suppress all output
     def quiet():
         """
