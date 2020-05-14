@@ -18,7 +18,7 @@ PYBIND11_MAKE_OPAQUE(pyre::journal::notes_t);
 
 
 // type aliases
-namespace p2::libjournal {
+namespace pyre::libjournal {
     // from the standard library
     using string_t = std::string;
 

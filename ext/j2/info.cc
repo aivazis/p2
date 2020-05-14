@@ -12,7 +12,7 @@
 
 // add bindings for the info channel
 void
-p2::libjournal::
+pyre::libjournal::
 info(py::module & m) {
 
     // type aliases for the member functions (mfp: method pointer)

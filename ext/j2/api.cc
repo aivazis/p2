@@ -12,7 +12,7 @@
 
 // add bindings to the inventory
 void
-p2::libjournal::
+pyre::libjournal::
 api(py::module & m) {
     // easy access to the manager of the global state
     m.attr("chronicler") = m.attr("Chronicler");

@@ -12,7 +12,7 @@
 
 // add bindings for the chronicler, the object that holds the journal global state
 void
-p2::libjournal::
+pyre::libjournal::
 chronicler(py::module & m) {
 
     // the chronicler interface

@@ -16,24 +16,24 @@ PYBIND11_MODULE(j2, m) {
     m.doc() = "the journal extension module";
 
     // bind the opaque types
-    p2::libjournal::opaque(m);
+    pyre::libjournal::opaque(m);
     // register the exception types
-    p2::libjournal::exceptions(m);
+    pyre::libjournal::exceptions(m);
 
     // global state
-    p2::libjournal::chronicler(m);
+    pyre::libjournal::chronicler(m);
     // devices
-    p2::libjournal::devices(m);
+    pyre::libjournal::devices(m);
     // developer channels
-    p2::libjournal::debug(m);
-    p2::libjournal::firewall(m);
+    pyre::libjournal::debug(m);
+    pyre::libjournal::firewall(m);
     // user facing channels
-    p2::libjournal::info(m);
-    p2::libjournal::warning(m);
-    p2::libjournal::error(m);
+    pyre::libjournal::info(m);
+    pyre::libjournal::warning(m);
+    pyre::libjournal::error(m);
 
     // convenience functions at module level
-    p2::libjournal::api(m);
+    pyre::libjournal::api(m);
 }
 
 

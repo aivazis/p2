@@ -5,7 +5,7 @@
 
 
 // the {libjournal} namespace
-namespace p2::libjournal {
+namespace pyre::libjournal {
 
     // bindings of opaque types
     void opaque(py::module &);

@@ -12,7 +12,7 @@
 
 // add bindings to the inventory
 void
-p2::libjournal::
+pyre::libjournal::
 exceptions(py::module & m) {
     // when {debug} channels are fatal
     py::register_exception<debug_error>(m, "DebugError");
