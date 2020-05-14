@@ -113,6 +113,7 @@ def boot():
     """
     # get the {__main__} module
     import __main__
+
     # check whether
     try:
         # the user has an opinion on whether to boot the framework
@@ -129,7 +130,7 @@ def boot():
         if dashboard is None:
             # no worries; we will handle this case later
             pass
-        # if we were not handed a callable
+        # if we were handed a callable
         elif callable(dashboard):
             # invoke it to build the custom dashboard
             dashboard = dashboard()
@@ -150,6 +151,26 @@ def boot():
         # the global variable in this package or the usual way through the singleton
         Dashboard.pyre_singletonInstance = dashboard
 
+    # now, check whether
+    try:
+        # the user has prohibited loading the extension module
+        without_libpyre = __main__.pyre_without_libpyre
+    # if there is no such setting
+    except AttributeError:
+        # assume that this means we should try
+        without_libpyre = False
+
+    # access the module level variable
+    global libpyre
+    # if we are not supposed to load the bindings
+    if without_libpyre:
+        # mark it
+        libpyre = None
+    # otherwise
+    else:
+        # pull the bindings, if they exist
+        from .ext import p2 as libpyre
+
     # if we are supposed to boot
     if dashboard is not None:
         # do whatever it takes to get the framework to boot
@@ -159,6 +180,9 @@ def boot():
     return dashboard
 
 
+# publish
+# placeholder for the extension module; gets patched by {boot}
+libpyre = False
 # kick start
 prerequisites()
 # first, invoke the {debug} method in case the user asked for debugging support
