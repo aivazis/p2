@@ -21,11 +21,7 @@ p2.tests := p2.pkg.tests
 # the p2 package settings
 p2.pkg.stem := p2
 
-# the p2 package test suite
-p2.pkg.tests.stem := pyre
-p2.pkg.tests.prerequisites := p2.pkg
-
 # get the testsuites
-include p2.pkg.tests
+include $(p2.tests)
 
 # end of file
