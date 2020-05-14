@@ -1,0 +1,17 @@
+# -*- Makefile -*-
+#
+# michael a.g. aïvázis <michael.aivazis@para-sim.com>
+# (c) 1998-2019 all rights reserved
+
+
+# the libp2 test suite
+p2.lib.tests.stem := pyre.lib
+p2.lib.tests.prerequisites := p2.lib j2.lib
+p2.lib.tests.extern := p2.lib j2.lib
+
+# c++ compiler arguments
+p2.lib.tests.c++.defines := PYRE_CORE
+p2.lib.tests.c++.flags += -Wall $($(compiler.c++).std.c++17)
+
+
+# end of file
