@@ -6,12 +6,10 @@
 
 # attempt to
 try:
-    # the journal bindings
+    # load the journal bindings
     from . import j2 as libjournal
 # if something goes wrong
 except ImportError:
-    # for now
-    raise
     # mark; the rest of the package will adjust
     libjournal = None
 
