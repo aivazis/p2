@@ -1,0 +1,88 @@
+// -*- c++ -*-
+//
+// michael a.g. aïvázis <michael.aivazis@para-sim.com>
+// (c) 1998-2020 all rights reserved
+
+// code guard
+#if !defined(pyre_timers_Index_icc)
+#error this file contains implementation details for pyre::timers::Index
+#else
+
+
+// metamethods
+pyre::timers::Index::
+Index():
+    _index {}
+{}
+
+
+// interface
+auto
+pyre::timers::Index::
+size() const
+{
+    return _index.size();
+}
+
+
+auto
+pyre::timers::Index::
+empty() const
+{
+    return _index.empty();
+}
+
+
+auto
+pyre::timers::Index::
+contains(const name_type & timer) const
+{
+    // attempt to locate the {timer}
+    auto place = _index.find(timer);
+    // if i can't find it
+    if (place == _index.end()) {
+        // i don't have it
+        return false;
+    }
+    // otherwise, i do
+    return true;
+}
+
+
+auto
+pyre::timers::Index::
+emplace(const name_type & name)
+{
+    // easy enough
+    return _index.emplace(name, movement_type());
+}
+
+
+auto
+pyre::timers::Index::
+begin() const
+{
+    return _index.begin();
+}
+
+
+auto
+pyre::timers::Index::
+end() const
+{
+    return _index.end();
+}
+
+
+auto
+pyre::timers::Index::
+lookup(const name_type & timer) -> movement_type &
+{
+    // look it up and return it
+    return _index[timer];
+}
+
+
+#endif
+
+// end of file

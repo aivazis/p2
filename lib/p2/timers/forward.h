@@ -14,6 +14,8 @@ namespace pyre::timers {
     class Movement;
     // and their proxies
     class Proxy;
+    // the name index
+    class Index;
 }
 
 

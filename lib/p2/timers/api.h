@@ -23,6 +23,8 @@ namespace pyre::timers {
 
     // movement proxy
     using proxy_t = Proxy;
+    // timer index
+    using index_t = Index;
 }
 #endif
 
