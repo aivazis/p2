@@ -12,10 +12,13 @@
 #include <type_traits>
 #include <stdexcept>
 #include <utility>
+#include <chrono>
 #include <memory>
 #include <string>
 #include <set>
 #include <map>
+#include <sstream>
+#include <iomanip>
 #include <filesystem>
 
 
@@ -27,6 +30,16 @@ namespace pyre::timers {
     using string_t = std::string;
     // paths
     using path_t = std::filesystem::path;
+    // scratch buffers
+    using buffer_t = std::stringstream;
+
+    // the clock
+    using clock_t = std::chrono::steady_clock;
+
+    // seconds
+    using seconds_t = std::chrono::duration<double>;
+    using milliseconds_t = std::chrono::duration<double, std::milli>;
+    using microseconds_t = std::chrono::duration<double, std::micro>;
 
     // generic names
     using name_t = string_t;

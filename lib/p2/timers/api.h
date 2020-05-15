@@ -10,6 +10,9 @@
 
 // end user facing api
 namespace pyre::timers {
+
+    // timer parts
+    using movement_t = Movement;
 }
 
 #endif

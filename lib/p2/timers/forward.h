@@ -10,6 +10,9 @@
 
 // forward declarations of all user facing entities
 namespace pyre::timers {
+    // movement parts
+    class Movement;
+    class MovementProxy;
 }
 
 
