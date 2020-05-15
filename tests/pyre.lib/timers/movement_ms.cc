@@ -33,9 +33,8 @@ int main() {
     auto nap = 50ms;
     // go to sleep for a bit
     std::this_thread::sleep_for(nap);
-
     // stop it
-    auto elapsed = movement.stop();
+    movement.stop();
 
     // make a channel
     pyre::journal::debug_t channel("pyre.timers");

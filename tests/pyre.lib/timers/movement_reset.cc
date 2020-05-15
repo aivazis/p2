@@ -31,7 +31,7 @@ int main() {
     // go to sleep for a bit
     std::this_thread::sleep_for(nap);
     // stop it
-    auto elapsed = movement.stop();
+    movement.stop();
 
     // reset the movement
     movement.reset();
