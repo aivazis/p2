@@ -10,9 +10,8 @@
 
 // end user facing api
 namespace pyre::timers {
-
-    // timer parts
-    using movement_t = Movement;
+    // timer
+    using timer_t = Timer<Proxy>;
 }
 
 
@@ -20,7 +19,8 @@ namespace pyre::timers {
 #if defined(PYRE_CORE)
 // place these additional symbols in the namespace
 namespace pyre::timers {
-
+    // timer parts
+    using movement_t = Movement;
     // movement proxy
     using proxy_t = Proxy;
     // timer index

@@ -16,13 +16,17 @@ public:
     using movement_type = Movement;
     using movement_reference = movement_type &;
     // its parts
+    using clock_type = movement_type::clock_type;
     using active_type = movement_type::active_type;
     using duration_type = movement_type::duration_type;
     using time_point_type = movement_type::time_point_type;
 
     // metamethods
 public:
+    // constructor
     inline explicit Proxy(movement_reference);
+    // let the compiler write the destructor
+    ~Proxy() = default;
 
     // accessors
 public:
@@ -57,15 +61,12 @@ public:
 public:
     inline operator active_type() const;
 
-    // other meta-methods: let the compiler write these
-public:
-    // constructors and assignments
+    // disable constructors and assignments
+private:
     Proxy(const Proxy &) = delete;
     Proxy(Proxy &&) = delete;
     Proxy & operator=(const Proxy &) = delete;
     Proxy & operator=(Proxy &&) = delete;
-    // destructor
-    ~Proxy() = default;
 
     // data member
 private:

@@ -8,7 +8,7 @@
 #define pyre_timers_public_h
 
 
-// external packagesvap
+// external packages
 #include "externals.h"
 // get the forward declarations
 #include "forward.h"
@@ -23,6 +23,8 @@
 #include "Proxy.h"
 // timer index
 #include "Index.h"
+// timers
+#include "Timer.h"
 
 
 #endif

@@ -1,0 +1,42 @@
+// -*- c++ -*-
+//
+// michael a.g. aïvázis <michael.aivazis@para-sim.com>
+// (c) 1998-2020 all rights reserved
+
+// code guard
+#if !defined(pyre_timers_Timer_icc)
+#error this file contains implementation details for pyre::timers::Timer
+#else
+
+
+// metamethods
+template <class proxyT>
+pyre::timers::Timer<proxyT>::
+Timer(const name_type & name) :
+    // lookup my movement
+    proxyT(_registry.lookup(name)),
+    // save my name
+    _name(name)
+{}
+
+
+// accessors
+template <class proxyT>
+auto
+pyre::timers::Timer<proxyT>::
+name() const
+{
+    // easy enough
+    return _name;
+}
+
+
+// static data
+template <class proxyT>
+typename pyre::timers::Timer<proxyT>::index_type
+pyre::timers::Timer<proxyT>::_registry;
+
+
+# endif
+
+// end of file

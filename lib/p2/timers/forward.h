@@ -16,6 +16,9 @@ namespace pyre::timers {
     class Proxy;
     // the name index
     class Index;
+
+    // the timer
+    template <class proxyT> class Timer;
 }
 
 
