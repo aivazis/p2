@@ -14,9 +14,10 @@ class pyre::timers::Timer : public proxyT {
     // types
 public:
     // my registry
-    using index_type = Index;
+    using registry_type = Index;
+    using registry_reference = registry_type &;
     // my name
-    using name_type = index_type::name_type;
+    using name_type = registry_type::name_type;
 
     // metamethods
 public:
@@ -29,6 +30,10 @@ public:
 public:
     inline auto name() const;
 
+    // static interface
+public:
+    inline static auto registry() -> registry_reference;
+
     // implementation details: data members
 private:
     name_type _name;
@@ -36,7 +41,7 @@ private:
     // implementation details: static data
 private:
     // the timer registry
-    static index_type _registry;
+    static registry_type _registry;
 
     // disable constructors and assignments
 private:
