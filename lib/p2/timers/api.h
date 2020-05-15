@@ -15,6 +15,18 @@ namespace pyre::timers {
     using movement_t = Movement;
 }
 
+
+// when building or testing
+#if defined(PYRE_CORE)
+// place these additional symbols in the namespace
+namespace pyre::timers {
+
+    // movement proxy
+    using proxy_t = Proxy;
+}
+#endif
+
+
 #endif
 
 // end of file

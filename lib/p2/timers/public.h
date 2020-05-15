@@ -19,6 +19,8 @@
 // timer parts
 // the state shared by all timers with the same name
 #include "Movement.h"
+// movement proxy
+#include "Proxy.h"
 
 
 #endif
