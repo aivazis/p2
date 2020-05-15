@@ -8,6 +8,9 @@
 namespace pyre::py {
     // the module api
     void api(py::module &);
+
+    // timers
+    void timers(py::module &);
 }
 
 

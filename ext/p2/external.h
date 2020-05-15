@@ -4,6 +4,10 @@
 // (c) 1998-2020 all rights reserved
 
 
+// get the pyre parts
+#include <p2/timers.h>
+
+
 // pybind support
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
