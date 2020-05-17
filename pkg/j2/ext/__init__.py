@@ -6,7 +6,7 @@
 
 # attempt to
 try:
-    # load the journal bindings
+    # the journal bindings
     from . import j2 as libjournal
 # if something goes wrong
 except ImportError:
