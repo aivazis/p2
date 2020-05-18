@@ -4,31 +4,32 @@
 // (c) 1998-2020 all rights reserved
 
 // code guard
-#if !defined(pyre_timers_Index_h)
-#define pyre_timers_Index_h
+#if !defined(pyre_timers_Registrar_h)
+#define pyre_timers_Registrar_h
 
 
 // owner of the map (timer name -> shared movement)
-class pyre::timers::Index
+template <class movementT>
+class pyre::timers::Registrar
 {
     // types
 public:
     // timer names
     using name_type = name_t;
     // shared movement
-    using movement_type = Movement;
+    using movement_type = movementT;
 
     // the map from channel names to movement instances
-    using index_type = std::map<name_type, movement_type>;
+    using registry_type = std::map<name_type, movement_type>;
 
     // metamethods
 public:
-    inline Index();
+    inline Registrar();
     // let the compiler write the rest
-    Index(const Index &) = default;
-    Index(Index &&) = default;
-    Index & operator= (const Index &) = default;
-    Index & operator= (Index &&) = default;
+    Registrar(const Registrar &) = default;
+    Registrar(Registrar &&) = default;
+    Registrar & operator= (const Registrar &) = default;
+    Registrar & operator= (Registrar &&) = default;
 
     // interface
 public:
@@ -49,14 +50,14 @@ public:
 
     // data members
 private:
-    index_type _index;
+    registry_type _registry;
 };
 
 
 // get the inline definitions
-#define pyre_timers_Index_icc
-#include "Index.icc"
-#undef pyre_timers_Index_icc
+#define pyre_timers_Registrar_icc
+#include "Registrar.icc"
+#undef pyre_timers_Registrar_icc
 
 
 #endif
