@@ -14,17 +14,17 @@ using namespace std::literals;
 
 
 // type aliases
-using proxy_t = pyre::timers::proxy_t;
-using index_t = pyre::timers::index_t;
+using movement_t = pyre::timers::movement_t<pyre::timers::wall_clock_t>;
+using registrar_t = pyre::timers::registrar_t<movement_t>;
 
 
 // exercise the timer state index
 int main() {
     // make an index
-    index_t index;
+    registrar_t registrar;
 
     // make a movement proxy by looking up a timer name
-    proxy_t m1(index.lookup("test.index"));
+    movement_t & m1(registrar.lookup("test.registrar"));
     // start the movement
     m1.start();
     // it should now be active
@@ -36,13 +36,16 @@ int main() {
     std::this_thread::sleep_for(nap);
 
     // make another proxy to the same movement
-    proxy_t m2(index.lookup("test.index"));
+    movement_t & m2(registrar.lookup("test.registrar"));
     // verify it is running
     assert (m2.active() == true);
     // stop it
     m2.stop();
 
-    // verify that the two timers show the same accumulated time
+    // verify that the two timers are now stopped
+    assert (m1.active() == false);
+    assert (m2.active() == false);
+    // and that they show the same accumulated time
     assert (m1.read() == m2.read());
 
     // all done

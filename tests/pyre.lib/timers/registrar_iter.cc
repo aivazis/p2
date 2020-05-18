@@ -11,30 +11,31 @@
 
 
 // type aliases
-using index_t = pyre::timers::index_t;
+using movement_t = pyre::timers::movement_t<pyre::timers::wall_clock_t>;
+using registrar_t = pyre::timers::registrar_t<movement_t>;
 
 
 // exercise iterating through the index contents
 int main() {
     // make an index
-    index_t index;
+    registrar_t registrar;
 
     // lookup a name
-    index.lookup("test.index.1");
+    registrar.lookup("test.registrar.1");
     // and another one
-    index.lookup("test.index.2");
+    registrar.lookup("test.registrar.2");
 
     // initialize the count
     std::size_t count = 0;
     // go through the contents
-    for (auto & [name, movement] : index) {
+    for (auto & [name, movement] : registrar) {
         // verify the timer activation state is as expected
         assert(movement.active() == false);
         // increment the counter
         count++;
     }
     // verify that we went through all the timers
-    assert(count == index.size());
+    assert(count == registrar.size());
 
     // all done
     return 0;

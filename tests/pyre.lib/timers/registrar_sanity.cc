@@ -11,16 +11,17 @@
 
 
 // type alias
-using index_t = pyre::timers::index_t;
+using movement_t = pyre::timers::movement_t<pyre::timers::wall_clock_t>;
+using registrar_t = pyre::timers::registrar_t<movement_t>;
 
 
 // verify that the timer state index can be instantiated
 int main() {
     // make an index
-    index_t index;
+    registrar_t registrar;
 
     // make sure it's empty
-    assert(index.empty());
+    assert(registrar.empty());
 
     // all done
     return 0;
