@@ -10,20 +10,20 @@
 
 
 // metamethods
-template <class proxyT>
-pyre::timers::Timer<proxyT>::
+template <class clockT, template <class, class> class proxyT>
+pyre::timers::Timer<clockT, proxyT>::
 Timer(const name_type & name) :
     // lookup my movement
-    proxyT(_registry.lookup(name)),
+    proxy_type(_registry.lookup(name)),
     // save my name
     _name(name)
 {}
 
 
 // accessors
-template <class proxyT>
+template <class clockT, template <class, class> class proxyT>
 auto
-pyre::timers::Timer<proxyT>::
+pyre::timers::Timer<clockT, proxyT>::
 name() const
 {
     // easy enough
@@ -32,9 +32,9 @@ name() const
 
 
 // static interface
-template <class proxyT>
+template <class clockT, template <class, class> class proxyT>
 auto
-pyre::timers::Timer<proxyT>::
+pyre::timers::Timer<clockT, proxyT>::
 registry() -> registry_reference
 {
     // easy enough
@@ -43,9 +43,9 @@ registry() -> registry_reference
 
 
 // static data
-template <class proxyT>
-typename pyre::timers::Timer<proxyT>::registry_type
-pyre::timers::Timer<proxyT>::_registry;
+template <class clockT, template <class, class> class proxyT>
+typename pyre::timers::Timer<clockT, proxyT>::registry_type
+pyre::timers::Timer<clockT, proxyT>::_registry;
 
 
 # endif

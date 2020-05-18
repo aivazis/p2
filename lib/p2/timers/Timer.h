@@ -9,15 +9,21 @@
 
 
 // user facing encapsulation of a timer
-template <class proxyT>
-class pyre::timers::Timer : public proxyT {
+template <class clockT, template <class, class> class proxyT>
+class pyre::timers::Timer : public proxyT<Timer<clockT, proxyT>, clockT> {
     // types
 public:
+    // my clock type
+    using clock_type = clockT;
+    // access to my shared state
+    using proxy_type = proxyT<Timer<clockT, proxyT>, clockT>;
+    // and its parts
+    using movement_type = typename proxy_type::movement_type;
     // my registry
-    using registry_type = Index;
+    using registry_type = Registrar<movement_type>;
     using registry_reference = registry_type &;
     // my name
-    using name_type = registry_type::name_type;
+    using name_type = typename registry_type::name_type;
 
     // metamethods
 public:
