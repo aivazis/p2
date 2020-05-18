@@ -9,17 +9,22 @@
 
 
 // proxy for accessing a timer movement on behalf of a client
+template <class timerT, class clockT>
 class pyre::timers::Proxy {
     // types
 public:
-    // my object
-    using movement_type = Movement;
+    // my client
+    using timer_type = timerT;
+    using timer_reference = timer_type &;
+    // my clock type
+    using clock_type = clockT;
+    // my state
+    using movement_type = Movement<clock_type>;
     using movement_reference = movement_type &;
     // its parts
-    using clock_type = movement_type::clock_type;
-    using active_type = movement_type::active_type;
-    using duration_type = movement_type::duration_type;
-    using time_point_type = movement_type::time_point_type;
+    using active_type = typename movement_type::active_type;
+    using duration_type = typename movement_type::duration_type;
+    using time_point_type = typename movement_type::time_point_type;
 
     // metamethods
 public:
@@ -40,7 +45,7 @@ public:
     // buttons
     inline auto start();
     inline auto stop();
-    inline auto reset() -> movement_reference;
+    inline auto reset() -> timer_reference;
 
     // readouts
     // get the accumulated time; make sure to stop the timer first, otherwise the behavior is
