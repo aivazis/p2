@@ -18,15 +18,18 @@
 // access the {chrono} literals
 using namespace std::literals;
 
+// timer stub
+class timer_t {
+};
+
 // convenience
-using proxy_t = pyre::timers::proxy_t;
-using movement_t = pyre::timers::movement_t;
+using proxy_t = pyre::timers::proxy_t<timer_t, pyre::timers::wall_clock_t>;
 
 
 // verify that we can manipulate the movement state
 int main() {
     // make a movement
-    movement_t movement;
+    proxy_t::movement_type movement;
     // and its proxy
     proxy_t proxy(movement);
 
