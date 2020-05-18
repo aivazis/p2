@@ -8,25 +8,11 @@
 #define pyre_timers_api_h
 
 
-// end user facing api
+// package api
 namespace pyre::timers {
-    // timer
-    using timer_t = Timer<Proxy>;
+    // wall clock timer
+    using wall_timer_t = Timer<WallClock, Proxy>;
 }
-
-
-// when building or testing
-#if defined(PYRE_CORE)
-// place these additional symbols in the namespace
-namespace pyre::timers {
-    // timer parts
-    using movement_t = Movement;
-    // movement proxy
-    using proxy_t = Proxy;
-    // timer index
-    using index_t = Index;
-}
-#endif
 
 
 #endif

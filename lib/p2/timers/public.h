@@ -16,13 +16,16 @@
 // published type aliases; this is the file you are looking for...
 #include "api.h"
 
+// clocks
+#include "WallClock.h"
+
 // timer parts
 // the state shared by all timers with the same name
 #include "Movement.h"
 // movement proxy
 #include "Proxy.h"
-// timer index
-#include "Index.h"
+// timer registry
+#include "Registrar.h"
 // timers
 #include "Timer.h"
 
