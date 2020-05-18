@@ -1,0 +1,53 @@
+// -*- c++ -*-
+//
+// michael a.g. aïvázis <michael.aivazis@para-sim.com>
+// (c) 1998-2020 all rights reserved
+
+
+// get the timers
+#include <p2/timers.h>
+// support
+#include <thread>
+#include <cassert>
+// access the {chrono} literals
+using namespace std::literals;
+
+
+// type aliases
+using timer_t = pyre::timers::process_timer_t;
+
+
+// verify that two timers that have the same name share the same movement
+int main() {
+    // make a timer
+    timer_t t1("tests.timer");
+    // start it
+    t1.start();
+    // it should now be active
+    assert (t1.active() == true);
+
+    // do something
+    double sum=0;
+    for (int i=0; i < 1000*1000; ++i) {
+        sum += i;
+    }
+
+    // make another timer with the same name
+    timer_t t2("tests.timer");
+    // verify it is running
+    assert (t2.active() == true);
+    // stop it
+    t2.stop();
+
+    // verify we stopped both timers
+    assert (t1.active() == false);
+    assert (t2.active() == false);
+    // and that they both show the same accumulated time
+    assert (t1.read() == t2.read());
+
+    // all done
+    return 0;
+}
+
+
+// end of file
