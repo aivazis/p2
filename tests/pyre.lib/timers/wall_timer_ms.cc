@@ -9,6 +9,8 @@
 
 // get the timers
 #include <p2/timers.h>
+// and the journal
+#include <p2/journal.h>
 
 // support
 #include <thread>
@@ -17,7 +19,7 @@
 using namespace std::literals;
 
 // convenience
-using timer_t = pyre::timers::timer_t;
+using timer_t = pyre::timers::wall_timer_t;
 
 
 // verify that we can manipulate the timer state
@@ -31,11 +33,17 @@ int main() {
     auto nap = 50ms;
     // go to sleep for a bit
     std::this_thread::sleep_for(nap);
-
     // stop it
-    auto elapsed = timer.stop();
-    // verify the elapsed time is roughly the same as the sleep time
-    assert (elapsed >= nap);
+    timer.stop();
+
+    // make a channel
+    pyre::journal::debug_t channel("pyre.timers");
+    // activate it
+    // channel.activate();
+    // and show me
+    channel
+        << "elapsed time: " << timer.ms()
+        << pyre::journal::endl(__HERE__);
 
     // all done
     return 0;

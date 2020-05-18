@@ -6,7 +6,6 @@
 
 // get the timers
 #include <p2/timers.h>
-#include <p2/journal.h>
 // support
 #include <thread>
 #include <cassert>
@@ -15,32 +14,35 @@ using namespace std::literals;
 
 
 // type aliases
-using timer_t = pyre::timers::timer_t;
+using timer_t = pyre::timers::wall_timer_t;
 
 
 // verify that two timers that have the same name share the same movement
 int main() {
     // make a timer
-    timer_t t("tests.timer");
+    timer_t t1("tests.timer");
     // start it
-    t.start();
+    t1.start();
+    // it should now be active
+    assert (t1.active() == true);
 
     // nap duration
     auto nap = 50ms;
     // go to sleep for a bit
     std::this_thread::sleep_for(nap);
 
-    // stop the timer
-    t.stop();
+    // make another timer with the same name
+    timer_t t2("tests.timer");
+    // verify it is running
+    assert (t2.active() == true);
+    // stop it
+    t2.stop();
 
-    // make a channel
-    pyre::journal::debug_t channel("tests.timer");
-    // activate it
-    channel.activate();
-    // show me
-    channel
-        << "elapsed time: " << t.us()
-        << pyre::journal::endl(__HERE__);
+    // verify we stopped both timers
+    assert (t1.active() == false);
+    assert (t2.active() == false);
+    // and that they both show the same accumulated time
+    assert (t1.read() == t2.read());
 
     // all done
     return 0;

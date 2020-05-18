@@ -18,7 +18,7 @@ using namespace std::literals;
 
 
 // convenience
-using timer_t = pyre::timers::timer_t;
+using timer_t = pyre::timers::wall_timer_t;
 
 
 // verify that we can manipulate the timer state

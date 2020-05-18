@@ -11,7 +11,7 @@
 
 
 // type aliases
-using timer_t = pyre::timers::timer_t;
+using timer_t = pyre::timers::wall_timer_t;
 
 
 // compile time sanity check: make sure the header file is accessible
