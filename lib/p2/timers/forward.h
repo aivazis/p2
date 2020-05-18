@@ -12,6 +12,7 @@
 namespace pyre::timers {
     // clocks
     class WallClock;
+    class ProcessClock;
 
     // timer movements
     template <class timerT> class Movement;

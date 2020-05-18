@@ -18,6 +18,7 @@
 
 // clocks
 #include "WallClock.h"
+#include "ProcessClock.h"
 
 // timer parts
 // the state shared by all timers with the same name
