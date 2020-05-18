@@ -11,6 +11,7 @@ namespace pyre::py {
 
     // timers
     void wall_timers(py::module &);
+    void process_timers(py::module &);
 }
 
 

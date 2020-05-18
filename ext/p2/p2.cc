@@ -20,6 +20,7 @@ PYBIND11_MODULE(p2, m) {
 
     // get the timer bindings
     pyre::py::wall_timers(m);
+    pyre::py::process_timers(m);
 }
 
 
