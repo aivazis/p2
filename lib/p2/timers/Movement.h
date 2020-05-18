@@ -8,19 +8,22 @@
 #define pyre_timers_Movement_h
 
 
-// the state shared by all channels of a given name+severity
+// the state shared by all timers of a given type+name
+template <class clockT>
 class pyre::timers::Movement {
     // types
 public:
     // me types
     using movement_type = Movement;
     using movement_reference = movement_type &;
-    // external
-    using clock_type = clock_t;
+
+    // my clock
+    using clock_type = clockT;
+
     // my parts
     using active_type = bool;
-    using duration_type = clock_type::duration;
-    using time_point_type = clock_type::time_point;
+    using duration_type = typename clock_type::duration_type;
+    using time_point_type = typename clock_type::time_point_type;
 
     // convenience
     using buffer_type = buffer_t;
