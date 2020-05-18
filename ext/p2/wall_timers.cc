@@ -11,16 +11,16 @@
 
 
 // type alias
-using timer_t = pyre::timers::timer_t;
+using timer_t = pyre::timers::wall_timer_t;
 
 
 // add bindings timers
 void
 pyre::py::
-timers(py::module & m) {
+wall_timers(py::module & m) {
 
     // the timer interface
-    py::class_<timer_t>(m, "Timer")
+    py::class_<timer_t>(m, "WallTimer")
         // the constructor
         .def(py::init<const timer_t::name_type &>(), "name"_a)
 

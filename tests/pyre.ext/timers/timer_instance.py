@@ -13,7 +13,7 @@ def test():
     import p2.ext.p2 as libpyre
 
     # make a timer
-    t = libpyre.Timer(name="tests.timer")
+    t = libpyre.WallTimer(name="tests.timer")
     # verify its name
     assert t.name == "tests.timer"
 

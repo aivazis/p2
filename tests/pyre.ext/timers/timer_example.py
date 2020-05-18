@@ -13,7 +13,7 @@ def test():
     import p2.ext.p2 as libpyre
 
     # make a timer
-    t = libpyre.Timer(name="tests.timer")
+    t = libpyre.WallTimer(name="tests.timer")
     # start it
     t.start()
 
@@ -27,7 +27,7 @@ def test():
     # make a channel
     channel = journal.debug(name="pyre.timers")
     # activate it
-    channel.activate()
+    # channel.activate()
     # log the elapsed time
     channel.log(f"elapsded: {t.ms()}")
 

@@ -10,7 +10,7 @@ namespace pyre::py {
     void api(py::module &);
 
     // timers
-    void timers(py::module &);
+    void wall_timers(py::module &);
 }
 
 

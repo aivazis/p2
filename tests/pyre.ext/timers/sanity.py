@@ -10,7 +10,7 @@ def test():
     Sanity test: make sure the timer bindings are accessible
     """
     # access the timer bindings
-    from p2.ext.p2 import Timer
+    from p2.ext.p2 import WallTimer
     # all done
     return
 
