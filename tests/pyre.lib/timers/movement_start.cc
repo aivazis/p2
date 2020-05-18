@@ -18,7 +18,7 @@ using namespace std::literals;
 
 
 // convenience
-using movement_t = pyre::timers::movement_t;
+using movement_t = pyre::timers::movement_t<pyre::timers::wall_clock_t>;
 
 
 // verify that we can manipulate the movement state
