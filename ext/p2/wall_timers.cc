@@ -11,7 +11,7 @@
 
 
 // type alias
-using timer_t = pyre::timers::wall_timer_t;
+using wall_timer_t = pyre::timers::wall_timer_t;
 
 
 // add bindings timers
@@ -20,23 +20,23 @@ pyre::py::
 wall_timers(py::module & m) {
 
     // the timer interface
-    py::class_<timer_t>(m, "WallTimer")
+    py::class_<wall_timer_t>(m, "WallTimer")
         // the constructor
-        .def(py::init<const timer_t::name_type &>(), "name"_a)
+        .def(py::init<const wall_timer_t::name_type &>(), "name"_a)
 
         // accessors
         // the name; read-only property
         .def_property_readonly("name",
                                // the implementation
-                               &timer_t::name,
+                               &wall_timer_t::name,
                                // the docstring
                                "my name")
 
         // the registry; read-only static property
         .def_property_readonly_static("registry",
                                       // the implementation
-                                      [](py::object) -> timer_t::registry_reference {
-                                          return timer_t::registry();
+                                      [](py::object) -> wall_timer_t::registry_reference {
+                                          return wall_timer_t::registry();
                                       },
                                       // the docstring
                                       "the timer registry")
@@ -44,43 +44,43 @@ wall_timers(py::module & m) {
         // start
         .def("start",
              // implementation
-             &timer_t::start,
+             &wall_timer_t::start,
              // docstring
              "start the timer")
         // stop
         .def("stop",
              // implementation
-             &timer_t::stop,
+             &wall_timer_t::stop,
              // doctstring
              "stop the timer")
         // reset
         .def("reset",
              // implementation
-             &timer_t::reset,
+             &wall_timer_t::reset,
              // docstring
              "reset the timer")
         // read
         .def("read",
              // implementation
-             &timer_t::read,
+             &wall_timer_t::read,
              // docstring
              "get the accumulated time")
         // as a string, in seconds
         .def("sec",
              // implementation
-             &timer_t::sec,
+             &wall_timer_t::sec,
              // docstring
              "render the accumulated time in seconds")
         // as a string, in milliseconds
         .def("ms",
              // implementation
-             &timer_t::ms,
+             &wall_timer_t::ms,
              // docstring
              "render the accumulated time in milliseconds")
         // as a string, in microseconds
         .def("us",
              // implementation
-             &timer_t::us,
+             &wall_timer_t::us,
              // docstring
              "render the accumulated time in microseconds")
         // done
