@@ -18,7 +18,7 @@ Movement() :
     // with a default-initialized timestamp
     _mark {},
     // and a zero duration
-    _duration { duration_type::zero() }
+    _elapsed { duration_type::zero() }
 {}
 
 
@@ -50,7 +50,7 @@ auto
 pyre::timers::Movement<clockT>::
 start()
 {
-    // starting a movement that it already active
+    // starting a movement that is already active
     if (_active) {
         // is a no-op
         return _mark;
@@ -74,7 +74,7 @@ stop()
     // stopping an inactive movement
     if (!_active) {
         // is a no-op
-        return _duration;
+        return _elapsed;
     }
 
     // otherwise, compute the time elapsed since the last {start}
@@ -82,7 +82,7 @@ stop()
     // mark the movement as stopped
     _active = false;
     // update the elapsed time
-    _duration += elapsed;
+    _elapsed += elapsed;
     // and return the adjustment
     return elapsed;
 }
@@ -96,7 +96,7 @@ reset() -> movement_reference
     // mark the movement as inactive
     _active = false;
     // zero out the duration
-    _duration = duration_type::zero();
+    _elapsed = duration_type::zero();
     //
     return *this;
 }
@@ -111,13 +111,13 @@ read() const
     // if the timer is not active
     if (!_active) {
         // return the accumulated time
-        return _duration;
+        return _elapsed;
     }
 
-    // otherwise, non-destructively compute the time since the last time the timer was started
+    // otherwise, non-destructively compute the accumulated time
     auto elapsed = clock_type::now() - _mark;
     // add the accumulated time and return it
-    return _duration + elapsed;
+    return _elapsed + elapsed;
 }
 
 
@@ -131,14 +131,8 @@ sec() const
     auto duration = read();
     // convert the duration in seconds
     auto sec = std::chrono::duration_cast<seconds_type>(duration);
-
-    // make a buffer
-    buffer_type buffer;
-    // render
-    buffer << sec.count() << "s";
-
-    // and return
-    return buffer.str();
+    // and return it
+    return sec.count();
 }
 
 
@@ -149,16 +143,10 @@ ms() const
 {
     // read the timer
     auto duration = read();
-    // convert the duration in seconds
+    // convert the duration into milliseconds
     auto ms = std::chrono::duration_cast<milliseconds_type>(duration);
-
-    // make a buffer
-    buffer_type buffer;
-    // render
-    buffer << ms.count() << "ms";
-
-    // and return
-    return buffer.str();
+    // and return it
+    return ms.count();
 }
 
 
@@ -169,16 +157,10 @@ us() const
 {
     // read the timer
     auto duration = read();
-    // convert the duration in seconds
+    // convert the duration into microseconds
     auto us = std::chrono::duration_cast<microseconds_type>(duration);
-
-    // make a buffer
-    buffer_type buffer;
-    // render
-    buffer << us.count() << "us";
-
-    // and return
-    return buffer.str();
+    // and return it
+    return us.count();
 }
 
 

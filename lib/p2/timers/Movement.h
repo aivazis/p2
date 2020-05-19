@@ -26,7 +26,6 @@ public:
     using time_point_type = typename clock_type::time_point_type;
 
     // convenience
-    using buffer_type = buffer_t;
     using seconds_type = seconds_t;
     using milliseconds_type = milliseconds_t;
     using microseconds_type = microseconds_t;
@@ -82,7 +81,7 @@ public:
 private:
     active_type _active;         // active timers accumulate time
     time_point_type _mark;       // timestamp from when the timer was last activated
-    duration_type _duration;     // the total time this timer has been active
+    duration_type _elapsed;      // the total time this timer has been active
 };
 
 
