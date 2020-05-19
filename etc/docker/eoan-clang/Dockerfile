@@ -1,4 +1,4 @@
-## -*- docker-image-name: "pyre:eoan-clang" -*-
+## -*- docker-image-name: "p2:eoan-clang" -*-
 
 # based on ubuntu
 FROM ubuntu:eoan
@@ -18,7 +18,7 @@ ARG mm="${python} ${srcdir}/mm/mm.py"
 ENV TERM=xterm-256color
 # set up the dynamic linker path
 ENV LD_LIBRARY_PATH=${prefix}/lib
-# export the python choide
+# export the python choice
 ENV PYTHON=${python}
 # and the path to {mm}
 ENV MM=${mm}
@@ -28,24 +28,43 @@ ENV MM=${mm}
 RUN apt update -y
 # get the latest
 RUN apt dist-upgrade -y
+
 # install the base software stack
+#  - {vim} is for interactive use
+#  - {openssh}, {zip}, {unzip} are needed for some of the tests
 RUN DEBIAN_FRONTEND=noninteractive \
     apt install -y \
-        git vim \
+        git vim zip unzip \
+        openssh-server \
         clang gfortran make \
         ${python} ${python}-dev \
         python3-pybind11 \
+        libopenmpi-dev \
         libgsl-dev
 
 
-# place the {mm} configuration file
+# setup the interactive environment
+# go home
+WORKDIR /root
+# copy the files with support for interactive use
+COPY etc/docker/eoan-gcc/inputrc .inputrc
+# the startup file
+COPY etc/docker/eoan-gcc/bashrc bashrc.in
+# expand
+RUN sed \
+        -e "s:@SRCDIR@:${srcdir}:g" \
+        bashrc.in > .bashrc
+
 # make the pyre configuration directory
 WORKDIR /root/.pyre
-# copy the {mm} coniguration file here
+# the mpi configuration
+COPY etc/docker/eoan-gcc/mpi.pfg mpi.pfg
+# the {mm} coniguration file
 COPY etc/docker/eoan-clang/mm.pfg mm.pfg.in
-# expand; the '/' after ${prefix} is necessary for complying with the mm convention of
-# termiating slashes on all directories
-RUN sed -e "s:@PREFIX@:${prefix}:g" mm.pfg.in > mm.pfg
+# expand
+RUN sed \
+        -e "s:@PREFIX@:${prefix}:g" \
+        mm.pfg.in > mm.pfg
 
 # place the {mm} control file
 WORKDIR /root/.mm
@@ -68,17 +87,12 @@ COPY . p2
 # go to the {p2} top level directory
 WORKDIR ${srcdir}/p2
 # build
-# RUN ${mm}
+RUN ${mm}
 # show me the build context
 RUN ${mm} --serial host.info builder.info compilers.info
 
-# prep the install location for python packages
-# - the python packages: by making the canonical directory a symbolic link to our install area
-RUN \
-        ln -s ${prefix}/packages/p2 ${prefix}/lib/${python}/dist-packages; \
-        ln -s ${prefix}/packages/j2 ${prefix}/lib/${python}/dist-packages
-# and test
-# RUN ${mm} tests
+# start the ssh daemon and test
+CMD service ssh start && ${MM} tests
 
 
 # end of file
