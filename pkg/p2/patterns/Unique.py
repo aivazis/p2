@@ -15,7 +15,7 @@ class Unique(Type):
 
     The instance registry is created and attached to the first base class in a hierarchy that
     mentions {Unique} as its metaclass. Subclasses that want their own registry must set
-    {pyre_extent} to {True} in their class declaration.
+    {pyre_unique} to {True} in their class declaration.
 
     The instance registry is expected to be a map (name -> instance), which assumes that the
     constructor takes {name} as an argument. Classes can override this behavior by overriding
