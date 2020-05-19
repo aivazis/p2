@@ -182,7 +182,7 @@ def boot():
 
 # publish
 # placeholder for the extension module; gets patched by {boot}
-libpyre = False
+libpyre = None
 # kick start
 prerequisites()
 # first, invoke the {debug} method in case the user asked for debugging support
@@ -194,6 +194,7 @@ if dashboard is not None:
     # publish
     from . import meta
     from . import patterns
+    from . import timers
     from . import tracking
 
 
