@@ -7,6 +7,7 @@
 # publish
 from .Named import Named as named
 from .Singleton import Singleton as singleton
+from .Unique import Unique as unique
 
 
 # end of file
