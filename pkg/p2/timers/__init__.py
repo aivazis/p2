@@ -35,4 +35,35 @@ well.
 """
 
 
+# prefer the c++ bindings
+libpyre_without_timers = False
+
+# get the {__main__} module
+import __main__
+# so we can check
+try:
+    # whether the user asked for the pure python implementation
+    libpyre_without_timers = __main__.libpyre_without_timers
+# if this fails
+except AttributeError:
+    # it's because the user hasn't expressed an opinion; check with pyre
+    import p2
+    # whether the C++ bindings are available
+    if p2.libpyre is None:
+        # if not, fall back to the pure python implementations
+        libpyre_without_timers = True
+
+
+# so...
+if libpyre_without_timers:
+    # publish the pure python implementation
+    from .WallTimer import WallTimer as wallTimer
+    from .ProcessTimer import ProcessTimer as processTimer
+# otherwise
+else:
+    # publish the C++ implementation
+    wallTimer = p2.libpyre.WallTimer
+    processTimer = p2.libpyre.ProcessTimer
+
+
 # end of file
