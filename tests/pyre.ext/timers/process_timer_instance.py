@@ -7,13 +7,13 @@
 
 def test():
     """
-    Sanity test: make sure the timer bindings are accessible
+    Verify that we can instantiate a cpu timer
     """
     # access the timer bindings
-    import p2.ext.p2 as libpyre
+    from p2.ext.p2 import ProcessTimer
 
     # make a timer
-    t = libpyre.ProcessTimer(name="tests.timer")
+    t = ProcessTimer(name="tests.timer")
     # verify its name
     assert t.name == "tests.timer"
 

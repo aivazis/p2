@@ -7,13 +7,13 @@
 
 def test():
     """
-    Sanity test: make sure the timer bindings are accessible
+    Make sure we can instantiate a wall clock timer
     """
     # access the timer bindings
-    import p2.ext.p2 as libpyre
+    from p2.ext.p2 import WallTimer
 
     # make a timer
-    t = libpyre.WallTimer(name="tests.timer")
+    t = WallTimer(name="tests.timer")
     # verify its name
     assert t.name == "tests.timer"
 

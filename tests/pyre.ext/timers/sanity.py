@@ -11,6 +11,7 @@ def test():
     """
     # access the timer bindings
     from p2.ext.p2 import WallTimer
+    from p2.ext.p2 import ProcessTimer
     # all done
     return
 

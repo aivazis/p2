@@ -7,13 +7,13 @@
 
 def test():
     """
-    Sanity test: make sure the timer bindings are accessible
+    Exercise the common use case with a cpu timer
     """
     # access the timer bindings
-    import p2.ext.p2 as libpyre
+    from p2.ext.p2 import ProcessTimer
 
     # make a timer
-    t = libpyre.ProcessTimer(name="tests.timer")
+    t = ProcessTimer(name="tests.timer")
     # start it
     t.start()
 
@@ -30,7 +30,7 @@ def test():
     # activate it
     # channel.activate()
     # log the elapsed time
-    channel.log(f"elapsded: {t.ms()}")
+    channel.log(f"elapsed: {t.ms()}ms")
 
     # all done
     return

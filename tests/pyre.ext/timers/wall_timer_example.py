@@ -7,17 +7,20 @@
 
 def test():
     """
-    Sanity test: make sure the timer bindings are accessible
+    Exercise the simple use case with a wall clock timer
     """
+    # externals
+    import time
     # access the timer bindings
-    import p2.ext.p2 as libpyre
+    from p2.ext.p2 import WallTimer
 
     # make a timer
-    t = libpyre.WallTimer(name="tests.timer")
+    t = WallTimer(name="tests.timer")
     # start it
     t.start()
 
-    # do something
+    # take a nap
+    time.sleep(.5)
 
     # stop the timer
     t.stop()
@@ -29,7 +32,7 @@ def test():
     # activate it
     # channel.activate()
     # log the elapsed time
-    channel.log(f"elapsded: {t.ms()}")
+    channel.log(f"elapsed: {t.ms()}ms")
 
     # all done
     return
