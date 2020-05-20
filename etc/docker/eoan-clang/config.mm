@@ -41,7 +41,8 @@ builder.dest.pyc := $(sys.prefix)/lib/python3/dist-packages/
 # set the python compiler so we don't depend on the symbolic link, which may not even be there
 compiler.python := python$(python.version)
 # pybind11 + clang:
-journal.ext.lib.c++.flags += -fsized-deallocation
+p2.ext.lib.c++.flags += -fsized-deallocation
+j2.ext.lib.c++.flags += -fsized-deallocation
 
 
 # end of file
