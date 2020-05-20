@@ -26,9 +26,9 @@ def test():
     t.stop()
 
     # get the journal
-    import journal
+    import j2
     # make a channel
-    channel = journal.debug(name="pyre.timers")
+    channel = j2.debug(name="pyre.timers")
     # activate it
     # channel.activate()
     # log the elapsed time

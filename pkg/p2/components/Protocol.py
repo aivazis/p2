@@ -30,11 +30,11 @@ class Protocol(Configurable, metaclass=Role):
         # i'm never compatible with components
         if spec.pyre_isComponent:
             # in fact, let's treat asking the question as a bug
-            import journal
+            import j2
             # build a description
             msg = "PC compatibility checks are not supported"
             # complain
-            raise journal.firewall("pyre.components").log(msg)
+            raise j2.firewall("pyre.components").log(msg)
         # chain up for the basic checks
         report = super().pyre_isCompatibleWith(spec=spec, fast=fast)
         # and report any errors
