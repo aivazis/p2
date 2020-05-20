@@ -15,6 +15,8 @@ p2.packages := p2.pkg
 p2.libraries := p2.lib
 # python extensions
 p2.extensions := p2.ext
+# docker images
+p2.docker-images := p2.focal-gcc p2.focal-clang p2.eoan-gcc p2.eoan-clang
 # and test suites
 p2.tests := p2.pkg.tests p2.lib.tests p2.ext.tests
 
@@ -38,7 +40,14 @@ p2.ext.lib.c++.defines += PYRE_CORE
 p2.ext.lib.c++.flags += $($(compiler.c++).std.c++17)
 
 
-# get the testsuites
+# the docker images
+p2.focal-gcc.name := focal-gcc
+p2.focal-clang.name := focal-clang
+p2.eoan-gcc.name := eoan-gcc
+p2.eoan-clang.name := eoan-clang
+
+
+# the testsuites
 include $(p2.tests)
 
 # end of file
