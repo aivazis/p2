@@ -33,6 +33,7 @@ namespace pyre::timers {
 namespace pyre::timers {
     // clocks
     using wall_clock_t = WallClock;
+    using process_clock_t = ProcessClock;
 
     // timer parts
     template <class timerT>
