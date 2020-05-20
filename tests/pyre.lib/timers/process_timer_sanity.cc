@@ -11,13 +11,13 @@
 
 
 // type aliases
-using timer_t = pyre::timers::process_timer_t;
+using proctimer_t = pyre::timers::process_timer_t;
 
 
 // compile time sanity check: make sure the header file is accessible
 int main() {
     // make a timer
-    timer_t timer("tests.timer");
+    proctimer_t timer("tests.timer");
     // make sure it knows its name
     assert (timer.name() == "tests.timer");
     // and it starts out inactive

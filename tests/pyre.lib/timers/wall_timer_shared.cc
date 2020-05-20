@@ -14,13 +14,13 @@ using namespace std::literals;
 
 
 // type aliases
-using timer_t = pyre::timers::wall_timer_t;
+using walltimer_t = pyre::timers::wall_timer_t;
 
 
 // verify that two timers that have the same name share the same movement
 int main() {
     // make a timer
-    timer_t t1("tests.timer");
+    walltimer_t t1("tests.timer");
     // start it
     t1.start();
     // it should now be active
@@ -32,7 +32,7 @@ int main() {
     std::this_thread::sleep_for(nap);
 
     // make another timer with the same name
-    timer_t t2("tests.timer");
+    walltimer_t t2("tests.timer");
     // verify it is running
     assert (t2.active() == true);
     // stop it

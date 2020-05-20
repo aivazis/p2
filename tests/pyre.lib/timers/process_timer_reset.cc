@@ -17,13 +17,13 @@
 using namespace std::literals;
 
 // convenience
-using timer_t = pyre::timers::process_timer_t;
+using proctimer_t = pyre::timers::process_timer_t;
 
 
 // verify that we can manipulate the timer state
 int main() {
     // make a timer
-    timer_t timer("tests.timer");
+    proctimer_t timer("tests.timer");
     // and start it
     timer.start();
 
@@ -41,7 +41,7 @@ int main() {
     // verify it is inactive
     assert (timer.active() == false);
     // and that the accumulated time is reset to zero
-    assert (timer.read() == timer_t::duration_type::zero());
+    assert (timer.read() == proctimer_t::duration_type::zero());
 
     // all done
     return 0;

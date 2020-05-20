@@ -18,20 +18,20 @@ using namespace std::literals;
 
 
 // convenience
-using timer_t = pyre::timers::wall_timer_t;
+using walltimer_t = pyre::timers::wall_timer_t;
 
 
 // verify that we can manipulate the timer state
 int main() {
     // take a timestamp
-    auto zero = timer_t::clock_type::now();
+    auto zero = walltimer_t::clock_type::now();
     // nap duration
     auto nap = 50ms;
     // go to sleep for a bit
     std::this_thread::sleep_for(nap);
 
     // make a timer
-    timer_t timer("tests.timer");
+    walltimer_t timer("tests.timer");
     // and start it
     auto mark = timer.start();
 

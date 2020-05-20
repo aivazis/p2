@@ -19,11 +19,11 @@
 using namespace std::literals;
 
 // timer stub
-class timer_t {
+class proctimer_t {
 };
 
 // convenience
-using proxy_t = pyre::timers::proxy_t<timer_t, pyre::timers::wall_clock_t>;
+using proxy_t = pyre::timers::proxy_t<proctimer_t, pyre::timers::wall_clock_t>;
 
 
 // verify that we can manipulate the movement state

@@ -19,13 +19,13 @@
 using namespace std::literals;
 
 // convenience
-using timer_t = pyre::timers::wall_timer_t;
+using walltimer_t = pyre::timers::wall_timer_t;
 
 
 // verify that we can manipulate the timer state
 int main() {
     // make a timer
-    timer_t timer("tests.timer");
+    walltimer_t timer("tests.timer");
     // and start it
     timer.start();
 
