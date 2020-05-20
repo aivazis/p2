@@ -18,13 +18,13 @@ using namespace std::literals;
 
 
 // convenience
-using timer_t = pyre::timers::process_timer_t;
+using proctimer_t = pyre::timers::process_timer_t;
 
 
 // verify that we can manipulate the timer state
 int main() {
     // take a timestamp
-    auto zero = timer_t::clock_type::now();
+    auto zero = proctimer_t::clock_type::now();
 
     // do something
     double sum=0;
@@ -33,7 +33,7 @@ int main() {
     }
 
     // make a timer
-    timer_t timer("tests.timer");
+    proctimer_t timer("tests.timer");
     // and start it
     auto mark = timer.start();
 
