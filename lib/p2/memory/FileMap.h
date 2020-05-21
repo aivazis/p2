@@ -43,14 +43,22 @@ public:
     // metamethods
 public:
     // destructor
-    ~FileMap();
+    inline ~FileMap();
 
     // constructors
     // map an existing data product given its filename
-    FileMap(uri_type, writable_type);
-    // create a new product of a given size in bytes; if {clobber} is {true}, overwrite
-    // existing files; if {false}, fail
-    FileMap(uri_type, size_type);
+    inline explicit FileMap(uri_type, writable_type = false);
+    // create a new product of a given size in bytes
+    inline FileMap(uri_type, size_type);
+
+    // interface
+public:
+    inline auto size() const;
+    inline auto writable() const;
+    inline auto data() const;
+
+    // syntactic sugar
+    inline operator pointer () const;
 
     // implementation details: methods
 private:
@@ -64,7 +72,7 @@ private:
     uri_type _uri;
     info_type _info;
     size_type _bytes;
-    pointer _buffer;
+    pointer _data;
     writable_type _writable;
 
     // disallow
@@ -74,6 +82,12 @@ private:
     const FileMap & operator= (const FileMap &) = delete;
     const FileMap & operator= (const FileMap &&) = delete;
 };
+
+
+// get the inline definitions
+#define pyre_memory_FileMap_icc
+#include "FileMap.icc"
+#undef pyre_memory_FileMap_icc
 
 
 #endif

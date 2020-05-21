@@ -8,6 +8,13 @@
 #define pyre_memory_api_h
 
 
+// publish
+namespace pyre::memory {
+    // filemap
+    using filemap_t = FileMap;
+}
+
+
 #endif
 
 // end of file

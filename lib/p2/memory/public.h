@@ -16,6 +16,9 @@
 // published type aliases; this is the file you are looking for...
 #include "api.h"
 
+// implementation
+#include "FileMap.h"
+
 
 #endif
 
