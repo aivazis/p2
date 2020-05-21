@@ -148,7 +148,7 @@ unmap()
     }
 
     // invalidate the pointer
-    _data == MAP_FAILED;
+    _data = MAP_FAILED;
     // and the size
     _bytes = 0;
 
