@@ -26,6 +26,15 @@
 
 // aliases that define implementation choices
 namespace pyre::memory {
+    // sizes
+    using size_t = std::size_t;
+    // offsets
+    using offset_t = off_t;
+
+    // filenames
+    using uri_t = std::filesystem::path;
+    // file information
+    using info_t = struct stat;
 }
 
 

@@ -10,6 +10,8 @@
 
 // set up the namespace
 namespace pyre::memory {
+    // file-backed memory maps
+    class FileMap;
 };
 
 
