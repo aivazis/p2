@@ -35,7 +35,7 @@ int main(int argc, char *argv[]) {
     // go through the entire block
     for (std::size_t offset = 0; offset < bytes; ++offset) {
         // and fill it with our byte
-        *(data + offset) = value;
+        data[offset] = value;
     }
 
     // all done

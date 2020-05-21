@@ -35,7 +35,7 @@ int main(int argc, char *argv[]) {
     // go through the entire block
     for (std::size_t offset = 0; offset < bytes; ++offset) {
         // make sure the value is what we expect
-        assert (*(data+offset) == value);
+        assert (data[offset] == value);
     }
 
     // all done
