@@ -9,6 +9,22 @@
 
 
 // a file-backed memory map
+
+// use cases:
+
+// - read only existing product
+//   need: filename
+//   edge cases: fail if file doesn't exist
+
+// - read/write existing product
+//   need: filename
+//   edge cases:
+
+// - create data product
+//   need: filename, size in bytes
+//   edge cases: what to do if file already exists
+
+
 class pyre::memory::FileMap {
     // types
 public:
@@ -20,17 +36,28 @@ public:
     using info_type = info_t;
     // sizes and offsets
     using size_type = size_t;
-    using offset_type = offset_t;
     // flags
     using writable_type = bool;
-    using preserve_type = bool;
+    using clobber_type = bool;
 
     // metamethods
 public:
     // destructor
     ~FileMap();
-    // constructor
-    FileMap(uri_type, writable_type, size_type, offset_type, preserve_type);
+
+    // constructors
+    // map an existing data product given its filename
+    FileMap(uri_type, writable_type);
+    // create a new product of a given size in bytes; if {clobber} is {true}, overwrite
+    // existing files; if {false}, fail
+    FileMap(uri_type, size_type);
+
+    // implementation details: methods
+private:
+    void stat();
+    void create();
+    void map();
+    void unmap();
 
     // implementation details: data
 private:
@@ -38,6 +65,7 @@ private:
     info_type _info;
     size_type _bytes;
     pointer _buffer;
+    writable_type _writable;
 
     // disallow
 private:
