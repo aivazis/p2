@@ -9,22 +9,6 @@
 
 
 // a file-backed memory map
-
-// use cases:
-
-// - read only existing product
-//   need: filename
-//   edge cases: fail if file doesn't exist
-
-// - read/write existing product
-//   need: filename
-//   edge cases:
-
-// - create data product
-//   need: filename, size in bytes
-//   edge cases: what to do if file already exists
-
-
 class pyre::memory::FileMap {
     // types
 public:
@@ -34,11 +18,10 @@ public:
     using uri_type = uri_t;
     // file information
     using info_type = info_t;
-    // sizes and offsets
+    // sizes of things
     using size_type = size_t;
     // flags
     using writable_type = bool;
-    using clobber_type = bool;
 
     // metamethods
 public:
@@ -53,9 +36,12 @@ public:
 
     // interface
 public:
+    // accessors
     inline auto uri() const;
-    inline auto bytes() const;
     inline auto writable() const;
+    // memory footprint
+    inline auto bytes() const;
+    // raw access to the memory block
     inline auto data() const;
 
     // syntactic sugar
@@ -70,11 +56,13 @@ private:
 
     // implementation details: data
 private:
-    uri_type _uri;
-    info_type _info;
-    size_type _bytes;
-    pointer _data;
-    writable_type _writable;
+    // client supplied
+    uri_type _uri;            // the path to my backing store
+    writable_type _writable;  // access control
+    // bookkeeping
+    pointer _data;            // the address of the memory block
+    size_type _bytes;         // the memory footprint of the block
+    info_type _info;          // information about the backing store; retrieved by {::stat}
 
     // disallow
 private:

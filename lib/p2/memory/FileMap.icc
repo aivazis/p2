@@ -23,10 +23,10 @@ pyre::memory::FileMap::
 pyre::memory::FileMap::
 FileMap(uri_type uri, writable_type writable) :
     _uri { uri },
-    _info {},
-    _bytes {},
+    _writable { writable },
     _data { nullptr },
-    _writable { writable }
+    _bytes {},
+    _info {}
 {
     // check the file
     stat();
@@ -52,10 +52,10 @@ FileMap(uri_type uri, writable_type writable) :
 pyre::memory::FileMap::
 FileMap(uri_type uri, size_type bytes) :
     _uri { uri },
-    _info {},
-    _bytes { bytes },
+    _writable { true },
     _data { nullptr },
-    _writable { true }
+    _bytes { bytes },
+    _info {}
 {
     // make the actual file; careful: existing products are deleted
     create();
