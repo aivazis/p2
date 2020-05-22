@@ -31,16 +31,14 @@ int main(int argc, char *argv[]) {
     assert (product.bytes() == len * sizeof(cell_t));
 
     // make a cell
-    cell_t cell = 1;
-    // access the block as an array of bytes
-    auto data = product.data();
+    cell_t value = 1;
 
     // go through the entire block
-    for (std::size_t offset = 0; offset < product.cells(); ++offset) {
+    for (auto & cell : product) {
         // verify it contains a zero
-        assert (data[offset] == 0);
+        assert (cell == 0);
         // and replace it with a new value
-        data[offset] = cell;
+        cell = value;
     }
 
     // all done

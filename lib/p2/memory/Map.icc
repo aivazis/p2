@@ -50,6 +50,29 @@ data() const
 }
 
 
+// iterator support
+// iterator start
+template <typename cellT, bool checkBounds>
+auto
+pyre::memory::Map<cellT, checkBounds>::
+begin() -> pointer
+{
+    // return the beginning of the block
+    return data();
+}
+
+
+// iterator end
+template <typename cellT, bool checkBounds>
+auto
+pyre::memory::Map<cellT, checkBounds>::
+end() -> pointer
+{
+    // return one past the end of the block
+    return data() + cells();
+}
+
+
 // array-like access
 template <typename cellT, bool checkBounds>
 auto

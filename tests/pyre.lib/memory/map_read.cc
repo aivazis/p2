@@ -29,9 +29,9 @@ int main(int argc, char *argv[]) {
     assert (product.bytes() == product.cells() * sizeof(map_t::cell_type));
 
     // go through the entire block
-    for (std::size_t offset = 0; offset < product.cells(); ++offset) {
+    for (auto cell : product) {
         // verify the contents
-        assert (product[offset] == 2);
+        assert (cell == 2);
     }
 
     // all done

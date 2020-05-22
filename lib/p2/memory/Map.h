@@ -35,6 +35,10 @@ public:
     // access to the raw data pointer
     inline auto data() const;
 
+    // iterator support
+    inline auto begin() -> pointer;
+    inline auto end() -> pointer;
+
     // syntactic sugar: data access
     inline auto operator[](size_type) -> reference;
     inline auto operator[](size_type) const -> const_reference;
