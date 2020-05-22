@@ -8,7 +8,7 @@
 #define pyre_memory_View_h
 
 
-// a file-backed block of cells
+// a block of cells whose memory belongs to someone else
 template <class cellT, bool checkBounds>
 class pyre::memory::View {
     // types
@@ -27,6 +27,8 @@ public:
 
     // metamethods
 public:
+    // destructor
+    inline ~View() = default;
     // map an existing data product
     inline View(pointer, cell_count_type);
 
