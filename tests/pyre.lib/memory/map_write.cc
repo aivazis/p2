@@ -20,7 +20,7 @@ int main(int argc, char *argv[]) {
     // initialize the journal
     pyre::journal::init(argc, argv);
 
-    // open an existing file-backed memory block for write
+    // open an existing file-backed memory block with write access
     map_t product("map.dat", true);
 
     // check the capacity of the block

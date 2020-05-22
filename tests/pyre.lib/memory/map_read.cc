@@ -15,12 +15,12 @@ using cell_t = double;
 using map_t = pyre::memory::map_t<cell_t, true>;
 
 
-// create a new filemap
+// create a map over an existing product in read-only mode
 int main(int argc, char *argv[]) {
     // initialize the journal
     pyre::journal::init(argc, argv);
 
-    // open an existing file-backed memory block for write
+    // open an existing file-backed memory block
     map_t product("map.dat");
 
     // check the capacity of the block

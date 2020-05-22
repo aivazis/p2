@@ -20,9 +20,9 @@ int main(int argc, char *argv[]) {
     // initialize the journal
     pyre::journal::init(argc, argv);
 
-    // the block size request
+    // the number of cells in the block
     std::size_t len = 1024;
-    // create a new file-backed memory block of 1024 cells;
+    // create the block
     map_t product("map.dat", len);
 
     // verify the capacity of the block
