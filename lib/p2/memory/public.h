@@ -19,6 +19,7 @@
 // implementation
 #include "FileMap.h"
 #include "Map.h"
+#include "ConstMap.h"
 
 
 #endif

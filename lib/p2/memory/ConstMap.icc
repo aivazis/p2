@@ -1,0 +1,46 @@
+// -*- c++ -*-
+//
+// michael a.g. aïvázis <michael.aivazis@para-sim.com>
+// (c) 1998-2020 all rights reserved
+
+
+// code guard
+#if !defined(pyre_memory_ConstMap_icc)
+#error this file contains implementation details for pyre::memory::ConstMap
+#else
+
+
+// map over an existing data product
+template <typename cellT>
+pyre::memory::ConstMap<cellT>::
+ConstMap(uri_type uri) :
+    FileMap(uri, false)
+{}
+
+
+// interface
+// compute the number of cells in the memory block
+template <typename cellT>
+auto
+pyre::memory::ConstMap<cellT>::
+cells() const
+{
+    // convert using my size in bytes
+    return bytes() / sizeof(cell_type);
+}
+
+
+// access to data pointer
+template <typename cellT>
+auto
+pyre::memory::ConstMap<cellT>::
+data() const
+{
+    // cast my data pointer to a {cellT *}
+    return static_cast<pointer>(FileMap::data());
+}
+
+
+#endif
+
+// end of file
