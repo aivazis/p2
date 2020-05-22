@@ -10,6 +10,10 @@
 
 // user facing types
 namespace pyre::memory {
+    // block on the heap
+    template <typename cellT, bool checkBounds = false>
+    using heap_t = Heap<cellT, checkBounds>;
+
     // file-backed blocks of cells
     template <typename cellT, bool checkBounds = false>
     using map_t = Map<cellT, checkBounds>;

@@ -17,6 +17,8 @@
 #include "api.h"
 
 // implementation
+// memory block on the heap
+#include "Heap.h"
 // file-backed memory blocks
 #include "FileMap.h"
 #include "Map.h"

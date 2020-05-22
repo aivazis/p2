@@ -10,6 +10,9 @@
 
 // set up the namespace
 namespace pyre::memory {
+    // block on the heap
+    template <typename cellT, bool checkBounds> class Heap;
+
     // file-backed block of undifferentiated memory
     class FileMap;
     // file-backed block of cells
