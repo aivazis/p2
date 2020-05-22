@@ -46,7 +46,7 @@ pyre::memory::Map<cellT>::
 data() const
 {
     // cast my data pointer to a {cellT *}
-    return static_cast<cell_type *>(FileMap::data());
+    return static_cast<pointer>(FileMap::data());
 }
 
 

@@ -15,6 +15,11 @@ class pyre::memory::Map : public FileMap {
 public:
     // my cell
     using cell_type = cellT;
+    // derived types
+    using pointer = cell_type *;
+    using reference = cell_type &;
+    using const_pointer = const cell_type *;
+    using const_reference = const cell_type &;
 
     // metamethods
 public:
