@@ -18,6 +18,7 @@
 
 // implementation
 #include "FileMap.h"
+#include "Map.h"
 
 
 #endif

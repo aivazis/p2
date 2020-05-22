@@ -10,8 +10,13 @@
 
 // set up the namespace
 namespace pyre::memory {
-    // file-backed memory maps
+    // file-backed block of undifferentiated memory
     class FileMap;
+
+    // file-backed block of cells
+    template <typename cellT> class Map;
+    // file-backed block of const cells
+    template <typename cellT> class ConstMap;
 };
 
 

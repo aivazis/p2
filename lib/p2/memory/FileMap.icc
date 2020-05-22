@@ -28,19 +28,20 @@ FileMap(uri_type uri, writable_type writable) :
     _data { nullptr },
     _writable { writable }
 {
-    // make a channel
-    pyre::journal::debug_t channel("pyre.memory.map");
-    // sign on
-    channel
-        << "mapping existing data product:" << pyre::journal::newline
-        << "  name: " << _uri << pyre::journal::newline
-        << "  size: " << _bytes << " bytes"
-        << pyre::journal::endl(__HERE__);
-
     // check the file
     stat();
     // and map it
     map();
+
+    // make a channel
+    pyre::journal::debug_t channel("pyre.memory.map");
+    // sign on
+    channel
+        << "mapped existing data product:" << pyre::journal::newline
+        << "  name: " << _uri << pyre::journal::newline
+        << "  size: " << _bytes << " bytes" << pyre::journal::newline
+        << "  addr: " << _data
+        << pyre::journal::endl(__HERE__);
 
     // all done
     return;
@@ -56,21 +57,22 @@ FileMap(uri_type uri, size_type bytes) :
     _data { nullptr },
     _writable { true }
 {
-    // make a channel
-    journal::debug_t channel("pyre.memory.map");
-    // sign on
-    channel
-        << "creating a new data product:" << pyre::journal::newline
-        << "  name: " << _uri << pyre::journal::newline
-        << "  size: " << _bytes << " bytes"
-        << pyre::journal::endl(__HERE__);
-
     // make the actual file; careful: existing products are deleted
     create();
     // check the file
     stat();
     // and map it
     map();
+
+    // make a channel
+    journal::debug_t channel("pyre.memory.map");
+    // sign on
+    channel
+        << "created and mapped a new data product:" << pyre::journal::newline
+        << "  name: " << _uri << pyre::journal::newline
+        << "  size: " << _bytes << " bytes" << pyre::journal::newline
+        << "  addr: " << _data
+        << pyre::journal::endl(__HERE__);
 
     // all done
     return;

@@ -1,0 +1,55 @@
+// -*- c++ -*-
+//
+// michael a.g. aïvázis <michael.aivazis@para-sim.com>
+// (c) 1998-2020 all rights reserved
+
+
+// code guard
+#if !defined(pyre_memory_Map_icc)
+#error this file contains implementation details for pyre::memory::Map
+#else
+
+
+// map over an existing data product
+template <typename cellT>
+pyre::memory::Map<cellT>::
+Map(uri_type uri, writable_type writable) :
+    FileMap(uri, writable)
+{}
+
+
+// create a new one
+template <typename cellT>
+pyre::memory::Map<cellT>::
+Map(uri_type uri, size_type cells) :
+    // scale up the number of cells to the number of bytes
+    FileMap(uri, cells * sizeof(cell_type))
+{}
+
+
+// interface
+// compute the number of cells in the memory block
+template <typename cellT>
+auto
+pyre::memory::Map<cellT>::
+cells() const
+{
+    // convert using my size in bytes
+    return bytes() / sizeof(cell_type);
+}
+
+
+// access to data pointer
+template <typename cellT>
+auto
+pyre::memory::Map<cellT>::
+data() const
+{
+    // cast my data pointer to a {cellT *}
+    return static_cast<cell_type *>(FileMap::data());
+}
+
+
+#endif
+
+// end of file

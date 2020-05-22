@@ -15,13 +15,16 @@ p2.lib.tests.c++.flags += -Wall $($(compiler.c++).std.c++17)
 
 
 # global clean up
-tests.pyre.lib.memory.clean += filemap.dat
+tests.pyre.lib.memory.clean += filemap.dat map.dat
 
 
 # test case configuration
 # the {pyre::memory} tests must be executed in a specific order
 tests.pyre.lib.memory.filemap_write.pre := tests.pyre.lib.memory.filemap_create
 tests.pyre.lib.memory.filemap_read.pre := tests.pyre.lib.memory.filemap_write
+
+tests.pyre.lib.memory.map_write.pre := tests.pyre.lib.memory.map_create
+tests.pyre.lib.memory.map_read.pre := tests.pyre.lib.memory.map_write
 
 
 # end of file
