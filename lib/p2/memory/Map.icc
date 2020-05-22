@@ -80,7 +80,7 @@ pyre::memory::Map<cellT, checkBounds>::
 operator [] (size_type pos) -> reference
 {
     // check the arguments
-    if (checkBounds && pos > cells()) {
+    if (checkBounds && pos >= cells()) {
         // make a channel
         pyre::journal::error_t channel("pyre.memory.map");
         // complain
@@ -88,6 +88,9 @@ operator [] (size_type pos) -> reference
             << "with " << uri() << ":" << pyre::journal::newline
             << "out of bounds access: " << pos << " >= " << cells()
             << pyre::journal::endl(__HERE__);
+        // unreachable, unless the user has marked this error as non-fatal
+        // clamp {pos} to the last element in the block
+        pos = cells() - 1;
     }
     // get the cell and return it
     return data()[pos];
@@ -100,7 +103,7 @@ pyre::memory::Map<cellT, checkBounds>::
 operator [] (size_type pos) const -> const_reference
 {
     // check the arguments
-    if (checkBounds && pos > cells()) {
+    if (checkBounds && pos >= cells()) {
         // make a channel
         pyre::journal::error_t channel("pyre.memory.map");
         // complain
@@ -108,6 +111,9 @@ operator [] (size_type pos) const -> const_reference
             << "with " << uri() << ":" << pyre::journal::newline
             << "out of bounds access: " << pos << " >= " << cells()
             << pyre::journal::endl(__HERE__);
+        // unreachable, unless the user has marked this error as non-fatal
+        // clamp {pos} to the last element in the block
+        pos = cells() - 1;
     }
 
     // get the cell and return it
