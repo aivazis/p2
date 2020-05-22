@@ -80,6 +80,16 @@ FileMap(uri_type uri, size_type bytes) :
 
 
 // interface
+// get the path to my data product
+auto
+pyre::memory::FileMap::
+uri() const
+{
+    // easy enough
+    return _uri;
+}
+
+
 // get the number of bytes of the memory block
 auto
 pyre::memory::FileMap::
