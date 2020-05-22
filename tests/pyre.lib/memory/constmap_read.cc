@@ -28,13 +28,10 @@ int main(int argc, char *argv[]) {
     // and the size in bytes
     assert (product.bytes() == product.cells() * sizeof(constmap_t::cell_type));
 
-    // access the block as an array of bytes
-    auto data = product.data();
-
     // go through the entire block
-    for (std::size_t offset = 0; offset < product.cells(); ++offset) {
+    for (auto cell : product) {
         // verify the contents
-        assert (data[offset] == 2);
+        assert (cell == 2);
     }
 
     // all done

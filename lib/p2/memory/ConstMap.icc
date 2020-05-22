@@ -11,8 +11,8 @@
 
 
 // map over an existing data product
-template <typename cellT>
-pyre::memory::ConstMap<cellT>::
+template <typename cellT, bool checkBounds>
+pyre::memory::ConstMap<cellT, checkBounds>::
 ConstMap(uri_type uri) :
     FileMap(uri, false)
 {}
@@ -20,9 +20,9 @@ ConstMap(uri_type uri) :
 
 // interface
 // compute the number of cells in the memory block
-template <typename cellT>
+template <typename cellT, bool checkBounds>
 auto
-pyre::memory::ConstMap<cellT>::
+pyre::memory::ConstMap<cellT, checkBounds>::
 cells() const
 {
     // convert using my size in bytes
@@ -31,13 +31,58 @@ cells() const
 
 
 // access to data pointer
-template <typename cellT>
+template <typename cellT, bool checkBounds>
 auto
-pyre::memory::ConstMap<cellT>::
+pyre::memory::ConstMap<cellT, checkBounds>::
 data() const
 {
     // cast my data pointer to a {cellT *}
     return static_cast<pointer>(FileMap::data());
+}
+
+
+// iterator support
+// iterator start
+template <typename cellT, bool checkBounds>
+auto
+pyre::memory::ConstMap<cellT, checkBounds>::
+begin() -> const_pointer
+{
+    // return the beginning of the block
+    return data();
+}
+
+
+// iterator end
+template <typename cellT, bool checkBounds>
+auto
+pyre::memory::ConstMap<cellT, checkBounds>::
+end() -> const_pointer
+{
+    // return one past the end of the block
+    return data() + cells();
+}
+
+
+// array-like access
+template <typename cellT, bool checkBounds>
+auto
+pyre::memory::ConstMap<cellT, checkBounds>::
+operator [] (size_type pos) const -> const_reference
+{
+    // check the arguments
+    if (checkBounds && pos > cells()) {
+        // make a channel
+        pyre::journal::error_t channel("pyre.memory.map");
+        // complain
+        channel
+            << "with " << uri() << ":" << pyre::journal::newline
+            << "out of bounds access: " << pos << " >= " << cells()
+            << pyre::journal::endl(__HERE__);
+    }
+
+    // get the cell and return it
+    return data()[pos];
 }
 
 
