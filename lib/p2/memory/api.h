@@ -10,10 +10,6 @@
 
 // user facing types
 namespace pyre::memory {
-    // view to someone else's data
-    template <typename cellT, bool checkBounds = false>
-    using view_t = View<cellT, checkBounds>;
-
     // file-backed blocks of cells
     template <typename cellT, bool checkBounds = false>
     using map_t = Map<cellT, checkBounds>;
@@ -21,6 +17,14 @@ namespace pyre::memory {
     // file-backed blocks of const cells
     template <typename cellT, bool checkBounds = false>
     using constmap_t = ConstMap<cellT, checkBounds>;
+
+    // view to someone else's data
+    template <typename cellT, bool checkBounds = false>
+    using view_t = View<cellT, checkBounds>;
+
+    // const view to someone else's data
+    template <typename cellT, bool checkBounds = false>
+    using constview_t = ConstView<cellT, checkBounds>;
 }
 
 

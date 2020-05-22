@@ -12,14 +12,15 @@
 namespace pyre::memory {
     // file-backed block of undifferentiated memory
     class FileMap;
-
-    // a view to someone else's data
-    template <typename cellT, bool checkBounds> class View;
-
     // file-backed block of cells
     template <typename cellT, bool checkBounds> class Map;
     // file-backed block of const cells
     template <typename cellT, bool checkBounds> class ConstMap;
+
+    // a view to someone else's data
+    template <typename cellT, bool checkBounds> class View;
+    // a const view to someone else's data
+    template <typename cellT, bool checkBounds> class ConstView;
 };
 
 

@@ -1,0 +1,104 @@
+// -*- c++ -*-
+//
+// michael a.g. aïvázis <michael.aivazis@para-sim.com>
+// (c) 1998-2020 all rights reserved
+
+
+// code guard
+#if !defined(pyre_memory_ConstView_icc)
+#error this file contains implementation details for pyre::memory::ConstView
+#else
+
+
+// metamethods
+template <class cellT, bool checkBounds>
+pyre::memory::ConstView<cellT, checkBounds>::
+ConstView(pointer data, cell_count_type cells) :
+    _data{ data },
+    _cells{ cells }
+{}
+
+
+// interface
+// get the number of cells in the block
+template <class cellT, bool checkBounds>
+auto
+pyre::memory::ConstView<cellT, checkBounds>::
+cells() const
+{
+    // easy
+    return _cells;
+}
+
+
+// get the memory footprint of the block
+template <class cellT, bool checkBounds>
+auto
+pyre::memory::ConstView<cellT, checkBounds>::
+bytes() const
+{
+    // scale the number of cells by the cell size
+    return cells() * sizeof(cell_type);
+}
+
+
+// access to the data pointer
+template <class cellT, bool checkBounds>
+auto
+pyre::memory::ConstView<cellT, checkBounds>::
+data() const
+{
+    // return the raw data pointer
+    return _data;
+}
+
+
+// iterator support
+template <class cellT, bool checkBounds>
+auto
+pyre::memory::ConstView<cellT, checkBounds>::
+begin() -> pointer
+{
+    // the beginning of the block
+    return data();
+}
+
+
+template <class cellT, bool checkBounds>
+auto
+pyre::memory::ConstView<cellT, checkBounds>::
+end() -> pointer
+{
+    // one past the last cell in the block
+    return data() + cells();
+}
+
+
+// data access
+template <class cellT, bool checkBounds>
+auto
+pyre::memory::ConstView<cellT, checkBounds>::
+operator [] (size_type pos) const -> const_reference
+{
+    // if we checking bounds
+    if (checkBounds && pos >= cells()) {
+        // make a channel
+        pyre::journal::error_t channel("pyre.memory.view");
+        // and complain
+        channel
+            << "with constview at " << data() << ":" << pyre::journal::newline
+            << "out of bounds access: " << pos << " >= " << cells()
+            << pyre::journal::endl(__HERE__);
+        // unreachable, unless the user has marked this error as non-fatal
+        // clamp {pos} to the last element in the block
+        pos = cells() - 1;
+    }
+
+    // return a reference to the cell at {pos}
+    return _data[pos];
+}
+
+
+#endif
+
+// end of file
