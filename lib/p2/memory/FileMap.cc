@@ -147,6 +147,15 @@ unmap()
             << pyre::journal::endl(__HERE__);
     }
 
+    // make a channel
+    pyre::journal::debug_t channel("pyre.memory.map");
+    // and report success
+    channel
+        << "with " << _uri << ":" << pyre::journal::newline
+        << "unmapped " << _bytes << " bytes of "
+        << (_writable ? "read/write" : "read only") << " memory at " << _data
+        << pyre::journal::endl(__HERE__);
+
     // invalidate the pointer
     _data = MAP_FAILED;
     // and the size

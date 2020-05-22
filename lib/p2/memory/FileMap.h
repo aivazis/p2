@@ -53,7 +53,7 @@ public:
 
     // interface
 public:
-    inline auto size() const;
+    inline auto bytes() const;
     inline auto writable() const;
     inline auto data() const;
 

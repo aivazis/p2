@@ -78,10 +78,10 @@ FileMap(uri_type uri, size_type bytes) :
 
 
 // interface
-// get the size of the memory block
+// get the number of bytes of the memory block
 auto
 pyre::memory::FileMap::
-size() const
+bytes() const
 {
     // easy enough
     return _bytes;

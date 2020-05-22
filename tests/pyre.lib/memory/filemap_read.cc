@@ -23,7 +23,7 @@ int main(int argc, char *argv[]) {
     filemap_t product("filemap.dat");
 
     // get the block size
-    auto bytes = product.size();
+    auto bytes = product.bytes();
     // we expect a 4k block
     assert (bytes == 4*1024ul);
 
