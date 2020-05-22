@@ -20,14 +20,14 @@ int main(int argc, char *argv[]) {
     // initialize the journal
     pyre::journal::init(argc, argv);
 
-    // the number of cells in the block
+    // pick the number of cells in the block
     std::size_t len = 1024;
     // create the block
     map_t product("map.dat", len);
 
     // verify the capacity of the block
     assert(product.cells() == len);
-    // check the size in bytes
+    // check the memory footprint in bytes
     assert (product.bytes() == len * sizeof(cell_t));
 
     // make a cell

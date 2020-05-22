@@ -15,7 +15,7 @@ using cell_t = double;
 using map_t = pyre::memory::map_t<cell_t, true>;
 
 
-// create a new filemap
+// open an existing data product in read/write mode
 int main(int argc, char *argv[]) {
     // initialize the journal
     pyre::journal::init(argc, argv);
@@ -25,14 +25,14 @@ int main(int argc, char *argv[]) {
 
     // check the capacity of the block
     assert (product.cells() == 1024);
-    // and the size in bytes
+    // and the memory footprint in bytes
     assert (product.bytes() == product.cells() * sizeof(map_t::cell_type));
 
     // go through the entire block
     for (auto & cell : product) {
         // verify the contents
         assert (cell == 1);
-        // and change it
+        // and update
         cell *= 2;
     }
 

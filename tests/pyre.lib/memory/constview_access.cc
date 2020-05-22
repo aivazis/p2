@@ -14,20 +14,19 @@
 using constview_t = pyre::memory::constview_t<double, true>;
 
 
-// compile time sanity check: make sure the header file is accessible
+// make a const view over someone else's data
 int main() {
     // the number of cells
     std::size_t cells = 1024ul;
     // allocate a memory block
     double * block = new double[cells];
-
     // initialize
-    for (auto pos=0; pos<cells; ++pos) {
+    for (std::size_t pos=0; pos<cells; ++pos) {
         // every cell
         block[pos] = 1.0;
     }
 
-    // convert it into a view
+    // use the clock to build a view
     constview_t view(block, cells);
 
     // verify we can iterate and read

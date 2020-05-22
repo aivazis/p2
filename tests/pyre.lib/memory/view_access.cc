@@ -14,7 +14,7 @@
 using view_t = pyre::memory::view_t<double, true>;
 
 
-// compile time sanity check: make sure the header file is accessible
+// create a view over a foreign block of data
 int main() {
     // the number of cells
     std::size_t cells = 1024ul;

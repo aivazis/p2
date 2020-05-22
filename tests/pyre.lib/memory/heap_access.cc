@@ -21,7 +21,7 @@ int main() {
     // make a block on the heap
     heap_t block(cells);
 
-    // verify we can iterate and write
+    // verify we can iterate and initialize all cells
     for (auto & cell : block) {
         // to unity
         cell = 1.0;
@@ -35,9 +35,9 @@ int main() {
 
     // exercise operator []
     // write
-    block[cells/2] = 1;
+    block[cells/2] = 2.0;
     // and read
-    assert (block[cells/2] == 1);
+    assert (block[cells/2] == 2.0);
 
     // all done
     return 0;
