@@ -17,6 +17,10 @@
 #include "api.h"
 
 // implementation
+// foreign data
+#include "View.h"
+
+// file-backed memory blocks
 #include "FileMap.h"
 #include "Map.h"
 #include "ConstMap.h"
