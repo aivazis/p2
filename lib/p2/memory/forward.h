@@ -14,7 +14,7 @@ namespace pyre::memory {
     class FileMap;
 
     // file-backed block of cells
-    template <typename cellT> class Map;
+    template <typename cellT, bool checkBounds> class Map;
     // file-backed block of const cells
     template <typename cellT> class ConstMap;
 };

@@ -13,7 +13,9 @@ namespace pyre::memory {
     // filemap
     using filemap_t = FileMap;
     // file-backed blocks of cells
-    template <typename cellT> using map_t = Map<cellT>;
+    template <typename cellT, bool checkBounds = false>
+    using map_t = Map<cellT, checkBounds>;
+    // file-backed blocks of const cells
     template <typename cellT> using constmap_t = ConstMap<cellT>;
 }
 

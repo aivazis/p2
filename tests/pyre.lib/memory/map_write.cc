@@ -12,7 +12,7 @@
 
 // type aliases
 using cell_t = double;
-using map_t = pyre::memory::map_t<cell_t>;
+using map_t = pyre::memory::map_t<cell_t, true>;
 
 
 // create a new filemap
@@ -28,15 +28,12 @@ int main(int argc, char *argv[]) {
     // and the size in bytes
     assert (product.bytes() == product.cells() * sizeof(map_t::cell_type));
 
-    // access the block as an array of bytes
-    auto data = product.data();
-
     // go through the entire block
     for (std::size_t offset = 0; offset < product.cells(); ++offset) {
         // verify the contents
-        assert (data[offset] == 1);
+        assert (product[offset] == 1);
         // and change it
-        data[offset] *= 2;
+        product[offset] *= 2;
     }
 
     // all done

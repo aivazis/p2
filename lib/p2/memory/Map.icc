@@ -11,16 +11,16 @@
 
 
 // map over an existing data product
-template <typename cellT>
-pyre::memory::Map<cellT>::
+template <typename cellT, bool checkBounds>
+pyre::memory::Map<cellT, checkBounds>::
 Map(uri_type uri, writable_type writable) :
     FileMap(uri, writable)
 {}
 
 
 // create a new one
-template <typename cellT>
-pyre::memory::Map<cellT>::
+template <typename cellT, bool checkBounds>
+pyre::memory::Map<cellT, checkBounds>::
 Map(uri_type uri, size_type cells) :
     // scale up the number of cells to the number of bytes
     FileMap(uri, cells * sizeof(cell_type))
@@ -29,9 +29,9 @@ Map(uri_type uri, size_type cells) :
 
 // interface
 // compute the number of cells in the memory block
-template <typename cellT>
+template <typename cellT, bool checkBounds>
 auto
-pyre::memory::Map<cellT>::
+pyre::memory::Map<cellT, checkBounds>::
 cells() const
 {
     // convert using my size in bytes
@@ -39,14 +39,56 @@ cells() const
 }
 
 
-// access to data pointer
-template <typename cellT>
+// access to the raw data pointer
+template <typename cellT, bool checkBounds>
 auto
-pyre::memory::Map<cellT>::
+pyre::memory::Map<cellT, checkBounds>::
 data() const
 {
-    // cast my data pointer to a {cellT *}
+    // cast my data pointer to a {pointer}
     return static_cast<pointer>(FileMap::data());
+}
+
+
+// array-like access
+template <typename cellT, bool checkBounds>
+auto
+pyre::memory::Map<cellT, checkBounds>::
+operator [] (size_type pos) -> reference
+{
+    // check the arguments
+    if (checkBounds && pos > cells()) {
+        // make a channel
+        pyre::journal::error_t channel("pyre.memory.map");
+        // complain
+        channel
+            << "with " << uri() << ":" << pyre::journal::newline
+            << "out of bounds access: " << pos << " >= " << cells()
+            << pyre::journal::endl(__HERE__);
+    }
+    // get the cell and return it
+    return data()[pos];
+}
+
+
+template <typename cellT, bool checkBounds>
+auto
+pyre::memory::Map<cellT, checkBounds>::
+operator [] (size_type pos) const -> const_reference
+{
+    // check the arguments
+    if (checkBounds && pos > cells()) {
+        // make a channel
+        pyre::journal::error_t channel("pyre.memory.map");
+        // complain
+        channel
+            << "with " << uri() << ":" << pyre::journal::newline
+            << "out of bounds access: " << pos << " >= " << cells()
+            << pyre::journal::endl(__HERE__);
+    }
+
+    // get the cell and return it
+    return data()[pos];
 }
 
 

@@ -9,7 +9,7 @@
 
 
 // a file-backed block of cells
-template <class cellT>
+template <class cellT, bool checkBounds>
 class pyre::memory::Map : public FileMap {
     // types
 public:
@@ -30,8 +30,14 @@ public:
 
     // interface
 public:
+    // the number of cells; the inherited {bytes} tells you the memory footprint of the block
     inline auto cells() const;
+    // access to the raw data pointer
     inline auto data() const;
+
+    // syntactic sugar: data access
+    inline auto operator[](size_type) -> reference;
+    inline auto operator[](size_type) const -> const_reference;
 
     // disallow
 private:
