@@ -47,7 +47,7 @@ private:
     // implementation details: static data
 private:
     // the timer registry
-    static registry_type _registry;
+    inline static registry_type _registry;
 
     // disable constructors and assignments
 private:

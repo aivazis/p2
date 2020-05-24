@@ -42,12 +42,6 @@ registry() -> registry_reference
 }
 
 
-// static data
-template <class clockT, template <class, class> class proxyT>
-typename pyre::timers::Timer<clockT, proxyT>::registry_type
-pyre::timers::Timer<clockT, proxyT>::_registry;
-
-
 # endif
 
 // end of file
