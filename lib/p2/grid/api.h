@@ -16,6 +16,9 @@ namespace pyre::grid {
 
 // low level entities; you should probably stay away from them
 namespace pyre::grid {
+    // indices
+    template <class repT, bool checkBounds=false>
+    using index_t = Index<repT, checkBounds>;
 }
 
 

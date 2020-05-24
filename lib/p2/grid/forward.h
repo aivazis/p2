@@ -10,6 +10,8 @@
 
 // set up the namespace
 namespace pyre::grid {
+    // indices
+    template <class repT, bool checkBounds> class Index;
 };
 
 
