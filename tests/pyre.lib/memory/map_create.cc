@@ -15,8 +15,8 @@ using cell_t = double;
 using map_t = pyre::memory::map_t<cell_t>;
 
 
-// create a new filemap
-int main(int argc, char *argv[]) {
+// create a new map
+int main(int argc, char * argv[]) {
     // initialize the journal
     pyre::journal::init(argc, argv);
 
@@ -39,6 +39,12 @@ int main(int argc, char *argv[]) {
         assert (cell == 0);
         // and replace it with a new value
         cell = value;
+    }
+
+    // check
+    for (auto & cell : product) {
+        // verify it contains the new value
+        assert (cell == value);
     }
 
     // all done

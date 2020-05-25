@@ -15,7 +15,7 @@ using filemap_t = pyre::memory::filemap_t;
 
 
 // create a new filemap
-int main(int argc, char *argv[]) {
+int main(int argc, char * argv[]) {
     // initialize the journal
     pyre::journal::init(argc, argv);
 

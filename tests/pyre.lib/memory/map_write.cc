@@ -16,7 +16,7 @@ using map_t = pyre::memory::map_t<cell_t, true>;
 
 
 // open an existing data product in read/write mode
-int main(int argc, char *argv[]) {
+int main(int argc, char * argv[]) {
     // initialize the journal
     pyre::journal::init(argc, argv);
 

@@ -12,11 +12,11 @@
 
 // type aliases
 using cell_t = double;
-using constmap_t = pyre::memory::constmap_t<cell_t>;
+using constmap_t = pyre::memory::constmap_t<cell_t, true>;
 
 
 // create a read-only map over an existing product
-int main(int argc, char *argv[]) {
+int main(int argc, char * argv[]) {
     // initialize the journal
     pyre::journal::init(argc, argv);
 
