@@ -83,12 +83,13 @@ operator [] (size_type pos) const -> const_reference
     // if we checking bounds
     if (checkBounds && pos >= cells()) {
         // make a channel
-        pyre::journal::error_t channel("pyre.memory.bounds");
+        pyre::journal::firewall_t channel("pyre.memory.bounds");
         // and complain
         channel
-            << "at pyre::memory::ConstView::operator[]" << pyre::journal::newline
-            << "with a constview at " << data() << ":" << pyre::journal::newline
-            << "out of bounds access: " << pos << " >= " << cells()
+            << "out of bounds access:" << pyre::journal::newline
+            << "  in pyre::memory::constview_t::operator[]" << pyre::journal::newline
+            << "  index " << pos << " must be less than " << cells() << pyre::journal::newline
+            << "  with a constview at " << data()
             << pyre::journal::endl(__HERE__);
         // unreachable, unless the user has marked this error as non-fatal
         // clamp {pos} to the last element in the block
