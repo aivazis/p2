@@ -8,6 +8,9 @@
 #define pyre_grid_externals_h
 
 
+// externals
+#include <array>
+
 // support
 #include <p2/journal.h>
 #include <p2/memory.h>
@@ -24,6 +27,10 @@ namespace pyre::grid {
     using name_t = pyre::memory::name_t;
     // filenames
     using uri_t = pyre::memory::uri_t;
+
+    // arrays of things
+    template <typename T, size_t N>
+    using array_t = std::array<T, N>;
 }
 
 

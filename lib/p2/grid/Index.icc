@@ -10,24 +10,23 @@
 
 
 // metamethods
-template <class repT, bool checkBounds>
+template <pyre::grid::size_t N, bool checkBounds>
 template <typename... argT>
-pyre::grid::Index<repT, checkBounds>::
+pyre::grid::Index<N, checkBounds>::
 Index(argT... idx) :
-    _rep{ static_cast<idx_type>(idx)... }
+    _rep{static_cast<idx_type>(idx)...}
 {}
 
 
 // static interface
-template <class repT, bool checkBounds>
+template <pyre::grid::size_t N, bool checkBounds>
 constexpr auto
-pyre::grid::Index<repT, checkBounds>::
+pyre::grid::Index<N, checkBounds>::
 dim() -> size_type
 {
     // ask my rep
     return std::tuple_size<rep_type>::value;
 }
-
 
 
 #endif

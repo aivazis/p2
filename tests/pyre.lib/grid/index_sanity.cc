@@ -9,8 +9,7 @@
 
 
 // type alias
-using rep_t = std::array<int, 4>;
-using idx_t = pyre::grid::index_t<rep_t, true>;
+using idx_t = pyre::grid::index_t<4, true>;
 
 
 // compile time sanity check: make sure the header file is accessible

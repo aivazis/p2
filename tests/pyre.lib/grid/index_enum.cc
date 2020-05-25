@@ -9,8 +9,7 @@
 
 
 // type alias
-using rep_t = std::array<int, 2>;
-using idx_t = pyre::grid::index_t<rep_t, true>;
+using idx_t = pyre::grid::index_t<2, true>;
 
 // color choices
 enum class color : int { red, green, blue };

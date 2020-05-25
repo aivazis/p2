@@ -9,13 +9,14 @@
 
 
 // storage for a multidimensional index
-//
-template <class repT, bool checkBounds>
+// the representation is an {std::array} with {int} as the {value_type}
+// other index abstraction must be reducible to this one so offsets can be computed
+template <size_t N, bool checkBounds>
 class pyre::grid::Index {
     // types
 public:
-    // the representation of my collection of value
-    using rep_type = repT;
+    // the representation of my collection of values
+    using rep_type = array_t<int, N>;
     // dependent types
     using size_type = typename rep_type::size_type;
     // the type of individual axis values
