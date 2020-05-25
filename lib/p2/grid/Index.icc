@@ -38,11 +38,12 @@ operator [] (size_type axis) const -> idx_type
     // if the user has asked for bounds checking
     if (checkBounds && axis >= dim()) {
         // make a channel
-        pyre::journal::error_t channel("pyre.grid.bounds");
+        pyre::journal::firewall_t channel("pyre.gred.bounds");
         // complain
         channel
-            << "at pyre::grid::index_t::operator[]:" << pyre::journal::newline
-            << "out of bounds access: " << axis << " >= " << dim()
+            << "out of bounds read only access:" << pyre::journal::newline
+            << "  axis " << axis << " must be less than " << dim() << pyre::journal::newline
+            << "  in pyre::grid::index_t::operator[]"
             << pyre::journal::endl(__HERE__);
         // unreachable, unless the user has marked this error as non-fatal
         // clamp {axis} to the largest legal value
@@ -62,11 +63,12 @@ operator [] (size_type axis) -> idx_reference
     // if the user has asked for bounds checking
     if (checkBounds && axis >= dim()) {
         // make a channel
-        pyre::journal::error_t channel("pyre.grid.bounds");
+        pyre::journal::firewall_t channel("pyre.grid.bounds");
         // complain
         channel
-            << "at pyre::grid::index_t::operator[]:" << pyre::journal::newline
-            << "out of bounds access: " << axis << " >= " << dim()
+            << "out of bounds read/write access:" << pyre::journal::newline
+            << "  axis " << axis << " must be less than " << dim() << pyre::journal::newline
+            << "  in pyre::grid::index_t::operator[]"
             << pyre::journal::endl(__HERE__);
         // unreachable, unless the user has marked this error as non-fatal
         // clamp {axis} to the largest legal value
