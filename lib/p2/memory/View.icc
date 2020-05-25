@@ -83,10 +83,11 @@ operator [] (size_type pos) -> reference
     // if we checking bounds
     if (checkBounds && pos >= cells()) {
         // make a channel
-        pyre::journal::error_t channel("pyre.memory.view");
+        pyre::journal::error_t channel("pyre.memory.bounds");
         // and complain
         channel
-            << "with view at " << data() << ":" << pyre::journal::newline
+            << "at pyre::memory::View::operator[]" << pyre::journal::newline
+            << "with a view at " << data() << ":" << pyre::journal::newline
             << "out of bounds access: " << pos << " >= " << cells()
             << pyre::journal::endl(__HERE__);
         // unreachable, unless the user has marked this error as non-fatal
@@ -107,10 +108,11 @@ operator [] (size_type pos) const -> const_reference
     // if we checking bounds
     if (checkBounds && pos >= cells()) {
         // make a channel
-        pyre::journal::error_t channel("pyre.memory.view");
+        pyre::journal::error_t channel("pyre.memory.bounds");
         // and complain
         channel
-            << "with view at " << data() << ":" << pyre::journal::newline
+            << "at pyre::memory::View::operator[]" << pyre::journal::newline
+            << "with a view at " << data() << ":" << pyre::journal::newline
             << "out of bounds access: " << pos << " >= " << cells()
             << pyre::journal::endl(__HERE__);
         // unreachable, unless the user has marked this error as non-fatal

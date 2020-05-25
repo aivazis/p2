@@ -73,10 +73,11 @@ operator [] (size_type pos) const -> const_reference
     // check the arguments
     if (checkBounds && pos >= cells()) {
         // make a channel
-        pyre::journal::error_t channel("pyre.memory.map");
+        pyre::journal::error_t channel("pyre.memory.bounds");
         // complain
         channel
-            << "with " << uri() << ":" << pyre::journal::newline
+            << "at pyre::memory::ConstMap::operator[]" << pyre::journal::newline
+            << "with a const map over " << uri() << ":" << pyre::journal::newline
             << "out of bounds access: " << pos << " >= " << cells()
             << pyre::journal::endl(__HERE__);
         // unreachable, unless the user has marked this error as non-fatal

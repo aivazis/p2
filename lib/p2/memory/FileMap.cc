@@ -17,7 +17,7 @@
 
 // metamethods
 // implementation details
-// open the backing for an existing data product given its name
+// check and get info on the file backing an existing data product given its name
 void
 pyre::memory::FileMap::
 stat()
@@ -32,7 +32,7 @@ stat()
         pyre::journal::error_t channel("pyre.memory.map");
         // complain
         channel
-            << "while opening " << _uri << ":" << pyre::journal::newline
+            << "while looking for " << _uri << ":" << pyre::journal::newline
             << "stat: error " << errno << ": " << std::strerror(errno)
             << pyre::journal::endl(__HERE__);
     }
@@ -100,7 +100,7 @@ map()
         // complain
         channel
             << "while mapping " << _uri << ":" << pyre::journal::newline
-            << "map: error " << errno << ": " << std::strerror(errno)
+            << "mmap: error " << errno << ": " << std::strerror(errno)
             << pyre::journal::endl(__HERE__);
         // unreachable, unless the user has marked this error as non-fatal
         return;
