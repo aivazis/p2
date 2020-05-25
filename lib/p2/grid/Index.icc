@@ -29,6 +29,55 @@ dim() -> size_type
 }
 
 
+// access
+template <pyre::grid::size_t N, bool checkBounds>
+auto
+pyre::grid::Index<N, checkBounds>::
+operator [] (size_type axis) const -> idx_type
+{
+    // if the user has asked for bounds checking
+    if (checkBounds && axis >= dim()) {
+        // make a channel
+        pyre::journal::error_t channel("pyre.grid.bounds");
+        // complain
+        channel
+            << "at pyre::grid::index_t::operator[]:" << pyre::journal::newline
+            << "out of bounds access: " << axis << " >= " << dim()
+            << pyre::journal::endl(__HERE__);
+        // unreachable, unless the user has marked this error as non-fatal
+        // clamp {axis} to the largest legal value
+        axis = dim() - 1;
+    }
+
+    // easy enough
+    return _rep[axis];
+}
+
+
+template <pyre::grid::size_t N, bool checkBounds>
+auto
+pyre::grid::Index<N, checkBounds>::
+operator [] (size_type axis) -> idx_reference
+{
+    // if the user has asked for bounds checking
+    if (checkBounds && axis >= dim()) {
+        // make a channel
+        pyre::journal::error_t channel("pyre.grid.bounds");
+        // complain
+        channel
+            << "at pyre::grid::index_t::operator[]:" << pyre::journal::newline
+            << "out of bounds access: " << axis << " >= " << dim()
+            << pyre::journal::endl(__HERE__);
+        // unreachable, unless the user has marked this error as non-fatal
+        // clamp {axis} to the largest legal value
+        axis = dim() - 1;
+    }
+
+    // easy enough
+    return _rep[axis];
+}
+
+
 #endif
 
 // end of file

@@ -10,7 +10,7 @@
 
 // storage for a multidimensional index
 // the representation is an {std::array} with {int} as the {value_type}
-// other index abstraction must be reducible to this one so offsets can be computed
+// other index abstractions must be reducible to this one so offsets can be computed
 template <size_t N, bool checkBounds>
 class pyre::grid::Index {
     // types
@@ -19,8 +19,10 @@ public:
     using rep_type = array_t<int, N>;
     // dependent types
     using size_type = typename rep_type::size_type;
-    // the type of individual axis values
+    // individual axis values
     using idx_type = typename rep_type::value_type;
+    using idx_reference = idx_type &;
+    using idx_const_reference = const idx_type &;
 
     // metamethods
 public:
@@ -29,6 +31,12 @@ public:
     // constructor; a variadic template to enable initializer lists
     template <typename... argT>
     inline explicit Index(argT...);
+
+    // access
+    // read-only
+    auto operator[](size_type axis) const -> idx_type;
+    // read/write
+    auto operator[](size_type axis) -> idx_reference;
 
     // static interface
 public:
