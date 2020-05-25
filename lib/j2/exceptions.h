@@ -16,7 +16,6 @@ public:
 
     // metamethods
 public:
-    inline application_error(const char *);
     inline application_error(const string_type &);
 };
 
@@ -29,7 +28,6 @@ public:
 
     // metamethods
 public:
-    inline firewall_error(const char *);
     inline firewall_error(const string_type &);
 };
 
@@ -42,7 +40,6 @@ public:
 
     // metamethods
 public:
-    inline debug_error(const char *);
     inline debug_error(const string_type &);
 };
 

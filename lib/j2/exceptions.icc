@@ -10,13 +10,7 @@
 
 
 // application_error
-// constructors
-pyre::journal::application_error::
-application_error(const char * what) :
-    std::runtime_error(what)
-{}
-
-
+// constructor
 pyre::journal::application_error::
 application_error(const string_type & what) :
     std::runtime_error(what)
@@ -24,13 +18,7 @@ application_error(const string_type & what) :
 
 
 // firewall_error
-// constructors
-pyre::journal::firewall_error::
-firewall_error(const char * what) :
-    std::logic_error(what)
-{}
-
-
+// constructor
 pyre::journal::firewall_error::
 firewall_error(const string_type & what) :
     std::logic_error(what)
@@ -38,13 +26,7 @@ firewall_error(const string_type & what) :
 
 
 // debug
-// constructors
-pyre::journal::debug_error::
-debug_error(const char * what) :
-    std::logic_error(what)
-{}
-
-
+// constructor
 pyre::journal::debug_error::
 debug_error(const string_type & what) :
     std::logic_error(what)
