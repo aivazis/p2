@@ -25,7 +25,9 @@ tests.pyre.lib.memory.filemap_read.pre := tests.pyre.lib.memory.filemap_write
 
 tests.pyre.lib.memory.map_write.pre := tests.pyre.lib.memory.map_create
 tests.pyre.lib.memory.map_read.pre := tests.pyre.lib.memory.map_write
+tests.pyre.lib.memory.map_oob.pre := tests.pyre.lib.memory.map_write
 tests.pyre.lib.memory.constmap_read.pre := tests.pyre.lib.memory.map_write
+tests.pyre.lib.memory.constmap_oob.pre := tests.pyre.lib.memory.map_write
 
 
 # end of file
