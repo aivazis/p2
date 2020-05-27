@@ -32,28 +32,28 @@ public:
     ~Index() = default;
 
     // constructor that fills an index with a given {value}
-    inline constexpr explicit Index(idx_type);
+    constexpr explicit Index(idx_type);
 
     // constructor; a variadic template to enable initializer lists
     template <typename... argT>
-    inline constexpr explicit Index(argT...);
+    constexpr explicit Index(argT...);
 
     // access
     // read-only
-    auto operator[](size_type axis) const -> idx_type;
+    constexpr auto operator[](size_type axis) const -> idx_type;
     // read/write
-    auto operator[](size_type axis) -> idx_reference;
+    constexpr auto operator[](size_type axis) -> idx_reference;
 
     // iteration support
-    auto begin() const;
-    auto end() const;
+    constexpr auto begin() const;
+    constexpr auto end() const;
 
-    auto begin();
-    auto end();
+    constexpr auto begin();
+    constexpr auto end();
 
     // static interface
 public:
-    inline static constexpr auto dim();
+    static constexpr auto dim();
 
     // implementation details: data
 private:
