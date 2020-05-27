@@ -30,9 +30,13 @@ public:
 public:
     // destructor
     ~Index() = default;
+
+    // constructor that fills an index with a given {value}
+    inline constexpr explicit Index(idx_type);
+
     // constructor; a variadic template to enable initializer lists
     template <typename... argT>
-    inline explicit Index(argT...);
+    inline constexpr explicit Index(argT...);
 
     // access
     // read-only

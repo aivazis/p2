@@ -11,7 +11,18 @@
 
 // metamethods
 template <pyre::grid::size_t N, bool checkBounds>
+constexpr
+pyre::grid::Index<N, checkBounds>::
+Index(idx_type value) :
+    _rep{}
+{
+    std::fill(begin(), end(), value);
+}
+
+
+template <pyre::grid::size_t N, bool checkBounds>
 template <typename... argT>
+constexpr
 pyre::grid::Index<N, checkBounds>::
 Index(argT... idx) :
     _rep{static_cast<idx_type>(idx)...}
