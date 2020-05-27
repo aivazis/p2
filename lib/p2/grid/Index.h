@@ -15,6 +15,8 @@ template <size_t N, bool checkBounds>
 class pyre::grid::Index {
     // types
 public:
+    // me
+    using index_type = Index<N, checkBounds>;
     // the representation of my collection of values
     using rep_type = array_t<int, N>;
     // dependent types
@@ -40,7 +42,7 @@ public:
 
     // static interface
 public:
-    inline static constexpr auto dim() -> size_type;
+    inline static constexpr auto dim();
 
     // implementation details: data
 private:

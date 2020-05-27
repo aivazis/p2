@@ -18,17 +18,6 @@ Index(argT... idx) :
 {}
 
 
-// static interface
-template <pyre::grid::size_t N, bool checkBounds>
-constexpr auto
-pyre::grid::Index<N, checkBounds>::
-dim() -> size_type
-{
-    // ask my rep
-    return std::tuple_size<rep_type>::value;
-}
-
-
 // access
 template <pyre::grid::size_t N, bool checkBounds>
 auto
@@ -77,6 +66,17 @@ operator [] (size_type axis) -> idx_reference
 
     // easy enough
     return _rep[axis];
+}
+
+
+// static interface
+template <pyre::grid::size_t N, bool checkBounds>
+constexpr auto
+pyre::grid::Index<N, checkBounds>::
+dim()
+{
+    // ask my rep
+    return std::tuple_size<rep_type>::value;
 }
 
 
