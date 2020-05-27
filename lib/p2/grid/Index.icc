@@ -69,6 +69,47 @@ operator [] (size_type axis) -> idx_reference
 }
 
 
+// iteration support
+template <pyre::grid::size_t N, bool checkBounds>
+auto
+pyre::grid::Index<N, checkBounds>::
+begin() const
+{
+    // ask my rep for its matching const_iterator
+    return _rep.cbegin();
+}
+
+
+template <pyre::grid::size_t N, bool checkBounds>
+auto
+pyre::grid::Index<N, checkBounds>::
+end() const
+{
+    // ask my rep for its matching const_iterator
+    return _rep.cend();
+}
+
+
+template <pyre::grid::size_t N, bool checkBounds>
+auto
+pyre::grid::Index<N, checkBounds>::
+begin()
+{
+    // ask my rep for its matching iterator
+    return _rep.begin();
+}
+
+
+template <pyre::grid::size_t N, bool checkBounds>
+auto
+pyre::grid::Index<N, checkBounds>::
+end()
+{
+    // ask my rep for its matching iterator
+    return _rep.end();
+}
+
+
 // static interface
 template <pyre::grid::size_t N, bool checkBounds>
 constexpr auto

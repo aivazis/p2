@@ -40,6 +40,13 @@ public:
     // read/write
     auto operator[](size_type axis) -> idx_reference;
 
+    // iteration support
+    auto begin() const;
+    auto end() const;
+
+    auto begin();
+    auto end();
+
     // static interface
 public:
     inline static constexpr auto dim();
