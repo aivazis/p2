@@ -42,7 +42,8 @@ operator [] (size_type axis) const -> idx_type
         // complain
         channel
             << "out of bounds read only access:" << pyre::journal::newline
-            << "  axis " << axis << " must be less than " << dim() << pyre::journal::newline
+            << "  with {axis=" << axis
+            << "}, must be less than {dim=" << dim() << "}" << pyre::journal::newline
             << "  in pyre::grid::index_t::operator[]"
             << pyre::journal::endl(__HERE__);
         // unreachable, unless the user has marked this error as non-fatal
@@ -67,7 +68,8 @@ operator [] (size_type axis) -> idx_reference
         // complain
         channel
             << "out of bounds read/write access:" << pyre::journal::newline
-            << "  axis " << axis << " must be less than " << dim() << pyre::journal::newline
+            << "  with {axis=" << axis
+            << "}, must be less than {dim=" << dim() << "}" << pyre::journal::newline
             << "  in pyre::grid::index_t::operator[]"
             << pyre::journal::endl(__HERE__);
         // unreachable, unless the user has marked this error as non-fatal
