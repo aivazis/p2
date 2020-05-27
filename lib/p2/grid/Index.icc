@@ -31,7 +31,7 @@ Index(argT... idx) :
 
 // access
 template <pyre::grid::size_t N, bool checkBounds>
-constexpr auto
+auto
 pyre::grid::Index<N, checkBounds>::
 operator [] (size_type axis) const -> idx_type
 {
@@ -57,7 +57,7 @@ operator [] (size_type axis) const -> idx_type
 
 
 template <pyre::grid::size_t N, bool checkBounds>
-constexpr auto
+auto
 pyre::grid::Index<N, checkBounds>::
 operator [] (size_type axis) -> idx_reference
 {

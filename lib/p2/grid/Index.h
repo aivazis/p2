@@ -40,9 +40,9 @@ public:
 
     // access
     // read-only
-    constexpr auto operator[](size_type axis) const -> idx_type;
+    inline auto operator[](size_type axis) const -> idx_type;
     // read/write
-    constexpr auto operator[](size_type axis) -> idx_reference;
+    inline auto operator[](size_type axis) -> idx_reference;
 
     // iteration support
     constexpr auto begin() const;
