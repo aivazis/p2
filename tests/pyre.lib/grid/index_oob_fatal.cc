@@ -21,7 +21,7 @@ int main(int argc, char * argv[]) {
     pyre::journal::application("index_oob");
 
     // silence the firewall
-    // pyre::journal::firewall_t::quiet();
+    pyre::journal::firewall_t::quiet();
 
     // make a const index
     const idx_t cidx { 0,1 };
