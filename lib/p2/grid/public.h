@@ -7,7 +7,6 @@
 #if !defined(pyre_grid_public_h)
 #define pyre_grid_public_h
 
-
 // DESIGN NOTES
 
 // Support for multi-dimensional arrays is an exercise in layering abstractions. At the lowest
@@ -46,7 +45,7 @@
 // part of the problem, hence it works regardless of how the memory block is obtained.
 
 // Given the address of the zeroth element of a memory block, C++ provides support for
-// accessing th e nth element of the block. The pointer to the block encodes the size of each
+// accessing the nth element of the block. The pointer to the block encodes the size of each
 // cell in the block, and pointer arithmetic provides a map Z_n -> memory. Straightforward
 // generalization of this requires:
 
@@ -85,8 +84,8 @@
 #include "api.h"
 
 // implementation
+#include "Product.h"
 #include "Index.h"
-
 
 #endif
 

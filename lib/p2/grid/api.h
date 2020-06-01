@@ -7,20 +7,22 @@
 #if !defined(pyre_grid_api_h)
 #define pyre_grid_api_h
 
-
 // user facing types
-namespace pyre::grid {
-
+namespace pyre::grid
+{
 }
-
 
 // low level entities; you should probably stay away from them
-namespace pyre::grid {
+namespace pyre::grid
+{
+    // support for the multidimensional objects in this package
+    template <size_t N, typename factorT = size_t>
+    using product_t = Product<N, factorT>;
+
     // indices
-    template <size_t N, bool checkBounds=false>
+    template <size_t N, bool checkBounds = false>
     using index_t = Index<N, checkBounds>;
 }
-
 
 #endif
 

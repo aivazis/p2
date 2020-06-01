@@ -10,6 +10,8 @@
 
 // set up the namespace
 namespace pyre::grid {
+    // basic representation of our multi-dimensional entities
+    template <size_t N, typename factorT> class Product;
     // indices
     template <size_t N, bool checkBounds> class Index;
 };
