@@ -19,8 +19,8 @@ public:
     using rep_type = array_t<factor_type, N>;
     // dependent types
     using size_type = decltype(N);
-    using factor_reference = factor_type&;
-    using factor_const_reference = const factor_type&;
+    using factor_reference = factor_type &;
+    using factor_const_reference = const factor_type &;
 
     // metamethods
 public:
@@ -35,9 +35,9 @@ public:
 public:
     // access
     // read only
-    constexpr auto operator [](size_type) const -> factor_type;
+    constexpr auto operator[](size_type) const -> factor_type;
     // read/write
-    constexpr auto operator [](size_type) -> factor_reference;
+    constexpr auto operator[](size_type) -> factor_reference;
 
     // iteration support
     // read only
@@ -48,7 +48,7 @@ public:
     constexpr auto end();
 
     // static interface
-public: 
+public:
     static constexpr auto dim();
 
     // implementation details: data
