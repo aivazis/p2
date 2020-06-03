@@ -9,22 +9,22 @@
 
 
 // storage for a multidimensional index
-// the representation is an {std::array} with {int} as the {value_type}
-// other index abstractions must be reducible to this one so offsets can be computed
-template <size_t N, bool checkBounds>
-class pyre::grid::Index {
+// resist the temptation to use unsigned types as the fundamental representation type; they
+// complicate index arithmetic unnecessarily
+
+// basic index type
+template <pyre::grid::size_t N>
+class pyre::grid::Index : public Product<N, long> {
     // types
 public:
-    // me
-    using index_type = Index<N, checkBounds>;
-    // the representation of my collection of values
-    using rep_type = array_t<int, N>;
-    // dependent types
-    using size_type = typename rep_type::size_type;
+    // alias for me
+    using index_type = Index<N>;
+    // alias for my base
+    using product_type = Product<N, long>;
     // individual axis values
-    using idx_type = typename rep_type::value_type;
-    using idx_reference = idx_type &;
-    using idx_const_reference = const idx_type &;
+    using axis_type = typename product_type::rep_type::value_type;
+    using axis_reference = axis_type &;
+    using axis_const_reference = const axis_type &;
 
     // metamethods
 public:
@@ -32,32 +32,11 @@ public:
     ~Index() = default;
 
     // constructor that fills an index with a given {value}
-    constexpr explicit Index(idx_type);
+    constexpr explicit Index(axis_type);
 
     // constructor; a variadic template to enable initializer lists
     template <typename... argT>
     constexpr explicit Index(argT...);
-
-    // access
-    // read-only
-    inline auto operator[](size_type axis) const -> idx_type;
-    // read/write
-    inline auto operator[](size_type axis) -> idx_reference;
-
-    // iteration support
-    constexpr auto begin() const;
-    constexpr auto end() const;
-
-    constexpr auto begin();
-    constexpr auto end();
-
-    // static interface
-public:
-    static constexpr auto dim();
-
-    // implementation details: data
-private:
-    rep_type _rep; // my values
 };
 
 

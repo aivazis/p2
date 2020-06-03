@@ -20,8 +20,8 @@ namespace pyre::grid
     using product_t = Product<N, factorT>;
 
     // indices
-    template <size_t N, bool checkBounds = false>
-    using index_t = Index<N, checkBounds>;
+    template <size_t N>
+    using index_t = Index<N>;
 }
 
 #endif

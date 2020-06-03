@@ -9,7 +9,7 @@
 
 
 // type alias
-using idx_t = pyre::grid::index_t<2, true>;
+using idx_t = pyre::grid::index_t<2>;
 
 // color choices
 enum class color : int { red, green, blue };

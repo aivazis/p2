@@ -9,7 +9,7 @@
 
 
 // type alias
-using idx_t = pyre::grid::index_t<4, true>;
+using idx_t = pyre::grid::index_t<4>;
 
 
 // compile time sanity check: make sure the header file is accessible

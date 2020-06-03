@@ -10,128 +10,24 @@
 
 
 // metamethods
-template <pyre::grid::size_t N, bool checkBounds>
+// constructor that fills an index with a specific value
+template <pyre::grid::size_t N>
 constexpr
-pyre::grid::Index<N, checkBounds>::
-Index(idx_type value) :
-    _rep{}
+pyre::grid::Index<N>::
+Index(axis_type value) :
+    Product<N, long> {}
 {
-    std::fill(begin(), end(), value);
+    std::fill(this->begin(), this->end(), value);
 }
 
-
-template <pyre::grid::size_t N, bool checkBounds>
+// constructor that accepts an initializer list
+template <pyre::grid::size_t N>
 template <typename... argT>
 constexpr
-pyre::grid::Index<N, checkBounds>::
+pyre::grid::Index<N>::
 Index(argT... idx) :
-    _rep{static_cast<idx_type>(idx)...}
+    Product<N, long>(idx...)
 {}
-
-
-// access
-template <pyre::grid::size_t N, bool checkBounds>
-auto
-pyre::grid::Index<N, checkBounds>::
-operator [] (size_type axis) const -> idx_type
-{
-    // if the user has asked for bounds checking
-    if (checkBounds && axis >= dim()) {
-        // make a channel
-        pyre::journal::firewall_t channel("pyre.gred.bounds");
-        // complain
-        channel
-            << "out of bounds read only access:" << pyre::journal::newline
-            << "  with {axis=" << axis
-            << "}, must be less than {dim=" << dim() << "}" << pyre::journal::newline
-            << "  in pyre::grid::index_t::operator[]"
-            << pyre::journal::endl(__HERE__);
-        // unreachable, unless the user has marked this error as non-fatal
-        // clamp {axis} to the largest legal value
-        axis = dim() - 1;
-    }
-
-    // easy enough
-    return _rep[axis];
-}
-
-
-template <pyre::grid::size_t N, bool checkBounds>
-auto
-pyre::grid::Index<N, checkBounds>::
-operator [] (size_type axis) -> idx_reference
-{
-    // if the user has asked for bounds checking
-    if (checkBounds && axis >= dim()) {
-        // make a channel
-        pyre::journal::firewall_t channel("pyre.grid.bounds");
-        // complain
-        channel
-            << "out of bounds read/write access:" << pyre::journal::newline
-            << "  with {axis=" << axis
-            << "}, must be less than {dim=" << dim() << "}" << pyre::journal::newline
-            << "  in pyre::grid::index_t::operator[]"
-            << pyre::journal::endl(__HERE__);
-        // unreachable, unless the user has marked this error as non-fatal
-        // clamp {axis} to the largest legal value
-        axis = dim() - 1;
-    }
-
-    // easy enough
-    return _rep[axis];
-}
-
-
-// iteration support
-template <pyre::grid::size_t N, bool checkBounds>
-constexpr auto
-pyre::grid::Index<N, checkBounds>::
-begin() const
-{
-    // ask my rep for its matching const_iterator
-    return _rep.cbegin();
-}
-
-
-template <pyre::grid::size_t N, bool checkBounds>
-constexpr auto
-pyre::grid::Index<N, checkBounds>::
-end() const
-{
-    // ask my rep for its matching const_iterator
-    return _rep.cend();
-}
-
-
-template <pyre::grid::size_t N, bool checkBounds>
-constexpr auto
-pyre::grid::Index<N, checkBounds>::
-begin()
-{
-    // ask my rep for its matching iterator
-    return _rep.begin();
-}
-
-
-template <pyre::grid::size_t N, bool checkBounds>
-constexpr auto
-pyre::grid::Index<N, checkBounds>::
-end()
-{
-    // ask my rep for its matching iterator
-    return _rep.end();
-}
-
-
-// static interface
-template <pyre::grid::size_t N, bool checkBounds>
-constexpr auto
-pyre::grid::Index<N, checkBounds>::
-dim()
-{
-    // ask my rep
-    return std::tuple_size<rep_type>::value;
-}
 
 
 #endif

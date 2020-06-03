@@ -11,22 +11,24 @@
 
 
 // type alias
-using idx_t = pyre::grid::index_t<4, true>;
+using idx_t = pyre::grid::index_t<4>;
 
 
 // compile time sanity check: make sure the header file is accessible
 int main(int argc, char * argv[]) {
+    // pick a value
+    idx_t::axis_type u = 42;
     // make a const index
-    const idx_t idx_1 { 42 };
+    const idx_t idx_1 { u };
 
     // verify the contents
-    assert (idx_1[0] == 42);
-    assert (idx_1[1] == 42);
-    assert (idx_1[2] == 42);
-    assert (idx_1[3] == 42);
+    assert (idx_1[0] == u);
+    assert (idx_1[1] == u);
+    assert (idx_1[2] == u);
+    assert (idx_1[3] == u);
 
     // again, at runtime
-    idx_t::idx_type v = argc;
+    idx_t::axis_type v = argc;
     // with another index
     const idx_t idx_2 { v };
     // verify the contents
