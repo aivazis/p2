@@ -14,6 +14,8 @@ namespace pyre::grid {
     template <size_t N, typename factorT> class Product;
     // indices
     template <size_t N> class Index;
+    // shapes: the number of possible values of each index
+    template <size_t N> class Shape;
 };
 
 

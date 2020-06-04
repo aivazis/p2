@@ -22,6 +22,10 @@ namespace pyre::grid
     // indices
     template <size_t N>
     using index_t = Index<N>;
+
+    // shapes: the number of possible values of each index
+    template <size_t N>
+    using shape_t = Shape<N>;
 }
 
 #endif

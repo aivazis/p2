@@ -86,6 +86,7 @@
 // implementation
 #include "Product.h"
 #include "Index.h"
+#include "Shape.h"
 
 #endif
 
