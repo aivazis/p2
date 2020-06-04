@@ -15,7 +15,7 @@ template <pyre::grid::size_t N>
 constexpr
 pyre::grid::Index<N>::
 Index(axis_type value) :
-    Product<N, long> {}
+    product_type {}
 {
     std::fill(this->begin(), this->end(), value);
 }
@@ -27,7 +27,7 @@ template <typename... argT>
 constexpr
 pyre::grid::Index<N>::
 Index(argT... idx) :
-    Product<N, long>(idx...)
+    product_type(idx...)
 {}
 
 
