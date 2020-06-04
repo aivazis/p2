@@ -14,7 +14,7 @@
 using idx_t = pyre::grid::index_t<4>;
 
 
-// compile time sanity check: make sure the header file is accessible
+// exercise the filling constructor
 int main(int argc, char * argv[]) {
     // pick a value
     idx_t::axis_type u = 42;

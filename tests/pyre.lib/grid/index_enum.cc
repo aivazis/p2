@@ -17,7 +17,7 @@ enum class color : int { red, green, blue };
 enum class pol : int { hh, hv, vh, vv };
 
 
-// compile time sanity check: make sure the header file is accessible
+// check the enums can be used as indices
 int main() {
     // make an index
     idx_t idx { pol::hh, color::red };

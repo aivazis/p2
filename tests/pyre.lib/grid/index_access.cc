@@ -14,7 +14,7 @@
 using idx_t = pyre::grid::index_t<4>;
 
 
-// compile time sanity check: make sure the header file is accessible
+// exercise operator[]
 int main() {
     // make a const index
     const idx_t idx_1 { 0,1,2,3 };

@@ -20,6 +20,7 @@ Index(axis_type value) :
     std::fill(this->begin(), this->end(), value);
 }
 
+
 // constructor that accepts an initializer list
 template <pyre::grid::size_t N>
 template <typename... argT>
