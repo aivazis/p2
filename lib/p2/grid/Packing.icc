@@ -1,0 +1,93 @@
+// -*- c++ -*-
+//
+// michael a.g. aïvázis <michael.aivazis@para-sim.com>
+// (c) 1998-2020 all rights reserved
+
+// code guard
+#if !defined(pyre_grid_Packing_icc)
+#error this file contains implementation details for pyre::grid::Packing
+#else
+
+
+// metamethods
+template <pyre::grid::size_t N>
+template <typename... argT>
+constexpr
+pyre::grid::Packing<N>::
+Packing(argT... permutation) :
+    product_type(permutation...)
+{}
+
+
+// static interface: factories
+// row major: the right most index varies the fastest
+template <pyre::grid::size_t N>
+constexpr auto
+pyre::grid::Packing<N>::
+rowMajor()
+{
+    // make an empty packing
+    packing_type packing;
+    // get its size
+    auto dim = packing.dim();
+
+    // go through slots
+    for (size_t slot=0; slot < dim; ++slot) {
+        // and fill with consecutive decreasing integers
+        packing[slot] = dim - 1 - slot;
+    }
+
+    // all done
+    return packing;
+}
+
+
+// alias for the above
+template <pyre::grid::size_t N>
+constexpr auto
+pyre::grid::Packing<N>::
+c()
+{
+    // delegate
+    return rowMajor();
+}
+
+
+// column major: the left most index varies the fastest
+template <pyre::grid::size_t N>
+constexpr auto
+pyre::grid::Packing<N>::
+columnMajor()
+{
+    // make an empty packing
+    packing_type packing;
+    // get its size
+    auto dim = packing.dim();
+
+    // go through slots
+    for (size_t slot=0; slot < dim; ++slot) {
+        // and fill with consecutive decreasing integers
+        packing[slot] = slot;
+    }
+
+    // all done
+    return packing;
+}
+
+
+// alias for the above
+template <pyre::grid::size_t N>
+constexpr auto
+pyre::grid::Packing<N>::
+fortran()
+{
+    // delegate
+    return columnMajor();
+}
+
+
+
+
+#endif
+
+// end of file

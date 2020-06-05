@@ -26,6 +26,10 @@ namespace pyre::grid
     // shapes: the number of possible values of each index
     template <size_t N>
     using shape_t = Shape<N>;
+
+    // packing: a map Z_m1, ..., Z_mN -> Z
+    template <size_t N>
+    using packing_t = Packing<N>;
 }
 
 #endif
