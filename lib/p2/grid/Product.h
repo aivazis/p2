@@ -37,15 +37,15 @@ public:
     // read only
     constexpr auto operator[](size_type) const -> factor_type;
     // read/write
-    inline auto operator[](size_type) -> factor_reference;
+    constexpr auto operator[](size_type) -> factor_reference;
 
     // iteration support
     // read only
     constexpr auto begin() const;
     constexpr auto end() const;
     // read/write
-    inline auto begin();
-    inline auto end();
+    constexpr auto begin();
+    constexpr auto end();
 
     // static interface
 public:

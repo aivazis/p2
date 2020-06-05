@@ -28,7 +28,7 @@ pyre::grid::Product<N, factorT>::operator[](size_type pos) const -> factor_type
 
 // read/write
 template <pyre::grid::size_t N, typename factorT>
-auto
+constexpr auto
 pyre::grid::Product<N, factorT>::operator[](size_type factor) -> factor_reference
 {
     return _rep[factor];
@@ -54,14 +54,14 @@ pyre::grid::Product<N, factorT>::end() const
 
 // read/write
 template <pyre::grid::size_t N, typename factorT>
-auto
+constexpr auto
 pyre::grid::Product<N, factorT>::begin()
 {
     return _rep.begin();
 }
 
 template <pyre::grid::size_t N, typename factorT>
-auto
+constexpr auto
 pyre::grid::Product<N, factorT>::end()
 {
     return _rep.end();
