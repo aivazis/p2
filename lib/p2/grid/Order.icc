@@ -4,8 +4,8 @@
 // (c) 1998-2020 all rights reserved
 
 // code guard
-#if !defined(pyre_grid_Packing_icc)
-#error this file contains implementation details for pyre::grid::Packing
+#if !defined(pyre_grid_Order_icc)
+#error this file contains implementation details for pyre::grid::Order
 #else
 
 
@@ -13,8 +13,8 @@
 template <pyre::grid::size_t N>
 template <typename... argT>
 constexpr
-pyre::grid::Packing<N>::
-Packing(argT... permutation) :
+pyre::grid::Order<N>::
+Order(argT... permutation) :
     product_type(permutation...)
 {}
 
@@ -23,29 +23,29 @@ Packing(argT... permutation) :
 // row major: the right most index varies the fastest
 template <pyre::grid::size_t N>
 constexpr auto
-pyre::grid::Packing<N>::
+pyre::grid::Order<N>::
 rowMajor()
 {
-    // make an empty packing
-    packing_type packing;
+    // make an empty order
+    order_type order;
     // get its size
-    auto dim = packing.dim();
+    auto dim = order.dim();
 
     // go through slots
     for (size_t slot=0; slot < dim; ++slot) {
         // and fill with consecutive decreasing integers
-        packing[slot] = dim - 1 - slot;
+        order[slot] = dim - 1 - slot;
     }
 
     // all done
-    return packing;
+    return order;
 }
 
 
 // alias for the above
 template <pyre::grid::size_t N>
 constexpr auto
-pyre::grid::Packing<N>::
+pyre::grid::Order<N>::
 c()
 {
     // delegate
@@ -56,29 +56,29 @@ c()
 // column major: the left most index varies the fastest
 template <pyre::grid::size_t N>
 constexpr auto
-pyre::grid::Packing<N>::
+pyre::grid::Order<N>::
 columnMajor()
 {
-    // make an empty packing
-    packing_type packing;
+    // make an empty order
+    order_type order;
     // get its size
-    auto dim = packing.dim();
+    auto dim = order.dim();
 
     // go through slots
     for (size_t slot=0; slot < dim; ++slot) {
         // and fill with consecutive decreasing integers
-        packing[slot] = slot;
+        order[slot] = slot;
     }
 
     // all done
-    return packing;
+    return order;
 }
 
 
 // alias for the above
 template <pyre::grid::size_t N>
 constexpr auto
-pyre::grid::Packing<N>::
+pyre::grid::Order<N>::
 fortran()
 {
     // delegate

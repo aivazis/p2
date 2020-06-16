@@ -4,19 +4,19 @@
 // (c) 1998-2020 all rights reserved
 
 // code guard
-#if !defined(pyre_grid_Packing_h)
-#define pyre_grid_Packing_h
+#if !defined(pyre_grid_Order_h)
+#define pyre_grid_Order_h
 
 
-// generalization to multiple dimensions of the familiar row-major and column-major packing
+// generalization to multiple dimensions of the familiar row-major and column-major order
 // strategies. this is captured as a permutation in S_N that denotes the storage order of the
 // indices.
 template <pyre::grid::size_t N>
-class pyre::grid::Packing : public Product<N, size_t> {
+class pyre::grid::Order : public Product<N, size_t> {
     // types
 public:
     // alias for me
-    using packing_type = Packing<N>;
+    using order_type = Order<N>;
     // alias for my base
     using product_type = Product<N, size_t>;
     // individual ranks
@@ -27,11 +27,11 @@ public:
     // metamethods
 public:
     // destructor: let the compiler do it
-    ~Packing() = default;
+    ~Order() = default;
 
     // a constructor that takes an initializer list
     template <typename... argT>
-    constexpr explicit Packing(argT...);
+    constexpr explicit Order(argT...);
 
     // static interface: factories
 public:
@@ -48,9 +48,9 @@ public:
 
 
 // get the inline definitions
-#define pyre_grid_Packing_icc
-#include "Packing.icc"
-#undef pyre_grid_Packing_icc
+#define pyre_grid_Order_icc
+#include "Order.icc"
+#undef pyre_grid_Order_icc
 
 
 #endif

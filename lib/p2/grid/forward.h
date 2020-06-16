@@ -16,8 +16,10 @@ namespace pyre::grid {
     template <size_t N> class Index;
     // shapes: the number of possible values of each index
     template <size_t N> class Shape;
-    // packing: the order in which index axes are packed in memory
-    template <size_t N> class Packing;
+
+    // memory packing strategies
+    // the order in which index axes are packed in memory
+    template <size_t N> class Order;
 };
 
 

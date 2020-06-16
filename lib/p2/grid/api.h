@@ -27,9 +27,10 @@ namespace pyre::grid
     template <size_t N>
     using shape_t = Shape<N>;
 
-    // packing: a map Z_m1, ..., Z_mN -> Z
+    // canonical packing
+    // order: the order in which index axes are packed in memory
     template <size_t N>
-    using packing_t = Packing<N>;
+    using order_t = Order<N>;
 }
 
 #endif
