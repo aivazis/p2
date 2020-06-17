@@ -21,6 +21,7 @@
 #include "Index.h"
 #include "Shape.h"
 #include "Order.h"
+#include "Canonical.h"
 
 
 #endif

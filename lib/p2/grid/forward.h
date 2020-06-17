@@ -20,6 +20,8 @@ namespace pyre::grid {
     // memory packing strategies
     // the order in which index axes are packed in memory
     template <size_t N> class Order;
+    // the packing strategy
+    template <size_t N> class Canonical;
 }
 
 

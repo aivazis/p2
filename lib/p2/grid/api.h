@@ -7,10 +7,6 @@
 #if !defined(pyre_grid_api_h)
 #define pyre_grid_api_h
 
-// user facing types
-namespace pyre::grid
-{
-}
 
 // low level entities; you should probably stay away from them
 namespace pyre::grid
@@ -23,15 +19,19 @@ namespace pyre::grid
     template <size_t N>
     using index_t = Index<N>;
 
-    // shapes: the number of possible values of each index
+    // the number of possible values of each axis
     template <size_t N>
     using shape_t = Shape<N>;
 
     // canonical packing
-    // order: the order in which index axes are packed in memory
+    //the order in which index axes are packed in memory
     template <size_t N>
     using order_t = Order<N>;
+
+    template <size_t N>
+    using canonical_t = Canonical<N>;
 }
+
 
 #endif
 

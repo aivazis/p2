@@ -10,6 +10,7 @@
 
 // externals
 #include <array>
+#include <numeric>
 
 // support
 #include <p2/journal.h>
