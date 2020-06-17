@@ -17,12 +17,15 @@ using shape_t = pyre::grid::shape_t<4>;
 // sanity check
 int main() {
     // make a shape
-    shape_t s { 2, 2, 2, 2 };
+    shape_t s { 2, 3, 4, 5 };
 
     // verify that the index dimensionality is reported correctly through the type
     static_assert (shape_t::dim() == 4);
     // verify that the index dimensionality is reported correctly through an instance
     static_assert (s.dim() == 4);
+
+    // verify that its capacity is equal to the product of the possible values along each axis
+    assert (s.size() == 2*3*4*5);
 
     // verify that a shape is equal to itself
     assert (s == s);

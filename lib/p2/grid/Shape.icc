@@ -13,10 +13,23 @@
 // constructor that accepts an initializer list
 template <pyre::grid::size_t N>
 template <typename... argT>
-constexpr pyre::grid::Shape<N>::
+constexpr
+pyre::grid::Shape<N>::
 Shape(argT... idx) :
     product_type(idx...)
 {}
+
+
+// interface
+// the total number of addressable values
+template <pyre::grid::size_t N>
+constexpr auto
+pyre::grid::Shape<N>::
+size() -> axis_type
+{
+    // my capacity is equal to the product of the possible values along each axis
+    return std::accumulate(this->begin(), this->end(), 1ul, std::multiplies<axis_type>());
+}
 
 
 #endif

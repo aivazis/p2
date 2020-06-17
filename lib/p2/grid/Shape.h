@@ -9,6 +9,10 @@
 
 
 // the specification of the number of possible index values along each dimension
+// this class stores the {s_i} in
+//
+//     Z_s_1 x ... x Z_s_n
+//
 template <pyre::grid::size_t N>
 class pyre::grid::Shape : public Product<N, size_t> {
     // types
@@ -30,6 +34,11 @@ public:
     // constructor; works with initializer lists
     template <typename... argT>
     constexpr explicit Shape(argT... args);
+
+    // interface
+public:
+    // the total number of addressable values
+    constexpr auto size() -> axis_type;
 };
 
 
