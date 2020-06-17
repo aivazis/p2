@@ -71,7 +71,7 @@ pyre::grid::Product<N, factorT>::end()
 // static interface
 template <pyre::grid::size_t N, typename factorT>
 constexpr auto
-pyre::grid::Product<N, factorT>::dim()
+pyre::grid::Product<N, factorT>::dim() -> size_type
 {
     return N;
 }
@@ -82,10 +82,10 @@ pyre::grid::Product<N, factorT>::dim()
 template <pyre::grid::size_t N, typename factorT>
 constexpr bool
 pyre::grid::
-operator== (const Product<N, factorT> & s1, const Product<N, factorT> & s2)
+operator== (const Product<N, factorT> & p1, const Product<N, factorT> & p2)
 {
     // delegate to the standard algorithm
-    return std::equal(s1.begin(), s1.end(), s2.begin());
+    return std::equal(p1.begin(), p1.end(), p2.begin());
 }
 
 
@@ -93,11 +93,34 @@ operator== (const Product<N, factorT> & s1, const Product<N, factorT> & s2)
 template <pyre::grid::size_t N, typename factorT>
 constexpr bool
 pyre::grid::
-operator!= (const Product<N, factorT> & s1, const Product<N, factorT> & s2)
+operator!= (const Product<N, factorT> & p1, const Product<N, factorT> & p2)
 {
     // delegate to {operator==}
-    return !(s1 == s2);
+    return !(p1 == p2);
 }
+
+
+// stream injection
+template <pyre::grid::size_t N, typename factorT>
+auto
+pyre::grid::
+operator<< (ostream_t & stream, const Product<N, factorT> & p) -> ostream_reference
+{
+    // the renderer
+    auto fold = [](string_t partial, typename Product<N, factorT>::factor_type value) {
+                    return std::move(partial) + ", " + std::to_string(value);
+                };
+    // fold the index values into a string
+    string_t rep = std::accumulate(std::next(p.begin()),
+                                   p.end(),
+                                   std::to_string(p[0]),
+                                   fold);
+    // inject the representation
+    stream << rep;
+    // and return
+    return stream;
+}
+
 
 
 #endif

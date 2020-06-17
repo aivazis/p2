@@ -11,6 +11,7 @@
 // externals
 #include <array>
 #include <numeric>
+#include <ostream>
 
 // support
 #include <p2/journal.h>
@@ -32,6 +33,10 @@ namespace pyre::grid {
     // arrays of things
     template <typename T, size_t N>
     using array_t = std::array<T, N>;
+
+    // output streams
+    using ostream_t = std::ostream;
+    using ostream_reference = std::ostream &;
 }
 
 

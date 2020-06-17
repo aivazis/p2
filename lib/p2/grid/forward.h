@@ -36,6 +36,11 @@ namespace pyre::grid {
     template <size_t N, typename factorT>
     constexpr bool
     operator!=(const Product<N, factorT> &, const Product<N, factorT> &);
+
+    // stream injection for {Product} descendants
+    template <size_t N, typename factorT>
+    auto
+    operator<< (ostream_reference, const Product<N, factorT> & index) -> ostream_reference;
 }
 
 

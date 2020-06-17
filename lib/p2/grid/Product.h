@@ -50,7 +50,7 @@ public:
 
     // static interface
 public:
-    static constexpr auto dim();
+    static constexpr auto dim() -> size_type;
 
     // implementation details: data
 private:
