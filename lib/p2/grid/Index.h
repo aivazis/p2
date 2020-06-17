@@ -21,8 +21,10 @@ public:
     using index_type = Index<N>;
     // alias for my base
     using product_type = Product<N, long>;
+    // my representation
+    using rep_type = typename product_type::rep_type;
     // individual axis values
-    using axis_type = typename product_type::rep_type::value_type;
+    using axis_type = typename rep_type::value_type;
     using axis_reference = axis_type &;
     using axis_const_reference = const axis_type &;
 

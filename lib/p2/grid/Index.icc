@@ -33,7 +33,7 @@ Index(argT... idx) :
 
 
 // static interface: factories
-// make an index tat is filled with zeroes
+// make an index that is filled with zeroes
 template <pyre::grid::size_t N>
 constexpr auto
 pyre::grid::Index<N>::
@@ -42,6 +42,47 @@ zero() -> index_type
     // delegate
     return index_type(0);
 }
+
+
+// index algebra
+template <pyre::grid::size_t N>
+constexpr auto
+pyre::grid::
+operator+ (const Index<N> & i1, const Index<N> & i2) -> Index<N>
+{
+    // make a default index
+    Index<N> sum;
+
+    // go through each axis
+    for (size_t axis = 0; axis < N; ++axis) {
+        // do the math
+        sum[axis] = i1[axis] + i2[axis];
+    }
+
+    // all done
+    return sum;
+}
+
+
+template <pyre::grid::size_t N>
+constexpr auto
+pyre::grid::
+operator- (const Index<N> & i1, const Index<N> & i2) -> Index<N>
+{
+    // make a default index
+    Index<N> diff;
+
+    // go through each axis
+    for (size_t axis = 0; axis < N; ++axis) {
+        // do the math
+        diff[axis] = i1[axis] - i2[axis];
+    }
+
+    // all done
+    return diff;
+}
+
+
 
 
 #endif

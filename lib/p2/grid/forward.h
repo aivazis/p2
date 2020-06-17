@@ -41,6 +41,15 @@ namespace pyre::grid {
     template <size_t N, typename factorT>
     auto
     operator<< (ostream_reference, const Product<N, factorT> & index) -> ostream_reference;
+
+    // index algebra
+    template <size_t N>
+    constexpr auto
+    operator+ (const Index<N> & i1, const Index<N> & i2) -> Index<N>;
+
+    template <size_t N>
+    constexpr auto
+    operator- (const Index<N> & i1, const Index<N> & i2) -> Index<N>;
 }
 
 
