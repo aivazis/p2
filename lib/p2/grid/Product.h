@@ -7,6 +7,7 @@
 #if !defined(pyre_grid_Product_h)
 #define pyre_grid_Product_h
 
+
 // thin wrapper over {std::array} that provides representation support for the other
 // fundamental concepts in this package
 template <pyre::grid::size_t N, typename factorT>
@@ -56,10 +57,12 @@ private:
     rep_type _rep;
 };
 
+
 // get the inline definitions
 #define pyre_grid_Product_icc
 #include "Product.icc"
 #undef pyre_grid_Product_icc
+
 
 #endif
 

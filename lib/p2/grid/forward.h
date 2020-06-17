@@ -20,7 +20,21 @@ namespace pyre::grid {
     // memory packing strategies
     // the order in which index axes are packed in memory
     template <size_t N> class Order;
-};
+}
+
+
+// operators
+namespace pyre::grid {
+    // boolean operators for {Product} descendants
+    // equality
+    template <size_t N, typename factorT>
+    constexpr bool
+    operator==(const Product<N, factorT> &, const Product<N, factorT> &);
+    // and not
+    template <size_t N, typename factorT>
+    constexpr bool
+    operator!=(const Product<N, factorT> &, const Product<N, factorT> &);
+}
 
 
 #endif
