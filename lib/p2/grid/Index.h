@@ -37,6 +37,10 @@ public:
     // constructor; a variadic template to enable initializer lists
     template <typename... argT>
     constexpr explicit Index(argT...);
+
+    // static interface: factories
+public:
+    static constexpr auto zero() -> index_type;
 };
 
 

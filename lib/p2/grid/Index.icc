@@ -17,6 +17,7 @@ pyre::grid::Index<N>::
 Index(axis_type value) :
     product_type {}
 {
+    // fill my representation with {value}
     std::fill(this->begin(), this->end(), value);
 }
 
@@ -29,6 +30,18 @@ pyre::grid::Index<N>::
 Index(argT... idx) :
     product_type(idx...)
 {}
+
+
+// static interface: factories
+// make an index tat is filled with zeroes
+template <pyre::grid::size_t N>
+constexpr auto
+pyre::grid::Index<N>::
+zero() -> index_type
+{
+    // delegate
+    return index_type(0);
+}
 
 
 #endif
