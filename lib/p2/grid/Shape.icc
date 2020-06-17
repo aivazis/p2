@@ -25,9 +25,9 @@ Shape(argT... idx) :
 template <pyre::grid::size_t N>
 constexpr auto
 pyre::grid::Shape<N>::
-size() -> axis_type
+size() const -> axis_type
 {
-    // my capacity is equal to the product of the possible values along each axis
+    // my capacity is equal to the product of the number of possible values along each axis
     return std::accumulate(this->begin(), this->end(), 1ul, std::multiplies<axis_type>());
 }
 

@@ -38,7 +38,7 @@ public:
     // interface
 public:
     // the total number of addressable values
-    constexpr auto size() -> axis_type;
+    constexpr auto size() const -> axis_type;
 };
 
 
