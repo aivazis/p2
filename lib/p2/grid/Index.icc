@@ -83,8 +83,6 @@ operator- (const Index<N> & i1, const Index<N> & i2) -> Index<N>
 }
 
 
-
-
 #endif
 
 // end of file
