@@ -55,10 +55,89 @@ origin() const -> index_type
 template <pyre::grid::size_t N>
 constexpr auto
 pyre::grid::Canonical<N>::
-nudge() const -> typename index_type::axis_type
+nudge() const -> difference_type
 {
     // easy enough
     return _nudge;
+}
+
+
+template <pyre::grid::size_t N>
+constexpr auto
+pyre::grid::Canonical<N>::
+size() const -> size_type
+{
+    // my {shape} knows
+    return _shape.size();
+}
+
+
+// from {difference_type} to {index_type}
+template <pyre::grid::size_t N>
+constexpr auto
+pyre::grid::Canonical<N>::
+index(difference_type offset) -> index_type
+{
+    // make an empty index
+    index_type index;
+    // get the capacity of the layout
+    auto product = this->size();
+
+    // get my shape
+    auto shape = this->shape();
+    // and my index packing order
+    auto order = this->order();
+
+    // loop in reverse packing order
+    for (size_t axis = this->dim(); axis > 0; --axis) {
+        // pull the extent of the current axis out of the layout capacity
+        product /= shape[order[axis-1]];
+        // set the index value
+        index[order[axis-1]] = offset / product;
+        // adjust
+        offset %= product;
+    }
+
+    // shift it by the {origin} and return it
+    return index + this->origin();
+}
+
+
+// from {index_type} to {difference_type}
+template <pyre::grid::size_t N>
+constexpr auto
+pyre::grid::Canonical<N>::
+offset(const index_type & index) -> difference_type
+{
+    // initialize the offset
+    difference_type offset = 0;
+    // and the running product of the shape factors
+    typename shape_type::axis_type product = 1;
+
+    // get my shape
+    auto shape = this->shape();
+    // and my packing order
+    auto order = this->order();
+
+    // in packing order
+    for (auto axis : order) {
+        // update the offset
+        offset += index[axis] * product;
+        // update the product
+        product *= shape[axis];
+    }
+
+    // shift the result by the fixed offset of the {origin} and return it
+    return offset - _nudge;
+}
+
+
+// static interface
+template <pyre::grid::size_t N>
+constexpr auto
+pyre::grid::Canonical<N>::dim() -> size_type
+{
+    return N;
 }
 
 
