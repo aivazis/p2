@@ -13,8 +13,7 @@ template <pyre::grid::size_t N, typename factorT>
 template <typename... argT>
 constexpr pyre::grid::Product<N, factorT>::Product(argT... idx) :
     _rep { static_cast<factor_type>(idx)... }
-{
-}
+{}
 
 
 // interface

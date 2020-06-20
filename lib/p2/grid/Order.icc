@@ -159,10 +159,10 @@ fortran()
 template <pyre::grid::size_t N>
 constexpr bool
 pyre::grid::
-operator== (const Order<N> & o1, const Order<N> & o2)
+operator== (const Order<N> & ord1, const Order<N> & ord2)
 {
     // delegate to the standard algorithm
-    return std::equal(o1.begin(), o1.end(), o2.begin());
+    return std::equal(ord1.begin(), ord1.end(), ord2.begin());
 }
 
 
@@ -170,10 +170,10 @@ operator== (const Order<N> & o1, const Order<N> & o2)
 template <pyre::grid::size_t N>
 constexpr bool
 pyre::grid::
-operator!= (const Order<N> & o1, const Order<N> & o2)
+operator!= (const Order<N> & ord1, const Order<N> & ord2)
 {
     // delegate to {operator==}
-    return !(o1 == o2);
+    return !(ord1 == ord2);
 }
 
 
@@ -181,23 +181,22 @@ operator!= (const Order<N> & o1, const Order<N> & o2)
 template <pyre::grid::size_t N>
 auto
 pyre::grid::
-operator<< (ostream_t & stream, const Order<N> & o) -> ostream_reference
+operator<< (ostream_t & stream, const Order<N> & ord) -> ostream_reference
 {
     // the renderer
     auto fold = [](string_t partial, typename Order<N>::rank_type value) {
                     return std::move(partial) + ", " + std::to_string(value);
                 };
     // fold the index values into a string
-    string_t rep = std::accumulate(std::next(o.begin()),
-                                   o.end(),
-                                   std::to_string(o[0]),
+    string_t rep = std::accumulate(std::next(ord.begin()),
+                                   ord.end(),
+                                   std::to_string(ord[0]),
                                    fold);
     // inject the representation
     stream << rep;
     // and return
     return stream;
 }
-
 
 
 // end of file
