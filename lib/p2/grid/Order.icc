@@ -14,9 +14,75 @@ template <pyre::grid::size_t N>
 template <typename... argT>
 constexpr
 pyre::grid::Order<N>::
-Order(argT... permutation) :
-    product_type(permutation...)
+Order(argT... axis) :
+    _ranks{ static_cast<size_t>(axis)... }
 {}
+
+
+// interface
+// read only
+template <pyre::grid::size_t N>
+constexpr auto
+pyre::grid::Order<N>::
+operator[](size_type pos) const -> rank_type
+{
+    return _ranks[pos];
+}
+
+// read/write
+template <pyre::grid::size_t N>
+constexpr auto
+pyre::grid::Order<N>::
+operator[](size_type rank) -> rank_reference
+{
+    return _ranks[rank];
+}
+
+
+// iteration support
+// read only
+template <pyre::grid::size_t N>
+constexpr auto
+pyre::grid::Order<N>::
+begin() const
+{
+    return _ranks.cbegin();
+}
+
+template <pyre::grid::size_t N>
+constexpr auto
+pyre::grid::Order<N>::
+end() const
+{
+    return _ranks.cend();
+}
+
+
+// read/write
+template <pyre::grid::size_t N>
+constexpr auto
+pyre::grid::Order<N>::
+begin()
+{
+    return _ranks.begin();
+}
+
+template <pyre::grid::size_t N>
+constexpr auto
+pyre::grid::Order<N>::
+end()
+{
+    return _ranks.end();
+}
+
+
+// static interface
+template <pyre::grid::size_t N>
+constexpr auto
+pyre::grid::Order<N>::dim() -> size_type
+{
+    return N;
+}
 
 
 // static interface: factories
@@ -87,5 +153,51 @@ fortran()
 
 
 #endif
+
+// operators
+// equality
+template <pyre::grid::size_t N>
+constexpr bool
+pyre::grid::
+operator== (const Order<N> & o1, const Order<N> & o2)
+{
+    // delegate to the standard algorithm
+    return std::equal(o1.begin(), o1.end(), o2.begin());
+}
+
+
+// and not
+template <pyre::grid::size_t N>
+constexpr bool
+pyre::grid::
+operator!= (const Order<N> & o1, const Order<N> & o2)
+{
+    // delegate to {operator==}
+    return !(o1 == o2);
+}
+
+
+// stream injection
+template <pyre::grid::size_t N>
+auto
+pyre::grid::
+operator<< (ostream_t & stream, const Order<N> & o) -> ostream_reference
+{
+    // the renderer
+    auto fold = [](string_t partial, typename Order<N>::rank_type value) {
+                    return std::move(partial) + ", " + std::to_string(value);
+                };
+    // fold the index values into a string
+    string_t rep = std::accumulate(std::next(o.begin()),
+                                   o.end(),
+                                   std::to_string(o[0]),
+                                   fold);
+    // inject the representation
+    stream << rep;
+    // and return
+    return stream;
+}
+
+
 
 // end of file
