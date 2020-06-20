@@ -17,9 +17,11 @@ namespace pyre::grid {
     // shapes: the number of possible values of each index
     template <size_t N> class Shape;
 
-    // memory packing strategies
+    // support for the canonical packing strategies
     // the order in which index axes are packed in memory
     template <size_t N> class Order;
+    // an ordered index generator
+    template <class packingT> class Iterator;
     // the packing strategy
     template <size_t N> class Canonical;
 }
@@ -41,6 +43,22 @@ namespace pyre::grid {
     template <size_t N, typename factorT>
     auto
     operator<< (ostream_reference, const Product<N, factorT> & index) -> ostream_reference;
+
+    // boolean operators for the rank ordering
+    // equality
+    template <size_t N>
+    constexpr bool
+    operator==(const Order<N> &, const Order<N> &);
+    // and not
+    template <size_t N>
+    constexpr bool
+    operator!=(const Order<N> &, const Order<N> &);
+
+    // stream injection for {Order} descendants
+    template <size_t N>
+    auto
+    operator<< (ostream_reference, const Order<N> & index) -> ostream_reference;
+
 
     // index algebra
     template <size_t N>
