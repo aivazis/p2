@@ -29,8 +29,10 @@ int main() {
 
     // verify that the offset of the {origin} is zero
     assert (packing.offset(origin) == 0);
-    // verify that the offset of {0,0,0} is equal to the nudge
-    assert (packing.offset({0,0,0}) == -packing.nudge());
+    // verify that the offset of {0,0,0}
+    canonical_t::index_type zero {};
+    // is equal to the nudge
+    assert (packing.offset(zero) == -packing.nudge());
 
     // make an index
     canonical_t::index_type index { 1, 2, 3 };
