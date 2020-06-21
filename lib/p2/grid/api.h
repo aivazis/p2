@@ -11,6 +11,12 @@
 // low level entities; you should probably stay away from them
 namespace pyre::grid
 {
+    // this wrapper over a {std::array}-like container
+    // thin adaptor over a compile time container
+    template <typename T, size_t N,
+              template <typename, size_t> typename containerT = std::array>
+    using rep_t = Rep<T, N, containerT>;
+
     // support for the multidimensional objects in this package
     template <size_t N, typename factorT = size_t>
     using product_t = Product<N, factorT>;
@@ -27,7 +33,10 @@ namespace pyre::grid
     //the order in which index axes are packed in memory
     template <size_t N>
     using order_t = Order<N>;
-
+    // ordered index generator
+    template <class packingT>
+    using iterator_t = Iterator<packingT>;
+    // the packing strategy
     template <size_t N>
     using canonical_t = Canonical<N>;
 }

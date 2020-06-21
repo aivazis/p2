@@ -10,6 +10,10 @@
 
 // set up the namespace
 namespace pyre::grid {
+    // thin adaptor over a compile time container
+    template <typename T, size_t N,
+              template <typename, size_t> typename containerT = std::array>
+    class Rep;
     // basic representation of our multi-dimensional entities
     template <size_t N, typename factorT> class Product;
     // indices
@@ -24,6 +28,22 @@ namespace pyre::grid {
     template <class packingT> class Iterator;
     // the packing strategy
     template <size_t N> class Canonical;
+}
+
+
+// operators on rep
+namespace pyre::grid {
+    // equality
+    template <typename T, size_t N,
+              template <typename, size_t> typename containerT = std::array>
+    inline auto
+    operator== (const Rep<T,N,containerT> &, const Rep<T,N,containerT> &) -> bool;
+
+    // stream injection
+    template <typename T, size_t N,
+              template <typename, size_t> typename containerT = std::array>
+    inline auto
+    operator<< (ostream_reference, const Rep<T,N,containerT> &) -> ostream_reference;
 }
 
 

@@ -17,6 +17,7 @@
 #include "api.h"
 
 // implementation
+#include "Rep.h"
 #include "Product.h"
 #include "Index.h"
 #include "Shape.h"

@@ -1,0 +1,181 @@
+// -*- c++ -*-
+//
+// michael a.g. aïvázis <michael.aivazis@para-sim.com>
+// (c) 1998-2020 all rights reserved
+
+
+// code guard
+#if !defined(pyre_grid_Rep_icc)
+#error this file contains implementation details for pyre::grid::Rep
+#else
+
+
+// metamethods
+template <typename T, pyre::grid::size_t N, template <typename, size_t> typename containerT>
+template <typename... argT>
+constexpr
+pyre::grid::Rep<T, N, containerT>::
+Rep(argT... args) :
+    _rep { static_cast<value_type>(args)... }
+{}
+
+
+// access with bounds checking
+template <typename T, pyre::grid::size_t N, template <typename, size_t> typename containerT>
+constexpr auto
+pyre::grid::Rep<T, N, containerT>::
+at(size_type pos) -> reference
+{
+    // delegate to my rep
+    return _rep.at(pos);
+}
+
+
+template <typename T, pyre::grid::size_t N, template <typename, size_t> typename containerT>
+constexpr auto
+pyre::grid::Rep<T, N, containerT>::
+at(size_type pos) const -> const_reference
+{
+    // delegate to my rep
+    return _rep.at(pos);
+}
+
+
+// random access
+template <typename T, pyre::grid::size_t N, template <typename, size_t> typename containerT>
+constexpr auto
+pyre::grid::Rep<T, N, containerT>::
+operator[](size_type pos) -> reference
+{
+    // delegate to my rep
+    return _rep[pos];
+}
+
+
+template <typename T, pyre::grid::size_t N, template <typename, size_t> typename containerT>
+constexpr auto
+pyre::grid::Rep<T, N, containerT>::
+operator[](size_type pos) const -> const_reference
+{
+    // delegate to my rep
+    return _rep[pos];
+}
+
+
+// fill with a spcific value
+template <typename T, pyre::grid::size_t N, template <typename, size_t> typename containerT>
+constexpr void
+pyre::grid::Rep<T, N, containerT>::
+fill(const_reference value)
+{
+    // delegate to my rep
+    _rep.fill(value);
+    // all done
+    return;
+}
+
+
+// iteration
+template <typename T, pyre::grid::size_t N, template <typename, size_t> typename containerT>
+constexpr auto
+pyre::grid::Rep<T, N, containerT>::
+begin() -> iterator
+{
+    // delegate to my rep
+    return _rep.begin();
+}
+
+
+template <typename T, pyre::grid::size_t N, template <typename, size_t> typename containerT>
+constexpr auto
+pyre::grid::Rep<T, N, containerT>::
+begin() const ->  const_iterator
+{
+    // delegate to my rep
+    return _rep.begin();
+}
+
+
+template <typename T, pyre::grid::size_t N, template <typename, size_t> typename containerT>
+constexpr auto
+pyre::grid::Rep<T, N, containerT>::
+end() -> iterator
+{
+    // delegate to my rep
+    return _rep.end();
+}
+
+
+template <typename T, pyre::grid::size_t N, template <typename, size_t> typename containerT>
+constexpr auto
+pyre::grid::Rep<T, N, containerT>::
+end() const ->  const_iterator
+{
+    // delegate to my rep
+    return _rep.end();
+}
+
+
+// static interface
+// get the rank of the rep
+template <typename T, pyre::grid::size_t N, template <typename, size_t> typename containerT>
+constexpr auto
+pyre::grid::Rep<T, N, containerT>::
+rank() -> typename rep_type::size_type
+{
+    // make one with an empty initializer; the language guarantees zero initialization
+    return N;
+}
+
+
+// make a rep and fill it with zeroes
+template <typename T, pyre::grid::size_t N, template <typename, size_t> typename containerT>
+constexpr auto
+pyre::grid::Rep<T, N, containerT>::
+zero() -> rep_type
+{
+    // make one with an empty initializer; the language guarantees zero initialization
+    return rep_type {};
+}
+
+
+// operators
+// equality
+template <typename T, pyre::grid::size_t N, template <typename, size_t> typename containerT>
+auto
+pyre::grid::
+operator== (const Rep<T,N,containerT> & rep1, const Rep<T,N,containerT> & rep2) -> bool
+{
+    // let the STL handle it
+    return std::equal(rep1.begin(), rep1.end(), rep2.begin());
+}
+
+
+// injection operator
+template <typename T, pyre::grid::size_t N, template <typename, size_t> typename containerT>
+auto
+pyre::grid::
+operator<< (ostream_reference stream, const Rep<T,N,containerT> & rep) -> ostream_reference
+{
+    // make an alias for {rep}
+    using rep_t = Rep<T, N, containerT>;
+
+    // the renderer
+    auto fold = [](string_t partial, typename rep_t::value_type value) {
+                    return std::move(partial) + ", " + std::to_string(value);
+                };
+    // fold the index values into a string
+    string_t text = std::accumulate(std::next(rep.begin()),
+                                    rep.end(),
+                                    std::to_string(rep.at(0)),
+                                    fold);
+    // inject the representation
+    stream << text;
+    // all done
+    return stream;
+}
+
+
+#endif
+
+// end of file
