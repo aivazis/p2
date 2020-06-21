@@ -25,9 +25,12 @@ public:
     using index_type = Index<N>;
     using shape_type = Shape<N>;
     using order_type = Order<N>;
-
+    // the array with the strides looks just like a shape
+    using strides_type = shape_type;
     // offsets
     using difference_type = typename index_type::rep_type::difference_type;
+    // iterators
+    using iterator_type = Iterator<canonical_type>;
 
     // metamethods
 public:
@@ -48,9 +51,12 @@ public:
     // interface
 public:
     // accessors
+    // user supplied
     constexpr auto shape() const -> shape_type;
     constexpr auto order() const -> order_type;
     constexpr auto origin() const -> index_type;
+    // deduced
+    constexpr auto strides() const -> strides_type;
     constexpr auto nudge() const -> difference_type;
 
     // the total number of addressable cells
@@ -60,15 +66,31 @@ public:
     constexpr auto index(difference_type) -> index_type;
     constexpr auto offset(const index_type &) -> difference_type;
 
+    // iteration support: iterators generate sequences of indices
+    constexpr auto begin() const;
+    constexpr auto end() const;
+    constexpr auto begin(const order_type &) const;
+
     // static interface
 public:
     static constexpr auto dim() -> size_type;
 
+    // implementation details: static helpers
+protected:
+    // given a {shape} and an {order}, infer the axis strides assuming tight packing
+    static constexpr auto strides(const shape_type &, const order_type &) -> strides_type;
+    // given the packing {strides}, project an {index} to an offset such that the {zero} index
+    // maps to the origin
+    static constexpr auto project(const index_type &, const strides_type &) -> difference_type;
+
     // implementation details: data
 private:
+    // supplied by the caller
     shape_type _shape;         // my shape
     order_type _order;         // the packing order of the axes
     index_type _origin;        // the smallest allowable index value
+    // deduced
+    shape_type _strides;       // the vector of strides for axis
     difference_type _nudge;    // offset correction when {_origin} is not {zero}
 };
 

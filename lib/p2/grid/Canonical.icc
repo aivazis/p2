@@ -17,11 +17,13 @@ Canonical(shape_type shape, index_type origin, order_type order) :
     _shape { shape },
     _order { order },
     _origin { origin },
-    _nudge { std::inner_product(origin.begin(), origin.end(), shape.begin(), 0l) }
+    _strides { strides(shape, order) },
+    _nudge { project(_origin, _strides) }
 {}
 
 
 // interface
+// accessors for the user supplied information
 template <pyre::grid::size_t N>
 constexpr auto
 pyre::grid::Canonical<N>::
@@ -49,6 +51,17 @@ origin() const -> index_type
 {
     // easy enough
     return _origin;
+}
+
+
+// accessors for the deduced information
+template <pyre::grid::size_t N>
+constexpr auto
+pyre::grid::Canonical<N>::
+strides() const -> strides_type
+{
+    // easy enough
+    return _strides;
 }
 
 
@@ -138,6 +151,42 @@ constexpr auto
 pyre::grid::Canonical<N>::dim() -> size_type
 {
     return N;
+}
+
+
+// static helpers
+template <pyre::grid::size_t N>
+constexpr auto
+pyre::grid::Canonical<N>::strides(const shape_type & shape,
+                                  const order_type & order) -> strides_type
+{
+    // make an empty shape to store the answer
+    strides_type strides;
+
+    // initialize the running product
+    typename shape_type::axis_type product = 1;
+    // go through indices in order
+    for (auto axis : order) {
+        // store the running product as the stride of the current axis
+        strides[axis] = product;
+        // and update it
+        product *= shape[axis];
+    }
+
+    // all done
+    return strides;
+}
+
+
+template <pyre::grid::size_t N>
+constexpr auto
+pyre::grid::Canonical<N>::project(const index_type & index,
+                                  const strides_type & strides) -> difference_type
+{
+    // the initial value; here so we can be explicit about the return type
+    difference_type init = 0;
+    // project and return
+    return std::inner_product(index.begin(), index.end(), strides.begin(), init);
 }
 
 

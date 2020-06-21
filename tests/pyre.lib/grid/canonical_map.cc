@@ -6,6 +6,7 @@
 
 // support
 #include <cassert>
+#include <iostream>
 // get the grid
 #include <p2/grid.h>
 
@@ -27,6 +28,12 @@ int main() {
     auto offset = packing.offset(index);
     // map it back to an index
     auto image = packing.index(offset);
+
+    // show me
+    std::cout
+        << "index: " << index << std::endl
+        << "offset: " << offset << std::endl
+        << "image: " << image << std::endl;
 
     // verify that the {image} is our original index
     assert (image == index);
