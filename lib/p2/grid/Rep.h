@@ -8,7 +8,7 @@
 #define pyre_grid_Rep_h
 
 
-// this adaptor over a compile time container that we use to store index ranks, grid shapes,
+// thin adaptor over a compile time container that we use to store index ranks, grid shapes,
 // packing order and the like; it provides an abstraction layer that is necessary for
 // supporting the implementation in environments that don't have {std::array}
 template <typename T,
