@@ -20,9 +20,9 @@ int main() {
     order_t shuffle { 0, 1, 2, 3 };
 
     // verify that the dimensionality is reported correctly through the type
-    static_assert (order_t::dim() == 4);
+    static_assert (order_t::rank() == 4);
     // verify that the dimensionality is reported correctly through an instance
-    static_assert (shuffle.dim() == 4);
+    static_assert (shuffle.rank() == 4);
 
     // make a column major ordering
     order_t fortran = order_t::fortran();
@@ -32,7 +32,7 @@ int main() {
     // make a column major ordering
     order_t c = order_t::c();
     // check that it's different from {shuffle}
-    assert (shuffle != c);
+    assert (!(shuffle == c));
 
     // all done
     return 0;

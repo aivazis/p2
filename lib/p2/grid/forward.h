@@ -11,9 +11,14 @@
 // set up the namespace
 namespace pyre::grid {
     // thin adaptor over a compile time container
-    template <typename T, size_t N,
-              template <typename, size_t> typename containerT>
+    template <typename T, size_t N, template <typename, size_t> class containerT>
     class Rep;
+
+    // support for the canonical packing strategies
+    // the order in which index axes are packed in memory
+    template <size_t N, template <typename, size_t> typename containerT>
+    class Order;
+
     // basic representation of our multi-dimensional entities
     template <size_t N, typename factorT> class Product;
     // indices
@@ -22,8 +27,6 @@ namespace pyre::grid {
     template <size_t N> class Shape;
 
     // support for the canonical packing strategies
-    // the order in which index axes are packed in memory
-    template <size_t N> class Order;
     // an ordered index generator
     template <class packingT> class Iterator;
     // the packing strategy
@@ -63,22 +66,6 @@ namespace pyre::grid {
     template <size_t N, typename factorT>
     auto
     operator<< (ostream_reference, const Product<N, factorT> & index) -> ostream_reference;
-
-    // boolean operators for the rank ordering
-    // equality
-    template <size_t N>
-    constexpr bool
-    operator==(const Order<N> &, const Order<N> &);
-    // and not
-    template <size_t N>
-    constexpr bool
-    operator!=(const Order<N> &, const Order<N> &);
-
-    // stream injection for {Order} descendants
-    template <size_t N>
-    auto
-    operator<< (ostream_reference, const Order<N> & index) -> ostream_reference;
-
 
     // index algebra
     template <size_t N>

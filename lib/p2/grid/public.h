@@ -18,11 +18,14 @@
 
 // implementation
 #include "Rep.h"
+#include "Order.h"
+
+// to be done...
 #include "Product.h"
 #include "Index.h"
 #include "Shape.h"
-#include "Order.h"
-#include "Canonical.h"
+// commented out so tests can rune
+// #include "Canonical.h"
 
 
 #endif

@@ -11,70 +11,55 @@
 // generalization to multiple dimensions of the familiar row-major and column-major order
 // strategies. this is captured as a permutation in {S_N} that denotes the storage order of the
 // indices.
-template <pyre::grid::size_t N>
-class pyre::grid::Order {
+template <pyre::grid::size_t N, template <typename, size_t> class containerT>
+class pyre::grid::Order : public Rep<size_t, N, containerT> {
     // types
 public:
     // alias for me
-    using order_type = Order<N>;
+    using order_type = Order<N, containerT>;
     // my representation
     using size_type = decltype(N);
-    using rep_type = array_t<size_t, N>;
-    // individual ranks
-    using rank_type = typename rep_type::value_type;
-    using rank_reference = rank_type &;
-    using rank_const_reference = const rank_type &;
+    using rep_type = Rep<size_t, N, containerT>;
 
     // metamethods
 public:
-    // destructor: let the compiler do it
-    ~Order() = default;
-
-    // a constructor that takes an initializer list
+    // aggregate initialization
     template <typename... argT>
     constexpr explicit Order(argT...);
 
-    // let the compiler write the rest
+    // static interface: factories
+public:
+    // row major: the sequence [N-1, ..., 0]
+    static constexpr auto rowMajor() -> order_type;
+    // and its alias
+    static constexpr auto c() -> order_type;
+
+    // column major: the sequence [0, ..., N-1]
+    static constexpr auto columnMajor() -> order_type;
+    // and its alias
+    static constexpr auto fortran() -> order_type;
+
+    // default metamethods
+public:
+    // destructor
+    ~Order() = default;
+    // constructors
     Order(const Order &) = default;
     Order(Order &&) = default;
     Order & operator=(const Order &) = default;
     Order & operator=(Order &&) = default;
 
-    // interface
-public:
-    // access
-    // read only
-    constexpr auto operator[](size_type) const -> rank_type;
-    // read/write
-    constexpr auto operator[](size_type) -> rank_reference;
-
-    // iteration support
-    // read only
-    constexpr auto begin() const;
-    constexpr auto end() const;
-    // read/write
-    constexpr auto begin();
-    constexpr auto end();
-
-    // static interface
-public:
-    static constexpr auto dim() -> size_type;
-
-    // static interface: factories
-public:
-    // c-like: last index varies first, in order right to left
-    static constexpr auto rowMajor();
-    // and it alias
-    static constexpr auto c();
-
-    // fortran-like: first index varies first, in order left to right
-    static constexpr auto columnMajor();
-    // and its alias
-    static constexpr auto fortran();
-
-    // implementation details: data
+    // implementation details: helpers
 private:
-    rep_type _ranks;
+    // the {columnMajor} helper
+    template <size_t... seq>
+    static constexpr auto
+    _columnMajor(std::index_sequence<seq...>) -> order_type;
+
+    // the {rowMajor} helper
+    template <size_t... seq>
+    static constexpr auto
+    _rowMajor(std::index_sequence<seq...>) -> order_type;
 };
 
 
