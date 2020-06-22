@@ -20,12 +20,12 @@
 // In this package, we refer to a multidimensional array as a "grid". It's not a good name, but
 // there are no good names for this problem. The best one i know of is "ndarray", and that's
 // not very good at all. The work "grid" is supposed to remind you that this data structure is
-// really a map from the user's abstract index space {I} to {Z_n} through an intermediate map
+// really a map from the user's abstract index space {I} to {Z_N} through an intermediate map
 // that's the cartesian product of subsets of the non-negative integers
 
-//  I: {I_0, I_1, ..., I_n} -> ... -> Z_m_0 x Z_m_1 x ... x Z_m_n-1 -> Z_N -> memory
+//  I: {I_0, I_1, ..., I_n-1} -> ... -> Z_{s_0} x Z_{s_2} x ... x Z_{s_{n-1}} -> Z_N -> memory
 
-// where N = m_0 x m_1 x ... x m_n-1. The last step is provided by the language in terms of the
+// where N = s_0 x s_1 x ... x s_n-1. The last step is provided by the language in terms of the
 // built in {operator[]} and pointer arithmetic that map integer indices to typed memory. The
 // second to the last forms the basis for supporting multi-dimensional arrays; it looks like
 // mapping a cartesian grid to the integers, hence the name.
@@ -49,15 +49,16 @@
 // cell in the block, and pointer arithmetic provides a map Z_n -> memory. Straightforward
 // generalization of this requires:
 
-// - an n-tuple {shape_t} that fixes the (m_0, m_1, ..., m_(n-1)) in Z_m1, ... Z_mN
 // - an n-tuple {index_t} of integers that store the specific values of the index
+// - an n-tuple {shape_t} that fixes the (s_1, m_2, ..., s_n)) in Z_s_1, ..., Z_s_N
 // - a packing strategy, i.e. the actual map from the index space to Z_N
 
 // The first two are relatively straightforward and describe the domain of the map. {shape_t}
 // describes the domain of the map, and {index_t} is a point in this domain. We use
 // {std::array} to represent both. The actual map is a bit more complicated. Ideally, it should
 // be an isomorphism so that not only do indices map to a unique offset into the memory block,
-// but the map is invertible to yield a unique index for each offset.
+// but the map is invertible to yield a unique index for each offset. There are many such maps
+// (in fact, precisely N!). We are looking for the subset that has acceptable computational cost.
 
 // The row major and column major packing strategies, familiar from 2-d arrays, can be
 // generalized to arbitrary dimensions rather easily. Observe that in 2-d, with indices (i,j),
@@ -70,10 +71,11 @@
 // permutation of the integers [0, n-1] and use it to determine the order in which the indices
 // run.
 
-// Other packing strategies are possible, many of which have very interesting properties. Peano
-// curves are good examples of the trade offs between the computational complexity of the
-// indexing map and the locality of the packing, i.e. the average distance in memory of cells
-// that are nearest neighbors in index space.
+// Other packing strategies are possible, many of which have very interesting properties. Space
+// filling curves, such as the Morton Z curve or the Peano family of curves, are good examples
+// of the trade offs between the computational complexity of the indexing map and the locality
+// of the packing, i.e. the average distance in memory of cells that are nearest neighbors in
+// index space.
 
 
 // publish the interface
