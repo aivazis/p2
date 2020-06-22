@@ -12,7 +12,7 @@
 namespace pyre::grid {
     // thin adaptor over a compile time container
     template <typename T, size_t N,
-              template <typename, size_t> typename containerT = std::array>
+              template <typename, size_t> typename containerT>
     class Rep;
     // basic representation of our multi-dimensional entities
     template <size_t N, typename factorT> class Product;
