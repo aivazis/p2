@@ -68,32 +68,6 @@ c() -> order_type
 }
 
 
-// operators
-// stream injection
-template <pyre::grid::size_t N, template <typename, pyre::grid::size_t> class containerT>
-auto
-pyre::grid::
-operator<< (ostream_t & stream, const Order<N, containerT> & ord) -> ostream_reference
-{
-    // make an alias for the {order_t}
-    using order_t = Order<N, containerT>;
-
-    // the renderer
-    auto fold = [](string_t partial, typename order_t::rank_type value) {
-                    return std::move(partial) + ", " + std::to_string(value);
-                };
-    // fold the index values into a string
-    string_t rep = std::accumulate(std::next(ord.begin()),
-                                   ord.end(),
-                                   std::to_string(ord[0]),
-                                   fold);
-    // inject the representation
-    stream << rep;
-    // and return
-    return stream;
-}
-
-
 // implementation details
 // column major helper
 template <pyre::grid::size_t N, template <typename, pyre::grid::size_t> class containerT>
