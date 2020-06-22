@@ -11,7 +11,7 @@
 
 
 // alias the rep
-using rep_t = pyre::grid::Rep<pyre::grid::size_t, 5>;
+using rep_t = pyre::grid::rep_t<pyre::grid::size_t, 5>;
 
 
 // make a {rep} that's filled with zeroes

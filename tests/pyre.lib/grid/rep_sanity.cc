@@ -10,7 +10,7 @@
 
 // alias the rep
 template <pyre::grid::size_t N>
-using rep_t = pyre::grid::Rep<pyre::grid::size_t, N>;
+using rep_t = pyre::grid::rep_t<pyre::grid::size_t, N>;
 
 
 // compile time sanity check: make sure the header file is accessible
