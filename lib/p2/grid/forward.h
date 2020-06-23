@@ -14,6 +14,9 @@ namespace pyre::grid {
     template <typename T, size_t N, template <typename, size_t> class containerT>
     class Rep;
 
+    // indices
+    template <size_t N, template <typename, size_t> class containerT> class Index;
+
     // support for the canonical packing strategies
     // the order in which index axes are packed in memory
     template <size_t N, template <typename, size_t> typename containerT>
@@ -21,8 +24,6 @@ namespace pyre::grid {
 
     // basic representation of our multi-dimensional entities
     template <size_t N, typename factorT> class Product;
-    // indices
-    template <size_t N> class Index;
     // shapes: the number of possible values of each index
     template <size_t N> class Shape;
 
@@ -38,15 +39,33 @@ namespace pyre::grid {
 namespace pyre::grid {
     // equality
     template <typename T, size_t N,
-              template <typename, size_t> typename containerT = std::array>
+              template <typename, size_t> class containerT = std::array>
     inline auto
     operator== (const Rep<T,N,containerT> &, const Rep<T,N,containerT> &) -> bool;
 
     // stream injection
     template <typename T, size_t N,
-              template <typename, size_t> typename containerT = std::array>
+              template <typename, size_t> class containerT = std::array>
     inline auto
     operator<< (ostream_reference, const Rep<T,N,containerT> &) -> ostream_reference;
+}
+
+
+// index algebra
+namespace pyre::grid {
+    // addition
+    template <size_t N,
+              template <typename, size_t> class containerT>
+    constexpr auto
+    operator+ (const Index<N, containerT> & i1, const Index<N, containerT> & i2)
+        -> Index<N, containerT>;
+
+    // subtraction
+    template <size_t N,
+              template <typename, size_t> class containerT>
+    constexpr auto
+    operator- (const Index<N, containerT> & i1, const Index<N, containerT> & i2)
+        -> Index<N, containerT>;
 }
 
 
@@ -66,15 +85,6 @@ namespace pyre::grid {
     template <size_t N, typename factorT>
     auto
     operator<< (ostream_reference, const Product<N, factorT> & index) -> ostream_reference;
-
-    // index algebra
-    template <size_t N>
-    constexpr auto
-    operator+ (const Index<N> & i1, const Index<N> & i2) -> Index<N>;
-
-    template <size_t N>
-    constexpr auto
-    operator- (const Index<N> & i1, const Index<N> & i2) -> Index<N>;
 }
 
 

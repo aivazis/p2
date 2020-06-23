@@ -16,6 +16,11 @@ namespace pyre::grid
     template <typename T, size_t N, template <typename, size_t> class containerT = std::array>
     using rep_t = Rep<T, N, containerT>;
 
+    // indices
+    template <size_t N, template <typename, size_t> class containerT = std::array>
+    using index_t = Index<N, containerT>;
+
+
     // canonical packing
     //the order in which index axes are packed in memory
     template <size_t N, template <typename, size_t> class containerT = std::array>
@@ -24,10 +29,6 @@ namespace pyre::grid
     // support for the multidimensional objects in this package
     template <size_t N, typename factorT = size_t>
     using product_t = Product<N, factorT>;
-
-    // indices
-    template <size_t N>
-    using index_t = Index<N>;
 
     // the number of possible values of each axis
     template <size_t N>

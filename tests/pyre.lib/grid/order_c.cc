@@ -18,7 +18,7 @@ using order_t = pyre::grid::order_t<4>;
 int main(int argc, char * argv[]) {
     // initialize the journal
     pyre::journal::init(argc, argv);
-    pyre::journal::application("order_access");
+    pyre::journal::application("order_c");
     // make a channel
     pyre::journal::debug_t channel("pyre.grid.order");
 
