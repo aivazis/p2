@@ -14,18 +14,26 @@ namespace pyre::grid {
     template <typename T, size_t N, template <typename, size_t> class containerT>
     class Rep;
 
+    // basic representation of our multi-dimensional entities
+    template <size_t N, typename T,
+              template <typename, size_t> class containerT>
+    class Product;
+
+    // shapes: the number of possible values of each index
+    template <size_t N,
+              template <typename, size_t> class containerT>
+    class Shape;
+
     // indices
-    template <size_t N, template <typename, size_t> class containerT> class Index;
+    template <size_t N,
+              template <typename, size_t> class containerT>
+    class Index;
 
     // support for the canonical packing strategies
     // the order in which index axes are packed in memory
-    template <size_t N, template <typename, size_t> typename containerT>
+    template <size_t N,
+              template <typename, size_t> typename containerT>
     class Order;
-
-    // basic representation of our multi-dimensional entities
-    template <size_t N, typename factorT> class Product;
-    // shapes: the number of possible values of each index
-    template <size_t N> class Shape;
 
     // support for the canonical packing strategies
     // an ordered index generator
@@ -66,25 +74,6 @@ namespace pyre::grid {
     constexpr auto
     operator- (const Index<N, containerT> & i1, const Index<N, containerT> & i2)
         -> Index<N, containerT>;
-}
-
-
-// operators
-namespace pyre::grid {
-    // boolean operators for {Product} descendants
-    // equality
-    template <size_t N, typename factorT>
-    constexpr bool
-    operator==(const Product<N, factorT> &, const Product<N, factorT> &);
-    // and not
-    template <size_t N, typename factorT>
-    constexpr bool
-    operator!=(const Product<N, factorT> &, const Product<N, factorT> &);
-
-    // stream injection for {Product} descendants
-    template <size_t N, typename factorT>
-    auto
-    operator<< (ostream_reference, const Product<N, factorT> & index) -> ostream_reference;
 }
 
 

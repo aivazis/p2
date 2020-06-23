@@ -11,26 +11,25 @@
 // the specification of the number of possible index values along each dimension
 // this class stores the {s_i} in
 //
-//     Z_s_1 x ... x Z_s_n
+//     Z_s_0 x ... x Z_s_{n-1}
 //
-template <pyre::grid::size_t N>
-class pyre::grid::Shape : public Product<N, size_t> {
+template <pyre::grid::size_t N, template <typename, size_t> class containerT>
+class pyre::grid::Shape : public Rep<size_t, N, containerT> {
     // types
 public:
     // alias for me
-    using shape_type = Shape<N>;
+    using shape_type = Shape<N, containerT>;
     // alias for my base
-    using product_type = Product<N, size_t>;
+    using rep_type = Rep<size_t, N, containerT>;
+    // the sizes of things
+    using size_type = typename rep_type::size_type;
     // individual axis values
-    using axis_type = typename product_type::rep_type::value_type;
+    using axis_type = typename rep_type::value_type;
     using axis_reference = axis_type &;
     using axis_const_reference = const axis_type &;
 
     // metamethods
 public:
-    // destructor
-    ~Shape() = default;
-
     // constructor; works with initializer lists
     template <typename... argT>
     constexpr explicit Shape(argT... args);
@@ -38,7 +37,17 @@ public:
     // interface
 public:
     // the total number of addressable values
-    constexpr auto size() const -> axis_type;
+    constexpr auto capacity() const -> size_type;
+
+    // default metamethods
+public:
+    // destructor
+    ~Shape() = default;
+    // constructors
+    Shape(const Shape &) = default;
+    Shape(Shape &&) = default;
+    Shape & operator=(const Shape &) = default;
+    Shape & operator=(Shape &&) = default;
 };
 
 
