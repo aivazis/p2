@@ -13,16 +13,14 @@
 // complicate index arithmetic unnecessarily
 
 // basic index type
-template <pyre::grid::size_t N>
-class pyre::grid::Index : public Product<N, long> {
+template <pyre::grid::size_t N, template <typename, size_t> class containerT>
+class pyre::grid::Index : public Rep<int, N, containerT> {
     // types
 public:
     // alias for me
-    using index_type = Index<N>;
+    using index_type = Index<N, containerT>;
     // alias for my base
-    using product_type = Product<N, long>;
-    // my representation
-    using rep_type = typename product_type::rep_type;
+    using rep_type = Rep<int, N, containerT>;
     // individual axis values
     using axis_type = typename rep_type::value_type;
     using axis_reference = axis_type &;
@@ -30,9 +28,6 @@ public:
 
     // metamethods
 public:
-    // destructor
-    ~Index() = default;
-
     // constructor that fills an index with a given {value}
     constexpr explicit Index(axis_type);
 
@@ -43,6 +38,16 @@ public:
     // static interface: factories
 public:
     static constexpr auto zero() -> index_type;
+
+    // default metamethods
+public:
+    // destructor
+    ~Index() = default;
+    // constructors
+    Index(const Index &) = default;
+    Index(Index &&) = default;
+    Index & operator=(const Index &) = default;
+    Index & operator=(Index &&) = default;
 };
 
 

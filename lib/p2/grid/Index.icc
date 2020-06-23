@@ -11,32 +11,37 @@
 
 // metamethods
 // constructor that fills an index with a specific value
-template <pyre::grid::size_t N>
+template <pyre::grid::size_t N, template <typename, size_t> class containerT>
 constexpr
-pyre::grid::Index<N>::
+pyre::grid::Index<N, containerT>::
 Index(axis_type value) :
-    product_type {}
+    rep_type {}
 {
     // fill my representation with {value}
-    std::fill(this->begin(), this->end(), value);
+    // std::fill(this->begin(), this->end(), value);
+    // this would be the preferred way, but {std::fill} is not {constexpr} until {c++20}, so
+    for (auto & axis : *this) {
+        // set the value
+        axis = value;
+    }
 }
 
 
 // constructor that accepts an initializer list
-template <pyre::grid::size_t N>
+template <pyre::grid::size_t N, template <typename, size_t> class containerT>
 template <typename... argT>
 constexpr
-pyre::grid::Index<N>::
+pyre::grid::Index<N, containerT>::
 Index(argT... idx) :
-    product_type(idx...)
+    rep_type(idx...)
 {}
 
 
 // static interface: factories
 // make an index that is filled with zeroes
-template <pyre::grid::size_t N>
+template <pyre::grid::size_t N, template <typename, size_t> class containerT>
 constexpr auto
-pyre::grid::Index<N>::
+pyre::grid::Index<N, containerT>::
 zero() -> index_type
 {
     // delegate
@@ -45,13 +50,13 @@ zero() -> index_type
 
 
 // index algebra
-template <pyre::grid::size_t N>
+template <pyre::grid::size_t N, template <typename, size_t> class containerT>
 constexpr auto
 pyre::grid::
-operator+ (const Index<N> & i1, const Index<N> & i2) -> Index<N>
+operator+ (const Index<N, containerT> & i1, const Index<N, containerT> & i2) -> Index<N, containerT>
 {
     // make a default index
-    Index<N> sum;
+    Index<N, containerT> sum;
 
     // go through each axis
     for (size_t axis = 0; axis < N; ++axis) {
@@ -64,13 +69,13 @@ operator+ (const Index<N> & i1, const Index<N> & i2) -> Index<N>
 }
 
 
-template <pyre::grid::size_t N>
+template <pyre::grid::size_t N, template <typename, size_t> class containerT>
 constexpr auto
 pyre::grid::
-operator- (const Index<N> & i1, const Index<N> & i2) -> Index<N>
+operator- (const Index<N, containerT> & i1, const Index<N, containerT> & i2) -> Index<N, containerT>
 {
     // make a default index
-    Index<N> diff;
+    Index<N, containerT> diff;
 
     // go through each axis
     for (size_t axis = 0; axis < N; ++axis) {
