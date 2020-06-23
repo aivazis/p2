@@ -13,7 +13,7 @@
 // supporting the implementation in environments that don't have {std::array}
 template <typename T,
           pyre::grid::size_t N,
-          template <typename, pyre::grid::size_t> typename containerT>
+          template <typename, pyre::grid::size_t> class containerT>
 class pyre::grid::Rep {
     // types
 public:
