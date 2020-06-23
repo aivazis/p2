@@ -20,7 +20,7 @@ int main(int argc, char *argv[]) {
     pyre::journal::init(argc, argv);
     pyre::journal::application("index_sanity");
     // make a channel
-    pyre::journal::debug_t channel("pyre.grid.order");
+    pyre::journal::debug_t channel("pyre.grid.index");
 
     // make a default index
     constexpr index_t dflt {};

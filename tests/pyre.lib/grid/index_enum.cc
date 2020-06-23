@@ -41,7 +41,7 @@ int main(int argc, char *argv[]) {
     pyre::journal::init(argc, argv);
     pyre::journal::application("index_enum");
     // make a channel
-    pyre::journal::debug_t channel("pyre.grid.order");
+    pyre::journal::debug_t channel("pyre.grid.index");
 
     // make an index
     constexpr idx_t idx { pol::hv, color::blue };
