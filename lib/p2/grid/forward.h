@@ -11,8 +11,7 @@
 // set up the namespace
 namespace pyre::grid {
     // thin adaptor over a compile time container
-    template <typename T, size_t N, template <typename, size_t> class containerT>
-    class Rep;
+    template <class containerT> class Rep;
 
     // basic representation of our multi-dimensional entities
     template <size_t N, typename T,
@@ -46,16 +45,14 @@ namespace pyre::grid {
 // operators on rep
 namespace pyre::grid {
     // equality
-    template <typename T, size_t N,
-              template <typename, size_t> class containerT = std::array>
+    template <class containerT>
     constexpr auto
-    operator== (const Rep<T,N,containerT> &, const Rep<T,N,containerT> &) -> bool;
+    operator== (const Rep<containerT> &, const Rep<containerT> &) -> bool;
 
     // stream injection
-    template <typename T, size_t N,
-              template <typename, size_t> class containerT = std::array>
+    template <class containerT>
     inline auto
-    operator<< (ostream_reference, const Rep<T,N,containerT> &) -> ostream_reference;
+    operator<< (ostream_reference, const Rep<containerT> &) -> ostream_reference;
 }
 
 

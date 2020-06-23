@@ -15,7 +15,7 @@ namespace pyre::grid
     // thin adaptor over a compile time container
     template <typename T, size_t N,
               template <typename, size_t> class containerT = std::array>
-    using rep_t = Rep<T, N, containerT>;
+    using rep_t = Rep<containerT<T,N>>;
 
     // support for the multidimensional objects in this package
     template <size_t N, typename T = size_t,

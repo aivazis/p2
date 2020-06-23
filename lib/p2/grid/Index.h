@@ -14,13 +14,13 @@
 
 // basic index type
 template <pyre::grid::size_t N, template <typename, size_t> class containerT>
-class pyre::grid::Index : public Rep<int, N, containerT> {
+class pyre::grid::Index : public Rep<containerT<int, N>> {
     // types
 public:
     // alias for me
     using index_type = Index<N, containerT>;
     // alias for my base
-    using rep_type = Rep<int, N, containerT>;
+    using rep_type = Rep<containerT<int, N>>;
     // individual axis values
     using axis_type = typename rep_type::value_type;
     using axis_reference = axis_type &;

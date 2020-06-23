@@ -18,13 +18,13 @@
 //
 // note: no {crtp} here, for now...
 template <pyre::grid::size_t N, typename T, template <typename, size_t> class containerT>
-class pyre::grid::Product : public Rep<T, N, containerT> {
+class pyre::grid::Product : public Rep<containerT<T,N>> {
     // types
 public:
     // the factor type determines the sets whose product we are computing
     using factor_type = T;
     // alias for my base
-    using rep_type = Rep<T, N, containerT>;
+    using rep_type = Rep<containerT<T,N>>;
 
     // metamethods
 public:

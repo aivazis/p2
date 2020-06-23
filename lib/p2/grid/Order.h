@@ -12,14 +12,14 @@
 // strategies. this is captured as a permutation in {S_N} that denotes the storage order of the
 // indices.
 template <pyre::grid::size_t N, template <typename, size_t> class containerT>
-class pyre::grid::Order : public Rep<size_t, N, containerT> {
+class pyre::grid::Order : public Rep<containerT<size_t, N>> {
     // types
 public:
     // alias for me
     using order_type = Order<N, containerT>;
     // my representation
     using size_type = decltype(N);
-    using rep_type = Rep<size_t, N, containerT>;
+    using rep_type = Rep<containerT<size_t, N>>;
 
     // metamethods
 public:

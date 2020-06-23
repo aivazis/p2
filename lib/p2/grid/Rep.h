@@ -11,16 +11,14 @@
 // thin adaptor over a compile time container that we use to store index ranks, grid shapes,
 // packing order and the like; it provides an abstraction layer that is necessary for
 // supporting the implementation in environments that don't have {std::array}
-template <typename T,
-          pyre::grid::size_t N,
-          template <typename, pyre::grid::size_t> class containerT>
+template <class containerT>
 class pyre::grid::Rep {
     // types
 public:
     // alias for me
-    using rep_type = Rep<T, N, containerT>;
+    using rep_type = Rep<containerT>;
     // and my container
-    using container_type = containerT<T, N>;
+    using container_type = containerT;
     // sizes of things
     using size_type = size_t;
     // my value

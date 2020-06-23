@@ -11,19 +11,19 @@
 
 
 // metamethods
-template <typename T, pyre::grid::size_t N, template <typename, size_t> class containerT>
+template <class containerT>
 template <typename... argT>
 constexpr
-pyre::grid::Rep<T, N, containerT>::
+pyre::grid::Rep<containerT>::
 Rep(argT... args) :
     _rep { static_cast<value_type>(args)... }
 {}
 
 
 // access with bounds checking
-template <typename T, pyre::grid::size_t N, template <typename, size_t> class containerT>
+template <class containerT>
 constexpr auto
-pyre::grid::Rep<T, N, containerT>::
+pyre::grid::Rep<containerT>::
 at(size_type pos) -> reference
 {
     // delegate to my rep
@@ -31,9 +31,9 @@ at(size_type pos) -> reference
 }
 
 
-template <typename T, pyre::grid::size_t N, template <typename, size_t> class containerT>
+template <class containerT>
 constexpr auto
-pyre::grid::Rep<T, N, containerT>::
+pyre::grid::Rep<containerT>::
 at(size_type pos) const -> const_reference
 {
     // delegate to my rep
@@ -42,9 +42,9 @@ at(size_type pos) const -> const_reference
 
 
 // random access
-template <typename T, pyre::grid::size_t N, template <typename, size_t> class containerT>
+template <class containerT>
 constexpr auto
-pyre::grid::Rep<T, N, containerT>::
+pyre::grid::Rep<containerT>::
 operator[](size_type pos) -> reference
 {
     // delegate to my rep
@@ -52,9 +52,9 @@ operator[](size_type pos) -> reference
 }
 
 
-template <typename T, pyre::grid::size_t N, template <typename, size_t> class containerT>
+template <class containerT>
 constexpr auto
-pyre::grid::Rep<T, N, containerT>::
+pyre::grid::Rep<containerT>::
 operator[](size_type pos) const -> const_reference
 {
     // delegate to my rep
@@ -63,9 +63,9 @@ operator[](size_type pos) const -> const_reference
 
 
 // fill with a spcific value
-template <typename T, pyre::grid::size_t N, template <typename, size_t> class containerT>
+template <class containerT>
 constexpr void
-pyre::grid::Rep<T, N, containerT>::
+pyre::grid::Rep<containerT>::
 fill(const_reference value)
 {
     // delegate to my rep
@@ -76,9 +76,9 @@ fill(const_reference value)
 
 
 // iteration
-template <typename T, pyre::grid::size_t N, template <typename, size_t> class containerT>
+template <class containerT>
 constexpr auto
-pyre::grid::Rep<T, N, containerT>::
+pyre::grid::Rep<containerT>::
 begin() -> iterator
 {
     // delegate to my rep
@@ -86,9 +86,9 @@ begin() -> iterator
 }
 
 
-template <typename T, pyre::grid::size_t N, template <typename, size_t> class containerT>
+template <class containerT>
 constexpr auto
-pyre::grid::Rep<T, N, containerT>::
+pyre::grid::Rep<containerT>::
 begin() const ->  const_iterator
 {
     // delegate to my rep
@@ -96,9 +96,9 @@ begin() const ->  const_iterator
 }
 
 
-template <typename T, pyre::grid::size_t N, template <typename, size_t> class containerT>
+template <class containerT>
 constexpr auto
-pyre::grid::Rep<T, N, containerT>::
+pyre::grid::Rep<containerT>::
 end() -> iterator
 {
     // delegate to my rep
@@ -106,9 +106,9 @@ end() -> iterator
 }
 
 
-template <typename T, pyre::grid::size_t N, template <typename, size_t> class containerT>
+template <class containerT>
 constexpr auto
-pyre::grid::Rep<T, N, containerT>::
+pyre::grid::Rep<containerT>::
 end() const ->  const_iterator
 {
     // delegate to my rep
@@ -118,20 +118,20 @@ end() const ->  const_iterator
 
 // static interface
 // get the rank of the rep
-template <typename T, pyre::grid::size_t N, template <typename, size_t> class containerT>
+template <class containerT>
 constexpr auto
-pyre::grid::Rep<T, N, containerT>::
+pyre::grid::Rep<containerT>::
 rank() -> typename rep_type::size_type
 {
-    // make one with an empty initializer; the language guarantees zero initialization
-    return N;
+    // the rank is equal to the number of slots in the rep
+    return std::tuple_size<container_type>::value;
 }
 
 
 // make a rep and fill it with zeroes
-template <typename T, pyre::grid::size_t N, template <typename, size_t> class containerT>
+template <class containerT>
 constexpr auto
-pyre::grid::Rep<T, N, containerT>::
+pyre::grid::Rep<containerT>::
 zero() -> rep_type
 {
     // make one with an empty initializer; the language guarantees zero initialization
@@ -141,10 +141,10 @@ zero() -> rep_type
 
 // operators
 // equality
-template <typename T, pyre::grid::size_t N, template <typename, size_t> class containerT>
+template <class containerT>
 constexpr auto
 pyre::grid::
-operator== (const Rep<T,N,containerT> & rep1, const Rep<T,N,containerT> & rep2) -> bool
+operator== (const Rep<containerT> & rep1, const Rep<containerT> & rep2) -> bool
 {
     // let the STL handle it
     // this would be the preferred way
@@ -163,13 +163,13 @@ operator== (const Rep<T,N,containerT> & rep1, const Rep<T,N,containerT> & rep2) 
 
 
 // injection operator
-template <typename T, pyre::grid::size_t N, template <typename, size_t> class containerT>
+template <class containerT>
 auto
 pyre::grid::
-operator<< (ostream_reference stream, const Rep<T,N,containerT> & rep) -> ostream_reference
+operator<< (ostream_reference stream, const Rep<containerT> & rep) -> ostream_reference
 {
     // make an alias for {rep}
-    using rep_t = Rep<T, N, containerT>;
+    using rep_t = Rep<containerT>;
 
     // the renderer
     auto fold = [](string_t partial, typename rep_t::value_type value) {
