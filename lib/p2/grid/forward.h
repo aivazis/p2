@@ -40,7 +40,7 @@ namespace pyre::grid {
     // equality
     template <typename T, size_t N,
               template <typename, size_t> class containerT = std::array>
-    inline auto
+    constexpr auto
     operator== (const Rep<T,N,containerT> &, const Rep<T,N,containerT> &) -> bool;
 
     // stream injection

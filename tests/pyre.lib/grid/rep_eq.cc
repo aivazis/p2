@@ -23,12 +23,12 @@ int main(int argc, char * argv[]) {
     pyre::journal::debug_t channel("pyre.grid.rep");
 
     // make a rep full of zeroes
-    rep_t rep1 {};
+    constexpr rep_t rep1 {};
     // and another
-    auto rep2 = rep_t::zero();
+    constexpr auto rep2 = rep_t::zero();
 
     // verify they are equal
-    assert (rep1 == rep2);
+    static_assert (rep1 == rep2);
 
     // show me
     channel

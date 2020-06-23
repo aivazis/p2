@@ -142,12 +142,23 @@ zero() -> rep_type
 // operators
 // equality
 template <typename T, pyre::grid::size_t N, template <typename, size_t> class containerT>
-auto
+constexpr auto
 pyre::grid::
 operator== (const Rep<T,N,containerT> & rep1, const Rep<T,N,containerT> & rep2) -> bool
 {
     // let the STL handle it
-    return std::equal(rep1.begin(), rep1.end(), rep2.begin());
+    // this would be the preferred way
+    // return std::equal(rep1.begin(), rep1.end(), rep2.begin());
+    // but {std::equal} is not {constexpr} until {c++20};,in the meantime
+    for (auto i1 = rep1.begin(), i2 = rep2.begin(); i1 != rep1.end(); ++i1, ++i2) {
+        // if there is a mismatch at the current location
+        if (*i1 != *i2) {
+            // all done
+            return false;
+        }
+    }
+    // if we get this far
+    return true;
 }
 
 
