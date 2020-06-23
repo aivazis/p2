@@ -78,10 +78,10 @@ nudge() const -> difference_type
 template <pyre::grid::size_t N>
 constexpr auto
 pyre::grid::Canonical<N>::
-size() const -> size_type
+capacity() const -> size_type
 {
     // my {shape} knows
-    return _shape.size();
+    return _shape.capacity();
 }
 
 
@@ -94,7 +94,7 @@ index(difference_type offset) -> index_type
     // make an empty index
     index_type index;
     // get the capacity of the layout
-    auto product = this->size();
+    auto product = this->capacity();
 
     // get my shape
     auto shape = this->shape();

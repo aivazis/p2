@@ -25,7 +25,7 @@
 #include "Index.h"
 #include "Shape.h"
 // commented out so tests can rune
-// #include "Canonical.h"
+#include "Canonical.h"
 
 
 #endif

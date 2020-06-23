@@ -22,13 +22,13 @@ public:
     // the sizes of things
     using size_type = size_t;
     // my parts
-    using index_type = Index<N>;
-    using shape_type = Shape<N>;
-    using order_type = Order<N>;
+    using index_type = Index<N, std::array>;
+    using shape_type = Shape<N, std::array>;
+    using order_type = Order<N, std::array>;
     // the array with the strides looks just like a shape
     using strides_type = shape_type;
     // offsets
-    using difference_type = typename index_type::rep_type::difference_type;
+    using difference_type = typename index_type::difference_type;
     // iterators
     using iterator_type = Iterator<canonical_type>;
 
@@ -60,7 +60,7 @@ public:
     constexpr auto nudge() const -> difference_type;
 
     // the total number of addressable cells
-    constexpr auto size() const -> size_type;
+    constexpr auto capacity() const -> size_type;
 
     // the packing isomorphism
     constexpr auto index(difference_type) -> index_type;
