@@ -10,9 +10,9 @@
 
 
 // metamethods
-template <pyre::grid::size_t N>
+template <pyre::grid::size_t N, template <typename, size_t> class containerT>
 constexpr
-pyre::grid::Canonical<N>::
+pyre::grid::Canonical<N, containerT>::
 Canonical(shape_type shape, index_type origin, order_type order) :
     _shape { shape },
     _order { order },
@@ -24,9 +24,9 @@ Canonical(shape_type shape, index_type origin, order_type order) :
 
 // interface
 // accessors for the user supplied information
-template <pyre::grid::size_t N>
+template <pyre::grid::size_t N, template <typename, size_t> class containerT>
 constexpr auto
-pyre::grid::Canonical<N>::
+pyre::grid::Canonical<N, containerT>::
 shape() const -> shape_type
 {
     // easy enough
@@ -34,9 +34,9 @@ shape() const -> shape_type
 }
 
 
-template <pyre::grid::size_t N>
+template <pyre::grid::size_t N, template <typename, size_t> class containerT>
 constexpr auto
-pyre::grid::Canonical<N>::
+pyre::grid::Canonical<N, containerT>::
 order() const -> order_type
 {
     // easy enough
@@ -44,9 +44,9 @@ order() const -> order_type
 }
 
 
-template <pyre::grid::size_t N>
+template <pyre::grid::size_t N, template <typename, size_t> class containerT>
 constexpr auto
-pyre::grid::Canonical<N>::
+pyre::grid::Canonical<N, containerT>::
 origin() const -> index_type
 {
     // easy enough
@@ -55,9 +55,9 @@ origin() const -> index_type
 
 
 // accessors for the deduced information
-template <pyre::grid::size_t N>
+template <pyre::grid::size_t N, template <typename, size_t> class containerT>
 constexpr auto
-pyre::grid::Canonical<N>::
+pyre::grid::Canonical<N, containerT>::
 strides() const -> strides_type
 {
     // easy enough
@@ -65,9 +65,9 @@ strides() const -> strides_type
 }
 
 
-template <pyre::grid::size_t N>
+template <pyre::grid::size_t N, template <typename, size_t> class containerT>
 constexpr auto
-pyre::grid::Canonical<N>::
+pyre::grid::Canonical<N, containerT>::
 nudge() const -> difference_type
 {
     // easy enough
@@ -75,9 +75,9 @@ nudge() const -> difference_type
 }
 
 
-template <pyre::grid::size_t N>
+template <pyre::grid::size_t N, template <typename, size_t> class containerT>
 constexpr auto
-pyre::grid::Canonical<N>::
+pyre::grid::Canonical<N, containerT>::
 capacity() const -> size_type
 {
     // my {shape} knows
@@ -86,9 +86,9 @@ capacity() const -> size_type
 
 
 // from {difference_type} to {index_type}
-template <pyre::grid::size_t N>
+template <pyre::grid::size_t N, template <typename, size_t> class containerT>
 constexpr auto
-pyre::grid::Canonical<N>::
+pyre::grid::Canonical<N, containerT>::
 index(difference_type offset) -> index_type
 {
     // make an empty index
@@ -117,9 +117,9 @@ index(difference_type offset) -> index_type
 
 
 // from {index_type} to {difference_type}
-template <pyre::grid::size_t N>
+template <pyre::grid::size_t N, template <typename, size_t> class containerT>
 constexpr auto
-pyre::grid::Canonical<N>::
+pyre::grid::Canonical<N, containerT>::
 offset(const index_type & index) -> difference_type
 {
     // initialize the offset
@@ -146,18 +146,18 @@ offset(const index_type & index) -> difference_type
 
 
 // static interface
-template <pyre::grid::size_t N>
+template <pyre::grid::size_t N, template <typename, size_t> class containerT>
 constexpr auto
-pyre::grid::Canonical<N>::dim() -> size_type
+pyre::grid::Canonical<N, containerT>::dim() -> size_type
 {
     return N;
 }
 
 
 // static helpers
-template <pyre::grid::size_t N>
+template <pyre::grid::size_t N, template <typename, size_t> class containerT>
 constexpr auto
-pyre::grid::Canonical<N>::strides(const shape_type & shape,
+pyre::grid::Canonical<N, containerT>::strides(const shape_type & shape,
                                   const order_type & order) -> strides_type
 {
     // make an empty shape to store the answer
@@ -178,9 +178,9 @@ pyre::grid::Canonical<N>::strides(const shape_type & shape,
 }
 
 
-template <pyre::grid::size_t N>
+template <pyre::grid::size_t N, template <typename, size_t> class containerT>
 constexpr auto
-pyre::grid::Canonical<N>::project(const index_type & index,
+pyre::grid::Canonical<N, containerT>::project(const index_type & index,
                                   const strides_type & strides) -> difference_type
 {
     // the initial value; here so we can be explicit about the return type

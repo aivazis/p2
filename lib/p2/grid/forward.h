@@ -12,31 +12,20 @@
 namespace pyre::grid {
     // thin adaptor over a compile time container
     template <class containerT> class Rep;
-
     // basic representation of our multi-dimensional entities
     template <class containerT> class Product;
-
     // shapes: the number of possible values of each index
-    template <size_t N,
-              template <typename, size_t> class containerT>
-    class Shape;
-
+    template <size_t N, template <typename, size_t> class containerT> class Shape;
     // indices
-    template <size_t N,
-              template <typename, size_t> class containerT>
-    class Index;
-
-    // support for the canonical packing strategies
+    template <size_t N, template <typename, size_t> class containerT> class Index;
     // the order in which index axes are packed in memory
-    template <size_t N,
-              template <typename, size_t> typename containerT>
-    class Order;
+    template <size_t N, template <typename, size_t> typename containerT> class Order;
 
     // support for the canonical packing strategies
     // an ordered index generator
     template <class packingT> class Iterator;
     // the packing strategy
-    template <size_t N> class Canonical;
+    template <size_t N, template <typename, size_t> class containerT> class Canonical;
 }
 
 

@@ -13,8 +13,7 @@ namespace pyre::grid
 {
     // this wrapper over a {std::array}-like container
     // thin adaptor over a compile time container
-    template <typename T, size_t N,
-              template <typename, size_t> class containerT = std::array>
+    template <typename T, size_t N, template <typename, size_t> class containerT = std::array>
     using rep_t = Rep<containerT<T,N>>;
 
     // support for the multidimensional objects in this package
@@ -23,28 +22,23 @@ namespace pyre::grid
     using product_t = Product<containerT<T,N>>;
 
     // the number of possible values of each axis
-    template <size_t N,
-              template <typename, size_t> class containerT = std::array>
+    template <size_t N, template <typename, size_t> class containerT = std::array>
     using shape_t = Shape<N, containerT>;
 
     // indices
-    template <size_t N,
-              template <typename, size_t> class containerT = std::array>
+    template <size_t N, template <typename, size_t> class containerT = std::array>
     using index_t = Index<N, containerT>;
 
     // the order in which indices are packed in memory
-    template <size_t N,
-              template <typename, size_t> class containerT = std::array>
+    template <size_t N, template <typename, size_t> class containerT = std::array>
     using order_t = Order<N, containerT>;
 
-
-    // canonical packing
     // ordered index generator
     template <class packingT>
     using iterator_t = Iterator<packingT>;
-    // the packing strategy
-    template <size_t N>
-    using canonical_t = Canonical<N>;
+    // the canonical packing strategy
+    template <size_t N, template <typename, size_t> class containerT = std::array>
+    using canonical_t = Canonical<N, containerT>;
 }
 
 

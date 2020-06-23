@@ -13,18 +13,18 @@
 //
 //    Z_s1 x ... x Z_sn -> Z_(s1 * ... * sn)
 //
-template <pyre::grid::size_t N>
+template <pyre::grid::size_t N, template <typename, size_t> class containerT>
 class pyre::grid::Canonical {
     // types
 public:
     // alias for me
-    using canonical_type = Canonical<N>;
+    using canonical_type = Canonical<N, containerT>;
     // the sizes of things
     using size_type = size_t;
     // my parts
-    using index_type = Index<N, std::array>;
-    using shape_type = Shape<N, std::array>;
-    using order_type = Order<N, std::array>;
+    using index_type = Index<N, containerT>;
+    using shape_type = Shape<N, containerT>;
+    using order_type = Order<N, containerT>;
     // the array with the strides looks just like a shape
     using strides_type = shape_type;
     // offsets
@@ -34,19 +34,10 @@ public:
 
     // metamethods
 public:
-    // destructor
-    ~Canonical() = default;
-
     // constructor
     constexpr explicit Canonical(shape_type,
                                  index_type = index_type::zero(),
                                  order_type = order_type::c());
-
-    // let the compiler take care of these
-    constexpr Canonical(const Canonical &) = default;
-    constexpr Canonical(Canonical &&) = default;
-    constexpr Canonical & operator= (const Canonical &) = default;
-    constexpr Canonical & operator= (Canonical &&) = default;
 
     // interface
 public:
@@ -80,7 +71,7 @@ protected:
     // given a {shape} and an {order}, infer the axis strides assuming tight packing
     static constexpr auto strides(const shape_type &, const order_type &) -> strides_type;
     // given the packing {strides}, project an {index} to an offset such that the {zero} index
-    // maps to the origin
+    // maps to offset 0
     static constexpr auto project(const index_type &, const strides_type &) -> difference_type;
 
     // implementation details: data
@@ -92,6 +83,16 @@ private:
     // deduced
     shape_type _strides;       // the vector of strides for axis
     difference_type _nudge;    // offset correction when {_origin} is not {zero}
+
+    // metamethods with default implementations
+public:
+    // destructor
+    ~Canonical() = default;
+    // constructors
+    constexpr Canonical(const Canonical &) = default;
+    constexpr Canonical(Canonical &&) = default;
+    constexpr Canonical & operator= (const Canonical &) = default;
+    constexpr Canonical & operator= (Canonical &&) = default;
 };
 
 
