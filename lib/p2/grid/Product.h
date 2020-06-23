@@ -17,14 +17,14 @@
 //  - the container choice to hand down to {rep_t} that stores per-rank values
 //
 // note: no {crtp} here, for now...
-template <pyre::grid::size_t N, typename T, template <typename, size_t> class containerT>
-class pyre::grid::Product : public Rep<containerT<T,N>> {
+template <class containerT>
+class pyre::grid::Product : public Rep<containerT> {
     // types
 public:
-    // the factor type determines the sets whose product we are computing
-    using factor_type = T;
     // alias for my base
-    using rep_type = Rep<containerT<T,N>>;
+    using rep_type = Rep<containerT>;
+    // the factor type determines the sets whose product we are computing
+    using rank_type = typename rep_type::value_type;
 
     // metamethods
 public:

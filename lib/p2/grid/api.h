@@ -20,7 +20,7 @@ namespace pyre::grid
     // support for the multidimensional objects in this package
     template <size_t N, typename T = size_t,
               template <typename, size_t> class containerT = std::array>
-    using product_t = Product<N, T, containerT>;
+    using product_t = Product<containerT<T,N>>;
 
     // the number of possible values of each axis
     template <size_t N,

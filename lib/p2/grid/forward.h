@@ -14,9 +14,7 @@ namespace pyre::grid {
     template <class containerT> class Rep;
 
     // basic representation of our multi-dimensional entities
-    template <size_t N, typename T,
-              template <typename, size_t> class containerT>
-    class Product;
+    template <class containerT> class Product;
 
     // shapes: the number of possible values of each index
     template <size_t N,
