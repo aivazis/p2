@@ -27,6 +27,8 @@ public:
     using value_type = typename container_type::value_type;
     using reference = value_type &;
     using const_reference = const value_type &;
+    // offsets
+    using difference_type = typename container_type::difference_type;
     // container access
     using iterator = typename container_type::iterator;
     using const_iterator = typename container_type::const_iterator;
