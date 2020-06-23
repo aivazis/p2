@@ -18,7 +18,7 @@ using rep_t = pyre::grid::rep_t<pyre::grid::size_t, 5>;
 int main(int argc, char * argv[]) {
     // initialize the journal
     pyre::journal::init(argc, argv);
-    pyre::journal::application("rep_sanity");
+    pyre::journal::application("rep_eq");
     // make a channel
     pyre::journal::debug_t channel("pyre.grid.rep");
 
