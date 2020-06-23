@@ -32,8 +32,7 @@ namespace pyre::grid
               template <typename, size_t> class containerT = std::array>
     using index_t = Index<N, containerT>;
 
-    // canonical packing
-    //the order in which index axes are packed in memory
+    // the order in which indices are packed in memory
     template <size_t N,
               template <typename, size_t> class containerT = std::array>
     using order_t = Order<N, containerT>;

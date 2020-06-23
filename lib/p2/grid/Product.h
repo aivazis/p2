@@ -8,53 +8,29 @@
 #define pyre_grid_Product_h
 
 
-// thin wrapper over {std::array} that provides representation support for the other
-// fundamental concepts in this package
-template <pyre::grid::size_t N, typename factorT>
-class pyre::grid::Product {
+// thin wrapper over {rep_t} that serves as the base for all classes that encapsulate cartesian
+// products, hence the name
+//
+// the client supplies:
+//  - its rank {N}
+//  - the category of each factor in {T}: {int}, {long}, {size_t}
+//  - the container choice to hand down to {rep_t} that stores per-rank values
+//
+// note: no {crtp} here, for now...
+template <pyre::grid::size_t N, typename T, template <typename, size_t> class containerT>
+class pyre::grid::Product : public Rep<T, N, containerT> {
     // types
 public:
     // the factor type determines the sets whose product we are computing
-    using factor_type = factorT;
-    // storage
-    using rep_type = array_t<factor_type, N>;
-    // dependent types
-    using size_type = decltype(N);
-    using factor_reference = factor_type &;
-    using factor_const_reference = const factor_type &;
+    using factor_type = T;
+    // alias for my base
+    using rep_type = Rep<T, N, containerT>;
 
     // metamethods
 public:
-    // destructor; let the compiler write it
-    ~Product() = default;
-
     // constructor
     template <typename... argT>
     constexpr explicit Product(argT...);
-
-    // interface
-public:
-    // access
-    // read only
-    constexpr auto operator[](size_type) const -> factor_type;
-    // read/write
-    constexpr auto operator[](size_type) -> factor_reference;
-
-    // iteration support
-    // read only
-    constexpr auto begin() const;
-    constexpr auto end() const;
-    // read/write
-    constexpr auto begin();
-    constexpr auto end();
-
-    // static interface
-public:
-    static constexpr auto dim() -> size_type;
-
-    // implementation details: data
-private:
-    rep_type _rep;
 };
 
 
