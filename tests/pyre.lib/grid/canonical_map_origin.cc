@@ -6,7 +6,6 @@
 
 // support
 #include <cassert>
-#include <iostream>
 // get the grid
 #include <p2/grid.h>
 
@@ -17,7 +16,13 @@ using canonical_t = pyre::grid::canonical_t<3>;
 
 // simple check that the map to and from index space is correct in the presence of a
 // non-trivial origin
-int main() {
+int main(int argc, char * argv[]) {
+    // initialize the journal
+    pyre::journal::init(argc, argv);
+    pyre::journal::application("canonical_map_origin");
+    // make a channel
+    pyre::journal::debug_t channel("pyre.grid.canonical");
+
     // pick a shape
     canonical_t::shape_type shape { 3, 5, 7 };
     // the indices range from (-1, -2)  to (1, 2)
@@ -42,15 +47,15 @@ int main() {
     auto image = packing.index(offset);
 
     // show me
-    std::cout
-        << "shape: " << packing.shape() << std::endl
-        << "origin: " << packing.origin() << std::endl
-        << "order: " << packing.order() << std::endl
-        << "strides: " << packing.strides() << std::endl
-        << "nudge: " << packing.nudge() << std::endl
-        << "index: " << index << std::endl
-        << "offset: " << offset << std::endl
-        << "image: " << image << std::endl;
+    channel
+        << "shape: " << packing.shape() << pyre::journal::newline
+        << "origin: " << packing.origin() << pyre::journal::newline
+        << "order: " << packing.order() << pyre::journal::newline
+        << "strides: " << packing.strides() << pyre::journal::newline
+        << "nudge: " << packing.nudge() << pyre::journal::newline
+        << "index: " << index << pyre::journal::newline
+        << "offset: " << offset << pyre::journal::newline
+        << "image: " << image << pyre::journal::endl(__HERE__);
 
     // verify that the {image} is our original index
     assert (image == index);

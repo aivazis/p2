@@ -15,11 +15,25 @@ using canonical_t = pyre::grid::canonical_t<3>;
 
 
 // compile time sanity check: make sure the header file is accessible
-int main() {
+int main(int argc, char * argv[]) {
+    // initialize the journal
+    pyre::journal::init(argc, argv);
+    pyre::journal::application("canonical_sanity");
+    // make a channel
+    pyre::journal::debug_t channel("pyre.grid.canonical");
+
     // pick a shape
     canonical_t::shape_type shape { 2,3,4 };
     // make a canonical packing strategy
     canonical_t packing { shape };
+
+    // show me
+    channel
+        << "shape: " << packing.shape() << pyre::journal::newline
+        << "origin: " << packing.origin() << pyre::journal::newline
+        << "order: " << packing.order() << pyre::journal::newline
+        << "strides: " << packing.strides() << pyre::journal::newline
+        << "nudge: " << packing.nudge() << pyre::journal::endl(__HERE__);
 
     // verify we understand the default constructor
     assert (packing.shape() == shape);

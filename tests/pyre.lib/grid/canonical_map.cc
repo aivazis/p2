@@ -6,7 +6,6 @@
 
 // support
 #include <cassert>
-#include <iostream>
 // get the grid
 #include <p2/grid.h>
 
@@ -16,7 +15,13 @@ using canonical_t = pyre::grid::canonical_t<3>;
 
 
 // simple check that the map from index space to offsets is correct
-int main() {
+int main(int argc, char * argv[]) {
+    // initialize the journal
+    pyre::journal::init(argc, argv);
+    pyre::journal::application("canonical_map");
+    // make a channel
+    pyre::journal::debug_t channel("pyre.grid.canonical");
+
     // pick a shape
     canonical_t::shape_type shape { 2,3,4 };
     // make a canonical packing strategy
@@ -30,10 +35,10 @@ int main() {
     auto image = packing.index(offset);
 
     // show me
-    std::cout
-        << "index: " << index << std::endl
-        << "offset: " << offset << std::endl
-        << "image: " << image << std::endl;
+    channel
+        << "index: " << index << pyre::journal::newline
+        << "offset: " << offset << pyre::journal::newline
+        << "image: " << image << pyre::journal::endl(__HERE__);
 
     // verify that the {image} is our original index
     assert (image == index);
