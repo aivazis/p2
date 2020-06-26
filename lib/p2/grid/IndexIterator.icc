@@ -1,0 +1,90 @@
+//
+// michael a.g. aïvázis <michael.aivazis@para-sim.com>
+// (c) 1998-2020 all rights reserved
+
+// code guard
+#if !defined(pyre_grid_IndexIterator_icc)
+#error this file contains implementation details for pyre::grid::IndexIterator
+#else
+
+
+// metamethods
+template <class packingT>
+constexpr
+pyre::grid::IndexIterator<packingT>::
+IndexIterator(const shape_type & shape, const order_type & order, const index_type & start) :
+    _current { start },
+    _shape { shape },
+    _order { order },
+    _origin { start }
+{}
+
+
+// the iterator protocol
+template <class packingT>
+constexpr auto
+pyre::grid::IndexIterator<packingT>::
+operator*() const -> index_reference
+{
+    // where i point
+    return _current;
+}
+
+
+template <class packingT>
+constexpr auto
+pyre::grid::IndexIterator<packingT>::
+operator++() -> iterator_reference
+{
+    // go through each rank in the given {order}
+    for (auto rank : _order) {
+        // get the limiting value for this rank
+        rank_type limit = _origin[rank] + _shape[rank];
+        // get my current value for this rank and increment it
+        auto value = ++_current[rank];
+        // if the value didn't overflow
+        if (value < limit) {
+            // all done
+            return *this;
+        }
+        // if the value overflowed, set it to its starting value and grab the next one
+        _current[rank] = _origin[rank];
+    }
+    // if we get this far, every rank has overflowed
+    for (auto rank : _order) {
+        // so point to the end of the container
+        _current[rank] = _origin[rank] + _shape[rank];
+    }
+
+    // all done
+    return *this;
+}
+
+
+// the global operators
+// equality
+template <class packingT>
+constexpr auto
+pyre::grid::
+operator==(const IndexIterator<packingT> & it1, const IndexIterator<packingT> & it2) -> bool
+{
+    // iterators are equal if they point to the same index
+    return *it1 == *it2;
+}
+
+
+// and not
+template <class packingT>
+constexpr auto
+pyre::grid::
+operator!=(const IndexIterator<packingT> & it1, const IndexIterator<packingT> & it2) -> bool
+{
+    // iterators are unequal iff they are not equal
+    return !(it1 == it2);
+}
+
+
+#endif
+
+
+// end of file

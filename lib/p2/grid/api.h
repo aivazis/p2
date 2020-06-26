@@ -35,7 +35,7 @@ namespace pyre::grid
 
     // ordered index generator
     template <class packingT>
-    using iterator_t = Iterator<packingT>;
+    using index_iterator_t = IndexIterator<packingT>;
     // the canonical packing strategy
     template <size_t N, template <typename, size_t> class containerT = std::array>
     using canonical_t = Canonical<N, containerT>;

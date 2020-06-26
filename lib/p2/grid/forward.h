@@ -8,6 +8,19 @@
 #define pyre_grid_forward_h
 
 
+// useful instantiations of STL entities
+namespace pyre::grid {
+    // the base class for the IndexIterator
+    template <class packingT>
+    using base_index_iterator =
+        std::iterator<std::random_access_iterator_tag,        // category
+                      typename packingT::index_type,          // iterators make indices
+                      void,                                   // distance
+                      const typename packingT::index_type *,  // pointer
+                      const typename packingT::index_type &   // reference
+                      >;
+}
+
 // set up the namespace
 namespace pyre::grid {
     // thin adaptor over a compile time container
@@ -23,7 +36,7 @@ namespace pyre::grid {
 
     // support for the canonical packing strategies
     // an ordered index generator
-    template <class packingT> class Iterator;
+    template <class packingT> class IndexIterator;
     // the packing strategy
     template <size_t N, template <typename, size_t> class containerT> class Canonical;
 }
@@ -40,6 +53,19 @@ namespace pyre::grid {
     template <class containerT>
     inline auto
     operator<< (ostream_reference, const Rep<containerT> &) -> ostream_reference;
+}
+
+
+// index iterator operators
+namespace pyre::grid {
+    // equality
+    template <class packingT>
+    constexpr auto
+    operator==(const IndexIterator<packingT> &, const IndexIterator<packingT> &) -> bool;
+    // and not
+    template <class packingT>
+    constexpr auto
+    operator!=(const IndexIterator<packingT> &, const IndexIterator<packingT> &) -> bool;
 }
 
 

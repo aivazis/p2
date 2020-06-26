@@ -24,7 +24,7 @@
 #include "Product.h"
 #include "Index.h"
 #include "Shape.h"
-// commented out so tests can rune
+#include "IndexIterator.h"
 #include "Canonical.h"
 
 

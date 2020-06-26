@@ -10,6 +10,7 @@
 
 // externals
 #include <array>
+#include <iterator>
 #include <numeric>
 #include <ostream>
 
