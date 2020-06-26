@@ -31,6 +31,16 @@ public:
     // constructor
     template <typename... argT>
     constexpr explicit Product(argT...);
+
+    // default metamethods
+public:
+    // destructor
+    ~Product() = default;
+    // constructors
+    Product(const Product &) = default;
+    Product(Product &&) = default;
+    Product & operator=(const Product &) = default;
+    Product & operator=(Product &&) = default;
 };
 
 
