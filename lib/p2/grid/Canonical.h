@@ -30,7 +30,7 @@ public:
     // offsets
     using difference_type = typename index_type::difference_type;
     // iterators
-    using iterator_type = Iterator<canonical_type>;
+    using iterator_type = IndexIterator<canonical_type>;
 
     // metamethods
 public:
@@ -53,14 +53,18 @@ public:
     // the total number of addressable cells
     constexpr auto capacity() const -> size_type;
 
+    // mutators: packing instances are {const}, so mutators create new instances
+public:
+    constexpr auto order(const order_type &) const -> canonical_type;
+
     // the packing isomorphism
-    constexpr auto index(difference_type) -> index_type;
-    constexpr auto offset(const index_type &) -> difference_type;
+public:
+    constexpr auto index(difference_type) const -> index_type;
+    constexpr auto offset(const index_type &) const -> difference_type;
 
     // iteration support: iterators generate sequences of indices
-    constexpr auto begin() const;
-    constexpr auto end() const;
-    constexpr auto begin(const order_type &) const;
+    constexpr auto begin() const -> iterator_type;
+    constexpr auto end() const -> iterator_type;
 
     // static interface
 public:
@@ -77,12 +81,12 @@ protected:
     // implementation details: data
 private:
     // supplied by the caller
-    shape_type _shape;         // my shape
-    order_type _order;         // the packing order of the axes
-    index_type _origin;        // the smallest allowable index value
+    const shape_type _shape;         // my shape
+    const order_type _order;         // the packing order of the axes
+    const index_type _origin;        // the smallest allowable index value
     // deduced
-    shape_type _strides;       // the vector of strides for axis
-    difference_type _nudge;    // offset correction when {_origin} is not {zero}
+    const shape_type _strides;       // the vector of strides for axis
+    const difference_type _nudge;    // offset correction when {_origin} is not {zero}
 
     // metamethods with default implementations
 public:
@@ -90,9 +94,12 @@ public:
     ~Canonical() = default;
     // constructors
     constexpr Canonical(const Canonical &) = default;
-    constexpr Canonical(Canonical &&) = default;
     constexpr Canonical & operator= (const Canonical &) = default;
-    constexpr Canonical & operator= (Canonical &&) = default;
+
+    // disallowed
+private:
+    constexpr Canonical(Canonical &&) = delete;
+    constexpr Canonical & operator= (Canonical &&) = delete;
 };
 
 

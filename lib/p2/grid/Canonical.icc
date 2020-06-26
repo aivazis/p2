@@ -85,11 +85,24 @@ capacity() const -> size_type
 }
 
 
+// mutators
+template <pyre::grid::size_t N, template <typename, size_t> class containerT>
+constexpr auto
+pyre::grid::Canonical<N, containerT>::
+order(const order_type & order) const -> canonical_type
+{
+    // make a new packing using my info and the supplied {order}
+    canonical_type reordered { _shape, _origin, order };
+    // and return it
+    return reordered;
+}
+
+
 // from {difference_type} to {index_type}
 template <pyre::grid::size_t N, template <typename, size_t> class containerT>
 constexpr auto
 pyre::grid::Canonical<N, containerT>::
-index(difference_type offset) -> index_type
+index(difference_type offset) const -> index_type
 {
     // make an empty index
     index_type index;
@@ -120,12 +133,12 @@ index(difference_type offset) -> index_type
 template <pyre::grid::size_t N, template <typename, size_t> class containerT>
 constexpr auto
 pyre::grid::Canonical<N, containerT>::
-offset(const index_type & index) -> difference_type
+offset(const index_type & index) const -> difference_type
 {
     // initialize the offset
     difference_type offset = 0;
     // and the running product of the shape factors
-    typename shape_type::axis_type product = 1;
+    typename shape_type::rank_type product = 1;
 
     // get my shape
     auto shape = this->shape();
@@ -145,11 +158,40 @@ offset(const index_type & index) -> difference_type
 }
 
 
+// iteration support
+template <pyre::grid::size_t N, template <typename, size_t> class containerT>
+constexpr auto
+pyre::grid::Canonical<N, containerT>::
+begin() const -> iterator_type
+{
+    // make an iterator that generates index in my packing {order}, starting at my {origin}
+    return iterator_type(shape(), order(), origin());
+}
+
+
+template <pyre::grid::size_t N, template <typename, size_t> class containerT>
+constexpr auto
+pyre::grid::Canonical<N, containerT>::
+end() const -> iterator_type
+{
+    // build the end of the container: start at the origin
+    auto end = _origin;
+    // and for every rank
+    for (auto rank : _order) {
+        // add my shape
+        end[rank] += _shape[rank];
+    }
+    // build an iterator that point to the end
+    return iterator_type(_shape, _order, end);
+}
+
+
 // static interface
 template <pyre::grid::size_t N, template <typename, size_t> class containerT>
 constexpr auto
 pyre::grid::Canonical<N, containerT>::dim() -> size_type
 {
+    // easy enough
     return N;
 }
 
@@ -164,7 +206,7 @@ pyre::grid::Canonical<N, containerT>::strides(const shape_type & shape,
     strides_type strides;
 
     // initialize the running product
-    typename shape_type::axis_type product = 1;
+    typename shape_type::rank_type product = 1;
     // go through indices in order
     for (auto axis : order) {
         // store the running product as the stride of the current axis
