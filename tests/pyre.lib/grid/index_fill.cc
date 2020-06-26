@@ -23,7 +23,7 @@ int main(int argc, char * argv[]) {
     pyre::journal::debug_t channel("pyre.grid.index");
 
     // pick a value
-    constexpr idx_t::axis_type u = 42;
+    constexpr idx_t::rank_type u = 42;
     // make a const index
     constexpr idx_t idx_1 { u };
     // show me
@@ -37,7 +37,7 @@ int main(int argc, char * argv[]) {
     static_assert (idx_1[3] == u);
 
     // again, at runtime
-    idx_t::axis_type v = argc;
+    idx_t::rank_type v = argc;
     // with another index
     const idx_t idx_2 { v };
     // show me

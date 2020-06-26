@@ -30,7 +30,7 @@ capacity() const -> size_type
     // the initial value
     size_t one = 1;
     // my capacity is equal to the product of the number of possible values along each axis
-    return std::accumulate(this->begin(), this->end(), one, std::multiplies<axis_type>());
+    return std::accumulate(this->begin(), this->end(), one, std::multiplies<rank_type>());
 }
 
 

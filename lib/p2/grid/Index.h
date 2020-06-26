@@ -22,14 +22,14 @@ public:
     // alias for my base
     using rep_type = Product<containerT<int, N>>;
     // individual axis values
-    using axis_type = typename rep_type::value_type;
-    using axis_reference = axis_type &;
-    using axis_const_reference = const axis_type &;
+    using rank_type = typename rep_type::value_type;
+    using rank_reference = rank_type &;
+    using rank_const_reference = const rank_type &;
 
     // metamethods
 public:
     // constructor that fills an index with a given {value}
-    constexpr explicit Index(axis_type);
+    constexpr explicit Index(rank_type);
 
     // constructor; a variadic template to enable initializer lists
     template <typename... argT>

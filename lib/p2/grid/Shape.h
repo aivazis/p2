@@ -24,9 +24,9 @@ public:
     // the sizes of things
     using size_type = typename rep_type::size_type;
     // individual axis values
-    using axis_type = typename rep_type::value_type;
-    using axis_reference = axis_type &;
-    using axis_const_reference = const axis_type &;
+    using rank_type = typename rep_type::value_type;
+    using rank_reference = rank_type &;
+    using rank_const_reference = const rank_type &;
 
     // metamethods
 public:

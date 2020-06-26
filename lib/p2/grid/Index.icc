@@ -14,7 +14,7 @@
 template <pyre::grid::size_t N, template <typename, size_t> class containerT>
 constexpr
 pyre::grid::Index<N, containerT>::
-Index(axis_type value) :
+Index(rank_type value) :
     rep_type {}
 {
     // fill my representation with {value}
