@@ -22,15 +22,18 @@ public:
     // the sizes of things
     using size_type = size_t;
     // my parts
-    using index_type = Index<containerT<int, N>>;
-    using shape_type = Shape<containerT<size_type, N>>;
+    // rank order
     using order_type = Order<containerT<size_type, N>>;
-    // strides are a shape but with wider type so overflow is less likely
+    // rank specifications
+    using shape_type = Shape<containerT<size_type, N>>;
+    // indices
+    using index_type = Index<containerT<int, N>>;
+    // strides are like shapes with a wide type so overflow is less likely
     using strides_type = Shape<containerT<size_type, N>>;
     // offsets
     using difference_type = typename index_type::difference_type;
     // iterators
-    using iterator_type = IndexIterator<canonical_type>;
+    using index_iterator = IndexIterator<canonical_type>;
 
     // metamethods
 public:
@@ -63,8 +66,8 @@ public:
     constexpr auto offset(const index_type &) const -> difference_type;
 
     // iteration support: iterators generate sequences of indices
-    constexpr auto begin() const -> iterator_type;
-    constexpr auto end() const -> iterator_type;
+    constexpr auto begin() const -> index_iterator;
+    constexpr auto end() const -> index_iterator;
 
     // static interface
 public:

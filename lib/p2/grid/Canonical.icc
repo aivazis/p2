@@ -162,17 +162,17 @@ offset(const index_type & index) const -> difference_type
 template <pyre::grid::size_t N, template <typename, size_t> class containerT>
 constexpr auto
 pyre::grid::Canonical<N, containerT>::
-begin() const -> iterator_type
+begin() const -> index_iterator
 {
     // make an iterator that generates index in my packing {order}, starting at my {origin}
-    return iterator_type(shape(), order(), origin());
+    return index_iterator(shape(), order(), origin());
 }
 
 
 template <pyre::grid::size_t N, template <typename, size_t> class containerT>
 constexpr auto
 pyre::grid::Canonical<N, containerT>::
-end() const -> iterator_type
+end() const -> index_iterator
 {
     // build the end of the container: start at the origin
     auto end = _origin;
@@ -182,7 +182,7 @@ end() const -> iterator_type
         end[rank] += _shape[rank];
     }
     // build an iterator that points to the end
-    return iterator_type(_shape, _order, end);
+    return index_iterator(_shape, _order, end);
 }
 
 
