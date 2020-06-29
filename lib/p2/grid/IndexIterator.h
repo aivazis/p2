@@ -17,9 +17,9 @@ public:
     // my template parameter
     using packing_type = packingT;
     // alias for me
-    using iterator_type = IndexIterator<packing_type>;
+    using iterator = IndexIterator<packing_type>;
     // references to me
-    using iterator_reference = iterator_type &;
+    using iterator_reference = iterator &;
     // and my base
     using base_type = base_index_iterator<packing_type>;
     // my parts
