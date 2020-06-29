@@ -89,7 +89,7 @@ begin() -> iterator
 template <class containerT>
 constexpr auto
 pyre::grid::Rep<containerT>::
-begin() const ->  const_iterator
+begin() const -> const_iterator
 {
     // delegate to my rep
     return _rep.begin();
@@ -109,10 +109,92 @@ end() -> iterator
 template <class containerT>
 constexpr auto
 pyre::grid::Rep<containerT>::
-end() const ->  const_iterator
+end() const -> const_iterator
 {
     // delegate to my rep
     return _rep.end();
+}
+
+
+// reverse iteration
+template <class containerT>
+constexpr auto
+pyre::grid::Rep<containerT>::
+rbegin() -> reverse_iterator
+{
+    // delegate to my rep
+    return _rep.begin();
+}
+
+
+template <class containerT>
+constexpr auto
+pyre::grid::Rep<containerT>::
+rbegin() const -> const_reverse_iterator
+{
+    // delegate to my rep
+    return _rep.rbegin();
+}
+
+
+template <class containerT>
+constexpr auto
+pyre::grid::Rep<containerT>::
+rend() -> reverse_iterator
+{
+    // delegate to my rep
+    return _rep.rend();
+}
+
+
+template <class containerT>
+constexpr auto
+pyre::grid::Rep<containerT>::
+rend() const -> const_reverse_iterator
+{
+    // delegate to my rep
+    return _rep.rend();
+}
+
+
+// const iteration
+template <class containerT>
+constexpr auto
+pyre::grid::Rep<containerT>::
+cbegin() const -> const_iterator
+{
+    // delegate to my rep
+    return _rep.cbegin();
+}
+
+
+template <class containerT>
+constexpr auto
+pyre::grid::Rep<containerT>::
+cend() const -> const_iterator
+{
+    // delegate to my rep
+    return _rep.cend();
+}
+
+
+template <class containerT>
+constexpr auto
+pyre::grid::Rep<containerT>::
+crbegin() const -> const_reverse_iterator
+{
+    // delegate to my rep
+    return _rep.crbegin();
+}
+
+
+template <class containerT>
+constexpr auto
+pyre::grid::Rep<containerT>::
+crend() const -> const_reverse_iterator
+{
+    // delegate to my rep
+    return _rep.crend();
 }
 
 

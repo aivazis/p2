@@ -32,6 +32,8 @@ public:
     // container access
     using iterator = typename container_type::iterator;
     using const_iterator = typename container_type::const_iterator;
+    using reverse_iterator = typename container_type::reverse_iterator;
+    using const_reverse_iterator = typename container_type::const_reverse_iterator;
 
     // metamethods
 public:
@@ -54,10 +56,21 @@ public:
 
     // iteration
 public:
+    // forward
     constexpr auto begin() -> iterator;
     constexpr auto begin() const -> const_iterator;
     constexpr auto end() -> iterator;
     constexpr auto end() const -> const_iterator;
+    // reverse
+    constexpr auto rbegin() -> reverse_iterator;
+    constexpr auto rbegin() const -> const_reverse_iterator;
+    constexpr auto rend() -> reverse_iterator;
+    constexpr auto rend() const -> const_reverse_iterator;
+    // const
+    constexpr auto cbegin() const -> const_iterator;
+    constexpr auto cend() const -> const_iterator;
+    constexpr auto crbegin() const -> const_reverse_iterator;
+    constexpr auto crend() const -> const_reverse_iterator;
 
     // static interface
 public:
