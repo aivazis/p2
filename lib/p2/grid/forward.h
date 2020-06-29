@@ -46,7 +46,7 @@ namespace pyre::grid {
     // indices
     template <class containerT> class Index;
     // index rank ordering, e.g. the order in which index axes are packed in memory
-    template <size_t N, template <typename, size_t> typename containerT> class Order;
+    template <class containerT> class Order;
     // support for visiting ranks in a specific order
     template <class productT, class orderT, bool isConst> class OrderIterator;
 

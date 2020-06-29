@@ -11,15 +11,17 @@
 // generalization to multiple dimensions of the familiar row-major and column-major order
 // strategies. this is captured as a permutation in {S_N} that denotes the storage order of the
 // indices.
-template <pyre::grid::size_t N, template <typename, size_t> class containerT>
-class pyre::grid::Order : public Rep<containerT<size_t, N>> {
+template <class containerT>
+class pyre::grid::Order : public Rep<containerT> {
     // types
 public:
     // alias for me
-    using order_type = Order<N, containerT>;
+    using order_type = Order<containerT>;
+    // my template parameter
+    using container_type = containerT;
     // my representation
-    using size_type = decltype(N);
-    using rep_type = Rep<containerT<size_t, N>>;
+    using size_type = typename container_type::size_type;
+    using rep_type = Rep<containerT>;
 
     // metamethods
 public:

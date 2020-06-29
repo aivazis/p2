@@ -24,7 +24,7 @@ public:
     // my parts
     using index_type = Index<containerT<int, N>>;
     using shape_type = Shape<containerT<size_type, N>>;
-    using order_type = Order<N, containerT>;
+    using order_type = Order<containerT<size_type, N>>;
     // strides are a shape but with wider type so overflow is less likely
     using strides_type = Shape<containerT<size_type, N>>;
     // offsets

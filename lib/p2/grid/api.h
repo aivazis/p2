@@ -32,8 +32,9 @@ namespace pyre::grid
     using index_t = Index<containerT<T,N>>;
 
     // the order in which indices are packed in memory
-    template <size_t N, template <typename, size_t> class containerT = std::array>
-    using order_t = Order<N, containerT>;
+    template <size_t N, typename T = unsigned int,
+              template <typename, size_t> class containerT = std::array>
+    using order_t = Order<containerT<T,N>>;
 
     // in order product rank traversal
     template <class productT, class orderT, bool isConst = true>
