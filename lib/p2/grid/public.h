@@ -19,6 +19,7 @@
 // implementation
 #include "Rep.h"
 #include "Order.h"
+#include "OrderIterator.h"
 
 // to be done...
 #include "Product.h"

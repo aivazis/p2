@@ -10,11 +10,25 @@
 
 // useful instantiations of STL entities
 namespace pyre::grid {
-    // the base class for the IndexIterator
+    // the base class for {OrderIterator}
+    template <class productT, class orderT, bool isConst>
+    using base_order_iterator =
+        std::iterator<std::forward_iterator_tag,
+                     typename productT::value_type,             // points to index ranks
+                     typename productT::difference_type,        // distance among entries
+                     std::conditional<isConst,
+                                      typename productT::const_pointer,
+                                      typename productT::pointer>,
+                     std::conditional<isConst,
+                                      typename productT::const_reference,
+                                      typename productT::reference>
+                     >;
+
+    // the base class for {IndexIterator}
     template <class packingT>
     using base_index_iterator =
-        std::iterator<std::random_access_iterator_tag,        // category
-                      typename packingT::index_type,          // iterators make indices
+        std::iterator<std::forward_iterator_tag,              // category
+                      typename packingT::index_type,          // points to index instances
                       void,                                   // distance
                       const typename packingT::index_type *,  // pointer
                       const typename packingT::index_type &   // reference
@@ -31,8 +45,10 @@ namespace pyre::grid {
     template <size_t N, template <typename, size_t> class containerT> class Shape;
     // indices
     template <size_t N, template <typename, size_t> class containerT> class Index;
-    // the order in which index axes are packed in memory
+    // index rank ordering, e.g. the order in which index axes are packed in memory
     template <size_t N, template <typename, size_t> typename containerT> class Order;
+    // support for visiting ranks in a specific order
+    template <class productT, class orderT, bool isConst> class OrderIterator;
 
     // support for the canonical packing strategies
     // an ordered index generator
@@ -47,12 +63,27 @@ namespace pyre::grid {
     // equality
     template <class containerT>
     constexpr auto
-    operator== (const Rep<containerT> &, const Rep<containerT> &) -> bool;
+    operator==(const Rep<containerT> &, const Rep<containerT> &) -> bool;
 
     // stream injection
     template <class containerT>
     inline auto
-    operator<< (ostream_reference, const Rep<containerT> &) -> ostream_reference;
+    operator<<(ostream_reference, const Rep<containerT> &) -> ostream_reference;
+}
+
+
+// order iterator operators
+namespace pyre::grid {
+    // equality
+    template <class productT, class orderT, bool isConst>
+    constexpr auto
+    operator==(const OrderIterator<productT, orderT, isConst> &,
+               const OrderIterator<productT, orderT, isConst> &) -> bool;
+    // and not
+    template <class productT, class orderT, bool isConst>
+    constexpr auto
+    operator!=(const OrderIterator<productT, orderT, isConst> &,
+               const OrderIterator<productT, orderT, isConst> &) -> bool;
 }
 
 

@@ -33,6 +33,10 @@ namespace pyre::grid
     template <size_t N, template <typename, size_t> class containerT = std::array>
     using order_t = Order<N, containerT>;
 
+    // in order product rank traversal
+    template <class productT, class orderT, bool isConst = true>
+    using order_iterator_t = OrderIterator<productT, orderT, isConst>;
+
     // ordered index generator
     template <class packingT>
     using index_iterator_t = IndexIterator<packingT>;
