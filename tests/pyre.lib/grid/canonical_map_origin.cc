@@ -59,7 +59,6 @@ int main(int argc, char * argv[]) {
 
     // verify that the {image} is our original index
     assert (image == index);
-    //
 
     // all done
     return 0;
