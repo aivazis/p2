@@ -13,14 +13,14 @@
 //
 //     Z_s_0 x ... x Z_s_{n-1}
 //
-template <pyre::grid::size_t N, template <typename, size_t> class containerT>
-class pyre::grid::Shape : public Product<containerT<size_t, N>> {
+template <class containerT>
+class pyre::grid::Shape : public Product<containerT> {
     // types
 public:
     // alias for me
-    using shape_type = Shape<N, containerT>;
+    using shape_type = Shape<containerT>;
     // alias for my base
-    using rep_type = Product<containerT<size_t, N>>;
+    using rep_type = Product<containerT>;
     // the sizes of things
     using size_type = typename rep_type::size_type;
     // individual axis values

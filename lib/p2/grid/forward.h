@@ -42,7 +42,7 @@ namespace pyre::grid {
     // basic representation of our multi-dimensional entities
     template <class containerT> class Product;
     // shapes: the number of possible values of each index
-    template <size_t N, template <typename, size_t> class containerT> class Shape;
+    template <class containerT> class Shape;
     // indices
     template <class containerT> class Index;
     // index rank ordering, e.g. the order in which index axes are packed in memory

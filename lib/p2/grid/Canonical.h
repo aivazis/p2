@@ -23,10 +23,10 @@ public:
     using size_type = size_t;
     // my parts
     using index_type = Index<containerT<int, N>>;
-    using shape_type = Shape<N, containerT>;
+    using shape_type = Shape<containerT<size_type, N>>;
     using order_type = Order<N, containerT>;
-    // the array with the strides looks just like a shape
-    using strides_type = shape_type;
+    // strides are a shape but with wider type so overflow is less likely
+    using strides_type = Shape<containerT<size_type, N>>;
     // offsets
     using difference_type = typename index_type::difference_type;
     // iterators
@@ -53,7 +53,7 @@ public:
     // the total number of addressable cells
     constexpr auto capacity() const -> size_type;
 
-    // mutators: packing instances are {const}, so mutators create new instances
+    // mutators: {canonical_type} instances are {const}, so mutators create new instances
 public:
     constexpr auto order(const order_type &) const -> canonical_type;
 
@@ -85,7 +85,7 @@ private:
     const order_type _order;         // the packing order of the axes
     const index_type _origin;        // the smallest allowable index value
     // deduced
-    const shape_type _strides;       // the vector of strides for axis
+    const strides_type _strides;     // the vector of strides for axis
     const difference_type _nudge;    // offset correction when {_origin} is not {zero}
 
     // metamethods with default implementations

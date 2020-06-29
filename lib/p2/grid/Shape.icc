@@ -11,10 +11,10 @@
 
 // metamethods
 // constructor that accepts an initializer list
-template <pyre::grid::size_t N, template <typename, size_t> class containerT>
+template <class containerT>
 template <typename... argT>
 constexpr
-pyre::grid::Shape<N, containerT>::
+pyre::grid::Shape<containerT>::
 Shape(argT... idx) :
     rep_type(idx...)
 {}
@@ -22,15 +22,15 @@ Shape(argT... idx) :
 
 // interface
 // the total number of addressable values
-template <pyre::grid::size_t N, template <typename, size_t> class containerT>
+template <class containerT>
 constexpr auto
-pyre::grid::Shape<N, containerT>::
+pyre::grid::Shape<containerT>::
 capacity() const -> size_type
 {
     // the initial value
-    size_t one = 1;
+    size_type one = 1;
     // my capacity is equal to the product of the number of possible values along each axis
-    return std::accumulate(this->begin(), this->end(), one, std::multiplies<rank_type>());
+    return std::accumulate(this->begin(), this->end(), one, std::multiplies<size_type>());
 }
 
 

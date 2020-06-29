@@ -22,8 +22,9 @@ namespace pyre::grid
     using product_t = Product<containerT<T,N>>;
 
     // the number of possible values of each axis
-    template <size_t N, template <typename, size_t> class containerT = std::array>
-    using shape_t = Shape<N, containerT>;
+    template <size_t N, typename T = unsigned int,
+              template <typename, size_t> class containerT = std::array>
+    using shape_t = Shape<containerT<T,N>>;
 
     // indices
     template <size_t N, typename T = int,

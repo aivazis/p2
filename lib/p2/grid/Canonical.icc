@@ -138,7 +138,7 @@ offset(const index_type & index) const -> difference_type
     // initialize the offset
     difference_type offset = 0;
     // and the running product of the shape factors
-    typename shape_type::rank_type product = 1;
+    size_type product = 1;
 
     // get my shape
     auto shape = this->shape();
@@ -181,7 +181,7 @@ end() const -> iterator_type
         // add my shape
         end[rank] += _shape[rank];
     }
-    // build an iterator that point to the end
+    // build an iterator that points to the end
     return iterator_type(_shape, _order, end);
 }
 
@@ -206,7 +206,7 @@ pyre::grid::Canonical<N, containerT>::strides(const shape_type & shape,
     strides_type strides;
 
     // initialize the running product
-    typename shape_type::rank_type product = 1;
+    size_type product = 1;
     // go through indices in order
     for (auto axis : order) {
         // store the running product as the stride of the current axis
