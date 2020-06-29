@@ -135,24 +135,10 @@ constexpr auto
 pyre::grid::Canonical<N, containerT>::
 offset(const index_type & index) const -> difference_type
 {
-    // initialize the offset
-    difference_type offset = 0;
-    // and the running product of the shape factors
-    size_type product = 1;
-
-    // get my shape
-    auto shape = this->shape();
-    // and my packing order
-    auto order = this->order();
-
-    // in packing order
-    for (auto axis : order) {
-        // update the offset
-        offset += index[axis] * product;
-        // update the product
-        product *= shape[axis];
-    }
-
+    // the initial value; here so we can be explicit about the return type
+    difference_type zero = 0;
+    // project and return
+    auto offset = std::inner_product(index.begin(), index.end(), _strides.begin(), zero);
     // shift the result by the fixed offset of the {origin} and return it
     return offset - _nudge;
 }
