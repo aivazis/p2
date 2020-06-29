@@ -204,16 +204,13 @@ pyre::grid::Canonical<N, containerT>::strides(const shape_type & shape,
 {
     // make an empty shape to store the answer
     strides_type strides;
-
-    // initialize the running product
-    size_type product = 1;
-    // go through indices in order
-    for (auto axis : order) {
-        // store the running product as the stride of the current axis
-        strides[axis] = product;
-        // and update it
-        product *= shape[axis];
-    }
+    // initialize the product
+    typename strides_type::value_type one = 1;
+    // compute the strides
+    std::exclusive_scan(shape.begin(order), shape.end(order),
+                        strides.begin(order),
+                        one,
+                        std::multiplies<>{});
 
     // all done
     return strides;
