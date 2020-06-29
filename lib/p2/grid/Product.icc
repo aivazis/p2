@@ -11,9 +11,56 @@
 // metamethods
 template <class containerT>
 template <typename... argT>
-constexpr pyre::grid::Product<containerT>::Product(argT... idx) :
+constexpr
+pyre::grid::Product<containerT>::
+Product(argT... idx) :
     rep_type(idx...)
 {}
+
+
+// iterator support
+template <class containerT>
+template <class orderT>
+constexpr auto
+pyre::grid::Product<containerT>::
+begin(const orderT & order) -> iterator<orderT>
+{
+    // make an iterator that points to the beginning and return it
+    return iterator<orderT> { *this, order.begin() };
+}
+
+
+template <class containerT>
+template <class orderT>
+constexpr auto
+pyre::grid::Product<containerT>::
+end(const orderT & order) -> iterator<orderT>
+{
+    // make an iterator that points to the end and return it
+    return iterator<orderT> { *this, order.end() };
+}
+
+
+template <class containerT>
+template <class orderT>
+constexpr auto
+pyre::grid::Product<containerT>::
+begin(const orderT & order) const -> const_iterator<orderT>
+{
+    // make an iterator that points to the beginning and return it
+    return const_iterator<orderT> { *this, order.begin() };
+}
+
+
+template <class containerT>
+template <class orderT>
+constexpr auto
+pyre::grid::Product<containerT>::
+end(const orderT & order) const -> const_iterator<orderT>
+{
+    // make an iterator that points to the end and return it
+    return const_iterator<orderT> { *this, order.end() };
+}
 
 
 #endif

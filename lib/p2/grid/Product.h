@@ -21,16 +21,44 @@ template <class containerT>
 class pyre::grid::Product : public Rep<containerT> {
     // types
 public:
+    // alias for me
+    using product_type = Product<containerT>;
     // alias for my base
     using rep_type = Rep<containerT>;
-    // the factor type determines the sets whose product we are computing
+    // the rank type determines the sets whose product we are computing
     using rank_type = typename rep_type::value_type;
+
+    // my iterators depend on an external ordering
+    template <class orderT>
+    using iterator = OrderIterator<product_type, orderT, false>;
+
+    template <class orderT>
+    using const_iterator = OrderIterator<product_type, orderT, true>;
 
     // metamethods
 public:
     // constructor
     template <typename... argT>
     constexpr explicit Product(argT...);
+
+    // iteration support
+public:
+    // pull the basic iterator support from my base class
+    using rep_type::begin;
+    using rep_type::end;
+
+    // iterate in a given order
+    template <class orderT>
+    constexpr auto begin(const orderT &) -> iterator<orderT>;
+
+    template <class orderT>
+    constexpr auto end(const orderT &) -> iterator<orderT>;
+
+    template <class orderT>
+    constexpr auto begin(const orderT &) const -> const_iterator<orderT>;
+
+    template <class orderT>
+    constexpr auto end(const orderT &) const -> const_iterator<orderT>;
 
     // default metamethods
 public:
