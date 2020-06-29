@@ -17,8 +17,8 @@ public:
     using product_type = productT;
     using order_type = orderT;
     // aliases for me
-    using iterator_type = OrderIterator<product_type, order_type, isConst>;
-    using iterator_reference = iterator_type &;
+    using iterator = OrderIterator<product_type, order_type, isConst>;
+    using iterator_reference = iterator &;
     // my parts
     using product_reference = std::conditional_t<isConst, const product_type &, product_type &>;
     using order_const_iterator = typename order_type::const_iterator;
