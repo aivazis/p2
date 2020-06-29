@@ -44,7 +44,7 @@ namespace pyre::grid {
     // shapes: the number of possible values of each index
     template <size_t N, template <typename, size_t> class containerT> class Shape;
     // indices
-    template <size_t N, template <typename, size_t> class containerT> class Index;
+    template <class containerT> class Index;
     // index rank ordering, e.g. the order in which index axes are packed in memory
     template <size_t N, template <typename, size_t> typename containerT> class Order;
     // support for visiting ranks in a specific order
@@ -103,18 +103,16 @@ namespace pyre::grid {
 // index algebra
 namespace pyre::grid {
     // addition
-    template <size_t N,
-              template <typename, size_t> class containerT>
+    template <class containerT>
     constexpr auto
-    operator+ (const Index<N, containerT> & i1, const Index<N, containerT> & i2)
-        -> Index<N, containerT>;
+    operator+ (const Index<containerT> & i1, const Index<containerT> & i2)
+        -> Index<containerT>;
 
     // subtraction
-    template <size_t N,
-              template <typename, size_t> class containerT>
+    template <class containerT>
     constexpr auto
-    operator- (const Index<N, containerT> & i1, const Index<N, containerT> & i2)
-        -> Index<N, containerT>;
+    operator- (const Index<containerT> & i1, const Index<containerT> & i2)
+        -> Index<containerT>;
 }
 
 

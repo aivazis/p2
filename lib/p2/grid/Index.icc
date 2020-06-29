@@ -11,9 +11,9 @@
 
 // metamethods
 // constructor that fills an index with a specific value
-template <pyre::grid::size_t N, template <typename, size_t> class containerT>
+template <class containerT>
 constexpr
-pyre::grid::Index<N, containerT>::
+pyre::grid::Index<containerT>::
 Index(rank_type value) :
     rep_type {}
 {
@@ -28,10 +28,10 @@ Index(rank_type value) :
 
 
 // constructor that accepts an initializer list
-template <pyre::grid::size_t N, template <typename, size_t> class containerT>
+template <class containerT>
 template <typename... argT>
 constexpr
-pyre::grid::Index<N, containerT>::
+pyre::grid::Index<containerT>::
 Index(argT... idx) :
     rep_type(idx...)
 {}
@@ -39,9 +39,9 @@ Index(argT... idx) :
 
 // static interface: factories
 // make an index that is filled with zeroes
-template <pyre::grid::size_t N, template <typename, size_t> class containerT>
+template <class containerT>
 constexpr auto
-pyre::grid::Index<N, containerT>::
+pyre::grid::Index<containerT>::
 zero() -> index_type
 {
     // delegate
@@ -50,16 +50,16 @@ zero() -> index_type
 
 
 // index algebra
-template <pyre::grid::size_t N, template <typename, size_t> class containerT>
+template <class containerT>
 constexpr auto
 pyre::grid::
-operator+ (const Index<N, containerT> & i1, const Index<N, containerT> & i2) -> Index<N, containerT>
+operator+ (const Index<containerT> & i1, const Index<containerT> & i2) -> Index<containerT>
 {
     // make a default index
-    Index<N, containerT> sum;
+    Index<containerT> sum;
 
     // go through each axis
-    for (size_t axis = 0; axis < N; ++axis) {
+    for (size_t axis = 0; axis < sum.rank(); ++axis) {
         // do the math
         sum[axis] = i1[axis] + i2[axis];
     }
@@ -69,16 +69,16 @@ operator+ (const Index<N, containerT> & i1, const Index<N, containerT> & i2) -> 
 }
 
 
-template <pyre::grid::size_t N, template <typename, size_t> class containerT>
+template <class containerT>
 constexpr auto
 pyre::grid::
-operator- (const Index<N, containerT> & i1, const Index<N, containerT> & i2) -> Index<N, containerT>
+operator- (const Index<containerT> & i1, const Index<containerT> & i2) -> Index<containerT>
 {
     // make a default index
-    Index<N, containerT> diff;
+    Index<containerT> diff;
 
     // go through each axis
-    for (size_t axis = 0; axis < N; ++axis) {
+    for (size_t axis = 0; axis < diff.rank(); ++axis) {
         // do the math
         diff[axis] = i1[axis] - i2[axis];
     }

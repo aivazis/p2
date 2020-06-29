@@ -13,14 +13,14 @@
 // complicate index arithmetic unnecessarily
 
 // basic index type
-template <pyre::grid::size_t N, template <typename, size_t> class containerT>
-class pyre::grid::Index : public Product<containerT<int, N>> {
+template <class containerT>
+class pyre::grid::Index : public Product<containerT> {
     // types
 public:
     // alias for me
-    using index_type = Index<N, containerT>;
+    using index_type = Index<containerT>;
     // alias for my base
-    using rep_type = Product<containerT<int, N>>;
+    using rep_type = Product<containerT>;
     // individual axis values
     using rank_type = typename rep_type::value_type;
     using rank_reference = rank_type &;

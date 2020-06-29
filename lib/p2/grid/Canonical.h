@@ -22,7 +22,7 @@ public:
     // the sizes of things
     using size_type = size_t;
     // my parts
-    using index_type = Index<N, containerT>;
+    using index_type = Index<containerT<int, N>>;
     using shape_type = Shape<N, containerT>;
     using order_type = Order<N, containerT>;
     // the array with the strides looks just like a shape

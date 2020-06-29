@@ -26,8 +26,9 @@ namespace pyre::grid
     using shape_t = Shape<N, containerT>;
 
     // indices
-    template <size_t N, template <typename, size_t> class containerT = std::array>
-    using index_t = Index<N, containerT>;
+    template <size_t N, typename T = int,
+              template <typename, size_t> class containerT = std::array>
+    using index_t = Index<containerT<T,N>>;
 
     // the order in which indices are packed in memory
     template <size_t N, template <typename, size_t> class containerT = std::array>
