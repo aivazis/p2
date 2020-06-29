@@ -20,7 +20,7 @@ public:
     // and my container
     using container_type = containerT;
     // sizes of things
-    using size_type = size_t;
+    using size_type = typename containerT::size_type;
     // my value
     using value_type = typename container_type::value_type;
     using reference = value_type &;
@@ -59,7 +59,7 @@ public:
 
     // static interface
 public:
-    static constexpr auto rank() -> typename rep_type::size_type;
+    static constexpr auto rank() -> size_type;
     static constexpr auto zero() -> rep_type;
 
     // default metamethods

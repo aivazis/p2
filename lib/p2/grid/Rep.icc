@@ -121,7 +121,7 @@ end() const ->  const_iterator
 template <class containerT>
 constexpr auto
 pyre::grid::Rep<containerT>::
-rank() -> typename rep_type::size_type
+rank() -> size_type
 {
     // the rank is equal to the number of slots in the rep
     return std::tuple_size<container_type>::value;
