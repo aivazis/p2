@@ -23,8 +23,10 @@ public:
     using size_type = typename containerT::size_type;
     // my value
     using value_type = typename container_type::value_type;
-    using reference = value_type &;
-    using const_reference = const value_type &;
+    using pointer = typename container_type::pointer;
+    using const_pointer = typename container_type::const_pointer;
+    using reference = typename container_type::reference;
+    using const_reference = typename container_type::const_reference;
     // offsets
     using difference_type = typename container_type::difference_type;
     // container access
