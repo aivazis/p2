@@ -14,7 +14,7 @@ template <class productT, class orderT, bool isConst>
 constexpr
 pyre::grid::OrderIterator<productT, orderT, isConst>::
 OrderIterator(product_reference product, order_const_iterator_reference order) :
-    base_order_iterator<productT, orderT, isConst>(),
+    base_order_iterator<productT, isConst>(),
     _product { product },
     _order { order }
 {}
