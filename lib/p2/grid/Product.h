@@ -30,10 +30,16 @@ public:
 
     // my iterators depend on an external ordering
     template <class orderT>
-    using iterator = OrderIterator<product_type, orderT, false>;
+    using iterator = OrderIterator<product_type, typename orderT::const_iterator, false>;
 
     template <class orderT>
-    using const_iterator = OrderIterator<product_type, orderT, true>;
+    using const_iterator = OrderIterator<product_type, typename orderT::const_iterator, true>;
+
+    template <class orderT>
+    using reverse_iterator = OrderIterator<product_type, typename orderT::const_reverse_iterator, false>;
+
+    template <class orderT>
+    using const_reverse_iterator = OrderIterator<product_type, typename orderT::const_reverse_iterator, true>;
 
     // metamethods
 public:
@@ -46,19 +52,51 @@ public:
     // pull the basic iterator support from my base class
     using rep_type::begin;
     using rep_type::end;
+    using rep_type::rbegin;
+    using rep_type::rend;
+    using rep_type::cbegin;
+    using rep_type::cend;
+    using rep_type::crbegin;
+    using rep_type::crend;
 
     // iterate in a given order
     template <class orderT>
     constexpr auto begin(const orderT &) -> iterator<orderT>;
 
     template <class orderT>
-    constexpr auto end(const orderT &) -> iterator<orderT>;
-
-    template <class orderT>
     constexpr auto begin(const orderT &) const -> const_iterator<orderT>;
 
     template <class orderT>
+    constexpr auto end(const orderT &) -> iterator<orderT>;
+
+    template <class orderT>
     constexpr auto end(const orderT &) const -> const_iterator<orderT>;
+
+    // iterate in the reverse of a given order
+    template <class orderT>
+    constexpr auto rbegin(const orderT &) -> reverse_iterator<orderT>;
+
+    template <class orderT>
+    constexpr auto rbegin(const orderT &) const -> const_reverse_iterator<orderT>;
+
+    template <class orderT>
+    constexpr auto rend(const orderT &) -> reverse_iterator<orderT>;
+
+    template <class orderT>
+    constexpr auto rend(const orderT &) const -> const_reverse_iterator<orderT>;
+
+    // const iteration
+    template <class orderT>
+    constexpr auto cbegin(const orderT &) const -> const_iterator<orderT>;
+
+    template <class orderT>
+    constexpr auto cend(const orderT &) const -> const_iterator<orderT>;
+
+    template <class orderT>
+    constexpr auto crbegin(const orderT &) const -> const_reverse_iterator<orderT>;
+
+    template <class orderT>
+    constexpr auto crend(const orderT &) const -> const_reverse_iterator<orderT>;
 
     // default metamethods
 public:
