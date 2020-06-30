@@ -9,19 +9,18 @@
 
 
 // an iterator that enables visiting product ranks in a specific order
-template <class productT, class orderT, bool isConst>
+template <class productT, class orderIteratorT, bool isConst>
 class pyre::grid::OrderIterator : public base_order_iterator<productT, isConst> {
     // types
 public:
     // aliases for my template parameters
     using product_type = productT;
-    using order_type = orderT;
+    using order_const_iterator = orderIteratorT;
     // aliases for me
-    using iterator = OrderIterator<product_type, order_type, isConst>;
+    using iterator = OrderIterator<product_type, order_const_iterator, isConst>;
     using iterator_reference = iterator &;
     // my parts
     using product_reference = std::conditional_t<isConst, const product_type &, product_type &>;
-    using order_const_iterator = typename order_type::const_iterator;
     using order_const_iterator_reference = const order_const_iterator &;
     // what i point to
     using value_type = typename product_type::value_type;

@@ -48,7 +48,7 @@ namespace pyre::grid {
     // index rank ordering, e.g. the order in which index axes are packed in memory
     template <class containerT> class Order;
     // support for visiting ranks in a specific order
-    template <class productT, class orderT, bool isConst> class OrderIterator;
+    template <class productT, class orderIteratorT, bool isConst> class OrderIterator;
 
     // support for the canonical packing strategies
     // an ordered index generator
@@ -75,15 +75,15 @@ namespace pyre::grid {
 // order iterator operators
 namespace pyre::grid {
     // equality
-    template <class productT, class orderT, bool isConst>
+    template <class productT, class orderIteratorT, bool isConst>
     constexpr auto
-    operator==(const OrderIterator<productT, orderT, isConst> &,
-               const OrderIterator<productT, orderT, isConst> &) -> bool;
+    operator==(const OrderIterator<productT, orderIteratorT, isConst> &,
+               const OrderIterator<productT, orderIteratorT, isConst> &) -> bool;
     // and not
-    template <class productT, class orderT, bool isConst>
+    template <class productT, class orderIteratorT, bool isConst>
     constexpr auto
-    operator!=(const OrderIterator<productT, orderT, isConst> &,
-               const OrderIterator<productT, orderT, isConst> &) -> bool;
+    operator!=(const OrderIterator<productT, orderIteratorT, isConst> &,
+               const OrderIterator<productT, orderIteratorT, isConst> &) -> bool;
 }
 
 
