@@ -62,10 +62,17 @@ public:
 
     // the packing isomorphism
 public:
+    // from a given offset to the matching index
     constexpr auto index(difference_type) const -> index_type;
+    // from an index to its offset from the beginning of the array
     constexpr auto offset(const index_type &) const -> difference_type;
 
+    // syntactic sugar for the above
+    constexpr auto operator[](difference_type) const -> index_type;
+    constexpr auto operator[](const index_type &) const -> difference_type;
+
     // iteration support: iterators generate sequences of indices
+public:
     constexpr auto begin() const -> index_iterator;
     constexpr auto end() const -> index_iterator;
 

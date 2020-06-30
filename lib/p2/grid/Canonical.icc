@@ -139,6 +139,27 @@ offset(const index_type & index) const -> difference_type
 }
 
 
+// syntactic sugar for the packing isomorphism
+template <pyre::grid::size_t N, template <typename, size_t> class containerT>
+constexpr auto
+pyre::grid::Canonical<N, containerT>::
+operator[](difference_type offset) const -> index_type
+{
+    // easy enough
+    return index(offset);
+}
+
+
+template <pyre::grid::size_t N, template <typename, size_t> class containerT>
+constexpr auto
+pyre::grid::Canonical<N, containerT>::
+operator[](const index_type & index) const -> difference_type
+{
+    // easy enough
+    return offset(index);
+}
+
+
 // iteration support
 template <pyre::grid::size_t N, template <typename, size_t> class containerT>
 constexpr auto
