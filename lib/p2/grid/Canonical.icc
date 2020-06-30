@@ -106,18 +106,14 @@ index(difference_type offset) const -> index_type
 {
     // make an empty index
     index_type index;
-    // get the packing order
-    auto rev = _order;
-    // and reverse it
-    std::reverse(rev.begin(), rev.end());
-
     // pack the initializers
-    auto pack = std::make_tuple(_strides.begin(rev), index.begin(rev));
-    // we traverse in reverse packing order
-    for (auto [s,i] = pack; s != _strides.end(rev); ++s, ++i) {
+    auto pack = std::make_tuple(_strides.rbegin(_order), index.rbegin(_order));
+    // traverse in reverse packing order
+    for (auto & [s,i] = pack; s != _strides.rend(_order); ++s, ++i) {
         // get the current stride
         auto stride = *s;
-        // the value of the index is the ratio of the current value of the offset with the current stride
+        // the value of the index is the ratio of the current value of the offset with the
+        // current stride
         *i = offset / stride;
         // the leftovers are for the next index value
         offset %= stride;
