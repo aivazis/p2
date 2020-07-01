@@ -36,6 +36,12 @@ int main(int argc, char * argv[]) {
 
     // show me
     channel
+        << "shape: " << packing.shape() << pyre::journal::newline
+        << "origin: " << packing.origin() << pyre::journal::newline
+        << "order: " << packing.order() << pyre::journal::newline
+        << "strides: " << packing.strides() << pyre::journal::newline
+        << "capacity: " << packing.capacity() << pyre::journal::newline
+        << "nudge: " << packing.nudge() << pyre::journal::newline
         << "index: " << index << pyre::journal::newline
         << "offset: " << offset << pyre::journal::newline
         << "image: " << image << pyre::journal::endl(__HERE__);
