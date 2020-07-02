@@ -26,7 +26,7 @@ int main(int argc, char * argv[]) {
     // pick a shape
     canonical_t::shape_type shape { 3, 5, 7 };
     // the indices range from (-1, -2)  to (1, 2)
-    canonical_t::index_type origin { -1, 0, 0 };
+    canonical_t::index_type origin { 1, 0, 0 };
     // and the cells are in c mode (the default)
     auto order = canonical_t::order_type::c();
     // assemble a canonical packing strategy

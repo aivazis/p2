@@ -27,6 +27,16 @@ int main(int argc, char * argv[]) {
     // make a canonical packing strategy
     canonical_t packing { shape };
 
+    // get the origin
+    auto origin = packing.origin();
+
+    // verify that the offset of the {origin} is zero
+    assert (packing.offset(origin) == 0);
+    // verify that the offset of {0,0,0}
+    canonical_t::index_type zero {};
+    // is equal to the nudge
+    assert (packing.offset(zero) == packing.nudge());
+
     // make an index
     canonical_t::index_type index { 1, 2, 3 };
     // get its offset
