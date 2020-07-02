@@ -224,14 +224,77 @@ cslice(const index_type & base) const
     // get my order
     const auto & myOrder = order();
     // visit the ranks in order
-    for (auto rank : myOrder) {
+    for (auto axis : myOrder) {
         // if this rank is not part of the slice
-        if (rawShape[rank] == 0) {
+        if (rawShape[axis] == 0) {
             // skip it
             continue;
         }
         // otherwise, record the order of the current rank of the slice
-        sliceOrder[rankMap[rank]] = i;
+        sliceOrder[rankMap[axis]] = i;
+        // update the slice rank
+        ++i;
+    }
+
+    // compute the nudge
+    difference_type sliceNudge = offset(base);
+    // instantiate the slice packing and return
+    return slice_t(sliceShape, sliceOrigin, sliceOrder, sliceStrides, sliceNudge);
+}
+
+
+// when the shape is not known at compile time
+template <pyre::grid::size_t N, template <typename, size_t> class containerT>
+template <pyre::grid::size_t rank>
+constexpr auto
+pyre::grid::Canonical<N, containerT>::
+slice(const shape_type & rawShape, const index_type & base) const
+{
+    // make an alias for the slice packing
+    using slice_t = canonical_t<rank, containerT>;
+    // and instantiate blank slice info
+    typename slice_t::shape_type sliceShape {};
+    typename slice_t::index_type sliceOrigin {};
+    typename slice_t::order_type sliceOrder {};
+    typename slice_t::strides_type sliceStrides {};
+
+    // start building the slice packing info
+    // get my strides
+    const auto & myStrides = strides();
+    // initialize the map from my ranks to the slice tanks
+    shape_type rankMap {};
+    // go through the raw shape spec
+    for (size_t i=0, j=0; i < N; ++i) {
+        // get the {ith} value
+        auto s = rawShape[i];
+        // if it's zero
+        if (s == 0) {
+            // move on
+            continue;
+        }
+        // if not, transfer the value
+        sliceShape[j] = s;
+        // get the matching stride
+        sliceStrides[j] = myStrides[i];
+        // update the rank map
+        rankMap[i] = j;
+        // point to the next slice rank and move on
+        ++j;
+    }
+
+    // now, to set the packing order
+    size_t i = 0;
+    // get my order
+    const auto & myOrder = order();
+    // visit the ranks in order
+    for (auto axis : myOrder) {
+        // if this rank is not part of the slice
+        if (rawShape[axis] == 0) {
+            // skip it
+            continue;
+        }
+        // otherwise, record the order of the current rank of the slice
+        sliceOrder[rankMap[axis]] = i;
         // update the slice rank
         ++i;
     }
