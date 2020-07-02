@@ -40,7 +40,7 @@ int main(int argc, char * argv[]) {
         << "    capacity: " << packing.capacity() << pyre::journal::newline
         << "    nudge: " << packing.nudge() << pyre::journal::endl(__HERE__);
 
-    // fins a spot
+    // find a spot
     canonical_t::index_type spot {1,2,4,5,6,7};
     // extract a slice
     auto slice = packing.cslice<0,0,2,0,4,0>(spot);
