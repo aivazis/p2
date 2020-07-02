@@ -79,6 +79,12 @@ public:
     constexpr auto operator[](difference_type) const -> index_type;
     constexpr auto operator[](const index_type &) const -> difference_type;
 
+    // slicing
+public:
+    // when the shape is known at compile time
+    template <size_t... shape>
+    constexpr auto cslice(const index_type & base) const;
+
     // iteration support: iterators generate sequences of indices
 public:
     constexpr auto begin() const -> index_iterator;
