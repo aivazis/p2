@@ -24,7 +24,7 @@ int main() {
     canonical_t packing { shape, origin };
 
     // check the nudge
-    assert (packing.nudge() == -17);
+    assert (packing.nudge() == 17);
 
     // all done
     return 0;
