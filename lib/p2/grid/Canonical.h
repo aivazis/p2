@@ -37,10 +37,18 @@ public:
 
     // metamethods
 public:
-    // constructor
-    constexpr explicit Canonical(shape_type,
-                                 index_type = index_type::zero(),
-                                 order_type = order_type::c());
+    // constructor that deduces {_strides} and {_nudge}
+    constexpr explicit
+    Canonical(const shape_type & shape,
+              const index_type & origin = index_type::zero(),
+              const order_type & order = order_type::c());
+    // constructor that requires a detailed description of the packing; useful for making slices
+    constexpr
+    Canonical(const shape_type & shape,
+              const index_type & origin,
+              const order_type & order,
+              const strides_type & strides,
+              difference_type nudge);
 
     // interface
 public:
@@ -105,11 +113,8 @@ public:
     // constructors
     constexpr Canonical(const Canonical &) = default;
     constexpr Canonical & operator= (const Canonical &) = default;
-
-    // disallowed
-private:
-    constexpr Canonical(Canonical &&) = delete;
-    constexpr Canonical & operator= (Canonical &&) = delete;
+    constexpr Canonical(Canonical &&) = default;
+    constexpr Canonical & operator= (Canonical &&) = default;
 };
 
 

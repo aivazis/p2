@@ -13,12 +13,25 @@
 template <pyre::grid::size_t N, template <typename, size_t> class containerT>
 constexpr
 pyre::grid::Canonical<N, containerT>::
-Canonical(shape_type shape, index_type origin, order_type order) :
+Canonical(const shape_type & shape, const index_type & origin, const order_type & order) :
     _shape { shape },
     _order { order },
     _origin { origin },
-    _strides { strides(shape, order) },
+    _strides { strides(_shape, _order) },
     _nudge { project(_origin, _strides) }
+{}
+
+
+template <pyre::grid::size_t N, template <typename, size_t> class containerT>
+constexpr
+pyre::grid::Canonical<N, containerT>::
+Canonical(const shape_type & shape, const index_type & origin, const order_type & order,
+          const strides_type & strides, difference_type nudge ) :
+    _shape { shape },
+    _order { order },
+    _origin { origin },
+    _strides { strides },
+    _nudge { nudge }
 {}
 
 
