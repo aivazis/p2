@@ -32,7 +32,7 @@ public:
 public:
     // constructor; works with initializer lists
     template <typename... argT>
-    constexpr explicit Shape(argT... args);
+    constexpr Shape(argT... args);
 
     // interface
 public:
