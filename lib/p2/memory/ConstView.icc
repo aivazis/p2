@@ -57,7 +57,7 @@ data() const
 template <class cellT, bool checkBounds>
 auto
 pyre::memory::ConstView<cellT, checkBounds>::
-begin() -> pointer
+begin() const -> pointer
 {
     // the beginning of the block
     return data();
@@ -67,7 +67,7 @@ begin() -> pointer
 template <class cellT, bool checkBounds>
 auto
 pyre::memory::ConstView<cellT, checkBounds>::
-end() -> pointer
+end() const -> pointer
 {
     // one past the last cell in the block
     return data() + cells();

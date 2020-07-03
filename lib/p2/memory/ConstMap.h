@@ -32,8 +32,8 @@ public:
     inline auto data() const;
 
     // iterator support
-    inline auto begin() -> const_pointer;
-    inline auto end() -> const_pointer;
+    inline auto begin() const -> const_pointer;
+    inline auto end() const -> const_pointer;
 
     // syntactic sugar: data access
     inline auto operator[](size_type) const -> const_reference;

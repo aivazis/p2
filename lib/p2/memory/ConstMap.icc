@@ -46,7 +46,7 @@ data() const
 template <typename cellT, bool checkBounds>
 auto
 pyre::memory::ConstMap<cellT, checkBounds>::
-begin() -> const_pointer
+begin() const -> const_pointer
 {
     // return the beginning of the block
     return data();
@@ -57,7 +57,7 @@ begin() -> const_pointer
 template <typename cellT, bool checkBounds>
 auto
 pyre::memory::ConstMap<cellT, checkBounds>::
-end() -> const_pointer
+end() const -> const_pointer
 {
     // return one past the end of the block
     return data() + cells();
