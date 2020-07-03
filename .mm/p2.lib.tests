@@ -16,6 +16,7 @@ p2.lib.tests.c++.flags += -Wall $($(compiler.c++).std.c++17)
 
 # global clean up
 tests.pyre.lib.memory.clean += filemap.dat map.dat
+tests.pyre.lib.grid.clean += grid_mmap.data
 
 
 # test case configuration
@@ -28,6 +29,10 @@ tests.pyre.lib.memory.map_read.pre := tests.pyre.lib.memory.map_write
 tests.pyre.lib.memory.map_oob.pre := tests.pyre.lib.memory.map_write
 tests.pyre.lib.memory.constmap_read.pre := tests.pyre.lib.memory.map_write
 tests.pyre.lib.memory.constmap_oob.pre := tests.pyre.lib.memory.map_write
+
+# grid tests with special needs
+tests.pyre.lib.grid.grid_mmap_set.pre := tests.pyre.lib.grid.grid_mmap_sanity
+tests.pyre.lib.grid.grid_mmap_get.pre := tests.pyre.lib.grid.grid_mmap_set
 
 
 # end of file
