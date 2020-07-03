@@ -20,6 +20,27 @@ Grid(packing_const_reference layout, storage_pointer data) :
 {}
 
 
+// accessors
+template <class packingT, class storageT>
+constexpr auto
+pyre::grid::Grid<packingT, storageT>::
+data() const -> storage_pointer
+{
+    // easy enough
+    return _data;
+}
+
+
+template <class packingT, class storageT>
+constexpr auto
+pyre::grid::Grid<packingT, storageT>::
+layout() const -> packing_const_reference
+{
+    // easy enough
+    return _layout;
+}
+
+
 // data access
 template <class packingT, class storageT>
 constexpr auto
@@ -42,6 +63,27 @@ operator[](index_const_reference index) const -> const_reference
     auto offset = _layout[index];
     // get and return the value
     return (*_data)[offset];
+}
+
+
+// iteration support
+template <class packingT, class storageT>
+constexpr auto
+pyre::grid::Grid<packingT, storageT>::
+begin() const
+{
+    // delegate to my layout
+    return _layout.begin();
+}
+
+
+template <class packingT, class storageT>
+constexpr auto
+pyre::grid::Grid<packingT, storageT>::
+end() const
+{
+    // delegate to my layout
+    return _layout.end();
 }
 
 

@@ -25,15 +25,27 @@ public:
     // my index
     using index_type = typename packing_type::index_type;
     using index_const_reference = const index_type &;
+    // iterators
+    using iterator = typename packing_type::index_iterator;
 
     // metamethods
 public:
     constexpr Grid(packing_const_reference, storage_pointer);
 
+    // accessors
+public:
+    constexpr auto data() const -> storage_pointer;
+    constexpr auto layout() const -> packing_const_reference;
+
     // interface: data access
 public:
     constexpr auto operator[](index_const_reference) -> reference;
     constexpr auto operator[](index_const_reference) const -> const_reference;
+
+    // interface: iteration support
+public:
+    constexpr auto begin() const;
+    constexpr auto end() const;
 
     // implementation details: data
 private:
