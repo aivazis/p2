@@ -46,6 +46,10 @@ namespace pyre::grid
     // the canonical packing strategy
     template <size_t N, template <typename, size_t> class containerT = std::array>
     using canonical_t = Canonical<N, containerT>;
+
+    // the grid
+    template <class packingT, class storageT>
+    using grid_t = Grid<packingT, storageT>;
 }
 
 

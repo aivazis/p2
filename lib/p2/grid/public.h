@@ -17,16 +17,19 @@
 #include "api.h"
 
 // implementation
+// thin wrapper over whatever a lightweight container
 #include "Rep.h"
+// packing order
 #include "Order.h"
 #include "OrderIterator.h"
-
-// to be done...
+// indices, shapes, and the canonical packing map
 #include "Product.h"
 #include "Index.h"
 #include "Shape.h"
 #include "IndexIterator.h"
 #include "Canonical.h"
+// the grid
+#include "Grid.h"
 
 
 #endif

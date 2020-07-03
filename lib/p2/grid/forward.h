@@ -55,6 +55,10 @@ namespace pyre::grid {
     template <class packingT> class IndexIterator;
     // the packing strategy
     template <size_t N, template <typename, size_t> class containerT> class Canonical;
+
+    // bringing it all together
+    template <class packingT, class storageT>
+    class Grid;
 }
 
 
