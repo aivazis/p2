@@ -14,9 +14,9 @@
 int main(int argc, char * argv[]) {
     // initialize the journal
     pyre::journal::init(argc, argv);
-    pyre::journal::application("grid_sanity");
+    pyre::journal::application("grid_heap_sanity");
     // make a channel
-    pyre::journal::debug_t channel("pyre.grid");
+    pyre::journal::debug_t channel("pyre.grid.heap");
 
     // we'll work with a 3d conventionally packed grid
     using pack_t = pyre::grid::canonical_t<3>;
@@ -26,23 +26,28 @@ int main(int argc, char * argv[]) {
     using grid_t = pyre::grid::grid_t<pack_t, storage_t>;
 
     // packing: 2x3x4
-    pack_t packing { {2,3,4} };
+    pack_t packing { {1024, 1024, 8} };
     // whose capacity is
     auto cells = packing.capacity();
     // instantiate the grid
     grid_t grid { packing, std::make_shared<storage_t>(cells) };
 
-    // make an index
-    grid_t::index_type zero {};
-    // set a value
-    grid[zero] = 42;
-    // show me the value
+    // fill it
+    for (const auto & idx : grid) {
+        // with the offset of each index
+        grid[idx] = grid.layout()[idx];
+    }
+
+    // show me the value at the origin
     channel
         << "grid[0,0,0] = " << grid[{0,0,0}]
         << pyre::journal::endl(__HERE__);
 
-    // check
-    assert(( grid[zero] == 42 ));
+    // verify
+    for (const auto & idx : grid) {
+        // that we have what we expect
+        assert(( grid[idx] == grid.layout()[idx] ));
+    }
 
     // nothing to do
     return 0;
