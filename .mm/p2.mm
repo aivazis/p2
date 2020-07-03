@@ -3,11 +3,6 @@
 # michael a.g. aïvázis <michael.aivazis@para-sim.com>
 # (c) 1998-2019 all rights reserved
 
-# project meta-data
-p2.major := $(repo.major)
-p2.minor := $(repo.minor)
-p2.micro := $(repo.micro)
-p2.revision := $(repo.revision)
 
 # p2 builds a python package
 p2.packages := p2.pkg
