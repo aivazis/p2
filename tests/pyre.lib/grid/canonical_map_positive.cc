@@ -33,11 +33,11 @@ int main(int argc, char * argv[]) {
     canonical_t packing { shape, origin, order };
 
     // verify that the offset of the {origin} is zero
-    assert (packing.offset(origin) == 0);
+    assert(( packing.offset(origin) == 0 ));
     // verify that the offset of {0,0,0}
     canonical_t::index_type zero {};
     // is equal to the nudge
-    assert (packing.offset(zero) == packing.nudge());
+    assert(( packing.offset(zero) == packing.nudge() ));
 
     // make an index
     canonical_t::index_type index { 1, 2, 3 };
@@ -58,7 +58,7 @@ int main(int argc, char * argv[]) {
         << "image: " << image << pyre::journal::endl(__HERE__);
 
     // verify that the {image} is our original index
-    assert (image == index);
+    assert(( image == index ));
 
     // all done
     return 0;

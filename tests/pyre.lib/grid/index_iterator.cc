@@ -34,7 +34,7 @@ int main(int argc, char * argv[]) {
     // go through the index ranks
     for (auto value : idx) {
         // verify it is as expected
-        assert (value == i);
+        assert(( value == i ));
         // get ready for the next one
         ++i;
     }

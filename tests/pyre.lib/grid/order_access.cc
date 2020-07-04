@@ -51,10 +51,10 @@ int main(int argc, char * argv[]) {
         << pyre::journal::endl(__HERE__);
 
     // check it
-    assert (order_2[0] == 0);
-    assert (order_2[1] == 1);
-    assert (order_2[2] == 2);
-    assert (order_2[3] == 3);
+    assert(( order_2[0] == 0 ));
+    assert(( order_2[1] == 1 ));
+    assert(( order_2[2] == 2 ));
+    assert(( order_2[3] == 3 ));
 
     // all done
     return 0;

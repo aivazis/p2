@@ -13,7 +13,7 @@ template <pyre::grid::size_t N>
 using rep_t = pyre::grid::rep_t<pyre::grid::size_t, N>;
 
 
-// compile time sanity check: make sure the header file is accessible
+// exercise the basic {rep_t} interface
 int main(int argc, char * argv[]) {
     // initialize the journal
     pyre::journal::init(argc, argv);

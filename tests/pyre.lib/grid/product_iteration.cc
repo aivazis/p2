@@ -41,7 +41,7 @@ int main(int argc, char * argv[])
     // check
     for (const auto f : p) {
         // that we get what we expect
-        assert(f == 42);
+        assert(( f == 42 ));
     }
 
     // all done

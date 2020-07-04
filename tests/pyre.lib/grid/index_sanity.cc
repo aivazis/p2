@@ -56,7 +56,7 @@ int main(int argc, char *argv[]) {
         << "another zero: " << zero
         << pyre::journal::endl(__HERE__);
     // verify it's the same as {z}
-    assert (zero == z);
+    assert(( zero == z ));
 
     // all done
     return 0;

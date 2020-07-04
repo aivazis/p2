@@ -14,7 +14,7 @@
 using canonical_t = pyre::grid::canonical_t<3>;
 
 
-// compile time sanity check: make sure the header file is accessible
+// verify that the layout is recorded as requested
 int main(int argc, char * argv[]) {
     // initialize the journal
     pyre::journal::init(argc, argv);
@@ -36,10 +36,10 @@ int main(int argc, char * argv[]) {
         << "nudge: " << packing.nudge() << pyre::journal::endl(__HERE__);
 
     // verify we understand the default constructor
-    assert (packing.shape() == shape);
-    assert (packing.order() == canonical_t::order_type::c());
-    assert (packing.origin() == canonical_t::index_type::zero());
-    assert (packing.nudge() == 0);
+    assert(( packing.shape() == shape ));
+    assert(( packing.order() == canonical_t::order_type::c() ));
+    assert(( packing.origin() == canonical_t::index_type::zero() ));
+    assert(( packing.nudge() == packing[{0,0,0}] ));
 
     // all done
     return 0;

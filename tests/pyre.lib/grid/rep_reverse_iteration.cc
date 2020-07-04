@@ -27,7 +27,7 @@ int main(int argc, char * argv[]) {
     // go through its contents
     for (auto r = rep.rbegin(); r != rep.rend(); ++r) {
         // and make sure it is zero
-        assert (*r == 0);
+        assert(( *r == 0 ));
     }
 
     // show me

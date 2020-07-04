@@ -38,7 +38,7 @@ int main(int argc, char * argv[]) {
     static_assert (s.rank() == 4);
 
     // verify that its capacity is equal to the product of the possible values along each axis
-    assert (s.capacity() == 2*3*4*5);
+    assert(( s.capacity() == 2*3*4*5 ));
 
     // verify that a shape is equal to itself
     static_assert (s == s);
@@ -46,7 +46,7 @@ int main(int argc, char * argv[]) {
     // make another
     shape_t z { 2, 3, 4, 5 };
     // that's equal to {s}
-    assert (s == z);
+    assert(( s == z ));
 
     // all done
     return 0;

@@ -45,10 +45,10 @@ int main(int argc, char * argv[]) {
         << "idx_2: " << idx_2
         << pyre::journal::endl(__HERE__);
     // verify the contents
-    assert (idx_2[0] == v);
-    assert (idx_2[1] == v);
-    assert (idx_2[2] == v);
-    assert (idx_2[3] == v);
+    assert(( idx_2[0] == v ));
+    assert(( idx_2[1] == v ));
+    assert(( idx_2[2] == v ));
+    assert(( idx_2[3] == v ));
 
     // all done
     return 0;

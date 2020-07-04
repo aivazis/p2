@@ -50,10 +50,10 @@ int main(int argc, char * argv[]) {
         << "idx_2 after: " << idx_2
         << pyre::journal::endl(__HERE__);
     // check it
-    assert (idx_2[0] == 0);
-    assert (idx_2[1] == 1);
-    assert (idx_2[2] == 2);
-    assert (idx_2[3] == 3);
+    assert(( idx_2[0] == 0 ));
+    assert(( idx_2[1] == 1 ));
+    assert(( idx_2[2] == 2 ));
+    assert(( idx_2[3] == 3 ));
 
     // all done
     return 0;

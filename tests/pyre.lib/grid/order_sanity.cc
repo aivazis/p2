@@ -44,7 +44,7 @@ int main(int argc, char * argv[]) {
         << "fortran: " << fortran
         << pyre::journal::endl(__HERE__);
     // check that it's equal to {shuffle}
-    assert (shuffle == fortran);
+    assert(( shuffle == fortran ));
 
     // make a column major ordering
     order_t c = order_t::c();
@@ -53,7 +53,7 @@ int main(int argc, char * argv[]) {
         << "c: " << c
         << pyre::journal::endl(__HERE__);
     // check that it's different from {shuffle}
-    assert (!(shuffle == c));
+    assert(( shuffle != c ));
 
     // all done
     return 0;

@@ -10,7 +10,7 @@
 #include <p2/grid.h>
 
 
-// sanity check: make sure we can instantiate a grid
+// verify the layout of a grid on the heap
 int main(int argc, char * argv[]) {
     // initialize the journal
     pyre::journal::init(argc, argv);

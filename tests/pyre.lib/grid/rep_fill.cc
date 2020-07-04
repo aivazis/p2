@@ -32,7 +32,7 @@ int main(int argc, char * argv[]) {
     // check that every entry
     for (auto rank : rep) {
         // is zero
-        assert (rank == v);
+        assert(( rank == v ));
     }
 
     // show me

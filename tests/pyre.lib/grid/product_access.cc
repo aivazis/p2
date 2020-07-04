@@ -52,10 +52,10 @@ int main(int argc, char * argv[])
         << pyre::journal::endl(__HERE__);
 
     // check it
-    assert (p_2[0] == 0);
-    assert (p_2[1] == 1);
-    assert (p_2[2] == 2);
-    assert (p_2[3] == 3);
+    assert(( p_2[0] == 0 ));
+    assert(( p_2[1] == 1 ));
+    assert(( p_2[2] == 2 ));
+    assert(( p_2[3] == 3 ));
 
     // all done
     return 0;

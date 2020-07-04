@@ -27,7 +27,7 @@ int main(int argc, char * argv[]) {
     // go through its contents
     for (auto v : rep) {
         // and make sure it is zero
-        assert (v == 0);
+        assert(( v == 0 ));
     }
 
     // show me

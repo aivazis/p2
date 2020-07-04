@@ -4,8 +4,6 @@
 // (c) 1998-2020 all rights reserved
 
 
-// support
-#include <cassert>
 // get the grid
 #include <p2/grid.h>
 

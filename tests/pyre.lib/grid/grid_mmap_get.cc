@@ -10,7 +10,7 @@
 #include <p2/grid.h>
 
 
-// sanity check: make sure we can instantiate a grid
+// read a previously constructed memory mapped grid
 int main(int argc, char * argv[]) {
     // initialize the journal
     pyre::journal::init(argc, argv);

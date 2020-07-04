@@ -40,7 +40,7 @@ int main(int argc, char * argv[])
     // now, in sorted order
     for (auto it = product.begin(order); it != product.end(order); ++it) {
         // check that we are visiting in sorted order
-        assert (*it == i);
+        assert(( *it == i ));
         // show me
         channel << *it << " ";
         // update the counter

@@ -13,7 +13,7 @@
 // type alias
 using product_t = pyre::grid::product_t<4>;
 
-// compile time sanity check: make sure the header file is accessible
+// exercise the basic {product_t} interface
 int main(int argc, char * argv[])
 {
     // initialize the journal
@@ -32,17 +32,17 @@ int main(int argc, char * argv[])
         << pyre::journal::endl(__HERE__);
 
     // verify that the index dimensionality is reported correctly through the type
-    static_assert(product_t::rank() == 4);
+    static_assert( product_t::rank() == 4 );
     // verify that the index dimensionality is reported correctly through an instance
-    static_assert(p.rank() == 4);
+    static_assert( p.rank() == 4 );
 
     // every product is equal to itself
-    assert (p == p);
+    assert(( p == p ));
 
     // make a different one
     product_t q { 1, 1, 1, 1 };
     // verify it's not the same as {q}
-    assert (!(p == q));
+    assert(( p != q ));
 
     // all done
     return 0;
