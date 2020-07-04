@@ -36,11 +36,20 @@ int main(int argc, char * argv[]) {
         << "  strides: " << packing.strides() << pyre::journal::endl(__HERE__);
 
     // sign on
-    channel << "visiting:" << pyre::journal::newline;
+    channel << "visiting in packing order:" << pyre::journal::newline;
+    // setup a counter
+    int i = 0;
     // visit every spot
     for (auto idx : packing) {
+        // get the offset of this index
+        auto offset = packing[idx];
         // show me
-        channel << " at: " << idx << pyre::journal::newline;
+        channel << " at: " << idx << " -> " << offset
+                << pyre::journal::newline;
+        // verify that we are visiting in packing order
+        assert(( offset == i ));
+        // increment the counter and grab thej next index
+        ++i;
     }
     // flush
     channel << pyre::journal::endl(__HERE__);
