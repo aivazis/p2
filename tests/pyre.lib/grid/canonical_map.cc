@@ -52,6 +52,8 @@ int main(int argc, char * argv[]) {
         << "strides: " << packing.strides() << pyre::journal::newline
         << "capacity: " << packing.capacity() << pyre::journal::newline
         << "nudge: " << packing.nudge() << pyre::journal::newline
+        << "begin: " << *packing.begin() << pyre::journal::newline
+        << "end: " << *packing.end() << pyre::journal::newline
         << "index: " << index << pyre::journal::newline
         << "offset: " << offset << pyre::journal::newline
         << "image: " << image << pyre::journal::endl(__HERE__);
