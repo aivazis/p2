@@ -109,14 +109,20 @@ namespace pyre::grid {
     // addition
     template <class containerT>
     constexpr auto
-    operator+ (const Index<containerT> & i1, const Index<containerT> & i2)
+    operator+ (const Index<containerT> &, const Index<containerT> &)
         -> Index<containerT>;
 
     // subtraction
     template <class containerT>
     constexpr auto
-    operator- (const Index<containerT> & i1, const Index<containerT> & i2)
+    operator- (const Index<containerT> &, const Index<containerT> &)
         -> Index<containerT>;
+
+    // add a {shape} to an {index}
+    template <class indexContainerT, class shapeContainerT>
+    constexpr auto
+    operator+ (const Index<indexContainerT> &, const Shape<shapeContainerT> &)
+        -> Index<indexContainerT>;
 }
 
 

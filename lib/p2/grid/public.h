@@ -24,8 +24,8 @@
 #include "OrderIterator.h"
 // indices, shapes, and the canonical packing map
 #include "Product.h"
-#include "Index.h"
 #include "Shape.h"
+#include "Index.h"
 #include "IndexIterator.h"
 #include "Canonical.h"
 // the grid

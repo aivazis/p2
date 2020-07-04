@@ -88,6 +88,27 @@ operator- (const Index<containerT> & i1, const Index<containerT> & i2) -> Index<
 }
 
 
+// add a shape to an index
+template <class indexContainerT, class shapeContainerT>
+constexpr auto
+pyre::grid::
+operator+ (const Index<indexContainerT> & i, const Shape<shapeContainerT> & s)
+    -> Index<indexContainerT>
+{
+    // make a default index
+    Index<indexContainerT> sum;
+
+    // go through each axis
+    for (size_t axis = 0; axis < sum.rank(); ++axis) {
+        // do the math
+        sum[axis] = i[axis] + s[axis];
+    }
+
+    // all done
+    return sum;
+}
+
+
 #endif
 
 // end of file

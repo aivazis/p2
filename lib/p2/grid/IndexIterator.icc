@@ -51,12 +51,8 @@ operator++() -> iterator_reference
         // if the value overflowed, set it to its starting value and grab the next one
         _current[rank] = _origin[rank];
     }
-    // if we get this far, every rank has overflowed
-    for (auto rank : _order) {
-        // so point to the end of the container
-        _current[rank] = _origin[rank] + _shape[rank];
-    }
-
+    // if we get this far, every rank has overflowed; point to the end
+    _current = _origin + _shape;
     // all done
     return *this;
 }

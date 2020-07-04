@@ -322,14 +322,9 @@ constexpr auto
 pyre::grid::Canonical<N, containerT>::
 end() const -> index_iterator
 {
-    // build the end of the container: start at the origin
-    auto end = _origin;
-    // and for every rank
-    for (auto rank : _order) {
-        // add my shape
-        end[rank] += _shape[rank];
-    }
-    // build an iterator that points to the end
+    // form the end of the container
+    auto end = _origin + _shape;
+    // build an iterator that points to it
     return index_iterator(_shape, _order, end);
 }
 
