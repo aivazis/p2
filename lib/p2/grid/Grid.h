@@ -22,6 +22,9 @@ public:
     using value_type = typename storage_type::cell_type;
     using reference = typename storage_type::reference;
     using const_reference = typename storage_type::const_reference;
+    // my shape
+    using shape_type = typename packing_type::shape_type;
+    using shape_const_reference = const shape_type &;
     // my index
     using index_type = typename packing_type::index_type;
     using index_const_reference = const index_type &;
@@ -46,6 +49,11 @@ public:
 public:
     constexpr auto begin() const;
     constexpr auto end() const;
+
+    // slicing
+public:
+    template <size_t sliceRank = packing_type::rank()>
+    constexpr auto slice(shape_const_reference, index_const_reference);
 
     // implementation details: data
 private:
