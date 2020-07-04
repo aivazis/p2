@@ -85,7 +85,7 @@ public:
     template <size_t... shape>
     constexpr auto cslice(const index_type & base) const;
     // when only the rank of the slice is known at compile time
-    template <size_t rank>
+    template <size_t sliceRank = N>
     constexpr auto slice(const shape_type & shape, const index_type & base) const;
 
     // iteration support: iterators generate sequences of indices
@@ -95,7 +95,7 @@ public:
 
     // static interface
 public:
-    static constexpr auto dim() -> size_type;
+    static constexpr auto rank() -> size_type;
 
     // implementation details: static helpers
 protected:

@@ -245,13 +245,13 @@ cslice(const index_type & base) const
 
 // when the shape is not known at compile time
 template <pyre::grid::size_t N, template <typename, size_t> class containerT>
-template <pyre::grid::size_t rank>
+template <pyre::grid::size_t sliceRank>
 constexpr auto
 pyre::grid::Canonical<N, containerT>::
 slice(const shape_type & rawShape, const index_type & base) const
 {
     // make an alias for the slice packing
-    using slice_t = canonical_t<rank, containerT>;
+    using slice_t = canonical_t<sliceRank, containerT>;
     // and instantiate blank slice info
     typename slice_t::shape_type sliceShape {};
     typename slice_t::index_type sliceOrigin {};
@@ -332,7 +332,7 @@ end() const -> index_iterator
 // static interface
 template <pyre::grid::size_t N, template <typename, size_t> class containerT>
 constexpr auto
-pyre::grid::Canonical<N, containerT>::dim() -> size_type
+pyre::grid::Canonical<N, containerT>::rank() -> size_type
 {
     // easy enough
     return N;
