@@ -244,6 +244,16 @@ operator== (const Rep<containerT> & rep1, const Rep<containerT> & rep2) -> bool
 }
 
 
+// inequality
+template <class containerT>
+constexpr auto
+pyre::grid::
+operator!= (const Rep<containerT> & rep1, const Rep<containerT> & rep2) -> bool
+{
+    return !(rep1 == rep2);
+}
+
+
 // injection operator
 template <class containerT>
 auto
