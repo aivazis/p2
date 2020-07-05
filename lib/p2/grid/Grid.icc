@@ -15,8 +15,8 @@ template <class packingT, class storageT>
 constexpr
 pyre::grid::Grid<packingT, storageT>::
 Grid(packing_const_reference layout, storage_pointer data) :
-    _data { data },
-    _layout { layout }
+    _layout { layout },
+    _data { data }
 {}
 
 
@@ -84,6 +84,16 @@ end() const
 {
     // delegate to my layout
     return _layout.end();
+}
+
+
+template <class packingT, class storageT>
+constexpr auto
+pyre::grid::Grid<packingT, storageT>::
+box(index_const_reference base, shape_const_reference shape) const
+{
+    // delegate to my layout
+    return _layout.box(base, shape);
 }
 
 

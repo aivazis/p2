@@ -47,8 +47,12 @@ public:
 
     // interface: iteration support
 public:
+    // whole grid iteration: generate a sequence of indices that cover the entire grid in its
+    // native packing order
     constexpr auto begin() const;
     constexpr auto end() const;
+    // iterate over a portion of the grid
+    constexpr auto box(index_const_reference, shape_const_reference) const;
 
     // slicing: create subgrids of a given shape anchored at the given index; rank reduction is
     // achieved by zeroing out the ranks to be skipped in the shape specification
@@ -58,8 +62,8 @@ public:
 
     // implementation details: data
 private:
-    storage_pointer _data;
     const packing_type _layout;
+    const storage_pointer _data;
 
     // default metamethods
 public:
