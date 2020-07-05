@@ -94,8 +94,11 @@ public:
 
     // iteration support: iterators generate sequences of indices
 public:
+    // whole layout iterators
     constexpr auto begin() const -> index_iterator;
     constexpr auto end() const -> index_iterator;
+    // iteration over a portion
+    constexpr auto box(index_const_reference, shape_const_reference) const -> canonical_type;
 
     // static interface
 public:

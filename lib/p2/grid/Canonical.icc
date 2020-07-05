@@ -329,6 +329,23 @@ end() const -> index_iterator
 }
 
 
+template <pyre::grid::size_t N, template <typename, size_t> class containerT>
+constexpr auto
+pyre::grid::Canonical<N, containerT>::
+box(index_const_reference base, shape_const_reference shape) const -> canonical_type
+{
+    // make a layout
+    canonical_type box {
+                        // using the supplied shape information
+                        shape, base,
+                        // but leaving the packing order and the offset calculation as is
+                        _order, _strides, _nudge };
+    // and return it
+    return box;
+
+}
+
+
 // static interface
 template <pyre::grid::size_t N, template <typename, size_t> class containerT>
 constexpr auto
