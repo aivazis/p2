@@ -92,7 +92,7 @@ template <class packingT, class storageT>
 template <size_t sliceRank>
 constexpr auto
 pyre::grid::Grid<packingT, storageT>::
-slice(shape_const_reference shape, index_const_reference base)
+slice(index_const_reference base, shape_const_reference shape)
 {
     // get the layout of the slice
     auto sliceLayout = _layout.template slice<sliceRank>(shape, base);
