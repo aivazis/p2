@@ -13,7 +13,7 @@
 template <pyre::grid::size_t N, template <typename, size_t> class containerT>
 constexpr
 pyre::grid::Canonical<N, containerT>::
-Canonical(const shape_type & shape, const index_type & origin, const order_type & order) :
+Canonical(shape_const_reference shape, index_const_reference origin, order_const_reference order) :
     _shape { shape },
     _order { order },
     _origin { origin },
@@ -25,8 +25,8 @@ Canonical(const shape_type & shape, const index_type & origin, const order_type 
 template <pyre::grid::size_t N, template <typename, size_t> class containerT>
 constexpr
 pyre::grid::Canonical<N, containerT>::
-Canonical(const shape_type & shape, const index_type & origin, const order_type & order,
-          const strides_type & strides, difference_type nudge ) :
+Canonical(shape_const_reference shape, index_const_reference origin, order_const_reference order,
+          strides_const_reference strides, difference_type nudge ) :
     _shape { shape },
     _order { order },
     _origin { origin },
@@ -102,7 +102,7 @@ capacity() const -> size_type
 template <pyre::grid::size_t N, template <typename, size_t> class containerT>
 constexpr auto
 pyre::grid::Canonical<N, containerT>::
-order(const order_type & order) const -> canonical_type
+order(order_const_reference order) const -> canonical_type
 {
     // make a new packing using my info and the supplied {order}
     canonical_type reordered { _shape, _origin, order };
@@ -141,7 +141,7 @@ index(difference_type offset) const -> index_type
 template <pyre::grid::size_t N, template <typename, size_t> class containerT>
 constexpr auto
 pyre::grid::Canonical<N, containerT>::
-offset(const index_type & index) const -> difference_type
+offset(index_const_reference index) const -> difference_type
 {
     // the initial value; here so we can be explicit about the return type
     difference_type zero = 0;
@@ -166,7 +166,7 @@ operator[](difference_type offset) const -> index_type
 template <pyre::grid::size_t N, template <typename, size_t> class containerT>
 constexpr auto
 pyre::grid::Canonical<N, containerT>::
-operator[](const index_type & index) const -> difference_type
+operator[](index_const_reference index) const -> difference_type
 {
     // easy enough
     return offset(index);
@@ -179,7 +179,7 @@ template <pyre::grid::size_t N, template <typename, size_t> class containerT>
 template <pyre::grid::size_t... args>
 constexpr auto
 pyre::grid::Canonical<N, containerT>::
-cslice(const index_type & base) const
+cslice(index_const_reference base) const
 {
     // count the non-zero entries in the shape specification to figure out the dimensionality
     // of the slice
@@ -248,7 +248,7 @@ template <pyre::grid::size_t N, template <typename, size_t> class containerT>
 template <pyre::grid::size_t sliceRank>
 constexpr auto
 pyre::grid::Canonical<N, containerT>::
-slice(const shape_type & rawShape, const index_type & base) const
+slice(index_const_reference base, shape_const_reference rawShape) const
 {
     // make an alias for the slice packing
     using slice_t = canonical_t<sliceRank, containerT>;
@@ -342,8 +342,8 @@ pyre::grid::Canonical<N, containerT>::rank() -> size_type
 // static helpers
 template <pyre::grid::size_t N, template <typename, size_t> class containerT>
 constexpr auto
-pyre::grid::Canonical<N, containerT>::strides(const shape_type & shape,
-                                  const order_type & order) -> strides_type
+pyre::grid::Canonical<N, containerT>::strides(shape_const_reference shape,
+                                              order_const_reference order) -> strides_type
 {
     // make an empty shape to store the answer
     strides_type strides;
@@ -362,8 +362,8 @@ pyre::grid::Canonical<N, containerT>::strides(const shape_type & shape,
 
 template <pyre::grid::size_t N, template <typename, size_t> class containerT>
 constexpr auto
-pyre::grid::Canonical<N, containerT>::project(const index_type & index,
-                                  const strides_type & strides) -> difference_type
+pyre::grid::Canonical<N, containerT>::project(index_const_reference index,
+                                              strides_const_reference strides) -> difference_type
 {
     // the initial value; here so we can be explicit about the return type
     difference_type init = 0;

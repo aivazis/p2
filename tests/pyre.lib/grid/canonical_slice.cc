@@ -45,7 +45,7 @@ int main(int argc, char * argv[]) {
     // find a spot
     canonical_t::index_type spot {1,2,4,5,6,7};
     // extract a slice
-    auto slice = packing.slice<2>(sliceShape, spot);
+    auto slice = packing.slice<2>(spot, sliceShape);
     // show me
     channel
         << "slice:" << pyre::journal::newline

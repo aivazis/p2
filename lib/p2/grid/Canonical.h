@@ -24,12 +24,16 @@ public:
     // my parts
     // rank order
     using order_type = Order<containerT<size_type, N>>;
+    using order_const_reference = const order_type &;
     // rank specifications
     using shape_type = Shape<containerT<size_type, N>>;
+    using shape_const_reference = const shape_type &;
     // indices
     using index_type = Index<containerT<int, N>>;
+    using index_const_reference = const index_type &;
     // strides are like shapes with a wide type so overflow is less likely
     using strides_type = Shape<containerT<size_type, N>>;
+    using strides_const_reference = const strides_type &;
     // offsets
     using difference_type = typename index_type::difference_type;
     // iterators
@@ -39,15 +43,15 @@ public:
 public:
     // constructor that deduces {_strides} and {_nudge}
     constexpr explicit
-    Canonical(const shape_type & shape,
-              const index_type & origin = index_type::zero(),
-              const order_type & order = order_type::c());
+    Canonical(shape_const_reference shape,
+              index_const_reference origin = index_type::zero(),
+              order_const_reference order = order_type::c());
     // constructor that requires a detailed description of the packing; useful for making slices
     constexpr
-    Canonical(const shape_type & shape,
-              const index_type & origin,
-              const order_type & order,
-              const strides_type & strides,
+    Canonical(shape_const_reference shape,
+              index_const_reference origin,
+              order_const_reference order,
+              strides_const_reference strides,
               difference_type nudge);
 
     // interface
@@ -66,27 +70,27 @@ public:
 
     // mutators: {canonical_type} instances are {const}, so mutators create new instances
 public:
-    constexpr auto order(const order_type &) const -> canonical_type;
+    constexpr auto order(order_const_reference) const -> canonical_type;
 
     // the packing isomorphism
 public:
     // from a given offset to the matching index
     constexpr auto index(difference_type) const -> index_type;
     // from an index to its offset from the beginning of the array
-    constexpr auto offset(const index_type &) const -> difference_type;
+    constexpr auto offset(index_const_reference) const -> difference_type;
 
     // syntactic sugar for the above
     constexpr auto operator[](difference_type) const -> index_type;
-    constexpr auto operator[](const index_type &) const -> difference_type;
+    constexpr auto operator[](index_const_reference) const -> difference_type;
 
     // slicing
 public:
     // when the shape is known at compile time
     template <size_t... shape>
-    constexpr auto cslice(const index_type & base) const;
+    constexpr auto cslice(index_const_reference base) const;
     // when only the rank of the slice is known at compile time
     template <size_t sliceRank = N>
-    constexpr auto slice(const shape_type & shape, const index_type & base) const;
+    constexpr auto slice(index_const_reference base, shape_const_reference shape) const;
 
     // iteration support: iterators generate sequences of indices
 public:
@@ -100,10 +104,11 @@ public:
     // implementation details: static helpers
 protected:
     // given a {shape} and an {order}, infer the axis strides assuming tight packing
-    static constexpr auto strides(const shape_type &, const order_type &) -> strides_type;
+    static constexpr auto strides(shape_const_reference, order_const_reference) -> strides_type;
     // given the packing {strides}, project an {index} to an offset such that the {zero} index
     // maps to offset 0
-    static constexpr auto project(const index_type &, const strides_type &) -> difference_type;
+    static constexpr auto project(index_const_reference, strides_const_reference)
+        -> difference_type;
 
     // implementation details: data
 private:
