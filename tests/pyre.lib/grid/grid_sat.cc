@@ -14,7 +14,7 @@
 int main(int argc, char * argv[]) {
     // initialize the journal
     pyre::journal::init(argc, argv);
-    pyre::journal::application("grid_heap_sanity");
+    pyre::journal::application("grid_sat");
     // make a channel
     pyre::journal::debug_t channel("pyre.grid.heap");
 

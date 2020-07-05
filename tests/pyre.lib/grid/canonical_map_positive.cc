@@ -19,7 +19,7 @@ using canonical_t = pyre::grid::canonical_t<3>;
 int main(int argc, char * argv[]) {
     // initialize the journal
     pyre::journal::init(argc, argv);
-    pyre::journal::application("canonical_map_origin");
+    pyre::journal::application("canonical_map_positive");
     // make a channel
     pyre::journal::debug_t channel("pyre.grid.canonical");
 

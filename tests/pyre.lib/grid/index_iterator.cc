@@ -18,7 +18,7 @@ using idx_t = pyre::grid::index_t<4>;
 int main(int argc, char * argv[]) {
     // initialize the journal
     pyre::journal::init(argc, argv);
-    pyre::journal::application("index_fill");
+    pyre::journal::application("index_iterator");
     // make a channel
     pyre::journal::debug_t channel("pyre.grid.index");
 
