@@ -12,11 +12,12 @@
 
 // metamethods
 template <class packingT, class storageT>
+template <typename... Args>
 constexpr
 pyre::grid::Grid<packingT, storageT>::
-Grid(packing_const_reference layout, storage_pointer data) :
+Grid(packing_const_reference layout, Args&&... args) :
     _layout { layout },
-    _data { data }
+    _data { std::make_shared<storageT>(std::forward<Args>(args)...) }
 {}
 
 

@@ -33,7 +33,8 @@ public:
 
     // metamethods
 public:
-    constexpr Grid(packing_const_reference, storage_pointer);
+    template <typename... Args>
+    constexpr Grid(packing_const_reference, Args&&...);
 
     // accessors
 public:

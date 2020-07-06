@@ -27,10 +27,8 @@ int main(int argc, char * argv[]) {
 
     // packing: 1024x1024x8
     pack_t packing { {1024,1024, 8} };
-    // whose capacity is
-    auto cells = packing.capacity();
     // instantiate the grid
-    grid_t grid { packing, std::make_shared<storage_t>("grid_mmap.data", cells) };
+    grid_t grid { packing, "grid_mmap.data", packing.capacity() };
 
     // go through it in packing order
     for (const auto & idx : grid) {
