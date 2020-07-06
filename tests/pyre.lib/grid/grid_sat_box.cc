@@ -30,10 +30,8 @@ int main(int argc, char * argv[]) {
     constexpr pack_t::shape_type shape { 2, 3 };
     // packing: 1024x1024
     pack_t packing { shape };
-    // whose capacity is
-    auto cells = packing.capacity();
     // instantiate the grid
-    grid_t grid { packing, std::make_shared<storage_t>(cells) };
+    grid_t grid { packing, packing.capacity() };
     // pick a value
     double value = 1;
     // fill it
@@ -43,7 +41,7 @@ int main(int argc, char * argv[]) {
     }
 
     // make the sum area table
-    grid_t sat { packing, std::make_shared<storage_t>(cells) };
+    grid_t sat { packing, packing.capacity() };
 
     // fill the top corner
     sat[{0,0}] = grid[{0,0}];
