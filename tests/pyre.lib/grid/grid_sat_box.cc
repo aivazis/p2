@@ -35,7 +35,7 @@ int main(int argc, char * argv[]) {
     // pick a value
     double value = 1;
     // fill it
-    for (const auto & idx : grid) {
+    for (const auto & idx : grid.layout()) {
         // with our chosen value
         grid[idx] = value;
     }
@@ -90,7 +90,7 @@ int main(int argc, char * argv[]) {
     channel << pyre::journal::endl;
 
     // verify
-    for (const auto & idx : sat) {
+    for (const auto & idx : sat.layout()) {
         // the expected value
         double expected = (idx[0]+1) * (idx[1]+1) * value;
         // show me

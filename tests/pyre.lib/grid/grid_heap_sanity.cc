@@ -31,7 +31,7 @@ int main(int argc, char * argv[]) {
     grid_t grid { packing, packing.capacity() };
 
     // fill it
-    for (const auto & idx : grid) {
+    for (const auto & idx : grid.layout()) {
         // with the offset of each index
         grid[idx] = grid.layout()[idx];
     }
@@ -42,7 +42,7 @@ int main(int argc, char * argv[]) {
         << pyre::journal::endl(__HERE__);
 
     // verify
-    for (const auto & idx : grid) {
+    for (const auto & idx : grid.layout()) {
         // that we have what we expect
         assert(( grid[idx] == grid.layout()[idx] ));
     }

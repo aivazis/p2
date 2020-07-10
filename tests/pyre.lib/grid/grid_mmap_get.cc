@@ -36,7 +36,7 @@ int main(int argc, char * argv[]) {
         << pyre::journal::endl(__HERE__);
 
     // go through it in packing order
-    for (const auto & idx : grid) {
+    for (const auto & idx : grid.layout()) {
         // and verify
         assert(( grid[idx] == grid.layout()[idx] ));
     }

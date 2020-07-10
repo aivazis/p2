@@ -31,7 +31,7 @@ int main(int argc, char * argv[]) {
     grid_t grid { packing, "grid_mmap.data", packing.capacity() };
 
     // go through it in packing order
-    for (const auto & idx : grid) {
+    for (const auto & idx : grid.layout()) {
         // and store the current offset as the grid value
         grid[idx] = grid.layout()[idx];
     }
