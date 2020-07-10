@@ -10,7 +10,7 @@
 
 // an iterator that enables visiting product ranks in a specific order
 template <class productT, class orderIteratorT, bool isConst>
-class pyre::grid::OrderIterator : public base_order_iterator<productT, isConst> {
+class pyre::grid::OrderIterator : public iterator_base<productT, isConst> {
     // types
 public:
     // aliases for my template parameters
