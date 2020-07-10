@@ -5,7 +5,7 @@
 
 
 // support
-#include <p2/memory.h>
+#include <cassert>
 // get the grid
 #include <p2/grid.h>
 
@@ -98,7 +98,7 @@ int main(int argc, char * argv[]) {
             << "sat[" << idx << "] = " << sat[idx] << ", expected: " << expected
             << pyre::journal::newline;
         // compare
-        // assert(( sat[idx] == expected ));
+        assert(( sat[idx] == expected ));
     }
     // flush
     channel << pyre::journal::endl;

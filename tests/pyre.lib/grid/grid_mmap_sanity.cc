@@ -5,7 +5,7 @@
 
 
 // support
-#include <p2/memory.h>
+#include <cassert>
 // get the grid
 #include <p2/grid.h>
 

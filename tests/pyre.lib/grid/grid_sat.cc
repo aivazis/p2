@@ -5,7 +5,7 @@
 
 
 // support
-#include <p2/memory.h>
+#include <cassert>
 // get the grid
 #include <p2/grid.h>
 
@@ -45,18 +45,18 @@ int main(int argc, char * argv[]) {
     // fill the top corner
     sat[{0,0}] = grid[{0,0}];
     // fill the top row
-    for (auto col=1; col < shape[1]; ++col) {
+    for (auto col=1u; col < shape[1]; ++col) {
         // just skip the terms that would cause out of bounds accesses
         sat[{0,col}] = grid[{0,col}] + sat[{0,col-1}];
     }
     // fill the left column
-    for (auto row=1; row < shape[0]; ++row) {
+    for (auto row=1u; row < shape[0]; ++row) {
         // just skip the terms that would cause out of bounds accesses
         sat[{row,0}] = grid[{row,0}] + sat[{row-1,0}];
     }
     // fill the rest of the table
-    for (auto row=1; row < shape[0]; ++row) {
-        for (auto col=1; col < shape[1]; ++col) {
+    for (auto row=1u; row < shape[0]; ++row) {
+        for (auto col=1u; col < shape[1]; ++col) {
             // this is the general form
             sat[{row,col}] =
                 grid[{row,col}] + sat[{row-1,col}] + sat[{row,col-1}] - sat[{row-1,col-1}];
