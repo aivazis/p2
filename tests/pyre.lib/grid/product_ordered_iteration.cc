@@ -34,7 +34,7 @@ int main(int argc, char * argv[])
         << pyre::journal::endl(__HERE__);
 
     // make a counter
-    int i = 0;
+    product_t::value_type i = 0;
     // sign in
     channel << "product in ascending order: ";
     // now, in sorted order
