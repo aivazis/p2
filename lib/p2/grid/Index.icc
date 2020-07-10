@@ -49,45 +49,6 @@ zero() -> index_type
 }
 
 
-// index algebra
-template <class containerT>
-constexpr auto
-pyre::grid::
-operator+ (const Index<containerT> & i1, const Index<containerT> & i2) -> Index<containerT>
-{
-    // make a default index
-    Index<containerT> sum;
-
-    // go through each axis
-    for (size_t axis = 0; axis < sum.rank(); ++axis) {
-        // do the math
-        sum[axis] = i1[axis] + i2[axis];
-    }
-
-    // all done
-    return sum;
-}
-
-
-template <class containerT>
-constexpr auto
-pyre::grid::
-operator- (const Index<containerT> & i1, const Index<containerT> & i2) -> Index<containerT>
-{
-    // make a default index
-    Index<containerT> diff;
-
-    // go through each axis
-    for (size_t axis = 0; axis < diff.rank(); ++axis) {
-        // do the math
-        diff[axis] = i1[axis] - i2[axis];
-    }
-
-    // all done
-    return diff;
-}
-
-
 // add a shape to an index
 template <class indexContainerT, class shapeContainerT>
 constexpr auto

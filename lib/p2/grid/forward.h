@@ -78,6 +78,19 @@ namespace pyre::grid {
     template <class containerT>
     inline auto
     operator<<(ostream_reference, const Rep<containerT> &) -> ostream_reference;
+
+    // arithmetic
+    // addition
+    template <class containerT>
+    constexpr auto
+    operator+ (const Rep<containerT> &, const Rep<containerT> &)
+        -> Rep<containerT>;
+
+    // subtraction
+    template <class containerT>
+    constexpr auto
+    operator- (const Rep<containerT> &, const Rep<containerT> &)
+        -> Rep<containerT>;
 }
 
 
@@ -111,18 +124,6 @@ namespace pyre::grid {
 
 // index algebra
 namespace pyre::grid {
-    // addition
-    template <class containerT>
-    constexpr auto
-    operator+ (const Index<containerT> &, const Index<containerT> &)
-        -> Index<containerT>;
-
-    // subtraction
-    template <class containerT>
-    constexpr auto
-    operator- (const Index<containerT> &, const Index<containerT> &)
-        -> Index<containerT>;
-
     // add a {shape} to an {index}
     template <class indexContainerT, class shapeContainerT>
     constexpr auto

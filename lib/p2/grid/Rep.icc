@@ -296,6 +296,45 @@ operator<< (ostream_reference stream, const Rep<containerT> & rep) -> ostream_re
 }
 
 
+// arithmetic
+template <class containerT>
+constexpr auto
+pyre::grid::
+operator+ (const Rep<containerT> & i1, const Rep<containerT> & i2) -> Rep<containerT>
+{
+    // make a default index
+    Rep<containerT> sum;
+
+    // go through each axis
+    for (size_t axis = 0; axis < sum.rank(); ++axis) {
+        // do the math
+        sum[axis] = i1[axis] + i2[axis];
+    }
+
+    // all done
+    return sum;
+}
+
+
+template <class containerT>
+constexpr auto
+pyre::grid::
+operator- (const Rep<containerT> & i1, const Rep<containerT> & i2) -> Rep<containerT>
+{
+    // make a default index
+    Rep<containerT> diff;
+
+    // go through each axis
+    for (size_t axis = 0; axis < diff.rank(); ++axis) {
+        // do the math
+        diff[axis] = i1[axis] - i2[axis];
+    }
+
+    // all done
+    return diff;
+}
+
+
 #endif
 
 // end of file
