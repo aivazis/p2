@@ -25,9 +25,7 @@ int main(int argc, char * argv[]) {
     // make up a value
     rep_t::value_type v = 42;
     // make a rep
-    rep_t rep {};
-    // fill it with a value
-    rep.fill(v);
+    rep_t rep = rep_t::fill(v);
 
     // check that every entry
     for (auto rank : rep) {

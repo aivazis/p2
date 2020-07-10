@@ -51,9 +51,6 @@ public:
     constexpr auto operator[](size_type) -> reference;
     constexpr auto operator[](size_type) const -> const_reference;
 
-    // fill with a specific value
-    constexpr void fill(const_reference);
-
     // iteration
 public:
     // forward
@@ -74,8 +71,14 @@ public:
 
     // static interface
 public:
+    // my rank is the number of indices i can store
     static constexpr auto rank() -> size_type;
+    // make a rep filled with zeroes
     static constexpr auto zero() -> rep_type;
+    // a rep filled with ones
+    static constexpr auto one() -> rep_type;
+    // and a rep filled with some specific value
+    static constexpr auto fill(const_reference) -> rep_type;
 
     // default metamethods
 public:

@@ -62,19 +62,6 @@ operator[](size_type pos) const -> const_reference
 }
 
 
-// fill with a spcific value
-template <class containerT>
-constexpr void
-pyre::grid::Rep<containerT>::
-fill(const_reference value)
-{
-    // delegate to my rep
-    _rep.fill(value);
-    // all done
-    return;
-}
-
-
 // iteration
 template <class containerT>
 constexpr auto
@@ -218,6 +205,36 @@ zero() -> rep_type
 {
     // make one with an empty initializer; the language guarantees zero initialization
     return rep_type {};
+}
+
+
+// make a rep and fill it with ones
+template <class containerT>
+constexpr auto
+pyre::grid::Rep<containerT>::
+one() -> rep_type
+{
+    // make one
+    rep_type rep {};
+    // fill it
+    std::fill(rep.begin(), rep.end(), 1);
+    // and return it
+    return rep;
+}
+
+
+// fill with a spcific value
+template <class containerT>
+constexpr auto
+pyre::grid::Rep<containerT>::
+fill(const_reference value) -> rep_type
+{
+    // make one
+    rep_type rep {};
+    // fill it
+    std::fill(rep.begin(), rep.end(), value);
+    // and return it
+    return rep;
 }
 
 
