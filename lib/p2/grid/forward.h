@@ -91,6 +91,22 @@ namespace pyre::grid {
     constexpr auto
     operator- (const Rep<containerT> &, const Rep<containerT> &)
         -> Rep<containerT>;
+
+    // scaling by integers
+    template <class containerT>
+    constexpr auto
+    operator* (int, const Rep<containerT> &)
+        -> Rep<containerT>;
+
+    template <class containerT>
+    constexpr auto
+    operator* (const Rep<containerT> &, int)
+        -> Rep<containerT>;
+
+    template <class containerT>
+    constexpr auto
+    operator/ (const Rep<containerT> &, int)
+        -> Rep<containerT>;
 }
 
 
