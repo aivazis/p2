@@ -38,8 +38,11 @@ public:
 
     // iterator protocol
 public:
+    // dereference
     constexpr auto operator*() const -> index_reference;
+    // arithmetic
     constexpr auto operator++() -> iterator_reference;
+    constexpr auto operator++(int) -> iterator;
 
     // implementation details: data
 private:

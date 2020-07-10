@@ -21,6 +21,7 @@ OrderIterator(product_reference product, order_const_iterator_reference order) :
 
 
 // the iterator protocol
+// dereference
 template <class productT, class orderIteratorT, bool isConst>
 constexpr auto
 pyre::grid::OrderIterator<productT, orderIteratorT, isConst>::
@@ -31,6 +32,7 @@ operator*() const -> value_reference
 }
 
 
+// arithmetic: prefix
 template <class productT, class orderIteratorT, bool isConst>
 constexpr auto
 pyre::grid::OrderIterator<productT, orderIteratorT, isConst>::
@@ -40,6 +42,21 @@ operator++() -> iterator_reference
     ++_order;
     // all done
     return *this;
+}
+
+
+// arithmetic: postfix
+template <class productT, class orderIteratorT, bool isConst>
+constexpr auto
+pyre::grid::OrderIterator<productT, orderIteratorT, isConst>::
+operator++(int) -> iterator
+{
+    // clone me
+    auto clone = *this;
+    // increment me
+    ++(*this);
+    // and return the clone
+    return clone;
 }
 
 

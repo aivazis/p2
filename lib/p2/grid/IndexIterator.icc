@@ -22,6 +22,7 @@ IndexIterator(const shape_type & shape, const order_type & order, const index_ty
 
 
 // the iterator protocol
+// dereference
 template <class packingT>
 constexpr auto
 pyre::grid::IndexIterator<packingT>::
@@ -32,6 +33,7 @@ operator*() const -> index_reference
 }
 
 
+// arithmetic: prefix
 template <class packingT>
 constexpr auto
 pyre::grid::IndexIterator<packingT>::
@@ -55,6 +57,21 @@ operator++() -> iterator_reference
     _current = _origin + _shape;
     // all done
     return *this;
+}
+
+
+// arithmetic: postfix
+template <class packingT>
+constexpr auto
+pyre::grid::IndexIterator<packingT>::
+operator++(int) -> iterator
+{
+    // make a copy of me
+    auto clone = *this;
+    // increment me
+    ++(*this);
+    // and return the clone
+    return clone;
 }
 
 

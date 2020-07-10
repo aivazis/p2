@@ -32,8 +32,11 @@ public:
 
     // iterator protocol
 public:
+    // dereference
     constexpr auto operator*() const -> value_reference;
+    // arithmetic
     constexpr auto operator++() -> iterator_reference;
+    constexpr auto operator++(int) -> iterator;
 
     // accessors: needed for the implementation of {operator==}
 public:
