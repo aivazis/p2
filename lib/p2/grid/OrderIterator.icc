@@ -87,7 +87,7 @@ operator==(const OrderIterator<productT, orderIteratorT, isConst> & it1,
            const OrderIterator<productT, orderIteratorT, isConst> & it2) -> bool
 {
     // iterators are equal if they have the same order and product
-    return it1.order() == it2.order() && it1.product() == it2.product();
+    return it1.order() == it2.order() && &it1.product() == &it2.product();
 }
 
 
