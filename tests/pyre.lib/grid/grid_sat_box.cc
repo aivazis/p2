@@ -14,9 +14,9 @@
 int main(int argc, char * argv[]) {
     // initialize the journal
     pyre::journal::init(argc, argv);
-    pyre::journal::application("grid_sat_slice");
+    pyre::journal::application("grid_sat_box");
     // make a channel
-    pyre::journal::debug_t channel("pyre.grid.heap");
+    pyre::journal::debug_t channel("pyre.grid.sat");
 
     // we'll work with a 3d conventionally packed grid
     using pack_t = pyre::grid::canonical_t<2>;
@@ -27,7 +27,7 @@ int main(int argc, char * argv[]) {
 
     // pick the shape
     // constexpr pack_t::shape_type shape { 1024, 1024 };
-    constexpr pack_t::shape_type shape { 2, 3 };
+    constexpr pack_t::shape_type shape { 3, 4 };
     // packing: 1024x1024
     pack_t packing { shape };
     // instantiate the grid
@@ -49,7 +49,7 @@ int main(int argc, char * argv[]) {
     channel << "-- origin" << pyre::journal::newline;
     channel << "sat[0, 0] <- " << sat[{0,0}] << pyre::journal::newline;
 
-    channel << "-- top row" << pyre::journal::newline;
+    channel << "-- top row without the origin" << pyre::journal::newline;
     // the top row minus the origin
     auto topRow = grid.layout().box( {0,1}, {1, shape[1]-1} );
     // fill the top row
@@ -60,7 +60,7 @@ int main(int argc, char * argv[]) {
         channel << "sat[" << idx << "] <- " << sat[idx] << pyre::journal::newline;
     }
 
-    channel << "-- left column" << pyre::journal::newline;
+    channel << "-- left column without the origin" << pyre::journal::newline;
     // the left column minus the origin
     auto leftCol = grid.layout().box( {1, 0}, {shape[0]-1, 1} );
     // fill the left column
@@ -85,7 +85,6 @@ int main(int argc, char * argv[]) {
         // show me
         channel << "sat[" << idx << "] <- " << sat[idx] << pyre::journal::newline;
     }
-    channel << "--" << pyre::journal::newline;
     // flush
     channel << pyre::journal::endl;
 

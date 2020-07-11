@@ -16,7 +16,7 @@ int main(int argc, char * argv[]) {
     pyre::journal::init(argc, argv);
     pyre::journal::application("grid_sat");
     // make a channel
-    pyre::journal::debug_t channel("pyre.grid.heap");
+    pyre::journal::debug_t channel("pyre.grid.sat");
 
     // we'll work with a 3d conventionally packed grid
     using pack_t = pyre::grid::canonical_t<2>;
