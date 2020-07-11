@@ -11,38 +11,38 @@
 
 
 // map over an existing data product
-template <typename cellT, bool checkBounds>
-pyre::memory::Map<cellT, checkBounds>::
+template <typename T, bool checkBounds>
+pyre::memory::Map<T, checkBounds>::
 Map(uri_type uri, writable_type writable) :
     FileMap(uri, writable)
 {}
 
 
 // create a new one
-template <typename cellT, bool checkBounds>
-pyre::memory::Map<cellT, checkBounds>::
+template <typename T, bool checkBounds>
+pyre::memory::Map<T, checkBounds>::
 Map(uri_type uri, size_type cells) :
     // scale up the number of cells to the number of bytes
-    FileMap(uri, cells * sizeof(cell_type))
+    FileMap(uri, cells * sizeof(value_type))
 {}
 
 
 // interface
 // compute the number of cells in the memory block
-template <typename cellT, bool checkBounds>
+template <typename T, bool checkBounds>
 auto
-pyre::memory::Map<cellT, checkBounds>::
+pyre::memory::Map<T, checkBounds>::
 cells() const
 {
     // convert using my size in bytes
-    return bytes() / sizeof(cell_type);
+    return bytes() / sizeof(value_type);
 }
 
 
 // access to the raw data pointer
-template <typename cellT, bool checkBounds>
+template <typename T, bool checkBounds>
 auto
-pyre::memory::Map<cellT, checkBounds>::
+pyre::memory::Map<T, checkBounds>::
 data() const
 {
     // cast my data pointer to a {pointer}
@@ -52,9 +52,9 @@ data() const
 
 // iterator support
 // iterator start
-template <typename cellT, bool checkBounds>
+template <typename T, bool checkBounds>
 auto
-pyre::memory::Map<cellT, checkBounds>::
+pyre::memory::Map<T, checkBounds>::
 begin() -> pointer
 {
     // return the beginning of the block
@@ -63,9 +63,9 @@ begin() -> pointer
 
 
 // iterator end
-template <typename cellT, bool checkBounds>
+template <typename T, bool checkBounds>
 auto
-pyre::memory::Map<cellT, checkBounds>::
+pyre::memory::Map<T, checkBounds>::
 end() -> pointer
 {
     // return one past the end of the block
@@ -74,9 +74,9 @@ end() -> pointer
 
 
 // array-like access
-template <typename cellT, bool checkBounds>
+template <typename T, bool checkBounds>
 auto
-pyre::memory::Map<cellT, checkBounds>::
+pyre::memory::Map<T, checkBounds>::
 operator [] (size_type pos) -> reference
 {
     // check the arguments
@@ -99,9 +99,9 @@ operator [] (size_type pos) -> reference
 }
 
 
-template <typename cellT, bool checkBounds>
+template <typename T, bool checkBounds>
 auto
-pyre::memory::Map<cellT, checkBounds>::
+pyre::memory::Map<T, checkBounds>::
 operator [] (size_type pos) const -> const_reference
 {
     // check the arguments

@@ -11,8 +11,8 @@
 
 
 // map over an existing data product
-template <typename cellT, bool checkBounds>
-pyre::memory::ConstMap<cellT, checkBounds>::
+template <typename T, bool checkBounds>
+pyre::memory::ConstMap<T, checkBounds>::
 ConstMap(uri_type uri) :
     FileMap(uri, false)
 {}
@@ -20,32 +20,32 @@ ConstMap(uri_type uri) :
 
 // interface
 // compute the number of cells in the memory block
-template <typename cellT, bool checkBounds>
+template <typename T, bool checkBounds>
 auto
-pyre::memory::ConstMap<cellT, checkBounds>::
+pyre::memory::ConstMap<T, checkBounds>::
 cells() const
 {
     // convert using my size in bytes
-    return bytes() / sizeof(cell_type);
+    return bytes() / sizeof(value_type);
 }
 
 
 // access to data pointer
-template <typename cellT, bool checkBounds>
+template <typename T, bool checkBounds>
 auto
-pyre::memory::ConstMap<cellT, checkBounds>::
+pyre::memory::ConstMap<T, checkBounds>::
 data() const
 {
-    // cast my data pointer to a {cellT *}
+    // cast my data pointer to a {T *}
     return static_cast<pointer>(FileMap::data());
 }
 
 
 // iterator support
 // iterator start
-template <typename cellT, bool checkBounds>
+template <typename T, bool checkBounds>
 auto
-pyre::memory::ConstMap<cellT, checkBounds>::
+pyre::memory::ConstMap<T, checkBounds>::
 begin() const -> const_pointer
 {
     // return the beginning of the block
@@ -54,9 +54,9 @@ begin() const -> const_pointer
 
 
 // iterator end
-template <typename cellT, bool checkBounds>
+template <typename T, bool checkBounds>
 auto
-pyre::memory::ConstMap<cellT, checkBounds>::
+pyre::memory::ConstMap<T, checkBounds>::
 end() const -> const_pointer
 {
     // return one past the end of the block
@@ -65,9 +65,9 @@ end() const -> const_pointer
 
 
 // array-like access
-template <typename cellT, bool checkBounds>
+template <typename T, bool checkBounds>
 auto
-pyre::memory::ConstMap<cellT, checkBounds>::
+pyre::memory::ConstMap<T, checkBounds>::
 operator [] (size_type pos) const -> const_reference
 {
     // check the arguments

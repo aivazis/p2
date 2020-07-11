@@ -11,8 +11,8 @@
 
 
 // metamethods
-template <class cellT, bool checkBounds>
-pyre::memory::ConstView<cellT, checkBounds>::
+template <class T, bool checkBounds>
+pyre::memory::ConstView<T, checkBounds>::
 ConstView(pointer data, cell_count_type cells) :
     _data{ data },
     _cells{ cells }
@@ -21,9 +21,9 @@ ConstView(pointer data, cell_count_type cells) :
 
 // interface
 // get the number of cells in the block
-template <class cellT, bool checkBounds>
+template <class T, bool checkBounds>
 auto
-pyre::memory::ConstView<cellT, checkBounds>::
+pyre::memory::ConstView<T, checkBounds>::
 cells() const
 {
     // easy
@@ -32,20 +32,20 @@ cells() const
 
 
 // get the memory footprint of the block
-template <class cellT, bool checkBounds>
+template <class T, bool checkBounds>
 auto
-pyre::memory::ConstView<cellT, checkBounds>::
+pyre::memory::ConstView<T, checkBounds>::
 bytes() const
 {
     // scale the number of cells by the cell size
-    return cells() * sizeof(cell_type);
+    return cells() * sizeof(value_type);
 }
 
 
 // access to the data pointer
-template <class cellT, bool checkBounds>
+template <class T, bool checkBounds>
 auto
-pyre::memory::ConstView<cellT, checkBounds>::
+pyre::memory::ConstView<T, checkBounds>::
 data() const
 {
     // return the raw data pointer
@@ -54,9 +54,9 @@ data() const
 
 
 // iterator support
-template <class cellT, bool checkBounds>
+template <class T, bool checkBounds>
 auto
-pyre::memory::ConstView<cellT, checkBounds>::
+pyre::memory::ConstView<T, checkBounds>::
 begin() const -> pointer
 {
     // the beginning of the block
@@ -64,9 +64,9 @@ begin() const -> pointer
 }
 
 
-template <class cellT, bool checkBounds>
+template <class T, bool checkBounds>
 auto
-pyre::memory::ConstView<cellT, checkBounds>::
+pyre::memory::ConstView<T, checkBounds>::
 end() const -> pointer
 {
     // one past the last cell in the block
@@ -75,9 +75,9 @@ end() const -> pointer
 
 
 // data access
-template <class cellT, bool checkBounds>
+template <class T, bool checkBounds>
 auto
-pyre::memory::ConstView<cellT, checkBounds>::
+pyre::memory::ConstView<T, checkBounds>::
 operator [] (size_type pos) const -> const_reference
 {
     // if we checking bounds

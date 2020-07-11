@@ -19,7 +19,7 @@ public:
     using storage_pointer = std::shared_ptr<storage_type>;
     using packing_const_reference = const packing_type &;
     // my value
-    using value_type = typename storage_type::cell_type;
+    using value_type = typename storage_type::value_type;
     using reference = typename storage_type::reference;
     using const_reference = typename storage_type::const_reference;
     // my shape

@@ -26,7 +26,7 @@ int main(int argc, char * argv[]) {
     // check the capacity of the block
     assert (product.cells() == 1024);
     // and the memory footprint in bytes
-    assert (product.bytes() == product.cells() * sizeof(map_t::cell_type));
+    assert (product.bytes() == product.cells() * sizeof(map_t::value_type));
 
     // go through the entire block
     for (auto & cell : product) {

@@ -9,17 +9,17 @@
 
 
 // a file-backed block of cells
-template <class cellT, bool checkBounds>
+template <class T, bool checkBounds>
 class pyre::memory::ConstMap : public FileMap {
     // types
 public:
     // my cell
-    using cell_type = cellT;
+    using value_type = T;
     // derived types
-    using pointer = const cell_type *;
-    using reference = const cell_type &;
-    using const_pointer = const cell_type *;
-    using const_reference = const cell_type &;
+    using pointer = const value_type *;
+    using reference = const value_type &;
+    using const_pointer = const value_type *;
+    using const_reference = const value_type &;
 
     // metamethods
 public:

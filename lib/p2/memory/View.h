@@ -9,17 +9,17 @@
 
 
 // a block of cells whose memory belongs to someone else
-template <class cellT, bool checkBounds>
+template <class T, bool checkBounds>
 class pyre::memory::View {
     // types
 public:
     // my cell
-    using cell_type = cellT;
+    using value_type = T;
     // derived types
-    using pointer = cell_type *;
-    using reference = cell_type &;
-    using const_pointer = const cell_type *;
-    using const_reference = const cell_type &;
+    using pointer = value_type *;
+    using reference = value_type &;
+    using const_pointer = const value_type *;
+    using const_reference = const value_type &;
 
     // sizes of things
     using size_type = size_t;
