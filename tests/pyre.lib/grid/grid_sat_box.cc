@@ -51,7 +51,7 @@ int main(int argc, char * argv[]) {
 
     channel << "-- top row" << pyre::journal::newline;
     // the top row minus the origin
-    auto topRow = grid.box( {0,1}, {1, shape[1]-1} );
+    auto topRow = grid.layout().box( {0,1}, {1, shape[1]-1} );
     // fill the top row
     for (const auto & idx : topRow) {
         // place the value
@@ -62,7 +62,7 @@ int main(int argc, char * argv[]) {
 
     channel << "-- left column" << pyre::journal::newline;
     // the left column minus the origin
-    auto leftCol = grid.box( {1, 0}, {shape[0]-1, 1} );
+    auto leftCol = grid.layout().box( {1, 0}, {shape[0]-1, 1} );
     // fill the left column
     for (const auto & idx : leftCol) {
         // place the value
@@ -73,7 +73,7 @@ int main(int argc, char * argv[]) {
 
     channel << "-- body" << pyre::journal::newline;
     // the rest of the table
-    auto body = grid.box( {1,1}, {shape[0]-1, shape[1]-1} );
+    auto body = grid.layout().box( {1,1}, {shape[0]-1, shape[1]-1} );
     // fill it
     for (const auto & idx : body) {
         // compute
