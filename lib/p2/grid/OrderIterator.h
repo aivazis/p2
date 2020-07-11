@@ -19,12 +19,16 @@ public:
     // aliases for me
     using iterator = OrderIterator<product_type, order_const_iterator, isConst>;
     using iterator_reference = iterator &;
+    // my base class
+    using iterbase = iterator_base<product_type, isConst>;
     // my parts
-    using product_reference = std::conditional_t<isConst, const product_type &, product_type &>;
     using order_const_iterator_reference = const order_const_iterator &;
+    using product_reference = std::conditional_t<isConst, const product_type &, product_type &>;
+
     // what i point to
-    using value_type = typename product_type::value_type;
-    using value_reference = std::conditional_t<isConst, const value_type &, value_type &>;
+    using value_type = typename iterbase::value_type;
+    using pointer = typename iterbase::pointer;
+    using reference = typename iterbase::reference;
 
     // metamethods
 public:
@@ -33,7 +37,7 @@ public:
     // iterator protocol
 public:
     // dereference
-    constexpr auto operator*() const -> value_reference;
+    constexpr auto operator*() const -> reference;
     // arithmetic
     constexpr auto operator++() -> iterator_reference;
     constexpr auto operator++(int) -> iterator;

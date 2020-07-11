@@ -25,7 +25,7 @@ OrderIterator(product_reference product, order_const_iterator_reference order) :
 template <class productT, class orderIteratorT, bool isConst>
 constexpr auto
 pyre::grid::OrderIterator<productT, orderIteratorT, isConst>::
-operator*() const -> value_reference
+operator*() const -> reference
 {
     // ask {product} for the value of the rank pointed to by {oder}
     return _product[*_order];
