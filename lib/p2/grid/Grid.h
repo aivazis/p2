@@ -44,6 +44,10 @@ public:
 
     // metamethods
 public:
+    // constructor that makes a grid using the supplied packing and storage strategies
+    constexpr Grid(packing_const_reference, storage_pointer);
+
+    // constructor that forwards its extra arguments to the storage strategy
     template <typename... Args>
     constexpr Grid(packing_const_reference, Args&&...);
 
@@ -70,7 +74,7 @@ public:
     constexpr auto cend() const -> const_iterator;
 
     // iterate over a portion of the grid
-    constexpr auto box(index_const_reference, shape_const_reference) const -> packing_type;
+    constexpr auto box(index_const_reference, shape_const_reference) const -> grid_type;
 
     // slicing: create subgrids of a given shape anchored at the given index; rank reduction is
     // achieved by zeroing out the ranks to be skipped in the shape specification

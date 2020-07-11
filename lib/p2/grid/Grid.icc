@@ -11,6 +11,17 @@
 
 
 // metamethods
+// constructor that make a grid out of the given packing and storage strategies
+template <class packingT, class storageT>
+constexpr
+pyre::grid::Grid<packingT, storageT>::
+Grid(packing_const_reference layout, storage_pointer data) :
+    _layout { layout },
+    _data { data }
+{}
+
+
+// variadic constructor that forwards its extra arguments to the packing strategy
 template <class packingT, class storageT>
 template <typename... Args>
 constexpr
@@ -130,18 +141,15 @@ cend() const -> const_iterator
 }
 
 
-
-
-// index-based iteration
+// iteration over a portion of the grid
 template <class packingT, class storageT>
 constexpr auto
 pyre::grid::Grid<packingT, storageT>::
-box(index_const_reference base, shape_const_reference shape) const -> packing_type
+box(index_const_reference base, shape_const_reference shape) const -> grid_type
 {
-    // delegate to my layout
-    return _layout.box(base, shape);
+    // ask my layout to narrow the region and make a new grid over it
+    return grid_type(_layout.box(base, shape), _data);
 }
-
 
 // slicing
 template <class packingT, class storageT>
