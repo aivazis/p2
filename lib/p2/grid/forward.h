@@ -10,18 +10,18 @@
 
 // useful instantiations of STL entities
 namespace pyre::grid {
-    // the base class for {OrderIterator}
-    template <class containetT, bool isConst>
+    // polymorphic base class for building iterators
+    template <class containerT, bool isConst>
     using iterator_base =
         std::iterator<std::forward_iterator_tag,
-                     typename containetT::value_type,             // points to index ranks
-                     typename containetT::difference_type,        // distance among entries
-                     std::conditional<isConst,
-                                      typename containetT::const_pointer,
-                                      typename containetT::pointer>,
-                     std::conditional<isConst,
-                                      typename containetT::const_reference,
-                                      typename containetT::reference>
+                     typename containerT::value_type,             // points to index ranks
+                     typename containerT::difference_type,        // distance among entries
+                     std::conditional_t<isConst,
+                                      typename containerT::const_pointer,
+                                      typename containerT::pointer>,
+                     std::conditional_t<isConst,
+                                      typename containerT::const_reference,
+                                      typename containerT::reference>
                      >;
 
     // the base class for {IndexIterator}
