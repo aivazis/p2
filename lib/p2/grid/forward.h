@@ -59,6 +59,9 @@ namespace pyre::grid {
     // bringing it all together
     template <class packingT, class storageT>
     class Grid;
+    // and its iterator
+    template <class gridT, class indexIteratorT, bool isConst>
+    class GridIterator;
 }
 
 
@@ -135,6 +138,21 @@ namespace pyre::grid {
     template <class packingT>
     constexpr auto
     operator!=(const IndexIterator<packingT> &, const IndexIterator<packingT> &) -> bool;
+}
+
+
+// grid iterator operators
+namespace pyre::grid {
+    // equality
+    template <class gridT, class indexIteratorT, bool isConst>
+    constexpr auto
+    operator==(const GridIterator<gridT, indexIteratorT, isConst> &,
+               const GridIterator<gridT, indexIteratorT, isConst> &) -> bool;
+    // and not
+    template <class gridT, class indexIteratorT, bool isConst>
+    constexpr auto
+    operator!=(const GridIterator<gridT, indexIteratorT, isConst> &,
+               const GridIterator<gridT, indexIteratorT, isConst> &) -> bool;
 }
 
 

@@ -30,6 +30,7 @@
 #include "Canonical.h"
 // the grid
 #include "Grid.h"
+#include "GridIterator.h"
 
 
 #endif

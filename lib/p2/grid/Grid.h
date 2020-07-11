@@ -12,16 +12,25 @@ template <class packingT, class storageT>
 class pyre::grid::Grid {
     // types
 public:
-    // aliases my template parameters
+    // aliases for my template parameters
     using packing_type = packingT;
     using storage_type = storageT;
+
+    // me
+    using grid_type = Grid<packing_type, storage_type>;
+
+    // my value
+    using value_type = typename storage_type::value_type;
+    using pointer = typename storage_type::pointer;
+    using const_pointer = typename storage_type::const_pointer;
+    using reference = typename storage_type::reference;
+    using const_reference = typename storage_type::const_reference;
+    // distances
+    using difference_type = typename storage_type::difference_type;
+
     // my parts
     using storage_pointer = std::shared_ptr<storage_type>;
     using packing_const_reference = const packing_type &;
-    // my value
-    using value_type = typename storage_type::value_type;
-    using reference = typename storage_type::reference;
-    using const_reference = typename storage_type::const_reference;
     // my shape
     using shape_type = typename packing_type::shape_type;
     using shape_const_reference = const shape_type &;
@@ -29,7 +38,9 @@ public:
     using index_type = typename packing_type::index_type;
     using index_const_reference = const index_type &;
     // iterators
-    using iterator = typename packing_type::index_iterator;
+    using index_iterator = typename packing_type::index_iterator;
+    using iterator = GridIterator<grid_type, index_iterator, false>;
+    using const_iterator = GridIterator<grid_type, index_iterator, true>;
 
     // metamethods
 public:
@@ -48,12 +59,18 @@ public:
 
     // interface: iteration support
 public:
-    // whole grid iteration: generate a sequence of indices that cover the entire grid in its
-    // native packing order
-    constexpr auto begin() const;
-    constexpr auto end() const;
+    // whole grid iteration: visit every value in my native packing order
+    constexpr auto begin() -> iterator;
+    constexpr auto end() -> iterator;
+    // const
+    constexpr auto begin() const -> const_iterator;
+    constexpr auto end() const -> const_iterator;
+    // and again, for non-const grids
+    constexpr auto cbegin() const -> const_iterator;
+    constexpr auto cend() const -> const_iterator;
+
     // iterate over a portion of the grid
-    constexpr auto box(index_const_reference, shape_const_reference) const;
+    constexpr auto box(index_const_reference, shape_const_reference) const -> packing_type;
 
     // slicing: create subgrids of a given shape anchored at the given index; rank reduction is
     // achieved by zeroing out the ranks to be skipped in the shape specification

@@ -50,6 +50,9 @@ namespace pyre::grid
     // the grid
     template <class packingT, class storageT>
     using grid_t = Grid<packingT, storageT>;
+    // and its iterator
+    template <class gridT, class indexIteratorT, bool isConst>
+    using grid_iterator_t = GridIterator<gridT, indexIteratorT, isConst>;
 }
 
 

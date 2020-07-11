@@ -71,27 +71,72 @@ operator[](index_const_reference index) const -> const_reference
 template <class packingT, class storageT>
 constexpr auto
 pyre::grid::Grid<packingT, storageT>::
-begin() const
+begin() -> iterator
 {
-    // delegate to my layout
-    return _layout.begin();
+    // make an {iterator} that points to the beginning of my index space
+    return iterator(*this, _layout.begin());
 }
 
 
 template <class packingT, class storageT>
 constexpr auto
 pyre::grid::Grid<packingT, storageT>::
-end() const
+end() -> iterator
 {
-    // delegate to my layout
-    return _layout.end();
+    // make an {iterator} that points to the end of my index space
+    return iterator(*this, _layout.end());
+}
+
+
+// again, but const
+template <class packingT, class storageT>
+constexpr auto
+pyre::grid::Grid<packingT, storageT>::
+begin() const -> const_iterator
+{
+    // make a {const_iterator} that points to the beginning of my index space
+    return const_iterator(*this, _layout.begin());
 }
 
 
 template <class packingT, class storageT>
 constexpr auto
 pyre::grid::Grid<packingT, storageT>::
-box(index_const_reference base, shape_const_reference shape) const
+end() const -> const_iterator
+{
+    // make a {const_iterator} that points to the end of my index space
+    return const_iterator(*this, _layout.end());
+}
+
+
+// const iteration over non-const grids
+template <class packingT, class storageT>
+constexpr auto
+pyre::grid::Grid<packingT, storageT>::
+cbegin() const -> const_iterator
+{
+    // make a {const_iterator} that points to the beginning of my index space
+    return const_iterator(*this, _layout.begin());
+}
+
+
+template <class packingT, class storageT>
+constexpr auto
+pyre::grid::Grid<packingT, storageT>::
+cend() const -> const_iterator
+{
+    // make a {const_iterator} that points to the end of my index space
+    return const_iterator(*this, _layout.end());
+}
+
+
+
+
+// index-based iteration
+template <class packingT, class storageT>
+constexpr auto
+pyre::grid::Grid<packingT, storageT>::
+box(index_const_reference base, shape_const_reference shape) const -> packing_type
 {
     // delegate to my layout
     return _layout.box(base, shape);
