@@ -21,6 +21,9 @@ public:
     using const_pointer = const value_type *;
     using const_reference = const value_type &;
 
+    // distances
+    using difference_type = std::ptrdiff_t;
+
     // sizes of things
     using size_type = size_t;
     using cell_count_type = size_type;
