@@ -37,12 +37,12 @@ public:
     // interface
 public:
     // accessors
-    inline auto uri() const;
-    inline auto writable() const;
+    inline auto uri() const -> uri_type;
+    inline auto writable() const -> bool;
     // memory footprint
-    inline auto bytes() const;
+    inline auto bytes() const -> size_type;
     // raw access to the memory block
-    inline auto data() const;
+    inline auto data() const -> pointer;
 
     // syntactic sugar
     inline operator pointer () const;
@@ -67,9 +67,9 @@ private:
     // disallow
 private:
     FileMap(const FileMap &) = delete;
-    FileMap(const FileMap &&) = delete;
-    const FileMap & operator= (const FileMap &) = delete;
-    const FileMap & operator= (const FileMap &&) = delete;
+    FileMap(FileMap &&) = delete;
+    FileMap & operator= (const FileMap &) = delete;
+    FileMap & operator= (FileMap &&) = delete;
 };
 
 

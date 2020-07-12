@@ -83,37 +83,37 @@ FileMap(uri_type uri, size_type bytes) :
 // get the path to my data product
 auto
 pyre::memory::FileMap::
-uri() const
+uri() const -> uri_type
 {
     // easy enough
     return _uri;
 }
 
 
-// get the number of bytes of the memory block
-auto
-pyre::memory::FileMap::
-bytes() const
-{
-    // easy enough
-    return _bytes;
-}
-
-
 // check whether the block is writable
 auto
 pyre::memory::FileMap::
-writable() const
+writable() const -> bool
 {
     // easy enough
     return _writable;
 }
 
 
+// get the number of bytes of the memory block
+auto
+pyre::memory::FileMap::
+bytes() const -> size_type
+{
+    // easy enough
+    return _bytes;
+}
+
+
 // get the address of the block
 auto
 pyre::memory::FileMap::
-data() const
+data() const -> pointer
 {
     // easy enough
     return _data;
