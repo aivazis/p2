@@ -11,16 +11,16 @@
 
 
 // map over an existing data product
-template <typename T, bool checkBounds>
-pyre::memory::Map<T, checkBounds>::
+template <typename T>
+pyre::memory::Map<T>::
 Map(uri_type uri, writable_type writable) :
     FileMap(uri, writable)
 {}
 
 
 // create a new one
-template <typename T, bool checkBounds>
-pyre::memory::Map<T, checkBounds>::
+template <typename T>
+pyre::memory::Map<T>::
 Map(uri_type uri, size_type cells) :
     // scale up the number of cells to the number of bytes
     FileMap(uri, cells * sizeof(value_type))
@@ -29,9 +29,9 @@ Map(uri_type uri, size_type cells) :
 
 // interface
 // compute the number of cells in the memory block
-template <typename T, bool checkBounds>
+template <typename T>
 auto
-pyre::memory::Map<T, checkBounds>::
+pyre::memory::Map<T>::
 cells() const
 {
     // convert using my size in bytes
@@ -40,9 +40,9 @@ cells() const
 
 
 // access to the raw data pointer
-template <typename T, bool checkBounds>
+template <typename T>
 auto
-pyre::memory::Map<T, checkBounds>::
+pyre::memory::Map<T>::
 data() const
 {
     // cast my data pointer to a {pointer}
@@ -52,9 +52,9 @@ data() const
 
 // iterator support
 // iterator start
-template <typename T, bool checkBounds>
+template <typename T>
 auto
-pyre::memory::Map<T, checkBounds>::
+pyre::memory::Map<T>::
 begin() -> pointer
 {
     // return the beginning of the block
@@ -63,9 +63,9 @@ begin() -> pointer
 
 
 // iterator end
-template <typename T, bool checkBounds>
+template <typename T>
 auto
-pyre::memory::Map<T, checkBounds>::
+pyre::memory::Map<T>::
 end() -> pointer
 {
     // return one past the end of the block
@@ -74,13 +74,13 @@ end() -> pointer
 
 
 // array-like access
-template <typename T, bool checkBounds>
+template <typename T>
 auto
-pyre::memory::Map<T, checkBounds>::
-operator [] (size_type pos) -> reference
+pyre::memory::Map<T>::
+at(size_type pos) -> reference
 {
-    // check the arguments
-    if (checkBounds && pos >= cells()) {
+    // if the requestis out of bounds
+    if (pos >= cells()) {
         // make a channel
         pyre::journal::firewall_t channel("pyre.memory.bounds");
         // complain
@@ -99,13 +99,13 @@ operator [] (size_type pos) -> reference
 }
 
 
-template <typename T, bool checkBounds>
+template <typename T>
 auto
-pyre::memory::Map<T, checkBounds>::
-operator [] (size_type pos) const -> const_reference
+pyre::memory::Map<T>::
+at(size_type pos) const -> const_reference
 {
-    // check the arguments
-    if (checkBounds && pos >= cells()) {
+    // if the request is out of bounds
+    if (pos >= cells()) {
         // make a channel
         pyre::journal::firewall_t channel("pyre.memory.bounds");
         // complain
@@ -120,6 +120,26 @@ operator [] (size_type pos) const -> const_reference
         pos = cells() - 1;
     }
 
+    // get the cell and return it
+    return data()[pos];
+}
+
+
+template <typename T>
+auto
+pyre::memory::Map<T>::
+operator [] (size_type pos) -> reference
+{
+    // get the cell and return it
+    return data()[pos];
+}
+
+
+template <typename T>
+auto
+pyre::memory::Map<T>::
+operator [] (size_type pos) const -> const_reference
+{
     // get the cell and return it
     return data()[pos];
 }

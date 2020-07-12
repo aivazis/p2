@@ -26,7 +26,7 @@ int main(int argc, char * argv[]) {
     // get the actual size
     auto bytes = product.bytes();
     // we expect a 4k block
-    assert (bytes == 4*1024ul);
+    assert(( bytes == 4*1024ul ));
 
     // make a byte
     char value = 0xff;

@@ -11,24 +11,24 @@
 // user facing types
 namespace pyre::memory {
     // block on the heap
-    template <typename T, bool checkBounds = false>
-    using heap_t = Heap<T, checkBounds>;
+    template <typename T>
+    using heap_t = Heap<T>;
 
     // file-backed blocks of cells
-    template <typename T, bool checkBounds = false>
-    using map_t = Map<T, checkBounds>;
+    template <typename T>
+    using map_t = Map<T>;
 
     // file-backed blocks of const cells
-    template <typename T, bool checkBounds = false>
-    using constmap_t = ConstMap<T, checkBounds>;
+    template <typename T>
+    using constmap_t = ConstMap<T>;
 
     // view to someone else's data
-    template <typename T, bool checkBounds = false>
-    using view_t = View<T, checkBounds>;
+    template <typename T>
+    using view_t = View<T>;
 
     // const view to someone else's data
-    template <typename T, bool checkBounds = false>
-    using constview_t = ConstView<T, checkBounds>;
+    template <typename T>
+    using constview_t = ConstView<T>;
 }
 
 

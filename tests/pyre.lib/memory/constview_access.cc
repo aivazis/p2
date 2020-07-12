@@ -11,7 +11,7 @@
 
 
 // type alias
-using constview_t = pyre::memory::constview_t<double, true>;
+using constview_t = pyre::memory::constview_t<double>;
 
 
 // make a const view over someone else's data
@@ -32,12 +32,12 @@ int main() {
     // verify we can iterate and read
     for (auto cell : view) {
         // check that we have what we expect
-        assert (cell == 1.0);
+        assert(( cell == 1.0 ));
     }
 
     // exercise operator []
     // read from somewhere
-    assert (view[cells/2] == 1.0);
+    assert(( view[cells/2] == 1.0 ));
 
     // clean up; after this, the memory of our view is invalid
     delete [] block;

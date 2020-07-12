@@ -11,8 +11,8 @@
 
 
 // metamethods
-template <class T, bool checkBounds>
-pyre::memory::View<T, checkBounds>::
+template <class T>
+pyre::memory::View<T>::
 View(pointer data, cell_count_type cells) :
     _data{ data },
     _cells{ cells }
@@ -21,9 +21,9 @@ View(pointer data, cell_count_type cells) :
 
 // interface
 // get the number of cells in the block
-template <class T, bool checkBounds>
+template <class T>
 auto
-pyre::memory::View<T, checkBounds>::
+pyre::memory::View<T>::
 cells() const
 {
     // easy
@@ -32,9 +32,9 @@ cells() const
 
 
 // get the memory footprint of the block
-template <class T, bool checkBounds>
+template <class T>
 auto
-pyre::memory::View<T, checkBounds>::
+pyre::memory::View<T>::
 bytes() const
 {
     // scale the number of cells by the cell size
@@ -43,9 +43,9 @@ bytes() const
 
 
 // access to the data pointer
-template <class T, bool checkBounds>
+template <class T>
 auto
-pyre::memory::View<T, checkBounds>::
+pyre::memory::View<T>::
 data() const
 {
     // return the raw data pointer
@@ -54,9 +54,9 @@ data() const
 
 
 // iterator support
-template <class T, bool checkBounds>
+template <class T>
 auto
-pyre::memory::View<T, checkBounds>::
+pyre::memory::View<T>::
 begin() -> pointer
 {
     // the beginning of the block
@@ -64,9 +64,9 @@ begin() -> pointer
 }
 
 
-template <class T, bool checkBounds>
+template <class T>
 auto
-pyre::memory::View<T, checkBounds>::
+pyre::memory::View<T>::
 end() -> pointer
 {
     // one past the last cell in the block
@@ -75,13 +75,13 @@ end() -> pointer
 
 
 // data access
-template <class T, bool checkBounds>
+template <class T>
 auto
-pyre::memory::View<T, checkBounds>::
-operator [] (size_type pos) -> reference
+pyre::memory::View<T>::
+at(size_type pos) -> reference
 {
-    // if we are checking bounds
-    if (checkBounds && pos >= cells()) {
+    // if the request is out of bounds
+    if (pos >= cells()) {
         // make a channel
         pyre::journal::firewall_t channel("pyre.memory.bounds");
         // and complain
@@ -101,13 +101,13 @@ operator [] (size_type pos) -> reference
 }
 
 
-template <class T, bool checkBounds>
+template <class T>
 auto
-pyre::memory::View<T, checkBounds>::
-operator [] (size_type pos) const -> const_reference
+pyre::memory::View<T>::
+at(size_type pos) const -> const_reference
 {
-    // if we are checking bounds
-    if (checkBounds && pos >= cells()) {
+    // if the request is out of bounds
+    if (pos >= cells()) {
         // make a channel
         pyre::journal::firewall_t channel("pyre.memory.bounds");
         // and complain
@@ -122,6 +122,26 @@ operator [] (size_type pos) const -> const_reference
         pos = cells() - 1;
     }
 
+    // return a reference to the cell at {pos}
+    return _data[pos];
+}
+
+
+template <class T>
+auto
+pyre::memory::View<T>::
+operator [] (size_type pos) -> reference
+{
+    // return a reference to the cell at {pos}
+    return _data[pos];
+}
+
+
+template <class T>
+auto
+pyre::memory::View<T>::
+operator [] (size_type pos) const -> const_reference
+{
     // return a reference to the cell at {pos}
     return _data[pos];
 }

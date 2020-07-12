@@ -9,7 +9,7 @@
 
 
 // a file-backed block of cells
-template <class T, bool checkBounds>
+template <class T>
 class pyre::memory::ConstMap : public FileMap {
     // types
 public:
@@ -42,7 +42,11 @@ public:
     inline auto begin() const -> const_pointer;
     inline auto end() const -> const_pointer;
 
-    // syntactic sugar: data access
+    // data access
+public:
+    // with bounds checking
+    inline auto at(size_type) const -> const_reference;
+    // without bounds checking
     inline auto operator[](size_type) const -> const_reference;
 
     // disallow

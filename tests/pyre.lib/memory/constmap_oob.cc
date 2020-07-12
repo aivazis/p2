@@ -6,13 +6,11 @@
 
 // access the memory package
 #include <p2/memory.h>
-// support
-#include <cassert>
 
 
 // type aliases
 using cell_t = double;
-using constmap_t = pyre::memory::constmap_t<cell_t, true>;
+using constmap_t = pyre::memory::constmap_t<cell_t>;
 
 
 // create a read-only map over an existing product
@@ -30,7 +28,7 @@ int main(int argc, char * argv[]) {
     // gingerly
     try {
         // make an out-of-bounds access
-        product[product.cells()];
+        product.at(product.cells());
         // unreachable
         throw std::logic_error("unreachable");
     // catch the firewall

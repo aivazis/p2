@@ -25,7 +25,7 @@ int main(int argc, char * argv[]) {
     // get the block size
     auto bytes = product.bytes();
     // we expect a 4k block
-    assert (bytes == 4*1024ul);
+    assert(( bytes == 4*1024ul ));
 
     // our value expectation
     char value = 0x20;
@@ -35,7 +35,7 @@ int main(int argc, char * argv[]) {
     // go through the entire block
     for (std::size_t offset = 0; offset < bytes; ++offset) {
         // make sure the value is what we expect
-        assert (data[offset] == value);
+        assert(( data[offset] == value ));
     }
 
     // all done

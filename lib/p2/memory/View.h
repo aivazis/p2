@@ -9,7 +9,7 @@
 
 
 // a block of cells whose memory belongs to someone else
-template <class T, bool checkBounds>
+template <class T>
 class pyre::memory::View {
     // types
 public:
@@ -48,7 +48,12 @@ public:
     inline auto begin() -> pointer;
     inline auto end() -> pointer;
 
-    // syntactic sugar: data access
+    // data access
+public:
+    // with bounds checking
+    inline auto at(size_type) -> reference;
+    inline auto at(size_type) const -> const_reference;
+    // without bounds checking
     inline auto operator[](size_type) -> reference;
     inline auto operator[](size_type) const -> const_reference;
 

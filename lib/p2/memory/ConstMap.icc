@@ -11,8 +11,8 @@
 
 
 // map over an existing data product
-template <typename T, bool checkBounds>
-pyre::memory::ConstMap<T, checkBounds>::
+template <typename T>
+pyre::memory::ConstMap<T>::
 ConstMap(uri_type uri) :
     FileMap(uri, false)
 {}
@@ -20,9 +20,9 @@ ConstMap(uri_type uri) :
 
 // interface
 // compute the number of cells in the memory block
-template <typename T, bool checkBounds>
+template <typename T>
 auto
-pyre::memory::ConstMap<T, checkBounds>::
+pyre::memory::ConstMap<T>::
 cells() const
 {
     // convert using my size in bytes
@@ -31,9 +31,9 @@ cells() const
 
 
 // access to data pointer
-template <typename T, bool checkBounds>
+template <typename T>
 auto
-pyre::memory::ConstMap<T, checkBounds>::
+pyre::memory::ConstMap<T>::
 data() const
 {
     // cast my data pointer to a {T *}
@@ -43,9 +43,9 @@ data() const
 
 // iterator support
 // iterator start
-template <typename T, bool checkBounds>
+template <typename T>
 auto
-pyre::memory::ConstMap<T, checkBounds>::
+pyre::memory::ConstMap<T>::
 begin() const -> const_pointer
 {
     // return the beginning of the block
@@ -54,9 +54,9 @@ begin() const -> const_pointer
 
 
 // iterator end
-template <typename T, bool checkBounds>
+template <typename T>
 auto
-pyre::memory::ConstMap<T, checkBounds>::
+pyre::memory::ConstMap<T>::
 end() const -> const_pointer
 {
     // return one past the end of the block
@@ -65,13 +65,13 @@ end() const -> const_pointer
 
 
 // array-like access
-template <typename T, bool checkBounds>
+template <typename T>
 auto
-pyre::memory::ConstMap<T, checkBounds>::
-operator [] (size_type pos) const -> const_reference
+pyre::memory::ConstMap<T>::
+at(size_type pos) const -> const_reference
 {
-    // check the arguments
-    if (checkBounds && pos >= cells()) {
+    // if the request is out of bounds
+    if (pos >= cells()) {
         // make a channel
         pyre::journal::firewall_t channel("pyre.memory.bounds");
         // complain
@@ -86,6 +86,16 @@ operator [] (size_type pos) const -> const_reference
         pos = cells() - 1;
     }
 
+    // get the cell and return it
+    return data()[pos];
+}
+
+
+template <typename T>
+auto
+pyre::memory::ConstMap<T>::
+operator [] (size_type pos) const -> const_reference
+{
     // get the cell and return it
     return data()[pos];
 }

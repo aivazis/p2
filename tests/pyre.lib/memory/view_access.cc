@@ -11,7 +11,7 @@
 
 
 // type alias
-using view_t = pyre::memory::view_t<double, true>;
+using view_t = pyre::memory::view_t<double>;
 
 
 // create a view over a foreign block of data
@@ -33,14 +33,14 @@ int main() {
     // verify we can iterate and read
     for (auto cell : view) {
         // check that we have what we expect
-        assert (cell == 0);
+        assert(( cell == 0 ));
     }
 
     // exercise operator []
     // write
     view[cells/2] = 1;
     // and read
-    assert (view[cells/2] == 1);
+    assert(( view[cells/2] == 1 ));
 
     // clean up
     delete [] block;

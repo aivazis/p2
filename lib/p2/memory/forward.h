@@ -11,19 +11,19 @@
 // set up the namespace
 namespace pyre::memory {
     // block on the heap
-    template <typename T, bool checkBounds> class Heap;
+    template <typename T> class Heap;
 
     // file-backed block of undifferentiated memory
     class FileMap;
     // file-backed block of cells
-    template <typename T, bool checkBounds> class Map;
+    template <typename T> class Map;
     // file-backed block of const cells
-    template <typename T, bool checkBounds> class ConstMap;
+    template <typename T> class ConstMap;
 
     // a view to someone else's data
-    template <typename T, bool checkBounds> class View;
+    template <typename T> class View;
     // a const view to someone else's data
-    template <typename T, bool checkBounds> class ConstView;
+    template <typename T> class ConstView;
 };
 
 

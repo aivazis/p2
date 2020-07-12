@@ -6,12 +6,10 @@
 
 // get the memory
 #include <p2/memory.h>
-// support
-#include <cassert>
 
 
 // type alias
-using heap_t = pyre::memory::heap_t<double, true>;
+using heap_t = pyre::memory::heap_t<double>;
 
 
 // verify that we can construct and use heap blocks
@@ -31,7 +29,7 @@ int main(int argc, char * argv[]) {
     // gingerly
     try {
         // make an out-of-bounds access
-        product[product.cells()];
+        product.at(product.cells());
         // unreachable
         throw std::logic_error("unreachable");
     // catch the firewall

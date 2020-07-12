@@ -12,8 +12,8 @@
 
 // metamethods
 // destructor
-template <class T, bool checkBounds>
-pyre::memory::Heap<T, checkBounds>::
+template <class T>
+pyre::memory::Heap<T>::
 ~Heap()
 {
     // deallocate my block
@@ -22,8 +22,8 @@ pyre::memory::Heap<T, checkBounds>::
 
 
 // constructor
-template <class T, bool checkBounds>
-pyre::memory::Heap<T, checkBounds>::
+template <class T>
+pyre::memory::Heap<T>::
 Heap(cell_count_type cells) :
     _data{ new value_type[cells] },
     _cells{ cells }
@@ -32,9 +32,9 @@ Heap(cell_count_type cells) :
 
 // interface
 // get the number of cells in the block
-template <class T, bool checkBounds>
+template <class T>
 auto
-pyre::memory::Heap<T, checkBounds>::
+pyre::memory::Heap<T>::
 cells() const
 {
     // easy
@@ -43,9 +43,9 @@ cells() const
 
 
 // get the memory footprint of the block
-template <class T, bool checkBounds>
+template <class T>
 auto
-pyre::memory::Heap<T, checkBounds>::
+pyre::memory::Heap<T>::
 bytes() const
 {
     // scale the number of cells by the cell size
@@ -54,9 +54,9 @@ bytes() const
 
 
 // access to the data pointer
-template <class T, bool checkBounds>
+template <class T>
 auto
-pyre::memory::Heap<T, checkBounds>::
+pyre::memory::Heap<T>::
 data() const
 {
     // return the raw data pointer
@@ -65,9 +65,9 @@ data() const
 
 
 // iterator support
-template <class T, bool checkBounds>
+template <class T>
 auto
-pyre::memory::Heap<T, checkBounds>::
+pyre::memory::Heap<T>::
 begin() -> pointer
 {
     // the beginning of the block
@@ -75,9 +75,9 @@ begin() -> pointer
 }
 
 
-template <class T, bool checkBounds>
+template <class T>
 auto
-pyre::memory::Heap<T, checkBounds>::
+pyre::memory::Heap<T>::
 end() -> pointer
 {
     // one past the last cell in the block
@@ -86,13 +86,13 @@ end() -> pointer
 
 
 // data access
-template <class T, bool checkBounds>
+template <class T>
 auto
-pyre::memory::Heap<T, checkBounds>::
-operator [] (size_type pos) -> reference
+pyre::memory::Heap<T>::
+at(size_type pos) -> reference
 {
-    // if we are checking bounds
-    if (checkBounds && pos >= cells()) {
+    // if the request is out of bounds
+    if (pos >= cells()) {
         // make a channel
         pyre::journal::firewall_t channel("pyre.memory.bounds");
         // and complain
@@ -112,13 +112,13 @@ operator [] (size_type pos) -> reference
 }
 
 
-template <class T, bool checkBounds>
+template <class T>
 auto
-pyre::memory::Heap<T, checkBounds>::
-operator [] (size_type pos) const -> const_reference
+pyre::memory::Heap<T>::
+at(size_type pos) const -> const_reference
 {
-    // if we are checking bounds
-    if (checkBounds && pos >= cells()) {
+    // if the request is out of bounds
+    if (pos >= cells()) {
         // make a channel
         pyre::journal::firewall_t channel("pyre.memory.bounds");
         // and complain
@@ -133,6 +133,26 @@ operator [] (size_type pos) const -> const_reference
         pos = cells() - 1;
     }
 
+    // return a reference to the cell at {pos}
+    return _data[pos];
+}
+
+
+template <class T>
+auto
+pyre::memory::Heap<T>::
+operator [] (size_type pos) -> reference
+{
+    // return a reference to the cell at {pos}
+    return _data[pos];
+}
+
+
+template <class T>
+auto
+pyre::memory::Heap<T>::
+operator [] (size_type pos) const -> const_reference
+{
     // return a reference to the cell at {pos}
     return _data[pos];
 }

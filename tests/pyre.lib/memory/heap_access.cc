@@ -11,7 +11,7 @@
 
 
 // type alias
-using heap_t = pyre::memory::heap_t<double, true>;
+using heap_t = pyre::memory::heap_t<double>;
 
 
 // verify that we can construct and use heap blocks
@@ -30,14 +30,14 @@ int main() {
     // verify we can iterate and read
     for (auto cell : block) {
         // check that we have what we expect
-        assert (cell == 1.0);
+        assert(( cell == 1.0 ));
     }
 
     // exercise operator []
     // write
     block[cells/2] = 2.0;
     // and read
-    assert (block[cells/2] == 2.0);
+    assert(( block[cells/2] == 2.0 ));
 
     // all done
     return 0;

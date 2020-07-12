@@ -6,12 +6,10 @@
 
 // get the memory
 #include <p2/memory.h>
-// support
-#include <cassert>
 
 
 // type alias
-using view_t = pyre::memory::view_t<double, true>;
+using view_t = pyre::memory::view_t<double>;
 
 
 // create a view over a foreign block of data
@@ -34,7 +32,7 @@ int main(int argc, char * argv[]) {
     // gingerly
     try {
         // make an out-of-bounds access
-        product[product.cells()];
+        product.at(product.cells());
         // unreachable
         throw std::logic_error("unreachable");
     // catch the firewall
