@@ -10,9 +10,16 @@
 
 // user facing types
 namespace pyre::memory {
+    // normalized type access
+    template <typename T, bool isConst>
+    using cell_t = Cell<T, isConst>;
+
     // block on the heap
     template <typename T>
-    using heap_t = Heap<T>;
+    using heap_t = Heap<T, false>;
+    // read-only version
+    template <typename T>
+    using constheap_t = Heap<T, true>;
 
     // file-backed blocks of cells
     template <typename T>

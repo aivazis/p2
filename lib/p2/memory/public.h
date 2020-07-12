@@ -17,6 +17,7 @@
 #include "api.h"
 
 // implementation
+#include "Cell.h"
 // memory block on the heap
 #include "Heap.h"
 // file-backed memory blocks

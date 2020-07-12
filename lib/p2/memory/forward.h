@@ -10,8 +10,11 @@
 
 // set up the namespace
 namespace pyre::memory {
+    // utility that normalizes type access
+    template <typename T, bool isConst> class Cell;
+
     // block on the heap
-    template <typename T> class Heap;
+    template <typename T, bool isConst> class Heap;
 
     // file-backed block of undifferentiated memory
     class FileMap;

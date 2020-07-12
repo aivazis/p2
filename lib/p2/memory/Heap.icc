@@ -11,42 +11,50 @@
 
 
 // metamethods
-// destructor
-template <class T>
-pyre::memory::Heap<T>::
-~Heap()
-{
-    // deallocate my block
-    delete [] _data;
-}
-
-
 // constructor
-template <class T>
-pyre::memory::Heap<T>::
+template <class T, bool isConst>
+pyre::memory::Heap<T, isConst>::
 Heap(cell_count_type cells) :
     _data{ new value_type[cells] },
     _cells{ cells }
 {}
 
 
+template <class T, bool isConst>
+pyre::memory::Heap<T, isConst>::
+Heap(handle_type handle, cell_count_type cells) :
+    _data{ handle },
+    _cells{ cells }
+{}
+
 // interface
 // get the number of cells in the block
-template <class T>
+template <class T, bool isConst>
 auto
-pyre::memory::Heap<T>::
-cells() const
+pyre::memory::Heap<T, isConst>::
+cells() const -> cell_count_type
 {
     // easy
     return _cells;
 }
 
 
-// get the memory footprint of the block
-template <class T>
+// get the shared pointer
+template <class T, bool isConst>
 auto
-pyre::memory::Heap<T>::
-bytes() const
+pyre::memory::Heap<T, isConst>::
+handle() const -> handle_type
+{
+    // easy
+    return _data;
+}
+
+
+// get the memory footprint of the block
+template <class T, bool isConst>
+auto
+pyre::memory::Heap<T, isConst>::
+bytes() const -> size_type
 {
     // scale the number of cells by the cell size
     return cells() * sizeof(value_type);
@@ -54,31 +62,31 @@ bytes() const
 
 
 // access to the data pointer
-template <class T>
+template <class T, bool isConst>
 auto
-pyre::memory::Heap<T>::
-data() const
+pyre::memory::Heap<T, isConst>::
+data() const -> pointer
 {
     // return the raw data pointer
-    return _data;
+    return _data.get();
 }
 
 
 // iterator support
-template <class T>
+template <class T, bool isConst>
 auto
-pyre::memory::Heap<T>::
-begin() -> pointer
+pyre::memory::Heap<T, isConst>::
+begin() const -> pointer
 {
     // the beginning of the block
     return data();
 }
 
 
-template <class T>
+template <class T, bool isConst>
 auto
-pyre::memory::Heap<T>::
-end() -> pointer
+pyre::memory::Heap<T, isConst>::
+end() const -> pointer
 {
     // one past the last cell in the block
     return data() + cells();
@@ -86,10 +94,10 @@ end() -> pointer
 
 
 // data access
-template <class T>
+template <class T, bool isConst>
 auto
-pyre::memory::Heap<T>::
-at(size_type pos) -> reference
+pyre::memory::Heap<T, isConst>::
+at(size_type pos) const -> reference
 {
     // if the request is out of bounds
     if (pos >= cells()) {
@@ -112,46 +120,10 @@ at(size_type pos) -> reference
 }
 
 
-template <class T>
+template <class T, bool isConst>
 auto
-pyre::memory::Heap<T>::
-at(size_type pos) const -> const_reference
-{
-    // if the request is out of bounds
-    if (pos >= cells()) {
-        // make a channel
-        pyre::journal::firewall_t channel("pyre.memory.bounds");
-        // and complain
-        channel
-            << "out of bounds access:" << pyre::journal::newline
-            << "  index " << pos << " must be less than " << cells() << pyre::journal::newline
-            << "  in pyre::memory::heap_t::operator[]" << pyre::journal::newline
-            << "  with a block on the heap at " << data()
-            << pyre::journal::endl(__HERE__);
-        // unreachable, unless the user has marked this error as non-fatal
-        // clamp {pos} to the last element in the block
-        pos = cells() - 1;
-    }
-
-    // return a reference to the cell at {pos}
-    return _data[pos];
-}
-
-
-template <class T>
-auto
-pyre::memory::Heap<T>::
-operator [] (size_type pos) -> reference
-{
-    // return a reference to the cell at {pos}
-    return _data[pos];
-}
-
-
-template <class T>
-auto
-pyre::memory::Heap<T>::
-operator [] (size_type pos) const -> const_reference
+pyre::memory::Heap<T, isConst>::
+operator [] (size_type pos) const -> reference
 {
     // return a reference to the cell at {pos}
     return _data[pos];

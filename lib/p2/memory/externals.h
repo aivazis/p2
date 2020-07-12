@@ -28,6 +28,8 @@
 namespace pyre::memory {
     // sizes of things
     using size_t = std::size_t;
+    // distances
+    using ptrdiff_t = std::ptrdiff_t;
 
     // strings
     using string_t = std::string;
