@@ -31,11 +31,11 @@ namespace pyre::memory {
 
     // view to someone else's data
     template <typename T>
-    using view_t = View<T>;
+    using view_t = View<T, false>;
 
     // const view to someone else's data
     template <typename T>
-    using constview_t = ConstView<T>;
+    using constview_t = View<T, true>;
 }
 
 

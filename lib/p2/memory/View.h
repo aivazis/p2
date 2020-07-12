@@ -9,65 +9,63 @@
 
 
 // a block of cells whose memory belongs to someone else
-template <class T>
+template <class T,  bool isConst>
 class pyre::memory::View {
     // types
 public:
     // my cell
-    using value_type = T;
+    using cell_type = cell_t<T, isConst>;
+    // pull the type aliases
+    using value_type = typename cell_type::value_type;
     // derived types
-    using pointer = value_type *;
-    using reference = value_type &;
-    using const_pointer = const value_type *;
-    using const_reference = const value_type &;
-
+    using pointer = typename cell_type::pointer;
+    using reference = typename cell_type::reference;
     // distances
-    using difference_type = std::ptrdiff_t;
-
+    using difference_type = typename cell_type::difference_type;
     // sizes of things
-    using size_type = size_t;
-    using cell_count_type = size_type;
+    using size_type = typename cell_type::size_type;
+    using cell_count_type = typename cell_type::cell_count_type;
 
     // metamethods
 public:
-    // destructor
-    inline ~View() = default;
     // map an existing data product
     inline View(pointer, cell_count_type);
 
     // interface
 public:
     // the number of cells
-    inline auto cells() const;
+    inline auto cells() const -> cell_count_type;
     // the memory footprint of the block
-    inline auto bytes() const;
+    inline auto bytes() const -> size_type;
     // access to the raw data pointer
-    inline auto data() const;
+    inline auto data() const -> pointer;
 
     // iterator support
-    inline auto begin() -> pointer;
-    inline auto end() -> pointer;
+public:
+    inline auto begin() const -> pointer;
+    inline auto end() const -> pointer;
 
     // data access
 public:
     // with bounds checking
-    inline auto at(size_type) -> reference;
-    inline auto at(size_type) const -> const_reference;
+    inline auto at(size_type) const -> reference;
     // without bounds checking
-    inline auto operator[](size_type) -> reference;
-    inline auto operator[](size_type) const -> const_reference;
+    inline auto operator[](size_type) const -> reference;
 
     // implementation details: data
 private:
-    pointer _data;
-    cell_count_type _cells;
+    const pointer _data;
+    const cell_count_type _cells;
 
-    // disallow
-private:
-    View(const View &) = delete;
-    View(const View &&) = delete;
-    const View & operator= (const View &) = delete;
-    const View & operator= (const View &&) = delete;
+    // default metamethods
+public:
+    // destructor
+    ~View() = default;
+    // constructors
+    View(const View &) = default;
+    View(View &&) = default;
+    View & operator= (const View &) = default;
+    View & operator= (View &&) = default;
 };
 
 

@@ -24,9 +24,7 @@ namespace pyre::memory {
     template <typename T> class ConstMap;
 
     // a view to someone else's data
-    template <typename T> class View;
-    // a const view to someone else's data
-    template <typename T> class ConstView;
+    template <typename T, bool isConst> class View;
 };
 
 

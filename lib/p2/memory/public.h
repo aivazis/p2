@@ -26,7 +26,6 @@
 #include "ConstMap.h"
 // foreign data
 #include "View.h"
-#include "ConstView.h"
 
 
 #endif
