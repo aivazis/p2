@@ -36,6 +36,12 @@ int main(int argc, char * argv[]) {
         // and set it to zero
         cell = 0;
     }
+    // show me
+    channel << "grid before box:" << pyre::journal::newline;
+    for (const auto & idx : grid.layout()) {
+        channel << "  " << idx << " -> " << grid[idx] << pyre::journal::newline;
+    }
+    channel << pyre::journal::endl(__HERE__);
 
     // make a box that excludes the outer surfaces
     // top corner
@@ -53,6 +59,13 @@ int main(int argc, char * argv[]) {
 
     // show me
     channel << "box:" << pyre::journal::newline;
+    for (const auto & idx : box) {
+        channel << "  " << idx << " -> " << grid[idx] << pyre::journal::newline;
+    }
+    channel << pyre::journal::endl(__HERE__);
+
+    // show me
+    channel << "grid after box:" << pyre::journal::newline;
     for (const auto & idx : grid.layout()) {
         channel << "  " << idx << " -> " << grid[idx] << pyre::journal::newline;
     }
