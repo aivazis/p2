@@ -58,8 +58,10 @@ public:
 
     // interface: data access
 public:
-    constexpr auto operator[](index_const_reference) -> reference;
-    constexpr auto operator[](index_const_reference) const -> const_reference;
+    // with bounds check
+    constexpr auto at(index_const_reference) const -> reference;
+    // without bounds check
+    constexpr auto operator[](index_const_reference) const -> reference;
 
     // interface: iteration support
 public:

@@ -54,22 +54,24 @@ layout() const -> packing_const_reference
 
 
 // data access
+// with bounds checking
 template <class packingT, class storageT>
 constexpr auto
 pyre::grid::Grid<packingT, storageT>::
-operator[](index_const_reference index) -> reference
+at(index_const_reference index) const -> reference
 {
     // get the offset that corresponds to this {index}
     auto offset = _layout[index];
     // get and return the value
-    return (*_data)[offset];
+    return _data->at(offset);
 }
 
 
+// without bounds checking
 template <class packingT, class storageT>
 constexpr auto
 pyre::grid::Grid<packingT, storageT>::
-operator[](index_const_reference index) const -> const_reference
+operator[](index_const_reference index) const -> reference
 {
     // get the offset that corresponds to this {index}
     auto offset = _layout[index];
