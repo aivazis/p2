@@ -19,7 +19,9 @@ public:
     using value_type = typename cell_type::value_type;
     // derived types
     using pointer = typename cell_type::pointer;
+    using const_pointer = typename cell_type::const_pointer;
     using reference = typename cell_type::reference;
+    using const_reference = typename cell_type::const_reference;
     // distances
     using difference_type = typename cell_type::difference_type;
     // sizes of things

@@ -17,9 +17,13 @@ public:
     using value_type = T;
     // derived types
     using pointer = std::conditional_t<isConst, const value_type *, value_type *>;
+    using const_pointer = const value_type *;
     using reference = std::conditional_t<isConst, const value_type &, value_type &>;
+    using const_reference = const value_type &;
+
     // distances
     using difference_type = ptrdiff_t;
+
     // sizes of things
     using size_type = size_t;
     // number of cells
@@ -27,7 +31,7 @@ public:
 
     // interface
 public:
-    // compute the footprint of n cells
+    // compute the footprint of {n} cells
     static constexpr auto bytes(cell_count_type = 1) -> size_type;
 };
 
