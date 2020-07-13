@@ -19,6 +19,7 @@ using constmap_t = pyre::memory::constmap_t<cell_t>;
 int main(int argc, char * argv[]) {
     // initialize the journal
     pyre::journal::init(argc, argv);
+    pyre::journal::application("constmap_read");
 
     // open an existing file-backed memory block
     constmap_t product("map.dat");

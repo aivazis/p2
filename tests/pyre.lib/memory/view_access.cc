@@ -15,7 +15,11 @@ using view_t = pyre::memory::view_t<double>;
 
 
 // create a view over a foreign block of data
-int main() {
+int main(int argc, char * argv[]) {
+    // initialize the journal
+    pyre::journal::init(argc, argv);
+    pyre::journal::application("view_access");
+
     // the number of cells
     std::size_t cells = 1024ul;
     // allocate a memory block

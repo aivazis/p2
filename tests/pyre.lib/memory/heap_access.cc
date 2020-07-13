@@ -15,7 +15,11 @@ using heap_t = pyre::memory::heap_t<double>;
 
 
 // verify that we can construct and use heap blocks
-int main() {
+int main(int argc, char * argv[]) {
+    // initialize the journal
+    pyre::journal::init(argc, argv);
+    pyre::journal::application("heap_access");
+
     // the number of cells
     std::size_t cells = 1024ul;
     // make a block on the heap

@@ -19,6 +19,7 @@ using map_t = pyre::memory::map_t<cell_t>;
 int main(int argc, char * argv[]) {
     // initialize the journal
     pyre::journal::init(argc, argv);
+    pyre::journal::application("map_create");
 
     // pick the number of cells in the block
     std::size_t len = 1024;

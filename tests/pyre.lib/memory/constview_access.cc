@@ -15,7 +15,11 @@ using constview_t = pyre::memory::constview_t<double>;
 
 
 // make a const view over someone else's data
-int main() {
+int main(int argc, char * argv[]) {
+    // initialize the journal
+    pyre::journal::init(argc, argv);
+    pyre::journal::application("constview_access");
+
     // the number of cells
     std::size_t cells = 1024ul;
     // allocate a memory block

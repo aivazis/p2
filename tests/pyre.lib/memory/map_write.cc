@@ -19,6 +19,7 @@ using map_t = pyre::memory::map_t<cell_t>;
 int main(int argc, char * argv[]) {
     // initialize the journal
     pyre::journal::init(argc, argv);
+    pyre::journal::application("map_write");
 
     // open an existing file-backed memory block with write access
     map_t product("map.dat", true);
