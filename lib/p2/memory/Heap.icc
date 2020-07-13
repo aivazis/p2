@@ -39,17 +39,6 @@ cells() const -> cell_count_type
 }
 
 
-// get the shared pointer
-template <class T, bool isConst>
-auto
-pyre::memory::Heap<T, isConst>::
-handle() const -> handle_type
-{
-    // easy
-    return _data;
-}
-
-
 // get the memory footprint of the block
 template <class T, bool isConst>
 auto
@@ -69,6 +58,17 @@ data() const -> pointer
 {
     // return the raw data pointer
     return _data.get();
+}
+
+
+// get the shared pointer
+template <class T, bool isConst>
+auto
+pyre::memory::Heap<T, isConst>::
+handle() const -> handle_type
+{
+    // easy
+    return _data;
 }
 
 

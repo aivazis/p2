@@ -39,15 +39,12 @@ public:
 public:
     // the number of cells
     inline auto cells() const -> cell_count_type;
-    // the shared pointer
-    inline auto handle() const -> handle_type;
-
-    // interface
-public:
     // the memory footprint of the block
     inline auto bytes() const -> size_type;
     // access to the raw data pointer
     inline auto data() const -> pointer;
+    // the shared pointer
+    inline auto handle() const -> handle_type;
 
     // iterator support
 public:
