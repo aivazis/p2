@@ -9,24 +9,29 @@
 
 
 // a file-backed block of cells
-template <class T>
-class pyre::memory::Map : public FileMap {
+template <class T, bool isConst>
+class pyre::memory::Map {
     // types
 public:
     // my cell
-    using value_type = T;
+    using cell_type = cell_t<T, isConst>;
+    // pull the type aliases
+    using value_type = typename cell_type::value_type;
     // derived types
-    using pointer = value_type *;
-    using reference = value_type &;
-    using const_pointer = const value_type *;
-    using const_reference = const value_type &;
-
+    using pointer = typename cell_type::pointer;
+    using reference = typename cell_type::reference;
     // distances
-    using difference_type = std::ptrdiff_t;
-
+    using difference_type = typename cell_type::difference_type;
     // sizes of things
-    using size_type = size_t;
-    using cell_count_type = size_type;
+    using size_type = typename cell_type::size_type;
+    using cell_count_type = typename cell_type::cell_count_type;
+
+    // file paths
+    using uri_type = FileMap::uri_type;
+    // permissions
+    using writable_type = FileMap::writable_type;
+    // my handle
+    using handle_type = std::shared_ptr<FileMap>;
 
     // metamethods
 public:
@@ -38,29 +43,37 @@ public:
     // interface
 public:
     // the number of cells; the inherited {bytes} tells you the memory footprint of the block
-    inline auto cells() const;
+    inline auto cells() const -> cell_count_type;
+    // the memory footprint of the block
+    inline auto bytes() const -> size_type;
     // access to the raw data pointer
-    inline auto data() const;
+    inline auto data() const -> pointer;
 
     // iterator support
-    inline auto begin() -> pointer;
-    inline auto end() -> pointer;
+public:
+    inline auto begin() const -> pointer;
+    inline auto end() const -> pointer;
 
     // data access
 public:
     // with bounds checking
-    inline auto at(size_type) -> reference;
-    inline auto at(size_type) const -> const_reference;
+    inline auto at(size_type) const -> reference;
     // without bounds checking
-    inline auto operator[](size_type) -> reference;
-    inline auto operator[](size_type) const -> const_reference;
+    inline auto operator[](size_type) const -> reference;
 
-    // disallow
+    // implementation details: data
 private:
-    Map(const Map &) = delete;
-    Map(const Map &&) = delete;
-    const Map & operator= (const Map &) = delete;
-    const Map & operator= (const Map &&) = delete;
+    handle_type _map;
+
+    // default metamethods
+public:
+    // destructor
+    ~Map() = default;
+    // constructors
+    Map(const Map &) = default;
+    Map(Map &&) = default;
+    Map & operator= (const Map &) = default;
+    Map & operator= (Map &&) = default;
 };
 
 

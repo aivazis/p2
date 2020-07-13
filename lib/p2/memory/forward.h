@@ -19,9 +19,7 @@ namespace pyre::memory {
     // file-backed block of undifferentiated memory
     class FileMap;
     // file-backed block of cells
-    template <typename T> class Map;
-    // file-backed block of const cells
-    template <typename T> class ConstMap;
+    template <typename T, bool isConst> class Map;
 
     // a view to someone else's data
     template <typename T, bool isConst> class View;

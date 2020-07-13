@@ -23,7 +23,6 @@
 // file-backed memory blocks
 #include "FileMap.h"
 #include "Map.h"
-#include "ConstMap.h"
 // foreign data
 #include "View.h"
 

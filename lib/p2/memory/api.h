@@ -23,11 +23,10 @@ namespace pyre::memory {
 
     // file-backed blocks of cells
     template <typename T>
-    using map_t = Map<T>;
-
+    using map_t = Map<T, false>;
     // file-backed blocks of const cells
     template <typename T>
-    using constmap_t = ConstMap<T>;
+    using constmap_t = Map<T, true>;
 
     // view to someone else's data
     template <typename T>
