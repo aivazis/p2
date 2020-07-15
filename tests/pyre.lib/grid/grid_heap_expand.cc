@@ -22,7 +22,7 @@ int main(int argc, char * argv[]) {
     // make a channel
     pyre::journal::debug_t channel("pyre.grid.heap");
 
-    // pick a dimension for the base arrat
+    // pick a dimension for the base array
     const auto dim = 4;
     // our base array is {dim x dim}
     matrix_t::shape_type shape { dim,dim };
