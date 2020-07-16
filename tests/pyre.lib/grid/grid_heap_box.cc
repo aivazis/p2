@@ -29,7 +29,7 @@ int main(int argc, char * argv[]) {
     // pack_t packing { {1024, 1024, 8} };
     pack_t packing { {3, 3, 3} };
     // instantiate the grid
-    grid_t grid { packing, packing.capacity() };
+    grid_t grid { packing, packing.cells() };
 
     // visit every location on the grid
     for (auto & cell : grid) {

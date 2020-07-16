@@ -25,7 +25,7 @@ Shape(argT... idx) :
 template <class containerT>
 constexpr auto
 pyre::grid::Shape<containerT>::
-capacity() const -> size_type
+cells() const -> size_type
 {
     // the initial value
     size_type one = 1;

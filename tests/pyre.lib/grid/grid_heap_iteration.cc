@@ -28,7 +28,7 @@ int main(int argc, char * argv[]) {
     // packing: 1024x1024x8
     pack_t packing { {1024, 1024, 8} };
     // instantiate the grid
-    grid_t grid { packing, packing.capacity() };
+    grid_t grid { packing, packing.cells() };
 
     // fill it
     for (auto & value : grid) {

@@ -29,7 +29,7 @@ int main(int argc, char * argv[]) {
         << "s: " << s << pyre::journal::newline
         << "  rank: " << shape_t::rank() << "  (from the type)" << pyre::journal::newline
         << "  rank: " << s.rank() << "  (from the instance)" << pyre::journal::newline
-        << "  capacity: " << s.capacity()
+        << "  cells: " << s.cells()
         << pyre::journal::endl(__HERE__);
 
     // verify that the index dimensionality is reported correctly through the type
@@ -38,7 +38,7 @@ int main(int argc, char * argv[]) {
     static_assert (s.rank() == 4);
 
     // verify that its capacity is equal to the product of the possible values along each axis
-    assert(( s.capacity() == 2*3*4*5 ));
+    assert(( s.cells() == 2*3*4*5 ));
 
     // verify that a shape is equal to itself
     static_assert (s == s);

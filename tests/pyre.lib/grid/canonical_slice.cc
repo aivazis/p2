@@ -37,7 +37,7 @@ int main(int argc, char * argv[]) {
         << "    origin: " << packing.origin() << pyre::journal::newline
         << "    order: " << packing.order() << pyre::journal::newline
         << "    strides: " << packing.strides() << pyre::journal::newline
-        << "    capacity: " << packing.capacity() << pyre::journal::newline
+        << "    cells: " << packing.cells() << pyre::journal::newline
         << "    nudge: " << packing.nudge() << pyre::journal::endl(__HERE__);
 
     // set a shape
@@ -54,7 +54,7 @@ int main(int argc, char * argv[]) {
         << "    origin: " << slice.origin() << pyre::journal::newline
         << "    order: " << slice.order() << pyre::journal::newline
         << "    strides: " << slice.strides() << pyre::journal::newline
-        << "    capacity: " << slice.capacity() << pyre::journal::newline
+        << "    cells: " << slice.cells() << pyre::journal::newline
         << "    nudge: " << slice.nudge() << pyre::journal::endl(__HERE__);
 
     // verify the slice offsets

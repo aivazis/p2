@@ -91,10 +91,10 @@ nudge() const -> difference_type
 template <pyre::grid::size_t N, template <typename, size_t> class containerT>
 constexpr auto
 pyre::grid::Canonical<N, containerT>::
-capacity() const -> size_type
+cells() const -> size_type
 {
     // my {shape} knows
-    return _shape.capacity();
+    return _shape.cells();
 }
 
 

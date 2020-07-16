@@ -31,7 +31,7 @@ int main(int argc, char * argv[]) {
     // packing: 1024x1024
     pack_t packing { shape };
     // instantiate the grid
-    grid_t grid { packing, packing.capacity() };
+    grid_t grid { packing, packing.cells() };
     // pick a value
     double value = 1;
     // fill it
@@ -41,7 +41,7 @@ int main(int argc, char * argv[]) {
     }
 
     // make the sum area table
-    grid_t sat { packing, packing.capacity() };
+    grid_t sat { packing, packing.cells() };
 
     // fill the top corner
     sat[{0,0}] = grid[{0,0}];

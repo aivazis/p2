@@ -37,7 +37,7 @@ int main(int argc, char * argv[]) {
         << "    origin: " << packing.origin() << pyre::journal::newline
         << "    order: " << packing.order() << pyre::journal::newline
         << "    strides: " << packing.strides() << pyre::journal::newline
-        << "    capacity: " << packing.capacity() << pyre::journal::newline
+        << "    cells: " << packing.cells() << pyre::journal::newline
         << "    nudge: " << packing.nudge() << pyre::journal::newline
         << "    begin: " << *packing.begin() << pyre::journal::newline
         << "    end: " << *packing.end() << pyre::journal::endl(__HERE__);
@@ -56,7 +56,7 @@ int main(int argc, char * argv[]) {
         << "    origin: " << box.origin() << pyre::journal::newline
         << "    order: " << box.order() << pyre::journal::newline
         << "    strides: " << box.strides() << pyre::journal::newline
-        << "    capacity: " << box.capacity() << pyre::journal::newline
+        << "    cells: " << box.cells() << pyre::journal::newline
         << "    nudge: " << box.nudge() << pyre::journal::newline
         << "    begin: " << *box.begin() << pyre::journal::newline
         << "    end: " << *box.end() << pyre::journal::endl(__HERE__);

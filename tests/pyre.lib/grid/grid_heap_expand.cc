@@ -29,7 +29,7 @@ int main(int argc, char * argv[]) {
     // it is packed in column major order with origin at {0,0}
     matrix_t::packing_type layout { shape };
     // make the base matrix
-    matrix_t base { layout, layout.capacity() };
+    matrix_t base { layout, layout.cells() };
 
     // we want to fill each quadrant with different values, so let's start be defining "quadrant"
     auto quad = shape / 2;  // <- this is {dim/2, dim/2}
@@ -65,7 +65,7 @@ int main(int argc, char * argv[]) {
     // it is also packed in column major order with origin at {0,0}
     matrix_t::packing_type expandedLayout { expandedShape };
     // instantiate
-    matrix_t expanded { expandedLayout, expandedLayout.capacity() };
+    matrix_t expanded { expandedLayout, expandedLayout.cells() };
     // zero it out
     for (auto & cell : expanded) {
         cell = 0;

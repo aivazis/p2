@@ -37,7 +37,7 @@ public:
     // interface
 public:
     // the total number of addressable values
-    constexpr auto capacity() const -> size_type;
+    constexpr auto cells() const -> size_type;
 
     // default metamethods
 public:

@@ -66,7 +66,7 @@ public:
     constexpr auto nudge() const -> difference_type;
 
     // the total number of addressable cells
-    constexpr auto capacity() const -> size_type;
+    constexpr auto cells() const -> size_type;
 
     // mutators: {canonical_type} instances are {const}, so mutators create new instances
 public:
