@@ -107,10 +107,11 @@ public:
     // implementation details: static helpers
 protected:
     // given a {shape} and an {order}, infer the axis strides assuming tight packing
-    static constexpr auto strides(shape_const_reference, order_const_reference) -> strides_type;
-    // given the packing {strides}, project an {index} to an offset such that the {zero} index
-    // maps to offset 0
-    static constexpr auto project(index_const_reference, strides_const_reference)
+    static constexpr auto _initStrides(shape_const_reference,
+                                       order_const_reference) -> strides_type;
+    // given the packing {strides}, compute the shift that maps the lowest possible index to
+    // zero offset
+    static constexpr auto _initShift(index_const_reference, strides_const_reference)
         -> difference_type;
 
     // implementation details: data

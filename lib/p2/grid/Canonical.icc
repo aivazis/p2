@@ -10,6 +10,9 @@
 
 
 // metamethods
+
+// constructor that assumes that the physical layout corresponds to the parameters given and
+// infers the strides and the nudge
 template <pyre::grid::size_t N, template <typename, size_t> class containerT>
 constexpr
 pyre::grid::Canonical<N, containerT>::
@@ -17,11 +20,16 @@ Canonical(shape_const_reference shape, index_const_reference origin, order_const
     _shape { shape },
     _order { order },
     _origin { origin },
-    _strides { strides(_shape, _order) },
-    _nudge { -project(_origin, _strides) }
+    // invoke the static stride initializer
+    _strides { _initStrides(_shape, _order) },
+    // compute the nudge, defined as the offset of the zero index
+    _nudge { - _initShift(_origin, _strides) }
 {}
 
 
+// constructor that requires a complete layout specification; useful for deriving layouts
+// different from the physical one that is fixed by the owner of the underlying memory
+// representation
 template <pyre::grid::size_t N, template <typename, size_t> class containerT>
 constexpr
 pyre::grid::Canonical<N, containerT>::
@@ -349,7 +357,8 @@ box(index_const_reference base, shape_const_reference shape) const -> canonical_
 // static interface
 template <pyre::grid::size_t N, template <typename, size_t> class containerT>
 constexpr auto
-pyre::grid::Canonical<N, containerT>::rank() -> size_type
+pyre::grid::Canonical<N, containerT>::
+rank() -> size_type
 {
     // easy enough
     return N;
@@ -357,10 +366,11 @@ pyre::grid::Canonical<N, containerT>::rank() -> size_type
 
 
 // static helpers
+// compute the packing strides, i.e. the offsets from a cell to its neighbor along each axis
 template <pyre::grid::size_t N, template <typename, size_t> class containerT>
 constexpr auto
-pyre::grid::Canonical<N, containerT>::strides(shape_const_reference shape,
-                                              order_const_reference order) -> strides_type
+pyre::grid::Canonical<N, containerT>::
+_initStrides(shape_const_reference shape, order_const_reference order) -> strides_type
 {
     // make an empty shape to store the answer
     strides_type strides;
@@ -377,15 +387,16 @@ pyre::grid::Canonical<N, containerT>::strides(shape_const_reference shape,
 }
 
 
+// compute the shift necessary so that {origin}, i.e. the smallest index, maps to offset zero
 template <pyre::grid::size_t N, template <typename, size_t> class containerT>
 constexpr auto
-pyre::grid::Canonical<N, containerT>::project(index_const_reference index,
-                                              strides_const_reference strides) -> difference_type
+pyre::grid::Canonical<N, containerT>::
+_initShift(index_const_reference origin, strides_const_reference strides) -> difference_type
 {
     // the initial value; here so we can be explicit about the return type
     difference_type init = 0;
     // project and return
-    return std::inner_product(index.begin(), index.end(), strides.begin(), init);
+    return std::inner_product(origin.begin(), origin.end(), strides.begin(), init);
 }
 
 
