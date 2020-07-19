@@ -19,6 +19,7 @@ class pyre::grid::Canonical {
 public:
     // alias for me
     using canonical_type = Canonical<N, containerT>;
+    using canonical_const_reference = const canonical_type &;
     // the sizes of things
     using size_type = size_t;
     // my parts
@@ -97,11 +98,14 @@ public:
     // whole layout iterators
     constexpr auto begin() const -> index_iterator;
     constexpr auto end() const -> index_iterator;
-    // iteration over a portion
-    constexpr auto box(index_const_reference, shape_const_reference) const -> canonical_type;
+
+    // use an existing layout to derive a new one
+    constexpr auto
+    box(index_const_reference, shape_const_reference) const -> canonical_type;
 
     // static interface
 public:
+    // the number of axes
     static constexpr auto rank() -> size_type;
 
     // implementation details: static helpers

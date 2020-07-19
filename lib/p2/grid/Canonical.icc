@@ -34,7 +34,7 @@ template <pyre::grid::size_t N, template <typename, size_t> class containerT>
 constexpr
 pyre::grid::Canonical<N, containerT>::
 Canonical(shape_const_reference shape, index_const_reference origin, order_const_reference order,
-          strides_const_reference strides, difference_type nudge ) :
+          strides_const_reference strides, difference_type nudge) :
     _shape { shape },
     _order { order },
     _origin { origin },
@@ -269,7 +269,7 @@ slice(index_const_reference base, shape_const_reference rawShape) const
     // start building the slice packing info
     // get my strides
     const auto & myStrides = strides();
-    // initialize the map from my ranks to the slice tanks
+    // initialize the map from my ranks to the slice ranks
     shape_type rankMap {};
     // go through the raw shape spec
     for (size_t i=0, j=0; i < N; ++i) {
