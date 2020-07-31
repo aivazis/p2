@@ -12,7 +12,7 @@
 // packing order and the like; it provides an abstraction layer that is necessary for
 // supporting the implementation in environments that don't have {std::array}
 template <class containerT>
-class pyre::grid::Rep {
+class pyre::grid::Rep : public containerT {
     // types
 public:
     // alias for me
@@ -41,34 +41,6 @@ public:
     template <typename... argT>
     constexpr explicit Rep(argT...);
 
-    // access
-public:
-    // bounds checked
-    constexpr auto at(size_type) -> reference;
-    constexpr auto at(size_type) const -> const_reference;
-
-    // random access
-    constexpr auto operator[](size_type) -> reference;
-    constexpr auto operator[](size_type) const -> const_reference;
-
-    // iteration
-public:
-    // forward
-    constexpr auto begin() -> iterator;
-    constexpr auto begin() const -> const_iterator;
-    constexpr auto end() -> iterator;
-    constexpr auto end() const -> const_iterator;
-    // reverse
-    constexpr auto rbegin() -> reverse_iterator;
-    constexpr auto rbegin() const -> const_reverse_iterator;
-    constexpr auto rend() -> reverse_iterator;
-    constexpr auto rend() const -> const_reverse_iterator;
-    // const
-    constexpr auto cbegin() const -> const_iterator;
-    constexpr auto cend() const -> const_iterator;
-    constexpr auto crbegin() const -> const_reverse_iterator;
-    constexpr auto crend() const -> const_reverse_iterator;
-
     // static interface
 public:
     // my rank is the number of indices i can store
@@ -92,7 +64,7 @@ public:
 
     // implementation details: data
 private:
-    container_type _rep;
+    // container_type _rep;
 };
 
 
