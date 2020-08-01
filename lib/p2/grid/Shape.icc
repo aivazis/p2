@@ -34,6 +34,21 @@ cells() const -> size_type
 }
 
 
+// support for structured bindings
+template<class containerT>
+class std::tuple_size<pyre::grid::Shape<containerT>> :
+    public std::integral_constant<std::size_t, pyre::grid::Shape<containerT>::rank()>
+{};
+
+
+template<std::size_t I, class containerT>
+struct std::tuple_element<I, pyre::grid::Shape<containerT>>
+{
+    static_assert(I < pyre::grid::Shape<containerT>::rank(), "index is out of bounds");
+    using type = typename containerT::value_type;
+};
+
+
 #endif
 
 // end of file

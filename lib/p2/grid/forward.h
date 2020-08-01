@@ -167,12 +167,20 @@ namespace pyre::grid {
 
 
 // structured binding support
-// on indices
+// for indices
 template<class containerT>
 class std::tuple_size<pyre::grid::Index<containerT>>;
 
 template<std::size_t I, class containerT>
 struct std::tuple_element<I, pyre::grid::Index<containerT>>;
+
+
+// for shapes
+template<class containerT>
+class std::tuple_size<pyre::grid::Shape<containerT>>;
+
+template<std::size_t I, class containerT>
+struct std::tuple_element<I, pyre::grid::Shape<containerT>>;
 
 
 #endif
