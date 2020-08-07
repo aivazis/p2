@@ -40,7 +40,7 @@ public:
     // map an existing data product
     inline explicit Map(uri_type, writable_type = false);
     // create a new one, given a path and a number of cells
-    inline explicit Map(uri_type, size_type);
+    inline Map(uri_type, size_type);
 
     // interface
 public:
