@@ -81,7 +81,7 @@ int main(int argc, char * argv[]) {
         assert(( grid[idx] == 0 ));
     }
 
-    // nothing to do
+    // all done
     return 0;
 }
 

@@ -53,7 +53,7 @@ int main(int argc, char *argv[]) {
     static_assert( idx[0] == pol::hv );
     static_assert( idx[1] == color::blue );
 
-    // nothing to do
+    // all done
     return 0;
 }
 

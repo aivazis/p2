@@ -10,7 +10,7 @@
 #include <p2/grid.h>
 
 
-// verify the layout of a grid on the heap
+// exercise ranged for loops
 int main(int argc, char * argv[]) {
     // initialize the journal
     pyre::journal::init(argc, argv);
@@ -47,7 +47,7 @@ int main(int argc, char * argv[]) {
         assert(( value == 47 ));
     }
 
-    // nothing to do
+    // all done
     return 0;
 }
 

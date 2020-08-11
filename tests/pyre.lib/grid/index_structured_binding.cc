@@ -38,7 +38,7 @@ int main(int argc, char * argv[]) {
     assert(( y == idx[1] ));
     assert(( z == idx[2] ));
 
-    // nothing to do
+    // all done
     return 0;
 }
 

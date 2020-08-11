@@ -38,7 +38,7 @@ int main(int argc, char * argv[]) {
     assert(( y == shape[1] ));
     assert(( z == shape[2] ));
 
-    // nothing to do
+    // all done
     return 0;
 }
 

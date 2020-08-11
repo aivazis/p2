@@ -71,7 +71,7 @@ int main(int argc, char * argv[]) {
         assert(( sat[idx] == expected ));
     }
 
-    // nothing to do
+    // all done
     return 0;
 }
 

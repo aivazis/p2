@@ -95,7 +95,7 @@ int main(int argc, char * argv[]) {
     }
     channel << pyre::journal::endl;
 
-    // nothing to do
+    // all done
     return 0;
 }
 

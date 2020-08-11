@@ -42,7 +42,7 @@ int main(int argc, char * argv[]) {
     // check
     assert(( grid[zero] == 42 ));
 
-    // nothing to do
+    // all done
     return 0;
 }
 

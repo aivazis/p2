@@ -44,7 +44,7 @@ int main(int argc, char * argv[]) {
     // and verify
     assert(( grid[{0,0,0}] == 0 ));
 
-    // nothing to do
+    // all done
     return 0;
 }
 

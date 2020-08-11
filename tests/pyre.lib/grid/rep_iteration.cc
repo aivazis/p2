@@ -35,7 +35,7 @@ int main(int argc, char * argv[]) {
         << "rep: {" << rep << "}"
         << pyre::journal::endl(__HERE__);
 
-    // nothing to do
+    // all done
     return 0;
 }
 
