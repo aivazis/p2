@@ -4,6 +4,7 @@
 // (c) 1998-2020 all rights reserved
 
 
+#include <iostream>
 // support
 #include <cassert>
 // get the grid
@@ -18,10 +19,19 @@ int main(int argc, char * argv[]) {
     // make a channel
     pyre::journal::debug_t channel("pyre.grid.heap");
 
+    // make my cell a bit more complicated
+    struct cell_t {
+        std::pair<float, float> ref;
+        std::pair<float, float> delta;
+        float conf;
+        float snr;
+        float cov;
+    };
+
     // we'll work with a 3d conventionally packed grid
     using pack_t = pyre::grid::canonical_t<3>;
     // of doubles on the heap
-    using storage_t = pyre::memory::heap_t<double>;
+    using storage_t = pyre::memory::heap_t<cell_t>;
     // putting it all together
     using grid_t = pyre::grid::grid_t<pack_t, storage_t>;
 
@@ -30,24 +40,19 @@ int main(int argc, char * argv[]) {
     // instantiate the grid
     grid_t grid { packing, packing.cells() };
 
-    // fill it
-    for (const auto & idx : grid.layout()) {
-        // with the offset of each index
-        grid[idx] = grid.layout()[idx];
-    }
-
-    // show me the value at the origin
+    // show me
     channel
-        << "grid[0,0,0] = " << grid[{0,0,0}]
-        << pyre::journal::endl(__HERE__);
+        << "value: " << sizeof(grid_t::value_type) << " bytes, "
+        << "spacing: " << (&grid[{0,0,1}] - &grid[{0,0,0}]) << " cell, "
+        << "spacing: " << (&grid[1] - &grid[0]) << " cell"
+        << pyre::journal::endl;
 
-    // verify
-    for (const auto & idx : grid.layout()) {
-        // that we have what we expect
-        assert(( grid[idx] == grid.layout()[idx] ));
-    }
+    // verify that the address of the second element is the same regardless of the way it is computed
+    assert(( &grid[{0,0,1}] == &grid[1] ));
+    // verify that the distance between consecutive entries is precisely one cell
+    assert(( (&grid[{0,0,1}] - &grid[{0,0,0}]) == 1 ));
 
-    // nothing to do
+    // all done
     return 0;
 }
 
