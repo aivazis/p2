@@ -59,8 +59,10 @@ public:
     // interface: data access
 public:
     // with bounds check
+    constexpr auto at(difference_type) const -> reference;
     constexpr auto at(index_const_reference) const -> reference;
     // without bounds check
+    constexpr auto operator[](difference_type) const -> reference;
     constexpr auto operator[](index_const_reference) const -> reference;
 
     // interface: iteration support
