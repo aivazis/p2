@@ -20,7 +20,6 @@ public:
     // my template parameter
     using container_type = containerT;
     // my representation
-    using size_type = typename container_type::size_type;
     using rep_type = Rep<containerT>;
 
     // metamethods
@@ -54,12 +53,12 @@ public:
     // implementation details: helpers
 private:
     // the {columnMajor} helper
-    template <size_t... seq>
+    template <std::size_t... seq>
     static constexpr auto
     _columnMajor(std::index_sequence<seq...>) -> order_type;
 
     // the {rowMajor} helper
-    template <size_t... seq>
+    template <std::size_t... seq>
     static constexpr auto
     _rowMajor(std::index_sequence<seq...>) -> order_type;
 };

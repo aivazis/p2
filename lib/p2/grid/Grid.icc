@@ -175,7 +175,7 @@ box(index_const_reference base, shape_const_reference shape) const -> grid_type
 
 // slicing
 template <class packingT, class storageT>
-template <size_t sliceRank>
+template <int sliceRank>
 constexpr auto
 pyre::grid::Grid<packingT, storageT>::
 slice(index_const_reference base, shape_const_reference shape)

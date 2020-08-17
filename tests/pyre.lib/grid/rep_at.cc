@@ -9,7 +9,7 @@
 
 
 // alias the rep
-using rep_t = pyre::grid::rep_t<pyre::grid::size_t, 4>;
+using rep_t = pyre::grid::rep_t<int, 4>;
 
 
 // bounds safe data access

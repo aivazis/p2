@@ -25,7 +25,7 @@ Rep(argT... args) :
 template <class containerT>
 constexpr auto
 pyre::grid::Rep<containerT>::
-rank() -> size_type
+rank() -> int
 {
     // the rank is equal to the number of slots in the rep
     return std::tuple_size<container_type>::value;
@@ -141,7 +141,7 @@ operator+ (const Rep<containerT> & i1, const Rep<containerT> & i2) -> Rep<contai
     Rep<containerT> sum;
 
     // go through each axis
-    for (size_t axis = 0; axis < sum.rank(); ++axis) {
+    for (int axis = 0; axis < sum.rank(); ++axis) {
         // do the math
         sum[axis] = i1[axis] + i2[axis];
     }
@@ -160,7 +160,7 @@ operator- (const Rep<containerT> & i1, const Rep<containerT> & i2) -> Rep<contai
     Rep<containerT> diff;
 
     // go through each axis
-    for (size_t axis = 0; axis < diff.rank(); ++axis) {
+    for (int axis = 0; axis < diff.rank(); ++axis) {
         // do the math
         diff[axis] = i1[axis] - i2[axis];
     }
@@ -180,7 +180,7 @@ operator* (const Rep<containerT> & i, int s) -> Rep<containerT>
     Rep<containerT> scaled;
 
     // go through each axis
-    for (size_t axis = 0; axis < scaled.rank(); ++axis) {
+    for (int axis = 0; axis < scaled.rank(); ++axis) {
         // do the math
         scaled[axis] = s * i[axis];
     }
@@ -209,7 +209,7 @@ operator/ (const Rep<containerT> & i, int s) -> Rep<containerT>
     Rep<containerT> scaled;
 
     // go through each axis
-    for (size_t axis = 0; axis < scaled.rank(); ++axis) {
+    for (int axis = 0; axis < scaled.rank(); ++axis) {
         // do the math
         scaled[axis] = i[axis] / s;
     }

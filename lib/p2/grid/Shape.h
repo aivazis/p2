@@ -21,8 +21,6 @@ public:
     using shape_type = Shape<containerT>;
     // alias for my base
     using rep_type = Product<containerT>;
-    // the sizes of things
-    using size_type = typename rep_type::size_type;
     // individual axis values
     using rank_type = typename rep_type::value_type;
     using rank_reference = rank_type &;
@@ -37,7 +35,7 @@ public:
     // interface
 public:
     // the total number of addressable values
-    constexpr auto cells() const -> size_type;
+    constexpr auto cells() const -> std::size_t;
 
     // default metamethods
 public:

@@ -25,23 +25,23 @@ Shape(argT... idx) :
 template <class containerT>
 constexpr auto
 pyre::grid::Shape<containerT>::
-cells() const -> size_type
+cells() const -> std::size_t
 {
     // the initial value
-    size_type one = 1;
+    int one = 1;
     // my capacity is equal to the product of the number of possible values along each axis
-    return std::accumulate(this->begin(), this->end(), one, std::multiplies<size_type>());
+    return std::accumulate(this->begin(), this->end(), one, std::multiplies<int>());
 }
 
 
 // support for structured bindings
 template<class containerT>
 class std::tuple_size<pyre::grid::Shape<containerT>> :
-    public std::integral_constant<std::size_t, pyre::grid::Shape<containerT>::rank()>
+    public std::integral_constant<int, pyre::grid::Shape<containerT>::rank()>
 {};
 
 
-template<std::size_t I, class containerT>
+template<int I, class containerT>
 struct std::tuple_element<I, pyre::grid::Shape<containerT>>
 {
     static_assert(I < pyre::grid::Shape<containerT>::rank(), "index is out of bounds");

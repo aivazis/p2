@@ -83,7 +83,7 @@ public:
     // slicing: create subgrids of a given shape anchored at the given index; rank reduction is
     // achieved by zeroing out the ranks to be skipped in the shape specification
 public:
-    template <size_t sliceRank = packing_type::rank()>
+    template <int sliceRank = packing_type::rank()>
     constexpr auto slice(index_const_reference, shape_const_reference);
 
     // implementation details: data

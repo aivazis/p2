@@ -13,7 +13,7 @@
 //
 // the client supplies:
 //  - its rank {N}
-//  - the category of each factor in {T}: {int}, {long}, {size_t}
+//  - the category of each factor in {T}: {int}, {long}
 //  - the container choice to hand down to {rep_t} that stores per-rank values
 //
 // note: no {crtp} here, for now...

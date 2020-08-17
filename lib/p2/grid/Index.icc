@@ -60,7 +60,7 @@ operator+ (const Index<indexContainerT> & i, const Shape<shapeContainerT> & s)
     Index<indexContainerT> sum;
 
     // go through each axis
-    for (size_t axis = 0; axis < sum.rank(); ++axis) {
+    for (auto axis = 0; axis < sum.rank(); ++axis) {
         // do the math
         sum[axis] = i[axis] + s[axis];
     }
@@ -73,11 +73,11 @@ operator+ (const Index<indexContainerT> & i, const Shape<shapeContainerT> & s)
 // support for structured bindings
 template<class containerT>
 class std::tuple_size<pyre::grid::Index<containerT>> :
-    public std::integral_constant<std::size_t, pyre::grid::Index<containerT>::rank()>
+    public std::integral_constant<int, pyre::grid::Index<containerT>::rank()>
 {};
 
 
-template<std::size_t I, class containerT>
+template<int I, class containerT>
 struct std::tuple_element<I, pyre::grid::Index<containerT>>
 {
     static_assert(I < pyre::grid::Index<containerT>::rank(), "index is out of bounds");

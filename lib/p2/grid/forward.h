@@ -54,7 +54,7 @@ namespace pyre::grid {
     // an ordered index generator
     template <class packingT> class IndexIterator;
     // the packing strategy
-    template <size_t N, template <typename, size_t> class containerT> class Canonical;
+    template <int N, template <typename, std::size_t> class containerT> class Canonical;
 
     // bringing it all together
     template <class packingT, class storageT>
@@ -171,7 +171,7 @@ namespace pyre::grid {
 template<class containerT>
 class std::tuple_size<pyre::grid::Index<containerT>>;
 
-template<std::size_t I, class containerT>
+template<int I, class containerT>
 struct std::tuple_element<I, pyre::grid::Index<containerT>>;
 
 
@@ -179,7 +179,7 @@ struct std::tuple_element<I, pyre::grid::Index<containerT>>;
 template<class containerT>
 class std::tuple_size<pyre::grid::Shape<containerT>>;
 
-template<std::size_t I, class containerT>
+template<int I, class containerT>
 struct std::tuple_element<I, pyre::grid::Shape<containerT>>;
 
 

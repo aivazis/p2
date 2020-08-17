@@ -19,8 +19,6 @@ public:
     using rep_type = Rep<containerT>;
     // and my container
     using container_type = containerT;
-    // sizes of things
-    using size_type = typename containerT::size_type;
     // my value
     using value_type = typename container_type::value_type;
     using pointer = typename container_type::pointer;
@@ -44,7 +42,7 @@ public:
     // static interface
 public:
     // my rank is the number of indices i can store
-    static constexpr auto rank() -> size_type;
+    static constexpr auto rank() -> int;
     // make a rep filled with zeroes
     static constexpr auto zero() -> rep_type;
     // a rep filled with ones

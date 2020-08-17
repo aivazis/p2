@@ -50,8 +50,8 @@ int main(int argc, char * argv[]) {
 
     // show me {base}
     channel << "base:" << pyre::journal::newline;
-    for (size_t i=0; i<shape[0]; ++i) {
-        for (size_t j=0; j<shape[1]; ++j) {
+    for (int i=0; i<shape[0]; ++i) {
+        for (int j=0; j<shape[1]; ++j) {
             channel << "  " << std::setw(2) << base[{i,j}];
         }
         channel << pyre::journal::newline;
@@ -87,8 +87,8 @@ int main(int argc, char * argv[]) {
 
     // show me {expanded}
     channel << "expanded:" << pyre::journal::newline;
-    for (size_t i=0; i<expandedShape[0]; ++i) {
-        for (size_t j=0; j<expandedShape[1]; ++j) {
+    for (int i=0; i<expandedShape[0]; ++i) {
+        for (int j=0; j<expandedShape[1]; ++j) {
             channel << "  " << std::setw(2) << expanded[{i,j}];
         }
         channel << pyre::journal::newline;

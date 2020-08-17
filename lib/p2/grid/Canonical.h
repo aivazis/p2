@@ -13,27 +13,25 @@
 //
 //    Z_s1 x ... x Z_sn -> Z_(s1 * ... * sn)
 //
-template <pyre::grid::size_t N, template <typename, size_t> class containerT>
+template <int N, template <typename, std::size_t> class containerT>
 class pyre::grid::Canonical {
     // types
 public:
     // alias for me
     using canonical_type = Canonical<N, containerT>;
     using canonical_const_reference = const canonical_type &;
-    // the sizes of things
-    using size_type = size_t;
     // my parts
     // rank order
-    using order_type = Order<containerT<size_type, N>>;
+    using order_type = Order<containerT<int, N>>;
     using order_const_reference = const order_type &;
     // rank specifications
-    using shape_type = Shape<containerT<size_type, N>>;
+    using shape_type = Shape<containerT<int, N>>;
     using shape_const_reference = const shape_type &;
     // indices
     using index_type = Index<containerT<int, N>>;
     using index_const_reference = const index_type &;
     // strides are like shapes with a wide type so overflow is less likely
-    using strides_type = Shape<containerT<size_type, N>>;
+    using strides_type = Shape<containerT<int, N>>;
     using strides_const_reference = const strides_type &;
     // offsets
     using difference_type = typename index_type::difference_type;
@@ -67,7 +65,7 @@ public:
     constexpr auto nudge() const -> difference_type;
 
     // the total number of addressable cells
-    constexpr auto cells() const -> size_type;
+    constexpr auto cells() const -> std::size_t;
 
     // mutators: {canonical_type} instances are {const}, so mutators create new instances
 public:
@@ -87,10 +85,10 @@ public:
     // slicing
 public:
     // when the shape is known at compile time
-    template <size_t... shape>
+    template <int... shape>
     constexpr auto cslice(index_const_reference base) const;
     // when only the rank of the slice is known at compile time
-    template <size_t sliceRank = N>
+    template <int sliceRank = N>
     constexpr auto slice(index_const_reference base, shape_const_reference shape) const;
 
     // iteration support: iterators generate sequences of indices
@@ -106,7 +104,7 @@ public:
     // static interface
 public:
     // the number of axes
-    static constexpr auto rank() -> size_type;
+    static constexpr auto rank() -> int;
 
     // implementation details: static helpers
 protected:
@@ -133,10 +131,10 @@ public:
     // destructor
     ~Canonical() = default;
     // constructors
-    constexpr Canonical(const Canonical &) = default;
-    constexpr Canonical & operator= (const Canonical &) = default;
-    constexpr Canonical(Canonical &&) = default;
-    constexpr Canonical & operator= (Canonical &&) = default;
+    Canonical(const Canonical &) = default;
+    Canonical & operator= (const Canonical &) = default;
+    Canonical(Canonical &&) = default;
+    Canonical & operator= (Canonical &&) = default;
 };
 
 

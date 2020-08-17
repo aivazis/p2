@@ -36,7 +36,7 @@ int main(int argc, char * argv[]) {
         << "cor: " << cor << pyre::journal::endl(__HERE__);
 
     // verify
-    for (size_t axis = 0; axis < shape_t::rank(); ++axis) {
+    for (auto axis = 0; axis < shape_t::rank(); ++axis) {
         assert(( cor[axis] == sec[axis] - ref[axis] + 1 ));
     }
 

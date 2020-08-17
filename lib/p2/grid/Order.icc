@@ -71,7 +71,7 @@ c() -> order_type
 // implementation details
 // column major helper
 template <class containerT>
-template<pyre::grid::size_t... seq>
+template<std::size_t... seq>
 constexpr auto
 pyre::grid::Order<containerT>::
 _columnMajor(std::index_sequence<seq...>) -> order_type
@@ -85,7 +85,7 @@ _columnMajor(std::index_sequence<seq...>) -> order_type
 
 
 template <class containerT>
-template<pyre::grid::size_t... seq>
+template<std::size_t... seq>
 constexpr auto
 pyre::grid::Order<containerT>::
 _rowMajor(std::index_sequence<seq...>) -> order_type

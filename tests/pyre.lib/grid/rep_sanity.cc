@@ -9,8 +9,7 @@
 
 
 // alias the rep
-template <pyre::grid::size_t N>
-using rep_t = pyre::grid::rep_t<pyre::grid::size_t, N>;
+using rep_t = pyre::grid::rep_t<int, 4>;
 
 
 // exercise the basic {rep_t} interface
@@ -22,7 +21,7 @@ int main(int argc, char * argv[]) {
     pyre::journal::debug_t channel("pyre.grid.rep");
 
     // make a rep
-    constexpr rep_t<4> rep { 0, 1, 2, 3 };
+    constexpr rep_t rep { 0, 1, 2, 3 };
 
     // check the dimension
     static_assert (rep.rank() == 4);

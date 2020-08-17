@@ -13,27 +13,27 @@ namespace pyre::grid
 {
     // this wrapper over a {std::array}-like container
     // thin adaptor over a compile time container
-    template <typename T, size_t N, template <typename, size_t> class containerT = std::array>
+    template <typename T, int N, template <typename, std::size_t> class containerT = std::array>
     using rep_t = Rep<containerT<T,N>>;
 
     // support for the multidimensional objects in this package
-    template <size_t N, typename T = size_t,
-              template <typename, size_t> class containerT = std::array>
+    template <int N, typename T = int,
+              template <typename, std::size_t> class containerT = std::array>
     using product_t = Product<containerT<T,N>>;
 
     // the number of possible values of each axis
-    template <size_t N, typename T = unsigned int,
-              template <typename, size_t> class containerT = std::array>
+    template <int N, typename T = unsigned int,
+              template <typename, std::size_t> class containerT = std::array>
     using shape_t = Shape<containerT<T,N>>;
 
     // indices
-    template <size_t N, typename T = int,
-              template <typename, size_t> class containerT = std::array>
+    template <int N, typename T = int,
+              template <typename, std::size_t> class containerT = std::array>
     using index_t = Index<containerT<T,N>>;
 
     // the order in which indices are packed in memory
-    template <size_t N, typename T = unsigned int,
-              template <typename, size_t> class containerT = std::array>
+    template <int N, typename T = unsigned int,
+              template <typename, std::size_t> class containerT = std::array>
     using order_t = Order<containerT<T,N>>;
 
     // in order product rank traversal
@@ -44,7 +44,7 @@ namespace pyre::grid
     template <class packingT>
     using index_iterator_t = IndexIterator<packingT>;
     // the canonical packing strategy
-    template <size_t N, template <typename, size_t> class containerT = std::array>
+    template <int N, template <typename, std::size_t> class containerT = std::array>
     using canonical_t = Canonical<N, containerT>;
 
     // the grid

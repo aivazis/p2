@@ -22,8 +22,6 @@
 // aliases that define implementation choices
 namespace pyre::grid {
     // make sure we are on the same page as {memory} on these fundamental types
-    // sizes of things
-    using size_t = pyre::memory::size_t;
     // strings
     using string_t = pyre::memory::string_t;
     // names of things
@@ -32,7 +30,7 @@ namespace pyre::grid {
     using uri_t = pyre::memory::uri_t;
 
     // arrays of things
-    template <typename T, size_t N>
+    template <typename T, int N>
     using array_t = std::array<T, N>;
 
     // output streams
