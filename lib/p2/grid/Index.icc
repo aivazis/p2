@@ -77,7 +77,7 @@ class std::tuple_size<pyre::grid::Index<containerT>> :
 {};
 
 
-template<int I, class containerT>
+template<std::size_t I, class containerT>
 struct std::tuple_element<I, pyre::grid::Index<containerT>>
 {
     static_assert(I < pyre::grid::Index<containerT>::rank(), "index is out of bounds");

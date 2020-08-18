@@ -171,7 +171,7 @@ namespace pyre::grid {
 template<class containerT>
 class std::tuple_size<pyre::grid::Index<containerT>>;
 
-template<int I, class containerT>
+template<std::size_t I, class containerT>
 struct std::tuple_element<I, pyre::grid::Index<containerT>>;
 
 
@@ -179,7 +179,7 @@ struct std::tuple_element<I, pyre::grid::Index<containerT>>;
 template<class containerT>
 class std::tuple_size<pyre::grid::Shape<containerT>>;
 
-template<int I, class containerT>
+template<std::size_t I, class containerT>
 struct std::tuple_element<I, pyre::grid::Shape<containerT>>;
 
 
