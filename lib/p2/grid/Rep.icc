@@ -170,6 +170,28 @@ operator- (const Rep<containerT> & i1, const Rep<containerT> & i2) -> Rep<contai
 }
 
 
+// cartesian product
+template <class containerT1, class containerT2, template <typename, std::size_t> class containerY>
+constexpr auto
+pyre::grid::
+operator* (const Rep<containerT1> & rep1, const Rep<containerT2> & rep2)
+    -> Rep<containerY<int, std::tuple_size_v<containerT1> + std::tuple_size_v<containerT2>>>
+{
+    // compute the dimension of the result
+    constexpr auto dim = std::tuple_size_v<containerT1> + std::tuple_size_v<containerT2>;
+    // build the result
+    Rep<containerY<int, dim>> result;
+    // grab the beginning of the storage
+    auto begin = result.begin();
+    // copy {rep1} into the result
+    std::copy(rep1.begin(), rep1.end(), begin);
+    // copy {rep2}
+    std::copy(rep2.begin(), rep2.end(), begin + rep1.rank());
+    // all done
+    return result;
+}
+
+
 // scaling by integers
 template <class containerT>
 constexpr auto

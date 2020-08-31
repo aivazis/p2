@@ -95,6 +95,15 @@ namespace pyre::grid {
     operator- (const Rep<containerT> &, const Rep<containerT> &)
         -> Rep<containerT>;
 
+    // cartesian products
+    template <class containerT1,
+              class containerT2,
+              template <typename, std::size_t> class containerY = std::array
+              >
+    constexpr auto
+    operator* (const Rep<containerT1> &, const Rep<containerT2> &)
+        -> Rep<containerY<int, std::tuple_size_v<containerT1> + std::tuple_size_v<containerT2>>>;
+
     // scaling by integers
     template <class containerT>
     constexpr auto
