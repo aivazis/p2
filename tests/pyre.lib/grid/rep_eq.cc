@@ -28,7 +28,7 @@ int main(int argc, char * argv[]) {
     constexpr auto rep2 = rep_t::zero();
 
     // verify they are equal
-    static_assert (rep1 == rep2);
+    assert(( rep1 == rep2 ));
 
     // show me
     channel

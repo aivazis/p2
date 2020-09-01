@@ -41,7 +41,7 @@ int main(int argc, char * argv[]) {
     assert(( s.cells() == 2*3*4*5 ));
 
     // verify that a shape is equal to itself
-    static_assert (s == s);
+    assert(( s == s ));
 
     // make another
     shape_t z { 2, 3, 4, 5 };

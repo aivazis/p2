@@ -47,7 +47,7 @@ int main(int argc, char *argv[]) {
         << "zero: " << z
         << pyre::journal::endl(__HERE__);
     // verify it's the same as {dflt}
-    static_assert (z == dflt);
+    assert(( z == dflt ));
 
     // make an index using the filling constructor
     index_t zero(0);

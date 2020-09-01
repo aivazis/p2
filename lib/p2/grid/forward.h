@@ -67,16 +67,6 @@ namespace pyre::grid {
 
 // operators on rep
 namespace pyre::grid {
-    // equality
-    template <class containerT>
-    constexpr auto
-    operator==(const Rep<containerT> &, const Rep<containerT> &) -> bool;
-
-    // inequality
-    template <class containerT>
-    constexpr auto
-    operator!=(const Rep<containerT> &, const Rep<containerT> &) -> bool;
-
     // stream injection
     template <class containerT>
     inline auto
