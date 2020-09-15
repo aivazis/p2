@@ -27,8 +27,8 @@ j2.pkg.prerequisites := p2.pkg
 # j2.lib.meta := meta.cc.in
 # the destination include directory
 j2.lib.incdir := $(builder.dest.inc)/p2/journal/
-# the master header file; it is deposited one level above the rest
-j2.lib.master := journal.h
+# the top level api header file; it is deposited one level above the rest
+j2.lib.gateway := journal.h
 # compiler control
 j2.lib.c++.defines += PYRE_CORE
 j2.lib.c++.flags += $($(compiler.c++).std.c++17)
