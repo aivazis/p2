@@ -78,6 +78,7 @@ public:
     constexpr auto cend() const -> const_iterator;
 
     // iterate over a portion of the grid
+    constexpr auto box(packing_const_reference) const -> grid_type;
     constexpr auto box(index_const_reference, shape_const_reference) const -> grid_type;
 
     // slicing: create subgrids of a given shape anchored at the given index; rank reduction is

@@ -167,6 +167,15 @@ cend() const -> const_iterator
 template <class packingT, class storageT>
 constexpr auto
 pyre::grid::Grid<packingT, storageT>::
+box(packing_const_reference box) const -> grid_type
+{
+    // ask my layout to narrow the region and make a new grid over it
+    return grid_type(box, _data);
+}
+
+template <class packingT, class storageT>
+constexpr auto
+pyre::grid::Grid<packingT, storageT>::
 box(index_const_reference base, shape_const_reference shape) const -> grid_type
 {
     // ask my layout to narrow the region and make a new grid over it
