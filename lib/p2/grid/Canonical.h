@@ -95,6 +95,7 @@ public:
 public:
     // whole layout iterators
     constexpr auto begin() const -> index_iterator;
+    constexpr auto begin(index_const_reference step) const -> index_iterator;
     constexpr auto end() const -> index_iterator;
 
     // use an existing layout to derive a new one

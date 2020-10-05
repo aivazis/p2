@@ -328,6 +328,16 @@ begin() const -> index_iterator
 template <int N, template <typename, std::size_t> class containerT>
 constexpr auto
 pyre::grid::Canonical<N, containerT>::
+begin(index_const_reference step) const -> index_iterator
+{
+    // make an iterator that generates index in my packing {order}, starting at my {origin}
+    return index_iterator(shape(), order(), origin(), step);
+}
+
+
+template <int N, template <typename, std::size_t> class containerT>
+constexpr auto
+pyre::grid::Canonical<N, containerT>::
 end() const -> index_iterator
 {
     // form the end of the container

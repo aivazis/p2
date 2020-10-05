@@ -27,19 +27,25 @@ public:
     using shape_type = typename packing_type::shape_type;
     using order_type = typename packing_type::order_type;
     // my value type
-    using index_reference = const index_type &;
+    using index_const_reference = const index_type &;
+    using shape_const_reference = const shape_type &;
+    using order_const_reference = const order_type &;
     // ranks
     using rank_type = typename index_type::rank_type;
 
     // metamethods
 public:
-    // constructor
-    constexpr IndexIterator(const shape_type &, const order_type &, const index_type &);
+    // constructors
+    // shape, order, origin
+    constexpr IndexIterator(shape_const_reference, order_const_reference, index_const_reference);
+    // shape, order, origin, step
+    constexpr IndexIterator(shape_const_reference, order_const_reference,
+                            index_const_reference, index_const_reference);
 
     // iterator protocol
 public:
     // dereference
-    constexpr auto operator*() const -> index_reference;
+    constexpr auto operator*() const -> index_const_reference;
     // arithmetic
     constexpr auto operator++() -> iterator_reference;
     constexpr auto operator++(int) -> iterator;
@@ -50,6 +56,7 @@ private:
     const shape_type _shape;        // the shape of the packing
     const order_type _order;        // the index ordering determines the iteration order
     const index_type _origin;       // the lowest possible value
+    const index_type _step;         // the desired increment along each rank
 
     // default metamethods
 public:

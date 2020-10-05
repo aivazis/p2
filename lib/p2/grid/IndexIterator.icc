@@ -10,14 +10,31 @@
 
 
 // metamethods
+// shape, order, origin
 template <class packingT>
 constexpr
 pyre::grid::IndexIterator<packingT>::
-IndexIterator(const shape_type & shape, const order_type & order, const index_type & start) :
-    _current { start },
+IndexIterator(shape_const_reference shape, order_const_reference order,
+              index_const_reference origin) :
+    _current { origin },
     _shape { shape },
     _order { order },
-    _origin { start }
+    _origin { origin },
+    _step { 1 }
+{}
+
+
+// shape, order, origin, step
+template <class packingT>
+constexpr
+pyre::grid::IndexIterator<packingT>::
+IndexIterator(shape_const_reference shape, order_const_reference order,
+              index_const_reference origin, index_const_reference step) :
+    _current { origin },
+    _shape { shape },
+    _order { order },
+    _origin { origin },
+    _step { step }
 {}
 
 
@@ -26,7 +43,7 @@ IndexIterator(const shape_type & shape, const order_type & order, const index_ty
 template <class packingT>
 constexpr auto
 pyre::grid::IndexIterator<packingT>::
-operator*() const -> index_reference
+operator*() const -> index_const_reference
 {
     // where i point
     return _current;
@@ -44,9 +61,11 @@ operator++() -> iterator_reference
         // get the limiting value for this rank
         rank_type limit = _origin[rank] + _shape[rank];
         // get my current value for this rank and increment it
-        auto value = ++_current[rank];
+        auto value = _current[rank] + _step[rank];
         // if the value didn't overflow
         if (value < limit) {
+            // store it
+            _current[rank] = value;
             // all done
             return *this;
         }
