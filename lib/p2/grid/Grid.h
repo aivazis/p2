@@ -69,12 +69,15 @@ public:
 public:
     // whole grid iteration: visit every value in my native packing order
     constexpr auto begin() -> iterator;
+    constexpr auto begin(index_type) -> iterator;
     constexpr auto end() -> iterator;
     // const
     constexpr auto begin() const -> const_iterator;
+    constexpr auto begin(index_type) const -> const_iterator;
     constexpr auto end() const -> const_iterator;
     // and again, for non-const grids
     constexpr auto cbegin() const -> const_iterator;
+    constexpr auto cbegin(index_type) const -> const_iterator;
     constexpr auto cend() const -> const_iterator;
 
     // iterate over a portion of the grid

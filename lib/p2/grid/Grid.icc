@@ -114,6 +114,16 @@ begin() -> iterator
 template <class packingT, class storageT>
 constexpr auto
 pyre::grid::Grid<packingT, storageT>::
+begin(index_type step) -> iterator
+{
+    // make an {iterator} that points to the beginning of my index space
+    return iterator(*this, _layout.begin(step));
+}
+
+
+template <class packingT, class storageT>
+constexpr auto
+pyre::grid::Grid<packingT, storageT>::
 end() -> iterator
 {
     // make an {iterator} that points to the end of my index space
@@ -135,6 +145,16 @@ begin() const -> const_iterator
 template <class packingT, class storageT>
 constexpr auto
 pyre::grid::Grid<packingT, storageT>::
+begin(index_type step) const -> const_iterator
+{
+    // make a {const_iterator} that points to the beginning of my index space
+    return const_iterator(*this, _layout.begin(step));
+}
+
+
+template <class packingT, class storageT>
+constexpr auto
+pyre::grid::Grid<packingT, storageT>::
 end() const -> const_iterator
 {
     // make a {const_iterator} that points to the end of my index space
@@ -150,6 +170,16 @@ cbegin() const -> const_iterator
 {
     // make a {const_iterator} that points to the beginning of my index space
     return const_iterator(*this, _layout.begin());
+}
+
+
+template <class packingT, class storageT>
+constexpr auto
+pyre::grid::Grid<packingT, storageT>::
+cbegin(index_type step) const -> const_iterator
+{
+    // make a {const_iterator} that points to the beginning of my index space
+    return const_iterator(*this, _layout.begin(step));
 }
 
 
