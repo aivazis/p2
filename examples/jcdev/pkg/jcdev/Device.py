@@ -7,7 +7,7 @@
 # externals
 import csv
 # superclass
-from j2.Device import Device
+from journal.Device import Device
 # my renderer
 from .Renderer import Renderer
 

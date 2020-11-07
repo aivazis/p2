@@ -22,7 +22,6 @@ jcdev.tests := jcdev.lib.tests jcdev.pkg.tests
 # compiler control
 jcdev.lib.c++.defines += WHATEVER
 jcdev.lib.c++.flags += $($(compiler.c++).std.c++17)
-jcdev.lib.c++.libraries := j2
 
 # the package
 # meta file

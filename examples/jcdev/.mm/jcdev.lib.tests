@@ -7,10 +7,9 @@
 # the libjcdev test suite
 jcdev.lib.tests.stem := jcdev.lib
 jcdev.lib.tests.prerequisites := jcdev.lib
-jcdev.lib.tests.extern := jcdev.lib
+jcdev.lib.tests.extern := jcdev.lib pyre
 # compiler control
 jcdev.lib.tests.c++.flags += -Wall $($(compiler.c++).std.c++17)
-jcdev.lib.tests.c++.libraries += j2
 
 
 # test case configuration

@@ -12,7 +12,7 @@ def test():
     # access the package
     import jcdev
     # get the journal
-    import j2
+    import journal
 
     # open a file
     stream = open("debug_example.csv", mode="w")
@@ -20,10 +20,10 @@ def test():
     device = jcdev.device(stream=stream)
 
     # attach the device as the global default
-    j2.chronicler.device = device
+    journal.chronicler.device = device
 
     # make a channel and activate it
-    debug = j2.debug("jcdev.debug").activate()
+    debug = journal.debug("jcdev.debug").activate()
     # say something
     debug.log("hello from jcdev!")
 

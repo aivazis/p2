@@ -61,9 +61,9 @@ class Configurable:
         # if it's not there
         except KeyError:
             # we have a bug; get the journal
-            import j2
+            import journal
             # build a channel
-            channel = j2.firewall("pyre.components")
+            channel = journal.firewall("pyre.components")
             # and complain
             raise channel.log(f"{cls}: missing trait for '{alias}' -> '{canonical}'")
 

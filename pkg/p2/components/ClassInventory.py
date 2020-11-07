@@ -42,9 +42,9 @@ class ClassInventory(Inventory):
                 return trait.default
 
         # if we exhausted the search without finding a value, we have a bug
-        import j2
+        import journal
         # make a channel
-        channel = j2.firewall("pyre.traits")
+        channel = journal.firewall("pyre.traits")
         # build an error report
         msg = f"could not find a value for '{trait.name}' in {component}"
         # and complain

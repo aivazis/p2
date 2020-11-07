@@ -40,7 +40,6 @@ builder.dest.pyc := $(sys.prefix)/lib/python3/dist-packages/
 compiler.python := python$(python.version)
 # pybind11 + clang:
 p2.ext.lib.c++.flags += -fsized-deallocation
-j2.ext.lib.c++.flags += -fsized-deallocation
 
 
 # end of file
