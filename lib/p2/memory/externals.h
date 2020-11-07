@@ -21,7 +21,7 @@
 #include <sys/stat.h>  // for the mode flags
 
 // support
-#include <p2/journal.h>
+#include <pyre/journal.h>
 
 
 // aliases that define implementation choices

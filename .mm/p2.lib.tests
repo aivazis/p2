@@ -6,7 +6,7 @@
 
 # the libp2 test suite
 p2.lib.tests.stem := pyre.lib
-p2.lib.tests.prerequisites := p2.lib pyre
+p2.lib.tests.prerequisites := p2.lib
 p2.lib.tests.extern := p2.lib pyre
 
 # c++ compiler arguments

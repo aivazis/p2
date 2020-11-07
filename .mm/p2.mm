@@ -18,7 +18,6 @@ p2.tests := p2.pkg.tests p2.lib.tests p2.ext.tests
 
 # the p2 library settings
 p2.lib.extern := pyre
-p2.lib.prerequisites := pyre
 p2.lib.c++.defines += PYRE_CORE
 p2.lib.c++.flags += $($(compiler.c++).std.c++17)
 

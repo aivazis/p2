@@ -7,7 +7,7 @@
 // standard library
 #include <fstream>
 // get the journal
-#include <p2/journal.h>
+#include <pyre/journal.h>
 // get the custom device support
 #include <jcdev/public.h>
 

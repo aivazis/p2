@@ -15,7 +15,7 @@
 #include <ostream>
 #include <iomanip>
 // get the journal
-#include <p2/journal.h>
+#include <pyre/journal.h>
 
 
 // aliases for fundamental types that define implementation choices

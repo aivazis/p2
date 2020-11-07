@@ -15,7 +15,7 @@
 #include <ostream>
 
 // support
-#include <p2/journal.h>
+#include <pyre/journal.h>
 #include <p2/memory.h>
 
 

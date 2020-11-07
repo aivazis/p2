@@ -6,7 +6,7 @@
 
 // get the timers
 #include <p2/timers.h>
-#include <p2/journal.h>
+#include <pyre/journal.h>
 // support
 #include <thread>
 #include <cassert>
