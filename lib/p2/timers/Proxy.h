@@ -55,11 +55,11 @@ public:
     inline auto lap() const;
 
     // display convenience
-    // read the accumulated time and render it as a string in seconds
+    // return the accumulated time in seconds
     inline auto sec() const;
-    // read the accumulated time and render it as a string in milliseconds
+    // return the accumulated time in milliseconds
     inline auto ms() const;
-    // read the accumulated time and render it as a string in microseconds
+    // return the accumulated time in microseconds
     inline auto us() const;
 
     // syntactic sugar
