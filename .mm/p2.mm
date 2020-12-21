@@ -7,19 +7,13 @@
 # p2 builds a python package
 p2.packages := p2.pkg
 # libraries
-p2.libraries := p2.lib
+p2.libraries :=
 # python extensions
 p2.extensions := p2.ext
 # docker images
 p2.docker-images := p2.focal-gcc p2.focal-clang p2.eoan-gcc p2.eoan-clang
 # and test suites
-p2.tests := p2.pkg.tests p2.lib.tests p2.ext.tests
-
-
-# the p2 library settings
-p2.lib.extern := pyre
-p2.lib.c++.defines += PYRE_CORE
-p2.lib.c++.flags += $($(compiler.c++).std.c++17)
+p2.tests := p2.pkg.tests p2.ext.tests
 
 
 # the p2 extension settings
