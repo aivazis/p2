@@ -13,7 +13,7 @@ p2.extensions :=
 # docker images
 p2.docker-images := p2.focal-gcc p2.focal-clang p2.eoan-gcc p2.eoan-clang
 # and test suites
-p2.tests := p2.pkg.tests p2.ext.tests
+p2.tests := p2.pkg.tests
 
 
 # the docker images
