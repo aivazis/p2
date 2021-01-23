@@ -38,7 +38,7 @@ class And(Constraint):
 
     def __str__(self):
         # build the list of constraint representations
-        reps = [ f"({constraint})" for constraint in self.constraints ]
+        reps = ( f"({constraint})" for constraint in self.constraints )
         # assemble and return
         return " and ".join(reps)
 
