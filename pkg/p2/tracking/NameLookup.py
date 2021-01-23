@@ -4,6 +4,8 @@
 # (c) 1998-2021 all rights reserved
 
 
+# locator tied to the configuration store; it associates a client supplied description to the
+# value of a key
 class NameLookup:
     """
     A locator that records a simple named source with no further details

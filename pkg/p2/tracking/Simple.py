@@ -4,6 +4,7 @@
 # (c) 1998-2021 all rights reserved
 
 
+# record a named source, no further details
 class Simple:
     """
     A locator that records a simple named source with no further details
@@ -19,6 +20,7 @@ class Simple:
 
 
     def __str__(self):
+        # stringify my {source} and return it
         return str(self.source)
 
 
