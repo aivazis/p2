@@ -43,9 +43,9 @@ class PathHash:
         """
         Make the node {target} accessible under the name {alias}
         """
-        # save the current hash key of {alias}
-        original = self[alias]
-        # establish the alias by replacing it with the new {target} node
+        # save the current hash key of {alias}, if any
+        original = None if alias not in self else self[alias]
+        # make {target} accessible as {alias}
         self[alias] = target
         # and return the original key
         return original
