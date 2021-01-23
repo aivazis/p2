@@ -56,7 +56,7 @@ class Requirement(AttributeFilter):
         # same name. resist the temptation to speed this up by traversing the pedigree in
         # reverse order and throw everything in the map expecting that closer ancestors will
         # update the maps correctly: there is no obvious easy way to undo the mapping of the
-        # aliases of a trait that get shadowed by a closer ancestor
+        # aliases of a trait that gets shadowed by a closer ancestor
         for base in pedigree[1:]:
             # and through each trait
             for trait in base.pyre_localTraits:
